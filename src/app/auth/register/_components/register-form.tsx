@@ -8,13 +8,27 @@ export function RegisterForm() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [gender, setGender] = useState("");
+  const [agreeToRules, setAgreeToRules] = useState(false);
+  const [agreeToPermaDeath, setAgreeToPermaDeath] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    if (!agreeToRules) {
+      setError("You must agree to the game rules to register.");
+      return;
+    }
+
+    if (!agreeToPermaDeath) {
+      setError("You must acknowledge the perma-death policy to register.");
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -26,7 +40,8 @@ export function RegisterForm() {
         body: JSON.stringify({
           email,
           password,
-          name: name || undefined,
+          name: username || undefined,
+          gender: gender || undefined,
         }),
       });
 
@@ -59,18 +74,44 @@ export function RegisterForm() {
         )}
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="name" className="text-sm font-medium">
-            Name (Optional)
+          <label htmlFor="username" className="text-sm font-medium">
+            Username
           </label>
           <input
-            id="name"
+            id="username"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             disabled={isLoading}
             className="rounded-lg bg-white/10 px-4 py-2 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[hsl(280,100%,70%)] disabled:opacity-50"
-            placeholder="Your name"
+            placeholder="Your username"
           />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="gender" className="text-sm font-medium">
+            Gender
+          </label>
+          <select
+            id="gender"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+            disabled={isLoading}
+            className="rounded-lg bg-white/10 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[hsl(280,100%,70%)] disabled:opacity-50"
+          >
+            <option value="" className="bg-gray-800 text-white">
+              Select gender
+            </option>
+            <option value="MALE" className="bg-gray-800 text-white">
+              Male
+            </option>
+            <option value="FEMALE" className="bg-gray-800 text-white">
+              Female
+            </option>
+            <option value="OTHER" className="bg-gray-800 text-white">
+              Other
+            </option>
+          </select>
         </div>
 
         <div className="flex flex-col gap-2">
@@ -109,9 +150,49 @@ export function RegisterForm() {
           </p>
         </div>
 
+        <div className="flex flex-col gap-3 border-t border-white/10 pt-4">
+          <div className="flex items-start gap-3">
+            <input
+              id="agreeToRules"
+              type="checkbox"
+              checked={agreeToRules}
+              onChange={(e) => setAgreeToRules(e.target.checked)}
+              disabled={isLoading}
+              required
+              className="mt-1 h-4 w-4 rounded border-white/20 bg-white/10 text-[hsl(280,100%,70%)] focus:ring-2 focus:ring-[hsl(280,100%,70%)] disabled:opacity-50"
+            />
+            <label
+              htmlFor="agreeToRules"
+              className="text-sm text-white/90 cursor-pointer"
+            >
+              I agree to follow the game rules and terms of service
+            </label>
+          </div>
+
+          <div className="flex items-start gap-3">
+            <input
+              id="agreeToPermaDeath"
+              type="checkbox"
+              checked={agreeToPermaDeath}
+              onChange={(e) => setAgreeToPermaDeath(e.target.checked)}
+              disabled={isLoading}
+              required
+              className="mt-1 h-4 w-4 rounded border-white/20 bg-white/10 text-[hsl(280,100%,70%)] focus:ring-2 focus:ring-[hsl(280,100%,70%)] disabled:opacity-50"
+            />
+            <label
+              htmlFor="agreeToPermaDeath"
+              className="text-sm text-white/90 cursor-pointer"
+            >
+              I understand that perma-death includes permanent account deletion
+              and there are{" "}
+              <span className="font-semibold text-red-300">no recovery options</span>. I accept full responsibility for my actions.
+            </label>
+          </div>
+        </div>
+
         <button
           type="submit"
-          disabled={isLoading}
+          disabled={isLoading || !agreeToRules || !agreeToPermaDeath}
           className="rounded-lg bg-[hsl(280,100%,70%)] px-4 py-2 font-semibold text-white transition hover:bg-[hsl(280,100%,65%)] disabled:opacity-50"
         >
           {isLoading ? "Creating account..." : "Sign Up"}

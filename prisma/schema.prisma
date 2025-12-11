@@ -59,6 +59,7 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String? // For credentials provider
+  gender        String? // MALE, FEMALE, OTHER
   accounts      Account[]
   sessions      Session[]
   posts         Post[]

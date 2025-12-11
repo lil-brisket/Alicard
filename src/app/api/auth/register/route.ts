@@ -8,6 +8,7 @@ const registerSchema = z.object({
   email: z.string().email("Invalid email address"),
   password: z.string().min(8, "Password must be at least 8 characters"),
   name: z.string().min(1, "Name is required").optional(),
+  gender: z.enum(["MALE", "FEMALE", "OTHER"]).optional(),
 });
 
 export async function POST(request: Request) {
@@ -36,12 +37,14 @@ export async function POST(request: Request) {
         email: validatedData.email,
         password: hashedPassword,
         name: validatedData.name ?? null,
+        gender: validatedData.gender ?? null,
       },
       select: {
         id: true,
         email: true,
         name: true,
         image: true,
+        gender: true,
       },
     });
 
