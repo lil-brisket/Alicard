@@ -6,9 +6,9 @@ import { db } from "~/server/db";
 
 const registerSchema = z.object({
   email: z.string().email("Invalid email address"),
+  username: z.string().min(1, "Username is required"),
   password: z.string().min(8, "Password must be at least 8 characters"),
-  name: z.string().min(1, "Name is required").optional(),
-  gender: z.enum(["MALE", "FEMALE", "OTHER"]).optional(),
+  gender: z.enum(["MALE", "FEMALE", "OTHER"]),
 });
 
 export async function POST(request: Request) {
@@ -16,14 +16,26 @@ export async function POST(request: Request) {
     const body = await request.json();
     const validatedData = registerSchema.parse(body);
 
-    // Check if user already exists
-    const existingUser = await db.user.findUnique({
+    // Check if user already exists by email
+    const existingUserByEmail = await db.user.findUnique({
       where: { email: validatedData.email },
     });
 
-    if (existingUser) {
+    if (existingUserByEmail) {
       return NextResponse.json(
         { error: "User with this email already exists" },
+        { status: 400 },
+      );
+    }
+
+    // Check if username already exists
+    const existingUserByUsername = await db.user.findUnique({
+      where: { username: validatedData.username },
+    });
+
+    if (existingUserByUsername) {
+      return NextResponse.json(
+        { error: "Username is already taken" },
         { status: 400 },
       );
     }
@@ -35,14 +47,14 @@ export async function POST(request: Request) {
     const user = await db.user.create({
       data: {
         email: validatedData.email,
+        username: validatedData.username,
         password: hashedPassword,
-        name: validatedData.name ?? null,
-        gender: validatedData.gender ?? null,
+        gender: validatedData.gender,
       },
       select: {
         id: true,
         email: true,
-        name: true,
+        username: true,
         image: true,
         gender: true,
       },

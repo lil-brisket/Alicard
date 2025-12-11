@@ -39,9 +39,9 @@ export function RegisterForm() {
         },
         body: JSON.stringify({
           email,
+          username,
           password,
-          name: username || undefined,
-          gender: gender || undefined,
+          gender,
         }),
       });
 
@@ -82,6 +82,7 @@ export function RegisterForm() {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
             disabled={isLoading}
             className="rounded-lg bg-white/10 px-4 py-2 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[hsl(280,100%,70%)] disabled:opacity-50"
             placeholder="Your username"
@@ -96,6 +97,7 @@ export function RegisterForm() {
             id="gender"
             value={gender}
             onChange={(e) => setGender(e.target.value)}
+            required
             disabled={isLoading}
             className="rounded-lg bg-white/10 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[hsl(280,100%,70%)] disabled:opacity-50"
           >
@@ -192,7 +194,7 @@ export function RegisterForm() {
 
         <button
           type="submit"
-          disabled={isLoading || !agreeToRules || !agreeToPermaDeath}
+          disabled={isLoading || !agreeToRules || !agreeToPermaDeath || !username || !gender}
           className="rounded-lg bg-[hsl(280,100%,70%)] px-4 py-2 font-semibold text-white transition hover:bg-[hsl(280,100%,65%)] disabled:opacity-50"
         >
           {isLoading ? "Creating account..." : "Sign Up"}
