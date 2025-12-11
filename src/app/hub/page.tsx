@@ -2,8 +2,11 @@ import { redirect } from "next/navigation";
 
 import { getServerAuthSession } from "~/server/auth";
 import { db } from "~/server/db";
-import { CharacterSummary } from "./_components/character-summary";
-import { NavigationSection } from "./_components/navigation-section";
+import { HubHeader } from "./_components/hub-header";
+import { CharacterSummaryCard } from "./_components/character-summary-card";
+import { CoreStatsCard } from "./_components/core-stats-card";
+import { ActionGrid } from "./_components/action-grid";
+import { HallOfDeadCard } from "./_components/hall-of-dead-card";
 
 export default async function HubPage() {
   const session = await getServerAuthSession();
@@ -62,16 +65,37 @@ export default async function HubPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="mb-8 text-4xl font-bold">Player Hub</h1>
+    <div className="min-h-screen bg-slate-950 text-slate-100">
+      <div className="mx-auto flex min-h-screen max-w-5xl flex-col gap-4 p-4 md:p-8">
+        <HubHeader
+          characterName={character.name}
+          level={character.level}
+        />
 
-        <div className="space-y-6">
-          <CharacterSummary character={character} />
-          <NavigationSection />
-        </div>
+        <main className="mt-4 grid flex-1 grid-cols-1 gap-4 md:mt-6 md:grid-cols-12">
+          {/* Left column: md:col-span-5 */}
+          <section className="space-y-4 md:col-span-5">
+            {/* character card */}
+            <CharacterSummaryCard character={character} />
+            {/* stats card */}
+            <CoreStatsCard
+              vitality={character.vitality}
+              strength={character.strength}
+              speed={character.speed}
+              dexterity={character.dexterity}
+            />
+          </section>
+
+          {/* Right column: md:col-span-7 */}
+          <section className="space-y-4 md:col-span-7">
+            {/* actions card */}
+            <ActionGrid />
+            {/* hall of the dead card */}
+            <HallOfDeadCard />
+          </section>
+        </main>
       </div>
-    </main>
+    </div>
   );
 }
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { api } from "~/trpc/react";
 
 export default function HallOfTheDeadPage() {
@@ -16,6 +17,13 @@ export default function HallOfTheDeadPage() {
     <main className="min-h-screen bg-black text-slate-50">
       <div className="container mx-auto px-4 py-12 max-w-4xl">
         <div className="mb-8">
+          <Link
+            href="/hub"
+            className="inline-flex items-center gap-2 mb-6 text-sm text-slate-400 hover:text-slate-200 transition-colors"
+          >
+            <span>←</span>
+            <span>Back to Hub</span>
+          </Link>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-red-400">
             Hall of the Dead
           </h1>
