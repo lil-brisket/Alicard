@@ -2,6 +2,7 @@ import { postRouter } from "~/server/api/routers/post";
 import { playerRouter } from "~/server/api/routers/player";
 import { mapRouter } from "~/server/api/routers/map";
 import { combatRouter } from "~/server/api/routers/combat";
+import { characterRouter } from "~/server/api/routers/character";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -14,6 +15,7 @@ export const appRouter = createTRPCRouter({
   player: playerRouter,
   map: mapRouter,
   combat: combatRouter,
+  character: characterRouter,
 });
 
 // export type definition of API
