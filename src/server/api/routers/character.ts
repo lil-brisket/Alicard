@@ -35,14 +35,12 @@ export const characterRouter = createTRPCRouter({
   // Hall of the Dead: public, for landing + dedicated page
   hallOfTheDead: publicProcedure
     .input(
-      z
-        .object({
-          limit: z.number().min(1).max(100).default(20),
-        })
-        .optional(),
+      z.object({
+        limit: z.number().min(1).max(100).optional(),
+      }),
     )
     .query(async ({ ctx, input }) => {
-      const limit = input?.limit ?? 20;
+      const limit = input.limit ?? 20;
 
       const deadCharacters = await ctx.db.character.findMany({
         where: { isDead: true },
