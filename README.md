@@ -38,20 +38,22 @@ AUTH_SECRET="your-secret-key-here" # Generate with: openssl rand -base64 32
 
 ### 3. Set Up Database
 
-**Option A: Using Docker (Recommended for local development)**
+#### Option A: Using Docker (Recommended for local development)
 
 On Windows:
+
 1. Install [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) and [Docker Desktop](https://docs.docker.com/docker-for-windows/install/)
 2. Open WSL terminal: `wsl`
 3. Navigate to project directory
 4. Run: `./start-database.sh`
 
 On Linux/macOS:
+
 ```bash
 ./start-database.sh
 ```
 
-**Option B: Using Existing PostgreSQL**
+#### Option B: Using Existing PostgreSQL
 
 Ensure your PostgreSQL server is running and update `DATABASE_URL` in `.env` with your connection string.
 
@@ -62,6 +64,7 @@ npm run db:generate
 ```
 
 This will:
+
 - Generate Prisma Client
 - Apply database migrations
 - Create all necessary tables

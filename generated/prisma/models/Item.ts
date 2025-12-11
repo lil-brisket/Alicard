@@ -344,18 +344,18 @@ export type ItemWhereInput = {
   hpBonus?: Prisma.IntFilter<"Item"> | number
   spBonus?: Prisma.IntFilter<"Item"> | number
   createdAt?: Prisma.DateTimeFilter<"Item"> | Date | string
-  inventoryItems?: Prisma.InventoryItemListRelationFilter
-  shopItems?: Prisma.ShopItemListRelationFilter
-  marketListings?: Prisma.MarketListingListRelationFilter
-  marketTransactions?: Prisma.MarketTransactionListRelationFilter
-  equippedAsWeapon?: Prisma.EquipmentListRelationFilter
-  equippedAsHead?: Prisma.EquipmentListRelationFilter
-  equippedAsChest?: Prisma.EquipmentListRelationFilter
-  equippedAsLegs?: Prisma.EquipmentListRelationFilter
-  equippedAsFeet?: Prisma.EquipmentListRelationFilter
+  bankVaultItems?: Prisma.BankVaultItemListRelationFilter
   equippedAsAccessory1?: Prisma.EquipmentListRelationFilter
   equippedAsAccessory2?: Prisma.EquipmentListRelationFilter
-  bankVaultItems?: Prisma.BankVaultItemListRelationFilter
+  equippedAsChest?: Prisma.EquipmentListRelationFilter
+  equippedAsFeet?: Prisma.EquipmentListRelationFilter
+  equippedAsHead?: Prisma.EquipmentListRelationFilter
+  equippedAsLegs?: Prisma.EquipmentListRelationFilter
+  equippedAsWeapon?: Prisma.EquipmentListRelationFilter
+  inventoryItems?: Prisma.InventoryItemListRelationFilter
+  marketListings?: Prisma.MarketListingListRelationFilter
+  marketTransactions?: Prisma.MarketTransactionListRelationFilter
+  shopItems?: Prisma.ShopItemListRelationFilter
 }
 
 export type ItemOrderByWithRelationInput = {
@@ -376,18 +376,18 @@ export type ItemOrderByWithRelationInput = {
   hpBonus?: Prisma.SortOrder
   spBonus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  inventoryItems?: Prisma.InventoryItemOrderByRelationAggregateInput
-  shopItems?: Prisma.ShopItemOrderByRelationAggregateInput
-  marketListings?: Prisma.MarketListingOrderByRelationAggregateInput
-  marketTransactions?: Prisma.MarketTransactionOrderByRelationAggregateInput
-  equippedAsWeapon?: Prisma.EquipmentOrderByRelationAggregateInput
-  equippedAsHead?: Prisma.EquipmentOrderByRelationAggregateInput
-  equippedAsChest?: Prisma.EquipmentOrderByRelationAggregateInput
-  equippedAsLegs?: Prisma.EquipmentOrderByRelationAggregateInput
-  equippedAsFeet?: Prisma.EquipmentOrderByRelationAggregateInput
+  bankVaultItems?: Prisma.BankVaultItemOrderByRelationAggregateInput
   equippedAsAccessory1?: Prisma.EquipmentOrderByRelationAggregateInput
   equippedAsAccessory2?: Prisma.EquipmentOrderByRelationAggregateInput
-  bankVaultItems?: Prisma.BankVaultItemOrderByRelationAggregateInput
+  equippedAsChest?: Prisma.EquipmentOrderByRelationAggregateInput
+  equippedAsFeet?: Prisma.EquipmentOrderByRelationAggregateInput
+  equippedAsHead?: Prisma.EquipmentOrderByRelationAggregateInput
+  equippedAsLegs?: Prisma.EquipmentOrderByRelationAggregateInput
+  equippedAsWeapon?: Prisma.EquipmentOrderByRelationAggregateInput
+  inventoryItems?: Prisma.InventoryItemOrderByRelationAggregateInput
+  marketListings?: Prisma.MarketListingOrderByRelationAggregateInput
+  marketTransactions?: Prisma.MarketTransactionOrderByRelationAggregateInput
+  shopItems?: Prisma.ShopItemOrderByRelationAggregateInput
 }
 
 export type ItemWhereUniqueInput = Prisma.AtLeast<{
@@ -411,18 +411,18 @@ export type ItemWhereUniqueInput = Prisma.AtLeast<{
   hpBonus?: Prisma.IntFilter<"Item"> | number
   spBonus?: Prisma.IntFilter<"Item"> | number
   createdAt?: Prisma.DateTimeFilter<"Item"> | Date | string
-  inventoryItems?: Prisma.InventoryItemListRelationFilter
-  shopItems?: Prisma.ShopItemListRelationFilter
-  marketListings?: Prisma.MarketListingListRelationFilter
-  marketTransactions?: Prisma.MarketTransactionListRelationFilter
-  equippedAsWeapon?: Prisma.EquipmentListRelationFilter
-  equippedAsHead?: Prisma.EquipmentListRelationFilter
-  equippedAsChest?: Prisma.EquipmentListRelationFilter
-  equippedAsLegs?: Prisma.EquipmentListRelationFilter
-  equippedAsFeet?: Prisma.EquipmentListRelationFilter
+  bankVaultItems?: Prisma.BankVaultItemListRelationFilter
   equippedAsAccessory1?: Prisma.EquipmentListRelationFilter
   equippedAsAccessory2?: Prisma.EquipmentListRelationFilter
-  bankVaultItems?: Prisma.BankVaultItemListRelationFilter
+  equippedAsChest?: Prisma.EquipmentListRelationFilter
+  equippedAsFeet?: Prisma.EquipmentListRelationFilter
+  equippedAsHead?: Prisma.EquipmentListRelationFilter
+  equippedAsLegs?: Prisma.EquipmentListRelationFilter
+  equippedAsWeapon?: Prisma.EquipmentListRelationFilter
+  inventoryItems?: Prisma.InventoryItemListRelationFilter
+  marketListings?: Prisma.MarketListingListRelationFilter
+  marketTransactions?: Prisma.MarketTransactionListRelationFilter
+  shopItems?: Prisma.ShopItemListRelationFilter
 }, "id">
 
 export type ItemOrderByWithAggregationInput = {
@@ -491,18 +491,18 @@ export type ItemCreateInput = {
   hpBonus?: number
   spBonus?: number
   createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
   equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateInput = {
@@ -523,18 +523,18 @@ export type ItemUncheckedCreateInput = {
   hpBonus?: number
   spBonus?: number
   createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
   equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemUpdateInput = {
@@ -555,18 +555,18 @@ export type ItemUpdateInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
   equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateInput = {
@@ -587,18 +587,18 @@ export type ItemUncheckedUpdateInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
   equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateManyInput = {
@@ -795,36 +795,6 @@ export type ItemUpdateOneRequiredWithoutInventoryItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutInventoryItemsInput, Prisma.ItemUpdateWithoutInventoryItemsInput>, Prisma.ItemUncheckedUpdateWithoutInventoryItemsInput>
 }
 
-export type ItemCreateNestedOneWithoutEquippedAsWeaponInput = {
-  create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsWeaponInput, Prisma.ItemUncheckedCreateWithoutEquippedAsWeaponInput>
-  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsWeaponInput
-  connect?: Prisma.ItemWhereUniqueInput
-}
-
-export type ItemCreateNestedOneWithoutEquippedAsHeadInput = {
-  create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsHeadInput, Prisma.ItemUncheckedCreateWithoutEquippedAsHeadInput>
-  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsHeadInput
-  connect?: Prisma.ItemWhereUniqueInput
-}
-
-export type ItemCreateNestedOneWithoutEquippedAsChestInput = {
-  create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsChestInput, Prisma.ItemUncheckedCreateWithoutEquippedAsChestInput>
-  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsChestInput
-  connect?: Prisma.ItemWhereUniqueInput
-}
-
-export type ItemCreateNestedOneWithoutEquippedAsLegsInput = {
-  create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsLegsInput, Prisma.ItemUncheckedCreateWithoutEquippedAsLegsInput>
-  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsLegsInput
-  connect?: Prisma.ItemWhereUniqueInput
-}
-
-export type ItemCreateNestedOneWithoutEquippedAsFeetInput = {
-  create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsFeetInput, Prisma.ItemUncheckedCreateWithoutEquippedAsFeetInput>
-  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsFeetInput
-  connect?: Prisma.ItemWhereUniqueInput
-}
-
 export type ItemCreateNestedOneWithoutEquippedAsAccessory1Input = {
   create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsAccessory1Input, Prisma.ItemUncheckedCreateWithoutEquippedAsAccessory1Input>
   connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsAccessory1Input
@@ -837,54 +807,34 @@ export type ItemCreateNestedOneWithoutEquippedAsAccessory2Input = {
   connect?: Prisma.ItemWhereUniqueInput
 }
 
-export type ItemUpdateOneWithoutEquippedAsWeaponNestedInput = {
-  create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsWeaponInput, Prisma.ItemUncheckedCreateWithoutEquippedAsWeaponInput>
-  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsWeaponInput
-  upsert?: Prisma.ItemUpsertWithoutEquippedAsWeaponInput
-  disconnect?: Prisma.ItemWhereInput | boolean
-  delete?: Prisma.ItemWhereInput | boolean
-  connect?: Prisma.ItemWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutEquippedAsWeaponInput, Prisma.ItemUpdateWithoutEquippedAsWeaponInput>, Prisma.ItemUncheckedUpdateWithoutEquippedAsWeaponInput>
-}
-
-export type ItemUpdateOneWithoutEquippedAsHeadNestedInput = {
-  create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsHeadInput, Prisma.ItemUncheckedCreateWithoutEquippedAsHeadInput>
-  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsHeadInput
-  upsert?: Prisma.ItemUpsertWithoutEquippedAsHeadInput
-  disconnect?: Prisma.ItemWhereInput | boolean
-  delete?: Prisma.ItemWhereInput | boolean
-  connect?: Prisma.ItemWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutEquippedAsHeadInput, Prisma.ItemUpdateWithoutEquippedAsHeadInput>, Prisma.ItemUncheckedUpdateWithoutEquippedAsHeadInput>
-}
-
-export type ItemUpdateOneWithoutEquippedAsChestNestedInput = {
+export type ItemCreateNestedOneWithoutEquippedAsChestInput = {
   create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsChestInput, Prisma.ItemUncheckedCreateWithoutEquippedAsChestInput>
   connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsChestInput
-  upsert?: Prisma.ItemUpsertWithoutEquippedAsChestInput
-  disconnect?: Prisma.ItemWhereInput | boolean
-  delete?: Prisma.ItemWhereInput | boolean
   connect?: Prisma.ItemWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutEquippedAsChestInput, Prisma.ItemUpdateWithoutEquippedAsChestInput>, Prisma.ItemUncheckedUpdateWithoutEquippedAsChestInput>
 }
 
-export type ItemUpdateOneWithoutEquippedAsLegsNestedInput = {
-  create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsLegsInput, Prisma.ItemUncheckedCreateWithoutEquippedAsLegsInput>
-  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsLegsInput
-  upsert?: Prisma.ItemUpsertWithoutEquippedAsLegsInput
-  disconnect?: Prisma.ItemWhereInput | boolean
-  delete?: Prisma.ItemWhereInput | boolean
-  connect?: Prisma.ItemWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutEquippedAsLegsInput, Prisma.ItemUpdateWithoutEquippedAsLegsInput>, Prisma.ItemUncheckedUpdateWithoutEquippedAsLegsInput>
-}
-
-export type ItemUpdateOneWithoutEquippedAsFeetNestedInput = {
+export type ItemCreateNestedOneWithoutEquippedAsFeetInput = {
   create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsFeetInput, Prisma.ItemUncheckedCreateWithoutEquippedAsFeetInput>
   connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsFeetInput
-  upsert?: Prisma.ItemUpsertWithoutEquippedAsFeetInput
-  disconnect?: Prisma.ItemWhereInput | boolean
-  delete?: Prisma.ItemWhereInput | boolean
   connect?: Prisma.ItemWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutEquippedAsFeetInput, Prisma.ItemUpdateWithoutEquippedAsFeetInput>, Prisma.ItemUncheckedUpdateWithoutEquippedAsFeetInput>
+}
+
+export type ItemCreateNestedOneWithoutEquippedAsHeadInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsHeadInput, Prisma.ItemUncheckedCreateWithoutEquippedAsHeadInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsHeadInput
+  connect?: Prisma.ItemWhereUniqueInput
+}
+
+export type ItemCreateNestedOneWithoutEquippedAsLegsInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsLegsInput, Prisma.ItemUncheckedCreateWithoutEquippedAsLegsInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsLegsInput
+  connect?: Prisma.ItemWhereUniqueInput
+}
+
+export type ItemCreateNestedOneWithoutEquippedAsWeaponInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsWeaponInput, Prisma.ItemUncheckedCreateWithoutEquippedAsWeaponInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsWeaponInput
+  connect?: Prisma.ItemWhereUniqueInput
 }
 
 export type ItemUpdateOneWithoutEquippedAsAccessory1NestedInput = {
@@ -905,6 +855,56 @@ export type ItemUpdateOneWithoutEquippedAsAccessory2NestedInput = {
   delete?: Prisma.ItemWhereInput | boolean
   connect?: Prisma.ItemWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutEquippedAsAccessory2Input, Prisma.ItemUpdateWithoutEquippedAsAccessory2Input>, Prisma.ItemUncheckedUpdateWithoutEquippedAsAccessory2Input>
+}
+
+export type ItemUpdateOneWithoutEquippedAsChestNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsChestInput, Prisma.ItemUncheckedCreateWithoutEquippedAsChestInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsChestInput
+  upsert?: Prisma.ItemUpsertWithoutEquippedAsChestInput
+  disconnect?: Prisma.ItemWhereInput | boolean
+  delete?: Prisma.ItemWhereInput | boolean
+  connect?: Prisma.ItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutEquippedAsChestInput, Prisma.ItemUpdateWithoutEquippedAsChestInput>, Prisma.ItemUncheckedUpdateWithoutEquippedAsChestInput>
+}
+
+export type ItemUpdateOneWithoutEquippedAsFeetNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsFeetInput, Prisma.ItemUncheckedCreateWithoutEquippedAsFeetInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsFeetInput
+  upsert?: Prisma.ItemUpsertWithoutEquippedAsFeetInput
+  disconnect?: Prisma.ItemWhereInput | boolean
+  delete?: Prisma.ItemWhereInput | boolean
+  connect?: Prisma.ItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutEquippedAsFeetInput, Prisma.ItemUpdateWithoutEquippedAsFeetInput>, Prisma.ItemUncheckedUpdateWithoutEquippedAsFeetInput>
+}
+
+export type ItemUpdateOneWithoutEquippedAsHeadNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsHeadInput, Prisma.ItemUncheckedCreateWithoutEquippedAsHeadInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsHeadInput
+  upsert?: Prisma.ItemUpsertWithoutEquippedAsHeadInput
+  disconnect?: Prisma.ItemWhereInput | boolean
+  delete?: Prisma.ItemWhereInput | boolean
+  connect?: Prisma.ItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutEquippedAsHeadInput, Prisma.ItemUpdateWithoutEquippedAsHeadInput>, Prisma.ItemUncheckedUpdateWithoutEquippedAsHeadInput>
+}
+
+export type ItemUpdateOneWithoutEquippedAsLegsNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsLegsInput, Prisma.ItemUncheckedCreateWithoutEquippedAsLegsInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsLegsInput
+  upsert?: Prisma.ItemUpsertWithoutEquippedAsLegsInput
+  disconnect?: Prisma.ItemWhereInput | boolean
+  delete?: Prisma.ItemWhereInput | boolean
+  connect?: Prisma.ItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutEquippedAsLegsInput, Prisma.ItemUpdateWithoutEquippedAsLegsInput>, Prisma.ItemUncheckedUpdateWithoutEquippedAsLegsInput>
+}
+
+export type ItemUpdateOneWithoutEquippedAsWeaponNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsWeaponInput, Prisma.ItemUncheckedCreateWithoutEquippedAsWeaponInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutEquippedAsWeaponInput
+  upsert?: Prisma.ItemUpsertWithoutEquippedAsWeaponInput
+  disconnect?: Prisma.ItemWhereInput | boolean
+  delete?: Prisma.ItemWhereInput | boolean
+  connect?: Prisma.ItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutEquippedAsWeaponInput, Prisma.ItemUpdateWithoutEquippedAsWeaponInput>, Prisma.ItemUncheckedUpdateWithoutEquippedAsWeaponInput>
 }
 
 export type ItemCreateNestedOneWithoutBankVaultItemsInput = {
@@ -967,17 +967,17 @@ export type ItemCreateWithoutShopItemsInput = {
   hpBonus?: number
   spBonus?: number
   createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
   inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
   marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
-  equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
-  equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutShopItemsInput = {
@@ -998,17 +998,17 @@ export type ItemUncheckedCreateWithoutShopItemsInput = {
   hpBonus?: number
   spBonus?: number
   createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
   inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
   marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
-  equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
-  equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutShopItemsInput = {
@@ -1045,17 +1045,17 @@ export type ItemUpdateWithoutShopItemsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
   inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
   marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
-  equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
-  equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutShopItemsInput = {
@@ -1076,17 +1076,17 @@ export type ItemUncheckedUpdateWithoutShopItemsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
   inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
   marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
-  equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
-  equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutInventoryItemsInput = {
@@ -1107,17 +1107,17 @@ export type ItemCreateWithoutInventoryItemsInput = {
   hpBonus?: number
   spBonus?: number
   createdAt?: Date | string
-  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
   equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
+  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutInventoryItemsInput = {
@@ -1138,17 +1138,17 @@ export type ItemUncheckedCreateWithoutInventoryItemsInput = {
   hpBonus?: number
   spBonus?: number
   createdAt?: Date | string
-  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
   equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
+  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutInventoryItemsInput = {
@@ -1185,17 +1185,17 @@ export type ItemUpdateWithoutInventoryItemsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
   equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
+  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutInventoryItemsInput = {
@@ -1216,352 +1216,17 @@ export type ItemUncheckedUpdateWithoutInventoryItemsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
   equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
-}
-
-export type ItemCreateWithoutEquippedAsWeaponInput = {
-  id?: string
-  name: string
-  description?: string | null
-  itemType: $Enums.ItemType
-  itemRarity: $Enums.ItemRarity
-  tier?: number
-  value: number
-  stackable?: boolean
-  maxStack?: number
-  equipmentSlot?: $Enums.EquipmentSlot | null
-  vitalityBonus?: number
-  strengthBonus?: number
-  speedBonus?: number
-  dexterityBonus?: number
-  hpBonus?: number
-  spBonus?: number
-  createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
-  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
-  equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
-  equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
-}
-
-export type ItemUncheckedCreateWithoutEquippedAsWeaponInput = {
-  id?: string
-  name: string
-  description?: string | null
-  itemType: $Enums.ItemType
-  itemRarity: $Enums.ItemRarity
-  tier?: number
-  value: number
-  stackable?: boolean
-  maxStack?: number
-  equipmentSlot?: $Enums.EquipmentSlot | null
-  vitalityBonus?: number
-  strengthBonus?: number
-  speedBonus?: number
-  dexterityBonus?: number
-  hpBonus?: number
-  spBonus?: number
-  createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
-  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
-  equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
-  equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
-}
-
-export type ItemCreateOrConnectWithoutEquippedAsWeaponInput = {
-  where: Prisma.ItemWhereUniqueInput
-  create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsWeaponInput, Prisma.ItemUncheckedCreateWithoutEquippedAsWeaponInput>
-}
-
-export type ItemCreateWithoutEquippedAsHeadInput = {
-  id?: string
-  name: string
-  description?: string | null
-  itemType: $Enums.ItemType
-  itemRarity: $Enums.ItemRarity
-  tier?: number
-  value: number
-  stackable?: boolean
-  maxStack?: number
-  equipmentSlot?: $Enums.EquipmentSlot | null
-  vitalityBonus?: number
-  strengthBonus?: number
-  speedBonus?: number
-  dexterityBonus?: number
-  hpBonus?: number
-  spBonus?: number
-  createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
-  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
-  equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
-  equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
-}
-
-export type ItemUncheckedCreateWithoutEquippedAsHeadInput = {
-  id?: string
-  name: string
-  description?: string | null
-  itemType: $Enums.ItemType
-  itemRarity: $Enums.ItemRarity
-  tier?: number
-  value: number
-  stackable?: boolean
-  maxStack?: number
-  equipmentSlot?: $Enums.EquipmentSlot | null
-  vitalityBonus?: number
-  strengthBonus?: number
-  speedBonus?: number
-  dexterityBonus?: number
-  hpBonus?: number
-  spBonus?: number
-  createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
-  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
-  equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
-  equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
-}
-
-export type ItemCreateOrConnectWithoutEquippedAsHeadInput = {
-  where: Prisma.ItemWhereUniqueInput
-  create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsHeadInput, Prisma.ItemUncheckedCreateWithoutEquippedAsHeadInput>
-}
-
-export type ItemCreateWithoutEquippedAsChestInput = {
-  id?: string
-  name: string
-  description?: string | null
-  itemType: $Enums.ItemType
-  itemRarity: $Enums.ItemRarity
-  tier?: number
-  value: number
-  stackable?: boolean
-  maxStack?: number
-  equipmentSlot?: $Enums.EquipmentSlot | null
-  vitalityBonus?: number
-  strengthBonus?: number
-  speedBonus?: number
-  dexterityBonus?: number
-  hpBonus?: number
-  spBonus?: number
-  createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
-  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
-  equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
-  equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
-}
-
-export type ItemUncheckedCreateWithoutEquippedAsChestInput = {
-  id?: string
-  name: string
-  description?: string | null
-  itemType: $Enums.ItemType
-  itemRarity: $Enums.ItemRarity
-  tier?: number
-  value: number
-  stackable?: boolean
-  maxStack?: number
-  equipmentSlot?: $Enums.EquipmentSlot | null
-  vitalityBonus?: number
-  strengthBonus?: number
-  speedBonus?: number
-  dexterityBonus?: number
-  hpBonus?: number
-  spBonus?: number
-  createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
-  equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
-  equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
-}
-
-export type ItemCreateOrConnectWithoutEquippedAsChestInput = {
-  where: Prisma.ItemWhereUniqueInput
-  create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsChestInput, Prisma.ItemUncheckedCreateWithoutEquippedAsChestInput>
-}
-
-export type ItemCreateWithoutEquippedAsLegsInput = {
-  id?: string
-  name: string
-  description?: string | null
-  itemType: $Enums.ItemType
-  itemRarity: $Enums.ItemRarity
-  tier?: number
-  value: number
-  stackable?: boolean
-  maxStack?: number
-  equipmentSlot?: $Enums.EquipmentSlot | null
-  vitalityBonus?: number
-  strengthBonus?: number
-  speedBonus?: number
-  dexterityBonus?: number
-  hpBonus?: number
-  spBonus?: number
-  createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
-  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
-  equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
-  equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
-}
-
-export type ItemUncheckedCreateWithoutEquippedAsLegsInput = {
-  id?: string
-  name: string
-  description?: string | null
-  itemType: $Enums.ItemType
-  itemRarity: $Enums.ItemRarity
-  tier?: number
-  value: number
-  stackable?: boolean
-  maxStack?: number
-  equipmentSlot?: $Enums.EquipmentSlot | null
-  vitalityBonus?: number
-  strengthBonus?: number
-  speedBonus?: number
-  dexterityBonus?: number
-  hpBonus?: number
-  spBonus?: number
-  createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
-  equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
-  equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
-}
-
-export type ItemCreateOrConnectWithoutEquippedAsLegsInput = {
-  where: Prisma.ItemWhereUniqueInput
-  create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsLegsInput, Prisma.ItemUncheckedCreateWithoutEquippedAsLegsInput>
-}
-
-export type ItemCreateWithoutEquippedAsFeetInput = {
-  id?: string
-  name: string
-  description?: string | null
-  itemType: $Enums.ItemType
-  itemRarity: $Enums.ItemRarity
-  tier?: number
-  value: number
-  stackable?: boolean
-  maxStack?: number
-  equipmentSlot?: $Enums.EquipmentSlot | null
-  vitalityBonus?: number
-  strengthBonus?: number
-  speedBonus?: number
-  dexterityBonus?: number
-  hpBonus?: number
-  spBonus?: number
-  createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
-  equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
-  equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
-}
-
-export type ItemUncheckedCreateWithoutEquippedAsFeetInput = {
-  id?: string
-  name: string
-  description?: string | null
-  itemType: $Enums.ItemType
-  itemRarity: $Enums.ItemRarity
-  tier?: number
-  value: number
-  stackable?: boolean
-  maxStack?: number
-  equipmentSlot?: $Enums.EquipmentSlot | null
-  vitalityBonus?: number
-  strengthBonus?: number
-  speedBonus?: number
-  dexterityBonus?: number
-  hpBonus?: number
-  spBonus?: number
-  createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
-  equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
-  equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
-}
-
-export type ItemCreateOrConnectWithoutEquippedAsFeetInput = {
-  where: Prisma.ItemWhereUniqueInput
-  create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsFeetInput, Prisma.ItemUncheckedCreateWithoutEquippedAsFeetInput>
+  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
+  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutEquippedAsAccessory1Input = {
@@ -1582,17 +1247,17 @@ export type ItemCreateWithoutEquippedAsAccessory1Input = {
   hpBonus?: number
   spBonus?: number
   createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
   inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
   marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
-  equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsAccessory1Input = {
@@ -1613,17 +1278,17 @@ export type ItemUncheckedCreateWithoutEquippedAsAccessory1Input = {
   hpBonus?: number
   spBonus?: number
   createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
   inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
   marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
-  equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsAccessory1Input = {
@@ -1649,17 +1314,17 @@ export type ItemCreateWithoutEquippedAsAccessory2Input = {
   hpBonus?: number
   spBonus?: number
   createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
+  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
   inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
   marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
-  equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
-  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsAccessory2Input = {
@@ -1680,17 +1345,17 @@ export type ItemUncheckedCreateWithoutEquippedAsAccessory2Input = {
   hpBonus?: number
   spBonus?: number
   createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
+  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
   inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
   marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
-  equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
-  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsAccessory2Input = {
@@ -1698,369 +1363,339 @@ export type ItemCreateOrConnectWithoutEquippedAsAccessory2Input = {
   create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsAccessory2Input, Prisma.ItemUncheckedCreateWithoutEquippedAsAccessory2Input>
 }
 
-export type ItemUpsertWithoutEquippedAsWeaponInput = {
-  update: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsWeaponInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsWeaponInput>
-  create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsWeaponInput, Prisma.ItemUncheckedCreateWithoutEquippedAsWeaponInput>
-  where?: Prisma.ItemWhereInput
+export type ItemCreateWithoutEquippedAsChestInput = {
+  id?: string
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
+  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
 }
 
-export type ItemUpdateToOneWithWhereWithoutEquippedAsWeaponInput = {
-  where?: Prisma.ItemWhereInput
-  data: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsWeaponInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsWeaponInput>
+export type ItemUncheckedCreateWithoutEquippedAsChestInput = {
+  id?: string
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
+  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
 }
 
-export type ItemUpdateWithoutEquippedAsWeaponInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
-  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
-  tier?: Prisma.IntFieldUpdateOperationsInput | number
-  value?: Prisma.IntFieldUpdateOperationsInput | number
-  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
-  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
-  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
-  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
-  equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
-  equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
-}
-
-export type ItemUncheckedUpdateWithoutEquippedAsWeaponInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
-  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
-  tier?: Prisma.IntFieldUpdateOperationsInput | number
-  value?: Prisma.IntFieldUpdateOperationsInput | number
-  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
-  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
-  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
-  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
-  equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
-  equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
-}
-
-export type ItemUpsertWithoutEquippedAsHeadInput = {
-  update: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsHeadInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsHeadInput>
-  create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsHeadInput, Prisma.ItemUncheckedCreateWithoutEquippedAsHeadInput>
-  where?: Prisma.ItemWhereInput
-}
-
-export type ItemUpdateToOneWithWhereWithoutEquippedAsHeadInput = {
-  where?: Prisma.ItemWhereInput
-  data: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsHeadInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsHeadInput>
-}
-
-export type ItemUpdateWithoutEquippedAsHeadInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
-  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
-  tier?: Prisma.IntFieldUpdateOperationsInput | number
-  value?: Prisma.IntFieldUpdateOperationsInput | number
-  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
-  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
-  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
-  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
-  equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
-  equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
-}
-
-export type ItemUncheckedUpdateWithoutEquippedAsHeadInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
-  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
-  tier?: Prisma.IntFieldUpdateOperationsInput | number
-  value?: Prisma.IntFieldUpdateOperationsInput | number
-  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
-  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
-  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
-  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
-  equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
-  equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
-}
-
-export type ItemUpsertWithoutEquippedAsChestInput = {
-  update: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsChestInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsChestInput>
+export type ItemCreateOrConnectWithoutEquippedAsChestInput = {
+  where: Prisma.ItemWhereUniqueInput
   create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsChestInput, Prisma.ItemUncheckedCreateWithoutEquippedAsChestInput>
-  where?: Prisma.ItemWhereInput
 }
 
-export type ItemUpdateToOneWithWhereWithoutEquippedAsChestInput = {
-  where?: Prisma.ItemWhereInput
-  data: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsChestInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsChestInput>
+export type ItemCreateWithoutEquippedAsFeetInput = {
+  id?: string
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
+  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
 }
 
-export type ItemUpdateWithoutEquippedAsChestInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
-  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
-  tier?: Prisma.IntFieldUpdateOperationsInput | number
-  value?: Prisma.IntFieldUpdateOperationsInput | number
-  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
-  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
-  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
-  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
-  equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
-  equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+export type ItemUncheckedCreateWithoutEquippedAsFeetInput = {
+  id?: string
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
+  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
 }
 
-export type ItemUncheckedUpdateWithoutEquippedAsChestInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
-  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
-  tier?: Prisma.IntFieldUpdateOperationsInput | number
-  value?: Prisma.IntFieldUpdateOperationsInput | number
-  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
-  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
-  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
-  equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
-  equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
-}
-
-export type ItemUpsertWithoutEquippedAsLegsInput = {
-  update: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsLegsInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsLegsInput>
-  create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsLegsInput, Prisma.ItemUncheckedCreateWithoutEquippedAsLegsInput>
-  where?: Prisma.ItemWhereInput
-}
-
-export type ItemUpdateToOneWithWhereWithoutEquippedAsLegsInput = {
-  where?: Prisma.ItemWhereInput
-  data: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsLegsInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsLegsInput>
-}
-
-export type ItemUpdateWithoutEquippedAsLegsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
-  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
-  tier?: Prisma.IntFieldUpdateOperationsInput | number
-  value?: Prisma.IntFieldUpdateOperationsInput | number
-  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
-  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
-  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
-  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
-  equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
-  equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
-}
-
-export type ItemUncheckedUpdateWithoutEquippedAsLegsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
-  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
-  tier?: Prisma.IntFieldUpdateOperationsInput | number
-  value?: Prisma.IntFieldUpdateOperationsInput | number
-  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
-  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
-  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
-  equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
-  equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
-}
-
-export type ItemUpsertWithoutEquippedAsFeetInput = {
-  update: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsFeetInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsFeetInput>
+export type ItemCreateOrConnectWithoutEquippedAsFeetInput = {
+  where: Prisma.ItemWhereUniqueInput
   create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsFeetInput, Prisma.ItemUncheckedCreateWithoutEquippedAsFeetInput>
-  where?: Prisma.ItemWhereInput
 }
 
-export type ItemUpdateToOneWithWhereWithoutEquippedAsFeetInput = {
-  where?: Prisma.ItemWhereInput
-  data: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsFeetInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsFeetInput>
+export type ItemCreateWithoutEquippedAsHeadInput = {
+  id?: string
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
 }
 
-export type ItemUpdateWithoutEquippedAsFeetInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
-  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
-  tier?: Prisma.IntFieldUpdateOperationsInput | number
-  value?: Prisma.IntFieldUpdateOperationsInput | number
-  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
-  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
-  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
-  equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
-  equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+export type ItemUncheckedCreateWithoutEquippedAsHeadInput = {
+  id?: string
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
 }
 
-export type ItemUncheckedUpdateWithoutEquippedAsFeetInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
-  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
-  tier?: Prisma.IntFieldUpdateOperationsInput | number
-  value?: Prisma.IntFieldUpdateOperationsInput | number
-  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
-  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
-  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
-  equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
-  equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+export type ItemCreateOrConnectWithoutEquippedAsHeadInput = {
+  where: Prisma.ItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsHeadInput, Prisma.ItemUncheckedCreateWithoutEquippedAsHeadInput>
+}
+
+export type ItemCreateWithoutEquippedAsLegsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
+  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+}
+
+export type ItemUncheckedCreateWithoutEquippedAsLegsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+}
+
+export type ItemCreateOrConnectWithoutEquippedAsLegsInput = {
+  where: Prisma.ItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsLegsInput, Prisma.ItemUncheckedCreateWithoutEquippedAsLegsInput>
+}
+
+export type ItemCreateWithoutEquippedAsWeaponInput = {
+  id?: string
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+}
+
+export type ItemUncheckedCreateWithoutEquippedAsWeaponInput = {
+  id?: string
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+}
+
+export type ItemCreateOrConnectWithoutEquippedAsWeaponInput = {
+  where: Prisma.ItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsWeaponInput, Prisma.ItemUncheckedCreateWithoutEquippedAsWeaponInput>
 }
 
 export type ItemUpsertWithoutEquippedAsAccessory1Input = {
@@ -2092,17 +1727,17 @@ export type ItemUpdateWithoutEquippedAsAccessory1Input = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
   inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
   marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
-  equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsAccessory1Input = {
@@ -2123,17 +1758,17 @@ export type ItemUncheckedUpdateWithoutEquippedAsAccessory1Input = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
   inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
   marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
-  equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsAccessory2Input = {
@@ -2165,17 +1800,17 @@ export type ItemUpdateWithoutEquippedAsAccessory2Input = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
+  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
   inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
   marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
-  equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsAccessory2Input = {
@@ -2196,17 +1831,382 @@ export type ItemUncheckedUpdateWithoutEquippedAsAccessory2Input = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
+  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
   inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
   marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
-  equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUpsertWithoutEquippedAsChestInput = {
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsChestInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsChestInput>
+  create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsChestInput, Prisma.ItemUncheckedCreateWithoutEquippedAsChestInput>
+  where?: Prisma.ItemWhereInput
+}
+
+export type ItemUpdateToOneWithWhereWithoutEquippedAsChestInput = {
+  where?: Prisma.ItemWhereInput
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsChestInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsChestInput>
+}
+
+export type ItemUpdateWithoutEquippedAsChestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
+  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUncheckedUpdateWithoutEquippedAsChestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUpsertWithoutEquippedAsFeetInput = {
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsFeetInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsFeetInput>
+  create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsFeetInput, Prisma.ItemUncheckedCreateWithoutEquippedAsFeetInput>
+  where?: Prisma.ItemWhereInput
+}
+
+export type ItemUpdateToOneWithWhereWithoutEquippedAsFeetInput = {
+  where?: Prisma.ItemWhereInput
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsFeetInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsFeetInput>
+}
+
+export type ItemUpdateWithoutEquippedAsFeetInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
+  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUncheckedUpdateWithoutEquippedAsFeetInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
+  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUpsertWithoutEquippedAsHeadInput = {
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsHeadInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsHeadInput>
+  create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsHeadInput, Prisma.ItemUncheckedCreateWithoutEquippedAsHeadInput>
+  where?: Prisma.ItemWhereInput
+}
+
+export type ItemUpdateToOneWithWhereWithoutEquippedAsHeadInput = {
+  where?: Prisma.ItemWhereInput
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsHeadInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsHeadInput>
+}
+
+export type ItemUpdateWithoutEquippedAsHeadInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUncheckedUpdateWithoutEquippedAsHeadInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUpsertWithoutEquippedAsLegsInput = {
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsLegsInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsLegsInput>
+  create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsLegsInput, Prisma.ItemUncheckedCreateWithoutEquippedAsLegsInput>
+  where?: Prisma.ItemWhereInput
+}
+
+export type ItemUpdateToOneWithWhereWithoutEquippedAsLegsInput = {
+  where?: Prisma.ItemWhereInput
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsLegsInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsLegsInput>
+}
+
+export type ItemUpdateWithoutEquippedAsLegsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUncheckedUpdateWithoutEquippedAsLegsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUpsertWithoutEquippedAsWeaponInput = {
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsWeaponInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsWeaponInput>
+  create: Prisma.XOR<Prisma.ItemCreateWithoutEquippedAsWeaponInput, Prisma.ItemUncheckedCreateWithoutEquippedAsWeaponInput>
+  where?: Prisma.ItemWhereInput
+}
+
+export type ItemUpdateToOneWithWhereWithoutEquippedAsWeaponInput = {
+  where?: Prisma.ItemWhereInput
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutEquippedAsWeaponInput, Prisma.ItemUncheckedUpdateWithoutEquippedAsWeaponInput>
+}
+
+export type ItemUpdateWithoutEquippedAsWeaponInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUncheckedUpdateWithoutEquippedAsWeaponInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutBankVaultItemsInput = {
@@ -2227,17 +2227,17 @@ export type ItemCreateWithoutBankVaultItemsInput = {
   hpBonus?: number
   spBonus?: number
   createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
   equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
   equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutBankVaultItemsInput = {
@@ -2258,17 +2258,17 @@ export type ItemUncheckedCreateWithoutBankVaultItemsInput = {
   hpBonus?: number
   spBonus?: number
   createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
   equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
   equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutBankVaultItemsInput = {
@@ -2305,17 +2305,17 @@ export type ItemUpdateWithoutBankVaultItemsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
   equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
   equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutBankVaultItemsInput = {
@@ -2336,17 +2336,17 @@ export type ItemUncheckedUpdateWithoutBankVaultItemsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
   equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
   equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutMarketListingsInput = {
@@ -2367,17 +2367,17 @@ export type ItemCreateWithoutMarketListingsInput = {
   hpBonus?: number
   spBonus?: number
   createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
   equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutMarketListingsInput = {
@@ -2398,17 +2398,17 @@ export type ItemUncheckedCreateWithoutMarketListingsInput = {
   hpBonus?: number
   spBonus?: number
   createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
   equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutMarketListingsInput = {
@@ -2445,17 +2445,17 @@ export type ItemUpdateWithoutMarketListingsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
   equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutMarketListingsInput = {
@@ -2476,17 +2476,17 @@ export type ItemUncheckedUpdateWithoutMarketListingsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
-  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
   equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutMarketTransactionsInput = {
@@ -2507,17 +2507,17 @@ export type ItemCreateWithoutMarketTransactionsInput = {
   hpBonus?: number
   spBonus?: number
   createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
   equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutMarketTransactionsInput = {
@@ -2538,17 +2538,17 @@ export type ItemUncheckedCreateWithoutMarketTransactionsInput = {
   hpBonus?: number
   spBonus?: number
   createdAt?: Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
-  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
-  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
-  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
-  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
   equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
-  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutMarketTransactionsInput = {
@@ -2585,17 +2585,17 @@ export type ItemUpdateWithoutMarketTransactionsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
   equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutMarketTransactionsInput = {
@@ -2616,17 +2616,17 @@ export type ItemUncheckedUpdateWithoutMarketTransactionsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
-  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
-  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
-  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
-  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
-  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
-  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
-  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
   equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
-  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
 }
 
 
@@ -2635,33 +2635,33 @@ export type ItemUncheckedUpdateWithoutMarketTransactionsInput = {
  */
 
 export type ItemCountOutputType = {
-  inventoryItems: number
-  shopItems: number
-  marketListings: number
-  marketTransactions: number
-  equippedAsWeapon: number
-  equippedAsHead: number
-  equippedAsChest: number
-  equippedAsLegs: number
-  equippedAsFeet: number
+  bankVaultItems: number
   equippedAsAccessory1: number
   equippedAsAccessory2: number
-  bankVaultItems: number
+  equippedAsChest: number
+  equippedAsFeet: number
+  equippedAsHead: number
+  equippedAsLegs: number
+  equippedAsWeapon: number
+  inventoryItems: number
+  marketListings: number
+  marketTransactions: number
+  shopItems: number
 }
 
 export type ItemCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  inventoryItems?: boolean | ItemCountOutputTypeCountInventoryItemsArgs
-  shopItems?: boolean | ItemCountOutputTypeCountShopItemsArgs
-  marketListings?: boolean | ItemCountOutputTypeCountMarketListingsArgs
-  marketTransactions?: boolean | ItemCountOutputTypeCountMarketTransactionsArgs
-  equippedAsWeapon?: boolean | ItemCountOutputTypeCountEquippedAsWeaponArgs
-  equippedAsHead?: boolean | ItemCountOutputTypeCountEquippedAsHeadArgs
-  equippedAsChest?: boolean | ItemCountOutputTypeCountEquippedAsChestArgs
-  equippedAsLegs?: boolean | ItemCountOutputTypeCountEquippedAsLegsArgs
-  equippedAsFeet?: boolean | ItemCountOutputTypeCountEquippedAsFeetArgs
+  bankVaultItems?: boolean | ItemCountOutputTypeCountBankVaultItemsArgs
   equippedAsAccessory1?: boolean | ItemCountOutputTypeCountEquippedAsAccessory1Args
   equippedAsAccessory2?: boolean | ItemCountOutputTypeCountEquippedAsAccessory2Args
-  bankVaultItems?: boolean | ItemCountOutputTypeCountBankVaultItemsArgs
+  equippedAsChest?: boolean | ItemCountOutputTypeCountEquippedAsChestArgs
+  equippedAsFeet?: boolean | ItemCountOutputTypeCountEquippedAsFeetArgs
+  equippedAsHead?: boolean | ItemCountOutputTypeCountEquippedAsHeadArgs
+  equippedAsLegs?: boolean | ItemCountOutputTypeCountEquippedAsLegsArgs
+  equippedAsWeapon?: boolean | ItemCountOutputTypeCountEquippedAsWeaponArgs
+  inventoryItems?: boolean | ItemCountOutputTypeCountInventoryItemsArgs
+  marketListings?: boolean | ItemCountOutputTypeCountMarketListingsArgs
+  marketTransactions?: boolean | ItemCountOutputTypeCountMarketTransactionsArgs
+  shopItems?: boolean | ItemCountOutputTypeCountShopItemsArgs
 }
 
 /**
@@ -2677,64 +2677,8 @@ export type ItemCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * ItemCountOutputType without action
  */
-export type ItemCountOutputTypeCountInventoryItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.InventoryItemWhereInput
-}
-
-/**
- * ItemCountOutputType without action
- */
-export type ItemCountOutputTypeCountShopItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ShopItemWhereInput
-}
-
-/**
- * ItemCountOutputType without action
- */
-export type ItemCountOutputTypeCountMarketListingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MarketListingWhereInput
-}
-
-/**
- * ItemCountOutputType without action
- */
-export type ItemCountOutputTypeCountMarketTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MarketTransactionWhereInput
-}
-
-/**
- * ItemCountOutputType without action
- */
-export type ItemCountOutputTypeCountEquippedAsWeaponArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.EquipmentWhereInput
-}
-
-/**
- * ItemCountOutputType without action
- */
-export type ItemCountOutputTypeCountEquippedAsHeadArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.EquipmentWhereInput
-}
-
-/**
- * ItemCountOutputType without action
- */
-export type ItemCountOutputTypeCountEquippedAsChestArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.EquipmentWhereInput
-}
-
-/**
- * ItemCountOutputType without action
- */
-export type ItemCountOutputTypeCountEquippedAsLegsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.EquipmentWhereInput
-}
-
-/**
- * ItemCountOutputType without action
- */
-export type ItemCountOutputTypeCountEquippedAsFeetArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.EquipmentWhereInput
+export type ItemCountOutputTypeCountBankVaultItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BankVaultItemWhereInput
 }
 
 /**
@@ -2754,8 +2698,64 @@ export type ItemCountOutputTypeCountEquippedAsAccessory2Args<ExtArgs extends run
 /**
  * ItemCountOutputType without action
  */
-export type ItemCountOutputTypeCountBankVaultItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BankVaultItemWhereInput
+export type ItemCountOutputTypeCountEquippedAsChestArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EquipmentWhereInput
+}
+
+/**
+ * ItemCountOutputType without action
+ */
+export type ItemCountOutputTypeCountEquippedAsFeetArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EquipmentWhereInput
+}
+
+/**
+ * ItemCountOutputType without action
+ */
+export type ItemCountOutputTypeCountEquippedAsHeadArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EquipmentWhereInput
+}
+
+/**
+ * ItemCountOutputType without action
+ */
+export type ItemCountOutputTypeCountEquippedAsLegsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EquipmentWhereInput
+}
+
+/**
+ * ItemCountOutputType without action
+ */
+export type ItemCountOutputTypeCountEquippedAsWeaponArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EquipmentWhereInput
+}
+
+/**
+ * ItemCountOutputType without action
+ */
+export type ItemCountOutputTypeCountInventoryItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InventoryItemWhereInput
+}
+
+/**
+ * ItemCountOutputType without action
+ */
+export type ItemCountOutputTypeCountMarketListingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MarketListingWhereInput
+}
+
+/**
+ * ItemCountOutputType without action
+ */
+export type ItemCountOutputTypeCountMarketTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MarketTransactionWhereInput
+}
+
+/**
+ * ItemCountOutputType without action
+ */
+export type ItemCountOutputTypeCountShopItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ShopItemWhereInput
 }
 
 
@@ -2777,18 +2777,18 @@ export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   hpBonus?: boolean
   spBonus?: boolean
   createdAt?: boolean
-  inventoryItems?: boolean | Prisma.Item$inventoryItemsArgs<ExtArgs>
-  shopItems?: boolean | Prisma.Item$shopItemsArgs<ExtArgs>
-  marketListings?: boolean | Prisma.Item$marketListingsArgs<ExtArgs>
-  marketTransactions?: boolean | Prisma.Item$marketTransactionsArgs<ExtArgs>
-  equippedAsWeapon?: boolean | Prisma.Item$equippedAsWeaponArgs<ExtArgs>
-  equippedAsHead?: boolean | Prisma.Item$equippedAsHeadArgs<ExtArgs>
-  equippedAsChest?: boolean | Prisma.Item$equippedAsChestArgs<ExtArgs>
-  equippedAsLegs?: boolean | Prisma.Item$equippedAsLegsArgs<ExtArgs>
-  equippedAsFeet?: boolean | Prisma.Item$equippedAsFeetArgs<ExtArgs>
+  bankVaultItems?: boolean | Prisma.Item$bankVaultItemsArgs<ExtArgs>
   equippedAsAccessory1?: boolean | Prisma.Item$equippedAsAccessory1Args<ExtArgs>
   equippedAsAccessory2?: boolean | Prisma.Item$equippedAsAccessory2Args<ExtArgs>
-  bankVaultItems?: boolean | Prisma.Item$bankVaultItemsArgs<ExtArgs>
+  equippedAsChest?: boolean | Prisma.Item$equippedAsChestArgs<ExtArgs>
+  equippedAsFeet?: boolean | Prisma.Item$equippedAsFeetArgs<ExtArgs>
+  equippedAsHead?: boolean | Prisma.Item$equippedAsHeadArgs<ExtArgs>
+  equippedAsLegs?: boolean | Prisma.Item$equippedAsLegsArgs<ExtArgs>
+  equippedAsWeapon?: boolean | Prisma.Item$equippedAsWeaponArgs<ExtArgs>
+  inventoryItems?: boolean | Prisma.Item$inventoryItemsArgs<ExtArgs>
+  marketListings?: boolean | Prisma.Item$marketListingsArgs<ExtArgs>
+  marketTransactions?: boolean | Prisma.Item$marketTransactionsArgs<ExtArgs>
+  shopItems?: boolean | Prisma.Item$shopItemsArgs<ExtArgs>
   _count?: boolean | Prisma.ItemCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["item"]>
 
@@ -2854,18 +2854,18 @@ export type ItemSelectScalar = {
 
 export type ItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "itemType" | "itemRarity" | "tier" | "value" | "stackable" | "maxStack" | "equipmentSlot" | "vitalityBonus" | "strengthBonus" | "speedBonus" | "dexterityBonus" | "hpBonus" | "spBonus" | "createdAt", ExtArgs["result"]["item"]>
 export type ItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  inventoryItems?: boolean | Prisma.Item$inventoryItemsArgs<ExtArgs>
-  shopItems?: boolean | Prisma.Item$shopItemsArgs<ExtArgs>
-  marketListings?: boolean | Prisma.Item$marketListingsArgs<ExtArgs>
-  marketTransactions?: boolean | Prisma.Item$marketTransactionsArgs<ExtArgs>
-  equippedAsWeapon?: boolean | Prisma.Item$equippedAsWeaponArgs<ExtArgs>
-  equippedAsHead?: boolean | Prisma.Item$equippedAsHeadArgs<ExtArgs>
-  equippedAsChest?: boolean | Prisma.Item$equippedAsChestArgs<ExtArgs>
-  equippedAsLegs?: boolean | Prisma.Item$equippedAsLegsArgs<ExtArgs>
-  equippedAsFeet?: boolean | Prisma.Item$equippedAsFeetArgs<ExtArgs>
+  bankVaultItems?: boolean | Prisma.Item$bankVaultItemsArgs<ExtArgs>
   equippedAsAccessory1?: boolean | Prisma.Item$equippedAsAccessory1Args<ExtArgs>
   equippedAsAccessory2?: boolean | Prisma.Item$equippedAsAccessory2Args<ExtArgs>
-  bankVaultItems?: boolean | Prisma.Item$bankVaultItemsArgs<ExtArgs>
+  equippedAsChest?: boolean | Prisma.Item$equippedAsChestArgs<ExtArgs>
+  equippedAsFeet?: boolean | Prisma.Item$equippedAsFeetArgs<ExtArgs>
+  equippedAsHead?: boolean | Prisma.Item$equippedAsHeadArgs<ExtArgs>
+  equippedAsLegs?: boolean | Prisma.Item$equippedAsLegsArgs<ExtArgs>
+  equippedAsWeapon?: boolean | Prisma.Item$equippedAsWeaponArgs<ExtArgs>
+  inventoryItems?: boolean | Prisma.Item$inventoryItemsArgs<ExtArgs>
+  marketListings?: boolean | Prisma.Item$marketListingsArgs<ExtArgs>
+  marketTransactions?: boolean | Prisma.Item$marketTransactionsArgs<ExtArgs>
+  shopItems?: boolean | Prisma.Item$shopItemsArgs<ExtArgs>
   _count?: boolean | Prisma.ItemCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ItemIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2874,18 +2874,18 @@ export type ItemIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $ItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Item"
   objects: {
-    inventoryItems: Prisma.$InventoryItemPayload<ExtArgs>[]
-    shopItems: Prisma.$ShopItemPayload<ExtArgs>[]
-    marketListings: Prisma.$MarketListingPayload<ExtArgs>[]
-    marketTransactions: Prisma.$MarketTransactionPayload<ExtArgs>[]
-    equippedAsWeapon: Prisma.$EquipmentPayload<ExtArgs>[]
-    equippedAsHead: Prisma.$EquipmentPayload<ExtArgs>[]
-    equippedAsChest: Prisma.$EquipmentPayload<ExtArgs>[]
-    equippedAsLegs: Prisma.$EquipmentPayload<ExtArgs>[]
-    equippedAsFeet: Prisma.$EquipmentPayload<ExtArgs>[]
+    bankVaultItems: Prisma.$BankVaultItemPayload<ExtArgs>[]
     equippedAsAccessory1: Prisma.$EquipmentPayload<ExtArgs>[]
     equippedAsAccessory2: Prisma.$EquipmentPayload<ExtArgs>[]
-    bankVaultItems: Prisma.$BankVaultItemPayload<ExtArgs>[]
+    equippedAsChest: Prisma.$EquipmentPayload<ExtArgs>[]
+    equippedAsFeet: Prisma.$EquipmentPayload<ExtArgs>[]
+    equippedAsHead: Prisma.$EquipmentPayload<ExtArgs>[]
+    equippedAsLegs: Prisma.$EquipmentPayload<ExtArgs>[]
+    equippedAsWeapon: Prisma.$EquipmentPayload<ExtArgs>[]
+    inventoryItems: Prisma.$InventoryItemPayload<ExtArgs>[]
+    marketListings: Prisma.$MarketListingPayload<ExtArgs>[]
+    marketTransactions: Prisma.$MarketTransactionPayload<ExtArgs>[]
+    shopItems: Prisma.$ShopItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3299,18 +3299,18 @@ readonly fields: ItemFieldRefs;
  */
 export interface Prisma__ItemClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  inventoryItems<T extends Prisma.Item$inventoryItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$inventoryItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  shopItems<T extends Prisma.Item$shopItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$shopItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShopItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  marketListings<T extends Prisma.Item$marketListingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$marketListingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MarketListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  marketTransactions<T extends Prisma.Item$marketTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$marketTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MarketTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  equippedAsWeapon<T extends Prisma.Item$equippedAsWeaponArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$equippedAsWeaponArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EquipmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  equippedAsHead<T extends Prisma.Item$equippedAsHeadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$equippedAsHeadArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EquipmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  equippedAsChest<T extends Prisma.Item$equippedAsChestArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$equippedAsChestArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EquipmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  equippedAsLegs<T extends Prisma.Item$equippedAsLegsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$equippedAsLegsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EquipmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  equippedAsFeet<T extends Prisma.Item$equippedAsFeetArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$equippedAsFeetArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EquipmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bankVaultItems<T extends Prisma.Item$bankVaultItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$bankVaultItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BankVaultItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   equippedAsAccessory1<T extends Prisma.Item$equippedAsAccessory1Args<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$equippedAsAccessory1Args<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EquipmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   equippedAsAccessory2<T extends Prisma.Item$equippedAsAccessory2Args<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$equippedAsAccessory2Args<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EquipmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  bankVaultItems<T extends Prisma.Item$bankVaultItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$bankVaultItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BankVaultItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  equippedAsChest<T extends Prisma.Item$equippedAsChestArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$equippedAsChestArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EquipmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  equippedAsFeet<T extends Prisma.Item$equippedAsFeetArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$equippedAsFeetArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EquipmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  equippedAsHead<T extends Prisma.Item$equippedAsHeadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$equippedAsHeadArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EquipmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  equippedAsLegs<T extends Prisma.Item$equippedAsLegsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$equippedAsLegsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EquipmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  equippedAsWeapon<T extends Prisma.Item$equippedAsWeaponArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$equippedAsWeaponArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EquipmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  inventoryItems<T extends Prisma.Item$inventoryItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$inventoryItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  marketListings<T extends Prisma.Item$marketListingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$marketListingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MarketListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  marketTransactions<T extends Prisma.Item$marketTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$marketTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MarketTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  shopItems<T extends Prisma.Item$shopItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$shopItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShopItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3745,219 +3745,27 @@ export type ItemDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Item.inventoryItems
+ * Item.bankVaultItems
  */
-export type Item$inventoryItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Item$bankVaultItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the InventoryItem
+   * Select specific fields to fetch from the BankVaultItem
    */
-  select?: Prisma.InventoryItemSelect<ExtArgs> | null
+  select?: Prisma.BankVaultItemSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the InventoryItem
+   * Omit specific fields from the BankVaultItem
    */
-  omit?: Prisma.InventoryItemOmit<ExtArgs> | null
+  omit?: Prisma.BankVaultItemOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.InventoryItemInclude<ExtArgs> | null
-  where?: Prisma.InventoryItemWhereInput
-  orderBy?: Prisma.InventoryItemOrderByWithRelationInput | Prisma.InventoryItemOrderByWithRelationInput[]
-  cursor?: Prisma.InventoryItemWhereUniqueInput
+  include?: Prisma.BankVaultItemInclude<ExtArgs> | null
+  where?: Prisma.BankVaultItemWhereInput
+  orderBy?: Prisma.BankVaultItemOrderByWithRelationInput | Prisma.BankVaultItemOrderByWithRelationInput[]
+  cursor?: Prisma.BankVaultItemWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.InventoryItemScalarFieldEnum | Prisma.InventoryItemScalarFieldEnum[]
-}
-
-/**
- * Item.shopItems
- */
-export type Item$shopItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ShopItem
-   */
-  select?: Prisma.ShopItemSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ShopItem
-   */
-  omit?: Prisma.ShopItemOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ShopItemInclude<ExtArgs> | null
-  where?: Prisma.ShopItemWhereInput
-  orderBy?: Prisma.ShopItemOrderByWithRelationInput | Prisma.ShopItemOrderByWithRelationInput[]
-  cursor?: Prisma.ShopItemWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ShopItemScalarFieldEnum | Prisma.ShopItemScalarFieldEnum[]
-}
-
-/**
- * Item.marketListings
- */
-export type Item$marketListingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the MarketListing
-   */
-  select?: Prisma.MarketListingSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the MarketListing
-   */
-  omit?: Prisma.MarketListingOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MarketListingInclude<ExtArgs> | null
-  where?: Prisma.MarketListingWhereInput
-  orderBy?: Prisma.MarketListingOrderByWithRelationInput | Prisma.MarketListingOrderByWithRelationInput[]
-  cursor?: Prisma.MarketListingWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MarketListingScalarFieldEnum | Prisma.MarketListingScalarFieldEnum[]
-}
-
-/**
- * Item.marketTransactions
- */
-export type Item$marketTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the MarketTransaction
-   */
-  select?: Prisma.MarketTransactionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the MarketTransaction
-   */
-  omit?: Prisma.MarketTransactionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MarketTransactionInclude<ExtArgs> | null
-  where?: Prisma.MarketTransactionWhereInput
-  orderBy?: Prisma.MarketTransactionOrderByWithRelationInput | Prisma.MarketTransactionOrderByWithRelationInput[]
-  cursor?: Prisma.MarketTransactionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MarketTransactionScalarFieldEnum | Prisma.MarketTransactionScalarFieldEnum[]
-}
-
-/**
- * Item.equippedAsWeapon
- */
-export type Item$equippedAsWeaponArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Equipment
-   */
-  select?: Prisma.EquipmentSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Equipment
-   */
-  omit?: Prisma.EquipmentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.EquipmentInclude<ExtArgs> | null
-  where?: Prisma.EquipmentWhereInput
-  orderBy?: Prisma.EquipmentOrderByWithRelationInput | Prisma.EquipmentOrderByWithRelationInput[]
-  cursor?: Prisma.EquipmentWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.EquipmentScalarFieldEnum | Prisma.EquipmentScalarFieldEnum[]
-}
-
-/**
- * Item.equippedAsHead
- */
-export type Item$equippedAsHeadArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Equipment
-   */
-  select?: Prisma.EquipmentSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Equipment
-   */
-  omit?: Prisma.EquipmentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.EquipmentInclude<ExtArgs> | null
-  where?: Prisma.EquipmentWhereInput
-  orderBy?: Prisma.EquipmentOrderByWithRelationInput | Prisma.EquipmentOrderByWithRelationInput[]
-  cursor?: Prisma.EquipmentWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.EquipmentScalarFieldEnum | Prisma.EquipmentScalarFieldEnum[]
-}
-
-/**
- * Item.equippedAsChest
- */
-export type Item$equippedAsChestArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Equipment
-   */
-  select?: Prisma.EquipmentSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Equipment
-   */
-  omit?: Prisma.EquipmentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.EquipmentInclude<ExtArgs> | null
-  where?: Prisma.EquipmentWhereInput
-  orderBy?: Prisma.EquipmentOrderByWithRelationInput | Prisma.EquipmentOrderByWithRelationInput[]
-  cursor?: Prisma.EquipmentWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.EquipmentScalarFieldEnum | Prisma.EquipmentScalarFieldEnum[]
-}
-
-/**
- * Item.equippedAsLegs
- */
-export type Item$equippedAsLegsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Equipment
-   */
-  select?: Prisma.EquipmentSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Equipment
-   */
-  omit?: Prisma.EquipmentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.EquipmentInclude<ExtArgs> | null
-  where?: Prisma.EquipmentWhereInput
-  orderBy?: Prisma.EquipmentOrderByWithRelationInput | Prisma.EquipmentOrderByWithRelationInput[]
-  cursor?: Prisma.EquipmentWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.EquipmentScalarFieldEnum | Prisma.EquipmentScalarFieldEnum[]
-}
-
-/**
- * Item.equippedAsFeet
- */
-export type Item$equippedAsFeetArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Equipment
-   */
-  select?: Prisma.EquipmentSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Equipment
-   */
-  omit?: Prisma.EquipmentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.EquipmentInclude<ExtArgs> | null
-  where?: Prisma.EquipmentWhereInput
-  orderBy?: Prisma.EquipmentOrderByWithRelationInput | Prisma.EquipmentOrderByWithRelationInput[]
-  cursor?: Prisma.EquipmentWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.EquipmentScalarFieldEnum | Prisma.EquipmentScalarFieldEnum[]
+  distinct?: Prisma.BankVaultItemScalarFieldEnum | Prisma.BankVaultItemScalarFieldEnum[]
 }
 
 /**
@@ -4009,27 +3817,219 @@ export type Item$equippedAsAccessory2Args<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
- * Item.bankVaultItems
+ * Item.equippedAsChest
  */
-export type Item$bankVaultItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Item$equippedAsChestArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the BankVaultItem
+   * Select specific fields to fetch from the Equipment
    */
-  select?: Prisma.BankVaultItemSelect<ExtArgs> | null
+  select?: Prisma.EquipmentSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the BankVaultItem
+   * Omit specific fields from the Equipment
    */
-  omit?: Prisma.BankVaultItemOmit<ExtArgs> | null
+  omit?: Prisma.EquipmentOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.BankVaultItemInclude<ExtArgs> | null
-  where?: Prisma.BankVaultItemWhereInput
-  orderBy?: Prisma.BankVaultItemOrderByWithRelationInput | Prisma.BankVaultItemOrderByWithRelationInput[]
-  cursor?: Prisma.BankVaultItemWhereUniqueInput
+  include?: Prisma.EquipmentInclude<ExtArgs> | null
+  where?: Prisma.EquipmentWhereInput
+  orderBy?: Prisma.EquipmentOrderByWithRelationInput | Prisma.EquipmentOrderByWithRelationInput[]
+  cursor?: Prisma.EquipmentWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.BankVaultItemScalarFieldEnum | Prisma.BankVaultItemScalarFieldEnum[]
+  distinct?: Prisma.EquipmentScalarFieldEnum | Prisma.EquipmentScalarFieldEnum[]
+}
+
+/**
+ * Item.equippedAsFeet
+ */
+export type Item$equippedAsFeetArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Equipment
+   */
+  select?: Prisma.EquipmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Equipment
+   */
+  omit?: Prisma.EquipmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EquipmentInclude<ExtArgs> | null
+  where?: Prisma.EquipmentWhereInput
+  orderBy?: Prisma.EquipmentOrderByWithRelationInput | Prisma.EquipmentOrderByWithRelationInput[]
+  cursor?: Prisma.EquipmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EquipmentScalarFieldEnum | Prisma.EquipmentScalarFieldEnum[]
+}
+
+/**
+ * Item.equippedAsHead
+ */
+export type Item$equippedAsHeadArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Equipment
+   */
+  select?: Prisma.EquipmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Equipment
+   */
+  omit?: Prisma.EquipmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EquipmentInclude<ExtArgs> | null
+  where?: Prisma.EquipmentWhereInput
+  orderBy?: Prisma.EquipmentOrderByWithRelationInput | Prisma.EquipmentOrderByWithRelationInput[]
+  cursor?: Prisma.EquipmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EquipmentScalarFieldEnum | Prisma.EquipmentScalarFieldEnum[]
+}
+
+/**
+ * Item.equippedAsLegs
+ */
+export type Item$equippedAsLegsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Equipment
+   */
+  select?: Prisma.EquipmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Equipment
+   */
+  omit?: Prisma.EquipmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EquipmentInclude<ExtArgs> | null
+  where?: Prisma.EquipmentWhereInput
+  orderBy?: Prisma.EquipmentOrderByWithRelationInput | Prisma.EquipmentOrderByWithRelationInput[]
+  cursor?: Prisma.EquipmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EquipmentScalarFieldEnum | Prisma.EquipmentScalarFieldEnum[]
+}
+
+/**
+ * Item.equippedAsWeapon
+ */
+export type Item$equippedAsWeaponArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Equipment
+   */
+  select?: Prisma.EquipmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Equipment
+   */
+  omit?: Prisma.EquipmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EquipmentInclude<ExtArgs> | null
+  where?: Prisma.EquipmentWhereInput
+  orderBy?: Prisma.EquipmentOrderByWithRelationInput | Prisma.EquipmentOrderByWithRelationInput[]
+  cursor?: Prisma.EquipmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EquipmentScalarFieldEnum | Prisma.EquipmentScalarFieldEnum[]
+}
+
+/**
+ * Item.inventoryItems
+ */
+export type Item$inventoryItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InventoryItem
+   */
+  select?: Prisma.InventoryItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InventoryItem
+   */
+  omit?: Prisma.InventoryItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InventoryItemInclude<ExtArgs> | null
+  where?: Prisma.InventoryItemWhereInput
+  orderBy?: Prisma.InventoryItemOrderByWithRelationInput | Prisma.InventoryItemOrderByWithRelationInput[]
+  cursor?: Prisma.InventoryItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InventoryItemScalarFieldEnum | Prisma.InventoryItemScalarFieldEnum[]
+}
+
+/**
+ * Item.marketListings
+ */
+export type Item$marketListingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MarketListing
+   */
+  select?: Prisma.MarketListingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MarketListing
+   */
+  omit?: Prisma.MarketListingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MarketListingInclude<ExtArgs> | null
+  where?: Prisma.MarketListingWhereInput
+  orderBy?: Prisma.MarketListingOrderByWithRelationInput | Prisma.MarketListingOrderByWithRelationInput[]
+  cursor?: Prisma.MarketListingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MarketListingScalarFieldEnum | Prisma.MarketListingScalarFieldEnum[]
+}
+
+/**
+ * Item.marketTransactions
+ */
+export type Item$marketTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MarketTransaction
+   */
+  select?: Prisma.MarketTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MarketTransaction
+   */
+  omit?: Prisma.MarketTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MarketTransactionInclude<ExtArgs> | null
+  where?: Prisma.MarketTransactionWhereInput
+  orderBy?: Prisma.MarketTransactionOrderByWithRelationInput | Prisma.MarketTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.MarketTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MarketTransactionScalarFieldEnum | Prisma.MarketTransactionScalarFieldEnum[]
+}
+
+/**
+ * Item.shopItems
+ */
+export type Item$shopItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ShopItem
+   */
+  select?: Prisma.ShopItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ShopItem
+   */
+  omit?: Prisma.ShopItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShopItemInclude<ExtArgs> | null
+  where?: Prisma.ShopItemWhereInput
+  orderBy?: Prisma.ShopItemOrderByWithRelationInput | Prisma.ShopItemOrderByWithRelationInput[]
+  cursor?: Prisma.ShopItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ShopItemScalarFieldEnum | Prisma.ShopItemScalarFieldEnum[]
 }
 
 /**

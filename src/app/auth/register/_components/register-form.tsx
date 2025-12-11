@@ -48,7 +48,24 @@ export function RegisterForm() {
       const data = await response.json();
 
       if (response.ok) {
-        router.push("/auth/signin?registered=true");
+        // Auto-sign in the user after successful registration
+        const formData = new FormData();
+        formData.append("email", email);
+        formData.append("password", password);
+        formData.append("redirect", "false");
+
+        const signInResponse = await fetch("/api/auth/callback/credentials", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (signInResponse.ok) {
+          router.push("/hub");
+          router.refresh();
+        } else {
+          // Registration succeeded but sign-in failed - redirect to sign-in page
+          router.push("/auth/signin?registered=true&callbackUrl=/hub");
+        }
       } else {
         setError(data.error || "Registration failed. Please try again.");
       }

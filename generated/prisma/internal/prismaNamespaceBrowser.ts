@@ -71,6 +71,7 @@ export const ModelName = {
   Encounter: 'Encounter',
   CombatLog: 'CombatLog',
   DeathLog: 'DeathLog',
+  DeathRecord: 'DeathRecord',
   Guild: 'Guild',
   GuildMember: 'GuildMember',
   GuildBank: 'GuildBank',
@@ -140,15 +141,15 @@ export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeo
 
 export const UserScalarFieldEnum = {
   id: 'id',
+  name: 'name',
   email: 'email',
-  username: 'username',
+  emailVerified: 'emailVerified',
+  image: 'image',
   password: 'password',
   gender: 'gender',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  name: 'name',
-  emailVerified: 'emailVerified',
-  image: 'image'
+  username: 'username'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -163,18 +164,18 @@ export const CharacterScalarFieldEnum = {
   strength: 'strength',
   speed: 'speed',
   dexterity: 'dexterity',
-  maxHealth: 'maxHealth',
-  currentHealth: 'currentHealth',
   maxStamina: 'maxStamina',
   currentStamina: 'currentStamina',
-  deathsUsed: 'deathsUsed',
-  floorsCleared: 'floorsCleared',
-  totalPlayTime: 'totalPlayTime',
-  isDead: 'isDead',
-  deathAt: 'deathAt',
-  deathReason: 'deathReason',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  currentHp: 'currentHp',
+  deaths: 'deaths',
+  floor: 'floor',
+  gender: 'gender',
+  location: 'location',
+  maxHp: 'maxHp',
+  deathAt: 'deathAt',
+  deathReason: 'deathReason'
 } as const
 
 export type CharacterScalarFieldEnum = (typeof CharacterScalarFieldEnum)[keyof typeof CharacterScalarFieldEnum]
@@ -389,6 +390,19 @@ export const DeathLogScalarFieldEnum = {
 } as const
 
 export type DeathLogScalarFieldEnum = (typeof DeathLogScalarFieldEnum)[keyof typeof DeathLogScalarFieldEnum]
+
+
+export const DeathRecordScalarFieldEnum = {
+  id: 'id',
+  characterName: 'characterName',
+  userId: 'userId',
+  floorReached: 'floorReached',
+  causeOfDeath: 'causeOfDeath',
+  deathsUsed: 'deathsUsed',
+  createdAt: 'createdAt'
+} as const
+
+export type DeathRecordScalarFieldEnum = (typeof DeathRecordScalarFieldEnum)[keyof typeof DeathRecordScalarFieldEnum]
 
 
 export const GuildScalarFieldEnum = {

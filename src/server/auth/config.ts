@@ -19,9 +19,14 @@ declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
+      username: string;
       // ...other properties
       // role: UserRole;
     } & DefaultSession["user"];
+  }
+
+  interface JWT {
+    username?: string;
   }
 
   // interface User {
@@ -106,15 +111,37 @@ export const authConfig = {
     signIn: "/auth/signin",
   },
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      // If redirecting to baseUrl or root, send to hub
+      if (url === baseUrl || url === `${baseUrl}/`) {
+        return `${baseUrl}/hub`;
+      }
+      // Otherwise use the provided URL
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      if (new URL(url).origin === baseUrl) return url;
+      // Default to hub if no valid URL provided
+      return `${baseUrl}/hub`;
+    },
     async session({ session, token }) {
       if (token.sub && session.user) {
         session.user.id = token.sub;
+      }
+      if (token.username && session.user) {
+        session.user.username = token.username as string;
       }
       return session;
     },
     async jwt({ token, user, account }) {
       if (user) {
         token.sub = user.id;
+        // Fetch username from database using user id
+        const dbUser = await db.user.findUnique({
+          where: { id: user.id },
+          select: { username: true },
+        });
+        if (dbUser) {
+          token.username = dbUser.username;
+        }
       }
       return token;
     },

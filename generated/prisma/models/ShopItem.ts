@@ -228,8 +228,8 @@ export type ShopItemWhereInput = {
   price?: Prisma.IntFilter<"ShopItem"> | number
   stock?: Prisma.IntNullableFilter<"ShopItem"> | number | null
   createdAt?: Prisma.DateTimeFilter<"ShopItem"> | Date | string
-  npc?: Prisma.XOR<Prisma.NPCScalarRelationFilter, Prisma.NPCWhereInput>
   item?: Prisma.XOR<Prisma.ItemScalarRelationFilter, Prisma.ItemWhereInput>
+  npc?: Prisma.XOR<Prisma.NPCScalarRelationFilter, Prisma.NPCWhereInput>
 }
 
 export type ShopItemOrderByWithRelationInput = {
@@ -239,8 +239,8 @@ export type ShopItemOrderByWithRelationInput = {
   price?: Prisma.SortOrder
   stock?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  npc?: Prisma.NPCOrderByWithRelationInput
   item?: Prisma.ItemOrderByWithRelationInput
+  npc?: Prisma.NPCOrderByWithRelationInput
 }
 
 export type ShopItemWhereUniqueInput = Prisma.AtLeast<{
@@ -253,8 +253,8 @@ export type ShopItemWhereUniqueInput = Prisma.AtLeast<{
   price?: Prisma.IntFilter<"ShopItem"> | number
   stock?: Prisma.IntNullableFilter<"ShopItem"> | number | null
   createdAt?: Prisma.DateTimeFilter<"ShopItem"> | Date | string
-  npc?: Prisma.XOR<Prisma.NPCScalarRelationFilter, Prisma.NPCWhereInput>
   item?: Prisma.XOR<Prisma.ItemScalarRelationFilter, Prisma.ItemWhereInput>
+  npc?: Prisma.XOR<Prisma.NPCScalarRelationFilter, Prisma.NPCWhereInput>
 }, "id">
 
 export type ShopItemOrderByWithAggregationInput = {
@@ -288,8 +288,8 @@ export type ShopItemCreateInput = {
   price: number
   stock?: number | null
   createdAt?: Date | string
-  npc: Prisma.NPCCreateNestedOneWithoutShopItemsInput
   item: Prisma.ItemCreateNestedOneWithoutShopItemsInput
+  npc: Prisma.NPCCreateNestedOneWithoutShopItemsInput
 }
 
 export type ShopItemUncheckedCreateInput = {
@@ -306,8 +306,8 @@ export type ShopItemUpdateInput = {
   price?: Prisma.IntFieldUpdateOperationsInput | number
   stock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  npc?: Prisma.NPCUpdateOneRequiredWithoutShopItemsNestedInput
   item?: Prisma.ItemUpdateOneRequiredWithoutShopItemsNestedInput
+  npc?: Prisma.NPCUpdateOneRequiredWithoutShopItemsNestedInput
 }
 
 export type ShopItemUncheckedUpdateInput = {
@@ -644,8 +644,8 @@ export type ShopItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   price?: boolean
   stock?: boolean
   createdAt?: boolean
-  npc?: boolean | Prisma.NPCDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  npc?: boolean | Prisma.NPCDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["shopItem"]>
 
 export type ShopItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -655,8 +655,8 @@ export type ShopItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   price?: boolean
   stock?: boolean
   createdAt?: boolean
-  npc?: boolean | Prisma.NPCDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  npc?: boolean | Prisma.NPCDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["shopItem"]>
 
 export type ShopItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -666,8 +666,8 @@ export type ShopItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   price?: boolean
   stock?: boolean
   createdAt?: boolean
-  npc?: boolean | Prisma.NPCDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  npc?: boolean | Prisma.NPCDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["shopItem"]>
 
 export type ShopItemSelectScalar = {
@@ -681,23 +681,23 @@ export type ShopItemSelectScalar = {
 
 export type ShopItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "npcId" | "itemId" | "price" | "stock" | "createdAt", ExtArgs["result"]["shopItem"]>
 export type ShopItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  npc?: boolean | Prisma.NPCDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  npc?: boolean | Prisma.NPCDefaultArgs<ExtArgs>
 }
 export type ShopItemIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  npc?: boolean | Prisma.NPCDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  npc?: boolean | Prisma.NPCDefaultArgs<ExtArgs>
 }
 export type ShopItemIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  npc?: boolean | Prisma.NPCDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  npc?: boolean | Prisma.NPCDefaultArgs<ExtArgs>
 }
 
 export type $ShopItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ShopItem"
   objects: {
-    npc: Prisma.$NPCPayload<ExtArgs>
     item: Prisma.$ItemPayload<ExtArgs>
+    npc: Prisma.$NPCPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1100,8 +1100,8 @@ readonly fields: ShopItemFieldRefs;
  */
 export interface Prisma__ShopItemClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  npc<T extends Prisma.NPCDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.NPCDefaultArgs<ExtArgs>>): Prisma.Prisma__NPCClient<runtime.Types.Result.GetResult<Prisma.$NPCPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   item<T extends Prisma.ItemDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ItemDefaultArgs<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  npc<T extends Prisma.NPCDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.NPCDefaultArgs<ExtArgs>>): Prisma.Prisma__NPCClient<runtime.Types.Result.GetResult<Prisma.$NPCPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

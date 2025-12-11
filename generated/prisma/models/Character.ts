@@ -32,13 +32,12 @@ export type CharacterAvgAggregateOutputType = {
   strength: number | null
   speed: number | null
   dexterity: number | null
-  maxHealth: number | null
-  currentHealth: number | null
   maxStamina: number | null
   currentStamina: number | null
-  deathsUsed: number | null
-  floorsCleared: number | null
-  totalPlayTime: number | null
+  currentHp: number | null
+  deaths: number | null
+  floor: number | null
+  maxHp: number | null
 }
 
 export type CharacterSumAggregateOutputType = {
@@ -47,13 +46,12 @@ export type CharacterSumAggregateOutputType = {
   strength: number | null
   speed: number | null
   dexterity: number | null
-  maxHealth: number | null
-  currentHealth: number | null
   maxStamina: number | null
   currentStamina: number | null
-  deathsUsed: number | null
-  floorsCleared: number | null
-  totalPlayTime: number | null
+  currentHp: number | null
+  deaths: number | null
+  floor: number | null
+  maxHp: number | null
 }
 
 export type CharacterMinAggregateOutputType = {
@@ -65,18 +63,18 @@ export type CharacterMinAggregateOutputType = {
   strength: number | null
   speed: number | null
   dexterity: number | null
-  maxHealth: number | null
-  currentHealth: number | null
   maxStamina: number | null
   currentStamina: number | null
-  deathsUsed: number | null
-  floorsCleared: number | null
-  totalPlayTime: number | null
-  isDead: boolean | null
-  deathAt: Date | null
-  deathReason: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  currentHp: number | null
+  deaths: number | null
+  floor: number | null
+  gender: string | null
+  location: string | null
+  maxHp: number | null
+  deathAt: Date | null
+  deathReason: string | null
 }
 
 export type CharacterMaxAggregateOutputType = {
@@ -88,18 +86,18 @@ export type CharacterMaxAggregateOutputType = {
   strength: number | null
   speed: number | null
   dexterity: number | null
-  maxHealth: number | null
-  currentHealth: number | null
   maxStamina: number | null
   currentStamina: number | null
-  deathsUsed: number | null
-  floorsCleared: number | null
-  totalPlayTime: number | null
-  isDead: boolean | null
-  deathAt: Date | null
-  deathReason: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  currentHp: number | null
+  deaths: number | null
+  floor: number | null
+  gender: string | null
+  location: string | null
+  maxHp: number | null
+  deathAt: Date | null
+  deathReason: string | null
 }
 
 export type CharacterCountAggregateOutputType = {
@@ -111,18 +109,18 @@ export type CharacterCountAggregateOutputType = {
   strength: number
   speed: number
   dexterity: number
-  maxHealth: number
-  currentHealth: number
   maxStamina: number
   currentStamina: number
-  deathsUsed: number
-  floorsCleared: number
-  totalPlayTime: number
-  isDead: number
-  deathAt: number
-  deathReason: number
   createdAt: number
   updatedAt: number
+  currentHp: number
+  deaths: number
+  floor: number
+  gender: number
+  location: number
+  maxHp: number
+  deathAt: number
+  deathReason: number
   _all: number
 }
 
@@ -133,13 +131,12 @@ export type CharacterAvgAggregateInputType = {
   strength?: true
   speed?: true
   dexterity?: true
-  maxHealth?: true
-  currentHealth?: true
   maxStamina?: true
   currentStamina?: true
-  deathsUsed?: true
-  floorsCleared?: true
-  totalPlayTime?: true
+  currentHp?: true
+  deaths?: true
+  floor?: true
+  maxHp?: true
 }
 
 export type CharacterSumAggregateInputType = {
@@ -148,13 +145,12 @@ export type CharacterSumAggregateInputType = {
   strength?: true
   speed?: true
   dexterity?: true
-  maxHealth?: true
-  currentHealth?: true
   maxStamina?: true
   currentStamina?: true
-  deathsUsed?: true
-  floorsCleared?: true
-  totalPlayTime?: true
+  currentHp?: true
+  deaths?: true
+  floor?: true
+  maxHp?: true
 }
 
 export type CharacterMinAggregateInputType = {
@@ -166,18 +162,18 @@ export type CharacterMinAggregateInputType = {
   strength?: true
   speed?: true
   dexterity?: true
-  maxHealth?: true
-  currentHealth?: true
   maxStamina?: true
   currentStamina?: true
-  deathsUsed?: true
-  floorsCleared?: true
-  totalPlayTime?: true
-  isDead?: true
-  deathAt?: true
-  deathReason?: true
   createdAt?: true
   updatedAt?: true
+  currentHp?: true
+  deaths?: true
+  floor?: true
+  gender?: true
+  location?: true
+  maxHp?: true
+  deathAt?: true
+  deathReason?: true
 }
 
 export type CharacterMaxAggregateInputType = {
@@ -189,18 +185,18 @@ export type CharacterMaxAggregateInputType = {
   strength?: true
   speed?: true
   dexterity?: true
-  maxHealth?: true
-  currentHealth?: true
   maxStamina?: true
   currentStamina?: true
-  deathsUsed?: true
-  floorsCleared?: true
-  totalPlayTime?: true
-  isDead?: true
-  deathAt?: true
-  deathReason?: true
   createdAt?: true
   updatedAt?: true
+  currentHp?: true
+  deaths?: true
+  floor?: true
+  gender?: true
+  location?: true
+  maxHp?: true
+  deathAt?: true
+  deathReason?: true
 }
 
 export type CharacterCountAggregateInputType = {
@@ -212,18 +208,18 @@ export type CharacterCountAggregateInputType = {
   strength?: true
   speed?: true
   dexterity?: true
-  maxHealth?: true
-  currentHealth?: true
   maxStamina?: true
   currentStamina?: true
-  deathsUsed?: true
-  floorsCleared?: true
-  totalPlayTime?: true
-  isDead?: true
-  deathAt?: true
-  deathReason?: true
   createdAt?: true
   updatedAt?: true
+  currentHp?: true
+  deaths?: true
+  floor?: true
+  gender?: true
+  location?: true
+  maxHp?: true
+  deathAt?: true
+  deathReason?: true
   _all?: true
 }
 
@@ -322,18 +318,18 @@ export type CharacterGroupByOutputType = {
   strength: number
   speed: number
   dexterity: number
-  maxHealth: number
-  currentHealth: number
   maxStamina: number
   currentStamina: number
-  deathsUsed: number
-  floorsCleared: number
-  totalPlayTime: number
-  isDead: boolean
-  deathAt: Date | null
-  deathReason: string | null
   createdAt: Date
   updatedAt: Date
+  currentHp: number
+  deaths: number
+  floor: number
+  gender: string
+  location: string
+  maxHp: number
+  deathAt: Date | null
+  deathReason: string | null
   _count: CharacterCountAggregateOutputType | null
   _avg: CharacterAvgAggregateOutputType | null
   _sum: CharacterSumAggregateOutputType | null
@@ -368,18 +364,18 @@ export type CharacterWhereInput = {
   strength?: Prisma.IntFilter<"Character"> | number
   speed?: Prisma.IntFilter<"Character"> | number
   dexterity?: Prisma.IntFilter<"Character"> | number
-  maxHealth?: Prisma.IntFilter<"Character"> | number
-  currentHealth?: Prisma.IntFilter<"Character"> | number
   maxStamina?: Prisma.IntFilter<"Character"> | number
   currentStamina?: Prisma.IntFilter<"Character"> | number
-  deathsUsed?: Prisma.IntFilter<"Character"> | number
-  floorsCleared?: Prisma.IntFilter<"Character"> | number
-  totalPlayTime?: Prisma.IntFilter<"Character"> | number
-  isDead?: Prisma.BoolFilter<"Character"> | boolean
-  deathAt?: Prisma.DateTimeNullableFilter<"Character"> | Date | string | null
-  deathReason?: Prisma.StringNullableFilter<"Character"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Character"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Character"> | Date | string
+  currentHp?: Prisma.IntFilter<"Character"> | number
+  deaths?: Prisma.IntFilter<"Character"> | number
+  floor?: Prisma.IntFilter<"Character"> | number
+  gender?: Prisma.StringFilter<"Character"> | string
+  location?: Prisma.StringFilter<"Character"> | string
+  maxHp?: Prisma.IntFilter<"Character"> | number
+  deathAt?: Prisma.DateTimeNullableFilter<"Character"> | Date | string | null
+  deathReason?: Prisma.StringNullableFilter<"Character"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
@@ -392,18 +388,18 @@ export type CharacterOrderByWithRelationInput = {
   strength?: Prisma.SortOrder
   speed?: Prisma.SortOrder
   dexterity?: Prisma.SortOrder
-  maxHealth?: Prisma.SortOrder
-  currentHealth?: Prisma.SortOrder
   maxStamina?: Prisma.SortOrder
   currentStamina?: Prisma.SortOrder
-  deathsUsed?: Prisma.SortOrder
-  floorsCleared?: Prisma.SortOrder
-  totalPlayTime?: Prisma.SortOrder
-  isDead?: Prisma.SortOrder
-  deathAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  deathReason?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  currentHp?: Prisma.SortOrder
+  deaths?: Prisma.SortOrder
+  floor?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  location?: Prisma.SortOrder
+  maxHp?: Prisma.SortOrder
+  deathAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deathReason?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -419,18 +415,18 @@ export type CharacterWhereUniqueInput = Prisma.AtLeast<{
   strength?: Prisma.IntFilter<"Character"> | number
   speed?: Prisma.IntFilter<"Character"> | number
   dexterity?: Prisma.IntFilter<"Character"> | number
-  maxHealth?: Prisma.IntFilter<"Character"> | number
-  currentHealth?: Prisma.IntFilter<"Character"> | number
   maxStamina?: Prisma.IntFilter<"Character"> | number
   currentStamina?: Prisma.IntFilter<"Character"> | number
-  deathsUsed?: Prisma.IntFilter<"Character"> | number
-  floorsCleared?: Prisma.IntFilter<"Character"> | number
-  totalPlayTime?: Prisma.IntFilter<"Character"> | number
-  isDead?: Prisma.BoolFilter<"Character"> | boolean
-  deathAt?: Prisma.DateTimeNullableFilter<"Character"> | Date | string | null
-  deathReason?: Prisma.StringNullableFilter<"Character"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Character"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Character"> | Date | string
+  currentHp?: Prisma.IntFilter<"Character"> | number
+  deaths?: Prisma.IntFilter<"Character"> | number
+  floor?: Prisma.IntFilter<"Character"> | number
+  gender?: Prisma.StringFilter<"Character"> | string
+  location?: Prisma.StringFilter<"Character"> | string
+  maxHp?: Prisma.IntFilter<"Character"> | number
+  deathAt?: Prisma.DateTimeNullableFilter<"Character"> | Date | string | null
+  deathReason?: Prisma.StringNullableFilter<"Character"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
@@ -443,18 +439,18 @@ export type CharacterOrderByWithAggregationInput = {
   strength?: Prisma.SortOrder
   speed?: Prisma.SortOrder
   dexterity?: Prisma.SortOrder
-  maxHealth?: Prisma.SortOrder
-  currentHealth?: Prisma.SortOrder
   maxStamina?: Prisma.SortOrder
   currentStamina?: Prisma.SortOrder
-  deathsUsed?: Prisma.SortOrder
-  floorsCleared?: Prisma.SortOrder
-  totalPlayTime?: Prisma.SortOrder
-  isDead?: Prisma.SortOrder
-  deathAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  deathReason?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  currentHp?: Prisma.SortOrder
+  deaths?: Prisma.SortOrder
+  floor?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  location?: Prisma.SortOrder
+  maxHp?: Prisma.SortOrder
+  deathAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deathReason?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CharacterCountOrderByAggregateInput
   _avg?: Prisma.CharacterAvgOrderByAggregateInput
   _max?: Prisma.CharacterMaxOrderByAggregateInput
@@ -474,18 +470,18 @@ export type CharacterScalarWhereWithAggregatesInput = {
   strength?: Prisma.IntWithAggregatesFilter<"Character"> | number
   speed?: Prisma.IntWithAggregatesFilter<"Character"> | number
   dexterity?: Prisma.IntWithAggregatesFilter<"Character"> | number
-  maxHealth?: Prisma.IntWithAggregatesFilter<"Character"> | number
-  currentHealth?: Prisma.IntWithAggregatesFilter<"Character"> | number
   maxStamina?: Prisma.IntWithAggregatesFilter<"Character"> | number
   currentStamina?: Prisma.IntWithAggregatesFilter<"Character"> | number
-  deathsUsed?: Prisma.IntWithAggregatesFilter<"Character"> | number
-  floorsCleared?: Prisma.IntWithAggregatesFilter<"Character"> | number
-  totalPlayTime?: Prisma.IntWithAggregatesFilter<"Character"> | number
-  isDead?: Prisma.BoolWithAggregatesFilter<"Character"> | boolean
-  deathAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Character"> | Date | string | null
-  deathReason?: Prisma.StringNullableWithAggregatesFilter<"Character"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Character"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Character"> | Date | string
+  currentHp?: Prisma.IntWithAggregatesFilter<"Character"> | number
+  deaths?: Prisma.IntWithAggregatesFilter<"Character"> | number
+  floor?: Prisma.IntWithAggregatesFilter<"Character"> | number
+  gender?: Prisma.StringWithAggregatesFilter<"Character"> | string
+  location?: Prisma.StringWithAggregatesFilter<"Character"> | string
+  maxHp?: Prisma.IntWithAggregatesFilter<"Character"> | number
+  deathAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Character"> | Date | string | null
+  deathReason?: Prisma.StringNullableWithAggregatesFilter<"Character"> | string | null
 }
 
 export type CharacterCreateInput = {
@@ -496,18 +492,18 @@ export type CharacterCreateInput = {
   strength?: number
   speed?: number
   dexterity?: number
-  maxHealth?: number
-  currentHealth?: number
-  maxStamina?: number
-  currentStamina?: number
-  deathsUsed?: number
-  floorsCleared?: number
-  totalPlayTime?: number
-  isDead?: boolean
-  deathAt?: Date | string | null
-  deathReason?: string | null
+  maxStamina: number
+  currentStamina: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  currentHp: number
+  deaths?: number
+  floor?: number
+  gender: string
+  location?: string
+  maxHp: number
+  deathAt?: Date | string | null
+  deathReason?: string | null
   user: Prisma.UserCreateNestedOneWithoutCharactersInput
 }
 
@@ -520,18 +516,18 @@ export type CharacterUncheckedCreateInput = {
   strength?: number
   speed?: number
   dexterity?: number
-  maxHealth?: number
-  currentHealth?: number
-  maxStamina?: number
-  currentStamina?: number
-  deathsUsed?: number
-  floorsCleared?: number
-  totalPlayTime?: number
-  isDead?: boolean
-  deathAt?: Date | string | null
-  deathReason?: string | null
+  maxStamina: number
+  currentStamina: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  currentHp: number
+  deaths?: number
+  floor?: number
+  gender: string
+  location?: string
+  maxHp: number
+  deathAt?: Date | string | null
+  deathReason?: string | null
 }
 
 export type CharacterUpdateInput = {
@@ -542,18 +538,18 @@ export type CharacterUpdateInput = {
   strength?: Prisma.IntFieldUpdateOperationsInput | number
   speed?: Prisma.IntFieldUpdateOperationsInput | number
   dexterity?: Prisma.IntFieldUpdateOperationsInput | number
-  maxHealth?: Prisma.IntFieldUpdateOperationsInput | number
-  currentHealth?: Prisma.IntFieldUpdateOperationsInput | number
   maxStamina?: Prisma.IntFieldUpdateOperationsInput | number
   currentStamina?: Prisma.IntFieldUpdateOperationsInput | number
-  deathsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  floorsCleared?: Prisma.IntFieldUpdateOperationsInput | number
-  totalPlayTime?: Prisma.IntFieldUpdateOperationsInput | number
-  isDead?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  floor?: Prisma.IntFieldUpdateOperationsInput | number
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  maxHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutCharactersNestedInput
 }
 
@@ -566,18 +562,18 @@ export type CharacterUncheckedUpdateInput = {
   strength?: Prisma.IntFieldUpdateOperationsInput | number
   speed?: Prisma.IntFieldUpdateOperationsInput | number
   dexterity?: Prisma.IntFieldUpdateOperationsInput | number
-  maxHealth?: Prisma.IntFieldUpdateOperationsInput | number
-  currentHealth?: Prisma.IntFieldUpdateOperationsInput | number
   maxStamina?: Prisma.IntFieldUpdateOperationsInput | number
   currentStamina?: Prisma.IntFieldUpdateOperationsInput | number
-  deathsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  floorsCleared?: Prisma.IntFieldUpdateOperationsInput | number
-  totalPlayTime?: Prisma.IntFieldUpdateOperationsInput | number
-  isDead?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  floor?: Prisma.IntFieldUpdateOperationsInput | number
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  maxHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CharacterCreateManyInput = {
@@ -589,18 +585,18 @@ export type CharacterCreateManyInput = {
   strength?: number
   speed?: number
   dexterity?: number
-  maxHealth?: number
-  currentHealth?: number
-  maxStamina?: number
-  currentStamina?: number
-  deathsUsed?: number
-  floorsCleared?: number
-  totalPlayTime?: number
-  isDead?: boolean
-  deathAt?: Date | string | null
-  deathReason?: string | null
+  maxStamina: number
+  currentStamina: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  currentHp: number
+  deaths?: number
+  floor?: number
+  gender: string
+  location?: string
+  maxHp: number
+  deathAt?: Date | string | null
+  deathReason?: string | null
 }
 
 export type CharacterUpdateManyMutationInput = {
@@ -611,18 +607,18 @@ export type CharacterUpdateManyMutationInput = {
   strength?: Prisma.IntFieldUpdateOperationsInput | number
   speed?: Prisma.IntFieldUpdateOperationsInput | number
   dexterity?: Prisma.IntFieldUpdateOperationsInput | number
-  maxHealth?: Prisma.IntFieldUpdateOperationsInput | number
-  currentHealth?: Prisma.IntFieldUpdateOperationsInput | number
   maxStamina?: Prisma.IntFieldUpdateOperationsInput | number
   currentStamina?: Prisma.IntFieldUpdateOperationsInput | number
-  deathsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  floorsCleared?: Prisma.IntFieldUpdateOperationsInput | number
-  totalPlayTime?: Prisma.IntFieldUpdateOperationsInput | number
-  isDead?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  floor?: Prisma.IntFieldUpdateOperationsInput | number
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  maxHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CharacterUncheckedUpdateManyInput = {
@@ -634,18 +630,18 @@ export type CharacterUncheckedUpdateManyInput = {
   strength?: Prisma.IntFieldUpdateOperationsInput | number
   speed?: Prisma.IntFieldUpdateOperationsInput | number
   dexterity?: Prisma.IntFieldUpdateOperationsInput | number
-  maxHealth?: Prisma.IntFieldUpdateOperationsInput | number
-  currentHealth?: Prisma.IntFieldUpdateOperationsInput | number
   maxStamina?: Prisma.IntFieldUpdateOperationsInput | number
   currentStamina?: Prisma.IntFieldUpdateOperationsInput | number
-  deathsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  floorsCleared?: Prisma.IntFieldUpdateOperationsInput | number
-  totalPlayTime?: Prisma.IntFieldUpdateOperationsInput | number
-  isDead?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  floor?: Prisma.IntFieldUpdateOperationsInput | number
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  maxHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CharacterListRelationFilter = {
@@ -667,18 +663,18 @@ export type CharacterCountOrderByAggregateInput = {
   strength?: Prisma.SortOrder
   speed?: Prisma.SortOrder
   dexterity?: Prisma.SortOrder
-  maxHealth?: Prisma.SortOrder
-  currentHealth?: Prisma.SortOrder
   maxStamina?: Prisma.SortOrder
   currentStamina?: Prisma.SortOrder
-  deathsUsed?: Prisma.SortOrder
-  floorsCleared?: Prisma.SortOrder
-  totalPlayTime?: Prisma.SortOrder
-  isDead?: Prisma.SortOrder
-  deathAt?: Prisma.SortOrder
-  deathReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  currentHp?: Prisma.SortOrder
+  deaths?: Prisma.SortOrder
+  floor?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  location?: Prisma.SortOrder
+  maxHp?: Prisma.SortOrder
+  deathAt?: Prisma.SortOrder
+  deathReason?: Prisma.SortOrder
 }
 
 export type CharacterAvgOrderByAggregateInput = {
@@ -687,13 +683,12 @@ export type CharacterAvgOrderByAggregateInput = {
   strength?: Prisma.SortOrder
   speed?: Prisma.SortOrder
   dexterity?: Prisma.SortOrder
-  maxHealth?: Prisma.SortOrder
-  currentHealth?: Prisma.SortOrder
   maxStamina?: Prisma.SortOrder
   currentStamina?: Prisma.SortOrder
-  deathsUsed?: Prisma.SortOrder
-  floorsCleared?: Prisma.SortOrder
-  totalPlayTime?: Prisma.SortOrder
+  currentHp?: Prisma.SortOrder
+  deaths?: Prisma.SortOrder
+  floor?: Prisma.SortOrder
+  maxHp?: Prisma.SortOrder
 }
 
 export type CharacterMaxOrderByAggregateInput = {
@@ -705,18 +700,18 @@ export type CharacterMaxOrderByAggregateInput = {
   strength?: Prisma.SortOrder
   speed?: Prisma.SortOrder
   dexterity?: Prisma.SortOrder
-  maxHealth?: Prisma.SortOrder
-  currentHealth?: Prisma.SortOrder
   maxStamina?: Prisma.SortOrder
   currentStamina?: Prisma.SortOrder
-  deathsUsed?: Prisma.SortOrder
-  floorsCleared?: Prisma.SortOrder
-  totalPlayTime?: Prisma.SortOrder
-  isDead?: Prisma.SortOrder
-  deathAt?: Prisma.SortOrder
-  deathReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  currentHp?: Prisma.SortOrder
+  deaths?: Prisma.SortOrder
+  floor?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  location?: Prisma.SortOrder
+  maxHp?: Prisma.SortOrder
+  deathAt?: Prisma.SortOrder
+  deathReason?: Prisma.SortOrder
 }
 
 export type CharacterMinOrderByAggregateInput = {
@@ -728,18 +723,18 @@ export type CharacterMinOrderByAggregateInput = {
   strength?: Prisma.SortOrder
   speed?: Prisma.SortOrder
   dexterity?: Prisma.SortOrder
-  maxHealth?: Prisma.SortOrder
-  currentHealth?: Prisma.SortOrder
   maxStamina?: Prisma.SortOrder
   currentStamina?: Prisma.SortOrder
-  deathsUsed?: Prisma.SortOrder
-  floorsCleared?: Prisma.SortOrder
-  totalPlayTime?: Prisma.SortOrder
-  isDead?: Prisma.SortOrder
-  deathAt?: Prisma.SortOrder
-  deathReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  currentHp?: Prisma.SortOrder
+  deaths?: Prisma.SortOrder
+  floor?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  location?: Prisma.SortOrder
+  maxHp?: Prisma.SortOrder
+  deathAt?: Prisma.SortOrder
+  deathReason?: Prisma.SortOrder
 }
 
 export type CharacterSumOrderByAggregateInput = {
@@ -748,13 +743,12 @@ export type CharacterSumOrderByAggregateInput = {
   strength?: Prisma.SortOrder
   speed?: Prisma.SortOrder
   dexterity?: Prisma.SortOrder
-  maxHealth?: Prisma.SortOrder
-  currentHealth?: Prisma.SortOrder
   maxStamina?: Prisma.SortOrder
   currentStamina?: Prisma.SortOrder
-  deathsUsed?: Prisma.SortOrder
-  floorsCleared?: Prisma.SortOrder
-  totalPlayTime?: Prisma.SortOrder
+  currentHp?: Prisma.SortOrder
+  deaths?: Prisma.SortOrder
+  floor?: Prisma.SortOrder
+  maxHp?: Prisma.SortOrder
 }
 
 export type CharacterCreateNestedManyWithoutUserInput = {
@@ -799,10 +793,6 @@ export type CharacterUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.CharacterScalarWhereInput | Prisma.CharacterScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type CharacterCreateWithoutUserInput = {
   id?: string
   name: string
@@ -811,18 +801,18 @@ export type CharacterCreateWithoutUserInput = {
   strength?: number
   speed?: number
   dexterity?: number
-  maxHealth?: number
-  currentHealth?: number
-  maxStamina?: number
-  currentStamina?: number
-  deathsUsed?: number
-  floorsCleared?: number
-  totalPlayTime?: number
-  isDead?: boolean
-  deathAt?: Date | string | null
-  deathReason?: string | null
+  maxStamina: number
+  currentStamina: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  currentHp: number
+  deaths?: number
+  floor?: number
+  gender: string
+  location?: string
+  maxHp: number
+  deathAt?: Date | string | null
+  deathReason?: string | null
 }
 
 export type CharacterUncheckedCreateWithoutUserInput = {
@@ -833,18 +823,18 @@ export type CharacterUncheckedCreateWithoutUserInput = {
   strength?: number
   speed?: number
   dexterity?: number
-  maxHealth?: number
-  currentHealth?: number
-  maxStamina?: number
-  currentStamina?: number
-  deathsUsed?: number
-  floorsCleared?: number
-  totalPlayTime?: number
-  isDead?: boolean
-  deathAt?: Date | string | null
-  deathReason?: string | null
+  maxStamina: number
+  currentStamina: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  currentHp: number
+  deaths?: number
+  floor?: number
+  gender: string
+  location?: string
+  maxHp: number
+  deathAt?: Date | string | null
+  deathReason?: string | null
 }
 
 export type CharacterCreateOrConnectWithoutUserInput = {
@@ -885,18 +875,18 @@ export type CharacterScalarWhereInput = {
   strength?: Prisma.IntFilter<"Character"> | number
   speed?: Prisma.IntFilter<"Character"> | number
   dexterity?: Prisma.IntFilter<"Character"> | number
-  maxHealth?: Prisma.IntFilter<"Character"> | number
-  currentHealth?: Prisma.IntFilter<"Character"> | number
   maxStamina?: Prisma.IntFilter<"Character"> | number
   currentStamina?: Prisma.IntFilter<"Character"> | number
-  deathsUsed?: Prisma.IntFilter<"Character"> | number
-  floorsCleared?: Prisma.IntFilter<"Character"> | number
-  totalPlayTime?: Prisma.IntFilter<"Character"> | number
-  isDead?: Prisma.BoolFilter<"Character"> | boolean
-  deathAt?: Prisma.DateTimeNullableFilter<"Character"> | Date | string | null
-  deathReason?: Prisma.StringNullableFilter<"Character"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Character"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Character"> | Date | string
+  currentHp?: Prisma.IntFilter<"Character"> | number
+  deaths?: Prisma.IntFilter<"Character"> | number
+  floor?: Prisma.IntFilter<"Character"> | number
+  gender?: Prisma.StringFilter<"Character"> | string
+  location?: Prisma.StringFilter<"Character"> | string
+  maxHp?: Prisma.IntFilter<"Character"> | number
+  deathAt?: Prisma.DateTimeNullableFilter<"Character"> | Date | string | null
+  deathReason?: Prisma.StringNullableFilter<"Character"> | string | null
 }
 
 export type CharacterCreateManyUserInput = {
@@ -907,18 +897,18 @@ export type CharacterCreateManyUserInput = {
   strength?: number
   speed?: number
   dexterity?: number
-  maxHealth?: number
-  currentHealth?: number
-  maxStamina?: number
-  currentStamina?: number
-  deathsUsed?: number
-  floorsCleared?: number
-  totalPlayTime?: number
-  isDead?: boolean
-  deathAt?: Date | string | null
-  deathReason?: string | null
+  maxStamina: number
+  currentStamina: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  currentHp: number
+  deaths?: number
+  floor?: number
+  gender: string
+  location?: string
+  maxHp: number
+  deathAt?: Date | string | null
+  deathReason?: string | null
 }
 
 export type CharacterUpdateWithoutUserInput = {
@@ -929,18 +919,18 @@ export type CharacterUpdateWithoutUserInput = {
   strength?: Prisma.IntFieldUpdateOperationsInput | number
   speed?: Prisma.IntFieldUpdateOperationsInput | number
   dexterity?: Prisma.IntFieldUpdateOperationsInput | number
-  maxHealth?: Prisma.IntFieldUpdateOperationsInput | number
-  currentHealth?: Prisma.IntFieldUpdateOperationsInput | number
   maxStamina?: Prisma.IntFieldUpdateOperationsInput | number
   currentStamina?: Prisma.IntFieldUpdateOperationsInput | number
-  deathsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  floorsCleared?: Prisma.IntFieldUpdateOperationsInput | number
-  totalPlayTime?: Prisma.IntFieldUpdateOperationsInput | number
-  isDead?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  floor?: Prisma.IntFieldUpdateOperationsInput | number
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  maxHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CharacterUncheckedUpdateWithoutUserInput = {
@@ -951,18 +941,18 @@ export type CharacterUncheckedUpdateWithoutUserInput = {
   strength?: Prisma.IntFieldUpdateOperationsInput | number
   speed?: Prisma.IntFieldUpdateOperationsInput | number
   dexterity?: Prisma.IntFieldUpdateOperationsInput | number
-  maxHealth?: Prisma.IntFieldUpdateOperationsInput | number
-  currentHealth?: Prisma.IntFieldUpdateOperationsInput | number
   maxStamina?: Prisma.IntFieldUpdateOperationsInput | number
   currentStamina?: Prisma.IntFieldUpdateOperationsInput | number
-  deathsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  floorsCleared?: Prisma.IntFieldUpdateOperationsInput | number
-  totalPlayTime?: Prisma.IntFieldUpdateOperationsInput | number
-  isDead?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  floor?: Prisma.IntFieldUpdateOperationsInput | number
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  maxHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CharacterUncheckedUpdateManyWithoutUserInput = {
@@ -973,18 +963,18 @@ export type CharacterUncheckedUpdateManyWithoutUserInput = {
   strength?: Prisma.IntFieldUpdateOperationsInput | number
   speed?: Prisma.IntFieldUpdateOperationsInput | number
   dexterity?: Prisma.IntFieldUpdateOperationsInput | number
-  maxHealth?: Prisma.IntFieldUpdateOperationsInput | number
-  currentHealth?: Prisma.IntFieldUpdateOperationsInput | number
   maxStamina?: Prisma.IntFieldUpdateOperationsInput | number
   currentStamina?: Prisma.IntFieldUpdateOperationsInput | number
-  deathsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  floorsCleared?: Prisma.IntFieldUpdateOperationsInput | number
-  totalPlayTime?: Prisma.IntFieldUpdateOperationsInput | number
-  isDead?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  floor?: Prisma.IntFieldUpdateOperationsInput | number
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  maxHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -998,18 +988,18 @@ export type CharacterSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   strength?: boolean
   speed?: boolean
   dexterity?: boolean
-  maxHealth?: boolean
-  currentHealth?: boolean
   maxStamina?: boolean
   currentStamina?: boolean
-  deathsUsed?: boolean
-  floorsCleared?: boolean
-  totalPlayTime?: boolean
-  isDead?: boolean
-  deathAt?: boolean
-  deathReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  currentHp?: boolean
+  deaths?: boolean
+  floor?: boolean
+  gender?: boolean
+  location?: boolean
+  maxHp?: boolean
+  deathAt?: boolean
+  deathReason?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["character"]>
 
@@ -1022,18 +1012,18 @@ export type CharacterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   strength?: boolean
   speed?: boolean
   dexterity?: boolean
-  maxHealth?: boolean
-  currentHealth?: boolean
   maxStamina?: boolean
   currentStamina?: boolean
-  deathsUsed?: boolean
-  floorsCleared?: boolean
-  totalPlayTime?: boolean
-  isDead?: boolean
-  deathAt?: boolean
-  deathReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  currentHp?: boolean
+  deaths?: boolean
+  floor?: boolean
+  gender?: boolean
+  location?: boolean
+  maxHp?: boolean
+  deathAt?: boolean
+  deathReason?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["character"]>
 
@@ -1046,18 +1036,18 @@ export type CharacterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   strength?: boolean
   speed?: boolean
   dexterity?: boolean
-  maxHealth?: boolean
-  currentHealth?: boolean
   maxStamina?: boolean
   currentStamina?: boolean
-  deathsUsed?: boolean
-  floorsCleared?: boolean
-  totalPlayTime?: boolean
-  isDead?: boolean
-  deathAt?: boolean
-  deathReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  currentHp?: boolean
+  deaths?: boolean
+  floor?: boolean
+  gender?: boolean
+  location?: boolean
+  maxHp?: boolean
+  deathAt?: boolean
+  deathReason?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["character"]>
 
@@ -1070,21 +1060,21 @@ export type CharacterSelectScalar = {
   strength?: boolean
   speed?: boolean
   dexterity?: boolean
-  maxHealth?: boolean
-  currentHealth?: boolean
   maxStamina?: boolean
   currentStamina?: boolean
-  deathsUsed?: boolean
-  floorsCleared?: boolean
-  totalPlayTime?: boolean
-  isDead?: boolean
-  deathAt?: boolean
-  deathReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  currentHp?: boolean
+  deaths?: boolean
+  floor?: boolean
+  gender?: boolean
+  location?: boolean
+  maxHp?: boolean
+  deathAt?: boolean
+  deathReason?: boolean
 }
 
-export type CharacterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "level" | "vitality" | "strength" | "speed" | "dexterity" | "maxHealth" | "currentHealth" | "maxStamina" | "currentStamina" | "deathsUsed" | "floorsCleared" | "totalPlayTime" | "isDead" | "deathAt" | "deathReason" | "createdAt" | "updatedAt", ExtArgs["result"]["character"]>
+export type CharacterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "level" | "vitality" | "strength" | "speed" | "dexterity" | "maxStamina" | "currentStamina" | "createdAt" | "updatedAt" | "currentHp" | "deaths" | "floor" | "gender" | "location" | "maxHp" | "deathAt" | "deathReason", ExtArgs["result"]["character"]>
 export type CharacterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -1109,18 +1099,18 @@ export type $CharacterPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     strength: number
     speed: number
     dexterity: number
-    maxHealth: number
-    currentHealth: number
     maxStamina: number
     currentStamina: number
-    deathsUsed: number
-    floorsCleared: number
-    totalPlayTime: number
-    isDead: boolean
-    deathAt: Date | null
-    deathReason: string | null
     createdAt: Date
     updatedAt: Date
+    currentHp: number
+    deaths: number
+    floor: number
+    gender: string
+    location: string
+    maxHp: number
+    deathAt: Date | null
+    deathReason: string | null
   }, ExtArgs["result"]["character"]>
   composites: {}
 }
@@ -1553,18 +1543,18 @@ export interface CharacterFieldRefs {
   readonly strength: Prisma.FieldRef<"Character", 'Int'>
   readonly speed: Prisma.FieldRef<"Character", 'Int'>
   readonly dexterity: Prisma.FieldRef<"Character", 'Int'>
-  readonly maxHealth: Prisma.FieldRef<"Character", 'Int'>
-  readonly currentHealth: Prisma.FieldRef<"Character", 'Int'>
   readonly maxStamina: Prisma.FieldRef<"Character", 'Int'>
   readonly currentStamina: Prisma.FieldRef<"Character", 'Int'>
-  readonly deathsUsed: Prisma.FieldRef<"Character", 'Int'>
-  readonly floorsCleared: Prisma.FieldRef<"Character", 'Int'>
-  readonly totalPlayTime: Prisma.FieldRef<"Character", 'Int'>
-  readonly isDead: Prisma.FieldRef<"Character", 'Boolean'>
-  readonly deathAt: Prisma.FieldRef<"Character", 'DateTime'>
-  readonly deathReason: Prisma.FieldRef<"Character", 'String'>
   readonly createdAt: Prisma.FieldRef<"Character", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Character", 'DateTime'>
+  readonly currentHp: Prisma.FieldRef<"Character", 'Int'>
+  readonly deaths: Prisma.FieldRef<"Character", 'Int'>
+  readonly floor: Prisma.FieldRef<"Character", 'Int'>
+  readonly gender: Prisma.FieldRef<"Character", 'String'>
+  readonly location: Prisma.FieldRef<"Character", 'String'>
+  readonly maxHp: Prisma.FieldRef<"Character", 'Int'>
+  readonly deathAt: Prisma.FieldRef<"Character", 'DateTime'>
+  readonly deathReason: Prisma.FieldRef<"Character", 'String'>
 }
     
 

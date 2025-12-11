@@ -216,8 +216,8 @@ export type InventoryItemWhereInput = {
   itemId?: Prisma.StringFilter<"InventoryItem"> | string
   quantity?: Prisma.IntFilter<"InventoryItem"> | number
   createdAt?: Prisma.DateTimeFilter<"InventoryItem"> | Date | string
-  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
   item?: Prisma.XOR<Prisma.ItemScalarRelationFilter, Prisma.ItemWhereInput>
+  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
 }
 
 export type InventoryItemOrderByWithRelationInput = {
@@ -226,8 +226,8 @@ export type InventoryItemOrderByWithRelationInput = {
   itemId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  player?: Prisma.PlayerOrderByWithRelationInput
   item?: Prisma.ItemOrderByWithRelationInput
+  player?: Prisma.PlayerOrderByWithRelationInput
 }
 
 export type InventoryItemWhereUniqueInput = Prisma.AtLeast<{
@@ -239,8 +239,8 @@ export type InventoryItemWhereUniqueInput = Prisma.AtLeast<{
   itemId?: Prisma.StringFilter<"InventoryItem"> | string
   quantity?: Prisma.IntFilter<"InventoryItem"> | number
   createdAt?: Prisma.DateTimeFilter<"InventoryItem"> | Date | string
-  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
   item?: Prisma.XOR<Prisma.ItemScalarRelationFilter, Prisma.ItemWhereInput>
+  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
 }, "id">
 
 export type InventoryItemOrderByWithAggregationInput = {
@@ -271,8 +271,8 @@ export type InventoryItemCreateInput = {
   id?: string
   quantity?: number
   createdAt?: Date | string
-  player: Prisma.PlayerCreateNestedOneWithoutInventoryInput
   item: Prisma.ItemCreateNestedOneWithoutInventoryItemsInput
+  player: Prisma.PlayerCreateNestedOneWithoutInventoryInput
 }
 
 export type InventoryItemUncheckedCreateInput = {
@@ -287,8 +287,8 @@ export type InventoryItemUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  player?: Prisma.PlayerUpdateOneRequiredWithoutInventoryNestedInput
   item?: Prisma.ItemUpdateOneRequiredWithoutInventoryItemsNestedInput
+  player?: Prisma.PlayerUpdateOneRequiredWithoutInventoryNestedInput
 }
 
 export type InventoryItemUncheckedUpdateInput = {
@@ -602,8 +602,8 @@ export type InventoryItemSelect<ExtArgs extends runtime.Types.Extensions.Interna
   itemId?: boolean
   quantity?: boolean
   createdAt?: boolean
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["inventoryItem"]>
 
 export type InventoryItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -612,8 +612,8 @@ export type InventoryItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   itemId?: boolean
   quantity?: boolean
   createdAt?: boolean
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["inventoryItem"]>
 
 export type InventoryItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -622,8 +622,8 @@ export type InventoryItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   itemId?: boolean
   quantity?: boolean
   createdAt?: boolean
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["inventoryItem"]>
 
 export type InventoryItemSelectScalar = {
@@ -636,23 +636,23 @@ export type InventoryItemSelectScalar = {
 
 export type InventoryItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "itemId" | "quantity" | "createdAt", ExtArgs["result"]["inventoryItem"]>
 export type InventoryItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }
 export type InventoryItemIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }
 export type InventoryItemIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }
 
 export type $InventoryItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "InventoryItem"
   objects: {
-    player: Prisma.$PlayerPayload<ExtArgs>
     item: Prisma.$ItemPayload<ExtArgs>
+    player: Prisma.$PlayerPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1054,8 +1054,8 @@ readonly fields: InventoryItemFieldRefs;
  */
 export interface Prisma__InventoryItemClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  player<T extends Prisma.PlayerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlayerDefaultArgs<ExtArgs>>): Prisma.Prisma__PlayerClient<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   item<T extends Prisma.ItemDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ItemDefaultArgs<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  player<T extends Prisma.PlayerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlayerDefaultArgs<ExtArgs>>): Prisma.Prisma__PlayerClient<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

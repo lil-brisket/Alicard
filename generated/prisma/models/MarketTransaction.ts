@@ -244,10 +244,10 @@ export type MarketTransactionWhereInput = {
   quantity?: Prisma.IntFilter<"MarketTransaction"> | number
   totalPrice?: Prisma.IntFilter<"MarketTransaction"> | number
   createdAt?: Prisma.DateTimeFilter<"MarketTransaction"> | Date | string
-  listing?: Prisma.XOR<Prisma.MarketListingScalarRelationFilter, Prisma.MarketListingWhereInput>
   buyer?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
-  seller?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
   item?: Prisma.XOR<Prisma.ItemScalarRelationFilter, Prisma.ItemWhereInput>
+  listing?: Prisma.XOR<Prisma.MarketListingScalarRelationFilter, Prisma.MarketListingWhereInput>
+  seller?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
 }
 
 export type MarketTransactionOrderByWithRelationInput = {
@@ -259,10 +259,10 @@ export type MarketTransactionOrderByWithRelationInput = {
   quantity?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  listing?: Prisma.MarketListingOrderByWithRelationInput
   buyer?: Prisma.PlayerOrderByWithRelationInput
-  seller?: Prisma.PlayerOrderByWithRelationInput
   item?: Prisma.ItemOrderByWithRelationInput
+  listing?: Prisma.MarketListingOrderByWithRelationInput
+  seller?: Prisma.PlayerOrderByWithRelationInput
 }
 
 export type MarketTransactionWhereUniqueInput = Prisma.AtLeast<{
@@ -277,10 +277,10 @@ export type MarketTransactionWhereUniqueInput = Prisma.AtLeast<{
   quantity?: Prisma.IntFilter<"MarketTransaction"> | number
   totalPrice?: Prisma.IntFilter<"MarketTransaction"> | number
   createdAt?: Prisma.DateTimeFilter<"MarketTransaction"> | Date | string
-  listing?: Prisma.XOR<Prisma.MarketListingScalarRelationFilter, Prisma.MarketListingWhereInput>
   buyer?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
-  seller?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
   item?: Prisma.XOR<Prisma.ItemScalarRelationFilter, Prisma.ItemWhereInput>
+  listing?: Prisma.XOR<Prisma.MarketListingScalarRelationFilter, Prisma.MarketListingWhereInput>
+  seller?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
 }, "id">
 
 export type MarketTransactionOrderByWithAggregationInput = {
@@ -318,10 +318,10 @@ export type MarketTransactionCreateInput = {
   quantity: number
   totalPrice: number
   createdAt?: Date | string
-  listing: Prisma.MarketListingCreateNestedOneWithoutTransactionsInput
   buyer: Prisma.PlayerCreateNestedOneWithoutMarketTransactionsAsBuyerInput
-  seller: Prisma.PlayerCreateNestedOneWithoutMarketTransactionsAsSellerInput
   item: Prisma.ItemCreateNestedOneWithoutMarketTransactionsInput
+  listing: Prisma.MarketListingCreateNestedOneWithoutTransactionsInput
+  seller: Prisma.PlayerCreateNestedOneWithoutMarketTransactionsAsSellerInput
 }
 
 export type MarketTransactionUncheckedCreateInput = {
@@ -340,10 +340,10 @@ export type MarketTransactionUpdateInput = {
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalPrice?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  listing?: Prisma.MarketListingUpdateOneRequiredWithoutTransactionsNestedInput
   buyer?: Prisma.PlayerUpdateOneRequiredWithoutMarketTransactionsAsBuyerNestedInput
-  seller?: Prisma.PlayerUpdateOneRequiredWithoutMarketTransactionsAsSellerNestedInput
   item?: Prisma.ItemUpdateOneRequiredWithoutMarketTransactionsNestedInput
+  listing?: Prisma.MarketListingUpdateOneRequiredWithoutTransactionsNestedInput
+  seller?: Prisma.PlayerUpdateOneRequiredWithoutMarketTransactionsAsSellerNestedInput
 }
 
 export type MarketTransactionUncheckedUpdateInput = {
@@ -612,9 +612,9 @@ export type MarketTransactionCreateWithoutBuyerInput = {
   quantity: number
   totalPrice: number
   createdAt?: Date | string
+  item: Prisma.ItemCreateNestedOneWithoutMarketTransactionsInput
   listing: Prisma.MarketListingCreateNestedOneWithoutTransactionsInput
   seller: Prisma.PlayerCreateNestedOneWithoutMarketTransactionsAsSellerInput
-  item: Prisma.ItemCreateNestedOneWithoutMarketTransactionsInput
 }
 
 export type MarketTransactionUncheckedCreateWithoutBuyerInput = {
@@ -642,9 +642,9 @@ export type MarketTransactionCreateWithoutSellerInput = {
   quantity: number
   totalPrice: number
   createdAt?: Date | string
-  listing: Prisma.MarketListingCreateNestedOneWithoutTransactionsInput
   buyer: Prisma.PlayerCreateNestedOneWithoutMarketTransactionsAsBuyerInput
   item: Prisma.ItemCreateNestedOneWithoutMarketTransactionsInput
+  listing: Prisma.MarketListingCreateNestedOneWithoutTransactionsInput
 }
 
 export type MarketTransactionUncheckedCreateWithoutSellerInput = {
@@ -718,8 +718,8 @@ export type MarketTransactionCreateWithoutItemInput = {
   quantity: number
   totalPrice: number
   createdAt?: Date | string
-  listing: Prisma.MarketListingCreateNestedOneWithoutTransactionsInput
   buyer: Prisma.PlayerCreateNestedOneWithoutMarketTransactionsAsBuyerInput
+  listing: Prisma.MarketListingCreateNestedOneWithoutTransactionsInput
   seller: Prisma.PlayerCreateNestedOneWithoutMarketTransactionsAsSellerInput
 }
 
@@ -765,8 +765,8 @@ export type MarketTransactionCreateWithoutListingInput = {
   totalPrice: number
   createdAt?: Date | string
   buyer: Prisma.PlayerCreateNestedOneWithoutMarketTransactionsAsBuyerInput
-  seller: Prisma.PlayerCreateNestedOneWithoutMarketTransactionsAsSellerInput
   item: Prisma.ItemCreateNestedOneWithoutMarketTransactionsInput
+  seller: Prisma.PlayerCreateNestedOneWithoutMarketTransactionsAsSellerInput
 }
 
 export type MarketTransactionUncheckedCreateWithoutListingInput = {
@@ -830,9 +830,9 @@ export type MarketTransactionUpdateWithoutBuyerInput = {
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalPrice?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  item?: Prisma.ItemUpdateOneRequiredWithoutMarketTransactionsNestedInput
   listing?: Prisma.MarketListingUpdateOneRequiredWithoutTransactionsNestedInput
   seller?: Prisma.PlayerUpdateOneRequiredWithoutMarketTransactionsAsSellerNestedInput
-  item?: Prisma.ItemUpdateOneRequiredWithoutMarketTransactionsNestedInput
 }
 
 export type MarketTransactionUncheckedUpdateWithoutBuyerInput = {
@@ -860,9 +860,9 @@ export type MarketTransactionUpdateWithoutSellerInput = {
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalPrice?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  listing?: Prisma.MarketListingUpdateOneRequiredWithoutTransactionsNestedInput
   buyer?: Prisma.PlayerUpdateOneRequiredWithoutMarketTransactionsAsBuyerNestedInput
   item?: Prisma.ItemUpdateOneRequiredWithoutMarketTransactionsNestedInput
+  listing?: Prisma.MarketListingUpdateOneRequiredWithoutTransactionsNestedInput
 }
 
 export type MarketTransactionUncheckedUpdateWithoutSellerInput = {
@@ -900,8 +900,8 @@ export type MarketTransactionUpdateWithoutItemInput = {
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   totalPrice?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  listing?: Prisma.MarketListingUpdateOneRequiredWithoutTransactionsNestedInput
   buyer?: Prisma.PlayerUpdateOneRequiredWithoutMarketTransactionsAsBuyerNestedInput
+  listing?: Prisma.MarketListingUpdateOneRequiredWithoutTransactionsNestedInput
   seller?: Prisma.PlayerUpdateOneRequiredWithoutMarketTransactionsAsSellerNestedInput
 }
 
@@ -941,8 +941,8 @@ export type MarketTransactionUpdateWithoutListingInput = {
   totalPrice?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   buyer?: Prisma.PlayerUpdateOneRequiredWithoutMarketTransactionsAsBuyerNestedInput
-  seller?: Prisma.PlayerUpdateOneRequiredWithoutMarketTransactionsAsSellerNestedInput
   item?: Prisma.ItemUpdateOneRequiredWithoutMarketTransactionsNestedInput
+  seller?: Prisma.PlayerUpdateOneRequiredWithoutMarketTransactionsAsSellerNestedInput
 }
 
 export type MarketTransactionUncheckedUpdateWithoutListingInput = {
@@ -976,10 +976,10 @@ export type MarketTransactionSelect<ExtArgs extends runtime.Types.Extensions.Int
   quantity?: boolean
   totalPrice?: boolean
   createdAt?: boolean
-  listing?: boolean | Prisma.MarketListingDefaultArgs<ExtArgs>
   buyer?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  seller?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  listing?: boolean | Prisma.MarketListingDefaultArgs<ExtArgs>
+  seller?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["marketTransaction"]>
 
 export type MarketTransactionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -991,10 +991,10 @@ export type MarketTransactionSelectCreateManyAndReturn<ExtArgs extends runtime.T
   quantity?: boolean
   totalPrice?: boolean
   createdAt?: boolean
-  listing?: boolean | Prisma.MarketListingDefaultArgs<ExtArgs>
   buyer?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  seller?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  listing?: boolean | Prisma.MarketListingDefaultArgs<ExtArgs>
+  seller?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["marketTransaction"]>
 
 export type MarketTransactionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1006,10 +1006,10 @@ export type MarketTransactionSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   quantity?: boolean
   totalPrice?: boolean
   createdAt?: boolean
-  listing?: boolean | Prisma.MarketListingDefaultArgs<ExtArgs>
   buyer?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  seller?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  listing?: boolean | Prisma.MarketListingDefaultArgs<ExtArgs>
+  seller?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["marketTransaction"]>
 
 export type MarketTransactionSelectScalar = {
@@ -1025,31 +1025,31 @@ export type MarketTransactionSelectScalar = {
 
 export type MarketTransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "listingId" | "buyerId" | "sellerId" | "itemId" | "quantity" | "totalPrice" | "createdAt", ExtArgs["result"]["marketTransaction"]>
 export type MarketTransactionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  listing?: boolean | Prisma.MarketListingDefaultArgs<ExtArgs>
   buyer?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  seller?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  listing?: boolean | Prisma.MarketListingDefaultArgs<ExtArgs>
+  seller?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }
 export type MarketTransactionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  listing?: boolean | Prisma.MarketListingDefaultArgs<ExtArgs>
   buyer?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  seller?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  listing?: boolean | Prisma.MarketListingDefaultArgs<ExtArgs>
+  seller?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }
 export type MarketTransactionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  listing?: boolean | Prisma.MarketListingDefaultArgs<ExtArgs>
   buyer?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  seller?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
+  listing?: boolean | Prisma.MarketListingDefaultArgs<ExtArgs>
+  seller?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }
 
 export type $MarketTransactionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MarketTransaction"
   objects: {
-    listing: Prisma.$MarketListingPayload<ExtArgs>
     buyer: Prisma.$PlayerPayload<ExtArgs>
-    seller: Prisma.$PlayerPayload<ExtArgs>
     item: Prisma.$ItemPayload<ExtArgs>
+    listing: Prisma.$MarketListingPayload<ExtArgs>
+    seller: Prisma.$PlayerPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1454,10 +1454,10 @@ readonly fields: MarketTransactionFieldRefs;
  */
 export interface Prisma__MarketTransactionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  listing<T extends Prisma.MarketListingDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MarketListingDefaultArgs<ExtArgs>>): Prisma.Prisma__MarketListingClient<runtime.Types.Result.GetResult<Prisma.$MarketListingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   buyer<T extends Prisma.PlayerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlayerDefaultArgs<ExtArgs>>): Prisma.Prisma__PlayerClient<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  seller<T extends Prisma.PlayerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlayerDefaultArgs<ExtArgs>>): Prisma.Prisma__PlayerClient<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   item<T extends Prisma.ItemDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ItemDefaultArgs<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  listing<T extends Prisma.MarketListingDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MarketListingDefaultArgs<ExtArgs>>): Prisma.Prisma__MarketListingClient<runtime.Types.Result.GetResult<Prisma.$MarketListingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  seller<T extends Prisma.PlayerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlayerDefaultArgs<ExtArgs>>): Prisma.Prisma__PlayerClient<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

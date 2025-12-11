@@ -256,9 +256,9 @@ export type MapTileWhereInput = {
   hasResource?: Prisma.BoolFilter<"MapTile"> | boolean
   resourceType?: Prisma.EnumResourceTypeNullableFilter<"MapTile"> | $Enums.ResourceType | null
   description?: Prisma.StringNullableFilter<"MapTile"> | string | null
+  encounters?: Prisma.EncounterListRelationFilter
   positions?: Prisma.MapPositionListRelationFilter
   npcs?: Prisma.NPCListRelationFilter
-  encounters?: Prisma.EncounterListRelationFilter
 }
 
 export type MapTileOrderByWithRelationInput = {
@@ -271,9 +271,9 @@ export type MapTileOrderByWithRelationInput = {
   hasResource?: Prisma.SortOrder
   resourceType?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  encounters?: Prisma.EncounterOrderByRelationAggregateInput
   positions?: Prisma.MapPositionOrderByRelationAggregateInput
   npcs?: Prisma.NPCOrderByRelationAggregateInput
-  encounters?: Prisma.EncounterOrderByRelationAggregateInput
 }
 
 export type MapTileWhereUniqueInput = Prisma.AtLeast<{
@@ -290,9 +290,9 @@ export type MapTileWhereUniqueInput = Prisma.AtLeast<{
   hasResource?: Prisma.BoolFilter<"MapTile"> | boolean
   resourceType?: Prisma.EnumResourceTypeNullableFilter<"MapTile"> | $Enums.ResourceType | null
   description?: Prisma.StringNullableFilter<"MapTile"> | string | null
+  encounters?: Prisma.EncounterListRelationFilter
   positions?: Prisma.MapPositionListRelationFilter
   npcs?: Prisma.NPCListRelationFilter
-  encounters?: Prisma.EncounterListRelationFilter
 }, "id" | "x_y">
 
 export type MapTileOrderByWithAggregationInput = {
@@ -336,9 +336,9 @@ export type MapTileCreateInput = {
   hasResource?: boolean
   resourceType?: $Enums.ResourceType | null
   description?: string | null
+  encounters?: Prisma.EncounterCreateNestedManyWithoutTileInput
   positions?: Prisma.MapPositionCreateNestedManyWithoutTileInput
   npcs?: Prisma.NPCCreateNestedManyWithoutTileInput
-  encounters?: Prisma.EncounterCreateNestedManyWithoutTileInput
 }
 
 export type MapTileUncheckedCreateInput = {
@@ -351,9 +351,9 @@ export type MapTileUncheckedCreateInput = {
   hasResource?: boolean
   resourceType?: $Enums.ResourceType | null
   description?: string | null
+  encounters?: Prisma.EncounterUncheckedCreateNestedManyWithoutTileInput
   positions?: Prisma.MapPositionUncheckedCreateNestedManyWithoutTileInput
   npcs?: Prisma.NPCUncheckedCreateNestedManyWithoutTileInput
-  encounters?: Prisma.EncounterUncheckedCreateNestedManyWithoutTileInput
 }
 
 export type MapTileUpdateInput = {
@@ -365,9 +365,9 @@ export type MapTileUpdateInput = {
   hasResource?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resourceType?: Prisma.NullableEnumResourceTypeFieldUpdateOperationsInput | $Enums.ResourceType | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  encounters?: Prisma.EncounterUpdateManyWithoutTileNestedInput
   positions?: Prisma.MapPositionUpdateManyWithoutTileNestedInput
   npcs?: Prisma.NPCUpdateManyWithoutTileNestedInput
-  encounters?: Prisma.EncounterUpdateManyWithoutTileNestedInput
 }
 
 export type MapTileUncheckedUpdateInput = {
@@ -380,9 +380,9 @@ export type MapTileUncheckedUpdateInput = {
   hasResource?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resourceType?: Prisma.NullableEnumResourceTypeFieldUpdateOperationsInput | $Enums.ResourceType | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  encounters?: Prisma.EncounterUncheckedUpdateManyWithoutTileNestedInput
   positions?: Prisma.MapPositionUncheckedUpdateManyWithoutTileNestedInput
   npcs?: Prisma.NPCUncheckedUpdateManyWithoutTileNestedInput
-  encounters?: Prisma.EncounterUncheckedUpdateManyWithoutTileNestedInput
 }
 
 export type MapTileCreateManyInput = {
@@ -547,8 +547,8 @@ export type MapTileCreateWithoutPositionsInput = {
   hasResource?: boolean
   resourceType?: $Enums.ResourceType | null
   description?: string | null
-  npcs?: Prisma.NPCCreateNestedManyWithoutTileInput
   encounters?: Prisma.EncounterCreateNestedManyWithoutTileInput
+  npcs?: Prisma.NPCCreateNestedManyWithoutTileInput
 }
 
 export type MapTileUncheckedCreateWithoutPositionsInput = {
@@ -561,8 +561,8 @@ export type MapTileUncheckedCreateWithoutPositionsInput = {
   hasResource?: boolean
   resourceType?: $Enums.ResourceType | null
   description?: string | null
-  npcs?: Prisma.NPCUncheckedCreateNestedManyWithoutTileInput
   encounters?: Prisma.EncounterUncheckedCreateNestedManyWithoutTileInput
+  npcs?: Prisma.NPCUncheckedCreateNestedManyWithoutTileInput
 }
 
 export type MapTileCreateOrConnectWithoutPositionsInput = {
@@ -590,8 +590,8 @@ export type MapTileUpdateWithoutPositionsInput = {
   hasResource?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resourceType?: Prisma.NullableEnumResourceTypeFieldUpdateOperationsInput | $Enums.ResourceType | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  npcs?: Prisma.NPCUpdateManyWithoutTileNestedInput
   encounters?: Prisma.EncounterUpdateManyWithoutTileNestedInput
+  npcs?: Prisma.NPCUpdateManyWithoutTileNestedInput
 }
 
 export type MapTileUncheckedUpdateWithoutPositionsInput = {
@@ -604,8 +604,8 @@ export type MapTileUncheckedUpdateWithoutPositionsInput = {
   hasResource?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resourceType?: Prisma.NullableEnumResourceTypeFieldUpdateOperationsInput | $Enums.ResourceType | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  npcs?: Prisma.NPCUncheckedUpdateManyWithoutTileNestedInput
   encounters?: Prisma.EncounterUncheckedUpdateManyWithoutTileNestedInput
+  npcs?: Prisma.NPCUncheckedUpdateManyWithoutTileNestedInput
 }
 
 export type MapTileCreateWithoutNpcsInput = {
@@ -617,8 +617,8 @@ export type MapTileCreateWithoutNpcsInput = {
   hasResource?: boolean
   resourceType?: $Enums.ResourceType | null
   description?: string | null
-  positions?: Prisma.MapPositionCreateNestedManyWithoutTileInput
   encounters?: Prisma.EncounterCreateNestedManyWithoutTileInput
+  positions?: Prisma.MapPositionCreateNestedManyWithoutTileInput
 }
 
 export type MapTileUncheckedCreateWithoutNpcsInput = {
@@ -631,8 +631,8 @@ export type MapTileUncheckedCreateWithoutNpcsInput = {
   hasResource?: boolean
   resourceType?: $Enums.ResourceType | null
   description?: string | null
-  positions?: Prisma.MapPositionUncheckedCreateNestedManyWithoutTileInput
   encounters?: Prisma.EncounterUncheckedCreateNestedManyWithoutTileInput
+  positions?: Prisma.MapPositionUncheckedCreateNestedManyWithoutTileInput
 }
 
 export type MapTileCreateOrConnectWithoutNpcsInput = {
@@ -660,8 +660,8 @@ export type MapTileUpdateWithoutNpcsInput = {
   hasResource?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resourceType?: Prisma.NullableEnumResourceTypeFieldUpdateOperationsInput | $Enums.ResourceType | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  positions?: Prisma.MapPositionUpdateManyWithoutTileNestedInput
   encounters?: Prisma.EncounterUpdateManyWithoutTileNestedInput
+  positions?: Prisma.MapPositionUpdateManyWithoutTileNestedInput
 }
 
 export type MapTileUncheckedUpdateWithoutNpcsInput = {
@@ -674,8 +674,8 @@ export type MapTileUncheckedUpdateWithoutNpcsInput = {
   hasResource?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resourceType?: Prisma.NullableEnumResourceTypeFieldUpdateOperationsInput | $Enums.ResourceType | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  positions?: Prisma.MapPositionUncheckedUpdateManyWithoutTileNestedInput
   encounters?: Prisma.EncounterUncheckedUpdateManyWithoutTileNestedInput
+  positions?: Prisma.MapPositionUncheckedUpdateManyWithoutTileNestedInput
 }
 
 export type MapTileCreateWithoutEncountersInput = {
@@ -754,15 +754,15 @@ export type MapTileUncheckedUpdateWithoutEncountersInput = {
  */
 
 export type MapTileCountOutputType = {
+  encounters: number
   positions: number
   npcs: number
-  encounters: number
 }
 
 export type MapTileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  encounters?: boolean | MapTileCountOutputTypeCountEncountersArgs
   positions?: boolean | MapTileCountOutputTypeCountPositionsArgs
   npcs?: boolean | MapTileCountOutputTypeCountNpcsArgs
-  encounters?: boolean | MapTileCountOutputTypeCountEncountersArgs
 }
 
 /**
@@ -773,6 +773,13 @@ export type MapTileCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
    * Select specific fields to fetch from the MapTileCountOutputType
    */
   select?: Prisma.MapTileCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * MapTileCountOutputType without action
+ */
+export type MapTileCountOutputTypeCountEncountersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EncounterWhereInput
 }
 
 /**
@@ -789,13 +796,6 @@ export type MapTileCountOutputTypeCountNpcsArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.NPCWhereInput
 }
 
-/**
- * MapTileCountOutputType without action
- */
-export type MapTileCountOutputTypeCountEncountersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.EncounterWhereInput
-}
-
 
 export type MapTileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -807,9 +807,9 @@ export type MapTileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   hasResource?: boolean
   resourceType?: boolean
   description?: boolean
+  encounters?: boolean | Prisma.MapTile$encountersArgs<ExtArgs>
   positions?: boolean | Prisma.MapTile$positionsArgs<ExtArgs>
   npcs?: boolean | Prisma.MapTile$npcsArgs<ExtArgs>
-  encounters?: boolean | Prisma.MapTile$encountersArgs<ExtArgs>
   _count?: boolean | Prisma.MapTileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["mapTile"]>
 
@@ -851,9 +851,9 @@ export type MapTileSelectScalar = {
 
 export type MapTileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "x" | "y" | "tileType" | "zoneType" | "isSafeZone" | "hasResource" | "resourceType" | "description", ExtArgs["result"]["mapTile"]>
 export type MapTileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  encounters?: boolean | Prisma.MapTile$encountersArgs<ExtArgs>
   positions?: boolean | Prisma.MapTile$positionsArgs<ExtArgs>
   npcs?: boolean | Prisma.MapTile$npcsArgs<ExtArgs>
-  encounters?: boolean | Prisma.MapTile$encountersArgs<ExtArgs>
   _count?: boolean | Prisma.MapTileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MapTileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -862,9 +862,9 @@ export type MapTileIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $MapTilePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MapTile"
   objects: {
+    encounters: Prisma.$EncounterPayload<ExtArgs>[]
     positions: Prisma.$MapPositionPayload<ExtArgs>[]
     npcs: Prisma.$NPCPayload<ExtArgs>[]
-    encounters: Prisma.$EncounterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1270,9 +1270,9 @@ readonly fields: MapTileFieldRefs;
  */
 export interface Prisma__MapTileClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  encounters<T extends Prisma.MapTile$encountersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MapTile$encountersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EncounterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   positions<T extends Prisma.MapTile$positionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MapTile$positionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MapPositionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   npcs<T extends Prisma.MapTile$npcsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MapTile$npcsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NPCPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  encounters<T extends Prisma.MapTile$encountersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MapTile$encountersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EncounterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1699,6 +1699,30 @@ export type MapTileDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
+ * MapTile.encounters
+ */
+export type MapTile$encountersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Encounter
+   */
+  select?: Prisma.EncounterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Encounter
+   */
+  omit?: Prisma.EncounterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EncounterInclude<ExtArgs> | null
+  where?: Prisma.EncounterWhereInput
+  orderBy?: Prisma.EncounterOrderByWithRelationInput | Prisma.EncounterOrderByWithRelationInput[]
+  cursor?: Prisma.EncounterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EncounterScalarFieldEnum | Prisma.EncounterScalarFieldEnum[]
+}
+
+/**
  * MapTile.positions
  */
 export type MapTile$positionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1744,30 +1768,6 @@ export type MapTile$npcsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.NPCScalarFieldEnum | Prisma.NPCScalarFieldEnum[]
-}
-
-/**
- * MapTile.encounters
- */
-export type MapTile$encountersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Encounter
-   */
-  select?: Prisma.EncounterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Encounter
-   */
-  omit?: Prisma.EncounterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.EncounterInclude<ExtArgs> | null
-  where?: Prisma.EncounterWhereInput
-  orderBy?: Prisma.EncounterOrderByWithRelationInput | Prisma.EncounterOrderByWithRelationInput[]
-  cursor?: Prisma.EncounterWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.EncounterScalarFieldEnum | Prisma.EncounterScalarFieldEnum[]
 }
 
 /**

@@ -404,6 +404,7 @@ export const ModelName = {
   Encounter: 'Encounter',
   CombatLog: 'CombatLog',
   DeathLog: 'DeathLog',
+  DeathRecord: 'DeathRecord',
   Guild: 'Guild',
   GuildMember: 'GuildMember',
   GuildBank: 'GuildBank',
@@ -428,7 +429,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "post" | "account" | "session" | "user" | "character" | "verificationToken" | "player" | "playerStats" | "mapTile" | "mapPosition" | "nPC" | "shopItem" | "item" | "inventoryItem" | "equipment" | "occupation" | "playerSkill" | "encounter" | "combatLog" | "deathLog" | "guild" | "guildMember" | "guildBank" | "guildQuest" | "bankAccount" | "bankVaultItem" | "marketListing" | "marketTransaction" | "quest"
+    modelProps: "post" | "account" | "session" | "user" | "character" | "verificationToken" | "player" | "playerStats" | "mapTile" | "mapPosition" | "nPC" | "shopItem" | "item" | "inventoryItem" | "equipment" | "occupation" | "playerSkill" | "encounter" | "combatLog" | "deathLog" | "deathRecord" | "guild" | "guildMember" | "guildBank" | "guildQuest" | "bankAccount" | "bankVaultItem" | "marketListing" | "marketTransaction" | "quest"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1912,6 +1913,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    DeathRecord: {
+      payload: Prisma.$DeathRecordPayload<ExtArgs>
+      fields: Prisma.DeathRecordFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DeathRecordFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeathRecordPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DeathRecordFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeathRecordPayload>
+        }
+        findFirst: {
+          args: Prisma.DeathRecordFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeathRecordPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DeathRecordFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeathRecordPayload>
+        }
+        findMany: {
+          args: Prisma.DeathRecordFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeathRecordPayload>[]
+        }
+        create: {
+          args: Prisma.DeathRecordCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeathRecordPayload>
+        }
+        createMany: {
+          args: Prisma.DeathRecordCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DeathRecordCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeathRecordPayload>[]
+        }
+        delete: {
+          args: Prisma.DeathRecordDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeathRecordPayload>
+        }
+        update: {
+          args: Prisma.DeathRecordUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeathRecordPayload>
+        }
+        deleteMany: {
+          args: Prisma.DeathRecordDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DeathRecordUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DeathRecordUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeathRecordPayload>[]
+        }
+        upsert: {
+          args: Prisma.DeathRecordUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeathRecordPayload>
+        }
+        aggregate: {
+          args: Prisma.DeathRecordAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDeathRecord>
+        }
+        groupBy: {
+          args: Prisma.DeathRecordGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DeathRecordGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DeathRecordCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DeathRecordCountAggregateOutputType> | number
+        }
+      }
+    }
     Guild: {
       payload: Prisma.$GuildPayload<ExtArgs>
       fields: Prisma.GuildFieldRefs
@@ -2659,15 +2734,15 @@ export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeo
 
 export const UserScalarFieldEnum = {
   id: 'id',
+  name: 'name',
   email: 'email',
-  username: 'username',
+  emailVerified: 'emailVerified',
+  image: 'image',
   password: 'password',
   gender: 'gender',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  name: 'name',
-  emailVerified: 'emailVerified',
-  image: 'image'
+  username: 'username'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -2682,18 +2757,18 @@ export const CharacterScalarFieldEnum = {
   strength: 'strength',
   speed: 'speed',
   dexterity: 'dexterity',
-  maxHealth: 'maxHealth',
-  currentHealth: 'currentHealth',
   maxStamina: 'maxStamina',
   currentStamina: 'currentStamina',
-  deathsUsed: 'deathsUsed',
-  floorsCleared: 'floorsCleared',
-  totalPlayTime: 'totalPlayTime',
-  isDead: 'isDead',
-  deathAt: 'deathAt',
-  deathReason: 'deathReason',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  currentHp: 'currentHp',
+  deaths: 'deaths',
+  floor: 'floor',
+  gender: 'gender',
+  location: 'location',
+  maxHp: 'maxHp',
+  deathAt: 'deathAt',
+  deathReason: 'deathReason'
 } as const
 
 export type CharacterScalarFieldEnum = (typeof CharacterScalarFieldEnum)[keyof typeof CharacterScalarFieldEnum]
@@ -2908,6 +2983,19 @@ export const DeathLogScalarFieldEnum = {
 } as const
 
 export type DeathLogScalarFieldEnum = (typeof DeathLogScalarFieldEnum)[keyof typeof DeathLogScalarFieldEnum]
+
+
+export const DeathRecordScalarFieldEnum = {
+  id: 'id',
+  characterName: 'characterName',
+  userId: 'userId',
+  floorReached: 'floorReached',
+  causeOfDeath: 'causeOfDeath',
+  deathsUsed: 'deathsUsed',
+  createdAt: 'createdAt'
+} as const
+
+export type DeathRecordScalarFieldEnum = (typeof DeathRecordScalarFieldEnum)[keyof typeof DeathRecordScalarFieldEnum]
 
 
 export const GuildScalarFieldEnum = {
@@ -3386,6 +3474,7 @@ export type GlobalOmitConfig = {
   encounter?: Prisma.EncounterOmit
   combatLog?: Prisma.CombatLogOmit
   deathLog?: Prisma.DeathLogOmit
+  deathRecord?: Prisma.DeathRecordOmit
   guild?: Prisma.GuildOmit
   guildMember?: Prisma.GuildMemberOmit
   guildBank?: Prisma.GuildBankOmit

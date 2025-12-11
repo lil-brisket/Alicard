@@ -232,8 +232,8 @@ export type CombatLogWhereInput = {
   action?: Prisma.StringFilter<"CombatLog"> | string
   result?: Prisma.StringFilter<"CombatLog"> | string
   createdAt?: Prisma.DateTimeFilter<"CombatLog"> | Date | string
-  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
   encounter?: Prisma.XOR<Prisma.EncounterNullableScalarRelationFilter, Prisma.EncounterWhereInput> | null
+  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
 }
 
 export type CombatLogOrderByWithRelationInput = {
@@ -244,8 +244,8 @@ export type CombatLogOrderByWithRelationInput = {
   action?: Prisma.SortOrder
   result?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  player?: Prisma.PlayerOrderByWithRelationInput
   encounter?: Prisma.EncounterOrderByWithRelationInput
+  player?: Prisma.PlayerOrderByWithRelationInput
 }
 
 export type CombatLogWhereUniqueInput = Prisma.AtLeast<{
@@ -259,8 +259,8 @@ export type CombatLogWhereUniqueInput = Prisma.AtLeast<{
   action?: Prisma.StringFilter<"CombatLog"> | string
   result?: Prisma.StringFilter<"CombatLog"> | string
   createdAt?: Prisma.DateTimeFilter<"CombatLog"> | Date | string
-  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
   encounter?: Prisma.XOR<Prisma.EncounterNullableScalarRelationFilter, Prisma.EncounterWhereInput> | null
+  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
 }, "id">
 
 export type CombatLogOrderByWithAggregationInput = {
@@ -297,8 +297,8 @@ export type CombatLogCreateInput = {
   action: string
   result: string
   createdAt?: Date | string
-  player: Prisma.PlayerCreateNestedOneWithoutCombatLogsInput
   encounter?: Prisma.EncounterCreateNestedOneWithoutCombatLogsInput
+  player: Prisma.PlayerCreateNestedOneWithoutCombatLogsInput
 }
 
 export type CombatLogUncheckedCreateInput = {
@@ -317,8 +317,8 @@ export type CombatLogUpdateInput = {
   action?: Prisma.StringFieldUpdateOperationsInput | string
   result?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  player?: Prisma.PlayerUpdateOneRequiredWithoutCombatLogsNestedInput
   encounter?: Prisma.EncounterUpdateOneWithoutCombatLogsNestedInput
+  player?: Prisma.PlayerUpdateOneRequiredWithoutCombatLogsNestedInput
 }
 
 export type CombatLogUncheckedUpdateInput = {
@@ -674,8 +674,8 @@ export type CombatLogSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   action?: boolean
   result?: boolean
   createdAt?: boolean
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   encounter?: boolean | Prisma.CombatLog$encounterArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["combatLog"]>
 
 export type CombatLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -686,8 +686,8 @@ export type CombatLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   action?: boolean
   result?: boolean
   createdAt?: boolean
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   encounter?: boolean | Prisma.CombatLog$encounterArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["combatLog"]>
 
 export type CombatLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -698,8 +698,8 @@ export type CombatLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   action?: boolean
   result?: boolean
   createdAt?: boolean
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   encounter?: boolean | Prisma.CombatLog$encounterArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["combatLog"]>
 
 export type CombatLogSelectScalar = {
@@ -714,23 +714,23 @@ export type CombatLogSelectScalar = {
 
 export type CombatLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "encounterId" | "turnNumber" | "action" | "result" | "createdAt", ExtArgs["result"]["combatLog"]>
 export type CombatLogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   encounter?: boolean | Prisma.CombatLog$encounterArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }
 export type CombatLogIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   encounter?: boolean | Prisma.CombatLog$encounterArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }
 export type CombatLogIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   encounter?: boolean | Prisma.CombatLog$encounterArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }
 
 export type $CombatLogPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CombatLog"
   objects: {
-    player: Prisma.$PlayerPayload<ExtArgs>
     encounter: Prisma.$EncounterPayload<ExtArgs> | null
+    player: Prisma.$PlayerPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1134,8 +1134,8 @@ readonly fields: CombatLogFieldRefs;
  */
 export interface Prisma__CombatLogClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  player<T extends Prisma.PlayerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlayerDefaultArgs<ExtArgs>>): Prisma.Prisma__PlayerClient<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   encounter<T extends Prisma.CombatLog$encounterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CombatLog$encounterArgs<ExtArgs>>): Prisma.Prisma__EncounterClient<runtime.Types.Result.GetResult<Prisma.$EncounterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  player<T extends Prisma.PlayerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlayerDefaultArgs<ExtArgs>>): Prisma.Prisma__PlayerClient<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

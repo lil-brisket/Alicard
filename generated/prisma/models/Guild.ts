@@ -236,8 +236,8 @@ export type GuildWhereInput = {
   gold?: Prisma.IntFilter<"Guild"> | number
   createdAt?: Prisma.DateTimeFilter<"Guild"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Guild"> | Date | string
-  members?: Prisma.GuildMemberListRelationFilter
   bank?: Prisma.XOR<Prisma.GuildBankNullableScalarRelationFilter, Prisma.GuildBankWhereInput> | null
+  members?: Prisma.GuildMemberListRelationFilter
   quests?: Prisma.GuildQuestListRelationFilter
 }
 
@@ -249,8 +249,8 @@ export type GuildOrderByWithRelationInput = {
   gold?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  members?: Prisma.GuildMemberOrderByRelationAggregateInput
   bank?: Prisma.GuildBankOrderByWithRelationInput
+  members?: Prisma.GuildMemberOrderByRelationAggregateInput
   quests?: Prisma.GuildQuestOrderByRelationAggregateInput
 }
 
@@ -265,8 +265,8 @@ export type GuildWhereUniqueInput = Prisma.AtLeast<{
   gold?: Prisma.IntFilter<"Guild"> | number
   createdAt?: Prisma.DateTimeFilter<"Guild"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Guild"> | Date | string
-  members?: Prisma.GuildMemberListRelationFilter
   bank?: Prisma.XOR<Prisma.GuildBankNullableScalarRelationFilter, Prisma.GuildBankWhereInput> | null
+  members?: Prisma.GuildMemberListRelationFilter
   quests?: Prisma.GuildQuestListRelationFilter
 }, "id" | "name">
 
@@ -306,8 +306,8 @@ export type GuildCreateInput = {
   gold?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  members?: Prisma.GuildMemberCreateNestedManyWithoutGuildInput
   bank?: Prisma.GuildBankCreateNestedOneWithoutGuildInput
+  members?: Prisma.GuildMemberCreateNestedManyWithoutGuildInput
   quests?: Prisma.GuildQuestCreateNestedManyWithoutGuildInput
 }
 
@@ -319,8 +319,8 @@ export type GuildUncheckedCreateInput = {
   gold?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  members?: Prisma.GuildMemberUncheckedCreateNestedManyWithoutGuildInput
   bank?: Prisma.GuildBankUncheckedCreateNestedOneWithoutGuildInput
+  members?: Prisma.GuildMemberUncheckedCreateNestedManyWithoutGuildInput
   quests?: Prisma.GuildQuestUncheckedCreateNestedManyWithoutGuildInput
 }
 
@@ -332,8 +332,8 @@ export type GuildUpdateInput = {
   gold?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.GuildMemberUpdateManyWithoutGuildNestedInput
   bank?: Prisma.GuildBankUpdateOneWithoutGuildNestedInput
+  members?: Prisma.GuildMemberUpdateManyWithoutGuildNestedInput
   quests?: Prisma.GuildQuestUpdateManyWithoutGuildNestedInput
 }
 
@@ -345,8 +345,8 @@ export type GuildUncheckedUpdateInput = {
   gold?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.GuildMemberUncheckedUpdateManyWithoutGuildNestedInput
   bank?: Prisma.GuildBankUncheckedUpdateOneWithoutGuildNestedInput
+  members?: Prisma.GuildMemberUncheckedUpdateManyWithoutGuildNestedInput
   quests?: Prisma.GuildQuestUncheckedUpdateManyWithoutGuildNestedInput
 }
 
@@ -603,8 +603,8 @@ export type GuildCreateWithoutQuestsInput = {
   gold?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  members?: Prisma.GuildMemberCreateNestedManyWithoutGuildInput
   bank?: Prisma.GuildBankCreateNestedOneWithoutGuildInput
+  members?: Prisma.GuildMemberCreateNestedManyWithoutGuildInput
 }
 
 export type GuildUncheckedCreateWithoutQuestsInput = {
@@ -615,8 +615,8 @@ export type GuildUncheckedCreateWithoutQuestsInput = {
   gold?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  members?: Prisma.GuildMemberUncheckedCreateNestedManyWithoutGuildInput
   bank?: Prisma.GuildBankUncheckedCreateNestedOneWithoutGuildInput
+  members?: Prisma.GuildMemberUncheckedCreateNestedManyWithoutGuildInput
 }
 
 export type GuildCreateOrConnectWithoutQuestsInput = {
@@ -643,8 +643,8 @@ export type GuildUpdateWithoutQuestsInput = {
   gold?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.GuildMemberUpdateManyWithoutGuildNestedInput
   bank?: Prisma.GuildBankUpdateOneWithoutGuildNestedInput
+  members?: Prisma.GuildMemberUpdateManyWithoutGuildNestedInput
 }
 
 export type GuildUncheckedUpdateWithoutQuestsInput = {
@@ -655,8 +655,8 @@ export type GuildUncheckedUpdateWithoutQuestsInput = {
   gold?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.GuildMemberUncheckedUpdateManyWithoutGuildNestedInput
   bank?: Prisma.GuildBankUncheckedUpdateOneWithoutGuildNestedInput
+  members?: Prisma.GuildMemberUncheckedUpdateManyWithoutGuildNestedInput
 }
 
 
@@ -707,8 +707,8 @@ export type GuildSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   gold?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  members?: boolean | Prisma.Guild$membersArgs<ExtArgs>
   bank?: boolean | Prisma.Guild$bankArgs<ExtArgs>
+  members?: boolean | Prisma.Guild$membersArgs<ExtArgs>
   quests?: boolean | Prisma.Guild$questsArgs<ExtArgs>
   _count?: boolean | Prisma.GuildCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["guild"]>
@@ -745,8 +745,8 @@ export type GuildSelectScalar = {
 
 export type GuildOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "level" | "gold" | "createdAt" | "updatedAt", ExtArgs["result"]["guild"]>
 export type GuildInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  members?: boolean | Prisma.Guild$membersArgs<ExtArgs>
   bank?: boolean | Prisma.Guild$bankArgs<ExtArgs>
+  members?: boolean | Prisma.Guild$membersArgs<ExtArgs>
   quests?: boolean | Prisma.Guild$questsArgs<ExtArgs>
   _count?: boolean | Prisma.GuildCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -756,8 +756,8 @@ export type GuildIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $GuildPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Guild"
   objects: {
-    members: Prisma.$GuildMemberPayload<ExtArgs>[]
     bank: Prisma.$GuildBankPayload<ExtArgs> | null
+    members: Prisma.$GuildMemberPayload<ExtArgs>[]
     quests: Prisma.$GuildQuestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1162,8 +1162,8 @@ readonly fields: GuildFieldRefs;
  */
 export interface Prisma__GuildClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  members<T extends Prisma.Guild$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Guild$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GuildMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   bank<T extends Prisma.Guild$bankArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Guild$bankArgs<ExtArgs>>): Prisma.Prisma__GuildBankClient<runtime.Types.Result.GetResult<Prisma.$GuildBankPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  members<T extends Prisma.Guild$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Guild$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GuildMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   quests<T extends Prisma.Guild$questsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Guild$questsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GuildQuestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1589,6 +1589,25 @@ export type GuildDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
+ * Guild.bank
+ */
+export type Guild$bankArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GuildBank
+   */
+  select?: Prisma.GuildBankSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GuildBank
+   */
+  omit?: Prisma.GuildBankOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GuildBankInclude<ExtArgs> | null
+  where?: Prisma.GuildBankWhereInput
+}
+
+/**
  * Guild.members
  */
 export type Guild$membersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1610,25 +1629,6 @@ export type Guild$membersArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.GuildMemberScalarFieldEnum | Prisma.GuildMemberScalarFieldEnum[]
-}
-
-/**
- * Guild.bank
- */
-export type Guild$bankArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the GuildBank
-   */
-  select?: Prisma.GuildBankSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the GuildBank
-   */
-  omit?: Prisma.GuildBankOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.GuildBankInclude<ExtArgs> | null
-  where?: Prisma.GuildBankWhereInput
 }
 
 /**

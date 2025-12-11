@@ -55,7 +55,7 @@ export default function PlayPage() {
           <h2 className="font-semibold mb-2 text-red-300">Perma-Death Warning</h2>
           <p className="text-sm text-slate-200">
             You get five deaths. On the fifth, your account and character are deleted.
-            No revives. No rollbacks. The Hall of the Dead remembers you… maybe.
+            No revives. No rollbacks.
           </p>
         </div>
       </div>

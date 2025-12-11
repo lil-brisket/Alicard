@@ -182,8 +182,8 @@ export type GuildMemberWhereInput = {
   guildId?: Prisma.StringFilter<"GuildMember"> | string
   role?: Prisma.EnumGuildRoleFilter<"GuildMember"> | $Enums.GuildRole
   joinedAt?: Prisma.DateTimeFilter<"GuildMember"> | Date | string
-  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
   guild?: Prisma.XOR<Prisma.GuildScalarRelationFilter, Prisma.GuildWhereInput>
+  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
 }
 
 export type GuildMemberOrderByWithRelationInput = {
@@ -192,8 +192,8 @@ export type GuildMemberOrderByWithRelationInput = {
   guildId?: Prisma.SortOrder
   role?: Prisma.SortOrder
   joinedAt?: Prisma.SortOrder
-  player?: Prisma.PlayerOrderByWithRelationInput
   guild?: Prisma.GuildOrderByWithRelationInput
+  player?: Prisma.PlayerOrderByWithRelationInput
 }
 
 export type GuildMemberWhereUniqueInput = Prisma.AtLeast<{
@@ -205,8 +205,8 @@ export type GuildMemberWhereUniqueInput = Prisma.AtLeast<{
   guildId?: Prisma.StringFilter<"GuildMember"> | string
   role?: Prisma.EnumGuildRoleFilter<"GuildMember"> | $Enums.GuildRole
   joinedAt?: Prisma.DateTimeFilter<"GuildMember"> | Date | string
-  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
   guild?: Prisma.XOR<Prisma.GuildScalarRelationFilter, Prisma.GuildWhereInput>
+  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
 }, "id" | "playerId">
 
 export type GuildMemberOrderByWithAggregationInput = {
@@ -235,8 +235,8 @@ export type GuildMemberCreateInput = {
   id?: string
   role?: $Enums.GuildRole
   joinedAt?: Date | string
-  player: Prisma.PlayerCreateNestedOneWithoutGuildMemberInput
   guild: Prisma.GuildCreateNestedOneWithoutMembersInput
+  player: Prisma.PlayerCreateNestedOneWithoutGuildMemberInput
 }
 
 export type GuildMemberUncheckedCreateInput = {
@@ -251,8 +251,8 @@ export type GuildMemberUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumGuildRoleFieldUpdateOperationsInput | $Enums.GuildRole
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  player?: Prisma.PlayerUpdateOneRequiredWithoutGuildMemberNestedInput
   guild?: Prisma.GuildUpdateOneRequiredWithoutMembersNestedInput
+  player?: Prisma.PlayerUpdateOneRequiredWithoutGuildMemberNestedInput
 }
 
 export type GuildMemberUncheckedUpdateInput = {
@@ -533,8 +533,8 @@ export type GuildMemberSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   guildId?: boolean
   role?: boolean
   joinedAt?: boolean
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["guildMember"]>
 
 export type GuildMemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -543,8 +543,8 @@ export type GuildMemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   guildId?: boolean
   role?: boolean
   joinedAt?: boolean
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["guildMember"]>
 
 export type GuildMemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -553,8 +553,8 @@ export type GuildMemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   guildId?: boolean
   role?: boolean
   joinedAt?: boolean
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["guildMember"]>
 
 export type GuildMemberSelectScalar = {
@@ -567,23 +567,23 @@ export type GuildMemberSelectScalar = {
 
 export type GuildMemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "guildId" | "role" | "joinedAt", ExtArgs["result"]["guildMember"]>
 export type GuildMemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }
 export type GuildMemberIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }
 export type GuildMemberIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }
 
 export type $GuildMemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "GuildMember"
   objects: {
-    player: Prisma.$PlayerPayload<ExtArgs>
     guild: Prisma.$GuildPayload<ExtArgs>
+    player: Prisma.$PlayerPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -985,8 +985,8 @@ readonly fields: GuildMemberFieldRefs;
  */
 export interface Prisma__GuildMemberClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  player<T extends Prisma.PlayerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlayerDefaultArgs<ExtArgs>>): Prisma.Prisma__PlayerClient<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   guild<T extends Prisma.GuildDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GuildDefaultArgs<ExtArgs>>): Prisma.Prisma__GuildClient<runtime.Types.Result.GetResult<Prisma.$GuildPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  player<T extends Prisma.PlayerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlayerDefaultArgs<ExtArgs>>): Prisma.Prisma__PlayerClient<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

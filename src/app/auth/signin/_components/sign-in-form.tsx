@@ -16,7 +16,7 @@ interface SignInFormProps {
 export function SignInForm({ oauthProviders }: SignInFormProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") ?? "/";
+  const callbackUrl = searchParams.get("callbackUrl") ?? "/hub";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -6,7 +6,14 @@ import { db } from "~/server/db";
 
 const registerSchema = z.object({
   email: z.string().email("Invalid email address"),
-  username: z.string().min(1, "Username is required"),
+  username: z
+    .string()
+    .min(3, "Username must be at least 3 characters")
+    .max(20, "Username must be at most 20 characters")
+    .regex(
+      /^[a-zA-Z0-9_-]+$/,
+      "Username can only contain letters, numbers, underscores, and hyphens"
+    ),
   password: z.string().min(8, "Password must be at least 8 characters"),
   gender: z.enum(["MALE", "FEMALE", "OTHER"]),
 });
@@ -43,13 +50,37 @@ export async function POST(request: Request) {
     // Hash password
     const hashedPassword = await bcrypt.hash(validatedData.password, 10);
 
-    // Create user
+    // Base stats for character
+    const vitality = 5;
+    const strength = 5;
+    const speed = 5;
+    const dexterity = 5;
+    const maxHp = vitality * 10; // 50
+    const maxStamina = 50;
+
+    // Create user and character in a transaction
     const user = await db.user.create({
       data: {
         email: validatedData.email,
         username: validatedData.username,
         password: hashedPassword,
         gender: validatedData.gender,
+        characters: {
+          create: {
+            name: validatedData.username,
+            gender: validatedData.gender,
+            vitality,
+            strength,
+            speed,
+            dexterity,
+            maxHp,
+            currentHp: maxHp,
+            maxStamina,
+            currentStamina: maxStamina,
+            floor: 1,
+            location: "Town Square",
+          },
+        },
       },
       select: {
         id: true,

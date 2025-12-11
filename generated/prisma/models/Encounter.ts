@@ -252,8 +252,8 @@ export type EncounterWhereInput = {
   enemyLevel?: Prisma.IntFilter<"Encounter"> | number
   isActive?: Prisma.BoolFilter<"Encounter"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Encounter"> | Date | string
-  tile?: Prisma.XOR<Prisma.MapTileNullableScalarRelationFilter, Prisma.MapTileWhereInput> | null
   combatLogs?: Prisma.CombatLogListRelationFilter
+  tile?: Prisma.XOR<Prisma.MapTileNullableScalarRelationFilter, Prisma.MapTileWhereInput> | null
 }
 
 export type EncounterOrderByWithRelationInput = {
@@ -265,8 +265,8 @@ export type EncounterOrderByWithRelationInput = {
   enemyLevel?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  tile?: Prisma.MapTileOrderByWithRelationInput
   combatLogs?: Prisma.CombatLogOrderByRelationAggregateInput
+  tile?: Prisma.MapTileOrderByWithRelationInput
 }
 
 export type EncounterWhereUniqueInput = Prisma.AtLeast<{
@@ -281,8 +281,8 @@ export type EncounterWhereUniqueInput = Prisma.AtLeast<{
   enemyLevel?: Prisma.IntFilter<"Encounter"> | number
   isActive?: Prisma.BoolFilter<"Encounter"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Encounter"> | Date | string
-  tile?: Prisma.XOR<Prisma.MapTileNullableScalarRelationFilter, Prisma.MapTileWhereInput> | null
   combatLogs?: Prisma.CombatLogListRelationFilter
+  tile?: Prisma.XOR<Prisma.MapTileNullableScalarRelationFilter, Prisma.MapTileWhereInput> | null
 }, "id">
 
 export type EncounterOrderByWithAggregationInput = {
@@ -323,8 +323,8 @@ export type EncounterCreateInput = {
   enemyLevel: number
   isActive?: boolean
   createdAt?: Date | string
-  tile?: Prisma.MapTileCreateNestedOneWithoutEncountersInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutEncounterInput
+  tile?: Prisma.MapTileCreateNestedOneWithoutEncountersInput
 }
 
 export type EncounterUncheckedCreateInput = {
@@ -347,8 +347,8 @@ export type EncounterUpdateInput = {
   enemyLevel?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  tile?: Prisma.MapTileUpdateOneWithoutEncountersNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutEncounterNestedInput
+  tile?: Prisma.MapTileUpdateOneWithoutEncountersNestedInput
 }
 
 export type EncounterUncheckedUpdateInput = {
@@ -719,8 +719,8 @@ export type EncounterSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   enemyLevel?: boolean
   isActive?: boolean
   createdAt?: boolean
-  tile?: boolean | Prisma.Encounter$tileArgs<ExtArgs>
   combatLogs?: boolean | Prisma.Encounter$combatLogsArgs<ExtArgs>
+  tile?: boolean | Prisma.Encounter$tileArgs<ExtArgs>
   _count?: boolean | Prisma.EncounterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["encounter"]>
 
@@ -761,8 +761,8 @@ export type EncounterSelectScalar = {
 
 export type EncounterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tileX" | "tileY" | "tileId" | "enemyType" | "enemyLevel" | "isActive" | "createdAt", ExtArgs["result"]["encounter"]>
 export type EncounterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  tile?: boolean | Prisma.Encounter$tileArgs<ExtArgs>
   combatLogs?: boolean | Prisma.Encounter$combatLogsArgs<ExtArgs>
+  tile?: boolean | Prisma.Encounter$tileArgs<ExtArgs>
   _count?: boolean | Prisma.EncounterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EncounterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -775,8 +775,8 @@ export type EncounterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
 export type $EncounterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Encounter"
   objects: {
-    tile: Prisma.$MapTilePayload<ExtArgs> | null
     combatLogs: Prisma.$CombatLogPayload<ExtArgs>[]
+    tile: Prisma.$MapTilePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1181,8 +1181,8 @@ readonly fields: EncounterFieldRefs;
  */
 export interface Prisma__EncounterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  tile<T extends Prisma.Encounter$tileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Encounter$tileArgs<ExtArgs>>): Prisma.Prisma__MapTileClient<runtime.Types.Result.GetResult<Prisma.$MapTilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   combatLogs<T extends Prisma.Encounter$combatLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Encounter$combatLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CombatLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tile<T extends Prisma.Encounter$tileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Encounter$tileArgs<ExtArgs>>): Prisma.Prisma__MapTileClient<runtime.Types.Result.GetResult<Prisma.$MapTilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1616,25 +1616,6 @@ export type EncounterDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * Encounter.tile
- */
-export type Encounter$tileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the MapTile
-   */
-  select?: Prisma.MapTileSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the MapTile
-   */
-  omit?: Prisma.MapTileOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MapTileInclude<ExtArgs> | null
-  where?: Prisma.MapTileWhereInput
-}
-
-/**
  * Encounter.combatLogs
  */
 export type Encounter$combatLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1656,6 +1637,25 @@ export type Encounter$combatLogsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.CombatLogScalarFieldEnum | Prisma.CombatLogScalarFieldEnum[]
+}
+
+/**
+ * Encounter.tile
+ */
+export type Encounter$tileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MapTile
+   */
+  select?: Prisma.MapTileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MapTile
+   */
+  omit?: Prisma.MapTileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MapTileInclude<ExtArgs> | null
+  where?: Prisma.MapTileWhereInput
 }
 
 /**

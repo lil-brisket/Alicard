@@ -140,6 +140,11 @@ export type CombatLog = Prisma.CombatLogModel
  */
 export type DeathLog = Prisma.DeathLogModel
 /**
+ * Model DeathRecord
+ * 
+ */
+export type DeathRecord = Prisma.DeathRecordModel
+/**
  * Model Guild
  * 
  */

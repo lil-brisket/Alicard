@@ -249,8 +249,8 @@ export type NPCWhereInput = {
   dialogue?: Prisma.StringNullableFilter<"NPC"> | string | null
   createdAt?: Prisma.DateTimeFilter<"NPC"> | Date | string
   tile?: Prisma.XOR<Prisma.MapTileNullableScalarRelationFilter, Prisma.MapTileWhereInput> | null
-  shopItems?: Prisma.ShopItemListRelationFilter
   quests?: Prisma.QuestListRelationFilter
+  shopItems?: Prisma.ShopItemListRelationFilter
 }
 
 export type NPCOrderByWithRelationInput = {
@@ -263,8 +263,8 @@ export type NPCOrderByWithRelationInput = {
   dialogue?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   tile?: Prisma.MapTileOrderByWithRelationInput
-  shopItems?: Prisma.ShopItemOrderByRelationAggregateInput
   quests?: Prisma.QuestOrderByRelationAggregateInput
+  shopItems?: Prisma.ShopItemOrderByRelationAggregateInput
 }
 
 export type NPCWhereUniqueInput = Prisma.AtLeast<{
@@ -280,8 +280,8 @@ export type NPCWhereUniqueInput = Prisma.AtLeast<{
   dialogue?: Prisma.StringNullableFilter<"NPC"> | string | null
   createdAt?: Prisma.DateTimeFilter<"NPC"> | Date | string
   tile?: Prisma.XOR<Prisma.MapTileNullableScalarRelationFilter, Prisma.MapTileWhereInput> | null
-  shopItems?: Prisma.ShopItemListRelationFilter
   quests?: Prisma.QuestListRelationFilter
+  shopItems?: Prisma.ShopItemListRelationFilter
 }, "id">
 
 export type NPCOrderByWithAggregationInput = {
@@ -323,8 +323,8 @@ export type NPCCreateInput = {
   dialogue?: string | null
   createdAt?: Date | string
   tile?: Prisma.MapTileCreateNestedOneWithoutNpcsInput
-  shopItems?: Prisma.ShopItemCreateNestedManyWithoutNpcInput
   quests?: Prisma.QuestCreateNestedManyWithoutNpcInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutNpcInput
 }
 
 export type NPCUncheckedCreateInput = {
@@ -336,8 +336,8 @@ export type NPCUncheckedCreateInput = {
   tileId?: number | null
   dialogue?: string | null
   createdAt?: Date | string
-  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutNpcInput
   quests?: Prisma.QuestUncheckedCreateNestedManyWithoutNpcInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutNpcInput
 }
 
 export type NPCUpdateInput = {
@@ -349,8 +349,8 @@ export type NPCUpdateInput = {
   dialogue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tile?: Prisma.MapTileUpdateOneWithoutNpcsNestedInput
-  shopItems?: Prisma.ShopItemUpdateManyWithoutNpcNestedInput
   quests?: Prisma.QuestUpdateManyWithoutNpcNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutNpcNestedInput
 }
 
 export type NPCUncheckedUpdateInput = {
@@ -362,8 +362,8 @@ export type NPCUncheckedUpdateInput = {
   tileId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dialogue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutNpcNestedInput
   quests?: Prisma.QuestUncheckedUpdateManyWithoutNpcNestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutNpcNestedInput
 }
 
 export type NPCCreateManyInput = {
@@ -547,8 +547,8 @@ export type NPCCreateWithoutTileInput = {
   tileY: number
   dialogue?: string | null
   createdAt?: Date | string
-  shopItems?: Prisma.ShopItemCreateNestedManyWithoutNpcInput
   quests?: Prisma.QuestCreateNestedManyWithoutNpcInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutNpcInput
 }
 
 export type NPCUncheckedCreateWithoutTileInput = {
@@ -559,8 +559,8 @@ export type NPCUncheckedCreateWithoutTileInput = {
   tileY: number
   dialogue?: string | null
   createdAt?: Date | string
-  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutNpcInput
   quests?: Prisma.QuestUncheckedCreateNestedManyWithoutNpcInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutNpcInput
 }
 
 export type NPCCreateOrConnectWithoutTileInput = {
@@ -749,8 +749,8 @@ export type NPCUpdateWithoutTileInput = {
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
   dialogue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  shopItems?: Prisma.ShopItemUpdateManyWithoutNpcNestedInput
   quests?: Prisma.QuestUpdateManyWithoutNpcNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutNpcNestedInput
 }
 
 export type NPCUncheckedUpdateWithoutTileInput = {
@@ -761,8 +761,8 @@ export type NPCUncheckedUpdateWithoutTileInput = {
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
   dialogue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutNpcNestedInput
   quests?: Prisma.QuestUncheckedUpdateManyWithoutNpcNestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutNpcNestedInput
 }
 
 export type NPCUncheckedUpdateManyWithoutTileInput = {
@@ -781,13 +781,13 @@ export type NPCUncheckedUpdateManyWithoutTileInput = {
  */
 
 export type NPCCountOutputType = {
-  shopItems: number
   quests: number
+  shopItems: number
 }
 
 export type NPCCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  shopItems?: boolean | NPCCountOutputTypeCountShopItemsArgs
   quests?: boolean | NPCCountOutputTypeCountQuestsArgs
+  shopItems?: boolean | NPCCountOutputTypeCountShopItemsArgs
 }
 
 /**
@@ -803,15 +803,15 @@ export type NPCCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensio
 /**
  * NPCCountOutputType without action
  */
-export type NPCCountOutputTypeCountShopItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ShopItemWhereInput
+export type NPCCountOutputTypeCountQuestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.QuestWhereInput
 }
 
 /**
  * NPCCountOutputType without action
  */
-export type NPCCountOutputTypeCountQuestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.QuestWhereInput
+export type NPCCountOutputTypeCountShopItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ShopItemWhereInput
 }
 
 
@@ -825,8 +825,8 @@ export type NPCSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   dialogue?: boolean
   createdAt?: boolean
   tile?: boolean | Prisma.NPC$tileArgs<ExtArgs>
-  shopItems?: boolean | Prisma.NPC$shopItemsArgs<ExtArgs>
   quests?: boolean | Prisma.NPC$questsArgs<ExtArgs>
+  shopItems?: boolean | Prisma.NPC$shopItemsArgs<ExtArgs>
   _count?: boolean | Prisma.NPCCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["nPC"]>
 
@@ -868,8 +868,8 @@ export type NPCSelectScalar = {
 export type NPCOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "npcType" | "tileX" | "tileY" | "tileId" | "dialogue" | "createdAt", ExtArgs["result"]["nPC"]>
 export type NPCInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tile?: boolean | Prisma.NPC$tileArgs<ExtArgs>
-  shopItems?: boolean | Prisma.NPC$shopItemsArgs<ExtArgs>
   quests?: boolean | Prisma.NPC$questsArgs<ExtArgs>
+  shopItems?: boolean | Prisma.NPC$shopItemsArgs<ExtArgs>
   _count?: boolean | Prisma.NPCCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type NPCIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -883,8 +883,8 @@ export type $NPCPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   name: "NPC"
   objects: {
     tile: Prisma.$MapTilePayload<ExtArgs> | null
-    shopItems: Prisma.$ShopItemPayload<ExtArgs>[]
     quests: Prisma.$QuestPayload<ExtArgs>[]
+    shopItems: Prisma.$ShopItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1290,8 +1290,8 @@ readonly fields: NPCFieldRefs;
 export interface Prisma__NPCClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tile<T extends Prisma.NPC$tileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.NPC$tileArgs<ExtArgs>>): Prisma.Prisma__MapTileClient<runtime.Types.Result.GetResult<Prisma.$MapTilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  shopItems<T extends Prisma.NPC$shopItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.NPC$shopItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShopItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   quests<T extends Prisma.NPC$questsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.NPC$questsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  shopItems<T extends Prisma.NPC$shopItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.NPC$shopItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShopItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1744,30 +1744,6 @@ export type NPC$tileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 }
 
 /**
- * NPC.shopItems
- */
-export type NPC$shopItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ShopItem
-   */
-  select?: Prisma.ShopItemSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ShopItem
-   */
-  omit?: Prisma.ShopItemOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ShopItemInclude<ExtArgs> | null
-  where?: Prisma.ShopItemWhereInput
-  orderBy?: Prisma.ShopItemOrderByWithRelationInput | Prisma.ShopItemOrderByWithRelationInput[]
-  cursor?: Prisma.ShopItemWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ShopItemScalarFieldEnum | Prisma.ShopItemScalarFieldEnum[]
-}
-
-/**
  * NPC.quests
  */
 export type NPC$questsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1789,6 +1765,30 @@ export type NPC$questsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.QuestScalarFieldEnum | Prisma.QuestScalarFieldEnum[]
+}
+
+/**
+ * NPC.shopItems
+ */
+export type NPC$shopItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ShopItem
+   */
+  select?: Prisma.ShopItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ShopItem
+   */
+  omit?: Prisma.ShopItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShopItemInclude<ExtArgs> | null
+  where?: Prisma.ShopItemWhereInput
+  orderBy?: Prisma.ShopItemOrderByWithRelationInput | Prisma.ShopItemOrderByWithRelationInput[]
+  cursor?: Prisma.ShopItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ShopItemScalarFieldEnum | Prisma.ShopItemScalarFieldEnum[]
 }
 
 /**
