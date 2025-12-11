@@ -4,6 +4,7 @@ import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
+import { AuthSessionProvider } from "./_components/session-provider";
 
 export const metadata: Metadata = {
   title: "Alicard – SAO-inspired Turn-Based Tower MMO",
@@ -23,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geist.variable}`}>
       <body className="bg-black text-slate-100 antialiased">
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <TRPCReactProvider>
+          <AuthSessionProvider>{children}</AuthSessionProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );
