@@ -56,15 +56,46 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String      @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?     @unique
   emailVerified DateTime?
   image         String?
   password      String? // For credentials provider
   accounts      Account[]
   sessions      Session[]
   posts         Post[]
+  player        Player? // One-to-one with Player
+  characters    Character[]
+}
+
+model Character {
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  name      String
+  level     Int    @default(1)
+  vitality  Int    @default(5)
+  strength  Int    @default(5)
+  speed     Int    @default(5)
+  dexterity Int    @default(5)
+
+  maxHealth      Int @default(100)
+  currentHealth  Int @default(100)
+  maxStamina     Int @default(50)
+  currentStamina Int @default(50)
+
+  deathsUsed    Int @default(0) // 5 = perma-deleted in future
+  floorsCleared Int @default(0)
+  totalPlayTime Int @default(0) // seconds
+
+  isDead      Boolean   @default(false)
+  deathAt     DateTime?
+  deathReason String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model VerificationToken {
@@ -73,4 +104,514 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+// ============================================
+// GAME MODELS - Project Alicard
+// ============================================
+
+// Player Character
+model Player {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  characterName String   @unique
+  level         Int      @default(1)
+  experience    Int      @default(0)
+  gold          Int      @default(0)
+  deathCount    Int      @default(0)
+  isDeleted     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  stats                      PlayerStats?
+  position                   MapPosition?
+  inventory                  InventoryItem[]
+  equipment                  Equipment?
+  occupation                 Occupation?
+  guildMember                GuildMember?
+  bankAccount                BankAccount?
+  marketListings             MarketListing[]
+  marketTransactionsAsBuyer  MarketTransaction[] @relation("Buyer")
+  marketTransactionsAsSeller MarketTransaction[] @relation("Seller")
+  combatLogs                 CombatLog[]
+  deathLogs                  DeathLog[]
+  skills                     PlayerSkill[]
+
+  @@index([characterName])
+  @@index([userId])
+}
+
+// Core Stats
+model PlayerStats {
+  id       String @id @default(cuid())
+  playerId String @unique
+  player   Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  // Base Stats
+  vitality  Int @default(10)
+  strength  Int @default(10)
+  speed     Int @default(10)
+  dexterity Int @default(10)
+
+  // Resource Pools (calculated from stats)
+  maxHP     Int @default(100)
+  currentHP Int @default(100)
+  maxSP     Int @default(50)
+  currentSP Int @default(50)
+
+  // Stat points available to allocate
+  statPoints Int @default(0)
+
+  updatedAt DateTime @updatedAt
+}
+
+// Map System
+model MapTile {
+  id           Int           @id @default(autoincrement())
+  x            Int
+  y            Int
+  tileType     TileType
+  zoneType     ZoneType
+  isSafeZone   Boolean       @default(false)
+  hasResource  Boolean       @default(false)
+  resourceType ResourceType?
+  description  String?
+
+  // Relations
+  positions  MapPosition[]
+  npcs       NPC[]
+  encounters Encounter[]
+
+  @@unique([x, y])
+  @@index([x, y])
+  @@index([tileType])
+  @@index([zoneType])
+}
+
+model MapPosition {
+  id        String   @id @default(cuid())
+  playerId  String   @unique
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  tileX     Int
+  tileY     Int
+  tileId    Int?
+  tile      MapTile? @relation(fields: [tileId], references: [id])
+  updatedAt DateTime @updatedAt
+
+  @@index([tileX, tileY])
+}
+
+enum TileType {
+  GRASS
+  FOREST
+  MOUNTAIN
+  RIVER
+  DESERT
+  DUNGEON
+  TOWN
+  SHRINE
+  ROAD
+}
+
+enum ZoneType {
+  SAFE
+  LOW_DANGER
+  MEDIUM_DANGER
+  HIGH_DANGER
+  EXTREME_DANGER
+}
+
+enum ResourceType {
+  ORE
+  HERB
+  FISH
+  WOOD
+  RARE_ITEM
+}
+
+// NPCs
+model NPC {
+  id        String     @id @default(cuid())
+  name      String
+  npcType   NPCType
+  tileX     Int
+  tileY     Int
+  tileId    Int?
+  tile      MapTile?   @relation(fields: [tileId], references: [id])
+  dialogue  String? // JSON or text
+  shopItems ShopItem[]
+  quests    Quest[]
+  createdAt DateTime   @default(now())
+
+  @@index([tileX, tileY])
+  @@index([npcType])
+  @@index([tileId])
+}
+
+enum NPCType {
+  MERCHANT
+  QUEST_GIVER
+  TRAINER
+  BANKER
+  GUILD_MASTER
+  GUARD
+  TAVERN_KEEPER
+}
+
+model ShopItem {
+  id        String   @id @default(cuid())
+  npcId     String
+  npc       NPC      @relation(fields: [npcId], references: [id], onDelete: Cascade)
+  itemId    String
+  item      Item     @relation(fields: [itemId], references: [id])
+  price     Int
+  stock     Int? // null = unlimited
+  createdAt DateTime @default(now())
+}
+
+// Items
+model Item {
+  id          String     @id @default(cuid())
+  name        String
+  description String?
+  itemType    ItemType
+  itemRarity  ItemRarity
+  tier        Int        @default(1) // 1-5
+  value       Int // Base gold value
+  stackable   Boolean    @default(false)
+  maxStack    Int        @default(1)
+
+  // Equipment stats (if applicable)
+  equipmentSlot  EquipmentSlot?
+  vitalityBonus  Int            @default(0)
+  strengthBonus  Int            @default(0)
+  speedBonus     Int            @default(0)
+  dexterityBonus Int            @default(0)
+  hpBonus        Int            @default(0)
+  spBonus        Int            @default(0)
+
+  // Relations
+  inventoryItems       InventoryItem[]
+  shopItems            ShopItem[]
+  marketListings       MarketListing[]
+  marketTransactions   MarketTransaction[]
+  equippedAsWeapon     Equipment[]         @relation("Weapon")
+  equippedAsHead       Equipment[]         @relation("Head")
+  equippedAsChest      Equipment[]         @relation("Chest")
+  equippedAsLegs       Equipment[]         @relation("Legs")
+  equippedAsFeet       Equipment[]         @relation("Feet")
+  equippedAsAccessory1 Equipment[]         @relation("Accessory1")
+  equippedAsAccessory2 Equipment[]         @relation("Accessory2")
+  createdAt            DateTime            @default(now())
+  bankVaultItems       BankVaultItem[]
+
+  @@index([itemType])
+  @@index([itemRarity])
+  @@index([tier])
+}
+
+enum ItemType {
+  WEAPON
+  ARMOR
+  ACCESSORY
+  CONSUMABLE
+  MATERIAL
+  QUEST_ITEM
+  TOOL
+}
+
+enum ItemRarity {
+  COMMON
+  UNCOMMON
+  RARE
+  EPIC
+  LEGENDARY
+}
+
+enum EquipmentSlot {
+  WEAPON
+  HEAD
+  CHEST
+  LEGS
+  FEET
+  ACCESSORY_1
+  ACCESSORY_2
+}
+
+// Inventory
+model InventoryItem {
+  id        String   @id @default(cuid())
+  playerId  String
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  itemId    String
+  item      Item     @relation(fields: [itemId], references: [id])
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+
+  @@index([playerId])
+  @@index([itemId])
+}
+
+// Equipment
+model Equipment {
+  id           String   @id @default(cuid())
+  playerId     String   @unique
+  player       Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  weaponId     String?
+  weapon       Item?    @relation("Weapon", fields: [weaponId], references: [id])
+  headId       String?
+  head         Item?    @relation("Head", fields: [headId], references: [id])
+  chestId      String?
+  chest        Item?    @relation("Chest", fields: [chestId], references: [id])
+  legsId       String?
+  legs         Item?    @relation("Legs", fields: [legsId], references: [id])
+  feetId       String?
+  feet         Item?    @relation("Feet", fields: [feetId], references: [id])
+  accessory1Id String?
+  accessory1   Item?    @relation("Accessory1", fields: [accessory1Id], references: [id])
+  accessory2Id String?
+  accessory2   Item?    @relation("Accessory2", fields: [accessory2Id], references: [id])
+  updatedAt    DateTime @updatedAt
+}
+
+// Occupations
+model Occupation {
+  id           String               @id @default(cuid())
+  playerId     String               @unique
+  player       Player               @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  primaryJob   PrimaryOccupation?
+  secondaryJob SecondaryOccupation?
+  level        Int                  @default(1)
+  experience   Int                  @default(0)
+  updatedAt    DateTime             @updatedAt
+}
+
+enum PrimaryOccupation {
+  BLACKSMITH
+  ALCHEMIST
+  COOK
+  TAILOR
+  MERCHANT
+  BEAST_HANDLER
+}
+
+enum SecondaryOccupation {
+  MINER
+  HERBALIST
+  FISHER
+  LOGGER
+  FORAGER
+}
+
+// Skills
+model PlayerSkill {
+  id         String   @id @default(cuid())
+  playerId   String
+  player     Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  skillName  String
+  level      Int      @default(1)
+  experience Int      @default(0)
+  createdAt  DateTime @default(now())
+
+  @@unique([playerId, skillName])
+  @@index([playerId])
+}
+
+// Combat System
+model Encounter {
+  id         String      @id @default(cuid())
+  tileX      Int
+  tileY      Int
+  tileId     Int?
+  tile       MapTile?    @relation(fields: [tileId], references: [id])
+  enemyType  String
+  enemyLevel Int
+  isActive   Boolean     @default(true)
+  createdAt  DateTime    @default(now())
+  combatLogs CombatLog[]
+
+  @@index([tileX, tileY])
+  @@index([tileId])
+  @@index([isActive])
+}
+
+model CombatLog {
+  id          String     @id @default(cuid())
+  playerId    String
+  player      Player     @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  encounterId String?
+  encounter   Encounter? @relation(fields: [encounterId], references: [id], onDelete: SetNull)
+  turnNumber  Int
+  action      String
+  result      String // JSON or text description
+  createdAt   DateTime   @default(now())
+
+  @@index([playerId])
+  @@index([encounterId])
+}
+
+// Death & Permadeath
+model DeathLog {
+  id         String   @id @default(cuid())
+  playerId   String
+  player     Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  deathCount Int // Death number (1-5)
+  cause      String?
+  locationX  Int?
+  locationY  Int?
+  createdAt  DateTime @default(now())
+
+  @@index([playerId])
+}
+
+// Guild System
+model Guild {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  level       Int      @default(1)
+  gold        Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  members GuildMember[]
+  bank    GuildBank?
+  quests  GuildQuest[]
+
+  @@index([name])
+}
+
+model GuildMember {
+  id       String    @id @default(cuid())
+  playerId String    @unique
+  player   Player    @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  guildId  String
+  guild    Guild     @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  role     GuildRole @default(MEMBER)
+  joinedAt DateTime  @default(now())
+
+  @@index([guildId])
+}
+
+enum GuildRole {
+  LEADER
+  OFFICER
+  MEMBER
+}
+
+model GuildBank {
+  id        String   @id @default(cuid())
+  guildId   String   @unique
+  guild     Guild    @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  gold      Int      @default(0)
+  updatedAt DateTime @updatedAt
+}
+
+model GuildQuest {
+  id          String   @id @default(cuid())
+  guildId     String
+  guild       Guild    @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  title       String
+  description String
+  reward      String? // JSON
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  @@index([guildId])
+  @@index([isActive])
+}
+
+// Banking System
+model BankAccount {
+  id         String          @id @default(cuid())
+  playerId   String          @unique
+  player     Player          @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  gold       Int             @default(0)
+  vaultLevel Int             @default(1) // Determines storage capacity
+  vaultItems BankVaultItem[]
+  updatedAt  DateTime        @updatedAt
+}
+
+model BankVaultItem {
+  id        String      @id @default(cuid())
+  accountId String
+  account   BankAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  itemId    String
+  item      Item        @relation(fields: [itemId], references: [id])
+  quantity  Int         @default(1)
+  createdAt DateTime    @default(now())
+
+  @@index([accountId])
+  @@index([itemId])
+}
+
+// Market System
+model MarketListing {
+  id           String              @id @default(cuid())
+  playerId     String
+  player       Player              @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  itemId       String
+  item         Item                @relation(fields: [itemId], references: [id])
+  quantity     Int
+  pricePerUnit Int
+  totalPrice   Int
+  listingTax   Int // Tax paid when listing
+  isActive     Boolean             @default(true)
+  expiresAt    DateTime?
+  createdAt    DateTime            @default(now())
+  soldAt       DateTime?
+  transactions MarketTransaction[]
+
+  @@index([playerId])
+  @@index([itemId])
+  @@index([isActive])
+  @@index([expiresAt])
+}
+
+model MarketTransaction {
+  id         String        @id @default(cuid())
+  listingId  String
+  listing    MarketListing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  buyerId    String
+  buyer      Player        @relation("Buyer", fields: [buyerId], references: [id], onDelete: Cascade)
+  sellerId   String
+  seller     Player        @relation("Seller", fields: [sellerId], references: [id], onDelete: Cascade)
+  itemId     String
+  item       Item          @relation(fields: [itemId], references: [id])
+  quantity   Int
+  totalPrice Int
+  createdAt  DateTime      @default(now())
+
+  @@index([buyerId])
+  @@index([sellerId])
+  @@index([listingId])
+  @@index([itemId])
+}
+
+// Quests
+model Quest {
+  id           String    @id @default(cuid())
+  npcId        String?
+  npc          NPC?      @relation(fields: [npcId], references: [id], onDelete: SetNull)
+  title        String
+  description  String
+  questType    QuestType
+  reward       String? // JSON
+  requirements String? // JSON
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+
+  @@index([npcId])
+  @@index([isActive])
+  @@index([questType])
+}
+
+enum QuestType {
+  KILL
+  GATHER
+  DELIVER
+  EXPLORE
+  CRAFT
 }

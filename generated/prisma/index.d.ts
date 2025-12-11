@@ -3648,6 +3648,8 @@ export namespace Prisma {
   export type PlayerCountOutputType = {
     inventory: number
     marketListings: number
+    marketTransactionsAsBuyer: number
+    marketTransactionsAsSeller: number
     combatLogs: number
     deathLogs: number
     skills: number
@@ -3656,6 +3658,8 @@ export namespace Prisma {
   export type PlayerCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     inventory?: boolean | PlayerCountOutputTypeCountInventoryArgs
     marketListings?: boolean | PlayerCountOutputTypeCountMarketListingsArgs
+    marketTransactionsAsBuyer?: boolean | PlayerCountOutputTypeCountMarketTransactionsAsBuyerArgs
+    marketTransactionsAsSeller?: boolean | PlayerCountOutputTypeCountMarketTransactionsAsSellerArgs
     combatLogs?: boolean | PlayerCountOutputTypeCountCombatLogsArgs
     deathLogs?: boolean | PlayerCountOutputTypeCountDeathLogsArgs
     skills?: boolean | PlayerCountOutputTypeCountSkillsArgs
@@ -3684,6 +3688,20 @@ export namespace Prisma {
    */
   export type PlayerCountOutputTypeCountMarketListingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MarketListingWhereInput
+  }
+
+  /**
+   * PlayerCountOutputType without action
+   */
+  export type PlayerCountOutputTypeCountMarketTransactionsAsBuyerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MarketTransactionWhereInput
+  }
+
+  /**
+   * PlayerCountOutputType without action
+   */
+  export type PlayerCountOutputTypeCountMarketTransactionsAsSellerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MarketTransactionWhereInput
   }
 
   /**
@@ -3805,6 +3823,7 @@ export namespace Prisma {
     inventoryItems: number
     shopItems: number
     marketListings: number
+    marketTransactions: number
     equippedAsWeapon: number
     equippedAsHead: number
     equippedAsChest: number
@@ -3819,6 +3838,7 @@ export namespace Prisma {
     inventoryItems?: boolean | ItemCountOutputTypeCountInventoryItemsArgs
     shopItems?: boolean | ItemCountOutputTypeCountShopItemsArgs
     marketListings?: boolean | ItemCountOutputTypeCountMarketListingsArgs
+    marketTransactions?: boolean | ItemCountOutputTypeCountMarketTransactionsArgs
     equippedAsWeapon?: boolean | ItemCountOutputTypeCountEquippedAsWeaponArgs
     equippedAsHead?: boolean | ItemCountOutputTypeCountEquippedAsHeadArgs
     equippedAsChest?: boolean | ItemCountOutputTypeCountEquippedAsChestArgs
@@ -3859,6 +3879,13 @@ export namespace Prisma {
    */
   export type ItemCountOutputTypeCountMarketListingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MarketListingWhereInput
+  }
+
+  /**
+   * ItemCountOutputType without action
+   */
+  export type ItemCountOutputTypeCountMarketTransactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MarketTransactionWhereInput
   }
 
   /**
@@ -3915,6 +3942,37 @@ export namespace Prisma {
    */
   export type ItemCountOutputTypeCountBankVaultItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BankVaultItemWhereInput
+  }
+
+
+  /**
+   * Count Type EncounterCountOutputType
+   */
+
+  export type EncounterCountOutputType = {
+    combatLogs: number
+  }
+
+  export type EncounterCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    combatLogs?: boolean | EncounterCountOutputTypeCountCombatLogsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EncounterCountOutputType without action
+   */
+  export type EncounterCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EncounterCountOutputType
+     */
+    select?: EncounterCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EncounterCountOutputType without action
+   */
+  export type EncounterCountOutputTypeCountCombatLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CombatLogWhereInput
   }
 
 
@@ -3986,6 +4044,37 @@ export namespace Prisma {
    */
   export type BankAccountCountOutputTypeCountVaultItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BankVaultItemWhereInput
+  }
+
+
+  /**
+   * Count Type MarketListingCountOutputType
+   */
+
+  export type MarketListingCountOutputType = {
+    transactions: number
+  }
+
+  export type MarketListingCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transactions?: boolean | MarketListingCountOutputTypeCountTransactionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MarketListingCountOutputType without action
+   */
+  export type MarketListingCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarketListingCountOutputType
+     */
+    select?: MarketListingCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MarketListingCountOutputType without action
+   */
+  export type MarketListingCountOutputTypeCountTransactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MarketTransactionWhereInput
   }
 
 
@@ -11079,6 +11168,8 @@ export namespace Prisma {
     guildMember?: boolean | Player$guildMemberArgs<ExtArgs>
     bankAccount?: boolean | Player$bankAccountArgs<ExtArgs>
     marketListings?: boolean | Player$marketListingsArgs<ExtArgs>
+    marketTransactionsAsBuyer?: boolean | Player$marketTransactionsAsBuyerArgs<ExtArgs>
+    marketTransactionsAsSeller?: boolean | Player$marketTransactionsAsSellerArgs<ExtArgs>
     combatLogs?: boolean | Player$combatLogsArgs<ExtArgs>
     deathLogs?: boolean | Player$deathLogsArgs<ExtArgs>
     skills?: boolean | Player$skillsArgs<ExtArgs>
@@ -11137,6 +11228,8 @@ export namespace Prisma {
     guildMember?: boolean | Player$guildMemberArgs<ExtArgs>
     bankAccount?: boolean | Player$bankAccountArgs<ExtArgs>
     marketListings?: boolean | Player$marketListingsArgs<ExtArgs>
+    marketTransactionsAsBuyer?: boolean | Player$marketTransactionsAsBuyerArgs<ExtArgs>
+    marketTransactionsAsSeller?: boolean | Player$marketTransactionsAsSellerArgs<ExtArgs>
     combatLogs?: boolean | Player$combatLogsArgs<ExtArgs>
     deathLogs?: boolean | Player$deathLogsArgs<ExtArgs>
     skills?: boolean | Player$skillsArgs<ExtArgs>
@@ -11161,6 +11254,8 @@ export namespace Prisma {
       guildMember: Prisma.$GuildMemberPayload<ExtArgs> | null
       bankAccount: Prisma.$BankAccountPayload<ExtArgs> | null
       marketListings: Prisma.$MarketListingPayload<ExtArgs>[]
+      marketTransactionsAsBuyer: Prisma.$MarketTransactionPayload<ExtArgs>[]
+      marketTransactionsAsSeller: Prisma.$MarketTransactionPayload<ExtArgs>[]
       combatLogs: Prisma.$CombatLogPayload<ExtArgs>[]
       deathLogs: Prisma.$DeathLogPayload<ExtArgs>[]
       skills: Prisma.$PlayerSkillPayload<ExtArgs>[]
@@ -11579,6 +11674,8 @@ export namespace Prisma {
     guildMember<T extends Player$guildMemberArgs<ExtArgs> = {}>(args?: Subset<T, Player$guildMemberArgs<ExtArgs>>): Prisma__GuildMemberClient<$Result.GetResult<Prisma.$GuildMemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     bankAccount<T extends Player$bankAccountArgs<ExtArgs> = {}>(args?: Subset<T, Player$bankAccountArgs<ExtArgs>>): Prisma__BankAccountClient<$Result.GetResult<Prisma.$BankAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     marketListings<T extends Player$marketListingsArgs<ExtArgs> = {}>(args?: Subset<T, Player$marketListingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MarketListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    marketTransactionsAsBuyer<T extends Player$marketTransactionsAsBuyerArgs<ExtArgs> = {}>(args?: Subset<T, Player$marketTransactionsAsBuyerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MarketTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    marketTransactionsAsSeller<T extends Player$marketTransactionsAsSellerArgs<ExtArgs> = {}>(args?: Subset<T, Player$marketTransactionsAsSellerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MarketTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     combatLogs<T extends Player$combatLogsArgs<ExtArgs> = {}>(args?: Subset<T, Player$combatLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CombatLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     deathLogs<T extends Player$deathLogsArgs<ExtArgs> = {}>(args?: Subset<T, Player$deathLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeathLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     skills<T extends Player$skillsArgs<ExtArgs> = {}>(args?: Subset<T, Player$skillsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerSkillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -12176,6 +12273,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MarketListingScalarFieldEnum | MarketListingScalarFieldEnum[]
+  }
+
+  /**
+   * Player.marketTransactionsAsBuyer
+   */
+  export type Player$marketTransactionsAsBuyerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarketTransaction
+     */
+    select?: MarketTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarketTransaction
+     */
+    omit?: MarketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarketTransactionInclude<ExtArgs> | null
+    where?: MarketTransactionWhereInput
+    orderBy?: MarketTransactionOrderByWithRelationInput | MarketTransactionOrderByWithRelationInput[]
+    cursor?: MarketTransactionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MarketTransactionScalarFieldEnum | MarketTransactionScalarFieldEnum[]
+  }
+
+  /**
+   * Player.marketTransactionsAsSeller
+   */
+  export type Player$marketTransactionsAsSellerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarketTransaction
+     */
+    select?: MarketTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarketTransaction
+     */
+    omit?: MarketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarketTransactionInclude<ExtArgs> | null
+    where?: MarketTransactionWhereInput
+    orderBy?: MarketTransactionOrderByWithRelationInput | MarketTransactionOrderByWithRelationInput[]
+    cursor?: MarketTransactionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MarketTransactionScalarFieldEnum | MarketTransactionScalarFieldEnum[]
   }
 
   /**
@@ -18506,6 +18651,7 @@ export namespace Prisma {
     inventoryItems?: boolean | Item$inventoryItemsArgs<ExtArgs>
     shopItems?: boolean | Item$shopItemsArgs<ExtArgs>
     marketListings?: boolean | Item$marketListingsArgs<ExtArgs>
+    marketTransactions?: boolean | Item$marketTransactionsArgs<ExtArgs>
     equippedAsWeapon?: boolean | Item$equippedAsWeaponArgs<ExtArgs>
     equippedAsHead?: boolean | Item$equippedAsHeadArgs<ExtArgs>
     equippedAsChest?: boolean | Item$equippedAsChestArgs<ExtArgs>
@@ -18582,6 +18728,7 @@ export namespace Prisma {
     inventoryItems?: boolean | Item$inventoryItemsArgs<ExtArgs>
     shopItems?: boolean | Item$shopItemsArgs<ExtArgs>
     marketListings?: boolean | Item$marketListingsArgs<ExtArgs>
+    marketTransactions?: boolean | Item$marketTransactionsArgs<ExtArgs>
     equippedAsWeapon?: boolean | Item$equippedAsWeaponArgs<ExtArgs>
     equippedAsHead?: boolean | Item$equippedAsHeadArgs<ExtArgs>
     equippedAsChest?: boolean | Item$equippedAsChestArgs<ExtArgs>
@@ -18601,6 +18748,7 @@ export namespace Prisma {
       inventoryItems: Prisma.$InventoryItemPayload<ExtArgs>[]
       shopItems: Prisma.$ShopItemPayload<ExtArgs>[]
       marketListings: Prisma.$MarketListingPayload<ExtArgs>[]
+      marketTransactions: Prisma.$MarketTransactionPayload<ExtArgs>[]
       equippedAsWeapon: Prisma.$EquipmentPayload<ExtArgs>[]
       equippedAsHead: Prisma.$EquipmentPayload<ExtArgs>[]
       equippedAsChest: Prisma.$EquipmentPayload<ExtArgs>[]
@@ -19025,6 +19173,7 @@ export namespace Prisma {
     inventoryItems<T extends Item$inventoryItemsArgs<ExtArgs> = {}>(args?: Subset<T, Item$inventoryItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     shopItems<T extends Item$shopItemsArgs<ExtArgs> = {}>(args?: Subset<T, Item$shopItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ShopItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     marketListings<T extends Item$marketListingsArgs<ExtArgs> = {}>(args?: Subset<T, Item$marketListingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MarketListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    marketTransactions<T extends Item$marketTransactionsArgs<ExtArgs> = {}>(args?: Subset<T, Item$marketTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MarketTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     equippedAsWeapon<T extends Item$equippedAsWeaponArgs<ExtArgs> = {}>(args?: Subset<T, Item$equippedAsWeaponArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EquipmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     equippedAsHead<T extends Item$equippedAsHeadArgs<ExtArgs> = {}>(args?: Subset<T, Item$equippedAsHeadArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EquipmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     equippedAsChest<T extends Item$equippedAsChestArgs<ExtArgs> = {}>(args?: Subset<T, Item$equippedAsChestArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EquipmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -19536,6 +19685,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MarketListingScalarFieldEnum | MarketListingScalarFieldEnum[]
+  }
+
+  /**
+   * Item.marketTransactions
+   */
+  export type Item$marketTransactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarketTransaction
+     */
+    select?: MarketTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarketTransaction
+     */
+    omit?: MarketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarketTransactionInclude<ExtArgs> | null
+    where?: MarketTransactionWhereInput
+    orderBy?: MarketTransactionOrderByWithRelationInput | MarketTransactionOrderByWithRelationInput[]
+    cursor?: MarketTransactionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MarketTransactionScalarFieldEnum | MarketTransactionScalarFieldEnum[]
   }
 
   /**
@@ -24627,6 +24800,8 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: boolean
     tile?: boolean | Encounter$tileArgs<ExtArgs>
+    combatLogs?: boolean | Encounter$combatLogsArgs<ExtArgs>
+    _count?: boolean | EncounterCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["encounter"]>
 
   export type EncounterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -24667,6 +24842,8 @@ export namespace Prisma {
   export type EncounterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tileX" | "tileY" | "tileId" | "enemyType" | "enemyLevel" | "isActive" | "createdAt", ExtArgs["result"]["encounter"]>
   export type EncounterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tile?: boolean | Encounter$tileArgs<ExtArgs>
+    combatLogs?: boolean | Encounter$combatLogsArgs<ExtArgs>
+    _count?: boolean | EncounterCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EncounterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tile?: boolean | Encounter$tileArgs<ExtArgs>
@@ -24679,6 +24856,7 @@ export namespace Prisma {
     name: "Encounter"
     objects: {
       tile: Prisma.$MapTilePayload<ExtArgs> | null
+      combatLogs: Prisma.$CombatLogPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -25084,6 +25262,7 @@ export namespace Prisma {
   export interface Prisma__EncounterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     tile<T extends Encounter$tileArgs<ExtArgs> = {}>(args?: Subset<T, Encounter$tileArgs<ExtArgs>>): Prisma__MapTileClient<$Result.GetResult<Prisma.$MapTilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    combatLogs<T extends Encounter$combatLogsArgs<ExtArgs> = {}>(args?: Subset<T, Encounter$combatLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CombatLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -25536,6 +25715,30 @@ export namespace Prisma {
   }
 
   /**
+   * Encounter.combatLogs
+   */
+  export type Encounter$combatLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CombatLog
+     */
+    select?: CombatLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CombatLog
+     */
+    omit?: CombatLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CombatLogInclude<ExtArgs> | null
+    where?: CombatLogWhereInput
+    orderBy?: CombatLogOrderByWithRelationInput | CombatLogOrderByWithRelationInput[]
+    cursor?: CombatLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CombatLogScalarFieldEnum | CombatLogScalarFieldEnum[]
+  }
+
+  /**
    * Encounter without action
    */
   export type EncounterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -25769,6 +25972,7 @@ export namespace Prisma {
     result?: boolean
     createdAt?: boolean
     player?: boolean | PlayerDefaultArgs<ExtArgs>
+    encounter?: boolean | CombatLog$encounterArgs<ExtArgs>
   }, ExtArgs["result"]["combatLog"]>
 
   export type CombatLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -25780,6 +25984,7 @@ export namespace Prisma {
     result?: boolean
     createdAt?: boolean
     player?: boolean | PlayerDefaultArgs<ExtArgs>
+    encounter?: boolean | CombatLog$encounterArgs<ExtArgs>
   }, ExtArgs["result"]["combatLog"]>
 
   export type CombatLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -25791,6 +25996,7 @@ export namespace Prisma {
     result?: boolean
     createdAt?: boolean
     player?: boolean | PlayerDefaultArgs<ExtArgs>
+    encounter?: boolean | CombatLog$encounterArgs<ExtArgs>
   }, ExtArgs["result"]["combatLog"]>
 
   export type CombatLogSelectScalar = {
@@ -25806,18 +26012,22 @@ export namespace Prisma {
   export type CombatLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "playerId" | "encounterId" | "turnNumber" | "action" | "result" | "createdAt", ExtArgs["result"]["combatLog"]>
   export type CombatLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     player?: boolean | PlayerDefaultArgs<ExtArgs>
+    encounter?: boolean | CombatLog$encounterArgs<ExtArgs>
   }
   export type CombatLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     player?: boolean | PlayerDefaultArgs<ExtArgs>
+    encounter?: boolean | CombatLog$encounterArgs<ExtArgs>
   }
   export type CombatLogIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     player?: boolean | PlayerDefaultArgs<ExtArgs>
+    encounter?: boolean | CombatLog$encounterArgs<ExtArgs>
   }
 
   export type $CombatLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "CombatLog"
     objects: {
       player: Prisma.$PlayerPayload<ExtArgs>
+      encounter: Prisma.$EncounterPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -26222,6 +26432,7 @@ export namespace Prisma {
   export interface Prisma__CombatLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     player<T extends PlayerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlayerDefaultArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    encounter<T extends CombatLog$encounterArgs<ExtArgs> = {}>(args?: Subset<T, CombatLog$encounterArgs<ExtArgs>>): Prisma__EncounterClient<$Result.GetResult<Prisma.$EncounterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -26651,6 +26862,25 @@ export namespace Prisma {
      * Limit how many CombatLogs to delete.
      */
     limit?: number
+  }
+
+  /**
+   * CombatLog.encounter
+   */
+  export type CombatLog$encounterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Encounter
+     */
+    select?: EncounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Encounter
+     */
+    omit?: EncounterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EncounterInclude<ExtArgs> | null
+    where?: EncounterWhereInput
   }
 
   /**
@@ -34698,6 +34928,8 @@ export namespace Prisma {
     soldAt?: boolean
     player?: boolean | PlayerDefaultArgs<ExtArgs>
     item?: boolean | ItemDefaultArgs<ExtArgs>
+    transactions?: boolean | MarketListing$transactionsArgs<ExtArgs>
+    _count?: boolean | MarketListingCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["marketListing"]>
 
   export type MarketListingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -34750,6 +34982,8 @@ export namespace Prisma {
   export type MarketListingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     player?: boolean | PlayerDefaultArgs<ExtArgs>
     item?: boolean | ItemDefaultArgs<ExtArgs>
+    transactions?: boolean | MarketListing$transactionsArgs<ExtArgs>
+    _count?: boolean | MarketListingCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MarketListingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     player?: boolean | PlayerDefaultArgs<ExtArgs>
@@ -34765,6 +34999,7 @@ export namespace Prisma {
     objects: {
       player: Prisma.$PlayerPayload<ExtArgs>
       item: Prisma.$ItemPayload<ExtArgs>
+      transactions: Prisma.$MarketTransactionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -35174,6 +35409,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     player<T extends PlayerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlayerDefaultArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     item<T extends ItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ItemDefaultArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    transactions<T extends MarketListing$transactionsArgs<ExtArgs> = {}>(args?: Subset<T, MarketListing$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MarketTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -35610,6 +35846,30 @@ export namespace Prisma {
   }
 
   /**
+   * MarketListing.transactions
+   */
+  export type MarketListing$transactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MarketTransaction
+     */
+    select?: MarketTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MarketTransaction
+     */
+    omit?: MarketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarketTransactionInclude<ExtArgs> | null
+    where?: MarketTransactionWhereInput
+    orderBy?: MarketTransactionOrderByWithRelationInput | MarketTransactionOrderByWithRelationInput[]
+    cursor?: MarketTransactionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MarketTransactionScalarFieldEnum | MarketTransactionScalarFieldEnum[]
+  }
+
+  /**
    * MarketListing without action
    */
   export type MarketListingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -35854,6 +36114,10 @@ export namespace Prisma {
     quantity?: boolean
     totalPrice?: boolean
     createdAt?: boolean
+    listing?: boolean | MarketListingDefaultArgs<ExtArgs>
+    buyer?: boolean | PlayerDefaultArgs<ExtArgs>
+    seller?: boolean | PlayerDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["marketTransaction"]>
 
   export type MarketTransactionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -35865,6 +36129,10 @@ export namespace Prisma {
     quantity?: boolean
     totalPrice?: boolean
     createdAt?: boolean
+    listing?: boolean | MarketListingDefaultArgs<ExtArgs>
+    buyer?: boolean | PlayerDefaultArgs<ExtArgs>
+    seller?: boolean | PlayerDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["marketTransaction"]>
 
   export type MarketTransactionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -35876,6 +36144,10 @@ export namespace Prisma {
     quantity?: boolean
     totalPrice?: boolean
     createdAt?: boolean
+    listing?: boolean | MarketListingDefaultArgs<ExtArgs>
+    buyer?: boolean | PlayerDefaultArgs<ExtArgs>
+    seller?: boolean | PlayerDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["marketTransaction"]>
 
   export type MarketTransactionSelectScalar = {
@@ -35890,10 +36162,33 @@ export namespace Prisma {
   }
 
   export type MarketTransactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "listingId" | "buyerId" | "sellerId" | "itemId" | "quantity" | "totalPrice" | "createdAt", ExtArgs["result"]["marketTransaction"]>
+  export type MarketTransactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    listing?: boolean | MarketListingDefaultArgs<ExtArgs>
+    buyer?: boolean | PlayerDefaultArgs<ExtArgs>
+    seller?: boolean | PlayerDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+  }
+  export type MarketTransactionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    listing?: boolean | MarketListingDefaultArgs<ExtArgs>
+    buyer?: boolean | PlayerDefaultArgs<ExtArgs>
+    seller?: boolean | PlayerDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+  }
+  export type MarketTransactionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    listing?: boolean | MarketListingDefaultArgs<ExtArgs>
+    buyer?: boolean | PlayerDefaultArgs<ExtArgs>
+    seller?: boolean | PlayerDefaultArgs<ExtArgs>
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+  }
 
   export type $MarketTransactionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "MarketTransaction"
-    objects: {}
+    objects: {
+      listing: Prisma.$MarketListingPayload<ExtArgs>
+      buyer: Prisma.$PlayerPayload<ExtArgs>
+      seller: Prisma.$PlayerPayload<ExtArgs>
+      item: Prisma.$ItemPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       listingId: string
@@ -36297,6 +36592,10 @@ export namespace Prisma {
    */
   export interface Prisma__MarketTransactionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    listing<T extends MarketListingDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MarketListingDefaultArgs<ExtArgs>>): Prisma__MarketListingClient<$Result.GetResult<Prisma.$MarketListingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    buyer<T extends PlayerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlayerDefaultArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    seller<T extends PlayerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlayerDefaultArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    item<T extends ItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ItemDefaultArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -36351,6 +36650,10 @@ export namespace Prisma {
      */
     omit?: MarketTransactionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarketTransactionInclude<ExtArgs> | null
+    /**
      * Filter, which MarketTransaction to fetch.
      */
     where: MarketTransactionWhereUniqueInput
@@ -36369,6 +36672,10 @@ export namespace Prisma {
      */
     omit?: MarketTransactionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarketTransactionInclude<ExtArgs> | null
+    /**
      * Filter, which MarketTransaction to fetch.
      */
     where: MarketTransactionWhereUniqueInput
@@ -36386,6 +36693,10 @@ export namespace Prisma {
      * Omit specific fields from the MarketTransaction
      */
     omit?: MarketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarketTransactionInclude<ExtArgs> | null
     /**
      * Filter, which MarketTransaction to fetch.
      */
@@ -36435,6 +36746,10 @@ export namespace Prisma {
      */
     omit?: MarketTransactionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarketTransactionInclude<ExtArgs> | null
+    /**
      * Filter, which MarketTransaction to fetch.
      */
     where?: MarketTransactionWhereInput
@@ -36483,6 +36798,10 @@ export namespace Prisma {
      */
     omit?: MarketTransactionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarketTransactionInclude<ExtArgs> | null
+    /**
      * Filter, which MarketTransactions to fetch.
      */
     where?: MarketTransactionWhereInput
@@ -36526,6 +36845,10 @@ export namespace Prisma {
      */
     omit?: MarketTransactionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarketTransactionInclude<ExtArgs> | null
+    /**
      * The data needed to create a MarketTransaction.
      */
     data: XOR<MarketTransactionCreateInput, MarketTransactionUncheckedCreateInput>
@@ -36559,6 +36882,10 @@ export namespace Prisma {
      */
     data: MarketTransactionCreateManyInput | MarketTransactionCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarketTransactionIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -36573,6 +36900,10 @@ export namespace Prisma {
      * Omit specific fields from the MarketTransaction
      */
     omit?: MarketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarketTransactionInclude<ExtArgs> | null
     /**
      * The data needed to update a MarketTransaction.
      */
@@ -36625,6 +36956,10 @@ export namespace Prisma {
      * Limit how many MarketTransactions to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarketTransactionIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -36639,6 +36974,10 @@ export namespace Prisma {
      * Omit specific fields from the MarketTransaction
      */
     omit?: MarketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarketTransactionInclude<ExtArgs> | null
     /**
      * The filter to search for the MarketTransaction to update in case it exists.
      */
@@ -36665,6 +37004,10 @@ export namespace Prisma {
      * Omit specific fields from the MarketTransaction
      */
     omit?: MarketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarketTransactionInclude<ExtArgs> | null
     /**
      * Filter which MarketTransaction to delete.
      */
@@ -36697,6 +37040,10 @@ export namespace Prisma {
      * Omit specific fields from the MarketTransaction
      */
     omit?: MarketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MarketTransactionInclude<ExtArgs> | null
   }
 
 
@@ -38971,6 +39318,8 @@ export namespace Prisma {
     guildMember?: XOR<GuildMemberNullableScalarRelationFilter, GuildMemberWhereInput> | null
     bankAccount?: XOR<BankAccountNullableScalarRelationFilter, BankAccountWhereInput> | null
     marketListings?: MarketListingListRelationFilter
+    marketTransactionsAsBuyer?: MarketTransactionListRelationFilter
+    marketTransactionsAsSeller?: MarketTransactionListRelationFilter
     combatLogs?: CombatLogListRelationFilter
     deathLogs?: DeathLogListRelationFilter
     skills?: PlayerSkillListRelationFilter
@@ -38996,6 +39345,8 @@ export namespace Prisma {
     guildMember?: GuildMemberOrderByWithRelationInput
     bankAccount?: BankAccountOrderByWithRelationInput
     marketListings?: MarketListingOrderByRelationAggregateInput
+    marketTransactionsAsBuyer?: MarketTransactionOrderByRelationAggregateInput
+    marketTransactionsAsSeller?: MarketTransactionOrderByRelationAggregateInput
     combatLogs?: CombatLogOrderByRelationAggregateInput
     deathLogs?: DeathLogOrderByRelationAggregateInput
     skills?: PlayerSkillOrderByRelationAggregateInput
@@ -39024,6 +39375,8 @@ export namespace Prisma {
     guildMember?: XOR<GuildMemberNullableScalarRelationFilter, GuildMemberWhereInput> | null
     bankAccount?: XOR<BankAccountNullableScalarRelationFilter, BankAccountWhereInput> | null
     marketListings?: MarketListingListRelationFilter
+    marketTransactionsAsBuyer?: MarketTransactionListRelationFilter
+    marketTransactionsAsSeller?: MarketTransactionListRelationFilter
     combatLogs?: CombatLogListRelationFilter
     deathLogs?: DeathLogListRelationFilter
     skills?: PlayerSkillListRelationFilter
@@ -39471,6 +39824,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemListRelationFilter
     shopItems?: ShopItemListRelationFilter
     marketListings?: MarketListingListRelationFilter
+    marketTransactions?: MarketTransactionListRelationFilter
     equippedAsWeapon?: EquipmentListRelationFilter
     equippedAsHead?: EquipmentListRelationFilter
     equippedAsChest?: EquipmentListRelationFilter
@@ -39502,6 +39856,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemOrderByRelationAggregateInput
     shopItems?: ShopItemOrderByRelationAggregateInput
     marketListings?: MarketListingOrderByRelationAggregateInput
+    marketTransactions?: MarketTransactionOrderByRelationAggregateInput
     equippedAsWeapon?: EquipmentOrderByRelationAggregateInput
     equippedAsHead?: EquipmentOrderByRelationAggregateInput
     equippedAsChest?: EquipmentOrderByRelationAggregateInput
@@ -39536,6 +39891,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemListRelationFilter
     shopItems?: ShopItemListRelationFilter
     marketListings?: MarketListingListRelationFilter
+    marketTransactions?: MarketTransactionListRelationFilter
     equippedAsWeapon?: EquipmentListRelationFilter
     equippedAsHead?: EquipmentListRelationFilter
     equippedAsChest?: EquipmentListRelationFilter
@@ -39898,6 +40254,7 @@ export namespace Prisma {
     isActive?: BoolFilter<"Encounter"> | boolean
     createdAt?: DateTimeFilter<"Encounter"> | Date | string
     tile?: XOR<MapTileNullableScalarRelationFilter, MapTileWhereInput> | null
+    combatLogs?: CombatLogListRelationFilter
   }
 
   export type EncounterOrderByWithRelationInput = {
@@ -39910,6 +40267,7 @@ export namespace Prisma {
     isActive?: SortOrder
     createdAt?: SortOrder
     tile?: MapTileOrderByWithRelationInput
+    combatLogs?: CombatLogOrderByRelationAggregateInput
   }
 
   export type EncounterWhereUniqueInput = Prisma.AtLeast<{
@@ -39925,6 +40283,7 @@ export namespace Prisma {
     isActive?: BoolFilter<"Encounter"> | boolean
     createdAt?: DateTimeFilter<"Encounter"> | Date | string
     tile?: XOR<MapTileNullableScalarRelationFilter, MapTileWhereInput> | null
+    combatLogs?: CombatLogListRelationFilter
   }, "id">
 
   export type EncounterOrderByWithAggregationInput = {
@@ -39969,6 +40328,7 @@ export namespace Prisma {
     result?: StringFilter<"CombatLog"> | string
     createdAt?: DateTimeFilter<"CombatLog"> | Date | string
     player?: XOR<PlayerScalarRelationFilter, PlayerWhereInput>
+    encounter?: XOR<EncounterNullableScalarRelationFilter, EncounterWhereInput> | null
   }
 
   export type CombatLogOrderByWithRelationInput = {
@@ -39980,6 +40340,7 @@ export namespace Prisma {
     result?: SortOrder
     createdAt?: SortOrder
     player?: PlayerOrderByWithRelationInput
+    encounter?: EncounterOrderByWithRelationInput
   }
 
   export type CombatLogWhereUniqueInput = Prisma.AtLeast<{
@@ -39994,6 +40355,7 @@ export namespace Prisma {
     result?: StringFilter<"CombatLog"> | string
     createdAt?: DateTimeFilter<"CombatLog"> | Date | string
     player?: XOR<PlayerScalarRelationFilter, PlayerWhereInput>
+    encounter?: XOR<EncounterNullableScalarRelationFilter, EncounterWhereInput> | null
   }, "id">
 
   export type CombatLogOrderByWithAggregationInput = {
@@ -40476,6 +40838,7 @@ export namespace Prisma {
     soldAt?: DateTimeNullableFilter<"MarketListing"> | Date | string | null
     player?: XOR<PlayerScalarRelationFilter, PlayerWhereInput>
     item?: XOR<ItemScalarRelationFilter, ItemWhereInput>
+    transactions?: MarketTransactionListRelationFilter
   }
 
   export type MarketListingOrderByWithRelationInput = {
@@ -40492,6 +40855,7 @@ export namespace Prisma {
     soldAt?: SortOrderInput | SortOrder
     player?: PlayerOrderByWithRelationInput
     item?: ItemOrderByWithRelationInput
+    transactions?: MarketTransactionOrderByRelationAggregateInput
   }
 
   export type MarketListingWhereUniqueInput = Prisma.AtLeast<{
@@ -40511,6 +40875,7 @@ export namespace Prisma {
     soldAt?: DateTimeNullableFilter<"MarketListing"> | Date | string | null
     player?: XOR<PlayerScalarRelationFilter, PlayerWhereInput>
     item?: XOR<ItemScalarRelationFilter, ItemWhereInput>
+    transactions?: MarketTransactionListRelationFilter
   }, "id">
 
   export type MarketListingOrderByWithAggregationInput = {
@@ -40561,6 +40926,10 @@ export namespace Prisma {
     quantity?: IntFilter<"MarketTransaction"> | number
     totalPrice?: IntFilter<"MarketTransaction"> | number
     createdAt?: DateTimeFilter<"MarketTransaction"> | Date | string
+    listing?: XOR<MarketListingScalarRelationFilter, MarketListingWhereInput>
+    buyer?: XOR<PlayerScalarRelationFilter, PlayerWhereInput>
+    seller?: XOR<PlayerScalarRelationFilter, PlayerWhereInput>
+    item?: XOR<ItemScalarRelationFilter, ItemWhereInput>
   }
 
   export type MarketTransactionOrderByWithRelationInput = {
@@ -40572,6 +40941,10 @@ export namespace Prisma {
     quantity?: SortOrder
     totalPrice?: SortOrder
     createdAt?: SortOrder
+    listing?: MarketListingOrderByWithRelationInput
+    buyer?: PlayerOrderByWithRelationInput
+    seller?: PlayerOrderByWithRelationInput
+    item?: ItemOrderByWithRelationInput
   }
 
   export type MarketTransactionWhereUniqueInput = Prisma.AtLeast<{
@@ -40586,6 +40959,10 @@ export namespace Prisma {
     quantity?: IntFilter<"MarketTransaction"> | number
     totalPrice?: IntFilter<"MarketTransaction"> | number
     createdAt?: DateTimeFilter<"MarketTransaction"> | Date | string
+    listing?: XOR<MarketListingScalarRelationFilter, MarketListingWhereInput>
+    buyer?: XOR<PlayerScalarRelationFilter, PlayerWhereInput>
+    seller?: XOR<PlayerScalarRelationFilter, PlayerWhereInput>
+    item?: XOR<ItemScalarRelationFilter, ItemWhereInput>
   }, "id">
 
   export type MarketTransactionOrderByWithAggregationInput = {
@@ -41208,6 +41585,8 @@ export namespace Prisma {
     guildMember?: GuildMemberCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillCreateNestedManyWithoutPlayerInput
@@ -41232,6 +41611,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountUncheckedCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogUncheckedCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogUncheckedCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
@@ -41256,6 +41637,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUpdateManyWithoutPlayerNestedInput
@@ -41280,6 +41663,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
@@ -41747,6 +42132,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemCreateNestedManyWithoutItemInput
     shopItems?: ShopItemCreateNestedManyWithoutItemInput
     marketListings?: MarketListingCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentCreateNestedManyWithoutChestInput
@@ -41778,6 +42164,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutItemInput
     shopItems?: ShopItemUncheckedCreateNestedManyWithoutItemInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionUncheckedCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentUncheckedCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentUncheckedCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentUncheckedCreateNestedManyWithoutChestInput
@@ -41809,6 +42196,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUpdateManyWithoutChestNestedInput
@@ -41840,6 +42228,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUncheckedUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUncheckedUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUncheckedUpdateManyWithoutChestNestedInput
@@ -42187,6 +42576,7 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     tile?: MapTileCreateNestedOneWithoutEncountersInput
+    combatLogs?: CombatLogCreateNestedManyWithoutEncounterInput
   }
 
   export type EncounterUncheckedCreateInput = {
@@ -42198,6 +42588,7 @@ export namespace Prisma {
     enemyLevel: number
     isActive?: boolean
     createdAt?: Date | string
+    combatLogs?: CombatLogUncheckedCreateNestedManyWithoutEncounterInput
   }
 
   export type EncounterUpdateInput = {
@@ -42209,6 +42600,7 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tile?: MapTileUpdateOneWithoutEncountersNestedInput
+    combatLogs?: CombatLogUpdateManyWithoutEncounterNestedInput
   }
 
   export type EncounterUncheckedUpdateInput = {
@@ -42220,6 +42612,7 @@ export namespace Prisma {
     enemyLevel?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    combatLogs?: CombatLogUncheckedUpdateManyWithoutEncounterNestedInput
   }
 
   export type EncounterCreateManyInput = {
@@ -42256,12 +42649,12 @@ export namespace Prisma {
 
   export type CombatLogCreateInput = {
     id?: string
-    encounterId?: string | null
     turnNumber: number
     action: string
     result: string
     createdAt?: Date | string
     player: PlayerCreateNestedOneWithoutCombatLogsInput
+    encounter?: EncounterCreateNestedOneWithoutCombatLogsInput
   }
 
   export type CombatLogUncheckedCreateInput = {
@@ -42276,12 +42669,12 @@ export namespace Prisma {
 
   export type CombatLogUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    encounterId?: NullableStringFieldUpdateOperationsInput | string | null
     turnNumber?: IntFieldUpdateOperationsInput | number
     action?: StringFieldUpdateOperationsInput | string
     result?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     player?: PlayerUpdateOneRequiredWithoutCombatLogsNestedInput
+    encounter?: EncounterUpdateOneWithoutCombatLogsNestedInput
   }
 
   export type CombatLogUncheckedUpdateInput = {
@@ -42306,7 +42699,6 @@ export namespace Prisma {
 
   export type CombatLogUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    encounterId?: NullableStringFieldUpdateOperationsInput | string | null
     turnNumber?: IntFieldUpdateOperationsInput | number
     action?: StringFieldUpdateOperationsInput | string
     result?: StringFieldUpdateOperationsInput | string
@@ -42770,6 +43162,7 @@ export namespace Prisma {
     soldAt?: Date | string | null
     player: PlayerCreateNestedOneWithoutMarketListingsInput
     item: ItemCreateNestedOneWithoutMarketListingsInput
+    transactions?: MarketTransactionCreateNestedManyWithoutListingInput
   }
 
   export type MarketListingUncheckedCreateInput = {
@@ -42784,6 +43177,7 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     createdAt?: Date | string
     soldAt?: Date | string | null
+    transactions?: MarketTransactionUncheckedCreateNestedManyWithoutListingInput
   }
 
   export type MarketListingUpdateInput = {
@@ -42798,6 +43192,7 @@ export namespace Prisma {
     soldAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     player?: PlayerUpdateOneRequiredWithoutMarketListingsNestedInput
     item?: ItemUpdateOneRequiredWithoutMarketListingsNestedInput
+    transactions?: MarketTransactionUpdateManyWithoutListingNestedInput
   }
 
   export type MarketListingUncheckedUpdateInput = {
@@ -42812,6 +43207,7 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     soldAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transactions?: MarketTransactionUncheckedUpdateManyWithoutListingNestedInput
   }
 
   export type MarketListingCreateManyInput = {
@@ -42856,13 +43252,13 @@ export namespace Prisma {
 
   export type MarketTransactionCreateInput = {
     id?: string
-    listingId: string
-    buyerId: string
-    sellerId: string
-    itemId: string
     quantity: number
     totalPrice: number
     createdAt?: Date | string
+    listing: MarketListingCreateNestedOneWithoutTransactionsInput
+    buyer: PlayerCreateNestedOneWithoutMarketTransactionsAsBuyerInput
+    seller: PlayerCreateNestedOneWithoutMarketTransactionsAsSellerInput
+    item: ItemCreateNestedOneWithoutMarketTransactionsInput
   }
 
   export type MarketTransactionUncheckedCreateInput = {
@@ -42878,13 +43274,13 @@ export namespace Prisma {
 
   export type MarketTransactionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    listingId?: StringFieldUpdateOperationsInput | string
-    buyerId?: StringFieldUpdateOperationsInput | string
-    sellerId?: StringFieldUpdateOperationsInput | string
-    itemId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     totalPrice?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    listing?: MarketListingUpdateOneRequiredWithoutTransactionsNestedInput
+    buyer?: PlayerUpdateOneRequiredWithoutMarketTransactionsAsBuyerNestedInput
+    seller?: PlayerUpdateOneRequiredWithoutMarketTransactionsAsSellerNestedInput
+    item?: ItemUpdateOneRequiredWithoutMarketTransactionsNestedInput
   }
 
   export type MarketTransactionUncheckedUpdateInput = {
@@ -42911,10 +43307,6 @@ export namespace Prisma {
 
   export type MarketTransactionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    listingId?: StringFieldUpdateOperationsInput | string
-    buyerId?: StringFieldUpdateOperationsInput | string
-    sellerId?: StringFieldUpdateOperationsInput | string
-    itemId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     totalPrice?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -43559,6 +43951,12 @@ export namespace Prisma {
     none?: MarketListingWhereInput
   }
 
+  export type MarketTransactionListRelationFilter = {
+    every?: MarketTransactionWhereInput
+    some?: MarketTransactionWhereInput
+    none?: MarketTransactionWhereInput
+  }
+
   export type CombatLogListRelationFilter = {
     every?: CombatLogWhereInput
     some?: CombatLogWhereInput
@@ -43582,6 +43980,10 @@ export namespace Prisma {
   }
 
   export type MarketListingOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MarketTransactionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -44425,6 +44827,11 @@ export namespace Prisma {
     enemyLevel?: SortOrder
   }
 
+  export type EncounterNullableScalarRelationFilter = {
+    is?: EncounterWhereInput | null
+    isNot?: EncounterWhereInput | null
+  }
+
   export type CombatLogCountOrderByAggregateInput = {
     id?: SortOrder
     playerId?: SortOrder
@@ -44800,6 +45207,11 @@ export namespace Prisma {
     pricePerUnit?: SortOrder
     totalPrice?: SortOrder
     listingTax?: SortOrder
+  }
+
+  export type MarketListingScalarRelationFilter = {
+    is?: MarketListingWhereInput
+    isNot?: MarketListingWhereInput
   }
 
   export type MarketTransactionCountOrderByAggregateInput = {
@@ -45251,6 +45663,20 @@ export namespace Prisma {
     connect?: MarketListingWhereUniqueInput | MarketListingWhereUniqueInput[]
   }
 
+  export type MarketTransactionCreateNestedManyWithoutBuyerInput = {
+    create?: XOR<MarketTransactionCreateWithoutBuyerInput, MarketTransactionUncheckedCreateWithoutBuyerInput> | MarketTransactionCreateWithoutBuyerInput[] | MarketTransactionUncheckedCreateWithoutBuyerInput[]
+    connectOrCreate?: MarketTransactionCreateOrConnectWithoutBuyerInput | MarketTransactionCreateOrConnectWithoutBuyerInput[]
+    createMany?: MarketTransactionCreateManyBuyerInputEnvelope
+    connect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+  }
+
+  export type MarketTransactionCreateNestedManyWithoutSellerInput = {
+    create?: XOR<MarketTransactionCreateWithoutSellerInput, MarketTransactionUncheckedCreateWithoutSellerInput> | MarketTransactionCreateWithoutSellerInput[] | MarketTransactionUncheckedCreateWithoutSellerInput[]
+    connectOrCreate?: MarketTransactionCreateOrConnectWithoutSellerInput | MarketTransactionCreateOrConnectWithoutSellerInput[]
+    createMany?: MarketTransactionCreateManySellerInputEnvelope
+    connect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+  }
+
   export type CombatLogCreateNestedManyWithoutPlayerInput = {
     create?: XOR<CombatLogCreateWithoutPlayerInput, CombatLogUncheckedCreateWithoutPlayerInput> | CombatLogCreateWithoutPlayerInput[] | CombatLogUncheckedCreateWithoutPlayerInput[]
     connectOrCreate?: CombatLogCreateOrConnectWithoutPlayerInput | CombatLogCreateOrConnectWithoutPlayerInput[]
@@ -45320,6 +45746,20 @@ export namespace Prisma {
     connectOrCreate?: MarketListingCreateOrConnectWithoutPlayerInput | MarketListingCreateOrConnectWithoutPlayerInput[]
     createMany?: MarketListingCreateManyPlayerInputEnvelope
     connect?: MarketListingWhereUniqueInput | MarketListingWhereUniqueInput[]
+  }
+
+  export type MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput = {
+    create?: XOR<MarketTransactionCreateWithoutBuyerInput, MarketTransactionUncheckedCreateWithoutBuyerInput> | MarketTransactionCreateWithoutBuyerInput[] | MarketTransactionUncheckedCreateWithoutBuyerInput[]
+    connectOrCreate?: MarketTransactionCreateOrConnectWithoutBuyerInput | MarketTransactionCreateOrConnectWithoutBuyerInput[]
+    createMany?: MarketTransactionCreateManyBuyerInputEnvelope
+    connect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+  }
+
+  export type MarketTransactionUncheckedCreateNestedManyWithoutSellerInput = {
+    create?: XOR<MarketTransactionCreateWithoutSellerInput, MarketTransactionUncheckedCreateWithoutSellerInput> | MarketTransactionCreateWithoutSellerInput[] | MarketTransactionUncheckedCreateWithoutSellerInput[]
+    connectOrCreate?: MarketTransactionCreateOrConnectWithoutSellerInput | MarketTransactionCreateOrConnectWithoutSellerInput[]
+    createMany?: MarketTransactionCreateManySellerInputEnvelope
+    connect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
   }
 
   export type CombatLogUncheckedCreateNestedManyWithoutPlayerInput = {
@@ -45437,6 +45877,34 @@ export namespace Prisma {
     update?: MarketListingUpdateWithWhereUniqueWithoutPlayerInput | MarketListingUpdateWithWhereUniqueWithoutPlayerInput[]
     updateMany?: MarketListingUpdateManyWithWhereWithoutPlayerInput | MarketListingUpdateManyWithWhereWithoutPlayerInput[]
     deleteMany?: MarketListingScalarWhereInput | MarketListingScalarWhereInput[]
+  }
+
+  export type MarketTransactionUpdateManyWithoutBuyerNestedInput = {
+    create?: XOR<MarketTransactionCreateWithoutBuyerInput, MarketTransactionUncheckedCreateWithoutBuyerInput> | MarketTransactionCreateWithoutBuyerInput[] | MarketTransactionUncheckedCreateWithoutBuyerInput[]
+    connectOrCreate?: MarketTransactionCreateOrConnectWithoutBuyerInput | MarketTransactionCreateOrConnectWithoutBuyerInput[]
+    upsert?: MarketTransactionUpsertWithWhereUniqueWithoutBuyerInput | MarketTransactionUpsertWithWhereUniqueWithoutBuyerInput[]
+    createMany?: MarketTransactionCreateManyBuyerInputEnvelope
+    set?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    disconnect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    delete?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    connect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    update?: MarketTransactionUpdateWithWhereUniqueWithoutBuyerInput | MarketTransactionUpdateWithWhereUniqueWithoutBuyerInput[]
+    updateMany?: MarketTransactionUpdateManyWithWhereWithoutBuyerInput | MarketTransactionUpdateManyWithWhereWithoutBuyerInput[]
+    deleteMany?: MarketTransactionScalarWhereInput | MarketTransactionScalarWhereInput[]
+  }
+
+  export type MarketTransactionUpdateManyWithoutSellerNestedInput = {
+    create?: XOR<MarketTransactionCreateWithoutSellerInput, MarketTransactionUncheckedCreateWithoutSellerInput> | MarketTransactionCreateWithoutSellerInput[] | MarketTransactionUncheckedCreateWithoutSellerInput[]
+    connectOrCreate?: MarketTransactionCreateOrConnectWithoutSellerInput | MarketTransactionCreateOrConnectWithoutSellerInput[]
+    upsert?: MarketTransactionUpsertWithWhereUniqueWithoutSellerInput | MarketTransactionUpsertWithWhereUniqueWithoutSellerInput[]
+    createMany?: MarketTransactionCreateManySellerInputEnvelope
+    set?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    disconnect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    delete?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    connect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    update?: MarketTransactionUpdateWithWhereUniqueWithoutSellerInput | MarketTransactionUpdateWithWhereUniqueWithoutSellerInput[]
+    updateMany?: MarketTransactionUpdateManyWithWhereWithoutSellerInput | MarketTransactionUpdateManyWithWhereWithoutSellerInput[]
+    deleteMany?: MarketTransactionScalarWhereInput | MarketTransactionScalarWhereInput[]
   }
 
   export type CombatLogUpdateManyWithoutPlayerNestedInput = {
@@ -45567,6 +46035,34 @@ export namespace Prisma {
     update?: MarketListingUpdateWithWhereUniqueWithoutPlayerInput | MarketListingUpdateWithWhereUniqueWithoutPlayerInput[]
     updateMany?: MarketListingUpdateManyWithWhereWithoutPlayerInput | MarketListingUpdateManyWithWhereWithoutPlayerInput[]
     deleteMany?: MarketListingScalarWhereInput | MarketListingScalarWhereInput[]
+  }
+
+  export type MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput = {
+    create?: XOR<MarketTransactionCreateWithoutBuyerInput, MarketTransactionUncheckedCreateWithoutBuyerInput> | MarketTransactionCreateWithoutBuyerInput[] | MarketTransactionUncheckedCreateWithoutBuyerInput[]
+    connectOrCreate?: MarketTransactionCreateOrConnectWithoutBuyerInput | MarketTransactionCreateOrConnectWithoutBuyerInput[]
+    upsert?: MarketTransactionUpsertWithWhereUniqueWithoutBuyerInput | MarketTransactionUpsertWithWhereUniqueWithoutBuyerInput[]
+    createMany?: MarketTransactionCreateManyBuyerInputEnvelope
+    set?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    disconnect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    delete?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    connect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    update?: MarketTransactionUpdateWithWhereUniqueWithoutBuyerInput | MarketTransactionUpdateWithWhereUniqueWithoutBuyerInput[]
+    updateMany?: MarketTransactionUpdateManyWithWhereWithoutBuyerInput | MarketTransactionUpdateManyWithWhereWithoutBuyerInput[]
+    deleteMany?: MarketTransactionScalarWhereInput | MarketTransactionScalarWhereInput[]
+  }
+
+  export type MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput = {
+    create?: XOR<MarketTransactionCreateWithoutSellerInput, MarketTransactionUncheckedCreateWithoutSellerInput> | MarketTransactionCreateWithoutSellerInput[] | MarketTransactionUncheckedCreateWithoutSellerInput[]
+    connectOrCreate?: MarketTransactionCreateOrConnectWithoutSellerInput | MarketTransactionCreateOrConnectWithoutSellerInput[]
+    upsert?: MarketTransactionUpsertWithWhereUniqueWithoutSellerInput | MarketTransactionUpsertWithWhereUniqueWithoutSellerInput[]
+    createMany?: MarketTransactionCreateManySellerInputEnvelope
+    set?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    disconnect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    delete?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    connect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    update?: MarketTransactionUpdateWithWhereUniqueWithoutSellerInput | MarketTransactionUpdateWithWhereUniqueWithoutSellerInput[]
+    updateMany?: MarketTransactionUpdateManyWithWhereWithoutSellerInput | MarketTransactionUpdateManyWithWhereWithoutSellerInput[]
+    deleteMany?: MarketTransactionScalarWhereInput | MarketTransactionScalarWhereInput[]
   }
 
   export type CombatLogUncheckedUpdateManyWithoutPlayerNestedInput = {
@@ -45946,6 +46442,13 @@ export namespace Prisma {
     connect?: MarketListingWhereUniqueInput | MarketListingWhereUniqueInput[]
   }
 
+  export type MarketTransactionCreateNestedManyWithoutItemInput = {
+    create?: XOR<MarketTransactionCreateWithoutItemInput, MarketTransactionUncheckedCreateWithoutItemInput> | MarketTransactionCreateWithoutItemInput[] | MarketTransactionUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: MarketTransactionCreateOrConnectWithoutItemInput | MarketTransactionCreateOrConnectWithoutItemInput[]
+    createMany?: MarketTransactionCreateManyItemInputEnvelope
+    connect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+  }
+
   export type EquipmentCreateNestedManyWithoutWeaponInput = {
     create?: XOR<EquipmentCreateWithoutWeaponInput, EquipmentUncheckedCreateWithoutWeaponInput> | EquipmentCreateWithoutWeaponInput[] | EquipmentUncheckedCreateWithoutWeaponInput[]
     connectOrCreate?: EquipmentCreateOrConnectWithoutWeaponInput | EquipmentCreateOrConnectWithoutWeaponInput[]
@@ -46021,6 +46524,13 @@ export namespace Prisma {
     connectOrCreate?: MarketListingCreateOrConnectWithoutItemInput | MarketListingCreateOrConnectWithoutItemInput[]
     createMany?: MarketListingCreateManyItemInputEnvelope
     connect?: MarketListingWhereUniqueInput | MarketListingWhereUniqueInput[]
+  }
+
+  export type MarketTransactionUncheckedCreateNestedManyWithoutItemInput = {
+    create?: XOR<MarketTransactionCreateWithoutItemInput, MarketTransactionUncheckedCreateWithoutItemInput> | MarketTransactionCreateWithoutItemInput[] | MarketTransactionUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: MarketTransactionCreateOrConnectWithoutItemInput | MarketTransactionCreateOrConnectWithoutItemInput[]
+    createMany?: MarketTransactionCreateManyItemInputEnvelope
+    connect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
   }
 
   export type EquipmentUncheckedCreateNestedManyWithoutWeaponInput = {
@@ -46131,6 +46641,20 @@ export namespace Prisma {
     update?: MarketListingUpdateWithWhereUniqueWithoutItemInput | MarketListingUpdateWithWhereUniqueWithoutItemInput[]
     updateMany?: MarketListingUpdateManyWithWhereWithoutItemInput | MarketListingUpdateManyWithWhereWithoutItemInput[]
     deleteMany?: MarketListingScalarWhereInput | MarketListingScalarWhereInput[]
+  }
+
+  export type MarketTransactionUpdateManyWithoutItemNestedInput = {
+    create?: XOR<MarketTransactionCreateWithoutItemInput, MarketTransactionUncheckedCreateWithoutItemInput> | MarketTransactionCreateWithoutItemInput[] | MarketTransactionUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: MarketTransactionCreateOrConnectWithoutItemInput | MarketTransactionCreateOrConnectWithoutItemInput[]
+    upsert?: MarketTransactionUpsertWithWhereUniqueWithoutItemInput | MarketTransactionUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: MarketTransactionCreateManyItemInputEnvelope
+    set?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    disconnect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    delete?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    connect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    update?: MarketTransactionUpdateWithWhereUniqueWithoutItemInput | MarketTransactionUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: MarketTransactionUpdateManyWithWhereWithoutItemInput | MarketTransactionUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: MarketTransactionScalarWhereInput | MarketTransactionScalarWhereInput[]
   }
 
   export type EquipmentUpdateManyWithoutWeaponNestedInput = {
@@ -46285,6 +46809,20 @@ export namespace Prisma {
     update?: MarketListingUpdateWithWhereUniqueWithoutItemInput | MarketListingUpdateWithWhereUniqueWithoutItemInput[]
     updateMany?: MarketListingUpdateManyWithWhereWithoutItemInput | MarketListingUpdateManyWithWhereWithoutItemInput[]
     deleteMany?: MarketListingScalarWhereInput | MarketListingScalarWhereInput[]
+  }
+
+  export type MarketTransactionUncheckedUpdateManyWithoutItemNestedInput = {
+    create?: XOR<MarketTransactionCreateWithoutItemInput, MarketTransactionUncheckedCreateWithoutItemInput> | MarketTransactionCreateWithoutItemInput[] | MarketTransactionUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: MarketTransactionCreateOrConnectWithoutItemInput | MarketTransactionCreateOrConnectWithoutItemInput[]
+    upsert?: MarketTransactionUpsertWithWhereUniqueWithoutItemInput | MarketTransactionUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: MarketTransactionCreateManyItemInputEnvelope
+    set?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    disconnect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    delete?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    connect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    update?: MarketTransactionUpdateWithWhereUniqueWithoutItemInput | MarketTransactionUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: MarketTransactionUpdateManyWithWhereWithoutItemInput | MarketTransactionUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: MarketTransactionScalarWhereInput | MarketTransactionScalarWhereInput[]
   }
 
   export type EquipmentUncheckedUpdateManyWithoutWeaponNestedInput = {
@@ -46595,6 +47133,20 @@ export namespace Prisma {
     connect?: MapTileWhereUniqueInput
   }
 
+  export type CombatLogCreateNestedManyWithoutEncounterInput = {
+    create?: XOR<CombatLogCreateWithoutEncounterInput, CombatLogUncheckedCreateWithoutEncounterInput> | CombatLogCreateWithoutEncounterInput[] | CombatLogUncheckedCreateWithoutEncounterInput[]
+    connectOrCreate?: CombatLogCreateOrConnectWithoutEncounterInput | CombatLogCreateOrConnectWithoutEncounterInput[]
+    createMany?: CombatLogCreateManyEncounterInputEnvelope
+    connect?: CombatLogWhereUniqueInput | CombatLogWhereUniqueInput[]
+  }
+
+  export type CombatLogUncheckedCreateNestedManyWithoutEncounterInput = {
+    create?: XOR<CombatLogCreateWithoutEncounterInput, CombatLogUncheckedCreateWithoutEncounterInput> | CombatLogCreateWithoutEncounterInput[] | CombatLogUncheckedCreateWithoutEncounterInput[]
+    connectOrCreate?: CombatLogCreateOrConnectWithoutEncounterInput | CombatLogCreateOrConnectWithoutEncounterInput[]
+    createMany?: CombatLogCreateManyEncounterInputEnvelope
+    connect?: CombatLogWhereUniqueInput | CombatLogWhereUniqueInput[]
+  }
+
   export type MapTileUpdateOneWithoutEncountersNestedInput = {
     create?: XOR<MapTileCreateWithoutEncountersInput, MapTileUncheckedCreateWithoutEncountersInput>
     connectOrCreate?: MapTileCreateOrConnectWithoutEncountersInput
@@ -46605,10 +47157,44 @@ export namespace Prisma {
     update?: XOR<XOR<MapTileUpdateToOneWithWhereWithoutEncountersInput, MapTileUpdateWithoutEncountersInput>, MapTileUncheckedUpdateWithoutEncountersInput>
   }
 
+  export type CombatLogUpdateManyWithoutEncounterNestedInput = {
+    create?: XOR<CombatLogCreateWithoutEncounterInput, CombatLogUncheckedCreateWithoutEncounterInput> | CombatLogCreateWithoutEncounterInput[] | CombatLogUncheckedCreateWithoutEncounterInput[]
+    connectOrCreate?: CombatLogCreateOrConnectWithoutEncounterInput | CombatLogCreateOrConnectWithoutEncounterInput[]
+    upsert?: CombatLogUpsertWithWhereUniqueWithoutEncounterInput | CombatLogUpsertWithWhereUniqueWithoutEncounterInput[]
+    createMany?: CombatLogCreateManyEncounterInputEnvelope
+    set?: CombatLogWhereUniqueInput | CombatLogWhereUniqueInput[]
+    disconnect?: CombatLogWhereUniqueInput | CombatLogWhereUniqueInput[]
+    delete?: CombatLogWhereUniqueInput | CombatLogWhereUniqueInput[]
+    connect?: CombatLogWhereUniqueInput | CombatLogWhereUniqueInput[]
+    update?: CombatLogUpdateWithWhereUniqueWithoutEncounterInput | CombatLogUpdateWithWhereUniqueWithoutEncounterInput[]
+    updateMany?: CombatLogUpdateManyWithWhereWithoutEncounterInput | CombatLogUpdateManyWithWhereWithoutEncounterInput[]
+    deleteMany?: CombatLogScalarWhereInput | CombatLogScalarWhereInput[]
+  }
+
+  export type CombatLogUncheckedUpdateManyWithoutEncounterNestedInput = {
+    create?: XOR<CombatLogCreateWithoutEncounterInput, CombatLogUncheckedCreateWithoutEncounterInput> | CombatLogCreateWithoutEncounterInput[] | CombatLogUncheckedCreateWithoutEncounterInput[]
+    connectOrCreate?: CombatLogCreateOrConnectWithoutEncounterInput | CombatLogCreateOrConnectWithoutEncounterInput[]
+    upsert?: CombatLogUpsertWithWhereUniqueWithoutEncounterInput | CombatLogUpsertWithWhereUniqueWithoutEncounterInput[]
+    createMany?: CombatLogCreateManyEncounterInputEnvelope
+    set?: CombatLogWhereUniqueInput | CombatLogWhereUniqueInput[]
+    disconnect?: CombatLogWhereUniqueInput | CombatLogWhereUniqueInput[]
+    delete?: CombatLogWhereUniqueInput | CombatLogWhereUniqueInput[]
+    connect?: CombatLogWhereUniqueInput | CombatLogWhereUniqueInput[]
+    update?: CombatLogUpdateWithWhereUniqueWithoutEncounterInput | CombatLogUpdateWithWhereUniqueWithoutEncounterInput[]
+    updateMany?: CombatLogUpdateManyWithWhereWithoutEncounterInput | CombatLogUpdateManyWithWhereWithoutEncounterInput[]
+    deleteMany?: CombatLogScalarWhereInput | CombatLogScalarWhereInput[]
+  }
+
   export type PlayerCreateNestedOneWithoutCombatLogsInput = {
     create?: XOR<PlayerCreateWithoutCombatLogsInput, PlayerUncheckedCreateWithoutCombatLogsInput>
     connectOrCreate?: PlayerCreateOrConnectWithoutCombatLogsInput
     connect?: PlayerWhereUniqueInput
+  }
+
+  export type EncounterCreateNestedOneWithoutCombatLogsInput = {
+    create?: XOR<EncounterCreateWithoutCombatLogsInput, EncounterUncheckedCreateWithoutCombatLogsInput>
+    connectOrCreate?: EncounterCreateOrConnectWithoutCombatLogsInput
+    connect?: EncounterWhereUniqueInput
   }
 
   export type PlayerUpdateOneRequiredWithoutCombatLogsNestedInput = {
@@ -46617,6 +47203,16 @@ export namespace Prisma {
     upsert?: PlayerUpsertWithoutCombatLogsInput
     connect?: PlayerWhereUniqueInput
     update?: XOR<XOR<PlayerUpdateToOneWithWhereWithoutCombatLogsInput, PlayerUpdateWithoutCombatLogsInput>, PlayerUncheckedUpdateWithoutCombatLogsInput>
+  }
+
+  export type EncounterUpdateOneWithoutCombatLogsNestedInput = {
+    create?: XOR<EncounterCreateWithoutCombatLogsInput, EncounterUncheckedCreateWithoutCombatLogsInput>
+    connectOrCreate?: EncounterCreateOrConnectWithoutCombatLogsInput
+    upsert?: EncounterUpsertWithoutCombatLogsInput
+    disconnect?: EncounterWhereInput | boolean
+    delete?: EncounterWhereInput | boolean
+    connect?: EncounterWhereUniqueInput
+    update?: XOR<XOR<EncounterUpdateToOneWithWhereWithoutCombatLogsInput, EncounterUpdateWithoutCombatLogsInput>, EncounterUncheckedUpdateWithoutCombatLogsInput>
   }
 
   export type PlayerCreateNestedOneWithoutDeathLogsInput = {
@@ -46905,6 +47501,20 @@ export namespace Prisma {
     connect?: ItemWhereUniqueInput
   }
 
+  export type MarketTransactionCreateNestedManyWithoutListingInput = {
+    create?: XOR<MarketTransactionCreateWithoutListingInput, MarketTransactionUncheckedCreateWithoutListingInput> | MarketTransactionCreateWithoutListingInput[] | MarketTransactionUncheckedCreateWithoutListingInput[]
+    connectOrCreate?: MarketTransactionCreateOrConnectWithoutListingInput | MarketTransactionCreateOrConnectWithoutListingInput[]
+    createMany?: MarketTransactionCreateManyListingInputEnvelope
+    connect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+  }
+
+  export type MarketTransactionUncheckedCreateNestedManyWithoutListingInput = {
+    create?: XOR<MarketTransactionCreateWithoutListingInput, MarketTransactionUncheckedCreateWithoutListingInput> | MarketTransactionCreateWithoutListingInput[] | MarketTransactionUncheckedCreateWithoutListingInput[]
+    connectOrCreate?: MarketTransactionCreateOrConnectWithoutListingInput | MarketTransactionCreateOrConnectWithoutListingInput[]
+    createMany?: MarketTransactionCreateManyListingInputEnvelope
+    connect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+  }
+
   export type PlayerUpdateOneRequiredWithoutMarketListingsNestedInput = {
     create?: XOR<PlayerCreateWithoutMarketListingsInput, PlayerUncheckedCreateWithoutMarketListingsInput>
     connectOrCreate?: PlayerCreateOrConnectWithoutMarketListingsInput
@@ -46919,6 +47529,90 @@ export namespace Prisma {
     upsert?: ItemUpsertWithoutMarketListingsInput
     connect?: ItemWhereUniqueInput
     update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutMarketListingsInput, ItemUpdateWithoutMarketListingsInput>, ItemUncheckedUpdateWithoutMarketListingsInput>
+  }
+
+  export type MarketTransactionUpdateManyWithoutListingNestedInput = {
+    create?: XOR<MarketTransactionCreateWithoutListingInput, MarketTransactionUncheckedCreateWithoutListingInput> | MarketTransactionCreateWithoutListingInput[] | MarketTransactionUncheckedCreateWithoutListingInput[]
+    connectOrCreate?: MarketTransactionCreateOrConnectWithoutListingInput | MarketTransactionCreateOrConnectWithoutListingInput[]
+    upsert?: MarketTransactionUpsertWithWhereUniqueWithoutListingInput | MarketTransactionUpsertWithWhereUniqueWithoutListingInput[]
+    createMany?: MarketTransactionCreateManyListingInputEnvelope
+    set?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    disconnect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    delete?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    connect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    update?: MarketTransactionUpdateWithWhereUniqueWithoutListingInput | MarketTransactionUpdateWithWhereUniqueWithoutListingInput[]
+    updateMany?: MarketTransactionUpdateManyWithWhereWithoutListingInput | MarketTransactionUpdateManyWithWhereWithoutListingInput[]
+    deleteMany?: MarketTransactionScalarWhereInput | MarketTransactionScalarWhereInput[]
+  }
+
+  export type MarketTransactionUncheckedUpdateManyWithoutListingNestedInput = {
+    create?: XOR<MarketTransactionCreateWithoutListingInput, MarketTransactionUncheckedCreateWithoutListingInput> | MarketTransactionCreateWithoutListingInput[] | MarketTransactionUncheckedCreateWithoutListingInput[]
+    connectOrCreate?: MarketTransactionCreateOrConnectWithoutListingInput | MarketTransactionCreateOrConnectWithoutListingInput[]
+    upsert?: MarketTransactionUpsertWithWhereUniqueWithoutListingInput | MarketTransactionUpsertWithWhereUniqueWithoutListingInput[]
+    createMany?: MarketTransactionCreateManyListingInputEnvelope
+    set?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    disconnect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    delete?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    connect?: MarketTransactionWhereUniqueInput | MarketTransactionWhereUniqueInput[]
+    update?: MarketTransactionUpdateWithWhereUniqueWithoutListingInput | MarketTransactionUpdateWithWhereUniqueWithoutListingInput[]
+    updateMany?: MarketTransactionUpdateManyWithWhereWithoutListingInput | MarketTransactionUpdateManyWithWhereWithoutListingInput[]
+    deleteMany?: MarketTransactionScalarWhereInput | MarketTransactionScalarWhereInput[]
+  }
+
+  export type MarketListingCreateNestedOneWithoutTransactionsInput = {
+    create?: XOR<MarketListingCreateWithoutTransactionsInput, MarketListingUncheckedCreateWithoutTransactionsInput>
+    connectOrCreate?: MarketListingCreateOrConnectWithoutTransactionsInput
+    connect?: MarketListingWhereUniqueInput
+  }
+
+  export type PlayerCreateNestedOneWithoutMarketTransactionsAsBuyerInput = {
+    create?: XOR<PlayerCreateWithoutMarketTransactionsAsBuyerInput, PlayerUncheckedCreateWithoutMarketTransactionsAsBuyerInput>
+    connectOrCreate?: PlayerCreateOrConnectWithoutMarketTransactionsAsBuyerInput
+    connect?: PlayerWhereUniqueInput
+  }
+
+  export type PlayerCreateNestedOneWithoutMarketTransactionsAsSellerInput = {
+    create?: XOR<PlayerCreateWithoutMarketTransactionsAsSellerInput, PlayerUncheckedCreateWithoutMarketTransactionsAsSellerInput>
+    connectOrCreate?: PlayerCreateOrConnectWithoutMarketTransactionsAsSellerInput
+    connect?: PlayerWhereUniqueInput
+  }
+
+  export type ItemCreateNestedOneWithoutMarketTransactionsInput = {
+    create?: XOR<ItemCreateWithoutMarketTransactionsInput, ItemUncheckedCreateWithoutMarketTransactionsInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutMarketTransactionsInput
+    connect?: ItemWhereUniqueInput
+  }
+
+  export type MarketListingUpdateOneRequiredWithoutTransactionsNestedInput = {
+    create?: XOR<MarketListingCreateWithoutTransactionsInput, MarketListingUncheckedCreateWithoutTransactionsInput>
+    connectOrCreate?: MarketListingCreateOrConnectWithoutTransactionsInput
+    upsert?: MarketListingUpsertWithoutTransactionsInput
+    connect?: MarketListingWhereUniqueInput
+    update?: XOR<XOR<MarketListingUpdateToOneWithWhereWithoutTransactionsInput, MarketListingUpdateWithoutTransactionsInput>, MarketListingUncheckedUpdateWithoutTransactionsInput>
+  }
+
+  export type PlayerUpdateOneRequiredWithoutMarketTransactionsAsBuyerNestedInput = {
+    create?: XOR<PlayerCreateWithoutMarketTransactionsAsBuyerInput, PlayerUncheckedCreateWithoutMarketTransactionsAsBuyerInput>
+    connectOrCreate?: PlayerCreateOrConnectWithoutMarketTransactionsAsBuyerInput
+    upsert?: PlayerUpsertWithoutMarketTransactionsAsBuyerInput
+    connect?: PlayerWhereUniqueInput
+    update?: XOR<XOR<PlayerUpdateToOneWithWhereWithoutMarketTransactionsAsBuyerInput, PlayerUpdateWithoutMarketTransactionsAsBuyerInput>, PlayerUncheckedUpdateWithoutMarketTransactionsAsBuyerInput>
+  }
+
+  export type PlayerUpdateOneRequiredWithoutMarketTransactionsAsSellerNestedInput = {
+    create?: XOR<PlayerCreateWithoutMarketTransactionsAsSellerInput, PlayerUncheckedCreateWithoutMarketTransactionsAsSellerInput>
+    connectOrCreate?: PlayerCreateOrConnectWithoutMarketTransactionsAsSellerInput
+    upsert?: PlayerUpsertWithoutMarketTransactionsAsSellerInput
+    connect?: PlayerWhereUniqueInput
+    update?: XOR<XOR<PlayerUpdateToOneWithWhereWithoutMarketTransactionsAsSellerInput, PlayerUpdateWithoutMarketTransactionsAsSellerInput>, PlayerUncheckedUpdateWithoutMarketTransactionsAsSellerInput>
+  }
+
+  export type ItemUpdateOneRequiredWithoutMarketTransactionsNestedInput = {
+    create?: XOR<ItemCreateWithoutMarketTransactionsInput, ItemUncheckedCreateWithoutMarketTransactionsInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutMarketTransactionsInput
+    upsert?: ItemUpsertWithoutMarketTransactionsInput
+    connect?: ItemWhereUniqueInput
+    update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutMarketTransactionsInput, ItemUpdateWithoutMarketTransactionsInput>, ItemUncheckedUpdateWithoutMarketTransactionsInput>
   }
 
   export type NPCCreateNestedOneWithoutQuestsInput = {
@@ -47636,6 +48330,8 @@ export namespace Prisma {
     guildMember?: GuildMemberCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillCreateNestedManyWithoutPlayerInput
@@ -47659,6 +48355,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountUncheckedCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogUncheckedCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogUncheckedCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
@@ -47840,6 +48538,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUpdateManyWithoutPlayerNestedInput
@@ -47863,6 +48563,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
@@ -48190,6 +48892,7 @@ export namespace Prisma {
     createdAt?: Date | string
     soldAt?: Date | string | null
     item: ItemCreateNestedOneWithoutMarketListingsInput
+    transactions?: MarketTransactionCreateNestedManyWithoutListingInput
   }
 
   export type MarketListingUncheckedCreateWithoutPlayerInput = {
@@ -48203,6 +48906,7 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     createdAt?: Date | string
     soldAt?: Date | string | null
+    transactions?: MarketTransactionUncheckedCreateNestedManyWithoutListingInput
   }
 
   export type MarketListingCreateOrConnectWithoutPlayerInput = {
@@ -48215,13 +48919,73 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MarketTransactionCreateWithoutBuyerInput = {
+    id?: string
+    quantity: number
+    totalPrice: number
+    createdAt?: Date | string
+    listing: MarketListingCreateNestedOneWithoutTransactionsInput
+    seller: PlayerCreateNestedOneWithoutMarketTransactionsAsSellerInput
+    item: ItemCreateNestedOneWithoutMarketTransactionsInput
+  }
+
+  export type MarketTransactionUncheckedCreateWithoutBuyerInput = {
+    id?: string
+    listingId: string
+    sellerId: string
+    itemId: string
+    quantity: number
+    totalPrice: number
+    createdAt?: Date | string
+  }
+
+  export type MarketTransactionCreateOrConnectWithoutBuyerInput = {
+    where: MarketTransactionWhereUniqueInput
+    create: XOR<MarketTransactionCreateWithoutBuyerInput, MarketTransactionUncheckedCreateWithoutBuyerInput>
+  }
+
+  export type MarketTransactionCreateManyBuyerInputEnvelope = {
+    data: MarketTransactionCreateManyBuyerInput | MarketTransactionCreateManyBuyerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MarketTransactionCreateWithoutSellerInput = {
+    id?: string
+    quantity: number
+    totalPrice: number
+    createdAt?: Date | string
+    listing: MarketListingCreateNestedOneWithoutTransactionsInput
+    buyer: PlayerCreateNestedOneWithoutMarketTransactionsAsBuyerInput
+    item: ItemCreateNestedOneWithoutMarketTransactionsInput
+  }
+
+  export type MarketTransactionUncheckedCreateWithoutSellerInput = {
+    id?: string
+    listingId: string
+    buyerId: string
+    itemId: string
+    quantity: number
+    totalPrice: number
+    createdAt?: Date | string
+  }
+
+  export type MarketTransactionCreateOrConnectWithoutSellerInput = {
+    where: MarketTransactionWhereUniqueInput
+    create: XOR<MarketTransactionCreateWithoutSellerInput, MarketTransactionUncheckedCreateWithoutSellerInput>
+  }
+
+  export type MarketTransactionCreateManySellerInputEnvelope = {
+    data: MarketTransactionCreateManySellerInput | MarketTransactionCreateManySellerInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CombatLogCreateWithoutPlayerInput = {
     id?: string
-    encounterId?: string | null
     turnNumber: number
     action: string
     result: string
     createdAt?: Date | string
+    encounter?: EncounterCreateNestedOneWithoutCombatLogsInput
   }
 
   export type CombatLogUncheckedCreateWithoutPlayerInput = {
@@ -48576,6 +49340,52 @@ export namespace Prisma {
     soldAt?: DateTimeNullableFilter<"MarketListing"> | Date | string | null
   }
 
+  export type MarketTransactionUpsertWithWhereUniqueWithoutBuyerInput = {
+    where: MarketTransactionWhereUniqueInput
+    update: XOR<MarketTransactionUpdateWithoutBuyerInput, MarketTransactionUncheckedUpdateWithoutBuyerInput>
+    create: XOR<MarketTransactionCreateWithoutBuyerInput, MarketTransactionUncheckedCreateWithoutBuyerInput>
+  }
+
+  export type MarketTransactionUpdateWithWhereUniqueWithoutBuyerInput = {
+    where: MarketTransactionWhereUniqueInput
+    data: XOR<MarketTransactionUpdateWithoutBuyerInput, MarketTransactionUncheckedUpdateWithoutBuyerInput>
+  }
+
+  export type MarketTransactionUpdateManyWithWhereWithoutBuyerInput = {
+    where: MarketTransactionScalarWhereInput
+    data: XOR<MarketTransactionUpdateManyMutationInput, MarketTransactionUncheckedUpdateManyWithoutBuyerInput>
+  }
+
+  export type MarketTransactionScalarWhereInput = {
+    AND?: MarketTransactionScalarWhereInput | MarketTransactionScalarWhereInput[]
+    OR?: MarketTransactionScalarWhereInput[]
+    NOT?: MarketTransactionScalarWhereInput | MarketTransactionScalarWhereInput[]
+    id?: StringFilter<"MarketTransaction"> | string
+    listingId?: StringFilter<"MarketTransaction"> | string
+    buyerId?: StringFilter<"MarketTransaction"> | string
+    sellerId?: StringFilter<"MarketTransaction"> | string
+    itemId?: StringFilter<"MarketTransaction"> | string
+    quantity?: IntFilter<"MarketTransaction"> | number
+    totalPrice?: IntFilter<"MarketTransaction"> | number
+    createdAt?: DateTimeFilter<"MarketTransaction"> | Date | string
+  }
+
+  export type MarketTransactionUpsertWithWhereUniqueWithoutSellerInput = {
+    where: MarketTransactionWhereUniqueInput
+    update: XOR<MarketTransactionUpdateWithoutSellerInput, MarketTransactionUncheckedUpdateWithoutSellerInput>
+    create: XOR<MarketTransactionCreateWithoutSellerInput, MarketTransactionUncheckedCreateWithoutSellerInput>
+  }
+
+  export type MarketTransactionUpdateWithWhereUniqueWithoutSellerInput = {
+    where: MarketTransactionWhereUniqueInput
+    data: XOR<MarketTransactionUpdateWithoutSellerInput, MarketTransactionUncheckedUpdateWithoutSellerInput>
+  }
+
+  export type MarketTransactionUpdateManyWithWhereWithoutSellerInput = {
+    where: MarketTransactionScalarWhereInput
+    data: XOR<MarketTransactionUpdateManyMutationInput, MarketTransactionUncheckedUpdateManyWithoutSellerInput>
+  }
+
   export type CombatLogUpsertWithWhereUniqueWithoutPlayerInput = {
     where: CombatLogWhereUniqueInput
     update: XOR<CombatLogUpdateWithoutPlayerInput, CombatLogUncheckedUpdateWithoutPlayerInput>
@@ -48680,6 +49490,8 @@ export namespace Prisma {
     guildMember?: GuildMemberCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillCreateNestedManyWithoutPlayerInput
@@ -48703,6 +49515,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountUncheckedCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogUncheckedCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogUncheckedCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
@@ -48742,6 +49556,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUpdateManyWithoutPlayerNestedInput
@@ -48765,6 +49581,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
@@ -48838,6 +49656,7 @@ export namespace Prisma {
     enemyLevel: number
     isActive?: boolean
     createdAt?: Date | string
+    combatLogs?: CombatLogCreateNestedManyWithoutEncounterInput
   }
 
   export type EncounterUncheckedCreateWithoutTileInput = {
@@ -48848,6 +49667,7 @@ export namespace Prisma {
     enemyLevel: number
     isActive?: boolean
     createdAt?: Date | string
+    combatLogs?: CombatLogUncheckedCreateNestedManyWithoutEncounterInput
   }
 
   export type EncounterCreateOrConnectWithoutTileInput = {
@@ -48966,6 +49786,8 @@ export namespace Prisma {
     guildMember?: GuildMemberCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillCreateNestedManyWithoutPlayerInput
@@ -48989,6 +49811,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountUncheckedCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogUncheckedCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogUncheckedCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
@@ -49060,6 +49884,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUpdateManyWithoutPlayerNestedInput
@@ -49083,6 +49909,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
@@ -49362,6 +50190,7 @@ export namespace Prisma {
     createdAt?: Date | string
     inventoryItems?: InventoryItemCreateNestedManyWithoutItemInput
     marketListings?: MarketListingCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentCreateNestedManyWithoutChestInput
@@ -49392,6 +50221,7 @@ export namespace Prisma {
     createdAt?: Date | string
     inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutItemInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionUncheckedCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentUncheckedCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentUncheckedCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentUncheckedCreateNestedManyWithoutChestInput
@@ -49473,6 +50303,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventoryItems?: InventoryItemUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUpdateManyWithoutChestNestedInput
@@ -49503,6 +50334,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUncheckedUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUncheckedUpdateManyWithoutChestNestedInput
@@ -49574,6 +50406,7 @@ export namespace Prisma {
     createdAt?: Date | string
     soldAt?: Date | string | null
     player: PlayerCreateNestedOneWithoutMarketListingsInput
+    transactions?: MarketTransactionCreateNestedManyWithoutListingInput
   }
 
   export type MarketListingUncheckedCreateWithoutItemInput = {
@@ -49587,6 +50420,7 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     createdAt?: Date | string
     soldAt?: Date | string | null
+    transactions?: MarketTransactionUncheckedCreateNestedManyWithoutListingInput
   }
 
   export type MarketListingCreateOrConnectWithoutItemInput = {
@@ -49596,6 +50430,36 @@ export namespace Prisma {
 
   export type MarketListingCreateManyItemInputEnvelope = {
     data: MarketListingCreateManyItemInput | MarketListingCreateManyItemInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MarketTransactionCreateWithoutItemInput = {
+    id?: string
+    quantity: number
+    totalPrice: number
+    createdAt?: Date | string
+    listing: MarketListingCreateNestedOneWithoutTransactionsInput
+    buyer: PlayerCreateNestedOneWithoutMarketTransactionsAsBuyerInput
+    seller: PlayerCreateNestedOneWithoutMarketTransactionsAsSellerInput
+  }
+
+  export type MarketTransactionUncheckedCreateWithoutItemInput = {
+    id?: string
+    listingId: string
+    buyerId: string
+    sellerId: string
+    quantity: number
+    totalPrice: number
+    createdAt?: Date | string
+  }
+
+  export type MarketTransactionCreateOrConnectWithoutItemInput = {
+    where: MarketTransactionWhereUniqueInput
+    create: XOR<MarketTransactionCreateWithoutItemInput, MarketTransactionUncheckedCreateWithoutItemInput>
+  }
+
+  export type MarketTransactionCreateManyItemInputEnvelope = {
+    data: MarketTransactionCreateManyItemInput | MarketTransactionCreateManyItemInput[]
     skipDuplicates?: boolean
   }
 
@@ -49909,6 +50773,22 @@ export namespace Prisma {
     data: XOR<MarketListingUpdateManyMutationInput, MarketListingUncheckedUpdateManyWithoutItemInput>
   }
 
+  export type MarketTransactionUpsertWithWhereUniqueWithoutItemInput = {
+    where: MarketTransactionWhereUniqueInput
+    update: XOR<MarketTransactionUpdateWithoutItemInput, MarketTransactionUncheckedUpdateWithoutItemInput>
+    create: XOR<MarketTransactionCreateWithoutItemInput, MarketTransactionUncheckedCreateWithoutItemInput>
+  }
+
+  export type MarketTransactionUpdateWithWhereUniqueWithoutItemInput = {
+    where: MarketTransactionWhereUniqueInput
+    data: XOR<MarketTransactionUpdateWithoutItemInput, MarketTransactionUncheckedUpdateWithoutItemInput>
+  }
+
+  export type MarketTransactionUpdateManyWithWhereWithoutItemInput = {
+    where: MarketTransactionScalarWhereInput
+    data: XOR<MarketTransactionUpdateManyMutationInput, MarketTransactionUncheckedUpdateManyWithoutItemInput>
+  }
+
   export type EquipmentUpsertWithWhereUniqueWithoutWeaponInput = {
     where: EquipmentWhereUniqueInput
     update: XOR<EquipmentUpdateWithoutWeaponInput, EquipmentUncheckedUpdateWithoutWeaponInput>
@@ -50082,6 +50962,8 @@ export namespace Prisma {
     guildMember?: GuildMemberCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillCreateNestedManyWithoutPlayerInput
@@ -50105,6 +50987,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountUncheckedCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogUncheckedCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogUncheckedCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
@@ -50135,6 +51019,7 @@ export namespace Prisma {
     createdAt?: Date | string
     shopItems?: ShopItemCreateNestedManyWithoutItemInput
     marketListings?: MarketListingCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentCreateNestedManyWithoutChestInput
@@ -50165,6 +51050,7 @@ export namespace Prisma {
     createdAt?: Date | string
     shopItems?: ShopItemUncheckedCreateNestedManyWithoutItemInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionUncheckedCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentUncheckedCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentUncheckedCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentUncheckedCreateNestedManyWithoutChestInput
@@ -50209,6 +51095,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUpdateManyWithoutPlayerNestedInput
@@ -50232,6 +51120,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
@@ -50268,6 +51158,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     shopItems?: ShopItemUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUpdateManyWithoutChestNestedInput
@@ -50298,6 +51189,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     shopItems?: ShopItemUncheckedUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUncheckedUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUncheckedUpdateManyWithoutChestNestedInput
@@ -50326,6 +51218,8 @@ export namespace Prisma {
     guildMember?: GuildMemberCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillCreateNestedManyWithoutPlayerInput
@@ -50349,6 +51243,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountUncheckedCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogUncheckedCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogUncheckedCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
@@ -50380,6 +51276,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemCreateNestedManyWithoutItemInput
     shopItems?: ShopItemCreateNestedManyWithoutItemInput
     marketListings?: MarketListingCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionCreateNestedManyWithoutItemInput
     equippedAsHead?: EquipmentCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentCreateNestedManyWithoutChestInput
     equippedAsLegs?: EquipmentCreateNestedManyWithoutLegsInput
@@ -50410,6 +51307,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutItemInput
     shopItems?: ShopItemUncheckedCreateNestedManyWithoutItemInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionUncheckedCreateNestedManyWithoutItemInput
     equippedAsHead?: EquipmentUncheckedCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentUncheckedCreateNestedManyWithoutChestInput
     equippedAsLegs?: EquipmentUncheckedCreateNestedManyWithoutLegsInput
@@ -50445,6 +51343,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemCreateNestedManyWithoutItemInput
     shopItems?: ShopItemCreateNestedManyWithoutItemInput
     marketListings?: MarketListingCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentCreateNestedManyWithoutWeaponInput
     equippedAsChest?: EquipmentCreateNestedManyWithoutChestInput
     equippedAsLegs?: EquipmentCreateNestedManyWithoutLegsInput
@@ -50475,6 +51374,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutItemInput
     shopItems?: ShopItemUncheckedCreateNestedManyWithoutItemInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionUncheckedCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentUncheckedCreateNestedManyWithoutWeaponInput
     equippedAsChest?: EquipmentUncheckedCreateNestedManyWithoutChestInput
     equippedAsLegs?: EquipmentUncheckedCreateNestedManyWithoutLegsInput
@@ -50510,6 +51410,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemCreateNestedManyWithoutItemInput
     shopItems?: ShopItemCreateNestedManyWithoutItemInput
     marketListings?: MarketListingCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentCreateNestedManyWithoutHeadInput
     equippedAsLegs?: EquipmentCreateNestedManyWithoutLegsInput
@@ -50540,6 +51441,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutItemInput
     shopItems?: ShopItemUncheckedCreateNestedManyWithoutItemInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionUncheckedCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentUncheckedCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentUncheckedCreateNestedManyWithoutHeadInput
     equippedAsLegs?: EquipmentUncheckedCreateNestedManyWithoutLegsInput
@@ -50575,6 +51477,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemCreateNestedManyWithoutItemInput
     shopItems?: ShopItemCreateNestedManyWithoutItemInput
     marketListings?: MarketListingCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentCreateNestedManyWithoutChestInput
@@ -50605,6 +51508,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutItemInput
     shopItems?: ShopItemUncheckedCreateNestedManyWithoutItemInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionUncheckedCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentUncheckedCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentUncheckedCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentUncheckedCreateNestedManyWithoutChestInput
@@ -50640,6 +51544,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemCreateNestedManyWithoutItemInput
     shopItems?: ShopItemCreateNestedManyWithoutItemInput
     marketListings?: MarketListingCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentCreateNestedManyWithoutChestInput
@@ -50670,6 +51575,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutItemInput
     shopItems?: ShopItemUncheckedCreateNestedManyWithoutItemInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionUncheckedCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentUncheckedCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentUncheckedCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentUncheckedCreateNestedManyWithoutChestInput
@@ -50705,6 +51611,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemCreateNestedManyWithoutItemInput
     shopItems?: ShopItemCreateNestedManyWithoutItemInput
     marketListings?: MarketListingCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentCreateNestedManyWithoutChestInput
@@ -50735,6 +51642,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutItemInput
     shopItems?: ShopItemUncheckedCreateNestedManyWithoutItemInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionUncheckedCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentUncheckedCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentUncheckedCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentUncheckedCreateNestedManyWithoutChestInput
@@ -50770,6 +51678,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemCreateNestedManyWithoutItemInput
     shopItems?: ShopItemCreateNestedManyWithoutItemInput
     marketListings?: MarketListingCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentCreateNestedManyWithoutChestInput
@@ -50800,6 +51709,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutItemInput
     shopItems?: ShopItemUncheckedCreateNestedManyWithoutItemInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionUncheckedCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentUncheckedCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentUncheckedCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentUncheckedCreateNestedManyWithoutChestInput
@@ -50843,6 +51753,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUpdateManyWithoutPlayerNestedInput
@@ -50866,6 +51778,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
@@ -50903,6 +51817,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUpdateManyWithoutItemNestedInput
     equippedAsHead?: EquipmentUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUpdateManyWithoutChestNestedInput
     equippedAsLegs?: EquipmentUpdateManyWithoutLegsNestedInput
@@ -50933,6 +51848,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUncheckedUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
     equippedAsHead?: EquipmentUncheckedUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUncheckedUpdateManyWithoutChestNestedInput
     equippedAsLegs?: EquipmentUncheckedUpdateManyWithoutLegsNestedInput
@@ -50974,6 +51890,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUpdateManyWithoutWeaponNestedInput
     equippedAsChest?: EquipmentUpdateManyWithoutChestNestedInput
     equippedAsLegs?: EquipmentUpdateManyWithoutLegsNestedInput
@@ -51004,6 +51921,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUncheckedUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
     equippedAsChest?: EquipmentUncheckedUpdateManyWithoutChestNestedInput
     equippedAsLegs?: EquipmentUncheckedUpdateManyWithoutLegsNestedInput
@@ -51045,6 +51963,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUpdateManyWithoutHeadNestedInput
     equippedAsLegs?: EquipmentUpdateManyWithoutLegsNestedInput
@@ -51075,6 +51994,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUncheckedUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUncheckedUpdateManyWithoutHeadNestedInput
     equippedAsLegs?: EquipmentUncheckedUpdateManyWithoutLegsNestedInput
@@ -51116,6 +52036,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUpdateManyWithoutChestNestedInput
@@ -51146,6 +52067,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUncheckedUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUncheckedUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUncheckedUpdateManyWithoutChestNestedInput
@@ -51187,6 +52109,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUpdateManyWithoutChestNestedInput
@@ -51217,6 +52140,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUncheckedUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUncheckedUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUncheckedUpdateManyWithoutChestNestedInput
@@ -51258,6 +52182,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUpdateManyWithoutChestNestedInput
@@ -51288,6 +52213,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUncheckedUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUncheckedUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUncheckedUpdateManyWithoutChestNestedInput
@@ -51329,6 +52255,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUpdateManyWithoutChestNestedInput
@@ -51359,6 +52286,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUncheckedUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUncheckedUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUncheckedUpdateManyWithoutChestNestedInput
@@ -51386,6 +52314,8 @@ export namespace Prisma {
     guildMember?: GuildMemberCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillCreateNestedManyWithoutPlayerInput
@@ -51409,6 +52339,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountUncheckedCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogUncheckedCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogUncheckedCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
@@ -51448,6 +52380,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUpdateManyWithoutPlayerNestedInput
@@ -51471,6 +52405,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
@@ -51495,6 +52431,8 @@ export namespace Prisma {
     guildMember?: GuildMemberCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogCreateNestedManyWithoutPlayerInput
   }
@@ -51518,6 +52456,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountUncheckedCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogUncheckedCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   }
@@ -51557,6 +52497,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUpdateManyWithoutPlayerNestedInput
   }
@@ -51580,6 +52522,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   }
@@ -51614,6 +52558,34 @@ export namespace Prisma {
   export type MapTileCreateOrConnectWithoutEncountersInput = {
     where: MapTileWhereUniqueInput
     create: XOR<MapTileCreateWithoutEncountersInput, MapTileUncheckedCreateWithoutEncountersInput>
+  }
+
+  export type CombatLogCreateWithoutEncounterInput = {
+    id?: string
+    turnNumber: number
+    action: string
+    result: string
+    createdAt?: Date | string
+    player: PlayerCreateNestedOneWithoutCombatLogsInput
+  }
+
+  export type CombatLogUncheckedCreateWithoutEncounterInput = {
+    id?: string
+    playerId: string
+    turnNumber: number
+    action: string
+    result: string
+    createdAt?: Date | string
+  }
+
+  export type CombatLogCreateOrConnectWithoutEncounterInput = {
+    where: CombatLogWhereUniqueInput
+    create: XOR<CombatLogCreateWithoutEncounterInput, CombatLogUncheckedCreateWithoutEncounterInput>
+  }
+
+  export type CombatLogCreateManyEncounterInputEnvelope = {
+    data: CombatLogCreateManyEncounterInput | CombatLogCreateManyEncounterInput[]
+    skipDuplicates?: boolean
   }
 
   export type MapTileUpsertWithoutEncountersInput = {
@@ -51654,6 +52626,22 @@ export namespace Prisma {
     npcs?: NPCUncheckedUpdateManyWithoutTileNestedInput
   }
 
+  export type CombatLogUpsertWithWhereUniqueWithoutEncounterInput = {
+    where: CombatLogWhereUniqueInput
+    update: XOR<CombatLogUpdateWithoutEncounterInput, CombatLogUncheckedUpdateWithoutEncounterInput>
+    create: XOR<CombatLogCreateWithoutEncounterInput, CombatLogUncheckedCreateWithoutEncounterInput>
+  }
+
+  export type CombatLogUpdateWithWhereUniqueWithoutEncounterInput = {
+    where: CombatLogWhereUniqueInput
+    data: XOR<CombatLogUpdateWithoutEncounterInput, CombatLogUncheckedUpdateWithoutEncounterInput>
+  }
+
+  export type CombatLogUpdateManyWithWhereWithoutEncounterInput = {
+    where: CombatLogScalarWhereInput
+    data: XOR<CombatLogUpdateManyMutationInput, CombatLogUncheckedUpdateManyWithoutEncounterInput>
+  }
+
   export type PlayerCreateWithoutCombatLogsInput = {
     id?: string
     characterName: string
@@ -51673,6 +52661,8 @@ export namespace Prisma {
     guildMember?: GuildMemberCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionCreateNestedManyWithoutSellerInput
     deathLogs?: DeathLogCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillCreateNestedManyWithoutPlayerInput
   }
@@ -51696,6 +52686,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountUncheckedCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
     deathLogs?: DeathLogUncheckedCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
   }
@@ -51703,6 +52695,33 @@ export namespace Prisma {
   export type PlayerCreateOrConnectWithoutCombatLogsInput = {
     where: PlayerWhereUniqueInput
     create: XOR<PlayerCreateWithoutCombatLogsInput, PlayerUncheckedCreateWithoutCombatLogsInput>
+  }
+
+  export type EncounterCreateWithoutCombatLogsInput = {
+    id?: string
+    tileX: number
+    tileY: number
+    enemyType: string
+    enemyLevel: number
+    isActive?: boolean
+    createdAt?: Date | string
+    tile?: MapTileCreateNestedOneWithoutEncountersInput
+  }
+
+  export type EncounterUncheckedCreateWithoutCombatLogsInput = {
+    id?: string
+    tileX: number
+    tileY: number
+    tileId?: number | null
+    enemyType: string
+    enemyLevel: number
+    isActive?: boolean
+    createdAt?: Date | string
+  }
+
+  export type EncounterCreateOrConnectWithoutCombatLogsInput = {
+    where: EncounterWhereUniqueInput
+    create: XOR<EncounterCreateWithoutCombatLogsInput, EncounterUncheckedCreateWithoutCombatLogsInput>
   }
 
   export type PlayerUpsertWithoutCombatLogsInput = {
@@ -51735,6 +52754,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUpdateManyWithoutSellerNestedInput
     deathLogs?: DeathLogUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUpdateManyWithoutPlayerNestedInput
   }
@@ -51758,8 +52779,43 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
     deathLogs?: DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type EncounterUpsertWithoutCombatLogsInput = {
+    update: XOR<EncounterUpdateWithoutCombatLogsInput, EncounterUncheckedUpdateWithoutCombatLogsInput>
+    create: XOR<EncounterCreateWithoutCombatLogsInput, EncounterUncheckedCreateWithoutCombatLogsInput>
+    where?: EncounterWhereInput
+  }
+
+  export type EncounterUpdateToOneWithWhereWithoutCombatLogsInput = {
+    where?: EncounterWhereInput
+    data: XOR<EncounterUpdateWithoutCombatLogsInput, EncounterUncheckedUpdateWithoutCombatLogsInput>
+  }
+
+  export type EncounterUpdateWithoutCombatLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tileX?: IntFieldUpdateOperationsInput | number
+    tileY?: IntFieldUpdateOperationsInput | number
+    enemyType?: StringFieldUpdateOperationsInput | string
+    enemyLevel?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tile?: MapTileUpdateOneWithoutEncountersNestedInput
+  }
+
+  export type EncounterUncheckedUpdateWithoutCombatLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tileX?: IntFieldUpdateOperationsInput | number
+    tileY?: IntFieldUpdateOperationsInput | number
+    tileId?: NullableIntFieldUpdateOperationsInput | number | null
+    enemyType?: StringFieldUpdateOperationsInput | string
+    enemyLevel?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PlayerCreateWithoutDeathLogsInput = {
@@ -51781,6 +52837,8 @@ export namespace Prisma {
     guildMember?: GuildMemberCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillCreateNestedManyWithoutPlayerInput
   }
@@ -51804,6 +52862,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountUncheckedCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogUncheckedCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
   }
@@ -51843,6 +52903,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUpdateManyWithoutPlayerNestedInput
   }
@@ -51866,6 +52928,8 @@ export namespace Prisma {
     guildMember?: GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
   }
@@ -52036,6 +53100,8 @@ export namespace Prisma {
     occupation?: OccupationCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillCreateNestedManyWithoutPlayerInput
@@ -52059,6 +53125,8 @@ export namespace Prisma {
     occupation?: OccupationUncheckedCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountUncheckedCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogUncheckedCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogUncheckedCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
@@ -52127,6 +53195,8 @@ export namespace Prisma {
     occupation?: OccupationUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUpdateManyWithoutPlayerNestedInput
@@ -52150,6 +53220,8 @@ export namespace Prisma {
     occupation?: OccupationUncheckedUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
@@ -52336,6 +53408,8 @@ export namespace Prisma {
     occupation?: OccupationCreateNestedOneWithoutPlayerInput
     guildMember?: GuildMemberCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillCreateNestedManyWithoutPlayerInput
@@ -52359,6 +53433,8 @@ export namespace Prisma {
     occupation?: OccupationUncheckedCreateNestedOneWithoutPlayerInput
     guildMember?: GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogUncheckedCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogUncheckedCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
@@ -52422,6 +53498,8 @@ export namespace Prisma {
     occupation?: OccupationUpdateOneWithoutPlayerNestedInput
     guildMember?: GuildMemberUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUpdateManyWithoutPlayerNestedInput
@@ -52445,6 +53523,8 @@ export namespace Prisma {
     occupation?: OccupationUncheckedUpdateOneWithoutPlayerNestedInput
     guildMember?: GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
@@ -52508,6 +53588,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemCreateNestedManyWithoutItemInput
     shopItems?: ShopItemCreateNestedManyWithoutItemInput
     marketListings?: MarketListingCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentCreateNestedManyWithoutChestInput
@@ -52538,6 +53619,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutItemInput
     shopItems?: ShopItemUncheckedCreateNestedManyWithoutItemInput
     marketListings?: MarketListingUncheckedCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionUncheckedCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentUncheckedCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentUncheckedCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentUncheckedCreateNestedManyWithoutChestInput
@@ -52611,6 +53693,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUpdateManyWithoutChestNestedInput
@@ -52641,6 +53724,7 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUncheckedUpdateManyWithoutItemNestedInput
     marketListings?: MarketListingUncheckedUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUncheckedUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUncheckedUpdateManyWithoutChestNestedInput
@@ -52668,6 +53752,8 @@ export namespace Prisma {
     occupation?: OccupationCreateNestedOneWithoutPlayerInput
     guildMember?: GuildMemberCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountCreateNestedOneWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillCreateNestedManyWithoutPlayerInput
@@ -52691,6 +53777,8 @@ export namespace Prisma {
     occupation?: OccupationUncheckedCreateNestedOneWithoutPlayerInput
     guildMember?: GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
     bankAccount?: BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
     combatLogs?: CombatLogUncheckedCreateNestedManyWithoutPlayerInput
     deathLogs?: DeathLogUncheckedCreateNestedManyWithoutPlayerInput
     skills?: PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
@@ -52721,6 +53809,7 @@ export namespace Prisma {
     createdAt?: Date | string
     inventoryItems?: InventoryItemCreateNestedManyWithoutItemInput
     shopItems?: ShopItemCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentCreateNestedManyWithoutChestInput
@@ -52751,6 +53840,7 @@ export namespace Prisma {
     createdAt?: Date | string
     inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutItemInput
     shopItems?: ShopItemUncheckedCreateNestedManyWithoutItemInput
+    marketTransactions?: MarketTransactionUncheckedCreateNestedManyWithoutItemInput
     equippedAsWeapon?: EquipmentUncheckedCreateNestedManyWithoutWeaponInput
     equippedAsHead?: EquipmentUncheckedCreateNestedManyWithoutHeadInput
     equippedAsChest?: EquipmentUncheckedCreateNestedManyWithoutChestInput
@@ -52764,6 +53854,36 @@ export namespace Prisma {
   export type ItemCreateOrConnectWithoutMarketListingsInput = {
     where: ItemWhereUniqueInput
     create: XOR<ItemCreateWithoutMarketListingsInput, ItemUncheckedCreateWithoutMarketListingsInput>
+  }
+
+  export type MarketTransactionCreateWithoutListingInput = {
+    id?: string
+    quantity: number
+    totalPrice: number
+    createdAt?: Date | string
+    buyer: PlayerCreateNestedOneWithoutMarketTransactionsAsBuyerInput
+    seller: PlayerCreateNestedOneWithoutMarketTransactionsAsSellerInput
+    item: ItemCreateNestedOneWithoutMarketTransactionsInput
+  }
+
+  export type MarketTransactionUncheckedCreateWithoutListingInput = {
+    id?: string
+    buyerId: string
+    sellerId: string
+    itemId: string
+    quantity: number
+    totalPrice: number
+    createdAt?: Date | string
+  }
+
+  export type MarketTransactionCreateOrConnectWithoutListingInput = {
+    where: MarketTransactionWhereUniqueInput
+    create: XOR<MarketTransactionCreateWithoutListingInput, MarketTransactionUncheckedCreateWithoutListingInput>
+  }
+
+  export type MarketTransactionCreateManyListingInputEnvelope = {
+    data: MarketTransactionCreateManyListingInput | MarketTransactionCreateManyListingInput[]
+    skipDuplicates?: boolean
   }
 
   export type PlayerUpsertWithoutMarketListingsInput = {
@@ -52795,6 +53915,8 @@ export namespace Prisma {
     occupation?: OccupationUpdateOneWithoutPlayerNestedInput
     guildMember?: GuildMemberUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUpdateOneWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUpdateManyWithoutPlayerNestedInput
@@ -52818,6 +53940,8 @@ export namespace Prisma {
     occupation?: OccupationUncheckedUpdateOneWithoutPlayerNestedInput
     guildMember?: GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
     bankAccount?: BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
     combatLogs?: CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
     deathLogs?: DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
     skills?: PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
@@ -52854,6 +53978,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventoryItems?: InventoryItemUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUpdateManyWithoutChestNestedInput
@@ -52884,6 +54009,467 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutItemNestedInput
     shopItems?: ShopItemUncheckedUpdateManyWithoutItemNestedInput
+    marketTransactions?: MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
+    equippedAsWeapon?: EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
+    equippedAsHead?: EquipmentUncheckedUpdateManyWithoutHeadNestedInput
+    equippedAsChest?: EquipmentUncheckedUpdateManyWithoutChestNestedInput
+    equippedAsLegs?: EquipmentUncheckedUpdateManyWithoutLegsNestedInput
+    equippedAsFeet?: EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+    equippedAsAccessory1?: EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
+    equippedAsAccessory2?: EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
+    bankVaultItems?: BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type MarketTransactionUpsertWithWhereUniqueWithoutListingInput = {
+    where: MarketTransactionWhereUniqueInput
+    update: XOR<MarketTransactionUpdateWithoutListingInput, MarketTransactionUncheckedUpdateWithoutListingInput>
+    create: XOR<MarketTransactionCreateWithoutListingInput, MarketTransactionUncheckedCreateWithoutListingInput>
+  }
+
+  export type MarketTransactionUpdateWithWhereUniqueWithoutListingInput = {
+    where: MarketTransactionWhereUniqueInput
+    data: XOR<MarketTransactionUpdateWithoutListingInput, MarketTransactionUncheckedUpdateWithoutListingInput>
+  }
+
+  export type MarketTransactionUpdateManyWithWhereWithoutListingInput = {
+    where: MarketTransactionScalarWhereInput
+    data: XOR<MarketTransactionUpdateManyMutationInput, MarketTransactionUncheckedUpdateManyWithoutListingInput>
+  }
+
+  export type MarketListingCreateWithoutTransactionsInput = {
+    id?: string
+    quantity: number
+    pricePerUnit: number
+    totalPrice: number
+    listingTax: number
+    isActive?: boolean
+    expiresAt?: Date | string | null
+    createdAt?: Date | string
+    soldAt?: Date | string | null
+    player: PlayerCreateNestedOneWithoutMarketListingsInput
+    item: ItemCreateNestedOneWithoutMarketListingsInput
+  }
+
+  export type MarketListingUncheckedCreateWithoutTransactionsInput = {
+    id?: string
+    playerId: string
+    itemId: string
+    quantity: number
+    pricePerUnit: number
+    totalPrice: number
+    listingTax: number
+    isActive?: boolean
+    expiresAt?: Date | string | null
+    createdAt?: Date | string
+    soldAt?: Date | string | null
+  }
+
+  export type MarketListingCreateOrConnectWithoutTransactionsInput = {
+    where: MarketListingWhereUniqueInput
+    create: XOR<MarketListingCreateWithoutTransactionsInput, MarketListingUncheckedCreateWithoutTransactionsInput>
+  }
+
+  export type PlayerCreateWithoutMarketTransactionsAsBuyerInput = {
+    id?: string
+    characterName: string
+    level?: number
+    experience?: number
+    gold?: number
+    deathCount?: number
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPlayerInput
+    stats?: PlayerStatsCreateNestedOneWithoutPlayerInput
+    position?: MapPositionCreateNestedOneWithoutPlayerInput
+    inventory?: InventoryItemCreateNestedManyWithoutPlayerInput
+    equipment?: EquipmentCreateNestedOneWithoutPlayerInput
+    occupation?: OccupationCreateNestedOneWithoutPlayerInput
+    guildMember?: GuildMemberCreateNestedOneWithoutPlayerInput
+    bankAccount?: BankAccountCreateNestedOneWithoutPlayerInput
+    marketListings?: MarketListingCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsSeller?: MarketTransactionCreateNestedManyWithoutSellerInput
+    combatLogs?: CombatLogCreateNestedManyWithoutPlayerInput
+    deathLogs?: DeathLogCreateNestedManyWithoutPlayerInput
+    skills?: PlayerSkillCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerUncheckedCreateWithoutMarketTransactionsAsBuyerInput = {
+    id?: string
+    userId: string
+    characterName: string
+    level?: number
+    experience?: number
+    gold?: number
+    deathCount?: number
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    stats?: PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+    position?: MapPositionUncheckedCreateNestedOneWithoutPlayerInput
+    inventory?: InventoryItemUncheckedCreateNestedManyWithoutPlayerInput
+    equipment?: EquipmentUncheckedCreateNestedOneWithoutPlayerInput
+    occupation?: OccupationUncheckedCreateNestedOneWithoutPlayerInput
+    guildMember?: GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
+    bankAccount?: BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+    marketListings?: MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
+    combatLogs?: CombatLogUncheckedCreateNestedManyWithoutPlayerInput
+    deathLogs?: DeathLogUncheckedCreateNestedManyWithoutPlayerInput
+    skills?: PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerCreateOrConnectWithoutMarketTransactionsAsBuyerInput = {
+    where: PlayerWhereUniqueInput
+    create: XOR<PlayerCreateWithoutMarketTransactionsAsBuyerInput, PlayerUncheckedCreateWithoutMarketTransactionsAsBuyerInput>
+  }
+
+  export type PlayerCreateWithoutMarketTransactionsAsSellerInput = {
+    id?: string
+    characterName: string
+    level?: number
+    experience?: number
+    gold?: number
+    deathCount?: number
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPlayerInput
+    stats?: PlayerStatsCreateNestedOneWithoutPlayerInput
+    position?: MapPositionCreateNestedOneWithoutPlayerInput
+    inventory?: InventoryItemCreateNestedManyWithoutPlayerInput
+    equipment?: EquipmentCreateNestedOneWithoutPlayerInput
+    occupation?: OccupationCreateNestedOneWithoutPlayerInput
+    guildMember?: GuildMemberCreateNestedOneWithoutPlayerInput
+    bankAccount?: BankAccountCreateNestedOneWithoutPlayerInput
+    marketListings?: MarketListingCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionCreateNestedManyWithoutBuyerInput
+    combatLogs?: CombatLogCreateNestedManyWithoutPlayerInput
+    deathLogs?: DeathLogCreateNestedManyWithoutPlayerInput
+    skills?: PlayerSkillCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerUncheckedCreateWithoutMarketTransactionsAsSellerInput = {
+    id?: string
+    userId: string
+    characterName: string
+    level?: number
+    experience?: number
+    gold?: number
+    deathCount?: number
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    stats?: PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+    position?: MapPositionUncheckedCreateNestedOneWithoutPlayerInput
+    inventory?: InventoryItemUncheckedCreateNestedManyWithoutPlayerInput
+    equipment?: EquipmentUncheckedCreateNestedOneWithoutPlayerInput
+    occupation?: OccupationUncheckedCreateNestedOneWithoutPlayerInput
+    guildMember?: GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
+    bankAccount?: BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+    marketListings?: MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+    combatLogs?: CombatLogUncheckedCreateNestedManyWithoutPlayerInput
+    deathLogs?: DeathLogUncheckedCreateNestedManyWithoutPlayerInput
+    skills?: PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerCreateOrConnectWithoutMarketTransactionsAsSellerInput = {
+    where: PlayerWhereUniqueInput
+    create: XOR<PlayerCreateWithoutMarketTransactionsAsSellerInput, PlayerUncheckedCreateWithoutMarketTransactionsAsSellerInput>
+  }
+
+  export type ItemCreateWithoutMarketTransactionsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    itemType: $Enums.ItemType
+    itemRarity: $Enums.ItemRarity
+    tier?: number
+    value: number
+    stackable?: boolean
+    maxStack?: number
+    equipmentSlot?: $Enums.EquipmentSlot | null
+    vitalityBonus?: number
+    strengthBonus?: number
+    speedBonus?: number
+    dexterityBonus?: number
+    hpBonus?: number
+    spBonus?: number
+    createdAt?: Date | string
+    inventoryItems?: InventoryItemCreateNestedManyWithoutItemInput
+    shopItems?: ShopItemCreateNestedManyWithoutItemInput
+    marketListings?: MarketListingCreateNestedManyWithoutItemInput
+    equippedAsWeapon?: EquipmentCreateNestedManyWithoutWeaponInput
+    equippedAsHead?: EquipmentCreateNestedManyWithoutHeadInput
+    equippedAsChest?: EquipmentCreateNestedManyWithoutChestInput
+    equippedAsLegs?: EquipmentCreateNestedManyWithoutLegsInput
+    equippedAsFeet?: EquipmentCreateNestedManyWithoutFeetInput
+    equippedAsAccessory1?: EquipmentCreateNestedManyWithoutAccessory1Input
+    equippedAsAccessory2?: EquipmentCreateNestedManyWithoutAccessory2Input
+    bankVaultItems?: BankVaultItemCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemUncheckedCreateWithoutMarketTransactionsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    itemType: $Enums.ItemType
+    itemRarity: $Enums.ItemRarity
+    tier?: number
+    value: number
+    stackable?: boolean
+    maxStack?: number
+    equipmentSlot?: $Enums.EquipmentSlot | null
+    vitalityBonus?: number
+    strengthBonus?: number
+    speedBonus?: number
+    dexterityBonus?: number
+    hpBonus?: number
+    spBonus?: number
+    createdAt?: Date | string
+    inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutItemInput
+    shopItems?: ShopItemUncheckedCreateNestedManyWithoutItemInput
+    marketListings?: MarketListingUncheckedCreateNestedManyWithoutItemInput
+    equippedAsWeapon?: EquipmentUncheckedCreateNestedManyWithoutWeaponInput
+    equippedAsHead?: EquipmentUncheckedCreateNestedManyWithoutHeadInput
+    equippedAsChest?: EquipmentUncheckedCreateNestedManyWithoutChestInput
+    equippedAsLegs?: EquipmentUncheckedCreateNestedManyWithoutLegsInput
+    equippedAsFeet?: EquipmentUncheckedCreateNestedManyWithoutFeetInput
+    equippedAsAccessory1?: EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
+    equippedAsAccessory2?: EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
+    bankVaultItems?: BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemCreateOrConnectWithoutMarketTransactionsInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutMarketTransactionsInput, ItemUncheckedCreateWithoutMarketTransactionsInput>
+  }
+
+  export type MarketListingUpsertWithoutTransactionsInput = {
+    update: XOR<MarketListingUpdateWithoutTransactionsInput, MarketListingUncheckedUpdateWithoutTransactionsInput>
+    create: XOR<MarketListingCreateWithoutTransactionsInput, MarketListingUncheckedCreateWithoutTransactionsInput>
+    where?: MarketListingWhereInput
+  }
+
+  export type MarketListingUpdateToOneWithWhereWithoutTransactionsInput = {
+    where?: MarketListingWhereInput
+    data: XOR<MarketListingUpdateWithoutTransactionsInput, MarketListingUncheckedUpdateWithoutTransactionsInput>
+  }
+
+  export type MarketListingUpdateWithoutTransactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    pricePerUnit?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
+    listingTax?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    soldAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    player?: PlayerUpdateOneRequiredWithoutMarketListingsNestedInput
+    item?: ItemUpdateOneRequiredWithoutMarketListingsNestedInput
+  }
+
+  export type MarketListingUncheckedUpdateWithoutTransactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    pricePerUnit?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
+    listingTax?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    soldAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PlayerUpsertWithoutMarketTransactionsAsBuyerInput = {
+    update: XOR<PlayerUpdateWithoutMarketTransactionsAsBuyerInput, PlayerUncheckedUpdateWithoutMarketTransactionsAsBuyerInput>
+    create: XOR<PlayerCreateWithoutMarketTransactionsAsBuyerInput, PlayerUncheckedCreateWithoutMarketTransactionsAsBuyerInput>
+    where?: PlayerWhereInput
+  }
+
+  export type PlayerUpdateToOneWithWhereWithoutMarketTransactionsAsBuyerInput = {
+    where?: PlayerWhereInput
+    data: XOR<PlayerUpdateWithoutMarketTransactionsAsBuyerInput, PlayerUncheckedUpdateWithoutMarketTransactionsAsBuyerInput>
+  }
+
+  export type PlayerUpdateWithoutMarketTransactionsAsBuyerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    characterName?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    experience?: IntFieldUpdateOperationsInput | number
+    gold?: IntFieldUpdateOperationsInput | number
+    deathCount?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPlayerNestedInput
+    stats?: PlayerStatsUpdateOneWithoutPlayerNestedInput
+    position?: MapPositionUpdateOneWithoutPlayerNestedInput
+    inventory?: InventoryItemUpdateManyWithoutPlayerNestedInput
+    equipment?: EquipmentUpdateOneWithoutPlayerNestedInput
+    occupation?: OccupationUpdateOneWithoutPlayerNestedInput
+    guildMember?: GuildMemberUpdateOneWithoutPlayerNestedInput
+    bankAccount?: BankAccountUpdateOneWithoutPlayerNestedInput
+    marketListings?: MarketListingUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUpdateManyWithoutSellerNestedInput
+    combatLogs?: CombatLogUpdateManyWithoutPlayerNestedInput
+    deathLogs?: DeathLogUpdateManyWithoutPlayerNestedInput
+    skills?: PlayerSkillUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerUncheckedUpdateWithoutMarketTransactionsAsBuyerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    characterName?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    experience?: IntFieldUpdateOperationsInput | number
+    gold?: IntFieldUpdateOperationsInput | number
+    deathCount?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    stats?: PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+    position?: MapPositionUncheckedUpdateOneWithoutPlayerNestedInput
+    inventory?: InventoryItemUncheckedUpdateManyWithoutPlayerNestedInput
+    equipment?: EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
+    occupation?: OccupationUncheckedUpdateOneWithoutPlayerNestedInput
+    guildMember?: GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
+    bankAccount?: BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+    marketListings?: MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsSeller?: MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
+    combatLogs?: CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
+    deathLogs?: DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
+    skills?: PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerUpsertWithoutMarketTransactionsAsSellerInput = {
+    update: XOR<PlayerUpdateWithoutMarketTransactionsAsSellerInput, PlayerUncheckedUpdateWithoutMarketTransactionsAsSellerInput>
+    create: XOR<PlayerCreateWithoutMarketTransactionsAsSellerInput, PlayerUncheckedCreateWithoutMarketTransactionsAsSellerInput>
+    where?: PlayerWhereInput
+  }
+
+  export type PlayerUpdateToOneWithWhereWithoutMarketTransactionsAsSellerInput = {
+    where?: PlayerWhereInput
+    data: XOR<PlayerUpdateWithoutMarketTransactionsAsSellerInput, PlayerUncheckedUpdateWithoutMarketTransactionsAsSellerInput>
+  }
+
+  export type PlayerUpdateWithoutMarketTransactionsAsSellerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    characterName?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    experience?: IntFieldUpdateOperationsInput | number
+    gold?: IntFieldUpdateOperationsInput | number
+    deathCount?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPlayerNestedInput
+    stats?: PlayerStatsUpdateOneWithoutPlayerNestedInput
+    position?: MapPositionUpdateOneWithoutPlayerNestedInput
+    inventory?: InventoryItemUpdateManyWithoutPlayerNestedInput
+    equipment?: EquipmentUpdateOneWithoutPlayerNestedInput
+    occupation?: OccupationUpdateOneWithoutPlayerNestedInput
+    guildMember?: GuildMemberUpdateOneWithoutPlayerNestedInput
+    bankAccount?: BankAccountUpdateOneWithoutPlayerNestedInput
+    marketListings?: MarketListingUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUpdateManyWithoutBuyerNestedInput
+    combatLogs?: CombatLogUpdateManyWithoutPlayerNestedInput
+    deathLogs?: DeathLogUpdateManyWithoutPlayerNestedInput
+    skills?: PlayerSkillUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerUncheckedUpdateWithoutMarketTransactionsAsSellerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    characterName?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    experience?: IntFieldUpdateOperationsInput | number
+    gold?: IntFieldUpdateOperationsInput | number
+    deathCount?: IntFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    stats?: PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+    position?: MapPositionUncheckedUpdateOneWithoutPlayerNestedInput
+    inventory?: InventoryItemUncheckedUpdateManyWithoutPlayerNestedInput
+    equipment?: EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
+    occupation?: OccupationUncheckedUpdateOneWithoutPlayerNestedInput
+    guildMember?: GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
+    bankAccount?: BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+    marketListings?: MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+    marketTransactionsAsBuyer?: MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+    combatLogs?: CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
+    deathLogs?: DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
+    skills?: PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type ItemUpsertWithoutMarketTransactionsInput = {
+    update: XOR<ItemUpdateWithoutMarketTransactionsInput, ItemUncheckedUpdateWithoutMarketTransactionsInput>
+    create: XOR<ItemCreateWithoutMarketTransactionsInput, ItemUncheckedCreateWithoutMarketTransactionsInput>
+    where?: ItemWhereInput
+  }
+
+  export type ItemUpdateToOneWithWhereWithoutMarketTransactionsInput = {
+    where?: ItemWhereInput
+    data: XOR<ItemUpdateWithoutMarketTransactionsInput, ItemUncheckedUpdateWithoutMarketTransactionsInput>
+  }
+
+  export type ItemUpdateWithoutMarketTransactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    itemType?: EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+    itemRarity?: EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+    tier?: IntFieldUpdateOperationsInput | number
+    value?: IntFieldUpdateOperationsInput | number
+    stackable?: BoolFieldUpdateOperationsInput | boolean
+    maxStack?: IntFieldUpdateOperationsInput | number
+    equipmentSlot?: NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+    vitalityBonus?: IntFieldUpdateOperationsInput | number
+    strengthBonus?: IntFieldUpdateOperationsInput | number
+    speedBonus?: IntFieldUpdateOperationsInput | number
+    dexterityBonus?: IntFieldUpdateOperationsInput | number
+    hpBonus?: IntFieldUpdateOperationsInput | number
+    spBonus?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inventoryItems?: InventoryItemUpdateManyWithoutItemNestedInput
+    shopItems?: ShopItemUpdateManyWithoutItemNestedInput
+    marketListings?: MarketListingUpdateManyWithoutItemNestedInput
+    equippedAsWeapon?: EquipmentUpdateManyWithoutWeaponNestedInput
+    equippedAsHead?: EquipmentUpdateManyWithoutHeadNestedInput
+    equippedAsChest?: EquipmentUpdateManyWithoutChestNestedInput
+    equippedAsLegs?: EquipmentUpdateManyWithoutLegsNestedInput
+    equippedAsFeet?: EquipmentUpdateManyWithoutFeetNestedInput
+    equippedAsAccessory1?: EquipmentUpdateManyWithoutAccessory1NestedInput
+    equippedAsAccessory2?: EquipmentUpdateManyWithoutAccessory2NestedInput
+    bankVaultItems?: BankVaultItemUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateWithoutMarketTransactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    itemType?: EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+    itemRarity?: EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+    tier?: IntFieldUpdateOperationsInput | number
+    value?: IntFieldUpdateOperationsInput | number
+    stackable?: BoolFieldUpdateOperationsInput | boolean
+    maxStack?: IntFieldUpdateOperationsInput | number
+    equipmentSlot?: NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+    vitalityBonus?: IntFieldUpdateOperationsInput | number
+    strengthBonus?: IntFieldUpdateOperationsInput | number
+    speedBonus?: IntFieldUpdateOperationsInput | number
+    dexterityBonus?: IntFieldUpdateOperationsInput | number
+    hpBonus?: IntFieldUpdateOperationsInput | number
+    spBonus?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inventoryItems?: InventoryItemUncheckedUpdateManyWithoutItemNestedInput
+    shopItems?: ShopItemUncheckedUpdateManyWithoutItemNestedInput
+    marketListings?: MarketListingUncheckedUpdateManyWithoutItemNestedInput
     equippedAsWeapon?: EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
     equippedAsHead?: EquipmentUncheckedUpdateManyWithoutHeadNestedInput
     equippedAsChest?: EquipmentUncheckedUpdateManyWithoutChestNestedInput
@@ -53177,6 +54763,26 @@ export namespace Prisma {
     soldAt?: Date | string | null
   }
 
+  export type MarketTransactionCreateManyBuyerInput = {
+    id?: string
+    listingId: string
+    sellerId: string
+    itemId: string
+    quantity: number
+    totalPrice: number
+    createdAt?: Date | string
+  }
+
+  export type MarketTransactionCreateManySellerInput = {
+    id?: string
+    listingId: string
+    buyerId: string
+    itemId: string
+    quantity: number
+    totalPrice: number
+    createdAt?: Date | string
+  }
+
   export type CombatLogCreateManyPlayerInput = {
     id?: string
     encounterId?: string | null
@@ -53235,6 +54841,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     soldAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     item?: ItemUpdateOneRequiredWithoutMarketListingsNestedInput
+    transactions?: MarketTransactionUpdateManyWithoutListingNestedInput
   }
 
   export type MarketListingUncheckedUpdateWithoutPlayerInput = {
@@ -53248,6 +54855,7 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     soldAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transactions?: MarketTransactionUncheckedUpdateManyWithoutListingNestedInput
   }
 
   export type MarketListingUncheckedUpdateManyWithoutPlayerInput = {
@@ -53263,13 +54871,73 @@ export namespace Prisma {
     soldAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type MarketTransactionUpdateWithoutBuyerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    listing?: MarketListingUpdateOneRequiredWithoutTransactionsNestedInput
+    seller?: PlayerUpdateOneRequiredWithoutMarketTransactionsAsSellerNestedInput
+    item?: ItemUpdateOneRequiredWithoutMarketTransactionsNestedInput
+  }
+
+  export type MarketTransactionUncheckedUpdateWithoutBuyerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    listingId?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MarketTransactionUncheckedUpdateManyWithoutBuyerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    listingId?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MarketTransactionUpdateWithoutSellerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    listing?: MarketListingUpdateOneRequiredWithoutTransactionsNestedInput
+    buyer?: PlayerUpdateOneRequiredWithoutMarketTransactionsAsBuyerNestedInput
+    item?: ItemUpdateOneRequiredWithoutMarketTransactionsNestedInput
+  }
+
+  export type MarketTransactionUncheckedUpdateWithoutSellerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    listingId?: StringFieldUpdateOperationsInput | string
+    buyerId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MarketTransactionUncheckedUpdateManyWithoutSellerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    listingId?: StringFieldUpdateOperationsInput | string
+    buyerId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type CombatLogUpdateWithoutPlayerInput = {
     id?: StringFieldUpdateOperationsInput | string
-    encounterId?: NullableStringFieldUpdateOperationsInput | string | null
     turnNumber?: IntFieldUpdateOperationsInput | number
     action?: StringFieldUpdateOperationsInput | string
     result?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    encounter?: EncounterUpdateOneWithoutCombatLogsNestedInput
   }
 
   export type CombatLogUncheckedUpdateWithoutPlayerInput = {
@@ -53435,6 +55103,7 @@ export namespace Prisma {
     enemyLevel?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    combatLogs?: CombatLogUpdateManyWithoutEncounterNestedInput
   }
 
   export type EncounterUncheckedUpdateWithoutTileInput = {
@@ -53445,6 +55114,7 @@ export namespace Prisma {
     enemyLevel?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    combatLogs?: CombatLogUncheckedUpdateManyWithoutEncounterNestedInput
   }
 
   export type EncounterUncheckedUpdateManyWithoutTileInput = {
@@ -53559,6 +55229,16 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     createdAt?: Date | string
     soldAt?: Date | string | null
+  }
+
+  export type MarketTransactionCreateManyItemInput = {
+    id?: string
+    listingId: string
+    buyerId: string
+    sellerId: string
+    quantity: number
+    totalPrice: number
+    createdAt?: Date | string
   }
 
   export type EquipmentCreateManyWeaponInput = {
@@ -53708,6 +55388,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     soldAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     player?: PlayerUpdateOneRequiredWithoutMarketListingsNestedInput
+    transactions?: MarketTransactionUpdateManyWithoutListingNestedInput
   }
 
   export type MarketListingUncheckedUpdateWithoutItemInput = {
@@ -53721,6 +55402,7 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     soldAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transactions?: MarketTransactionUncheckedUpdateManyWithoutListingNestedInput
   }
 
   export type MarketListingUncheckedUpdateManyWithoutItemInput = {
@@ -53734,6 +55416,36 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     soldAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type MarketTransactionUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    listing?: MarketListingUpdateOneRequiredWithoutTransactionsNestedInput
+    buyer?: PlayerUpdateOneRequiredWithoutMarketTransactionsAsBuyerNestedInput
+    seller?: PlayerUpdateOneRequiredWithoutMarketTransactionsAsSellerNestedInput
+  }
+
+  export type MarketTransactionUncheckedUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    listingId?: StringFieldUpdateOperationsInput | string
+    buyerId?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MarketTransactionUncheckedUpdateManyWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    listingId?: StringFieldUpdateOperationsInput | string
+    buyerId?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EquipmentUpdateWithoutWeaponInput = {
@@ -54009,6 +55721,42 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CombatLogCreateManyEncounterInput = {
+    id?: string
+    playerId: string
+    turnNumber: number
+    action: string
+    result: string
+    createdAt?: Date | string
+  }
+
+  export type CombatLogUpdateWithoutEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    turnNumber?: IntFieldUpdateOperationsInput | number
+    action?: StringFieldUpdateOperationsInput | string
+    result?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    player?: PlayerUpdateOneRequiredWithoutCombatLogsNestedInput
+  }
+
+  export type CombatLogUncheckedUpdateWithoutEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    turnNumber?: IntFieldUpdateOperationsInput | number
+    action?: StringFieldUpdateOperationsInput | string
+    result?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CombatLogUncheckedUpdateManyWithoutEncounterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    turnNumber?: IntFieldUpdateOperationsInput | number
+    action?: StringFieldUpdateOperationsInput | string
+    result?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type GuildMemberCreateManyGuildInput = {
     id?: string
     playerId: string
@@ -54098,6 +55846,46 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     itemId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MarketTransactionCreateManyListingInput = {
+    id?: string
+    buyerId: string
+    sellerId: string
+    itemId: string
+    quantity: number
+    totalPrice: number
+    createdAt?: Date | string
+  }
+
+  export type MarketTransactionUpdateWithoutListingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    buyer?: PlayerUpdateOneRequiredWithoutMarketTransactionsAsBuyerNestedInput
+    seller?: PlayerUpdateOneRequiredWithoutMarketTransactionsAsSellerNestedInput
+    item?: ItemUpdateOneRequiredWithoutMarketTransactionsNestedInput
+  }
+
+  export type MarketTransactionUncheckedUpdateWithoutListingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    buyerId?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MarketTransactionUncheckedUpdateManyWithoutListingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    buyerId?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    itemId?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

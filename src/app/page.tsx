@@ -2,19 +2,19 @@
 
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
+import { HallOfTheDeadPreview } from "@/components/hall-of-the-dead-preview";
 
 export default function LandingPage() {
   const { data: session } = useSession();
 
   return (
-    <main className="min-h-screen bg-black text-slate-50">
-      {/* Hero */}
-      <section className="flex flex-col items-center justify-center py-24">
+    <main className="min-h-screen bg-black text-slate-50 flex flex-col">
+      <section className="flex flex-col items-center justify-center py-24 px-4">
         <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center">
           Alicard
         </h1>
         <p className="text-slate-300 mb-8 text-center max-w-xl">
-          Turn-based MMO with real stakes. Five deaths and your account is gone.
+          Turn-based MMO with perma-death. Five deaths and your account is gone.
         </p>
 
         {session ? (
@@ -34,7 +34,8 @@ export default function LandingPage() {
         )}
       </section>
 
-      {/* Leaderboard section will go here later */}
+      {/* Leaderboard */}
+      <HallOfTheDeadPreview />
     </main>
   );
 }
