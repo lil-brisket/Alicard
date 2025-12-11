@@ -2,7 +2,7 @@
 
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
-import { HallOfTheDeadPreview } from "@/components/hall-of-the-dead-preview";
+import { HallOfTheDeadWidget } from "./_components/hall-of-the-dead-widget";
 
 export default function LandingPage() {
   const { data: session } = useSession();
@@ -26,7 +26,7 @@ export default function LandingPage() {
           </Link>
         ) : (
           <button
-            onClick={() => void signIn(undefined, { callbackUrl: "/play" })}
+            onClick={() => void signIn(undefined, { callbackUrl: "/hub" })}
             className="rounded-xl px-6 py-3 text-lg font-semibold bg-slate-100 text-black"
           >
             Play Now
@@ -34,8 +34,7 @@ export default function LandingPage() {
         )}
       </section>
 
-      {/* Leaderboard */}
-      <HallOfTheDeadPreview />
+      <HallOfTheDeadWidget />
     </main>
   );
 }
