@@ -29,6 +29,7 @@
     "@trpc/client": "^11.0.0",
     "@trpc/react-query": "^11.0.0",
     "@trpc/server": "^11.0.0",
+    "bcryptjs": "^3.0.3",
     "next": "^16.0.8",
     "next-auth": "5.0.0-beta.30",
     "pg": "^8.16.3",
@@ -41,6 +42,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@tailwindcss/postcss": "^4.0.15",
+    "@types/bcryptjs": "^3.0.0",
     "@types/node": "^25.0.0",
     "@types/pg": "^8.16.0",
     "@types/react": "^19.0.0",

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export function RegisterForm() {
   const router = useRouter();
@@ -49,22 +50,19 @@ export function RegisterForm() {
 
       if (response.ok) {
         // Auto-sign in the user after successful registration
-        const formData = new FormData();
-        formData.append("email", email);
-        formData.append("password", password);
-        formData.append("redirect", "false");
-
-        const signInResponse = await fetch("/api/auth/callback/credentials", {
-          method: "POST",
-          body: formData,
+        const result = await signIn("credentials", {
+          email,
+          password,
+          redirect: false,
+          callbackUrl: "/hub",
         });
 
-        if (signInResponse.ok) {
-          router.push("/hub");
-          router.refresh();
-        } else {
+        if (result?.error) {
           // Registration succeeded but sign-in failed - redirect to sign-in page
           router.push("/auth/signin?registered=true&callbackUrl=/hub");
+        } else if (result?.ok) {
+          router.push("/hub");
+          router.refresh();
         }
       } else {
         setError(data.error || "Registration failed. Please try again.");

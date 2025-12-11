@@ -36,7 +36,7 @@ export async function POST(request: Request) {
     }
 
     // Check if username already exists
-    const existingUserByUsername = await db.user.findUnique({
+    const existingUserByUsername = await db.user.findFirst({
       where: { username: validatedData.username },
     });
 
@@ -104,8 +104,17 @@ export async function POST(request: Request) {
     }
 
     console.error("Registration error:", error);
+    
+    // In development, return more detailed error information
+    const isDevelopment = process.env.NODE_ENV === "development";
+    const errorMessage = error instanceof Error ? error.message : "Internal server error";
+    const errorStack = error instanceof Error ? error.stack : undefined;
+    
     return NextResponse.json(
-      { error: "Internal server error" },
+      { 
+        error: isDevelopment ? errorMessage : "Internal server error",
+        ...(isDevelopment && errorStack && { stack: errorStack })
+      },
       { status: 500 },
     );
   }

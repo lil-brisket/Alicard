@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 interface OAuthProviders {
   google: boolean;
@@ -29,29 +30,18 @@ export function SignInForm({ oauthProviders }: SignInFormProps) {
     setIsLoading(true);
 
     try {
-      const formData = new FormData();
-      formData.append("email", email);
-      formData.append("password", password);
-      formData.append("redirect", "false");
-
-      const response = await fetch("/api/auth/callback/credentials", {
-        method: "POST",
-        body: formData,
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+        callbackUrl,
       });
 
-      if (response.ok) {
+      if (result?.error) {
+        setError("Invalid email or password");
+      } else if (result?.ok) {
         router.push(callbackUrl);
         router.refresh();
-      } else {
-        const text = await response.text();
-        let errorMessage = "Invalid email or password";
-        try {
-          const data = JSON.parse(text);
-          errorMessage = data.error ?? errorMessage;
-        } catch {
-          // Use default error message
-        }
-        setError(errorMessage);
       }
     } catch (err) {
       setError("An error occurred. Please try again.");
