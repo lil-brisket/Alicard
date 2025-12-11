@@ -209,7 +209,79 @@ User confirms:
 - Patterns were followed
 - Behavior aligns with design
 
-## 5. Summary Checklist
+## 5. Git Commit Message Rules
+
+### 5.1 Conventional Commits Specification
+
+All commit messages MUST follow the [Conventional Commits](https://www.conventionalcommits.org/) specification.
+
+**Format:**
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### 5.2 Commit Types
+
+- **feat**: A new feature (correlates with MINOR in Semantic Versioning)
+- **fix**: A bug fix (correlates with PATCH in Semantic Versioning)
+- **build**: Changes to build system or external dependencies
+- **chore**: Changes to the build process or auxiliary tools
+- **ci**: Changes to CI configuration files and scripts
+- **docs**: Documentation only changes
+- **style**: Code style changes (formatting, missing semi-colons, etc.)
+- **refactor**: Code changes that neither fix a bug nor add a feature
+- **perf**: A code change that improves performance
+- **test**: Adding missing tests or correcting existing tests
+
+### 5.3 Commit Structure Requirements
+
+- Commits MUST be prefixed with a type, followed by OPTIONAL scope, OPTIONAL `!`, and REQUIRED colon and space
+- A scope MAY be provided after a type, surrounded by parentheses: `feat(parser):`
+- A description MUST immediately follow the colon and space
+- A longer commit body MAY be provided after the short description (one blank line after)
+- One or more footers MAY be provided one blank line after the body
+
+### 5.4 Breaking Changes
+
+Breaking changes MUST be indicated by:
+- Appending `!` after the type/scope: `feat(api)!: change endpoint`
+- OR including `BREAKING CHANGE:` in the footer:
+  ```
+  feat(api): update endpoint
+  
+  BREAKING CHANGE: endpoint now requires authentication
+  ```
+
+### 5.5 Examples
+
+```
+feat(combat): add turn-based combat system
+
+fix(player): resolve stamina calculation bug
+
+docs: update API documentation
+
+refactor(map): simplify grid movement logic
+
+feat(api)!: require authentication for all endpoints
+
+BREAKING CHANGE: all API endpoints now require valid session token
+```
+
+### 5.6 AI Commit Behavior
+
+When committing changes, AI must:
+- Use appropriate commit type based on changes made
+- Include scope when changes affect specific module/feature
+- Write clear, concise descriptions
+- Use breaking change notation when applicable
+- Never use generic messages like "update files" or "fix stuff"
+
+## 6. Summary Checklist
 
 AI must always abide by:
 
@@ -221,4 +293,5 @@ AI must always abide by:
 - ✅ Minimal diffs
 - ✅ Maintain the MMO design rules
 - ✅ Keep turn-based gameplay intact
+- ✅ Use Conventional Commit Messages for all commits
 
