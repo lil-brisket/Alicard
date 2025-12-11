@@ -34,6 +34,11 @@ export type Session = $Result.DefaultSelection<Prisma.$SessionPayload>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model Character
+ * 
+ */
+export type Character = $Result.DefaultSelection<Prisma.$CharacterPayload>
+/**
  * Model VerificationToken
  * 
  */
@@ -490,6 +495,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.character`: Exposes CRUD operations for the **Character** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Characters
+    * const characters = await prisma.character.findMany()
+    * ```
+    */
+  get character(): Prisma.CharacterDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.verificationToken`: Exposes CRUD operations for the **VerificationToken** model.
@@ -1175,6 +1190,7 @@ export namespace Prisma {
     Account: 'Account',
     Session: 'Session',
     User: 'User',
+    Character: 'Character',
     VerificationToken: 'VerificationToken',
     Player: 'Player',
     PlayerStats: 'PlayerStats',
@@ -1217,7 +1233,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "post" | "account" | "session" | "user" | "verificationToken" | "player" | "playerStats" | "mapTile" | "mapPosition" | "nPC" | "shopItem" | "item" | "inventoryItem" | "equipment" | "occupation" | "playerSkill" | "encounter" | "combatLog" | "deathLog" | "guild" | "guildMember" | "guildBank" | "guildQuest" | "bankAccount" | "bankVaultItem" | "marketListing" | "marketTransaction" | "quest"
+      modelProps: "post" | "account" | "session" | "user" | "character" | "verificationToken" | "player" | "playerStats" | "mapTile" | "mapPosition" | "nPC" | "shopItem" | "item" | "inventoryItem" | "equipment" | "occupation" | "playerSkill" | "encounter" | "combatLog" | "deathLog" | "guild" | "guildMember" | "guildBank" | "guildQuest" | "bankAccount" | "bankVaultItem" | "marketListing" | "marketTransaction" | "quest"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1514,6 +1530,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      Character: {
+        payload: Prisma.$CharacterPayload<ExtArgs>
+        fields: Prisma.CharacterFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CharacterFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CharacterPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CharacterFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CharacterPayload>
+          }
+          findFirst: {
+            args: Prisma.CharacterFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CharacterPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CharacterFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CharacterPayload>
+          }
+          findMany: {
+            args: Prisma.CharacterFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CharacterPayload>[]
+          }
+          create: {
+            args: Prisma.CharacterCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CharacterPayload>
+          }
+          createMany: {
+            args: Prisma.CharacterCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CharacterCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CharacterPayload>[]
+          }
+          delete: {
+            args: Prisma.CharacterDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CharacterPayload>
+          }
+          update: {
+            args: Prisma.CharacterUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CharacterPayload>
+          }
+          deleteMany: {
+            args: Prisma.CharacterDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CharacterUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CharacterUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CharacterPayload>[]
+          }
+          upsert: {
+            args: Prisma.CharacterUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CharacterPayload>
+          }
+          aggregate: {
+            args: Prisma.CharacterAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCharacter>
+          }
+          groupBy: {
+            args: Prisma.CharacterGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CharacterGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CharacterCountArgs<ExtArgs>
+            result: $Utils.Optional<CharacterCountAggregateOutputType> | number
           }
         }
       }
@@ -3393,6 +3483,7 @@ export namespace Prisma {
     account?: AccountOmit
     session?: SessionOmit
     user?: UserOmit
+    character?: CharacterOmit
     verificationToken?: VerificationTokenOmit
     player?: PlayerOmit
     playerStats?: PlayerStatsOmit
@@ -3500,12 +3591,14 @@ export namespace Prisma {
     accounts: number
     sessions: number
     posts: number
+    characters: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     posts?: boolean | UserCountOutputTypeCountPostsArgs
+    characters?: boolean | UserCountOutputTypeCountCharactersArgs
   }
 
   // Custom InputTypes
@@ -3538,6 +3631,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PostWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCharactersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CharacterWhereInput
   }
 
 
@@ -7406,6 +7506,7 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
     player?: boolean | User$playerArgs<ExtArgs>
+    characters?: boolean | User$charactersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -7442,6 +7543,7 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
     player?: boolean | User$playerArgs<ExtArgs>
+    characters?: boolean | User$charactersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -7454,6 +7556,7 @@ export namespace Prisma {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       posts: Prisma.$PostPayload<ExtArgs>[]
       player: Prisma.$PlayerPayload<ExtArgs> | null
+      characters: Prisma.$CharacterPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7860,6 +7963,7 @@ export namespace Prisma {
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     player<T extends User$playerArgs<ExtArgs> = {}>(args?: Subset<T, User$playerArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    characters<T extends User$charactersArgs<ExtArgs> = {}>(args?: Subset<T, User$charactersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8374,6 +8478,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.characters
+   */
+  export type User$charactersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Character
+     */
+    select?: CharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Character
+     */
+    omit?: CharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CharacterInclude<ExtArgs> | null
+    where?: CharacterWhereInput
+    orderBy?: CharacterOrderByWithRelationInput | CharacterOrderByWithRelationInput[]
+    cursor?: CharacterWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CharacterScalarFieldEnum | CharacterScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8389,6 +8517,1337 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Character
+   */
+
+  export type AggregateCharacter = {
+    _count: CharacterCountAggregateOutputType | null
+    _avg: CharacterAvgAggregateOutputType | null
+    _sum: CharacterSumAggregateOutputType | null
+    _min: CharacterMinAggregateOutputType | null
+    _max: CharacterMaxAggregateOutputType | null
+  }
+
+  export type CharacterAvgAggregateOutputType = {
+    level: number | null
+    vitality: number | null
+    strength: number | null
+    speed: number | null
+    dexterity: number | null
+    maxHealth: number | null
+    currentHealth: number | null
+    maxStamina: number | null
+    currentStamina: number | null
+    deathsUsed: number | null
+    floorsCleared: number | null
+    totalPlayTime: number | null
+  }
+
+  export type CharacterSumAggregateOutputType = {
+    level: number | null
+    vitality: number | null
+    strength: number | null
+    speed: number | null
+    dexterity: number | null
+    maxHealth: number | null
+    currentHealth: number | null
+    maxStamina: number | null
+    currentStamina: number | null
+    deathsUsed: number | null
+    floorsCleared: number | null
+    totalPlayTime: number | null
+  }
+
+  export type CharacterMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    name: string | null
+    level: number | null
+    vitality: number | null
+    strength: number | null
+    speed: number | null
+    dexterity: number | null
+    maxHealth: number | null
+    currentHealth: number | null
+    maxStamina: number | null
+    currentStamina: number | null
+    deathsUsed: number | null
+    floorsCleared: number | null
+    totalPlayTime: number | null
+    isDead: boolean | null
+    deathAt: Date | null
+    deathReason: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CharacterMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    name: string | null
+    level: number | null
+    vitality: number | null
+    strength: number | null
+    speed: number | null
+    dexterity: number | null
+    maxHealth: number | null
+    currentHealth: number | null
+    maxStamina: number | null
+    currentStamina: number | null
+    deathsUsed: number | null
+    floorsCleared: number | null
+    totalPlayTime: number | null
+    isDead: boolean | null
+    deathAt: Date | null
+    deathReason: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CharacterCountAggregateOutputType = {
+    id: number
+    userId: number
+    name: number
+    level: number
+    vitality: number
+    strength: number
+    speed: number
+    dexterity: number
+    maxHealth: number
+    currentHealth: number
+    maxStamina: number
+    currentStamina: number
+    deathsUsed: number
+    floorsCleared: number
+    totalPlayTime: number
+    isDead: number
+    deathAt: number
+    deathReason: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CharacterAvgAggregateInputType = {
+    level?: true
+    vitality?: true
+    strength?: true
+    speed?: true
+    dexterity?: true
+    maxHealth?: true
+    currentHealth?: true
+    maxStamina?: true
+    currentStamina?: true
+    deathsUsed?: true
+    floorsCleared?: true
+    totalPlayTime?: true
+  }
+
+  export type CharacterSumAggregateInputType = {
+    level?: true
+    vitality?: true
+    strength?: true
+    speed?: true
+    dexterity?: true
+    maxHealth?: true
+    currentHealth?: true
+    maxStamina?: true
+    currentStamina?: true
+    deathsUsed?: true
+    floorsCleared?: true
+    totalPlayTime?: true
+  }
+
+  export type CharacterMinAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    level?: true
+    vitality?: true
+    strength?: true
+    speed?: true
+    dexterity?: true
+    maxHealth?: true
+    currentHealth?: true
+    maxStamina?: true
+    currentStamina?: true
+    deathsUsed?: true
+    floorsCleared?: true
+    totalPlayTime?: true
+    isDead?: true
+    deathAt?: true
+    deathReason?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CharacterMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    level?: true
+    vitality?: true
+    strength?: true
+    speed?: true
+    dexterity?: true
+    maxHealth?: true
+    currentHealth?: true
+    maxStamina?: true
+    currentStamina?: true
+    deathsUsed?: true
+    floorsCleared?: true
+    totalPlayTime?: true
+    isDead?: true
+    deathAt?: true
+    deathReason?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CharacterCountAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    level?: true
+    vitality?: true
+    strength?: true
+    speed?: true
+    dexterity?: true
+    maxHealth?: true
+    currentHealth?: true
+    maxStamina?: true
+    currentStamina?: true
+    deathsUsed?: true
+    floorsCleared?: true
+    totalPlayTime?: true
+    isDead?: true
+    deathAt?: true
+    deathReason?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CharacterAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Character to aggregate.
+     */
+    where?: CharacterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Characters to fetch.
+     */
+    orderBy?: CharacterOrderByWithRelationInput | CharacterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CharacterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Characters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Characters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Characters
+    **/
+    _count?: true | CharacterCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CharacterAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CharacterSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CharacterMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CharacterMaxAggregateInputType
+  }
+
+  export type GetCharacterAggregateType<T extends CharacterAggregateArgs> = {
+        [P in keyof T & keyof AggregateCharacter]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCharacter[P]>
+      : GetScalarType<T[P], AggregateCharacter[P]>
+  }
+
+
+
+
+  export type CharacterGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CharacterWhereInput
+    orderBy?: CharacterOrderByWithAggregationInput | CharacterOrderByWithAggregationInput[]
+    by: CharacterScalarFieldEnum[] | CharacterScalarFieldEnum
+    having?: CharacterScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CharacterCountAggregateInputType | true
+    _avg?: CharacterAvgAggregateInputType
+    _sum?: CharacterSumAggregateInputType
+    _min?: CharacterMinAggregateInputType
+    _max?: CharacterMaxAggregateInputType
+  }
+
+  export type CharacterGroupByOutputType = {
+    id: string
+    userId: string
+    name: string
+    level: number
+    vitality: number
+    strength: number
+    speed: number
+    dexterity: number
+    maxHealth: number
+    currentHealth: number
+    maxStamina: number
+    currentStamina: number
+    deathsUsed: number
+    floorsCleared: number
+    totalPlayTime: number
+    isDead: boolean
+    deathAt: Date | null
+    deathReason: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: CharacterCountAggregateOutputType | null
+    _avg: CharacterAvgAggregateOutputType | null
+    _sum: CharacterSumAggregateOutputType | null
+    _min: CharacterMinAggregateOutputType | null
+    _max: CharacterMaxAggregateOutputType | null
+  }
+
+  type GetCharacterGroupByPayload<T extends CharacterGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CharacterGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CharacterGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CharacterGroupByOutputType[P]>
+            : GetScalarType<T[P], CharacterGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CharacterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    level?: boolean
+    vitality?: boolean
+    strength?: boolean
+    speed?: boolean
+    dexterity?: boolean
+    maxHealth?: boolean
+    currentHealth?: boolean
+    maxStamina?: boolean
+    currentStamina?: boolean
+    deathsUsed?: boolean
+    floorsCleared?: boolean
+    totalPlayTime?: boolean
+    isDead?: boolean
+    deathAt?: boolean
+    deathReason?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["character"]>
+
+  export type CharacterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    level?: boolean
+    vitality?: boolean
+    strength?: boolean
+    speed?: boolean
+    dexterity?: boolean
+    maxHealth?: boolean
+    currentHealth?: boolean
+    maxStamina?: boolean
+    currentStamina?: boolean
+    deathsUsed?: boolean
+    floorsCleared?: boolean
+    totalPlayTime?: boolean
+    isDead?: boolean
+    deathAt?: boolean
+    deathReason?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["character"]>
+
+  export type CharacterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    level?: boolean
+    vitality?: boolean
+    strength?: boolean
+    speed?: boolean
+    dexterity?: boolean
+    maxHealth?: boolean
+    currentHealth?: boolean
+    maxStamina?: boolean
+    currentStamina?: boolean
+    deathsUsed?: boolean
+    floorsCleared?: boolean
+    totalPlayTime?: boolean
+    isDead?: boolean
+    deathAt?: boolean
+    deathReason?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["character"]>
+
+  export type CharacterSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    level?: boolean
+    vitality?: boolean
+    strength?: boolean
+    speed?: boolean
+    dexterity?: boolean
+    maxHealth?: boolean
+    currentHealth?: boolean
+    maxStamina?: boolean
+    currentStamina?: boolean
+    deathsUsed?: boolean
+    floorsCleared?: boolean
+    totalPlayTime?: boolean
+    isDead?: boolean
+    deathAt?: boolean
+    deathReason?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CharacterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "level" | "vitality" | "strength" | "speed" | "dexterity" | "maxHealth" | "currentHealth" | "maxStamina" | "currentStamina" | "deathsUsed" | "floorsCleared" | "totalPlayTime" | "isDead" | "deathAt" | "deathReason" | "createdAt" | "updatedAt", ExtArgs["result"]["character"]>
+  export type CharacterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CharacterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CharacterIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $CharacterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Character"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      name: string
+      level: number
+      vitality: number
+      strength: number
+      speed: number
+      dexterity: number
+      maxHealth: number
+      currentHealth: number
+      maxStamina: number
+      currentStamina: number
+      deathsUsed: number
+      floorsCleared: number
+      totalPlayTime: number
+      isDead: boolean
+      deathAt: Date | null
+      deathReason: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["character"]>
+    composites: {}
+  }
+
+  type CharacterGetPayload<S extends boolean | null | undefined | CharacterDefaultArgs> = $Result.GetResult<Prisma.$CharacterPayload, S>
+
+  type CharacterCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CharacterFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CharacterCountAggregateInputType | true
+    }
+
+  export interface CharacterDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Character'], meta: { name: 'Character' } }
+    /**
+     * Find zero or one Character that matches the filter.
+     * @param {CharacterFindUniqueArgs} args - Arguments to find a Character
+     * @example
+     * // Get one Character
+     * const character = await prisma.character.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CharacterFindUniqueArgs>(args: SelectSubset<T, CharacterFindUniqueArgs<ExtArgs>>): Prisma__CharacterClient<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Character that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CharacterFindUniqueOrThrowArgs} args - Arguments to find a Character
+     * @example
+     * // Get one Character
+     * const character = await prisma.character.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CharacterFindUniqueOrThrowArgs>(args: SelectSubset<T, CharacterFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CharacterClient<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Character that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CharacterFindFirstArgs} args - Arguments to find a Character
+     * @example
+     * // Get one Character
+     * const character = await prisma.character.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CharacterFindFirstArgs>(args?: SelectSubset<T, CharacterFindFirstArgs<ExtArgs>>): Prisma__CharacterClient<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Character that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CharacterFindFirstOrThrowArgs} args - Arguments to find a Character
+     * @example
+     * // Get one Character
+     * const character = await prisma.character.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CharacterFindFirstOrThrowArgs>(args?: SelectSubset<T, CharacterFindFirstOrThrowArgs<ExtArgs>>): Prisma__CharacterClient<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Characters that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CharacterFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Characters
+     * const characters = await prisma.character.findMany()
+     * 
+     * // Get first 10 Characters
+     * const characters = await prisma.character.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const characterWithIdOnly = await prisma.character.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CharacterFindManyArgs>(args?: SelectSubset<T, CharacterFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Character.
+     * @param {CharacterCreateArgs} args - Arguments to create a Character.
+     * @example
+     * // Create one Character
+     * const Character = await prisma.character.create({
+     *   data: {
+     *     // ... data to create a Character
+     *   }
+     * })
+     * 
+     */
+    create<T extends CharacterCreateArgs>(args: SelectSubset<T, CharacterCreateArgs<ExtArgs>>): Prisma__CharacterClient<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Characters.
+     * @param {CharacterCreateManyArgs} args - Arguments to create many Characters.
+     * @example
+     * // Create many Characters
+     * const character = await prisma.character.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CharacterCreateManyArgs>(args?: SelectSubset<T, CharacterCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Characters and returns the data saved in the database.
+     * @param {CharacterCreateManyAndReturnArgs} args - Arguments to create many Characters.
+     * @example
+     * // Create many Characters
+     * const character = await prisma.character.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Characters and only return the `id`
+     * const characterWithIdOnly = await prisma.character.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CharacterCreateManyAndReturnArgs>(args?: SelectSubset<T, CharacterCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Character.
+     * @param {CharacterDeleteArgs} args - Arguments to delete one Character.
+     * @example
+     * // Delete one Character
+     * const Character = await prisma.character.delete({
+     *   where: {
+     *     // ... filter to delete one Character
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CharacterDeleteArgs>(args: SelectSubset<T, CharacterDeleteArgs<ExtArgs>>): Prisma__CharacterClient<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Character.
+     * @param {CharacterUpdateArgs} args - Arguments to update one Character.
+     * @example
+     * // Update one Character
+     * const character = await prisma.character.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CharacterUpdateArgs>(args: SelectSubset<T, CharacterUpdateArgs<ExtArgs>>): Prisma__CharacterClient<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Characters.
+     * @param {CharacterDeleteManyArgs} args - Arguments to filter Characters to delete.
+     * @example
+     * // Delete a few Characters
+     * const { count } = await prisma.character.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CharacterDeleteManyArgs>(args?: SelectSubset<T, CharacterDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Characters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CharacterUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Characters
+     * const character = await prisma.character.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CharacterUpdateManyArgs>(args: SelectSubset<T, CharacterUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Characters and returns the data updated in the database.
+     * @param {CharacterUpdateManyAndReturnArgs} args - Arguments to update many Characters.
+     * @example
+     * // Update many Characters
+     * const character = await prisma.character.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Characters and only return the `id`
+     * const characterWithIdOnly = await prisma.character.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CharacterUpdateManyAndReturnArgs>(args: SelectSubset<T, CharacterUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Character.
+     * @param {CharacterUpsertArgs} args - Arguments to update or create a Character.
+     * @example
+     * // Update or create a Character
+     * const character = await prisma.character.upsert({
+     *   create: {
+     *     // ... data to create a Character
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Character we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CharacterUpsertArgs>(args: SelectSubset<T, CharacterUpsertArgs<ExtArgs>>): Prisma__CharacterClient<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Characters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CharacterCountArgs} args - Arguments to filter Characters to count.
+     * @example
+     * // Count the number of Characters
+     * const count = await prisma.character.count({
+     *   where: {
+     *     // ... the filter for the Characters we want to count
+     *   }
+     * })
+    **/
+    count<T extends CharacterCountArgs>(
+      args?: Subset<T, CharacterCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CharacterCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Character.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CharacterAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CharacterAggregateArgs>(args: Subset<T, CharacterAggregateArgs>): Prisma.PrismaPromise<GetCharacterAggregateType<T>>
+
+    /**
+     * Group by Character.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CharacterGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CharacterGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CharacterGroupByArgs['orderBy'] }
+        : { orderBy?: CharacterGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CharacterGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCharacterGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Character model
+   */
+  readonly fields: CharacterFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Character.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CharacterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Character model
+   */
+  interface CharacterFieldRefs {
+    readonly id: FieldRef<"Character", 'String'>
+    readonly userId: FieldRef<"Character", 'String'>
+    readonly name: FieldRef<"Character", 'String'>
+    readonly level: FieldRef<"Character", 'Int'>
+    readonly vitality: FieldRef<"Character", 'Int'>
+    readonly strength: FieldRef<"Character", 'Int'>
+    readonly speed: FieldRef<"Character", 'Int'>
+    readonly dexterity: FieldRef<"Character", 'Int'>
+    readonly maxHealth: FieldRef<"Character", 'Int'>
+    readonly currentHealth: FieldRef<"Character", 'Int'>
+    readonly maxStamina: FieldRef<"Character", 'Int'>
+    readonly currentStamina: FieldRef<"Character", 'Int'>
+    readonly deathsUsed: FieldRef<"Character", 'Int'>
+    readonly floorsCleared: FieldRef<"Character", 'Int'>
+    readonly totalPlayTime: FieldRef<"Character", 'Int'>
+    readonly isDead: FieldRef<"Character", 'Boolean'>
+    readonly deathAt: FieldRef<"Character", 'DateTime'>
+    readonly deathReason: FieldRef<"Character", 'String'>
+    readonly createdAt: FieldRef<"Character", 'DateTime'>
+    readonly updatedAt: FieldRef<"Character", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Character findUnique
+   */
+  export type CharacterFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Character
+     */
+    select?: CharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Character
+     */
+    omit?: CharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CharacterInclude<ExtArgs> | null
+    /**
+     * Filter, which Character to fetch.
+     */
+    where: CharacterWhereUniqueInput
+  }
+
+  /**
+   * Character findUniqueOrThrow
+   */
+  export type CharacterFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Character
+     */
+    select?: CharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Character
+     */
+    omit?: CharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CharacterInclude<ExtArgs> | null
+    /**
+     * Filter, which Character to fetch.
+     */
+    where: CharacterWhereUniqueInput
+  }
+
+  /**
+   * Character findFirst
+   */
+  export type CharacterFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Character
+     */
+    select?: CharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Character
+     */
+    omit?: CharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CharacterInclude<ExtArgs> | null
+    /**
+     * Filter, which Character to fetch.
+     */
+    where?: CharacterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Characters to fetch.
+     */
+    orderBy?: CharacterOrderByWithRelationInput | CharacterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Characters.
+     */
+    cursor?: CharacterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Characters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Characters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Characters.
+     */
+    distinct?: CharacterScalarFieldEnum | CharacterScalarFieldEnum[]
+  }
+
+  /**
+   * Character findFirstOrThrow
+   */
+  export type CharacterFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Character
+     */
+    select?: CharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Character
+     */
+    omit?: CharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CharacterInclude<ExtArgs> | null
+    /**
+     * Filter, which Character to fetch.
+     */
+    where?: CharacterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Characters to fetch.
+     */
+    orderBy?: CharacterOrderByWithRelationInput | CharacterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Characters.
+     */
+    cursor?: CharacterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Characters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Characters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Characters.
+     */
+    distinct?: CharacterScalarFieldEnum | CharacterScalarFieldEnum[]
+  }
+
+  /**
+   * Character findMany
+   */
+  export type CharacterFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Character
+     */
+    select?: CharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Character
+     */
+    omit?: CharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CharacterInclude<ExtArgs> | null
+    /**
+     * Filter, which Characters to fetch.
+     */
+    where?: CharacterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Characters to fetch.
+     */
+    orderBy?: CharacterOrderByWithRelationInput | CharacterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Characters.
+     */
+    cursor?: CharacterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Characters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Characters.
+     */
+    skip?: number
+    distinct?: CharacterScalarFieldEnum | CharacterScalarFieldEnum[]
+  }
+
+  /**
+   * Character create
+   */
+  export type CharacterCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Character
+     */
+    select?: CharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Character
+     */
+    omit?: CharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CharacterInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Character.
+     */
+    data: XOR<CharacterCreateInput, CharacterUncheckedCreateInput>
+  }
+
+  /**
+   * Character createMany
+   */
+  export type CharacterCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Characters.
+     */
+    data: CharacterCreateManyInput | CharacterCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Character createManyAndReturn
+   */
+  export type CharacterCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Character
+     */
+    select?: CharacterSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Character
+     */
+    omit?: CharacterOmit<ExtArgs> | null
+    /**
+     * The data used to create many Characters.
+     */
+    data: CharacterCreateManyInput | CharacterCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CharacterIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Character update
+   */
+  export type CharacterUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Character
+     */
+    select?: CharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Character
+     */
+    omit?: CharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CharacterInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Character.
+     */
+    data: XOR<CharacterUpdateInput, CharacterUncheckedUpdateInput>
+    /**
+     * Choose, which Character to update.
+     */
+    where: CharacterWhereUniqueInput
+  }
+
+  /**
+   * Character updateMany
+   */
+  export type CharacterUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Characters.
+     */
+    data: XOR<CharacterUpdateManyMutationInput, CharacterUncheckedUpdateManyInput>
+    /**
+     * Filter which Characters to update
+     */
+    where?: CharacterWhereInput
+    /**
+     * Limit how many Characters to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Character updateManyAndReturn
+   */
+  export type CharacterUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Character
+     */
+    select?: CharacterSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Character
+     */
+    omit?: CharacterOmit<ExtArgs> | null
+    /**
+     * The data used to update Characters.
+     */
+    data: XOR<CharacterUpdateManyMutationInput, CharacterUncheckedUpdateManyInput>
+    /**
+     * Filter which Characters to update
+     */
+    where?: CharacterWhereInput
+    /**
+     * Limit how many Characters to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CharacterIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Character upsert
+   */
+  export type CharacterUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Character
+     */
+    select?: CharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Character
+     */
+    omit?: CharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CharacterInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Character to update in case it exists.
+     */
+    where: CharacterWhereUniqueInput
+    /**
+     * In case the Character found by the `where` argument doesn't exist, create a new Character with this data.
+     */
+    create: XOR<CharacterCreateInput, CharacterUncheckedCreateInput>
+    /**
+     * In case the Character was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CharacterUpdateInput, CharacterUncheckedUpdateInput>
+  }
+
+  /**
+   * Character delete
+   */
+  export type CharacterDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Character
+     */
+    select?: CharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Character
+     */
+    omit?: CharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CharacterInclude<ExtArgs> | null
+    /**
+     * Filter which Character to delete.
+     */
+    where: CharacterWhereUniqueInput
+  }
+
+  /**
+   * Character deleteMany
+   */
+  export type CharacterDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Characters to delete
+     */
+    where?: CharacterWhereInput
+    /**
+     * Limit how many Characters to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Character without action
+   */
+  export type CharacterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Character
+     */
+    select?: CharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Character
+     */
+    omit?: CharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CharacterInclude<ExtArgs> | null
   }
 
 
@@ -36436,6 +37895,32 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const CharacterScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    name: 'name',
+    level: 'level',
+    vitality: 'vitality',
+    strength: 'strength',
+    speed: 'speed',
+    dexterity: 'dexterity',
+    maxHealth: 'maxHealth',
+    currentHealth: 'currentHealth',
+    maxStamina: 'maxStamina',
+    currentStamina: 'currentStamina',
+    deathsUsed: 'deathsUsed',
+    floorsCleared: 'floorsCleared',
+    totalPlayTime: 'totalPlayTime',
+    isDead: 'isDead',
+    deathAt: 'deathAt',
+    deathReason: 'deathReason',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CharacterScalarFieldEnum = (typeof CharacterScalarFieldEnum)[keyof typeof CharacterScalarFieldEnum]
+
+
   export const VerificationTokenScalarFieldEnum: {
     identifier: 'identifier',
     token: 'token',
@@ -37230,6 +38715,7 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     posts?: PostListRelationFilter
     player?: XOR<PlayerNullableScalarRelationFilter, PlayerWhereInput> | null
+    characters?: CharacterListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -37243,6 +38729,7 @@ export namespace Prisma {
     sessions?: SessionOrderByRelationAggregateInput
     posts?: PostOrderByRelationAggregateInput
     player?: PlayerOrderByWithRelationInput
+    characters?: CharacterOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -37259,6 +38746,7 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     posts?: PostListRelationFilter
     player?: XOR<PlayerNullableScalarRelationFilter, PlayerWhereInput> | null
+    characters?: CharacterListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -37283,6 +38771,138 @@ export namespace Prisma {
     emailVerified?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringNullableWithAggregatesFilter<"User"> | string | null
+  }
+
+  export type CharacterWhereInput = {
+    AND?: CharacterWhereInput | CharacterWhereInput[]
+    OR?: CharacterWhereInput[]
+    NOT?: CharacterWhereInput | CharacterWhereInput[]
+    id?: StringFilter<"Character"> | string
+    userId?: StringFilter<"Character"> | string
+    name?: StringFilter<"Character"> | string
+    level?: IntFilter<"Character"> | number
+    vitality?: IntFilter<"Character"> | number
+    strength?: IntFilter<"Character"> | number
+    speed?: IntFilter<"Character"> | number
+    dexterity?: IntFilter<"Character"> | number
+    maxHealth?: IntFilter<"Character"> | number
+    currentHealth?: IntFilter<"Character"> | number
+    maxStamina?: IntFilter<"Character"> | number
+    currentStamina?: IntFilter<"Character"> | number
+    deathsUsed?: IntFilter<"Character"> | number
+    floorsCleared?: IntFilter<"Character"> | number
+    totalPlayTime?: IntFilter<"Character"> | number
+    isDead?: BoolFilter<"Character"> | boolean
+    deathAt?: DateTimeNullableFilter<"Character"> | Date | string | null
+    deathReason?: StringNullableFilter<"Character"> | string | null
+    createdAt?: DateTimeFilter<"Character"> | Date | string
+    updatedAt?: DateTimeFilter<"Character"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type CharacterOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    level?: SortOrder
+    vitality?: SortOrder
+    strength?: SortOrder
+    speed?: SortOrder
+    dexterity?: SortOrder
+    maxHealth?: SortOrder
+    currentHealth?: SortOrder
+    maxStamina?: SortOrder
+    currentStamina?: SortOrder
+    deathsUsed?: SortOrder
+    floorsCleared?: SortOrder
+    totalPlayTime?: SortOrder
+    isDead?: SortOrder
+    deathAt?: SortOrderInput | SortOrder
+    deathReason?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type CharacterWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CharacterWhereInput | CharacterWhereInput[]
+    OR?: CharacterWhereInput[]
+    NOT?: CharacterWhereInput | CharacterWhereInput[]
+    userId?: StringFilter<"Character"> | string
+    name?: StringFilter<"Character"> | string
+    level?: IntFilter<"Character"> | number
+    vitality?: IntFilter<"Character"> | number
+    strength?: IntFilter<"Character"> | number
+    speed?: IntFilter<"Character"> | number
+    dexterity?: IntFilter<"Character"> | number
+    maxHealth?: IntFilter<"Character"> | number
+    currentHealth?: IntFilter<"Character"> | number
+    maxStamina?: IntFilter<"Character"> | number
+    currentStamina?: IntFilter<"Character"> | number
+    deathsUsed?: IntFilter<"Character"> | number
+    floorsCleared?: IntFilter<"Character"> | number
+    totalPlayTime?: IntFilter<"Character"> | number
+    isDead?: BoolFilter<"Character"> | boolean
+    deathAt?: DateTimeNullableFilter<"Character"> | Date | string | null
+    deathReason?: StringNullableFilter<"Character"> | string | null
+    createdAt?: DateTimeFilter<"Character"> | Date | string
+    updatedAt?: DateTimeFilter<"Character"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type CharacterOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    level?: SortOrder
+    vitality?: SortOrder
+    strength?: SortOrder
+    speed?: SortOrder
+    dexterity?: SortOrder
+    maxHealth?: SortOrder
+    currentHealth?: SortOrder
+    maxStamina?: SortOrder
+    currentStamina?: SortOrder
+    deathsUsed?: SortOrder
+    floorsCleared?: SortOrder
+    totalPlayTime?: SortOrder
+    isDead?: SortOrder
+    deathAt?: SortOrderInput | SortOrder
+    deathReason?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CharacterCountOrderByAggregateInput
+    _avg?: CharacterAvgOrderByAggregateInput
+    _max?: CharacterMaxOrderByAggregateInput
+    _min?: CharacterMinOrderByAggregateInput
+    _sum?: CharacterSumOrderByAggregateInput
+  }
+
+  export type CharacterScalarWhereWithAggregatesInput = {
+    AND?: CharacterScalarWhereWithAggregatesInput | CharacterScalarWhereWithAggregatesInput[]
+    OR?: CharacterScalarWhereWithAggregatesInput[]
+    NOT?: CharacterScalarWhereWithAggregatesInput | CharacterScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Character"> | string
+    userId?: StringWithAggregatesFilter<"Character"> | string
+    name?: StringWithAggregatesFilter<"Character"> | string
+    level?: IntWithAggregatesFilter<"Character"> | number
+    vitality?: IntWithAggregatesFilter<"Character"> | number
+    strength?: IntWithAggregatesFilter<"Character"> | number
+    speed?: IntWithAggregatesFilter<"Character"> | number
+    dexterity?: IntWithAggregatesFilter<"Character"> | number
+    maxHealth?: IntWithAggregatesFilter<"Character"> | number
+    currentHealth?: IntWithAggregatesFilter<"Character"> | number
+    maxStamina?: IntWithAggregatesFilter<"Character"> | number
+    currentStamina?: IntWithAggregatesFilter<"Character"> | number
+    deathsUsed?: IntWithAggregatesFilter<"Character"> | number
+    floorsCleared?: IntWithAggregatesFilter<"Character"> | number
+    totalPlayTime?: IntWithAggregatesFilter<"Character"> | number
+    isDead?: BoolWithAggregatesFilter<"Character"> | boolean
+    deathAt?: DateTimeNullableWithAggregatesFilter<"Character"> | Date | string | null
+    deathReason?: StringNullableWithAggregatesFilter<"Character"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Character"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Character"> | Date | string
   }
 
   export type VerificationTokenWhereInput = {
@@ -39295,6 +40915,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
     player?: PlayerCreateNestedOneWithoutUserInput
+    characters?: CharacterCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -39308,6 +40929,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
     player?: PlayerUncheckedCreateNestedOneWithoutUserInput
+    characters?: CharacterUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -39321,6 +40943,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
     player?: PlayerUpdateOneWithoutUserNestedInput
+    characters?: CharacterUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -39334,6 +40957,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
     player?: PlayerUncheckedUpdateOneWithoutUserNestedInput
+    characters?: CharacterUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -39361,6 +40985,166 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CharacterCreateInput = {
+    id?: string
+    name: string
+    level?: number
+    vitality?: number
+    strength?: number
+    speed?: number
+    dexterity?: number
+    maxHealth?: number
+    currentHealth?: number
+    maxStamina?: number
+    currentStamina?: number
+    deathsUsed?: number
+    floorsCleared?: number
+    totalPlayTime?: number
+    isDead?: boolean
+    deathAt?: Date | string | null
+    deathReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutCharactersInput
+  }
+
+  export type CharacterUncheckedCreateInput = {
+    id?: string
+    userId: string
+    name: string
+    level?: number
+    vitality?: number
+    strength?: number
+    speed?: number
+    dexterity?: number
+    maxHealth?: number
+    currentHealth?: number
+    maxStamina?: number
+    currentStamina?: number
+    deathsUsed?: number
+    floorsCleared?: number
+    totalPlayTime?: number
+    isDead?: boolean
+    deathAt?: Date | string | null
+    deathReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CharacterUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    vitality?: IntFieldUpdateOperationsInput | number
+    strength?: IntFieldUpdateOperationsInput | number
+    speed?: IntFieldUpdateOperationsInput | number
+    dexterity?: IntFieldUpdateOperationsInput | number
+    maxHealth?: IntFieldUpdateOperationsInput | number
+    currentHealth?: IntFieldUpdateOperationsInput | number
+    maxStamina?: IntFieldUpdateOperationsInput | number
+    currentStamina?: IntFieldUpdateOperationsInput | number
+    deathsUsed?: IntFieldUpdateOperationsInput | number
+    floorsCleared?: IntFieldUpdateOperationsInput | number
+    totalPlayTime?: IntFieldUpdateOperationsInput | number
+    isDead?: BoolFieldUpdateOperationsInput | boolean
+    deathAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deathReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCharactersNestedInput
+  }
+
+  export type CharacterUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    vitality?: IntFieldUpdateOperationsInput | number
+    strength?: IntFieldUpdateOperationsInput | number
+    speed?: IntFieldUpdateOperationsInput | number
+    dexterity?: IntFieldUpdateOperationsInput | number
+    maxHealth?: IntFieldUpdateOperationsInput | number
+    currentHealth?: IntFieldUpdateOperationsInput | number
+    maxStamina?: IntFieldUpdateOperationsInput | number
+    currentStamina?: IntFieldUpdateOperationsInput | number
+    deathsUsed?: IntFieldUpdateOperationsInput | number
+    floorsCleared?: IntFieldUpdateOperationsInput | number
+    totalPlayTime?: IntFieldUpdateOperationsInput | number
+    isDead?: BoolFieldUpdateOperationsInput | boolean
+    deathAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deathReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CharacterCreateManyInput = {
+    id?: string
+    userId: string
+    name: string
+    level?: number
+    vitality?: number
+    strength?: number
+    speed?: number
+    dexterity?: number
+    maxHealth?: number
+    currentHealth?: number
+    maxStamina?: number
+    currentStamina?: number
+    deathsUsed?: number
+    floorsCleared?: number
+    totalPlayTime?: number
+    isDead?: boolean
+    deathAt?: Date | string | null
+    deathReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CharacterUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    vitality?: IntFieldUpdateOperationsInput | number
+    strength?: IntFieldUpdateOperationsInput | number
+    speed?: IntFieldUpdateOperationsInput | number
+    dexterity?: IntFieldUpdateOperationsInput | number
+    maxHealth?: IntFieldUpdateOperationsInput | number
+    currentHealth?: IntFieldUpdateOperationsInput | number
+    maxStamina?: IntFieldUpdateOperationsInput | number
+    currentStamina?: IntFieldUpdateOperationsInput | number
+    deathsUsed?: IntFieldUpdateOperationsInput | number
+    floorsCleared?: IntFieldUpdateOperationsInput | number
+    totalPlayTime?: IntFieldUpdateOperationsInput | number
+    isDead?: BoolFieldUpdateOperationsInput | boolean
+    deathAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deathReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CharacterUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    vitality?: IntFieldUpdateOperationsInput | number
+    strength?: IntFieldUpdateOperationsInput | number
+    speed?: IntFieldUpdateOperationsInput | number
+    dexterity?: IntFieldUpdateOperationsInput | number
+    maxHealth?: IntFieldUpdateOperationsInput | number
+    currentHealth?: IntFieldUpdateOperationsInput | number
+    maxStamina?: IntFieldUpdateOperationsInput | number
+    currentStamina?: IntFieldUpdateOperationsInput | number
+    deathsUsed?: IntFieldUpdateOperationsInput | number
+    floorsCleared?: IntFieldUpdateOperationsInput | number
+    totalPlayTime?: IntFieldUpdateOperationsInput | number
+    isDead?: BoolFieldUpdateOperationsInput | boolean
+    deathAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deathReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VerificationTokenCreateInput = {
@@ -41535,6 +43319,12 @@ export namespace Prisma {
     isNot?: PlayerWhereInput | null
   }
 
+  export type CharacterListRelationFilter = {
+    every?: CharacterWhereInput
+    some?: CharacterWhereInput
+    none?: CharacterWhereInput
+  }
+
   export type AccountOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -41544,6 +43334,10 @@ export namespace Prisma {
   }
 
   export type PostOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CharacterOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -41588,6 +43382,118 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type CharacterCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    level?: SortOrder
+    vitality?: SortOrder
+    strength?: SortOrder
+    speed?: SortOrder
+    dexterity?: SortOrder
+    maxHealth?: SortOrder
+    currentHealth?: SortOrder
+    maxStamina?: SortOrder
+    currentStamina?: SortOrder
+    deathsUsed?: SortOrder
+    floorsCleared?: SortOrder
+    totalPlayTime?: SortOrder
+    isDead?: SortOrder
+    deathAt?: SortOrder
+    deathReason?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CharacterAvgOrderByAggregateInput = {
+    level?: SortOrder
+    vitality?: SortOrder
+    strength?: SortOrder
+    speed?: SortOrder
+    dexterity?: SortOrder
+    maxHealth?: SortOrder
+    currentHealth?: SortOrder
+    maxStamina?: SortOrder
+    currentStamina?: SortOrder
+    deathsUsed?: SortOrder
+    floorsCleared?: SortOrder
+    totalPlayTime?: SortOrder
+  }
+
+  export type CharacterMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    level?: SortOrder
+    vitality?: SortOrder
+    strength?: SortOrder
+    speed?: SortOrder
+    dexterity?: SortOrder
+    maxHealth?: SortOrder
+    currentHealth?: SortOrder
+    maxStamina?: SortOrder
+    currentStamina?: SortOrder
+    deathsUsed?: SortOrder
+    floorsCleared?: SortOrder
+    totalPlayTime?: SortOrder
+    isDead?: SortOrder
+    deathAt?: SortOrder
+    deathReason?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CharacterMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    level?: SortOrder
+    vitality?: SortOrder
+    strength?: SortOrder
+    speed?: SortOrder
+    dexterity?: SortOrder
+    maxHealth?: SortOrder
+    currentHealth?: SortOrder
+    maxStamina?: SortOrder
+    currentStamina?: SortOrder
+    deathsUsed?: SortOrder
+    floorsCleared?: SortOrder
+    totalPlayTime?: SortOrder
+    isDead?: SortOrder
+    deathAt?: SortOrder
+    deathReason?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CharacterSumOrderByAggregateInput = {
+    level?: SortOrder
+    vitality?: SortOrder
+    strength?: SortOrder
+    speed?: SortOrder
+    dexterity?: SortOrder
+    maxHealth?: SortOrder
+    currentHealth?: SortOrder
+    maxStamina?: SortOrder
+    currentStamina?: SortOrder
+    deathsUsed?: SortOrder
+    floorsCleared?: SortOrder
+    totalPlayTime?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type VerificationTokenIdentifierTokenCompoundUniqueInput = {
     identifier: string
     token: string
@@ -41609,11 +43515,6 @@ export namespace Prisma {
     identifier?: SortOrder
     token?: SortOrder
     expires?: SortOrder
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type PlayerStatsNullableScalarRelationFilter = {
@@ -41747,14 +43648,6 @@ export namespace Prisma {
     experience?: SortOrder
     gold?: SortOrder
     deathCount?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type PlayerScalarRelationFilter = {
@@ -43107,6 +45000,13 @@ export namespace Prisma {
     connect?: PlayerWhereUniqueInput
   }
 
+  export type CharacterCreateNestedManyWithoutUserInput = {
+    create?: XOR<CharacterCreateWithoutUserInput, CharacterUncheckedCreateWithoutUserInput> | CharacterCreateWithoutUserInput[] | CharacterUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CharacterCreateOrConnectWithoutUserInput | CharacterCreateOrConnectWithoutUserInput[]
+    createMany?: CharacterCreateManyUserInputEnvelope
+    connect?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+  }
+
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -43132,6 +45032,13 @@ export namespace Prisma {
     create?: XOR<PlayerCreateWithoutUserInput, PlayerUncheckedCreateWithoutUserInput>
     connectOrCreate?: PlayerCreateOrConnectWithoutUserInput
     connect?: PlayerWhereUniqueInput
+  }
+
+  export type CharacterUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CharacterCreateWithoutUserInput, CharacterUncheckedCreateWithoutUserInput> | CharacterCreateWithoutUserInput[] | CharacterUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CharacterCreateOrConnectWithoutUserInput | CharacterCreateOrConnectWithoutUserInput[]
+    createMany?: CharacterCreateManyUserInputEnvelope
+    connect?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -43190,6 +45097,20 @@ export namespace Prisma {
     update?: XOR<XOR<PlayerUpdateToOneWithWhereWithoutUserInput, PlayerUpdateWithoutUserInput>, PlayerUncheckedUpdateWithoutUserInput>
   }
 
+  export type CharacterUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CharacterCreateWithoutUserInput, CharacterUncheckedCreateWithoutUserInput> | CharacterCreateWithoutUserInput[] | CharacterUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CharacterCreateOrConnectWithoutUserInput | CharacterCreateOrConnectWithoutUserInput[]
+    upsert?: CharacterUpsertWithWhereUniqueWithoutUserInput | CharacterUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CharacterCreateManyUserInputEnvelope
+    set?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+    disconnect?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+    delete?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+    connect?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+    update?: CharacterUpdateWithWhereUniqueWithoutUserInput | CharacterUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CharacterUpdateManyWithWhereWithoutUserInput | CharacterUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CharacterScalarWhereInput | CharacterScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -43240,6 +45161,38 @@ export namespace Prisma {
     delete?: PlayerWhereInput | boolean
     connect?: PlayerWhereUniqueInput
     update?: XOR<XOR<PlayerUpdateToOneWithWhereWithoutUserInput, PlayerUpdateWithoutUserInput>, PlayerUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CharacterUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CharacterCreateWithoutUserInput, CharacterUncheckedCreateWithoutUserInput> | CharacterCreateWithoutUserInput[] | CharacterUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CharacterCreateOrConnectWithoutUserInput | CharacterCreateOrConnectWithoutUserInput[]
+    upsert?: CharacterUpsertWithWhereUniqueWithoutUserInput | CharacterUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CharacterCreateManyUserInputEnvelope
+    set?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+    disconnect?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+    delete?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+    connect?: CharacterWhereUniqueInput | CharacterWhereUniqueInput[]
+    update?: CharacterUpdateWithWhereUniqueWithoutUserInput | CharacterUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CharacterUpdateManyWithWhereWithoutUserInput | CharacterUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CharacterScalarWhereInput | CharacterScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutCharactersInput = {
+    create?: XOR<UserCreateWithoutCharactersInput, UserUncheckedCreateWithoutCharactersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCharactersInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type UserUpdateOneRequiredWithoutCharactersNestedInput = {
+    create?: XOR<UserCreateWithoutCharactersInput, UserUncheckedCreateWithoutCharactersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCharactersInput
+    upsert?: UserUpsertWithoutCharactersInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCharactersInput, UserUpdateWithoutCharactersInput>, UserUncheckedUpdateWithoutCharactersInput>
   }
 
   export type UserCreateNestedOneWithoutPlayerInput = {
@@ -43388,10 +45341,6 @@ export namespace Prisma {
     connectOrCreate?: PlayerSkillCreateOrConnectWithoutPlayerInput | PlayerSkillCreateOrConnectWithoutPlayerInput[]
     createMany?: PlayerSkillCreateManyPlayerInputEnvelope
     connect?: PlayerSkillWhereUniqueInput | PlayerSkillWhereUniqueInput[]
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type UserUpdateOneRequiredWithoutPlayerNestedInput = {
@@ -45390,6 +47339,7 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     player?: PlayerCreateNestedOneWithoutUserInput
+    characters?: CharacterCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -45402,6 +47352,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     player?: PlayerUncheckedCreateNestedOneWithoutUserInput
+    characters?: CharacterUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -45430,6 +47381,7 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     player?: PlayerUpdateOneWithoutUserNestedInput
+    characters?: CharacterUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -45442,6 +47394,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     player?: PlayerUncheckedUpdateOneWithoutUserNestedInput
+    characters?: CharacterUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -45454,6 +47407,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
     player?: PlayerCreateNestedOneWithoutUserInput
+    characters?: CharacterCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -45466,6 +47420,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
     player?: PlayerUncheckedCreateNestedOneWithoutUserInput
+    characters?: CharacterUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -45494,6 +47449,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
     player?: PlayerUpdateOneWithoutUserNestedInput
+    characters?: CharacterUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -45506,6 +47462,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
     player?: PlayerUncheckedUpdateOneWithoutUserNestedInput
+    characters?: CharacterUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -45518,6 +47475,7 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
     player?: PlayerCreateNestedOneWithoutUserInput
+    characters?: CharacterCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -45530,6 +47488,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
     player?: PlayerUncheckedCreateNestedOneWithoutUserInput
+    characters?: CharacterUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -45558,6 +47517,7 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
     player?: PlayerUpdateOneWithoutUserNestedInput
+    characters?: CharacterUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -45570,6 +47530,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
     player?: PlayerUncheckedUpdateOneWithoutUserNestedInput
+    characters?: CharacterUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountCreateWithoutUserInput = {
@@ -45706,6 +47667,60 @@ export namespace Prisma {
   export type PlayerCreateOrConnectWithoutUserInput = {
     where: PlayerWhereUniqueInput
     create: XOR<PlayerCreateWithoutUserInput, PlayerUncheckedCreateWithoutUserInput>
+  }
+
+  export type CharacterCreateWithoutUserInput = {
+    id?: string
+    name: string
+    level?: number
+    vitality?: number
+    strength?: number
+    speed?: number
+    dexterity?: number
+    maxHealth?: number
+    currentHealth?: number
+    maxStamina?: number
+    currentStamina?: number
+    deathsUsed?: number
+    floorsCleared?: number
+    totalPlayTime?: number
+    isDead?: boolean
+    deathAt?: Date | string | null
+    deathReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CharacterUncheckedCreateWithoutUserInput = {
+    id?: string
+    name: string
+    level?: number
+    vitality?: number
+    strength?: number
+    speed?: number
+    dexterity?: number
+    maxHealth?: number
+    currentHealth?: number
+    maxStamina?: number
+    currentStamina?: number
+    deathsUsed?: number
+    floorsCleared?: number
+    totalPlayTime?: number
+    isDead?: boolean
+    deathAt?: Date | string | null
+    deathReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CharacterCreateOrConnectWithoutUserInput = {
+    where: CharacterWhereUniqueInput
+    create: XOR<CharacterCreateWithoutUserInput, CharacterUncheckedCreateWithoutUserInput>
+  }
+
+  export type CharacterCreateManyUserInputEnvelope = {
+    data: CharacterCreateManyUserInput | CharacterCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
@@ -45853,6 +47868,116 @@ export namespace Prisma {
     skills?: PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
   }
 
+  export type CharacterUpsertWithWhereUniqueWithoutUserInput = {
+    where: CharacterWhereUniqueInput
+    update: XOR<CharacterUpdateWithoutUserInput, CharacterUncheckedUpdateWithoutUserInput>
+    create: XOR<CharacterCreateWithoutUserInput, CharacterUncheckedCreateWithoutUserInput>
+  }
+
+  export type CharacterUpdateWithWhereUniqueWithoutUserInput = {
+    where: CharacterWhereUniqueInput
+    data: XOR<CharacterUpdateWithoutUserInput, CharacterUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CharacterUpdateManyWithWhereWithoutUserInput = {
+    where: CharacterScalarWhereInput
+    data: XOR<CharacterUpdateManyMutationInput, CharacterUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type CharacterScalarWhereInput = {
+    AND?: CharacterScalarWhereInput | CharacterScalarWhereInput[]
+    OR?: CharacterScalarWhereInput[]
+    NOT?: CharacterScalarWhereInput | CharacterScalarWhereInput[]
+    id?: StringFilter<"Character"> | string
+    userId?: StringFilter<"Character"> | string
+    name?: StringFilter<"Character"> | string
+    level?: IntFilter<"Character"> | number
+    vitality?: IntFilter<"Character"> | number
+    strength?: IntFilter<"Character"> | number
+    speed?: IntFilter<"Character"> | number
+    dexterity?: IntFilter<"Character"> | number
+    maxHealth?: IntFilter<"Character"> | number
+    currentHealth?: IntFilter<"Character"> | number
+    maxStamina?: IntFilter<"Character"> | number
+    currentStamina?: IntFilter<"Character"> | number
+    deathsUsed?: IntFilter<"Character"> | number
+    floorsCleared?: IntFilter<"Character"> | number
+    totalPlayTime?: IntFilter<"Character"> | number
+    isDead?: BoolFilter<"Character"> | boolean
+    deathAt?: DateTimeNullableFilter<"Character"> | Date | string | null
+    deathReason?: StringNullableFilter<"Character"> | string | null
+    createdAt?: DateTimeFilter<"Character"> | Date | string
+    updatedAt?: DateTimeFilter<"Character"> | Date | string
+  }
+
+  export type UserCreateWithoutCharactersInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    posts?: PostCreateNestedManyWithoutCreatedByInput
+    player?: PlayerCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCharactersInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    player?: PlayerUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCharactersInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCharactersInput, UserUncheckedCreateWithoutCharactersInput>
+  }
+
+  export type UserUpsertWithoutCharactersInput = {
+    update: XOR<UserUpdateWithoutCharactersInput, UserUncheckedUpdateWithoutCharactersInput>
+    create: XOR<UserCreateWithoutCharactersInput, UserUncheckedCreateWithoutCharactersInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCharactersInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCharactersInput, UserUncheckedUpdateWithoutCharactersInput>
+  }
+
+  export type UserUpdateWithoutCharactersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutCreatedByNestedInput
+    player?: PlayerUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCharactersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    player?: PlayerUncheckedUpdateOneWithoutUserNestedInput
+  }
+
   export type UserCreateWithoutPlayerInput = {
     id?: string
     name?: string | null
@@ -45863,6 +47988,7 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
+    characters?: CharacterCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPlayerInput = {
@@ -45875,6 +48001,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
+    characters?: CharacterUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPlayerInput = {
@@ -46191,6 +48318,7 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
+    characters?: CharacterUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPlayerInput = {
@@ -46203,6 +48331,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
+    characters?: CharacterUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PlayerStatsUpsertWithoutPlayerInput = {
@@ -50857,6 +52986,28 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type CharacterCreateManyUserInput = {
+    id?: string
+    name: string
+    level?: number
+    vitality?: number
+    strength?: number
+    speed?: number
+    dexterity?: number
+    maxHealth?: number
+    currentHealth?: number
+    maxStamina?: number
+    currentStamina?: number
+    deathsUsed?: number
+    floorsCleared?: number
+    totalPlayTime?: number
+    isDead?: boolean
+    deathAt?: Date | string | null
+    deathReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type AccountUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
@@ -50936,6 +53087,72 @@ export namespace Prisma {
   export type PostUncheckedUpdateManyWithoutCreatedByInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CharacterUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    vitality?: IntFieldUpdateOperationsInput | number
+    strength?: IntFieldUpdateOperationsInput | number
+    speed?: IntFieldUpdateOperationsInput | number
+    dexterity?: IntFieldUpdateOperationsInput | number
+    maxHealth?: IntFieldUpdateOperationsInput | number
+    currentHealth?: IntFieldUpdateOperationsInput | number
+    maxStamina?: IntFieldUpdateOperationsInput | number
+    currentStamina?: IntFieldUpdateOperationsInput | number
+    deathsUsed?: IntFieldUpdateOperationsInput | number
+    floorsCleared?: IntFieldUpdateOperationsInput | number
+    totalPlayTime?: IntFieldUpdateOperationsInput | number
+    isDead?: BoolFieldUpdateOperationsInput | boolean
+    deathAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deathReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CharacterUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    vitality?: IntFieldUpdateOperationsInput | number
+    strength?: IntFieldUpdateOperationsInput | number
+    speed?: IntFieldUpdateOperationsInput | number
+    dexterity?: IntFieldUpdateOperationsInput | number
+    maxHealth?: IntFieldUpdateOperationsInput | number
+    currentHealth?: IntFieldUpdateOperationsInput | number
+    maxStamina?: IntFieldUpdateOperationsInput | number
+    currentStamina?: IntFieldUpdateOperationsInput | number
+    deathsUsed?: IntFieldUpdateOperationsInput | number
+    floorsCleared?: IntFieldUpdateOperationsInput | number
+    totalPlayTime?: IntFieldUpdateOperationsInput | number
+    isDead?: BoolFieldUpdateOperationsInput | boolean
+    deathAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deathReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CharacterUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    vitality?: IntFieldUpdateOperationsInput | number
+    strength?: IntFieldUpdateOperationsInput | number
+    speed?: IntFieldUpdateOperationsInput | number
+    dexterity?: IntFieldUpdateOperationsInput | number
+    maxHealth?: IntFieldUpdateOperationsInput | number
+    currentHealth?: IntFieldUpdateOperationsInput | number
+    maxStamina?: IntFieldUpdateOperationsInput | number
+    currentStamina?: IntFieldUpdateOperationsInput | number
+    deathsUsed?: IntFieldUpdateOperationsInput | number
+    floorsCleared?: IntFieldUpdateOperationsInput | number
+    totalPlayTime?: IntFieldUpdateOperationsInput | number
+    isDead?: BoolFieldUpdateOperationsInput | boolean
+    deathAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deathReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

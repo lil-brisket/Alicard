@@ -161,6 +161,29 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password'
 };
 
+exports.Prisma.CharacterScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  level: 'level',
+  vitality: 'vitality',
+  strength: 'strength',
+  speed: 'speed',
+  dexterity: 'dexterity',
+  maxHealth: 'maxHealth',
+  currentHealth: 'currentHealth',
+  maxStamina: 'maxStamina',
+  currentStamina: 'currentStamina',
+  deathsUsed: 'deathsUsed',
+  floorsCleared: 'floorsCleared',
+  totalPlayTime: 'totalPlayTime',
+  isDead: 'isDead',
+  deathAt: 'deathAt',
+  deathReason: 'deathReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.VerificationTokenScalarFieldEnum = {
   identifier: 'identifier',
   token: 'token',
@@ -531,6 +554,7 @@ exports.Prisma.ModelName = {
   Account: 'Account',
   Session: 'Session',
   User: 'User',
+  Character: 'Character',
   VerificationToken: 'VerificationToken',
   Player: 'Player',
   PlayerStats: 'PlayerStats',
