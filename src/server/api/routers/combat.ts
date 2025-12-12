@@ -317,13 +317,29 @@ export const combatRouter = createTRPCRouter({
       });
 
       // Update player HP/SP
-      await ctx.db.playerStats.update({
+      const updatedStats = await ctx.db.playerStats.update({
         where: { playerId: player.id },
         data: {
           currentHP: playerHP,
           currentSP: playerSP,
         },
       });
+
+      // Sync Character model with PlayerStats
+      await syncCharacterWithPlayerStats(
+        player.userId,
+        {
+          currentHP: playerHP,
+          maxHP: playerStats.maxHP,
+          currentSP: playerSP,
+          maxSP: playerStats.maxSP,
+          vitality: updatedStats.vitality,
+          strength: updatedStats.strength,
+          speed: updatedStats.speed,
+          dexterity: updatedStats.dexterity,
+        },
+        ctx.db
+      );
 
       // Handle combat end
       if (combatEnded) {
@@ -405,6 +421,39 @@ export const combatRouter = createTRPCRouter({
       }));
     }),
 });
+
+// Helper function to sync Character model with PlayerStats
+async function syncCharacterWithPlayerStats(
+  userId: string,
+  playerStats: { currentHP: number; maxHP: number; currentSP: number; maxSP: number; vitality: number; strength: number; speed: number; dexterity: number },
+  db: any
+) {
+  // Find the character by userId
+  const character = await db.character.findFirst({
+    where: { userId },
+    orderBy: { createdAt: "desc" },
+  });
+
+  if (character) {
+    // Calculate max values based on stats (same formula as PlayerStats)
+    const maxHP = 50 + playerStats.vitality * 5;
+    const maxSP = 20 + playerStats.vitality * 2 + playerStats.speed * 1;
+
+    await db.character.update({
+      where: { id: character.id },
+      data: {
+        currentHp: playerStats.currentHP,
+        maxHp: maxHP,
+        currentStamina: playerStats.currentSP,
+        maxStamina: maxSP,
+        vitality: playerStats.vitality,
+        strength: playerStats.strength,
+        speed: playerStats.speed,
+        dexterity: playerStats.dexterity,
+      },
+    });
+  }
+}
 
 // Helper functions
 function calculateCombatStats(stats: any, equipment: any) {
@@ -540,13 +589,29 @@ async function handlePlayerDeath(playerId: string, db: any) {
       });
 
       if (stats) {
-        await db.playerStats.update({
+        const updatedStats = await db.playerStats.update({
           where: { playerId },
           data: {
             currentHP: Math.floor(stats.maxHP * 0.5),
             currentSP: Math.floor(stats.maxSP * 0.5),
           },
         });
+
+        // Sync Character model with PlayerStats
+        await syncCharacterWithPlayerStats(
+          player.userId,
+          {
+            currentHP: updatedStats.currentHP,
+            maxHP: updatedStats.maxHP,
+            currentSP: updatedStats.currentSP,
+            maxSP: updatedStats.maxSP,
+            vitality: updatedStats.vitality,
+            strength: updatedStats.strength,
+            speed: updatedStats.speed,
+            dexterity: updatedStats.dexterity,
+          },
+          db
+        );
       }
     }
   }

@@ -5,6 +5,39 @@ import {
   protectedProcedure,
 } from "~/server/api/trpc";
 
+// Helper function to sync Character model with PlayerStats
+async function syncCharacterWithPlayerStats(
+  userId: string,
+  playerStats: { currentHP: number; maxHP: number; currentSP: number; maxSP: number; vitality: number; strength: number; speed: number; dexterity: number },
+  db: any
+) {
+  // Find the character by userId
+  const character = await db.character.findFirst({
+    where: { userId },
+    orderBy: { createdAt: "desc" },
+  });
+
+  if (character) {
+    // Calculate max values based on stats (same formula as PlayerStats)
+    const maxHP = 50 + playerStats.vitality * 5;
+    const maxSP = 20 + playerStats.vitality * 2 + playerStats.speed * 1;
+
+    await db.character.update({
+      where: { id: character.id },
+      data: {
+        currentHp: playerStats.currentHP,
+        maxHp: maxHP,
+        currentStamina: playerStats.currentSP,
+        maxStamina: maxSP,
+        vitality: playerStats.vitality,
+        strength: playerStats.strength,
+        speed: playerStats.speed,
+        dexterity: playerStats.dexterity,
+      },
+    });
+  }
+}
+
 // Character name validation
 const characterNameSchema = z
   .string()
@@ -258,7 +291,7 @@ export const playerRouter = createTRPCRouter({
       const maxSP = 20 + updatedStats.vitality * 2 + updatedStats.speed * 1;
 
       // Update max HP/SP (don't reduce current if it would go below current)
-      await ctx.db.playerStats.update({
+      const finalStats = await ctx.db.playerStats.update({
         where: { playerId: player.id },
         data: {
           maxHP,
@@ -267,6 +300,22 @@ export const playerRouter = createTRPCRouter({
           currentSP: Math.min(updatedStats.currentSP, maxSP),
         },
       });
+
+      // Sync Character model with PlayerStats
+      await syncCharacterWithPlayerStats(
+        player.userId,
+        {
+          currentHP: finalStats.currentHP,
+          maxHP: finalStats.maxHP,
+          currentSP: finalStats.currentSP,
+          maxSP: finalStats.maxSP,
+          vitality: finalStats.vitality,
+          strength: finalStats.strength,
+          speed: finalStats.speed,
+          dexterity: finalStats.dexterity,
+        },
+        ctx.db
+      );
 
       return { success: true };
     }),
