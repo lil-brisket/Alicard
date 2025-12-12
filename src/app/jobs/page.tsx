@@ -6,12 +6,16 @@ import { JobCard } from "../hub/jobs/_components/job-card";
 
 export default function JobsPage() {
   const { data: jobs, isLoading: jobsLoading, error: jobsError } = api.jobs.listJobs.useQuery();
-  const { data: myJobs, isLoading: myJobsLoading, error: myJobsError } = api.jobs.getMyJobs.useQuery();
+  const { data: myJobs, isLoading: myJobsLoading, error: myJobsError, refetch: refetchMyJobs } = api.jobs.getMyJobs.useQuery();
   const utils = api.useUtils();
 
   const addXpMutation = api.jobs.addJobXp.useMutation({
-    onSuccess: () => {
+    onSuccess: async () => {
+      await refetchMyJobs();
       void utils.jobs.getMyJobs.invalidate();
+    },
+    onError: (error) => {
+      console.error("Failed to add XP:", error);
     },
   });
 
@@ -68,9 +72,18 @@ export default function JobsPage() {
             <div className="space-y-4">
               {craftJobs.map((job) => {
                 const userJob = myJobsMap.get(job.id);
+                const transformedUserJob = userJob
+                  ? {
+                      ...userJob,
+                      progress: {
+                        current: userJob.xpInLevel ?? 0,
+                        needed: userJob.xpToNext ?? 100,
+                      },
+                    }
+                  : null;
                 return (
                   <div key={job.id} className="space-y-2">
-                    <JobCard job={job} userJob={userJob ?? null} basePath="/jobs" />
+                    <JobCard job={job} userJob={transformedUserJob} basePath="/jobs" />
                     <div className="ml-4 flex items-center gap-2">
                       <button
                         onClick={() => {
@@ -81,7 +94,7 @@ export default function JobsPage() {
                       >
                         {addXpMutation.isPending ? "Training..." : "Train +10 XP"}
                       </button>
-                      {userJob && !userJob.active && (
+                      {transformedUserJob && !transformedUserJob.active && (
                         <button
                           onClick={() => {
                             setActiveJobMutation.mutate({ jobId: job.id });
@@ -106,9 +119,18 @@ export default function JobsPage() {
             <div className="space-y-4">
               {gatherJobs.map((job) => {
                 const userJob = myJobsMap.get(job.id);
+                const transformedUserJob = userJob
+                  ? {
+                      ...userJob,
+                      progress: {
+                        current: userJob.xpInLevel ?? 0,
+                        needed: userJob.xpToNext ?? 100,
+                      },
+                    }
+                  : null;
                 return (
                   <div key={job.id} className="space-y-2">
-                    <JobCard job={job} userJob={userJob ?? null} basePath="/jobs" />
+                    <JobCard job={job} userJob={transformedUserJob} basePath="/jobs" />
                     <div className="ml-4 flex items-center gap-2">
                       <button
                         onClick={() => {
@@ -119,7 +141,7 @@ export default function JobsPage() {
                       >
                         {addXpMutation.isPending ? "Training..." : "Train +10 XP"}
                       </button>
-                      {userJob && !userJob.active && (
+                      {transformedUserJob && !transformedUserJob.active && (
                         <button
                           onClick={() => {
                             setActiveJobMutation.mutate({ jobId: job.id });

@@ -28,13 +28,112 @@ export const jobsRouter = createTRPCRouter({
     const userId = ctx.session.user.id;
     
     // Get player
-    const player = await db.player.findUnique({
+    let player = await db.player.findUnique({
       where: { userId },
     });
 
-    // If player doesn't exist, return empty array (user needs to create character first)
+    // Auto-create Player if it doesn't exist
     if (!player) {
-      return [];
+      // Get user's character to use its name
+      const character = await db.character.findFirst({
+        where: { userId },
+        orderBy: { createdAt: "desc" },
+      });
+
+      if (!character) {
+        // Return empty array if no character exists
+        return [];
+      }
+
+      // Get user for username fallback
+      const user = await db.user.findUnique({
+        where: { id: userId },
+        select: { username: true },
+      });
+
+      // Use character name, or username with suffix if name is taken
+      let characterName = character.name;
+      let nameTaken = await db.player.findUnique({
+        where: { characterName },
+      });
+
+      // If name is taken, add a suffix
+      if (nameTaken) {
+        const baseName = user?.username ?? "Player";
+        const suffix = Math.floor(Math.random() * 9000 + 1000);
+        characterName = `${baseName} #${suffix}`;
+      }
+
+      // Find starting tile
+      let startingTile = await db.mapTile.findFirst({
+        where: {
+          isSafeZone: true,
+          tileType: "TOWN",
+        },
+      });
+
+      if (!startingTile) {
+        startingTile = await db.mapTile.upsert({
+          where: { x_y: { x: 0, y: 0 } },
+          update: {},
+          create: {
+            x: 0,
+            y: 0,
+            tileType: "TOWN",
+            zoneType: "SAFE",
+            isSafeZone: true,
+            description: "Starting Town",
+          },
+        });
+      }
+
+      // Create player with default stats
+      const defaultVitality = 5;
+      const defaultStrength = 5;
+      const defaultSpeed = 5;
+      const defaultDexterity = 5;
+      const maxHP = 50 + defaultVitality * 5;
+      const maxSP = 20 + defaultVitality * 2 + defaultSpeed * 1;
+
+      player = await db.player.create({
+        data: {
+          userId,
+          characterName,
+          level: 1,
+          experience: 0,
+          gold: 100,
+          deathCount: 0,
+          stats: {
+            create: {
+              vitality: defaultVitality,
+              strength: defaultStrength,
+              speed: defaultSpeed,
+              dexterity: defaultDexterity,
+              maxHP,
+              currentHP: maxHP,
+              maxSP,
+              currentSP: maxSP,
+              statPoints: 0,
+            },
+          },
+          position: {
+            create: {
+              tileX: startingTile.x,
+              tileY: startingTile.y,
+              tileId: startingTile.id,
+            },
+          },
+          equipment: {
+            create: {},
+          },
+          bankAccount: {
+            create: {
+              gold: 0,
+              vaultLevel: 1,
+            },
+          },
+        },
+      });
     }
 
     // Get all jobs
@@ -68,7 +167,7 @@ export const jobsRouter = createTRPCRouter({
         include: { job: true },
       });
 
-      return userJobs.map((uj) => {
+      return updatedUserJobs.map((uj) => {
         const levelResult = addXp(uj.level, uj.xp, 0, 10);
         return {
           ...uj,
@@ -79,6 +178,20 @@ export const jobsRouter = createTRPCRouter({
           progressPct: levelResult.progressPct,
         };
       });
+    }
+
+    // Return existing jobs if no new ones were created
+    return userJobs.map((uj) => {
+      const levelResult = addXp(uj.level, uj.xp, 0, 10);
+      return {
+        ...uj,
+        totalXp: uj.xp,
+        level: levelResult.newLevel,
+        xpInLevel: levelResult.xpInLevel,
+        xpToNext: levelResult.xpToNext,
+        progressPct: levelResult.progressPct,
+      };
+    });
   }),
 
   // Add XP to a job
@@ -92,14 +205,113 @@ export const jobsRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.session.user.id;
       
-      const player = await db.player.findUnique({
+      let player = await db.player.findUnique({
         where: { userId },
       });
 
+      // Auto-create Player if it doesn't exist
       if (!player) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "Player not found",
+        // Get user's character to use its name
+        const character = await db.character.findFirst({
+          where: { userId },
+          orderBy: { createdAt: "desc" },
+        });
+
+        if (!character) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "Character not found. Please create a character first.",
+          });
+        }
+
+        // Get user for username fallback
+        const user = await db.user.findUnique({
+          where: { id: userId },
+          select: { username: true },
+        });
+
+        // Use character name, or username with suffix if name is taken
+        let characterName = character.name;
+        let nameTaken = await db.player.findUnique({
+          where: { characterName },
+        });
+
+        // If name is taken, add a suffix
+        if (nameTaken) {
+          const baseName = user?.username ?? "Player";
+          const suffix = Math.floor(Math.random() * 9000 + 1000);
+          characterName = `${baseName} #${suffix}`;
+        }
+
+        // Find starting tile
+        let startingTile = await db.mapTile.findFirst({
+          where: {
+            isSafeZone: true,
+            tileType: "TOWN",
+          },
+        });
+
+        if (!startingTile) {
+          startingTile = await db.mapTile.upsert({
+            where: { x_y: { x: 0, y: 0 } },
+            update: {},
+            create: {
+              x: 0,
+              y: 0,
+              tileType: "TOWN",
+              zoneType: "SAFE",
+              isSafeZone: true,
+              description: "Starting Town",
+            },
+          });
+        }
+
+        // Create player with default stats
+        const defaultVitality = 5;
+        const defaultStrength = 5;
+        const defaultSpeed = 5;
+        const defaultDexterity = 5;
+        const maxHP = 50 + defaultVitality * 5;
+        const maxSP = 20 + defaultVitality * 2 + defaultSpeed * 1;
+
+        player = await db.player.create({
+          data: {
+            userId,
+            characterName,
+            level: 1,
+            experience: 0,
+            gold: 100,
+            deathCount: 0,
+            stats: {
+              create: {
+                vitality: defaultVitality,
+                strength: defaultStrength,
+                speed: defaultSpeed,
+                dexterity: defaultDexterity,
+                maxHP,
+                currentHP: maxHP,
+                maxSP,
+                currentSP: maxSP,
+                statPoints: 0,
+              },
+            },
+            position: {
+              create: {
+                tileX: startingTile.x,
+                tileY: startingTile.y,
+                tileId: startingTile.id,
+              },
+            },
+            equipment: {
+              create: {},
+            },
+            bankAccount: {
+              create: {
+                gold: 0,
+                vaultLevel: 1,
+              },
+            },
+          },
         });
       }
 
