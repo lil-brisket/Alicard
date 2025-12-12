@@ -37,15 +37,15 @@ const rarityColors: Record<string, { border: string; text: string; dot: string }
   LEGENDARY: { border: "border-yellow-400", text: "text-yellow-400", dot: "bg-yellow-400" },
 };
 
-// Position coordinates for body slots (percentage-based for responsiveness)
-const slotPositions: Record<EquipmentSlot, { top: string; left: string }> = {
-  HEAD: { top: "5%", left: "50%" },
-  LEFT_ARM: { top: "25%", left: "15%" },
-  RIGHT_ARM: { top: "25%", left: "85%" },
+// Position coordinates for body slots (percentage-based for true rig)
+const slotPositions: Record<EquipmentSlot, { top: string; left?: string; right?: string }> = {
+  HEAD: { top: "8%", left: "50%" },
+  LEFT_ARM: { top: "42%", left: "12%" },
+  RIGHT_ARM: { top: "42%", right: "12%" },
   BODY: { top: "35%", left: "50%" },
-  LEGS: { top: "65%", left: "50%" },
-  FEET: { top: "90%", left: "50%" },
-  RING1: { top: "0", left: "0" }, // Not used for body positioning
+  LEGS: { top: "59%", left: "50%" },
+  FEET: { top: "82%", left: "50%" },
+  RING1: { top: "0", left: "0" },
   RING2: { top: "0", left: "0" },
   RING3: { top: "0", left: "0" },
   NECKLACE: { top: "0", left: "0" },
@@ -282,17 +282,16 @@ export default function EquipmentPage() {
           <div className="space-y-3">
             <h2 className="text-xl font-semibold text-cyan-400">Equipment Slots</h2>
             
-            {/* Character Silhouette with Body Slots */}
-            <div className="relative mx-auto aspect-[612/612] w-full max-w-md">
-              <Image
+            {/* Character Silhouette with Body Slots - True Rig */}
+            <div className="relative mx-auto aspect-[3/4] w-[420px]">
+              {/* Silhouette */}
+              <img
                 src="/character-silhouette.png"
                 alt="Character silhouette"
-                fill
-                className="object-contain"
-                priority
+                className="absolute inset-0 h-full w-full object-contain opacity-90 pointer-events-none brightness-110 contrast-125"
               />
               
-              {/* Body Slots Overlay */}
+              {/* Body Slots Overlay - Percentage-based positioning */}
               {bodySlots.map((slot) => {
                 const item = getEquippedItem(slot);
                 const isSelected = selectedSlot === slot;
@@ -302,29 +301,37 @@ export default function EquipmentPage() {
                 const rarityColor = item?.itemRarity ? rarityColors[item.itemRarity] : null;
                 const primaryStat = getPrimaryStat(item);
                 const totalBonus = getTotalStatBonus(item);
+                const isCentered = position.left === "50%";
+                
                 return (
                   <div
                     key={slot}
-                    className={`group absolute -translate-x-1/2 -translate-y-1/2 transition-all ${
+                    className={`group absolute -translate-y-1/2 transition-all ${
+                      isCentered ? "left-1/2 -translate-x-1/2" : ""
+                    } ${
                       isSelected
                         ? "z-10 scale-110"
                         : "hover:scale-105"
                     }`}
-                    style={{ top: position.top, left: position.left }}
+                    style={{ 
+                      top: position.top,
+                      ...(isCentered ? {} : position.left ? { left: position.left } : {}),
+                      ...(position.right ? { right: position.right } : {})
+                    }}
                   >
                     <div
                       role="button"
                       tabIndex={0}
                       aria-pressed={isSelected}
                       aria-label={`${slotLabels[slot]} slot${item ? `, equipped: ${item.name}` : ", empty"}`}
-                      className={`relative flex h-16 w-16 cursor-pointer flex-col items-center justify-center rounded-lg border-2 transition ${
+                      className={`relative flex h-[64px] w-[64px] cursor-pointer flex-col items-center justify-center rounded-lg border-2 transition-all duration-200 ${
                         isSelected
-                          ? "border-cyan-400 bg-cyan-500/20 shadow-lg shadow-cyan-500/50 ring-2 ring-cyan-400 ring-offset-2 ring-offset-slate-950"
+                          ? "border-cyan-400 bg-cyan-500/20 ring-2 ring-cyan-400 shadow-[0_0_18px_rgba(34,211,238,0.35)] animate-pulse"
                           : item && rarityColor
-                            ? `${rarityColor.border} bg-slate-800/60 hover:border-opacity-70`
+                            ? `${rarityColor.border} bg-slate-800/60 ring-1 ring-white/10 hover:ring-white/25 hover:border-opacity-70 hover:bg-slate-800/80`
                             : item
-                              ? "border-green-500 bg-green-500/20 hover:border-green-400"
-                              : "border-slate-600 bg-slate-800/60 hover:border-slate-500"
+                              ? "border-green-500 bg-green-500/20 ring-1 ring-white/10 hover:ring-white/25 hover:border-green-400 hover:bg-green-500/30"
+                              : "border-slate-600 bg-slate-800/60 ring-1 ring-white/10 hover:ring-white/25 hover:border-slate-500 hover:bg-slate-800/80"
                       }`}
                       onClick={() => {
                         handleSlotClick(slot);
@@ -339,15 +346,15 @@ export default function EquipmentPage() {
                         <>
                           {/* Rarity dot indicator */}
                           {rarityColor && (
-                            <div className={`absolute left-1 top-1 h-2 w-2 rounded-full ${rarityColor.dot}`} />
+                            <div className={`absolute left-1.5 top-1.5 h-2.5 w-2.5 rounded-full ${rarityColor.dot} ring-1 ring-slate-900/50`} />
                           )}
                           {/* Item name (truncated) */}
-                          <span className="max-w-[90%] truncate text-[9px] font-semibold text-slate-100">
+                          <span className="max-w-[90%] truncate text-[10px] font-semibold text-slate-100">
                             {item.name}
                           </span>
                           {/* Stat total */}
                           {totalBonus > 0 && (
-                            <span className="text-[8px] text-cyan-300">
+                            <span className="text-[9px] text-cyan-300">
                               +{totalBonus} {primaryStat?.label || ""}
                             </span>
                           )}
@@ -366,7 +373,7 @@ export default function EquipmentPage() {
                           </button>
                         </>
                       ) : (
-                        <span className="text-xs text-slate-400">+</span>
+                        <span className="text-lg text-slate-400 font-light">+</span>
                       )}
                       {/* Tooltip on hover (desktop) */}
                       {item && (
@@ -399,8 +406,13 @@ export default function EquipmentPage() {
                         </button>
                       </div>
                     )}
+                    {/* Slot label - hidden by default, shown on hover/selected */}
                     <div 
-                      className="absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap text-xs text-slate-300 cursor-pointer"
+                      className={`absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap text-sm font-medium cursor-pointer transition-all ${
+                        isSelected 
+                          ? "opacity-100 text-cyan-300 font-semibold" 
+                          : "opacity-70 group-hover:opacity-100 group-hover:text-slate-100"
+                      }`}
                       onClick={() => handleItemClick(slot)}
                       onKeyDown={(e) => handleItemKeyDown(e, slot)}
                       role="button"
@@ -414,9 +426,9 @@ export default function EquipmentPage() {
             </div>
 
             {/* Accessory Slots at Bottom */}
-            <div className="mt-2">
+            <div className="mt-6 rounded-xl border border-slate-800 bg-slate-950/60 p-4">
               <h3 className="mb-3 text-sm font-semibold text-slate-400">Accessories</h3>
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+              <div className="grid grid-cols-3 gap-4 sm:grid-cols-6">
                 {accessorySlots.map((slot) => {
                   const item = getEquippedItem(slot);
                   const isSelected = selectedSlot === slot;
@@ -428,68 +440,93 @@ export default function EquipmentPage() {
                   return (
                     <div
                       key={slot}
-                      role="button"
-                      tabIndex={0}
-                      onClick={() => {
-                        handleSlotClick(slot);
-                        if (!isExpanded && item) {
-                          setExpandedSlot(slot);
-                        }
-                      }}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
+                      className={`group relative flex flex-col items-center transition-all ${
+                        isSelected
+                          ? "z-10 scale-110"
+                          : "hover:scale-105"
+                      }`}
+                    >
+                      <div
+                        role="button"
+                        tabIndex={0}
+                        aria-pressed={isSelected}
+                        aria-label={`${slotLabels[slot]} slot${item ? `, equipped: ${item.name}` : ", empty"}`}
+                        className={`relative flex h-[64px] w-[64px] cursor-pointer flex-col items-center justify-center rounded-lg border-2 transition-all duration-200 ${
+                          isSelected
+                            ? "border-cyan-400 bg-cyan-500/20 ring-2 ring-cyan-400 shadow-[0_0_18px_rgba(34,211,238,0.35)] animate-pulse"
+                            : item && rarityColor
+                              ? `${rarityColor.border} bg-slate-800/60 ring-1 ring-white/10 hover:ring-white/25 hover:border-opacity-70 hover:bg-slate-800/80`
+                              : item
+                                ? "border-green-500 bg-green-500/20 ring-1 ring-white/10 hover:ring-white/25 hover:border-green-400 hover:bg-green-500/30"
+                                : "border-slate-600 bg-slate-800/60 ring-1 ring-white/10 hover:ring-white/25 hover:border-slate-500 hover:bg-slate-800/80"
+                        }`}
+                        onClick={() => {
                           handleSlotClick(slot);
                           if (!isExpanded && item) {
                             setExpandedSlot(slot);
                           }
-                        }
-                      }}
-                      className={`cursor-pointer rounded-xl border p-3 transition ${
-                        isSelected
-                          ? "border-cyan-400 bg-cyan-500/10 ring-2 ring-cyan-400 ring-offset-1 ring-offset-slate-950"
-                          : item && rarityColor
-                            ? `${rarityColor.border} bg-slate-950/60 hover:border-opacity-70`
-                            : "border-slate-800 bg-slate-950/60 hover:border-slate-700"
-                      }`}
-                    >
-                      <div className="mb-2 flex items-center justify-between">
-                        <h3 className="text-xs font-semibold text-slate-300">{slotLabels[slot]}</h3>
-                        {isSelected && (
-                          <span className="rounded-full bg-cyan-500/20 px-2 py-0.5 text-[10px] text-cyan-400">
-                            ✓
-                          </span>
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            handleSlotClick(slot);
+                            if (!isExpanded && item) {
+                              setExpandedSlot(slot);
+                            }
+                          }
+                        }}
+                      >
+                        {item ? (
+                          <>
+                            {/* Rarity dot indicator */}
+                            {rarityColor && (
+                              <div className={`absolute left-1.5 top-1.5 h-2.5 w-2.5 rounded-full ${rarityColor.dot} ring-1 ring-slate-900/50`} />
+                            )}
+                            {/* Item name (truncated) */}
+                            <span className="max-w-[90%] truncate text-[10px] font-semibold text-slate-100">
+                              {item.name}
+                            </span>
+                            {/* Stat total */}
+                            {totalBonus > 0 && (
+                              <span className="text-[9px] text-cyan-300">
+                                +{totalBonus} {primaryStat?.label || ""}
+                              </span>
+                            )}
+                            {/* Unequip button on hover/desktop */}
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setPendingSlot(slot);
+                                unequipMutation.mutate({ fromSlot: slot });
+                              }}
+                              disabled={isPending}
+                              className="absolute right-0 top-0 hidden h-5 w-5 items-center justify-center rounded-full bg-red-500/80 text-[10px] text-white transition hover:bg-red-500 disabled:opacity-50 group-hover:flex"
+                              title="Unequip"
+                            >
+                              {isPending ? "..." : "×"}
+                            </button>
+                          </>
+                        ) : (
+                          <span className="text-lg text-slate-400 font-light">+</span>
+                        )}
+                        {/* Tooltip on hover (desktop) */}
+                        {item && (
+                          <div className="pointer-events-none absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 whitespace-nowrap rounded-lg border border-slate-700 bg-slate-900 px-2 py-1 text-xs text-slate-100 shadow-lg group-hover:block">
+                            <div className="font-semibold">{item.name}</div>
+                            <StatBadges item={item} size="xs" />
+                          </div>
                         )}
                       </div>
-                      {item ? (
-                        <div className="space-y-1">
-                          {/* Rarity dot indicator */}
-                          {rarityColor && (
-                            <div className="mb-1 flex items-center gap-1">
-                              <div className={`h-2 w-2 rounded-full ${rarityColor.dot}`} />
-                              <p className="text-xs font-medium text-slate-100 truncate">{item.name}</p>
-                            </div>
+                      {/* Mobile/Expanded detail panel */}
+                      {isExpanded && item && (
+                        <div className="absolute left-1/2 top-full z-20 mt-2 w-48 -translate-x-1/2 rounded-lg border border-slate-700 bg-slate-900 p-3 text-xs text-slate-100 shadow-lg">
+                          <div className="mb-1 font-semibold">Equipped: {item.name}</div>
+                          {item.description && (
+                            <div className="mb-2 text-slate-400">{item.description}</div>
                           )}
-                          {!rarityColor && (
-                            <p className="text-xs font-medium text-slate-100 truncate">{item.name}</p>
-                          )}
-                          {totalBonus > 0 && primaryStat && (
-                            <p className="text-[10px] text-cyan-300">
-                              +{primaryStat.value} {primaryStat.label}
-                            </p>
-                          )}
-                          <StatBadges item={item} size="xs" />
-                          {/* Mobile/Expanded detail panel */}
-                          {isExpanded && (
-                            <div className="mt-2 rounded border border-slate-700 bg-slate-900 p-2 text-xs text-slate-100">
-                              {item.description && (
-                                <div className="mb-2 text-slate-400">{item.description}</div>
-                              )}
-                              <div className="mb-2">
-                                <StatBadges item={item} size="xs" showLabels />
-                              </div>
-                            </div>
-                          )}
+                          <div className="mb-2">
+                            <StatBadges item={item} size="xs" showLabels />
+                          </div>
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
@@ -497,17 +534,31 @@ export default function EquipmentPage() {
                               unequipMutation.mutate({ fromSlot: slot });
                             }}
                             disabled={isPending}
-                            className="mt-1 w-full rounded bg-red-500/20 px-2 py-1 text-[10px] text-red-400 transition hover:bg-red-500/30 disabled:opacity-50"
+                            className="w-full rounded bg-red-500/20 px-2 py-1 text-red-400 transition hover:bg-red-500/30 disabled:opacity-50"
                           >
                             {isPending ? "Unequipping..." : "Unequip"}
                           </button>
                         </div>
-                      ) : (
-                        <div>
-                          <p className="mb-1 text-[10px] text-slate-500">Empty</p>
-                          <p className="text-[9px] text-slate-600">Click to equip</p>
-                        </div>
                       )}
+                      {/* Slot label */}
+                      <div 
+                        className={`mt-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-all ${
+                          isSelected 
+                            ? "opacity-100 text-cyan-300 font-semibold" 
+                            : "opacity-70 group-hover:opacity-100 group-hover:text-slate-100"
+                        }`}
+                        onClick={() => handleItemClick(slot)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            handleItemClick(slot);
+                          }
+                        }}
+                        role="button"
+                        tabIndex={0}
+                      >
+                        {slotLabels[slot]}
+                      </div>
                     </div>
                   );
                 })}
@@ -521,16 +572,11 @@ export default function EquipmentPage() {
               <div className="flex-1">
                 {selectedSlot ? (
                   <>
-                    <div className="mb-2 flex items-center gap-2">
-                      <span className="rounded-full bg-cyan-500/20 px-3 py-1 text-xs font-semibold text-cyan-400">
-                        Selected: {slotLabels[selectedSlot]}
-                      </span>
-                    </div>
                     <h2 className="text-xl font-semibold text-cyan-400">
-                      Equippable Items
+                      Selected: {slotLabels[selectedSlot]}
                     </h2>
                     <p className="mt-1 text-sm text-slate-400">
-                      Showing: items for {slotLabels[selectedSlot]}
+                      Showing items for {slotLabels[selectedSlot]}
                     </p>
                     <p className="text-xs text-slate-500">
                       Only equippable items for this slot appear here.
@@ -614,8 +660,22 @@ export default function EquipmentPage() {
                 )}
               </>
             ) : (
-              <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-8 text-center">
-                <p className="text-slate-400">Pick a slot on the character to view equippable items.</p>
+              <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-6 text-center">
+                <p className="mb-4 text-slate-400">Pick a slot on the character to view equippable items.</p>
+                <div className="space-y-2 text-left text-sm text-slate-500">
+                  <div className="flex items-center gap-2">
+                    <span className="text-cyan-400">•</span>
+                    <span>Click a slot</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-cyan-400">•</span>
+                    <span>Pick an item</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-cyan-400">•</span>
+                    <span>Swap anytime</span>
+                  </div>
+                </div>
               </div>
             )}
           </div>
