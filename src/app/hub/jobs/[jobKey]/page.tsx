@@ -34,6 +34,21 @@ export default function JobDetailPage({ params }: Props) {
     return (
       <div className="min-h-screen bg-slate-950 text-slate-100">
         <div className="mx-auto max-w-5xl p-4 md:p-8">
+          <div className="mb-6 flex items-center justify-between">
+            <Link
+              href="/hub/jobs"
+              className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-slate-200 transition-colors"
+            >
+              <span>←</span>
+              <span>Back to Jobs</span>
+            </Link>
+            <Link
+              href="/hub"
+              className="inline-block rounded-xl bg-cyan-500/20 px-6 py-3 text-cyan-400 transition hover:bg-cyan-500/30"
+            >
+              Return to Hub
+            </Link>
+          </div>
           <p className="text-slate-400">Job not found</p>
         </div>
       </div>
@@ -43,12 +58,21 @@ export default function JobDetailPage({ params }: Props) {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto max-w-5xl p-4 md:p-8">
-        <Link
-          href="/hub/jobs"
-          className="text-cyan-400 hover:text-cyan-300"
-        >
-          ← Back to Jobs
-        </Link>
+        <div className="mb-6 flex items-center justify-between">
+          <Link
+            href="/hub/jobs"
+            className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-slate-200 transition-colors"
+          >
+            <span>←</span>
+            <span>Back to Jobs</span>
+          </Link>
+          <Link
+            href="/hub"
+            className="inline-block rounded-xl bg-cyan-500/20 px-6 py-3 text-cyan-400 transition hover:bg-cyan-500/30"
+          >
+            Return to Hub
+          </Link>
+        </div>
         
         <h1 className="mt-4 text-2xl font-bold text-cyan-400">{job.name}</h1>
         <p className="mt-2 text-slate-400">{job.description}</p>

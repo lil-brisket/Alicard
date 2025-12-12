@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { api } from "~/trpc/server";
 import { ProfileHeaderCard } from "../_components/profile-header-card";
 import { ProfileStatsCard } from "../_components/profile-stats-card";
@@ -36,9 +37,17 @@ export default async function ProfileUsernamePage({
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto flex min-h-screen max-w-5xl flex-col gap-4 p-4 md:p-8">
-        <h1 className="text-2xl font-bold text-cyan-400">
-          {profile.user.name ?? profile.user.username}&apos;s Profile
-        </h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-cyan-400">
+            {profile.user.name ?? profile.user.username}&apos;s Profile
+          </h1>
+          <Link
+            href="/hub"
+            className="inline-block rounded-xl bg-cyan-500/20 px-6 py-3 text-cyan-400 transition hover:bg-cyan-500/30"
+          >
+            Return to Hub
+          </Link>
+        </div>
 
         <main className="mt-4 grid flex-1 grid-cols-1 gap-4 md:mt-6 md:grid-cols-12">
           {/* Left column: md:col-span-5 */}

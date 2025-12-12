@@ -35,13 +35,21 @@ export default async function ProfileAchievementsPage({
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto max-w-5xl p-4 md:p-8">
-        <Link
-          href={`/profile/${username}`}
-          className="inline-flex items-center gap-2 mb-6 text-sm text-slate-400 hover:text-slate-200 transition-colors"
-        >
-          <span>←</span>
-          <span>Back to Profile</span>
-        </Link>
+        <div className="mb-6 flex items-center justify-between">
+          <Link
+            href={`/profile/${username}`}
+            className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-slate-200 transition-colors"
+          >
+            <span>←</span>
+            <span>Back to Profile</span>
+          </Link>
+          <Link
+            href="/hub"
+            className="inline-block rounded-xl bg-cyan-500/20 px-6 py-3 text-cyan-400 transition hover:bg-cyan-500/30"
+          >
+            Return to Hub
+          </Link>
+        </div>
 
         <h1 className="text-2xl font-bold text-cyan-400">
           {profile.user.name ?? profile.user.username}&apos;s Achievements
