@@ -274,10 +274,11 @@ export const recipesRouter = createTRPCRouter({
   getRecentCraftedItems: publicProcedure
     .input(
       z.object({
-        limit: z.number().int().min(1).max(50).default(20),
+        limit: z.number().int().min(1).max(50).optional(),
       }).optional()
     )
     .query(async ({ input }) => {
+      const limit = input?.limit ?? 20;
       return await db.craftAttempt.findMany({
         where: { success: true },
         include: {
@@ -294,7 +295,7 @@ export const recipesRouter = createTRPCRouter({
           },
         },
         orderBy: { createdAt: "desc" },
-        take: input?.limit ?? 20,
+        take: limit,
       });
     }),
 });

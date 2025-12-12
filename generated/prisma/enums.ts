@@ -137,3 +137,11 @@ export const QuestType = {
 } as const
 
 export type QuestType = (typeof QuestType)[keyof typeof QuestType]
+
+
+export const JobCategory = {
+  CRAFT: 'CRAFT',
+  GATHER: 'GATHER'
+} as const
+
+export type JobCategory = (typeof JobCategory)[keyof typeof JobCategory]

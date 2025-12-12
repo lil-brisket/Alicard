@@ -167,3 +167,43 @@ export type MarketTransaction = Prisma.MarketTransactionModel
  * 
  */
 export type Quest = Prisma.QuestModel
+/**
+ * Model Job
+ * 
+ */
+export type Job = Prisma.JobModel
+/**
+ * Model UserJob
+ * 
+ */
+export type UserJob = Prisma.UserJobModel
+/**
+ * Model Recipe
+ * 
+ */
+export type Recipe = Prisma.RecipeModel
+/**
+ * Model RecipeInput
+ * 
+ */
+export type RecipeInput = Prisma.RecipeInputModel
+/**
+ * Model CraftAttempt
+ * 
+ */
+export type CraftAttempt = Prisma.CraftAttemptModel
+/**
+ * Model GatheringNode
+ * 
+ */
+export type GatheringNode = Prisma.GatheringNodeModel
+/**
+ * Model NodeYield
+ * 
+ */
+export type NodeYield = Prisma.NodeYieldModel
+/**
+ * Model GatherAttempt
+ * 
+ */
+export type GatherAttempt = Prisma.GatherAttemptModel

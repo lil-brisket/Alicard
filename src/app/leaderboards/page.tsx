@@ -13,22 +13,32 @@ export default async function LeaderboardsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="flex min-h-screen flex-col items-center justify-center gap-4 p-4">
-        <div className="w-full max-w-md rounded-xl border border-white/20 bg-white/10 p-6">
-          <h1 className="mb-4 text-3xl font-bold">Leaderboards</h1>
-          <p className="mb-6 text-slate-300">
-            This feature is under construction.
+    <div className="min-h-screen bg-slate-950 text-slate-100">
+      <div className="mx-auto max-w-5xl p-4 md:p-8">
+        <h1 className="text-2xl font-bold text-cyan-400">Leaderboards</h1>
+        <p className="mt-2 text-slate-400">
+          See how you rank against other players
+        </p>
+
+        <div className="mt-6 rounded-xl border border-slate-800 bg-slate-950/60 p-8 text-center">
+          <h2 className="text-xl font-semibold text-slate-100">
+            Coming Soon
+          </h2>
+          <p className="mt-2 text-slate-400">
+            This feature is under construction. Check back soon!
           </p>
+        </div>
+
+        <div className="mt-8">
           <Link
             href="/hub"
-            className="inline-block rounded-lg bg-[hsl(280,100%,70%)] px-6 py-3 font-semibold text-white transition hover:bg-[hsl(280,100%,65%)]"
+            className="inline-block rounded-xl bg-cyan-500/20 px-6 py-3 text-cyan-400 transition hover:bg-cyan-500/30"
           >
-            Back to Hub
+            Return to Hub
           </Link>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 

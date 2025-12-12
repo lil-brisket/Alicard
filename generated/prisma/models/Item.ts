@@ -356,6 +356,9 @@ export type ItemWhereInput = {
   marketListings?: Prisma.MarketListingListRelationFilter
   marketTransactions?: Prisma.MarketTransactionListRelationFilter
   shopItems?: Prisma.ShopItemListRelationFilter
+  recipeOutputs?: Prisma.RecipeListRelationFilter
+  recipeInputs?: Prisma.RecipeInputListRelationFilter
+  nodeYields?: Prisma.NodeYieldListRelationFilter
 }
 
 export type ItemOrderByWithRelationInput = {
@@ -388,6 +391,9 @@ export type ItemOrderByWithRelationInput = {
   marketListings?: Prisma.MarketListingOrderByRelationAggregateInput
   marketTransactions?: Prisma.MarketTransactionOrderByRelationAggregateInput
   shopItems?: Prisma.ShopItemOrderByRelationAggregateInput
+  recipeOutputs?: Prisma.RecipeOrderByRelationAggregateInput
+  recipeInputs?: Prisma.RecipeInputOrderByRelationAggregateInput
+  nodeYields?: Prisma.NodeYieldOrderByRelationAggregateInput
 }
 
 export type ItemWhereUniqueInput = Prisma.AtLeast<{
@@ -423,6 +429,9 @@ export type ItemWhereUniqueInput = Prisma.AtLeast<{
   marketListings?: Prisma.MarketListingListRelationFilter
   marketTransactions?: Prisma.MarketTransactionListRelationFilter
   shopItems?: Prisma.ShopItemListRelationFilter
+  recipeOutputs?: Prisma.RecipeListRelationFilter
+  recipeInputs?: Prisma.RecipeInputListRelationFilter
+  nodeYields?: Prisma.NodeYieldListRelationFilter
 }, "id">
 
 export type ItemOrderByWithAggregationInput = {
@@ -503,6 +512,9 @@ export type ItemCreateInput = {
   marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateInput = {
@@ -535,6 +547,9 @@ export type ItemUncheckedCreateInput = {
   marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeUncheckedCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemUpdateInput = {
@@ -567,6 +582,9 @@ export type ItemUpdateInput = {
   marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateInput = {
@@ -599,6 +617,9 @@ export type ItemUncheckedUpdateInput = {
   marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUncheckedUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateManyInput = {
@@ -949,6 +970,48 @@ export type ItemUpdateOneRequiredWithoutMarketTransactionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutMarketTransactionsInput, Prisma.ItemUpdateWithoutMarketTransactionsInput>, Prisma.ItemUncheckedUpdateWithoutMarketTransactionsInput>
 }
 
+export type ItemCreateNestedOneWithoutRecipeOutputsInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutRecipeOutputsInput, Prisma.ItemUncheckedCreateWithoutRecipeOutputsInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutRecipeOutputsInput
+  connect?: Prisma.ItemWhereUniqueInput
+}
+
+export type ItemUpdateOneRequiredWithoutRecipeOutputsNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutRecipeOutputsInput, Prisma.ItemUncheckedCreateWithoutRecipeOutputsInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutRecipeOutputsInput
+  upsert?: Prisma.ItemUpsertWithoutRecipeOutputsInput
+  connect?: Prisma.ItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutRecipeOutputsInput, Prisma.ItemUpdateWithoutRecipeOutputsInput>, Prisma.ItemUncheckedUpdateWithoutRecipeOutputsInput>
+}
+
+export type ItemCreateNestedOneWithoutRecipeInputsInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutRecipeInputsInput, Prisma.ItemUncheckedCreateWithoutRecipeInputsInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutRecipeInputsInput
+  connect?: Prisma.ItemWhereUniqueInput
+}
+
+export type ItemUpdateOneRequiredWithoutRecipeInputsNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutRecipeInputsInput, Prisma.ItemUncheckedCreateWithoutRecipeInputsInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutRecipeInputsInput
+  upsert?: Prisma.ItemUpsertWithoutRecipeInputsInput
+  connect?: Prisma.ItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutRecipeInputsInput, Prisma.ItemUpdateWithoutRecipeInputsInput>, Prisma.ItemUncheckedUpdateWithoutRecipeInputsInput>
+}
+
+export type ItemCreateNestedOneWithoutNodeYieldsInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutNodeYieldsInput, Prisma.ItemUncheckedCreateWithoutNodeYieldsInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutNodeYieldsInput
+  connect?: Prisma.ItemWhereUniqueInput
+}
+
+export type ItemUpdateOneRequiredWithoutNodeYieldsNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutNodeYieldsInput, Prisma.ItemUncheckedCreateWithoutNodeYieldsInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutNodeYieldsInput
+  upsert?: Prisma.ItemUpsertWithoutNodeYieldsInput
+  connect?: Prisma.ItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutNodeYieldsInput, Prisma.ItemUpdateWithoutNodeYieldsInput>, Prisma.ItemUncheckedUpdateWithoutNodeYieldsInput>
+}
+
 export type ItemCreateWithoutShopItemsInput = {
   id?: string
   name: string
@@ -978,6 +1041,9 @@ export type ItemCreateWithoutShopItemsInput = {
   inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
   marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutShopItemsInput = {
@@ -1009,6 +1075,9 @@ export type ItemUncheckedCreateWithoutShopItemsInput = {
   inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
   marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeUncheckedCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutShopItemsInput = {
@@ -1056,6 +1125,9 @@ export type ItemUpdateWithoutShopItemsInput = {
   inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
   marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutShopItemsInput = {
@@ -1087,6 +1159,9 @@ export type ItemUncheckedUpdateWithoutShopItemsInput = {
   inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
   marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUncheckedUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutInventoryItemsInput = {
@@ -1118,6 +1193,9 @@ export type ItemCreateWithoutInventoryItemsInput = {
   marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutInventoryItemsInput = {
@@ -1149,6 +1227,9 @@ export type ItemUncheckedCreateWithoutInventoryItemsInput = {
   marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeUncheckedCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutInventoryItemsInput = {
@@ -1196,6 +1277,9 @@ export type ItemUpdateWithoutInventoryItemsInput = {
   marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutInventoryItemsInput = {
@@ -1227,6 +1311,9 @@ export type ItemUncheckedUpdateWithoutInventoryItemsInput = {
   marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUncheckedUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutEquippedAsAccessory1Input = {
@@ -1258,6 +1345,9 @@ export type ItemCreateWithoutEquippedAsAccessory1Input = {
   marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsAccessory1Input = {
@@ -1289,6 +1379,9 @@ export type ItemUncheckedCreateWithoutEquippedAsAccessory1Input = {
   marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeUncheckedCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsAccessory1Input = {
@@ -1325,6 +1418,9 @@ export type ItemCreateWithoutEquippedAsAccessory2Input = {
   marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsAccessory2Input = {
@@ -1356,6 +1452,9 @@ export type ItemUncheckedCreateWithoutEquippedAsAccessory2Input = {
   marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeUncheckedCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsAccessory2Input = {
@@ -1392,6 +1491,9 @@ export type ItemCreateWithoutEquippedAsChestInput = {
   marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsChestInput = {
@@ -1423,6 +1525,9 @@ export type ItemUncheckedCreateWithoutEquippedAsChestInput = {
   marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeUncheckedCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsChestInput = {
@@ -1459,6 +1564,9 @@ export type ItemCreateWithoutEquippedAsFeetInput = {
   marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsFeetInput = {
@@ -1490,6 +1598,9 @@ export type ItemUncheckedCreateWithoutEquippedAsFeetInput = {
   marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeUncheckedCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsFeetInput = {
@@ -1526,6 +1637,9 @@ export type ItemCreateWithoutEquippedAsHeadInput = {
   marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsHeadInput = {
@@ -1557,6 +1671,9 @@ export type ItemUncheckedCreateWithoutEquippedAsHeadInput = {
   marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeUncheckedCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsHeadInput = {
@@ -1593,6 +1710,9 @@ export type ItemCreateWithoutEquippedAsLegsInput = {
   marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsLegsInput = {
@@ -1624,6 +1744,9 @@ export type ItemUncheckedCreateWithoutEquippedAsLegsInput = {
   marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeUncheckedCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsLegsInput = {
@@ -1660,6 +1783,9 @@ export type ItemCreateWithoutEquippedAsWeaponInput = {
   marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsWeaponInput = {
@@ -1691,6 +1817,9 @@ export type ItemUncheckedCreateWithoutEquippedAsWeaponInput = {
   marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeUncheckedCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsWeaponInput = {
@@ -1738,6 +1867,9 @@ export type ItemUpdateWithoutEquippedAsAccessory1Input = {
   marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsAccessory1Input = {
@@ -1769,6 +1901,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsAccessory1Input = {
   marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUncheckedUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsAccessory2Input = {
@@ -1811,6 +1946,9 @@ export type ItemUpdateWithoutEquippedAsAccessory2Input = {
   marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsAccessory2Input = {
@@ -1842,6 +1980,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsAccessory2Input = {
   marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUncheckedUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsChestInput = {
@@ -1884,6 +2025,9 @@ export type ItemUpdateWithoutEquippedAsChestInput = {
   marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsChestInput = {
@@ -1915,6 +2059,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsChestInput = {
   marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUncheckedUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsFeetInput = {
@@ -1957,6 +2104,9 @@ export type ItemUpdateWithoutEquippedAsFeetInput = {
   marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsFeetInput = {
@@ -1988,6 +2138,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsFeetInput = {
   marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUncheckedUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsHeadInput = {
@@ -2030,6 +2183,9 @@ export type ItemUpdateWithoutEquippedAsHeadInput = {
   marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsHeadInput = {
@@ -2061,6 +2217,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsHeadInput = {
   marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUncheckedUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsLegsInput = {
@@ -2103,6 +2262,9 @@ export type ItemUpdateWithoutEquippedAsLegsInput = {
   marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsLegsInput = {
@@ -2134,6 +2296,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsLegsInput = {
   marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUncheckedUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsWeaponInput = {
@@ -2176,6 +2341,9 @@ export type ItemUpdateWithoutEquippedAsWeaponInput = {
   marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsWeaponInput = {
@@ -2207,6 +2375,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsWeaponInput = {
   marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUncheckedUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutBankVaultItemsInput = {
@@ -2238,6 +2409,9 @@ export type ItemCreateWithoutBankVaultItemsInput = {
   marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutBankVaultItemsInput = {
@@ -2269,6 +2443,9 @@ export type ItemUncheckedCreateWithoutBankVaultItemsInput = {
   marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeUncheckedCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutBankVaultItemsInput = {
@@ -2316,6 +2493,9 @@ export type ItemUpdateWithoutBankVaultItemsInput = {
   marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutBankVaultItemsInput = {
@@ -2347,6 +2527,9 @@ export type ItemUncheckedUpdateWithoutBankVaultItemsInput = {
   marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUncheckedUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutMarketListingsInput = {
@@ -2378,6 +2561,9 @@ export type ItemCreateWithoutMarketListingsInput = {
   inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutMarketListingsInput = {
@@ -2409,6 +2595,9 @@ export type ItemUncheckedCreateWithoutMarketListingsInput = {
   inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
   marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeUncheckedCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutMarketListingsInput = {
@@ -2456,6 +2645,9 @@ export type ItemUpdateWithoutMarketListingsInput = {
   inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutMarketListingsInput = {
@@ -2487,6 +2679,9 @@ export type ItemUncheckedUpdateWithoutMarketListingsInput = {
   inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
   marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUncheckedUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutMarketTransactionsInput = {
@@ -2518,6 +2713,9 @@ export type ItemCreateWithoutMarketTransactionsInput = {
   inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
   marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutMarketTransactionsInput = {
@@ -2549,6 +2747,9 @@ export type ItemUncheckedCreateWithoutMarketTransactionsInput = {
   inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
   marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
   shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeUncheckedCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutMarketTransactionsInput = {
@@ -2596,6 +2797,9 @@ export type ItemUpdateWithoutMarketTransactionsInput = {
   inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
   marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutMarketTransactionsInput = {
@@ -2627,6 +2831,465 @@ export type ItemUncheckedUpdateWithoutMarketTransactionsInput = {
   inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
   marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
   shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUncheckedUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
+}
+
+export type ItemCreateWithoutRecipeOutputsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+  recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
+}
+
+export type ItemUncheckedCreateWithoutRecipeOutputsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+  recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
+}
+
+export type ItemCreateOrConnectWithoutRecipeOutputsInput = {
+  where: Prisma.ItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.ItemCreateWithoutRecipeOutputsInput, Prisma.ItemUncheckedCreateWithoutRecipeOutputsInput>
+}
+
+export type ItemUpsertWithoutRecipeOutputsInput = {
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutRecipeOutputsInput, Prisma.ItemUncheckedUpdateWithoutRecipeOutputsInput>
+  create: Prisma.XOR<Prisma.ItemCreateWithoutRecipeOutputsInput, Prisma.ItemUncheckedCreateWithoutRecipeOutputsInput>
+  where?: Prisma.ItemWhereInput
+}
+
+export type ItemUpdateToOneWithWhereWithoutRecipeOutputsInput = {
+  where?: Prisma.ItemWhereInput
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutRecipeOutputsInput, Prisma.ItemUncheckedUpdateWithoutRecipeOutputsInput>
+}
+
+export type ItemUpdateWithoutRecipeOutputsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUncheckedUpdateWithoutRecipeOutputsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
+}
+
+export type ItemCreateWithoutRecipeInputsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeCreateNestedManyWithoutOutputItemInput
+  nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
+}
+
+export type ItemUncheckedCreateWithoutRecipeInputsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeUncheckedCreateNestedManyWithoutOutputItemInput
+  nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
+}
+
+export type ItemCreateOrConnectWithoutRecipeInputsInput = {
+  where: Prisma.ItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.ItemCreateWithoutRecipeInputsInput, Prisma.ItemUncheckedCreateWithoutRecipeInputsInput>
+}
+
+export type ItemUpsertWithoutRecipeInputsInput = {
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutRecipeInputsInput, Prisma.ItemUncheckedUpdateWithoutRecipeInputsInput>
+  create: Prisma.XOR<Prisma.ItemCreateWithoutRecipeInputsInput, Prisma.ItemUncheckedCreateWithoutRecipeInputsInput>
+  where?: Prisma.ItemWhereInput
+}
+
+export type ItemUpdateToOneWithWhereWithoutRecipeInputsInput = {
+  where?: Prisma.ItemWhereInput
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutRecipeInputsInput, Prisma.ItemUncheckedUpdateWithoutRecipeInputsInput>
+}
+
+export type ItemUpdateWithoutRecipeInputsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUpdateManyWithoutOutputItemNestedInput
+  nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUncheckedUpdateWithoutRecipeInputsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUncheckedUpdateManyWithoutOutputItemNestedInput
+  nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
+}
+
+export type ItemCreateWithoutNodeYieldsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
+}
+
+export type ItemUncheckedCreateWithoutNodeYieldsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory1Input
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutAccessory2Input
+  equippedAsChest?: Prisma.EquipmentUncheckedCreateNestedManyWithoutChestInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedCreateNestedManyWithoutWeaponInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeUncheckedCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
+}
+
+export type ItemCreateOrConnectWithoutNodeYieldsInput = {
+  where: Prisma.ItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.ItemCreateWithoutNodeYieldsInput, Prisma.ItemUncheckedCreateWithoutNodeYieldsInput>
+}
+
+export type ItemUpsertWithoutNodeYieldsInput = {
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutNodeYieldsInput, Prisma.ItemUncheckedUpdateWithoutNodeYieldsInput>
+  create: Prisma.XOR<Prisma.ItemCreateWithoutNodeYieldsInput, Prisma.ItemUncheckedCreateWithoutNodeYieldsInput>
+  where?: Prisma.ItemWhereInput
+}
+
+export type ItemUpdateToOneWithWhereWithoutNodeYieldsInput = {
+  where?: Prisma.ItemWhereInput
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutNodeYieldsInput, Prisma.ItemUncheckedUpdateWithoutNodeYieldsInput>
+}
+
+export type ItemUpdateWithoutNodeYieldsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUncheckedUpdateWithoutNodeYieldsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+  equippedAsAccessory1?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput
+  equippedAsAccessory2?: Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput
+  equippedAsChest?: Prisma.EquipmentUncheckedUpdateManyWithoutChestNestedInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
+  equippedAsWeapon?: Prisma.EquipmentUncheckedUpdateManyWithoutWeaponNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUncheckedUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
 }
 
 
@@ -2647,6 +3310,9 @@ export type ItemCountOutputType = {
   marketListings: number
   marketTransactions: number
   shopItems: number
+  recipeOutputs: number
+  recipeInputs: number
+  nodeYields: number
 }
 
 export type ItemCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2662,6 +3328,9 @@ export type ItemCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   marketListings?: boolean | ItemCountOutputTypeCountMarketListingsArgs
   marketTransactions?: boolean | ItemCountOutputTypeCountMarketTransactionsArgs
   shopItems?: boolean | ItemCountOutputTypeCountShopItemsArgs
+  recipeOutputs?: boolean | ItemCountOutputTypeCountRecipeOutputsArgs
+  recipeInputs?: boolean | ItemCountOutputTypeCountRecipeInputsArgs
+  nodeYields?: boolean | ItemCountOutputTypeCountNodeYieldsArgs
 }
 
 /**
@@ -2758,6 +3427,27 @@ export type ItemCountOutputTypeCountShopItemsArgs<ExtArgs extends runtime.Types.
   where?: Prisma.ShopItemWhereInput
 }
 
+/**
+ * ItemCountOutputType without action
+ */
+export type ItemCountOutputTypeCountRecipeOutputsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RecipeWhereInput
+}
+
+/**
+ * ItemCountOutputType without action
+ */
+export type ItemCountOutputTypeCountRecipeInputsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RecipeInputWhereInput
+}
+
+/**
+ * ItemCountOutputType without action
+ */
+export type ItemCountOutputTypeCountNodeYieldsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NodeYieldWhereInput
+}
+
 
 export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2789,6 +3479,9 @@ export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   marketListings?: boolean | Prisma.Item$marketListingsArgs<ExtArgs>
   marketTransactions?: boolean | Prisma.Item$marketTransactionsArgs<ExtArgs>
   shopItems?: boolean | Prisma.Item$shopItemsArgs<ExtArgs>
+  recipeOutputs?: boolean | Prisma.Item$recipeOutputsArgs<ExtArgs>
+  recipeInputs?: boolean | Prisma.Item$recipeInputsArgs<ExtArgs>
+  nodeYields?: boolean | Prisma.Item$nodeYieldsArgs<ExtArgs>
   _count?: boolean | Prisma.ItemCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["item"]>
 
@@ -2866,6 +3559,9 @@ export type ItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   marketListings?: boolean | Prisma.Item$marketListingsArgs<ExtArgs>
   marketTransactions?: boolean | Prisma.Item$marketTransactionsArgs<ExtArgs>
   shopItems?: boolean | Prisma.Item$shopItemsArgs<ExtArgs>
+  recipeOutputs?: boolean | Prisma.Item$recipeOutputsArgs<ExtArgs>
+  recipeInputs?: boolean | Prisma.Item$recipeInputsArgs<ExtArgs>
+  nodeYields?: boolean | Prisma.Item$nodeYieldsArgs<ExtArgs>
   _count?: boolean | Prisma.ItemCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ItemIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2886,6 +3582,9 @@ export type $ItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     marketListings: Prisma.$MarketListingPayload<ExtArgs>[]
     marketTransactions: Prisma.$MarketTransactionPayload<ExtArgs>[]
     shopItems: Prisma.$ShopItemPayload<ExtArgs>[]
+    recipeOutputs: Prisma.$RecipePayload<ExtArgs>[]
+    recipeInputs: Prisma.$RecipeInputPayload<ExtArgs>[]
+    nodeYields: Prisma.$NodeYieldPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3311,6 +4010,9 @@ export interface Prisma__ItemClient<T, Null = never, ExtArgs extends runtime.Typ
   marketListings<T extends Prisma.Item$marketListingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$marketListingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MarketListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   marketTransactions<T extends Prisma.Item$marketTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$marketTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MarketTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   shopItems<T extends Prisma.Item$shopItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$shopItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShopItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  recipeOutputs<T extends Prisma.Item$recipeOutputsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$recipeOutputsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RecipePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  recipeInputs<T extends Prisma.Item$recipeInputsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$recipeInputsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RecipeInputPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  nodeYields<T extends Prisma.Item$nodeYieldsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$nodeYieldsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NodeYieldPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4030,6 +4732,78 @@ export type Item$shopItemsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.ShopItemScalarFieldEnum | Prisma.ShopItemScalarFieldEnum[]
+}
+
+/**
+ * Item.recipeOutputs
+ */
+export type Item$recipeOutputsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Recipe
+   */
+  select?: Prisma.RecipeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Recipe
+   */
+  omit?: Prisma.RecipeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RecipeInclude<ExtArgs> | null
+  where?: Prisma.RecipeWhereInput
+  orderBy?: Prisma.RecipeOrderByWithRelationInput | Prisma.RecipeOrderByWithRelationInput[]
+  cursor?: Prisma.RecipeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RecipeScalarFieldEnum | Prisma.RecipeScalarFieldEnum[]
+}
+
+/**
+ * Item.recipeInputs
+ */
+export type Item$recipeInputsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RecipeInput
+   */
+  select?: Prisma.RecipeInputSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RecipeInput
+   */
+  omit?: Prisma.RecipeInputOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RecipeInputInclude<ExtArgs> | null
+  where?: Prisma.RecipeInputWhereInput
+  orderBy?: Prisma.RecipeInputOrderByWithRelationInput | Prisma.RecipeInputOrderByWithRelationInput[]
+  cursor?: Prisma.RecipeInputWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RecipeInputScalarFieldEnum | Prisma.RecipeInputScalarFieldEnum[]
+}
+
+/**
+ * Item.nodeYields
+ */
+export type Item$nodeYieldsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NodeYield
+   */
+  select?: Prisma.NodeYieldSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the NodeYield
+   */
+  omit?: Prisma.NodeYieldOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NodeYieldInclude<ExtArgs> | null
+  where?: Prisma.NodeYieldWhereInput
+  orderBy?: Prisma.NodeYieldOrderByWithRelationInput | Prisma.NodeYieldOrderByWithRelationInput[]
+  cursor?: Prisma.NodeYieldWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NodeYieldScalarFieldEnum | Prisma.NodeYieldScalarFieldEnum[]
 }
 
 /**

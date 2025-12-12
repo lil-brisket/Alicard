@@ -389,6 +389,23 @@ export type EnumQuestTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumQuestTypeFilter<$PrismaModel>
 }
 
+export type EnumJobCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.JobCategory | Prisma.EnumJobCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.JobCategory[] | Prisma.ListEnumJobCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.JobCategory[] | Prisma.ListEnumJobCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumJobCategoryFilter<$PrismaModel> | $Enums.JobCategory
+}
+
+export type EnumJobCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.JobCategory | Prisma.EnumJobCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.JobCategory[] | Prisma.ListEnumJobCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.JobCategory[] | Prisma.ListEnumJobCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumJobCategoryWithAggregatesFilter<$PrismaModel> | $Enums.JobCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumJobCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumJobCategoryFilter<$PrismaModel>
+}
+
 export type NestedIntFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
@@ -775,6 +792,23 @@ export type NestedEnumQuestTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumQuestTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumQuestTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumJobCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.JobCategory | Prisma.EnumJobCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.JobCategory[] | Prisma.ListEnumJobCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.JobCategory[] | Prisma.ListEnumJobCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumJobCategoryFilter<$PrismaModel> | $Enums.JobCategory
+}
+
+export type NestedEnumJobCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.JobCategory | Prisma.EnumJobCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.JobCategory[] | Prisma.ListEnumJobCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.JobCategory[] | Prisma.ListEnumJobCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumJobCategoryWithAggregatesFilter<$PrismaModel> | $Enums.JobCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumJobCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumJobCategoryFilter<$PrismaModel>
 }
 
 

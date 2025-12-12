@@ -282,6 +282,9 @@ export type PlayerWhereInput = {
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   skills?: Prisma.PlayerSkillListRelationFilter
   stats?: Prisma.XOR<Prisma.PlayerStatsNullableScalarRelationFilter, Prisma.PlayerStatsWhereInput> | null
+  userJobs?: Prisma.UserJobListRelationFilter
+  craftAttempts?: Prisma.CraftAttemptListRelationFilter
+  gatherAttempts?: Prisma.GatherAttemptListRelationFilter
 }
 
 export type PlayerOrderByWithRelationInput = {
@@ -309,6 +312,9 @@ export type PlayerOrderByWithRelationInput = {
   user?: Prisma.UserOrderByWithRelationInput
   skills?: Prisma.PlayerSkillOrderByRelationAggregateInput
   stats?: Prisma.PlayerStatsOrderByWithRelationInput
+  userJobs?: Prisma.UserJobOrderByRelationAggregateInput
+  craftAttempts?: Prisma.CraftAttemptOrderByRelationAggregateInput
+  gatherAttempts?: Prisma.GatherAttemptOrderByRelationAggregateInput
 }
 
 export type PlayerWhereUniqueInput = Prisma.AtLeast<{
@@ -339,6 +345,9 @@ export type PlayerWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   skills?: Prisma.PlayerSkillListRelationFilter
   stats?: Prisma.XOR<Prisma.PlayerStatsNullableScalarRelationFilter, Prisma.PlayerStatsWhereInput> | null
+  userJobs?: Prisma.UserJobListRelationFilter
+  craftAttempts?: Prisma.CraftAttemptListRelationFilter
+  gatherAttempts?: Prisma.GatherAttemptListRelationFilter
 }, "id" | "userId" | "characterName">
 
 export type PlayerOrderByWithAggregationInput = {
@@ -399,6 +408,9 @@ export type PlayerCreateInput = {
   user: Prisma.UserCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateInput = {
@@ -425,6 +437,9 @@ export type PlayerUncheckedCreateInput = {
   occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUpdateInput = {
@@ -451,6 +466,9 @@ export type PlayerUpdateInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateInput = {
@@ -477,6 +495,9 @@ export type PlayerUncheckedUpdateInput = {
   occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerCreateManyInput = {
@@ -798,6 +819,48 @@ export type PlayerUpdateOneRequiredWithoutMarketTransactionsAsSellerNestedInput 
   update?: Prisma.XOR<Prisma.XOR<Prisma.PlayerUpdateToOneWithWhereWithoutMarketTransactionsAsSellerInput, Prisma.PlayerUpdateWithoutMarketTransactionsAsSellerInput>, Prisma.PlayerUncheckedUpdateWithoutMarketTransactionsAsSellerInput>
 }
 
+export type PlayerCreateNestedOneWithoutUserJobsInput = {
+  create?: Prisma.XOR<Prisma.PlayerCreateWithoutUserJobsInput, Prisma.PlayerUncheckedCreateWithoutUserJobsInput>
+  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutUserJobsInput
+  connect?: Prisma.PlayerWhereUniqueInput
+}
+
+export type PlayerUpdateOneRequiredWithoutUserJobsNestedInput = {
+  create?: Prisma.XOR<Prisma.PlayerCreateWithoutUserJobsInput, Prisma.PlayerUncheckedCreateWithoutUserJobsInput>
+  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutUserJobsInput
+  upsert?: Prisma.PlayerUpsertWithoutUserJobsInput
+  connect?: Prisma.PlayerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PlayerUpdateToOneWithWhereWithoutUserJobsInput, Prisma.PlayerUpdateWithoutUserJobsInput>, Prisma.PlayerUncheckedUpdateWithoutUserJobsInput>
+}
+
+export type PlayerCreateNestedOneWithoutCraftAttemptsInput = {
+  create?: Prisma.XOR<Prisma.PlayerCreateWithoutCraftAttemptsInput, Prisma.PlayerUncheckedCreateWithoutCraftAttemptsInput>
+  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutCraftAttemptsInput
+  connect?: Prisma.PlayerWhereUniqueInput
+}
+
+export type PlayerUpdateOneRequiredWithoutCraftAttemptsNestedInput = {
+  create?: Prisma.XOR<Prisma.PlayerCreateWithoutCraftAttemptsInput, Prisma.PlayerUncheckedCreateWithoutCraftAttemptsInput>
+  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutCraftAttemptsInput
+  upsert?: Prisma.PlayerUpsertWithoutCraftAttemptsInput
+  connect?: Prisma.PlayerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PlayerUpdateToOneWithWhereWithoutCraftAttemptsInput, Prisma.PlayerUpdateWithoutCraftAttemptsInput>, Prisma.PlayerUncheckedUpdateWithoutCraftAttemptsInput>
+}
+
+export type PlayerCreateNestedOneWithoutGatherAttemptsInput = {
+  create?: Prisma.XOR<Prisma.PlayerCreateWithoutGatherAttemptsInput, Prisma.PlayerUncheckedCreateWithoutGatherAttemptsInput>
+  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutGatherAttemptsInput
+  connect?: Prisma.PlayerWhereUniqueInput
+}
+
+export type PlayerUpdateOneRequiredWithoutGatherAttemptsNestedInput = {
+  create?: Prisma.XOR<Prisma.PlayerCreateWithoutGatherAttemptsInput, Prisma.PlayerUncheckedCreateWithoutGatherAttemptsInput>
+  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutGatherAttemptsInput
+  upsert?: Prisma.PlayerUpsertWithoutGatherAttemptsInput
+  connect?: Prisma.PlayerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PlayerUpdateToOneWithWhereWithoutGatherAttemptsInput, Prisma.PlayerUpdateWithoutGatherAttemptsInput>, Prisma.PlayerUncheckedUpdateWithoutGatherAttemptsInput>
+}
+
 export type PlayerCreateWithoutUserInput = {
   id?: string
   characterName: string
@@ -821,6 +884,9 @@ export type PlayerCreateWithoutUserInput = {
   occupation?: Prisma.OccupationCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateWithoutUserInput = {
@@ -846,6 +912,9 @@ export type PlayerUncheckedCreateWithoutUserInput = {
   occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerCreateOrConnectWithoutUserInput = {
@@ -887,6 +956,9 @@ export type PlayerUpdateWithoutUserInput = {
   occupation?: Prisma.OccupationUpdateOneWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateWithoutUserInput = {
@@ -912,6 +984,9 @@ export type PlayerUncheckedUpdateWithoutUserInput = {
   occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerCreateWithoutStatsInput = {
@@ -937,6 +1012,9 @@ export type PlayerCreateWithoutStatsInput = {
   occupation?: Prisma.OccupationCreateNestedOneWithoutPlayerInput
   user: Prisma.UserCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateWithoutStatsInput = {
@@ -962,6 +1040,9 @@ export type PlayerUncheckedCreateWithoutStatsInput = {
   marketTransactionsAsSeller?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
   occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerCreateOrConnectWithoutStatsInput = {
@@ -1003,6 +1084,9 @@ export type PlayerUpdateWithoutStatsInput = {
   occupation?: Prisma.OccupationUpdateOneWithoutPlayerNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateWithoutStatsInput = {
@@ -1028,6 +1112,9 @@ export type PlayerUncheckedUpdateWithoutStatsInput = {
   marketTransactionsAsSeller?: Prisma.MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
   occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerCreateWithoutPositionInput = {
@@ -1053,6 +1140,9 @@ export type PlayerCreateWithoutPositionInput = {
   user: Prisma.UserCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateWithoutPositionInput = {
@@ -1078,6 +1168,9 @@ export type PlayerUncheckedCreateWithoutPositionInput = {
   occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerCreateOrConnectWithoutPositionInput = {
@@ -1119,6 +1212,9 @@ export type PlayerUpdateWithoutPositionInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateWithoutPositionInput = {
@@ -1144,6 +1240,9 @@ export type PlayerUncheckedUpdateWithoutPositionInput = {
   occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerCreateWithoutInventoryInput = {
@@ -1169,6 +1268,9 @@ export type PlayerCreateWithoutInventoryInput = {
   user: Prisma.UserCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateWithoutInventoryInput = {
@@ -1194,6 +1296,9 @@ export type PlayerUncheckedCreateWithoutInventoryInput = {
   occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerCreateOrConnectWithoutInventoryInput = {
@@ -1235,6 +1340,9 @@ export type PlayerUpdateWithoutInventoryInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateWithoutInventoryInput = {
@@ -1260,6 +1368,9 @@ export type PlayerUncheckedUpdateWithoutInventoryInput = {
   occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerCreateWithoutEquipmentInput = {
@@ -1285,6 +1396,9 @@ export type PlayerCreateWithoutEquipmentInput = {
   user: Prisma.UserCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateWithoutEquipmentInput = {
@@ -1310,6 +1424,9 @@ export type PlayerUncheckedCreateWithoutEquipmentInput = {
   occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerCreateOrConnectWithoutEquipmentInput = {
@@ -1351,6 +1468,9 @@ export type PlayerUpdateWithoutEquipmentInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateWithoutEquipmentInput = {
@@ -1376,6 +1496,9 @@ export type PlayerUncheckedUpdateWithoutEquipmentInput = {
   occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerCreateWithoutOccupationInput = {
@@ -1401,6 +1524,9 @@ export type PlayerCreateWithoutOccupationInput = {
   user: Prisma.UserCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateWithoutOccupationInput = {
@@ -1426,6 +1552,9 @@ export type PlayerUncheckedCreateWithoutOccupationInput = {
   marketTransactionsAsSeller?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
   skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerCreateOrConnectWithoutOccupationInput = {
@@ -1467,6 +1596,9 @@ export type PlayerUpdateWithoutOccupationInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateWithoutOccupationInput = {
@@ -1492,6 +1624,9 @@ export type PlayerUncheckedUpdateWithoutOccupationInput = {
   marketTransactionsAsSeller?: Prisma.MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
   skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerCreateWithoutSkillsInput = {
@@ -1517,6 +1652,9 @@ export type PlayerCreateWithoutSkillsInput = {
   occupation?: Prisma.OccupationCreateNestedOneWithoutPlayerInput
   user: Prisma.UserCreateNestedOneWithoutPlayerInput
   stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateWithoutSkillsInput = {
@@ -1542,6 +1680,9 @@ export type PlayerUncheckedCreateWithoutSkillsInput = {
   marketTransactionsAsSeller?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
   occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
   stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerCreateOrConnectWithoutSkillsInput = {
@@ -1583,6 +1724,9 @@ export type PlayerUpdateWithoutSkillsInput = {
   occupation?: Prisma.OccupationUpdateOneWithoutPlayerNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateWithoutSkillsInput = {
@@ -1608,6 +1752,9 @@ export type PlayerUncheckedUpdateWithoutSkillsInput = {
   marketTransactionsAsSeller?: Prisma.MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
   occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerCreateWithoutCombatLogsInput = {
@@ -1633,6 +1780,9 @@ export type PlayerCreateWithoutCombatLogsInput = {
   user: Prisma.UserCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateWithoutCombatLogsInput = {
@@ -1658,6 +1808,9 @@ export type PlayerUncheckedCreateWithoutCombatLogsInput = {
   occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerCreateOrConnectWithoutCombatLogsInput = {
@@ -1699,6 +1852,9 @@ export type PlayerUpdateWithoutCombatLogsInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateWithoutCombatLogsInput = {
@@ -1724,6 +1880,9 @@ export type PlayerUncheckedUpdateWithoutCombatLogsInput = {
   occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerCreateWithoutDeathLogsInput = {
@@ -1749,6 +1908,9 @@ export type PlayerCreateWithoutDeathLogsInput = {
   user: Prisma.UserCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateWithoutDeathLogsInput = {
@@ -1774,6 +1936,9 @@ export type PlayerUncheckedCreateWithoutDeathLogsInput = {
   occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerCreateOrConnectWithoutDeathLogsInput = {
@@ -1815,6 +1980,9 @@ export type PlayerUpdateWithoutDeathLogsInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateWithoutDeathLogsInput = {
@@ -1840,6 +2008,9 @@ export type PlayerUncheckedUpdateWithoutDeathLogsInput = {
   occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerCreateWithoutGuildMemberInput = {
@@ -1865,6 +2036,9 @@ export type PlayerCreateWithoutGuildMemberInput = {
   user: Prisma.UserCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateWithoutGuildMemberInput = {
@@ -1890,6 +2064,9 @@ export type PlayerUncheckedCreateWithoutGuildMemberInput = {
   occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerCreateOrConnectWithoutGuildMemberInput = {
@@ -1931,6 +2108,9 @@ export type PlayerUpdateWithoutGuildMemberInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateWithoutGuildMemberInput = {
@@ -1956,6 +2136,9 @@ export type PlayerUncheckedUpdateWithoutGuildMemberInput = {
   occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerCreateWithoutBankAccountInput = {
@@ -1981,6 +2164,9 @@ export type PlayerCreateWithoutBankAccountInput = {
   user: Prisma.UserCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateWithoutBankAccountInput = {
@@ -2006,6 +2192,9 @@ export type PlayerUncheckedCreateWithoutBankAccountInput = {
   occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerCreateOrConnectWithoutBankAccountInput = {
@@ -2047,6 +2236,9 @@ export type PlayerUpdateWithoutBankAccountInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateWithoutBankAccountInput = {
@@ -2072,6 +2264,9 @@ export type PlayerUncheckedUpdateWithoutBankAccountInput = {
   occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerCreateWithoutMarketListingsInput = {
@@ -2097,6 +2292,9 @@ export type PlayerCreateWithoutMarketListingsInput = {
   user: Prisma.UserCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateWithoutMarketListingsInput = {
@@ -2122,6 +2320,9 @@ export type PlayerUncheckedCreateWithoutMarketListingsInput = {
   occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerCreateOrConnectWithoutMarketListingsInput = {
@@ -2163,6 +2364,9 @@ export type PlayerUpdateWithoutMarketListingsInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateWithoutMarketListingsInput = {
@@ -2188,6 +2392,9 @@ export type PlayerUncheckedUpdateWithoutMarketListingsInput = {
   occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerCreateWithoutMarketTransactionsAsBuyerInput = {
@@ -2213,6 +2420,9 @@ export type PlayerCreateWithoutMarketTransactionsAsBuyerInput = {
   user: Prisma.UserCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateWithoutMarketTransactionsAsBuyerInput = {
@@ -2238,6 +2448,9 @@ export type PlayerUncheckedCreateWithoutMarketTransactionsAsBuyerInput = {
   occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerCreateOrConnectWithoutMarketTransactionsAsBuyerInput = {
@@ -2268,6 +2481,9 @@ export type PlayerCreateWithoutMarketTransactionsAsSellerInput = {
   user: Prisma.UserCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerUncheckedCreateWithoutMarketTransactionsAsSellerInput = {
@@ -2293,6 +2509,9 @@ export type PlayerUncheckedCreateWithoutMarketTransactionsAsSellerInput = {
   occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
   skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
   stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
 }
 
 export type PlayerCreateOrConnectWithoutMarketTransactionsAsSellerInput = {
@@ -2334,6 +2553,9 @@ export type PlayerUpdateWithoutMarketTransactionsAsBuyerInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateWithoutMarketTransactionsAsBuyerInput = {
@@ -2359,6 +2581,9 @@ export type PlayerUncheckedUpdateWithoutMarketTransactionsAsBuyerInput = {
   occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUpsertWithoutMarketTransactionsAsSellerInput = {
@@ -2395,6 +2620,9 @@ export type PlayerUpdateWithoutMarketTransactionsAsSellerInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
 }
 
 export type PlayerUncheckedUpdateWithoutMarketTransactionsAsSellerInput = {
@@ -2420,6 +2648,393 @@ export type PlayerUncheckedUpdateWithoutMarketTransactionsAsSellerInput = {
   occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
   skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
   stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+}
+
+export type PlayerCreateWithoutUserJobsInput = {
+  id?: string
+  characterName: string
+  level?: number
+  experience?: number
+  gold?: number
+  deathCount?: number
+  isDeleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
+  deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
+  equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
+  guildMember?: Prisma.GuildMemberCreateNestedOneWithoutPlayerInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutPlayerInput
+  position?: Prisma.MapPositionCreateNestedOneWithoutPlayerInput
+  marketListings?: Prisma.MarketListingCreateNestedManyWithoutPlayerInput
+  marketTransactionsAsBuyer?: Prisma.MarketTransactionCreateNestedManyWithoutBuyerInput
+  marketTransactionsAsSeller?: Prisma.MarketTransactionCreateNestedManyWithoutSellerInput
+  occupation?: Prisma.OccupationCreateNestedOneWithoutPlayerInput
+  user: Prisma.UserCreateNestedOneWithoutPlayerInput
+  skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
+  stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
+}
+
+export type PlayerUncheckedCreateWithoutUserJobsInput = {
+  id?: string
+  userId: string
+  characterName: string
+  level?: number
+  experience?: number
+  gold?: number
+  deathCount?: number
+  isDeleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
+  deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
+  equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
+  guildMember?: Prisma.GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutPlayerInput
+  position?: Prisma.MapPositionUncheckedCreateNestedOneWithoutPlayerInput
+  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+  marketTransactionsAsBuyer?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+  marketTransactionsAsSeller?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
+  occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
+  skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
+  stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
+}
+
+export type PlayerCreateOrConnectWithoutUserJobsInput = {
+  where: Prisma.PlayerWhereUniqueInput
+  create: Prisma.XOR<Prisma.PlayerCreateWithoutUserJobsInput, Prisma.PlayerUncheckedCreateWithoutUserJobsInput>
+}
+
+export type PlayerUpsertWithoutUserJobsInput = {
+  update: Prisma.XOR<Prisma.PlayerUpdateWithoutUserJobsInput, Prisma.PlayerUncheckedUpdateWithoutUserJobsInput>
+  create: Prisma.XOR<Prisma.PlayerCreateWithoutUserJobsInput, Prisma.PlayerUncheckedCreateWithoutUserJobsInput>
+  where?: Prisma.PlayerWhereInput
+}
+
+export type PlayerUpdateToOneWithWhereWithoutUserJobsInput = {
+  where?: Prisma.PlayerWhereInput
+  data: Prisma.XOR<Prisma.PlayerUpdateWithoutUserJobsInput, Prisma.PlayerUncheckedUpdateWithoutUserJobsInput>
+}
+
+export type PlayerUpdateWithoutUserJobsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  characterName?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  experience?: Prisma.IntFieldUpdateOperationsInput | number
+  gold?: Prisma.IntFieldUpdateOperationsInput | number
+  deathCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
+  deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
+  equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
+  guildMember?: Prisma.GuildMemberUpdateOneWithoutPlayerNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutPlayerNestedInput
+  position?: Prisma.MapPositionUpdateOneWithoutPlayerNestedInput
+  marketListings?: Prisma.MarketListingUpdateManyWithoutPlayerNestedInput
+  marketTransactionsAsBuyer?: Prisma.MarketTransactionUpdateManyWithoutBuyerNestedInput
+  marketTransactionsAsSeller?: Prisma.MarketTransactionUpdateManyWithoutSellerNestedInput
+  occupation?: Prisma.OccupationUpdateOneWithoutPlayerNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
+  skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
+  stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
+}
+
+export type PlayerUncheckedUpdateWithoutUserJobsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  characterName?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  experience?: Prisma.IntFieldUpdateOperationsInput | number
+  gold?: Prisma.IntFieldUpdateOperationsInput | number
+  deathCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
+  deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
+  equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
+  guildMember?: Prisma.GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutPlayerNestedInput
+  position?: Prisma.MapPositionUncheckedUpdateOneWithoutPlayerNestedInput
+  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+  marketTransactionsAsBuyer?: Prisma.MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+  marketTransactionsAsSeller?: Prisma.MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
+  occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
+  skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
+  stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+}
+
+export type PlayerCreateWithoutCraftAttemptsInput = {
+  id?: string
+  characterName: string
+  level?: number
+  experience?: number
+  gold?: number
+  deathCount?: number
+  isDeleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
+  deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
+  equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
+  guildMember?: Prisma.GuildMemberCreateNestedOneWithoutPlayerInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutPlayerInput
+  position?: Prisma.MapPositionCreateNestedOneWithoutPlayerInput
+  marketListings?: Prisma.MarketListingCreateNestedManyWithoutPlayerInput
+  marketTransactionsAsBuyer?: Prisma.MarketTransactionCreateNestedManyWithoutBuyerInput
+  marketTransactionsAsSeller?: Prisma.MarketTransactionCreateNestedManyWithoutSellerInput
+  occupation?: Prisma.OccupationCreateNestedOneWithoutPlayerInput
+  user: Prisma.UserCreateNestedOneWithoutPlayerInput
+  skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
+  stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
+}
+
+export type PlayerUncheckedCreateWithoutCraftAttemptsInput = {
+  id?: string
+  userId: string
+  characterName: string
+  level?: number
+  experience?: number
+  gold?: number
+  deathCount?: number
+  isDeleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
+  deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
+  equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
+  guildMember?: Prisma.GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutPlayerInput
+  position?: Prisma.MapPositionUncheckedCreateNestedOneWithoutPlayerInput
+  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+  marketTransactionsAsBuyer?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+  marketTransactionsAsSeller?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
+  occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
+  skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
+  stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
+}
+
+export type PlayerCreateOrConnectWithoutCraftAttemptsInput = {
+  where: Prisma.PlayerWhereUniqueInput
+  create: Prisma.XOR<Prisma.PlayerCreateWithoutCraftAttemptsInput, Prisma.PlayerUncheckedCreateWithoutCraftAttemptsInput>
+}
+
+export type PlayerUpsertWithoutCraftAttemptsInput = {
+  update: Prisma.XOR<Prisma.PlayerUpdateWithoutCraftAttemptsInput, Prisma.PlayerUncheckedUpdateWithoutCraftAttemptsInput>
+  create: Prisma.XOR<Prisma.PlayerCreateWithoutCraftAttemptsInput, Prisma.PlayerUncheckedCreateWithoutCraftAttemptsInput>
+  where?: Prisma.PlayerWhereInput
+}
+
+export type PlayerUpdateToOneWithWhereWithoutCraftAttemptsInput = {
+  where?: Prisma.PlayerWhereInput
+  data: Prisma.XOR<Prisma.PlayerUpdateWithoutCraftAttemptsInput, Prisma.PlayerUncheckedUpdateWithoutCraftAttemptsInput>
+}
+
+export type PlayerUpdateWithoutCraftAttemptsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  characterName?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  experience?: Prisma.IntFieldUpdateOperationsInput | number
+  gold?: Prisma.IntFieldUpdateOperationsInput | number
+  deathCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
+  deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
+  equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
+  guildMember?: Prisma.GuildMemberUpdateOneWithoutPlayerNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutPlayerNestedInput
+  position?: Prisma.MapPositionUpdateOneWithoutPlayerNestedInput
+  marketListings?: Prisma.MarketListingUpdateManyWithoutPlayerNestedInput
+  marketTransactionsAsBuyer?: Prisma.MarketTransactionUpdateManyWithoutBuyerNestedInput
+  marketTransactionsAsSeller?: Prisma.MarketTransactionUpdateManyWithoutSellerNestedInput
+  occupation?: Prisma.OccupationUpdateOneWithoutPlayerNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
+  skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
+  stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
+}
+
+export type PlayerUncheckedUpdateWithoutCraftAttemptsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  characterName?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  experience?: Prisma.IntFieldUpdateOperationsInput | number
+  gold?: Prisma.IntFieldUpdateOperationsInput | number
+  deathCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
+  deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
+  equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
+  guildMember?: Prisma.GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutPlayerNestedInput
+  position?: Prisma.MapPositionUncheckedUpdateOneWithoutPlayerNestedInput
+  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+  marketTransactionsAsBuyer?: Prisma.MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+  marketTransactionsAsSeller?: Prisma.MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
+  occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
+  skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
+  stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+}
+
+export type PlayerCreateWithoutGatherAttemptsInput = {
+  id?: string
+  characterName: string
+  level?: number
+  experience?: number
+  gold?: number
+  deathCount?: number
+  isDeleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
+  deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
+  equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
+  guildMember?: Prisma.GuildMemberCreateNestedOneWithoutPlayerInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutPlayerInput
+  position?: Prisma.MapPositionCreateNestedOneWithoutPlayerInput
+  marketListings?: Prisma.MarketListingCreateNestedManyWithoutPlayerInput
+  marketTransactionsAsBuyer?: Prisma.MarketTransactionCreateNestedManyWithoutBuyerInput
+  marketTransactionsAsSeller?: Prisma.MarketTransactionCreateNestedManyWithoutSellerInput
+  occupation?: Prisma.OccupationCreateNestedOneWithoutPlayerInput
+  user: Prisma.UserCreateNestedOneWithoutPlayerInput
+  skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
+  stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+}
+
+export type PlayerUncheckedCreateWithoutGatherAttemptsInput = {
+  id?: string
+  userId: string
+  characterName: string
+  level?: number
+  experience?: number
+  gold?: number
+  deathCount?: number
+  isDeleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
+  deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
+  equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
+  guildMember?: Prisma.GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutPlayerInput
+  position?: Prisma.MapPositionUncheckedCreateNestedOneWithoutPlayerInput
+  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+  marketTransactionsAsBuyer?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+  marketTransactionsAsSeller?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
+  occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
+  skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
+  stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+}
+
+export type PlayerCreateOrConnectWithoutGatherAttemptsInput = {
+  where: Prisma.PlayerWhereUniqueInput
+  create: Prisma.XOR<Prisma.PlayerCreateWithoutGatherAttemptsInput, Prisma.PlayerUncheckedCreateWithoutGatherAttemptsInput>
+}
+
+export type PlayerUpsertWithoutGatherAttemptsInput = {
+  update: Prisma.XOR<Prisma.PlayerUpdateWithoutGatherAttemptsInput, Prisma.PlayerUncheckedUpdateWithoutGatherAttemptsInput>
+  create: Prisma.XOR<Prisma.PlayerCreateWithoutGatherAttemptsInput, Prisma.PlayerUncheckedCreateWithoutGatherAttemptsInput>
+  where?: Prisma.PlayerWhereInput
+}
+
+export type PlayerUpdateToOneWithWhereWithoutGatherAttemptsInput = {
+  where?: Prisma.PlayerWhereInput
+  data: Prisma.XOR<Prisma.PlayerUpdateWithoutGatherAttemptsInput, Prisma.PlayerUncheckedUpdateWithoutGatherAttemptsInput>
+}
+
+export type PlayerUpdateWithoutGatherAttemptsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  characterName?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  experience?: Prisma.IntFieldUpdateOperationsInput | number
+  gold?: Prisma.IntFieldUpdateOperationsInput | number
+  deathCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
+  deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
+  equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
+  guildMember?: Prisma.GuildMemberUpdateOneWithoutPlayerNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutPlayerNestedInput
+  position?: Prisma.MapPositionUpdateOneWithoutPlayerNestedInput
+  marketListings?: Prisma.MarketListingUpdateManyWithoutPlayerNestedInput
+  marketTransactionsAsBuyer?: Prisma.MarketTransactionUpdateManyWithoutBuyerNestedInput
+  marketTransactionsAsSeller?: Prisma.MarketTransactionUpdateManyWithoutSellerNestedInput
+  occupation?: Prisma.OccupationUpdateOneWithoutPlayerNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
+  skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
+  stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+}
+
+export type PlayerUncheckedUpdateWithoutGatherAttemptsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  characterName?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  experience?: Prisma.IntFieldUpdateOperationsInput | number
+  gold?: Prisma.IntFieldUpdateOperationsInput | number
+  deathCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
+  deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
+  equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
+  guildMember?: Prisma.GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutPlayerNestedInput
+  position?: Prisma.MapPositionUncheckedUpdateOneWithoutPlayerNestedInput
+  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+  marketTransactionsAsBuyer?: Prisma.MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+  marketTransactionsAsSeller?: Prisma.MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
+  occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
+  skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
+  stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
 
@@ -2435,6 +3050,9 @@ export type PlayerCountOutputType = {
   marketTransactionsAsBuyer: number
   marketTransactionsAsSeller: number
   skills: number
+  userJobs: number
+  craftAttempts: number
+  gatherAttempts: number
 }
 
 export type PlayerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2445,6 +3063,9 @@ export type PlayerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   marketTransactionsAsBuyer?: boolean | PlayerCountOutputTypeCountMarketTransactionsAsBuyerArgs
   marketTransactionsAsSeller?: boolean | PlayerCountOutputTypeCountMarketTransactionsAsSellerArgs
   skills?: boolean | PlayerCountOutputTypeCountSkillsArgs
+  userJobs?: boolean | PlayerCountOutputTypeCountUserJobsArgs
+  craftAttempts?: boolean | PlayerCountOutputTypeCountCraftAttemptsArgs
+  gatherAttempts?: boolean | PlayerCountOutputTypeCountGatherAttemptsArgs
 }
 
 /**
@@ -2506,6 +3127,27 @@ export type PlayerCountOutputTypeCountSkillsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.PlayerSkillWhereInput
 }
 
+/**
+ * PlayerCountOutputType without action
+ */
+export type PlayerCountOutputTypeCountUserJobsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserJobWhereInput
+}
+
+/**
+ * PlayerCountOutputType without action
+ */
+export type PlayerCountOutputTypeCountCraftAttemptsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CraftAttemptWhereInput
+}
+
+/**
+ * PlayerCountOutputType without action
+ */
+export type PlayerCountOutputTypeCountGatherAttemptsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GatherAttemptWhereInput
+}
+
 
 export type PlayerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2532,6 +3174,9 @@ export type PlayerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   skills?: boolean | Prisma.Player$skillsArgs<ExtArgs>
   stats?: boolean | Prisma.Player$statsArgs<ExtArgs>
+  userJobs?: boolean | Prisma.Player$userJobsArgs<ExtArgs>
+  craftAttempts?: boolean | Prisma.Player$craftAttemptsArgs<ExtArgs>
+  gatherAttempts?: boolean | Prisma.Player$gatherAttemptsArgs<ExtArgs>
   _count?: boolean | Prisma.PlayerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["player"]>
 
@@ -2592,6 +3237,9 @@ export type PlayerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   skills?: boolean | Prisma.Player$skillsArgs<ExtArgs>
   stats?: boolean | Prisma.Player$statsArgs<ExtArgs>
+  userJobs?: boolean | Prisma.Player$userJobsArgs<ExtArgs>
+  craftAttempts?: boolean | Prisma.Player$craftAttemptsArgs<ExtArgs>
+  gatherAttempts?: boolean | Prisma.Player$gatherAttemptsArgs<ExtArgs>
   _count?: boolean | Prisma.PlayerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PlayerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2618,6 +3266,9 @@ export type $PlayerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     user: Prisma.$UserPayload<ExtArgs>
     skills: Prisma.$PlayerSkillPayload<ExtArgs>[]
     stats: Prisma.$PlayerStatsPayload<ExtArgs> | null
+    userJobs: Prisma.$UserJobPayload<ExtArgs>[]
+    craftAttempts: Prisma.$CraftAttemptPayload<ExtArgs>[]
+    gatherAttempts: Prisma.$GatherAttemptPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3038,6 +3689,9 @@ export interface Prisma__PlayerClient<T, Null = never, ExtArgs extends runtime.T
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   skills<T extends Prisma.Player$skillsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Player$skillsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlayerSkillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stats<T extends Prisma.Player$statsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Player$statsArgs<ExtArgs>>): Prisma.Prisma__PlayerStatsClient<runtime.Types.Result.GetResult<Prisma.$PlayerStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  userJobs<T extends Prisma.Player$userJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Player$userJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  craftAttempts<T extends Prisma.Player$craftAttemptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Player$craftAttemptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CraftAttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  gatherAttempts<T extends Prisma.Player$gatherAttemptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Player$gatherAttemptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GatherAttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3752,6 +4406,78 @@ export type Player$statsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.PlayerStatsInclude<ExtArgs> | null
   where?: Prisma.PlayerStatsWhereInput
+}
+
+/**
+ * Player.userJobs
+ */
+export type Player$userJobsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserJob
+   */
+  select?: Prisma.UserJobSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserJob
+   */
+  omit?: Prisma.UserJobOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserJobInclude<ExtArgs> | null
+  where?: Prisma.UserJobWhereInput
+  orderBy?: Prisma.UserJobOrderByWithRelationInput | Prisma.UserJobOrderByWithRelationInput[]
+  cursor?: Prisma.UserJobWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserJobScalarFieldEnum | Prisma.UserJobScalarFieldEnum[]
+}
+
+/**
+ * Player.craftAttempts
+ */
+export type Player$craftAttemptsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CraftAttempt
+   */
+  select?: Prisma.CraftAttemptSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CraftAttempt
+   */
+  omit?: Prisma.CraftAttemptOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CraftAttemptInclude<ExtArgs> | null
+  where?: Prisma.CraftAttemptWhereInput
+  orderBy?: Prisma.CraftAttemptOrderByWithRelationInput | Prisma.CraftAttemptOrderByWithRelationInput[]
+  cursor?: Prisma.CraftAttemptWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CraftAttemptScalarFieldEnum | Prisma.CraftAttemptScalarFieldEnum[]
+}
+
+/**
+ * Player.gatherAttempts
+ */
+export type Player$gatherAttemptsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GatherAttempt
+   */
+  select?: Prisma.GatherAttemptSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GatherAttempt
+   */
+  omit?: Prisma.GatherAttemptOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GatherAttemptInclude<ExtArgs> | null
+  where?: Prisma.GatherAttemptWhereInput
+  orderBy?: Prisma.GatherAttemptOrderByWithRelationInput | Prisma.GatherAttemptOrderByWithRelationInput[]
+  cursor?: Prisma.GatherAttemptWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GatherAttemptScalarFieldEnum | Prisma.GatherAttemptScalarFieldEnum[]
 }
 
 /**

@@ -80,7 +80,15 @@ export const ModelName = {
   BankVaultItem: 'BankVaultItem',
   MarketListing: 'MarketListing',
   MarketTransaction: 'MarketTransaction',
-  Quest: 'Quest'
+  Quest: 'Quest',
+  Job: 'Job',
+  UserJob: 'UserJob',
+  Recipe: 'Recipe',
+  RecipeInput: 'RecipeInput',
+  CraftAttempt: 'CraftAttempt',
+  GatheringNode: 'GatheringNode',
+  NodeYield: 'NodeYield',
+  GatherAttempt: 'GatherAttempt'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -518,6 +526,111 @@ export const QuestScalarFieldEnum = {
 } as const
 
 export type QuestScalarFieldEnum = (typeof QuestScalarFieldEnum)[keyof typeof QuestScalarFieldEnum]
+
+
+export const JobScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  description: 'description',
+  category: 'category',
+  icon: 'icon',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type JobScalarFieldEnum = (typeof JobScalarFieldEnum)[keyof typeof JobScalarFieldEnum]
+
+
+export const UserJobScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  jobId: 'jobId',
+  level: 'level',
+  xp: 'xp',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserJobScalarFieldEnum = (typeof UserJobScalarFieldEnum)[keyof typeof UserJobScalarFieldEnum]
+
+
+export const RecipeScalarFieldEnum = {
+  id: 'id',
+  jobId: 'jobId',
+  name: 'name',
+  description: 'description',
+  difficulty: 'difficulty',
+  outputItemId: 'outputItemId',
+  outputQty: 'outputQty',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RecipeScalarFieldEnum = (typeof RecipeScalarFieldEnum)[keyof typeof RecipeScalarFieldEnum]
+
+
+export const RecipeInputScalarFieldEnum = {
+  id: 'id',
+  recipeId: 'recipeId',
+  itemId: 'itemId',
+  qty: 'qty',
+  createdAt: 'createdAt'
+} as const
+
+export type RecipeInputScalarFieldEnum = (typeof RecipeInputScalarFieldEnum)[keyof typeof RecipeInputScalarFieldEnum]
+
+
+export const CraftAttemptScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  recipeId: 'recipeId',
+  success: 'success',
+  xpGained: 'xpGained',
+  createdAt: 'createdAt'
+} as const
+
+export type CraftAttemptScalarFieldEnum = (typeof CraftAttemptScalarFieldEnum)[keyof typeof CraftAttemptScalarFieldEnum]
+
+
+export const GatheringNodeScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  jobId: 'jobId',
+  dangerTier: 'dangerTier',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GatheringNodeScalarFieldEnum = (typeof GatheringNodeScalarFieldEnum)[keyof typeof GatheringNodeScalarFieldEnum]
+
+
+export const NodeYieldScalarFieldEnum = {
+  id: 'id',
+  nodeId: 'nodeId',
+  itemId: 'itemId',
+  minQty: 'minQty',
+  maxQty: 'maxQty',
+  weight: 'weight',
+  createdAt: 'createdAt'
+} as const
+
+export type NodeYieldScalarFieldEnum = (typeof NodeYieldScalarFieldEnum)[keyof typeof NodeYieldScalarFieldEnum]
+
+
+export const GatherAttemptScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  nodeId: 'nodeId',
+  success: 'success',
+  xpGained: 'xpGained',
+  createdAt: 'createdAt'
+} as const
+
+export type GatherAttemptScalarFieldEnum = (typeof GatherAttemptScalarFieldEnum)[keyof typeof GatherAttemptScalarFieldEnum]
 
 
 export const SortOrder = {
