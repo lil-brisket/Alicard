@@ -5,7 +5,7 @@ import { api } from "~/trpc/react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 
-type EquipmentSlot = "HEAD" | "LEFT_ARM" | "RIGHT_ARM" | "BODY" | "LEGS" | "FEET" | "RING" | "NECKLACE" | "BELT" | "CLOAK";
+type EquipmentSlot = "HEAD" | "LEFT_ARM" | "RIGHT_ARM" | "BODY" | "LEGS" | "FEET" | "RING1" | "RING2" | "RING3" | "NECKLACE" | "BELT" | "CLOAK";
 
 const slotLabels: Record<EquipmentSlot, string> = {
   HEAD: "Head",
@@ -14,7 +14,9 @@ const slotLabels: Record<EquipmentSlot, string> = {
   BODY: "Body",
   LEGS: "Legs",
   FEET: "Feet",
-  RING: "Ring",
+  RING1: "Ring 1",
+  RING2: "Ring 2",
+  RING3: "Ring 3",
   NECKLACE: "Necklace",
   BELT: "Belt",
   CLOAK: "Cloak",
@@ -64,16 +66,7 @@ export default function EquipmentPage() {
   const equipment = loadout?.equipment;
   const totalStats = loadout?.totalStats;
 
-  const slots: EquipmentSlot[] = ["HEAD", "LEFT_ARM", "RIGHT_ARM", "BODY", "LEGS", "FEET", "RING", "NECKLACE", "BELT", "CLOAK"];
-
-  const getEquippedRing = () => {
-    if (!equipment) return null;
-    // Return the first equipped ring
-    if (equipment.ring1) return { item: equipment.ring1, index: 1 };
-    if (equipment.ring2) return { item: equipment.ring2, index: 2 };
-    if (equipment.ring3) return { item: equipment.ring3, index: 3 };
-    return null;
-  };
+  const slots: EquipmentSlot[] = ["HEAD", "LEFT_ARM", "RIGHT_ARM", "BODY", "LEGS", "FEET", "RING1", "RING2", "RING3", "NECKLACE", "BELT", "CLOAK"];
 
   const getEquippedItem = (slot: EquipmentSlot) => {
     if (!equipment) return null;
@@ -90,10 +83,12 @@ export default function EquipmentPage() {
         return equipment.legs;
       case "FEET":
         return equipment.feet;
-      case "RING": {
-        const ring = getEquippedRing();
-        return ring?.item ?? null;
-      }
+      case "RING1":
+        return equipment.ring1;
+      case "RING2":
+        return equipment.ring2;
+      case "RING3":
+        return equipment.ring3;
       case "NECKLACE":
         return equipment.necklace;
       case "BELT":
@@ -103,11 +98,6 @@ export default function EquipmentPage() {
       default:
         return null;
     }
-  };
-
-  const getRingSlotIndex = (): number => {
-    const ring = getEquippedRing();
-    return ring?.index ?? 1;
   };
 
   const filteredItems = equippableItems?.filter((group) =>
@@ -212,14 +202,7 @@ export default function EquipmentPage() {
                         </div>
                         <button
                           onClick={() => {
-                            if (slot === "RING") {
-                              unequipMutation.mutate({
-                                fromSlot: slot,
-                                ringIndex: getRingSlotIndex(),
-                              });
-                            } else {
-                              unequipMutation.mutate({ fromSlot: slot });
-                            }
+                            unequipMutation.mutate({ fromSlot: slot });
                           }}
                           disabled={unequipMutation.isPending}
                           className="w-full rounded bg-red-500/20 px-3 py-1.5 text-xs text-red-400 transition hover:bg-red-500/30 disabled:opacity-50"

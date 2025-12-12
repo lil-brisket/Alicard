@@ -5,8 +5,10 @@ import { api } from "~/trpc/react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import Image from "next/image";
+import { StatBadges } from "./_components/stat-badges";
+import { getBonus } from "./_components/item-bonus-helper";
 
-type EquipmentSlot = "HEAD" | "LEFT_ARM" | "RIGHT_ARM" | "BODY" | "LEGS" | "FEET" | "RING" | "NECKLACE" | "BELT" | "CLOAK";
+type EquipmentSlot = "HEAD" | "LEFT_ARM" | "RIGHT_ARM" | "BODY" | "LEGS" | "FEET" | "RING1" | "RING2" | "RING3" | "NECKLACE" | "BELT" | "CLOAK";
 
 const slotLabels: Record<EquipmentSlot, string> = {
   HEAD: "Head",
@@ -15,14 +17,16 @@ const slotLabels: Record<EquipmentSlot, string> = {
   BODY: "Body",
   LEGS: "Legs",
   FEET: "Feet",
-  RING: "Ring",
+  RING1: "Ring 1",
+  RING2: "Ring 2",
+  RING3: "Ring 3",
   NECKLACE: "Necklace",
   BELT: "Belt",
   CLOAK: "Cloak",
 };
 
 const bodySlots: EquipmentSlot[] = ["HEAD", "LEFT_ARM", "RIGHT_ARM", "BODY", "LEGS", "FEET"];
-const accessorySlots: EquipmentSlot[] = ["RING", "NECKLACE", "BELT", "CLOAK"];
+const accessorySlots: EquipmentSlot[] = ["RING1", "RING2", "RING3", "NECKLACE", "BELT", "CLOAK"];
 
 // Position coordinates for body slots (percentage-based for responsiveness)
 const slotPositions: Record<EquipmentSlot, { top: string; left: string }> = {
@@ -32,7 +36,9 @@ const slotPositions: Record<EquipmentSlot, { top: string; left: string }> = {
   BODY: { top: "35%", left: "50%" },
   LEGS: { top: "65%", left: "50%" },
   FEET: { top: "90%", left: "50%" },
-  RING: { top: "0", left: "0" }, // Not used for body positioning
+  RING1: { top: "0", left: "0" }, // Not used for body positioning
+  RING2: { top: "0", left: "0" },
+  RING3: { top: "0", left: "0" },
   NECKLACE: { top: "0", left: "0" },
   BELT: { top: "0", left: "0" },
   CLOAK: { top: "0", left: "0" },
@@ -41,7 +47,11 @@ const slotPositions: Record<EquipmentSlot, { top: string; left: string }> = {
 export default function EquipmentPage() {
   const [selectedSlot, setSelectedSlot] = useState<EquipmentSlot | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [pendingInventoryItemId, setPendingInventoryItemId] = useState<string | null>(null);
+  const [pendingSlot, setPendingSlot] = useState<EquipmentSlot | null>(null);
+  const [expandedSlot, setExpandedSlot] = useState<EquipmentSlot | null>(null);
 
+  const utils = api.useUtils();
   const { data: loadout, isLoading: loadoutLoading, refetch: refetchLoadout } = api.equipment.getLoadout.useQuery();
   const { data: equippableItems, isLoading: itemsLoading } = api.equipment.getEquippableInventory.useQuery(
     { slot: selectedSlot ?? undefined },
@@ -52,9 +62,12 @@ export default function EquipmentPage() {
     onSuccess: () => {
       toast.success("Item equipped!");
       void refetchLoadout();
+      void utils.equipment.getEquippableInventory.invalidate();
+      setPendingInventoryItemId(null);
     },
     onError: (error) => {
       toast.error(error.message || "Failed to equip item");
+      setPendingInventoryItemId(null);
     },
   });
 
@@ -62,9 +75,12 @@ export default function EquipmentPage() {
     onSuccess: () => {
       toast.success("Item unequipped!");
       void refetchLoadout();
+      void utils.equipment.getEquippableInventory.invalidate();
+      setPendingSlot(null);
     },
     onError: (error) => {
       toast.error(error.message || "Failed to unequip item");
+      setPendingSlot(null);
     },
   });
 
@@ -82,15 +98,6 @@ export default function EquipmentPage() {
   const equipment = loadout?.equipment;
   const totalStats = loadout?.totalStats;
 
-  const getEquippedRing = () => {
-    if (!equipment) return null;
-    // Return the first equipped ring
-    if (equipment.ring1) return { item: equipment.ring1, index: 1 };
-    if (equipment.ring2) return { item: equipment.ring2, index: 2 };
-    if (equipment.ring3) return { item: equipment.ring3, index: 3 };
-    return null;
-  };
-
   const getEquippedItem = (slot: EquipmentSlot) => {
     if (!equipment) return null;
     switch (slot) {
@@ -106,10 +113,12 @@ export default function EquipmentPage() {
         return equipment.legs;
       case "FEET":
         return equipment.feet;
-      case "RING": {
-        const ring = getEquippedRing();
-        return ring?.item ?? null;
-      }
+      case "RING1":
+        return equipment.ring1;
+      case "RING2":
+        return equipment.ring2;
+      case "RING3":
+        return equipment.ring3;
       case "NECKLACE":
         return equipment.necklace;
       case "BELT":
@@ -121,14 +130,68 @@ export default function EquipmentPage() {
     }
   };
 
-  const getRingSlotIndex = (): number => {
-    const ring = getEquippedRing();
-    return ring?.index ?? 1;
+  const handleSlotClick = (slot: EquipmentSlot) => {
+    if (selectedSlot === slot) {
+      setSelectedSlot(null);
+      setExpandedSlot(null);
+    } else {
+      setSelectedSlot(slot);
+      setExpandedSlot(null);
+    }
   };
 
-  const filteredItems = equippableItems?.filter((group) =>
-    group.item.name.toLowerCase().includes(searchQuery.toLowerCase())
-  ) ?? [];
+  const handleSlotKeyDown = (e: React.KeyboardEvent, slot: EquipmentSlot) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleSlotClick(slot);
+    }
+  };
+
+  const handleItemClick = (slot: EquipmentSlot) => {
+    if (expandedSlot === slot) {
+      setExpandedSlot(null);
+    } else {
+      setExpandedSlot(slot);
+    }
+  };
+
+  const handleItemKeyDown = (e: React.KeyboardEvent, slot: EquipmentSlot) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleItemClick(slot);
+    }
+  };
+
+  // Enhanced filtering: search by name, description, and stat shorthand
+  const filteredItems = equippableItems?.filter((group) => {
+    if (!searchQuery) return true;
+    const query = searchQuery.toLowerCase();
+    
+    // Search in name
+    if (group.item.name.toLowerCase().includes(query)) return true;
+    
+    // Search in description
+    if (group.item.description?.toLowerCase().includes(query)) return true;
+    
+    // Search in stat shorthand (str, vit, dex, spd, etc.)
+    const statTerms: Record<string, string[]> = {
+      str: ["strength", "str"],
+      vit: ["vitality", "vit"],
+      dex: ["dexterity", "dex"],
+      spd: ["speed", "spd"],
+      hp: ["hp", "health"],
+      sp: ["sp", "stamina"],
+    };
+    
+    for (const [key, terms] of Object.entries(statTerms)) {
+      if (query.includes(key) || terms.some(term => query.includes(term))) {
+        const bonus = getBonus(group.item, key);
+        if (bonus > 0) return true;
+      }
+    }
+    
+    return false;
+  }) ?? [];
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
@@ -190,68 +253,92 @@ export default function EquipmentPage() {
               {bodySlots.map((slot) => {
                 const item = getEquippedItem(slot);
                 const isSelected = selectedSlot === slot;
+                const isExpanded = expandedSlot === slot;
+                const isPending = pendingSlot === slot;
                 const position = slotPositions[slot];
                 return (
                   <div
                     key={slot}
-                    className={`group absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all ${
+                    className={`group absolute -translate-x-1/2 -translate-y-1/2 transition-all ${
                       isSelected
                         ? "z-10 scale-110"
                         : "hover:scale-105"
                     }`}
                     style={{ top: position.top, left: position.left }}
-                    onClick={() => setSelectedSlot(isSelected ? null : slot)}
                   >
                     <div
-                      className={`relative flex h-16 w-16 items-center justify-center rounded-lg border-2 transition ${
+                      role="button"
+                      tabIndex={0}
+                      aria-pressed={isSelected}
+                      aria-label={`${slotLabels[slot]} slot${item ? `, equipped: ${item.name}` : ", empty"}`}
+                      className={`relative flex h-16 w-16 cursor-pointer items-center justify-center rounded-lg border-2 transition ${
                         isSelected
                           ? "border-cyan-500 bg-cyan-500/20 shadow-lg shadow-cyan-500/50"
                           : item
                             ? "border-green-500 bg-green-500/20 hover:border-green-400"
                             : "border-slate-600 bg-slate-800/60 hover:border-slate-500"
                       }`}
+                      onClick={() => handleSlotClick(slot)}
+                      onKeyDown={(e) => handleSlotKeyDown(e, slot)}
                     >
                       {item ? (
                         <>
                           <span className="text-xs font-semibold text-green-400">✓</span>
-                          {/* Unequip button on hover */}
+                          {/* Unequip button on hover/desktop */}
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
+                              setPendingSlot(slot);
                               unequipMutation.mutate({ fromSlot: slot });
                             }}
-                            disabled={unequipMutation.isPending}
+                            disabled={isPending}
                             className="absolute right-0 top-0 hidden h-5 w-5 items-center justify-center rounded-full bg-red-500/80 text-[10px] text-white transition hover:bg-red-500 disabled:opacity-50 group-hover:flex"
                             title="Unequip"
                           >
-                            ×
+                            {isPending ? "..." : "×"}
                           </button>
                         </>
                       ) : (
                         <span className="text-xs text-slate-400">+</span>
                       )}
-                      {/* Tooltip on hover */}
+                      {/* Tooltip on hover (desktop) */}
                       {item && (
                         <div className="pointer-events-none absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 whitespace-nowrap rounded-lg border border-slate-700 bg-slate-900 px-2 py-1 text-xs text-slate-100 shadow-lg group-hover:block">
                           <div className="font-semibold">{item.name}</div>
-                          <div className="mt-1 flex gap-1">
-                            {item.vitalityBonus > 0 && (
-                              <span className="text-green-400">V+{item.vitalityBonus}</span>
-                            )}
-                            {item.strengthBonus > 0 && (
-                              <span className="text-red-400">S+{item.strengthBonus}</span>
-                            )}
-                            {item.speedBonus > 0 && (
-                              <span className="text-yellow-400">Sp+{item.speedBonus}</span>
-                            )}
-                            {item.dexterityBonus > 0 && (
-                              <span className="text-blue-400">D+{item.dexterityBonus}</span>
-                            )}
-                          </div>
+                          <StatBadges item={item} size="xs" />
                         </div>
                       )}
                     </div>
-                    <div className="absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap text-xs text-slate-300">
+                    {/* Mobile/Expanded detail panel */}
+                    {isExpanded && item && (
+                      <div className="absolute left-1/2 top-full z-20 mt-2 w-48 -translate-x-1/2 rounded-lg border border-slate-700 bg-slate-900 p-3 text-xs text-slate-100 shadow-lg">
+                        <div className="font-semibold mb-1">Equipped: {item.name}</div>
+                        {item.description && (
+                          <div className="mb-2 text-slate-400">{item.description}</div>
+                        )}
+                        <div className="mb-2">
+                          <StatBadges item={item} size="xs" showLabels />
+                        </div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setPendingSlot(slot);
+                            unequipMutation.mutate({ fromSlot: slot });
+                          }}
+                          disabled={isPending}
+                          className="w-full rounded bg-red-500/20 px-2 py-1 text-red-400 transition hover:bg-red-500/30 disabled:opacity-50"
+                        >
+                          {isPending ? "Unequipping..." : "Unequip"}
+                        </button>
+                      </div>
+                    )}
+                    <div 
+                      className="absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap text-xs text-slate-300 cursor-pointer"
+                      onClick={() => handleItemClick(slot)}
+                      onKeyDown={(e) => handleItemKeyDown(e, slot)}
+                      role="button"
+                      tabIndex={0}
+                    >
                       {slotLabels[slot]}
                     </div>
                   </div>
@@ -262,10 +349,12 @@ export default function EquipmentPage() {
             {/* Accessory Slots at Bottom */}
             <div className="mt-6">
               <h3 className="mb-3 text-sm font-semibold text-slate-400">Accessories</h3>
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                 {accessorySlots.map((slot) => {
                   const item = getEquippedItem(slot);
                   const isSelected = selectedSlot === slot;
+                  const isExpanded = expandedSlot === slot;
+                  const isPending = pendingSlot === slot;
                   return (
                     <div
                       key={slot}
@@ -277,57 +366,54 @@ export default function EquipmentPage() {
                     >
                       <div className="mb-2 flex items-center justify-between">
                         <h3 className="text-xs font-semibold text-slate-300">{slotLabels[slot]}</h3>
-                        <button
-                          onClick={() => setSelectedSlot(isSelected ? null : slot)}
-                          className={`rounded px-2 py-0.5 text-xs transition ${
+                        <div
+                          role="button"
+                          tabIndex={0}
+                          aria-pressed={isSelected}
+                          aria-label={`Select ${slotLabels[slot]} slot`}
+                          onClick={() => handleSlotClick(slot)}
+                          onKeyDown={(e) => handleSlotKeyDown(e, slot)}
+                          className={`cursor-pointer rounded px-2 py-0.5 text-xs transition ${
                             isSelected
                               ? "bg-cyan-500/20 text-cyan-400"
                               : "bg-slate-800 text-slate-400 hover:bg-slate-700"
                           }`}
                         >
                           {isSelected ? "✓" : "○"}
-                        </button>
+                        </div>
                       </div>
                       {item ? (
                         <div className="space-y-1">
-                          <p className="text-xs font-medium text-slate-100 truncate">{item.name}</p>
-                          <div className="flex flex-wrap gap-0.5">
-                            {item.vitalityBonus > 0 && (
-                              <span className="rounded bg-green-500/20 px-1 py-0.5 text-[10px] text-green-400">
-                                V+{item.vitalityBonus}
-                              </span>
-                            )}
-                            {item.strengthBonus > 0 && (
-                              <span className="rounded bg-red-500/20 px-1 py-0.5 text-[10px] text-red-400">
-                                S+{item.strengthBonus}
-                              </span>
-                            )}
-                            {item.speedBonus > 0 && (
-                              <span className="rounded bg-yellow-500/20 px-1 py-0.5 text-[10px] text-yellow-400">
-                                Sp+{item.speedBonus}
-                              </span>
-                            )}
-                            {item.dexterityBonus > 0 && (
-                              <span className="rounded bg-blue-500/20 px-1 py-0.5 text-[10px] text-blue-400">
-                                D+{item.dexterityBonus}
-                              </span>
-                            )}
+                          <div
+                            role="button"
+                            tabIndex={0}
+                            onClick={() => handleItemClick(slot)}
+                            onKeyDown={(e) => handleItemKeyDown(e, slot)}
+                            className="cursor-pointer"
+                          >
+                            <p className="text-xs font-medium text-slate-100 truncate">{item.name}</p>
+                            <StatBadges item={item} size="xs" />
                           </div>
+                          {/* Mobile/Expanded detail panel */}
+                          {isExpanded && (
+                            <div className="mt-2 rounded border border-slate-700 bg-slate-900 p-2 text-xs text-slate-100">
+                              {item.description && (
+                                <div className="mb-2 text-slate-400">{item.description}</div>
+                              )}
+                              <div className="mb-2">
+                                <StatBadges item={item} size="xs" showLabels />
+                              </div>
+                            </div>
+                          )}
                           <button
                             onClick={() => {
-                              if (slot === "RING") {
-                                unequipMutation.mutate({
-                                  fromSlot: slot,
-                                  ringIndex: getRingSlotIndex(),
-                                });
-                              } else {
-                                unequipMutation.mutate({ fromSlot: slot });
-                              }
+                              setPendingSlot(slot);
+                              unequipMutation.mutate({ fromSlot: slot });
                             }}
-                            disabled={unequipMutation.isPending}
+                            disabled={isPending}
                             className="mt-1 w-full rounded bg-red-500/20 px-2 py-1 text-[10px] text-red-400 transition hover:bg-red-500/30 disabled:opacity-50"
                           >
-                            Unequip
+                            {isPending ? "Unequipping..." : "Unequip"}
                           </button>
                         </div>
                       ) : (
@@ -342,18 +428,30 @@ export default function EquipmentPage() {
 
           {/* Right: Inventory Panel */}
           <div className="space-y-4">
-            <h2 className="text-xl font-semibold text-cyan-400">
-              {selectedSlot ? `Equippable Items - ${slotLabels[selectedSlot]}` : "Select a slot to view items"}
-            </h2>
-            {selectedSlot && (
+            <div>
+              <h2 className="text-xl font-semibold text-cyan-400">
+                {selectedSlot ? `Equippable Items - ${slotLabels[selectedSlot]}` : "Select a slot to view items"}
+              </h2>
+              {selectedSlot && (
+                <p className="mt-1 text-sm text-slate-400">
+                  Selected slot: <span className="font-semibold text-cyan-400">{slotLabels[selectedSlot]}</span> (click again to clear)
+                </p>
+              )}
+            </div>
+            {selectedSlot ? (
               <>
-                <input
-                  type="text"
-                  placeholder="Search items..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full rounded-xl border border-slate-800 bg-slate-950/60 px-4 py-2 text-slate-100 placeholder:text-slate-500 focus:border-cyan-500 focus:outline-none"
-                />
+                <div>
+                  <p className="mb-2 text-sm text-slate-400">
+                    Only items that fit this slot appear on the right.
+                  </p>
+                  <input
+                    type="text"
+                    placeholder="Search items (name, description, or stat: str, vit, dex, spd)..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full rounded-xl border border-slate-800 bg-slate-950/60 px-4 py-2 text-slate-100 placeholder:text-slate-500 focus:border-cyan-500 focus:outline-none"
+                  />
+                </div>
                 {itemsLoading ? (
                   <p className="text-slate-400">Loading items...</p>
                 ) : filteredItems.length > 0 ? (
@@ -361,6 +459,7 @@ export default function EquipmentPage() {
                     {filteredItems.map((group) => {
                       const firstInvItem = group.inventoryItems[0];
                       if (!firstInvItem) return null;
+                      const isPending = pendingInventoryItemId === firstInvItem.id;
                       return (
                         <div
                           key={group.item.id}
@@ -372,27 +471,8 @@ export default function EquipmentPage() {
                               {group.item.description && (
                                 <p className="mt-1 text-xs text-slate-400">{group.item.description}</p>
                               )}
-                              <div className="mt-2 flex flex-wrap gap-1">
-                                {group.item.vitalityBonus > 0 && (
-                                  <span className="rounded bg-green-500/20 px-1.5 py-0.5 text-xs text-green-400">
-                                    VIT +{group.item.vitalityBonus}
-                                  </span>
-                                )}
-                                {group.item.strengthBonus > 0 && (
-                                  <span className="rounded bg-red-500/20 px-1.5 py-0.5 text-xs text-red-400">
-                                    STR +{group.item.strengthBonus}
-                                  </span>
-                                )}
-                                {group.item.speedBonus > 0 && (
-                                  <span className="rounded bg-yellow-500/20 px-1.5 py-0.5 text-xs text-yellow-400">
-                                    SPD +{group.item.speedBonus}
-                                  </span>
-                                )}
-                                {group.item.dexterityBonus > 0 && (
-                                  <span className="rounded bg-blue-500/20 px-1.5 py-0.5 text-xs text-blue-400">
-                                    DEX +{group.item.dexterityBonus}
-                                  </span>
-                                )}
+                              <div className="mt-2">
+                                <StatBadges item={group.item} size="sm" showLabels />
                               </div>
                               <p className="mt-2 text-xs text-slate-500">
                                 Quantity: {group.totalQuantity}
@@ -400,15 +480,22 @@ export default function EquipmentPage() {
                             </div>
                             <button
                               onClick={() => {
+                                setPendingInventoryItemId(firstInvItem.id);
                                 equipMutation.mutate({
                                   inventoryItemId: firstInvItem.id,
                                   toSlot: selectedSlot,
                                 });
                               }}
-                              disabled={equipMutation.isPending}
-                              className="ml-4 rounded bg-cyan-500/20 px-4 py-2 text-sm text-cyan-400 transition hover:bg-cyan-500/30 disabled:opacity-50"
+                              disabled={isPending || equipMutation.isPending}
+                              className="ml-4 flex items-center gap-2 rounded bg-cyan-500/20 px-4 py-2 text-sm text-cyan-400 transition hover:bg-cyan-500/30 disabled:opacity-50"
                             >
-                              Equip
+                              {isPending && (
+                                <svg className="h-4 w-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                              )}
+                              {isPending ? "Equipping..." : "Equip"}
                             </button>
                           </div>
                         </div>
@@ -421,6 +508,10 @@ export default function EquipmentPage() {
                   </div>
                 )}
               </>
+            ) : (
+              <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-8 text-center">
+                <p className="text-slate-400">Pick a slot on the character to view equippable items.</p>
+              </div>
             )}
           </div>
         </div>

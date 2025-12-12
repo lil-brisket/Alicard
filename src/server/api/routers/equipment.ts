@@ -13,7 +13,9 @@ const equipmentSlotSchema = z.enum([
   "BODY",
   "LEGS",
   "FEET",
-  "RING",
+  "RING1",
+  "RING2",
+  "RING3",
   "NECKLACE",
   "BELT",
   "CLOAK",
@@ -26,13 +28,13 @@ const slotToFieldMap = {
   BODY: "bodyItemId",
   LEGS: "legsItemId",
   FEET: "feetItemId",
-  RING: "ring1ItemId", // Default to ring1, can be extended
+  RING1: "ring1ItemId",
+  RING2: "ring2ItemId",
+  RING3: "ring3ItemId",
   NECKLACE: "necklaceItemId",
   BELT: "beltItemId",
   CLOAK: "cloakItemId",
 } as const;
-
-const ringSlots = ["ring1ItemId", "ring2ItemId", "ring3ItemId"] as const;
 
 export const equipmentRouter = createTRPCRouter({
   // Get current equipment loadout with items and stat bonuses
@@ -170,8 +172,8 @@ export const equipmentRouter = createTRPCRouter({
 
       // If slot is specified, filter to items that match that slot
       if (input?.slot) {
-        if (input.slot === "RING") {
-          // RING can go in any ring slot
+        if (input.slot === "RING1" || input.slot === "RING2" || input.slot === "RING3") {
+          // Ring slots accept items with equipmentSlot: "RING"
           equippable = equippable.filter(
             (invItem) => invItem.item.equipmentSlot === "RING"
           );
@@ -242,8 +244,8 @@ export const equipmentRouter = createTRPCRouter({
       }
 
       // Validate slot match
-      if (input.toSlot === "RING") {
-        // RING can go in any ring slot, we'll use the first available
+      if (input.toSlot === "RING1" || input.toSlot === "RING2" || input.toSlot === "RING3") {
+        // Ring slots accept items with equipmentSlot: "RING"
         if (inventoryItem.item.equipmentSlot !== "RING") {
           throw new TRPCError({
             code: "BAD_REQUEST",
@@ -271,22 +273,7 @@ export const equipmentRouter = createTRPCRouter({
       }
 
       // Determine which field to update
-      let dbField: string;
-      if (input.toSlot === "RING") {
-        // Find first empty ring slot
-        if (!equipment.ring1ItemId) {
-          dbField = "ring1ItemId";
-        } else if (!equipment.ring2ItemId) {
-          dbField = "ring2ItemId";
-        } else if (!equipment.ring3ItemId) {
-          dbField = "ring3ItemId";
-        } else {
-          // All ring slots full, use ring1 (will swap)
-          dbField = "ring1ItemId";
-        }
-      } else {
-        dbField = slotToFieldMap[input.toSlot];
-      }
+      const dbField = slotToFieldMap[input.toSlot];
 
       // Use transaction to handle swap
       await ctx.db.$transaction(async (tx) => {
@@ -325,7 +312,6 @@ export const equipmentRouter = createTRPCRouter({
     .input(
       z.object({
         fromSlot: equipmentSlotSchema,
-        ringIndex: z.number().int().min(1).max(3).optional(), // For RING slot
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -352,13 +338,7 @@ export const equipmentRouter = createTRPCRouter({
       }
 
       // Determine which field to clear
-      let dbField: string;
-      if (input.fromSlot === "RING") {
-        const ringIndex = input.ringIndex ?? 1;
-        dbField = ringSlots[ringIndex - 1] ?? "ring1ItemId";
-      } else {
-        dbField = slotToFieldMap[input.fromSlot];
-      }
+      const dbField = slotToFieldMap[input.fromSlot];
 
       const itemId = equipment[dbField as keyof typeof equipment] as string | null;
 
