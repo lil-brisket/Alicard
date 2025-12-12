@@ -97,7 +97,9 @@ export const ModelName = {
   PlayerPveRecord: 'PlayerPveRecord',
   Achievement: 'Achievement',
   PlayerAchievement: 'PlayerAchievement',
-  PlayerSocial: 'PlayerSocial'
+  PlayerSocial: 'PlayerSocial',
+  Monster: 'Monster',
+  Battle: 'Battle'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -766,12 +768,55 @@ export const PlayerSocialScalarFieldEnum = {
 export type PlayerSocialScalarFieldEnum = (typeof PlayerSocialScalarFieldEnum)[keyof typeof PlayerSocialScalarFieldEnum]
 
 
+export const MonsterScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  level: 'level',
+  vitality: 'vitality',
+  strength: 'strength',
+  speed: 'speed',
+  dexterity: 'dexterity',
+  maxHp: 'maxHp',
+  xpReward: 'xpReward',
+  goldReward: 'goldReward',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MonsterScalarFieldEnum = (typeof MonsterScalarFieldEnum)[keyof typeof MonsterScalarFieldEnum]
+
+
+export const BattleScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  monsterId: 'monsterId',
+  status: 'status',
+  turnNumber: 'turnNumber',
+  playerHp: 'playerHp',
+  playerSp: 'playerSp',
+  monsterHp: 'monsterHp',
+  log: 'log',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BattleScalarFieldEnum = (typeof BattleScalarFieldEnum)[keyof typeof BattleScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: 'JsonNull'
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -788,4 +833,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: 'DbNull',
+  JsonNull: 'JsonNull',
+  AnyNull: 'AnyNull'
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

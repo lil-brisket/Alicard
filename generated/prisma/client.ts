@@ -274,3 +274,13 @@ export type PlayerAchievement = Prisma.PlayerAchievementModel
  * 
  */
 export type PlayerSocial = Prisma.PlayerSocialModel
+/**
+ * Model Monster
+ * 
+ */
+export type Monster = Prisma.MonsterModel
+/**
+ * Model Battle
+ * 
+ */
+export type Battle = Prisma.BattleModel

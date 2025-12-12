@@ -430,7 +430,9 @@ export const ModelName = {
   PlayerPveRecord: 'PlayerPveRecord',
   Achievement: 'Achievement',
   PlayerAchievement: 'PlayerAchievement',
-  PlayerSocial: 'PlayerSocial'
+  PlayerSocial: 'PlayerSocial',
+  Monster: 'Monster',
+  Battle: 'Battle'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -446,7 +448,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "post" | "account" | "session" | "user" | "character" | "verificationToken" | "player" | "playerStats" | "mapTile" | "mapPosition" | "nPC" | "shopItem" | "item" | "inventoryItem" | "equipment" | "occupation" | "skill" | "playerSkill" | "playerSkillLoadout" | "encounter" | "combatLog" | "deathLog" | "deathRecord" | "guild" | "guildMember" | "guildBank" | "guildQuest" | "bankAccount" | "bankVaultItem" | "marketListing" | "marketTransaction" | "quest" | "job" | "userJob" | "recipe" | "recipeInput" | "craftAttempt" | "gatheringNode" | "nodeYield" | "gatherAttempt" | "playerProfile" | "playerProfileStats" | "playerPvpRecord" | "playerPveRecord" | "achievement" | "playerAchievement" | "playerSocial"
+    modelProps: "post" | "account" | "session" | "user" | "character" | "verificationToken" | "player" | "playerStats" | "mapTile" | "mapPosition" | "nPC" | "shopItem" | "item" | "inventoryItem" | "equipment" | "occupation" | "skill" | "playerSkill" | "playerSkillLoadout" | "encounter" | "combatLog" | "deathLog" | "deathRecord" | "guild" | "guildMember" | "guildBank" | "guildQuest" | "bankAccount" | "bankVaultItem" | "marketListing" | "marketTransaction" | "quest" | "job" | "userJob" | "recipe" | "recipeInput" | "craftAttempt" | "gatheringNode" | "nodeYield" | "gatherAttempt" | "playerProfile" | "playerProfileStats" | "playerPvpRecord" | "playerPveRecord" | "achievement" | "playerAchievement" | "playerSocial" | "monster" | "battle"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3928,6 +3930,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Monster: {
+      payload: Prisma.$MonsterPayload<ExtArgs>
+      fields: Prisma.MonsterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MonsterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonsterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MonsterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonsterPayload>
+        }
+        findFirst: {
+          args: Prisma.MonsterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonsterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MonsterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonsterPayload>
+        }
+        findMany: {
+          args: Prisma.MonsterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonsterPayload>[]
+        }
+        create: {
+          args: Prisma.MonsterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonsterPayload>
+        }
+        createMany: {
+          args: Prisma.MonsterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MonsterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonsterPayload>[]
+        }
+        delete: {
+          args: Prisma.MonsterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonsterPayload>
+        }
+        update: {
+          args: Prisma.MonsterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonsterPayload>
+        }
+        deleteMany: {
+          args: Prisma.MonsterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MonsterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MonsterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonsterPayload>[]
+        }
+        upsert: {
+          args: Prisma.MonsterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MonsterPayload>
+        }
+        aggregate: {
+          args: Prisma.MonsterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMonster>
+        }
+        groupBy: {
+          args: Prisma.MonsterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MonsterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MonsterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MonsterCountAggregateOutputType> | number
+        }
+      }
+    }
+    Battle: {
+      payload: Prisma.$BattlePayload<ExtArgs>
+      fields: Prisma.BattleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BattleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BattlePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BattleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BattlePayload>
+        }
+        findFirst: {
+          args: Prisma.BattleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BattlePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BattleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BattlePayload>
+        }
+        findMany: {
+          args: Prisma.BattleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BattlePayload>[]
+        }
+        create: {
+          args: Prisma.BattleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BattlePayload>
+        }
+        createMany: {
+          args: Prisma.BattleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BattleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BattlePayload>[]
+        }
+        delete: {
+          args: Prisma.BattleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BattlePayload>
+        }
+        update: {
+          args: Prisma.BattleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BattlePayload>
+        }
+        deleteMany: {
+          args: Prisma.BattleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BattleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BattleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BattlePayload>[]
+        }
+        upsert: {
+          args: Prisma.BattleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BattlePayload>
+        }
+        aggregate: {
+          args: Prisma.BattleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBattle>
+        }
+        groupBy: {
+          args: Prisma.BattleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BattleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BattleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BattleCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4617,12 +4767,55 @@ export const PlayerSocialScalarFieldEnum = {
 export type PlayerSocialScalarFieldEnum = (typeof PlayerSocialScalarFieldEnum)[keyof typeof PlayerSocialScalarFieldEnum]
 
 
+export const MonsterScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  level: 'level',
+  vitality: 'vitality',
+  strength: 'strength',
+  speed: 'speed',
+  dexterity: 'dexterity',
+  maxHp: 'maxHp',
+  xpReward: 'xpReward',
+  goldReward: 'goldReward',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MonsterScalarFieldEnum = (typeof MonsterScalarFieldEnum)[keyof typeof MonsterScalarFieldEnum]
+
+
+export const BattleScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  monsterId: 'monsterId',
+  status: 'status',
+  turnNumber: 'turnNumber',
+  playerHp: 'playerHp',
+  playerSp: 'playerSp',
+  monsterHp: 'monsterHp',
+  log: 'log',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BattleScalarFieldEnum = (typeof BattleScalarFieldEnum)[keyof typeof BattleScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -4639,6 +4832,15 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 
@@ -4879,6 +5081,34 @@ export type ListEnumAchievementRarityFieldRefInput<$PrismaModel> = FieldRefInput
 
 
 /**
+ * Reference to a field of type 'BattleStatus'
+ */
+export type EnumBattleStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BattleStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'BattleStatus[]'
+ */
+export type ListEnumBattleStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BattleStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -5033,6 +5263,8 @@ export type GlobalOmitConfig = {
   achievement?: Prisma.AchievementOmit
   playerAchievement?: Prisma.PlayerAchievementOmit
   playerSocial?: Prisma.PlayerSocialOmit
+  monster?: Prisma.MonsterOmit
+  battle?: Prisma.BattleOmit
 }
 
 /* Types for Logging */

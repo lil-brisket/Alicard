@@ -160,3 +160,13 @@ export const AchievementRarity = {
 } as const
 
 export type AchievementRarity = (typeof AchievementRarity)[keyof typeof AchievementRarity]
+
+
+export const BattleStatus = {
+  ACTIVE: 'ACTIVE',
+  WON: 'WON',
+  LOST: 'LOST',
+  FLED: 'FLED'
+} as const
+
+export type BattleStatus = (typeof BattleStatus)[keyof typeof BattleStatus]
