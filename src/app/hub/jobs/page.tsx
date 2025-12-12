@@ -5,8 +5,8 @@ import { JobCard } from "./_components/job-card";
 import { ProgressBar } from "./_components/progress-bar";
 
 export default function JobsPage() {
-  const { data: jobs, isLoading: jobsLoading } = api.jobs.listJobs.useQuery();
-  const { data: myJobs, isLoading: myJobsLoading } = api.jobs.getMyJobs.useQuery();
+  const { data: jobs, isLoading: jobsLoading, error: jobsError } = api.jobs.listJobs.useQuery();
+  const { data: myJobs, isLoading: myJobsLoading, error: myJobsError } = api.jobs.getMyJobs.useQuery();
   const utils = api.useUtils();
 
   const addXpMutation = api.jobs.addJobXp.useMutation({
@@ -21,6 +21,22 @@ export default function JobsPage() {
         <div className="mx-auto max-w-5xl p-4 md:p-8">
           <h1 className="text-2xl font-bold text-cyan-400">Jobs</h1>
           <p className="mt-2 text-slate-400">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (jobsError || myJobsError) {
+    return (
+      <div className="min-h-screen bg-slate-950 text-slate-100">
+        <div className="mx-auto max-w-5xl p-4 md:p-8">
+          <h1 className="text-2xl font-bold text-cyan-400">Jobs</h1>
+          <div className="mt-4 rounded bg-red-500/20 border border-red-500/50 p-4">
+            <p className="text-red-400 font-semibold">Error loading jobs</p>
+            <p className="text-red-300 text-sm mt-2">
+              {jobsError?.message ?? myJobsError?.message ?? "Unknown error"}
+            </p>
+          </div>
         </div>
       </div>
     );
