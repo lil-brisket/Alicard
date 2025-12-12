@@ -28,6 +28,15 @@ const slotLabels: Record<EquipmentSlot, string> = {
 const bodySlots: EquipmentSlot[] = ["HEAD", "LEFT_ARM", "RIGHT_ARM", "BODY", "LEGS", "FEET"];
 const accessorySlots: EquipmentSlot[] = ["RING1", "RING2", "RING3", "NECKLACE", "BELT", "CLOAK"];
 
+// Rarity colors for borders and indicators
+const rarityColors: Record<string, { border: string; text: string; dot: string }> = {
+  COMMON: { border: "border-slate-400", text: "text-slate-400", dot: "bg-slate-400" },
+  UNCOMMON: { border: "border-green-400", text: "text-green-400", dot: "bg-green-400" },
+  RARE: { border: "border-blue-400", text: "text-blue-400", dot: "bg-blue-400" },
+  EPIC: { border: "border-purple-400", text: "text-purple-400", dot: "bg-purple-400" },
+  LEGENDARY: { border: "border-yellow-400", text: "text-yellow-400", dot: "bg-yellow-400" },
+};
+
 // Position coordinates for body slots (percentage-based for responsiveness)
 const slotPositions: Record<EquipmentSlot, { top: string; left: string }> = {
   HEAD: { top: "5%", left: "50%" },
@@ -43,6 +52,27 @@ const slotPositions: Record<EquipmentSlot, { top: string; left: string }> = {
   BELT: { top: "0", left: "0" },
   CLOAK: { top: "0", left: "0" },
 };
+
+// Helper to calculate total stat bonus for an item
+function getTotalStatBonus(item: { vitalityBonus?: number; strengthBonus?: number; speedBonus?: number; dexterityBonus?: number; hpBonus?: number; spBonus?: number } | null): number {
+  if (!item) return 0;
+  return (item.vitalityBonus ?? 0) + (item.strengthBonus ?? 0) + (item.speedBonus ?? 0) + (item.dexterityBonus ?? 0) + (item.hpBonus ?? 0) + (item.spBonus ?? 0);
+}
+
+// Helper to get primary stat for display
+function getPrimaryStat(item: { vitalityBonus?: number; strengthBonus?: number; speedBonus?: number; dexterityBonus?: number; hpBonus?: number; spBonus?: number } | null): { label: string; value: number } | null {
+  if (!item) return null;
+  const stats = [
+    { label: "STR", value: item.strengthBonus ?? 0 },
+    { label: "VIT", value: item.vitalityBonus ?? 0 },
+    { label: "DEX", value: item.dexterityBonus ?? 0 },
+    { label: "SPD", value: item.speedBonus ?? 0 },
+    { label: "HP", value: item.hpBonus ?? 0 },
+    { label: "SP", value: item.spBonus ?? 0 },
+  ];
+  const primary = stats.find(s => s.value > 0) || stats[0];
+  return primary.value > 0 ? primary : null;
+}
 
 export default function EquipmentPage() {
   const [selectedSlot, setSelectedSlot] = useState<EquipmentSlot | null>(null);
@@ -204,31 +234,44 @@ export default function EquipmentPage() {
         {/* Total Stats Summary */}
         {totalStats && (
           <div className="mb-6 rounded-xl border border-slate-800 bg-slate-950/60 p-4">
-            <h2 className="mb-3 text-lg font-semibold text-cyan-400">Total Equipment Bonuses</h2>
+            <h2 className="mb-1 text-lg font-semibold text-cyan-400">Total Equipment Bonuses</h2>
+            <p className="mb-3 text-xs text-slate-500">Total bonuses (from equipped gear)</p>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-6">
               <div>
                 <span className="text-xs text-slate-400">Vitality</span>
-                <p className="text-lg font-semibold text-green-400">+{totalStats.vitality}</p>
+                <p className={`text-lg font-semibold ${totalStats.vitality > 0 ? "text-green-400" : "text-slate-600"}`}>
+                  +{totalStats.vitality}
+                </p>
               </div>
               <div>
                 <span className="text-xs text-slate-400">Strength</span>
-                <p className="text-lg font-semibold text-red-400">+{totalStats.strength}</p>
+                <p className={`text-lg font-semibold ${totalStats.strength > 0 ? "text-red-400" : "text-slate-600"}`}>
+                  +{totalStats.strength}
+                </p>
               </div>
               <div>
                 <span className="text-xs text-slate-400">Speed</span>
-                <p className="text-lg font-semibold text-yellow-400">+{totalStats.speed}</p>
+                <p className={`text-lg font-semibold ${totalStats.speed > 0 ? "text-yellow-400" : "text-slate-600"}`}>
+                  +{totalStats.speed}
+                </p>
               </div>
               <div>
                 <span className="text-xs text-slate-400">Dexterity</span>
-                <p className="text-lg font-semibold text-blue-400">+{totalStats.dexterity}</p>
+                <p className={`text-lg font-semibold ${totalStats.dexterity > 0 ? "text-blue-400" : "text-slate-600"}`}>
+                  +{totalStats.dexterity}
+                </p>
               </div>
               <div>
                 <span className="text-xs text-slate-400">HP</span>
-                <p className="text-lg font-semibold text-pink-400">+{totalStats.hp}</p>
+                <p className={`text-lg font-semibold ${totalStats.hp > 0 ? "text-pink-400" : "text-slate-600"}`}>
+                  +{totalStats.hp}
+                </p>
               </div>
               <div>
                 <span className="text-xs text-slate-400">SP</span>
-                <p className="text-lg font-semibold text-purple-400">+{totalStats.sp}</p>
+                <p className={`text-lg font-semibold ${totalStats.sp > 0 ? "text-purple-400" : "text-slate-600"}`}>
+                  +{totalStats.sp}
+                </p>
               </div>
             </div>
           </div>
@@ -236,7 +279,7 @@ export default function EquipmentPage() {
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {/* Left: Character Silhouette with Equipment Slots */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <h2 className="text-xl font-semibold text-cyan-400">Equipment Slots</h2>
             
             {/* Character Silhouette with Body Slots */}
@@ -256,6 +299,9 @@ export default function EquipmentPage() {
                 const isExpanded = expandedSlot === slot;
                 const isPending = pendingSlot === slot;
                 const position = slotPositions[slot];
+                const rarityColor = item?.itemRarity ? rarityColors[item.itemRarity] : null;
+                const primaryStat = getPrimaryStat(item);
+                const totalBonus = getTotalStatBonus(item);
                 return (
                   <div
                     key={slot}
@@ -271,19 +317,40 @@ export default function EquipmentPage() {
                       tabIndex={0}
                       aria-pressed={isSelected}
                       aria-label={`${slotLabels[slot]} slot${item ? `, equipped: ${item.name}` : ", empty"}`}
-                      className={`relative flex h-16 w-16 cursor-pointer items-center justify-center rounded-lg border-2 transition ${
+                      className={`relative flex h-16 w-16 cursor-pointer flex-col items-center justify-center rounded-lg border-2 transition ${
                         isSelected
-                          ? "border-cyan-500 bg-cyan-500/20 shadow-lg shadow-cyan-500/50"
-                          : item
-                            ? "border-green-500 bg-green-500/20 hover:border-green-400"
-                            : "border-slate-600 bg-slate-800/60 hover:border-slate-500"
+                          ? "border-cyan-400 bg-cyan-500/20 shadow-lg shadow-cyan-500/50 ring-2 ring-cyan-400 ring-offset-2 ring-offset-slate-950"
+                          : item && rarityColor
+                            ? `${rarityColor.border} bg-slate-800/60 hover:border-opacity-70`
+                            : item
+                              ? "border-green-500 bg-green-500/20 hover:border-green-400"
+                              : "border-slate-600 bg-slate-800/60 hover:border-slate-500"
                       }`}
-                      onClick={() => handleSlotClick(slot)}
+                      onClick={() => {
+                        handleSlotClick(slot);
+                        // On mobile/touch, also toggle expanded view
+                        if (!isExpanded && item) {
+                          setExpandedSlot(slot);
+                        }
+                      }}
                       onKeyDown={(e) => handleSlotKeyDown(e, slot)}
                     >
                       {item ? (
                         <>
-                          <span className="text-xs font-semibold text-green-400">✓</span>
+                          {/* Rarity dot indicator */}
+                          {rarityColor && (
+                            <div className={`absolute left-1 top-1 h-2 w-2 rounded-full ${rarityColor.dot}`} />
+                          )}
+                          {/* Item name (truncated) */}
+                          <span className="max-w-[90%] truncate text-[9px] font-semibold text-slate-100">
+                            {item.name}
+                          </span>
+                          {/* Stat total */}
+                          {totalBonus > 0 && (
+                            <span className="text-[8px] text-cyan-300">
+                              +{totalBonus} {primaryStat?.label || ""}
+                            </span>
+                          )}
                           {/* Unequip button on hover/desktop */}
                           <button
                             onClick={(e) => {
@@ -312,7 +379,7 @@ export default function EquipmentPage() {
                     {/* Mobile/Expanded detail panel */}
                     {isExpanded && item && (
                       <div className="absolute left-1/2 top-full z-20 mt-2 w-48 -translate-x-1/2 rounded-lg border border-slate-700 bg-slate-900 p-3 text-xs text-slate-100 shadow-lg">
-                        <div className="font-semibold mb-1">Equipped: {item.name}</div>
+                        <div className="mb-1 font-semibold">Equipped: {item.name}</div>
                         {item.description && (
                           <div className="mb-2 text-slate-400">{item.description}</div>
                         )}
@@ -347,7 +414,7 @@ export default function EquipmentPage() {
             </div>
 
             {/* Accessory Slots at Bottom */}
-            <div className="mt-6">
+            <div className="mt-2">
               <h3 className="mb-3 text-sm font-semibold text-slate-400">Accessories</h3>
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                 {accessorySlots.map((slot) => {
@@ -355,45 +422,63 @@ export default function EquipmentPage() {
                   const isSelected = selectedSlot === slot;
                   const isExpanded = expandedSlot === slot;
                   const isPending = pendingSlot === slot;
+                  const rarityColor = item?.itemRarity ? rarityColors[item.itemRarity] : null;
+                  const primaryStat = getPrimaryStat(item);
+                  const totalBonus = getTotalStatBonus(item);
                   return (
                     <div
                       key={slot}
-                      className={`rounded-xl border p-3 transition ${
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => {
+                        handleSlotClick(slot);
+                        if (!isExpanded && item) {
+                          setExpandedSlot(slot);
+                        }
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          handleSlotClick(slot);
+                          if (!isExpanded && item) {
+                            setExpandedSlot(slot);
+                          }
+                        }
+                      }}
+                      className={`cursor-pointer rounded-xl border p-3 transition ${
                         isSelected
-                          ? "border-cyan-500 bg-cyan-500/10"
-                          : "border-slate-800 bg-slate-950/60 hover:border-slate-700"
+                          ? "border-cyan-400 bg-cyan-500/10 ring-2 ring-cyan-400 ring-offset-1 ring-offset-slate-950"
+                          : item && rarityColor
+                            ? `${rarityColor.border} bg-slate-950/60 hover:border-opacity-70`
+                            : "border-slate-800 bg-slate-950/60 hover:border-slate-700"
                       }`}
                     >
                       <div className="mb-2 flex items-center justify-between">
                         <h3 className="text-xs font-semibold text-slate-300">{slotLabels[slot]}</h3>
-                        <div
-                          role="button"
-                          tabIndex={0}
-                          aria-pressed={isSelected}
-                          aria-label={`Select ${slotLabels[slot]} slot`}
-                          onClick={() => handleSlotClick(slot)}
-                          onKeyDown={(e) => handleSlotKeyDown(e, slot)}
-                          className={`cursor-pointer rounded px-2 py-0.5 text-xs transition ${
-                            isSelected
-                              ? "bg-cyan-500/20 text-cyan-400"
-                              : "bg-slate-800 text-slate-400 hover:bg-slate-700"
-                          }`}
-                        >
-                          {isSelected ? "✓" : "○"}
-                        </div>
+                        {isSelected && (
+                          <span className="rounded-full bg-cyan-500/20 px-2 py-0.5 text-[10px] text-cyan-400">
+                            ✓
+                          </span>
+                        )}
                       </div>
                       {item ? (
                         <div className="space-y-1">
-                          <div
-                            role="button"
-                            tabIndex={0}
-                            onClick={() => handleItemClick(slot)}
-                            onKeyDown={(e) => handleItemKeyDown(e, slot)}
-                            className="cursor-pointer"
-                          >
+                          {/* Rarity dot indicator */}
+                          {rarityColor && (
+                            <div className="mb-1 flex items-center gap-1">
+                              <div className={`h-2 w-2 rounded-full ${rarityColor.dot}`} />
+                              <p className="text-xs font-medium text-slate-100 truncate">{item.name}</p>
+                            </div>
+                          )}
+                          {!rarityColor && (
                             <p className="text-xs font-medium text-slate-100 truncate">{item.name}</p>
-                            <StatBadges item={item} size="xs" />
-                          </div>
+                          )}
+                          {totalBonus > 0 && primaryStat && (
+                            <p className="text-[10px] text-cyan-300">
+                              +{primaryStat.value} {primaryStat.label}
+                            </p>
+                          )}
+                          <StatBadges item={item} size="xs" />
                           {/* Mobile/Expanded detail panel */}
                           {isExpanded && (
                             <div className="mt-2 rounded border border-slate-700 bg-slate-900 p-2 text-xs text-slate-100">
@@ -406,7 +491,8 @@ export default function EquipmentPage() {
                             </div>
                           )}
                           <button
-                            onClick={() => {
+                            onClick={(e) => {
+                              e.stopPropagation();
                               setPendingSlot(slot);
                               unequipMutation.mutate({ fromSlot: slot });
                             }}
@@ -417,7 +503,10 @@ export default function EquipmentPage() {
                           </button>
                         </div>
                       ) : (
-                        <p className="text-[10px] text-slate-500">Empty</p>
+                        <div>
+                          <p className="mb-1 text-[10px] text-slate-500">Empty</p>
+                          <p className="text-[9px] text-slate-600">Click to equip</p>
+                        </div>
                       )}
                     </div>
                   );
@@ -428,15 +517,31 @@ export default function EquipmentPage() {
 
           {/* Right: Inventory Panel */}
           <div className="space-y-4">
-            <div>
-              <h2 className="text-xl font-semibold text-cyan-400">
-                {selectedSlot ? `Equippable Items - ${slotLabels[selectedSlot]}` : "Select a slot to view items"}
-              </h2>
-              {selectedSlot && (
-                <p className="mt-1 text-sm text-slate-400">
-                  Selected slot: <span className="font-semibold text-cyan-400">{slotLabels[selectedSlot]}</span> (click again to clear)
-                </p>
-              )}
+            <div className="flex items-start gap-2">
+              <div className="flex-1">
+                {selectedSlot ? (
+                  <>
+                    <div className="mb-2 flex items-center gap-2">
+                      <span className="rounded-full bg-cyan-500/20 px-3 py-1 text-xs font-semibold text-cyan-400">
+                        Selected: {slotLabels[selectedSlot]}
+                      </span>
+                    </div>
+                    <h2 className="text-xl font-semibold text-cyan-400">
+                      Equippable Items
+                    </h2>
+                    <p className="mt-1 text-sm text-slate-400">
+                      Showing: items for {slotLabels[selectedSlot]}
+                    </p>
+                    <p className="text-xs text-slate-500">
+                      Only equippable items for this slot appear here.
+                    </p>
+                  </>
+                ) : (
+                  <h2 className="text-xl font-semibold text-cyan-400">
+                    Select a slot to view items
+                  </h2>
+                )}
+              </div>
             </div>
             {selectedSlot ? (
               <>
