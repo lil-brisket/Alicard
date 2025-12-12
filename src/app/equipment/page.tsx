@@ -4,6 +4,7 @@ import { useState } from "react";
 import { api } from "~/trpc/react";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
 type EquipmentSlot = "HEAD" | "LEFT_ARM" | "RIGHT_ARM" | "BODY" | "LEGS" | "FEET" | "RING" | "NECKLACE" | "BELT" | "CLOAK";
 
@@ -18,6 +19,23 @@ const slotLabels: Record<EquipmentSlot, string> = {
   NECKLACE: "Necklace",
   BELT: "Belt",
   CLOAK: "Cloak",
+};
+
+const bodySlots: EquipmentSlot[] = ["HEAD", "LEFT_ARM", "RIGHT_ARM", "BODY", "LEGS", "FEET"];
+const accessorySlots: EquipmentSlot[] = ["RING", "NECKLACE", "BELT", "CLOAK"];
+
+// Position coordinates for body slots (percentage-based for responsiveness)
+const slotPositions: Record<EquipmentSlot, { top: string; left: string }> = {
+  HEAD: { top: "5%", left: "50%" },
+  LEFT_ARM: { top: "25%", left: "15%" },
+  RIGHT_ARM: { top: "25%", left: "85%" },
+  BODY: { top: "35%", left: "50%" },
+  LEGS: { top: "65%", left: "50%" },
+  FEET: { top: "90%", left: "50%" },
+  RING: { top: "0", left: "0" }, // Not used for body positioning
+  NECKLACE: { top: "0", left: "0" },
+  BELT: { top: "0", left: "0" },
+  CLOAK: { top: "0", left: "0" },
 };
 
 export default function EquipmentPage() {
@@ -63,8 +81,6 @@ export default function EquipmentPage() {
 
   const equipment = loadout?.equipment;
   const totalStats = loadout?.totalStats;
-
-  const slots: EquipmentSlot[] = ["HEAD", "LEFT_ARM", "RIGHT_ARM", "BODY", "LEGS", "FEET", "RING", "NECKLACE", "BELT", "CLOAK"];
 
   const getEquippedRing = () => {
     if (!equipment) return null;
@@ -156,83 +172,171 @@ export default function EquipmentPage() {
         )}
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {/* Left: Equipment Slots */}
+          {/* Left: Character Silhouette with Equipment Slots */}
           <div className="space-y-4">
             <h2 className="text-xl font-semibold text-cyan-400">Equipment Slots</h2>
-            <div className="grid grid-cols-2 gap-3">
-              {slots.map((slot) => {
+            
+            {/* Character Silhouette with Body Slots */}
+            <div className="relative mx-auto aspect-[612/612] w-full max-w-md">
+              <Image
+                src="/character-silhouette.png"
+                alt="Character silhouette"
+                fill
+                className="object-contain"
+                priority
+              />
+              
+              {/* Body Slots Overlay */}
+              {bodySlots.map((slot) => {
                 const item = getEquippedItem(slot);
                 const isSelected = selectedSlot === slot;
+                const position = slotPositions[slot];
                 return (
                   <div
                     key={slot}
-                    className={`rounded-xl border p-4 transition ${
+                    className={`group absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all ${
                       isSelected
-                        ? "border-cyan-500 bg-cyan-500/10"
-                        : "border-slate-800 bg-slate-950/60 hover:border-slate-700"
+                        ? "z-10 scale-110"
+                        : "hover:scale-105"
                     }`}
+                    style={{ top: position.top, left: position.left }}
+                    onClick={() => setSelectedSlot(isSelected ? null : slot)}
                   >
-                    <div className="mb-2 flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-slate-300">{slotLabels[slot]}</h3>
-                      <button
-                        onClick={() => setSelectedSlot(isSelected ? null : slot)}
-                        className={`rounded px-2 py-1 text-xs transition ${
-                          isSelected
-                            ? "bg-cyan-500/20 text-cyan-400"
-                            : "bg-slate-800 text-slate-400 hover:bg-slate-700"
-                        }`}
-                      >
-                        {isSelected ? "Selected" : "Select"}
-                      </button>
-                    </div>
-                    {item ? (
-                      <div className="space-y-2">
-                        <p className="text-sm font-medium text-slate-100">{item.name}</p>
-                        <div className="flex flex-wrap gap-1">
-                          {item.vitalityBonus > 0 && (
-                            <span className="rounded bg-green-500/20 px-1.5 py-0.5 text-xs text-green-400">
-                              VIT +{item.vitalityBonus}
-                            </span>
-                          )}
-                          {item.strengthBonus > 0 && (
-                            <span className="rounded bg-red-500/20 px-1.5 py-0.5 text-xs text-red-400">
-                              STR +{item.strengthBonus}
-                            </span>
-                          )}
-                          {item.speedBonus > 0 && (
-                            <span className="rounded bg-yellow-500/20 px-1.5 py-0.5 text-xs text-yellow-400">
-                              SPD +{item.speedBonus}
-                            </span>
-                          )}
-                          {item.dexterityBonus > 0 && (
-                            <span className="rounded bg-blue-500/20 px-1.5 py-0.5 text-xs text-blue-400">
-                              DEX +{item.dexterityBonus}
-                            </span>
-                          )}
-                        </div>
-                        <button
-                          onClick={() => {
-                            if (slot === "RING") {
-                              unequipMutation.mutate({
-                                fromSlot: slot,
-                                ringIndex: getRingSlotIndex(),
-                              });
-                            } else {
+                    <div
+                      className={`relative flex h-16 w-16 items-center justify-center rounded-lg border-2 transition ${
+                        isSelected
+                          ? "border-cyan-500 bg-cyan-500/20 shadow-lg shadow-cyan-500/50"
+                          : item
+                            ? "border-green-500 bg-green-500/20 hover:border-green-400"
+                            : "border-slate-600 bg-slate-800/60 hover:border-slate-500"
+                      }`}
+                    >
+                      {item ? (
+                        <>
+                          <span className="text-xs font-semibold text-green-400">✓</span>
+                          {/* Unequip button on hover */}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
                               unequipMutation.mutate({ fromSlot: slot });
-                            }
-                          }}
-                          disabled={unequipMutation.isPending}
-                          className="w-full rounded bg-red-500/20 px-3 py-1.5 text-xs text-red-400 transition hover:bg-red-500/30 disabled:opacity-50"
-                        >
-                          Unequip
-                        </button>
-                      </div>
-                    ) : (
-                      <p className="text-xs text-slate-500">Empty</p>
-                    )}
+                            }}
+                            disabled={unequipMutation.isPending}
+                            className="absolute right-0 top-0 hidden h-5 w-5 items-center justify-center rounded-full bg-red-500/80 text-[10px] text-white transition hover:bg-red-500 disabled:opacity-50 group-hover:flex"
+                            title="Unequip"
+                          >
+                            ×
+                          </button>
+                        </>
+                      ) : (
+                        <span className="text-xs text-slate-400">+</span>
+                      )}
+                      {/* Tooltip on hover */}
+                      {item && (
+                        <div className="pointer-events-none absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 whitespace-nowrap rounded-lg border border-slate-700 bg-slate-900 px-2 py-1 text-xs text-slate-100 shadow-lg group-hover:block">
+                          <div className="font-semibold">{item.name}</div>
+                          <div className="mt-1 flex gap-1">
+                            {item.vitalityBonus > 0 && (
+                              <span className="text-green-400">V+{item.vitalityBonus}</span>
+                            )}
+                            {item.strengthBonus > 0 && (
+                              <span className="text-red-400">S+{item.strengthBonus}</span>
+                            )}
+                            {item.speedBonus > 0 && (
+                              <span className="text-yellow-400">Sp+{item.speedBonus}</span>
+                            )}
+                            {item.dexterityBonus > 0 && (
+                              <span className="text-blue-400">D+{item.dexterityBonus}</span>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    <div className="absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap text-xs text-slate-300">
+                      {slotLabels[slot]}
+                    </div>
                   </div>
                 );
               })}
+            </div>
+
+            {/* Accessory Slots at Bottom */}
+            <div className="mt-6">
+              <h3 className="mb-3 text-sm font-semibold text-slate-400">Accessories</h3>
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                {accessorySlots.map((slot) => {
+                  const item = getEquippedItem(slot);
+                  const isSelected = selectedSlot === slot;
+                  return (
+                    <div
+                      key={slot}
+                      className={`rounded-xl border p-3 transition ${
+                        isSelected
+                          ? "border-cyan-500 bg-cyan-500/10"
+                          : "border-slate-800 bg-slate-950/60 hover:border-slate-700"
+                      }`}
+                    >
+                      <div className="mb-2 flex items-center justify-between">
+                        <h3 className="text-xs font-semibold text-slate-300">{slotLabels[slot]}</h3>
+                        <button
+                          onClick={() => setSelectedSlot(isSelected ? null : slot)}
+                          className={`rounded px-2 py-0.5 text-xs transition ${
+                            isSelected
+                              ? "bg-cyan-500/20 text-cyan-400"
+                              : "bg-slate-800 text-slate-400 hover:bg-slate-700"
+                          }`}
+                        >
+                          {isSelected ? "✓" : "○"}
+                        </button>
+                      </div>
+                      {item ? (
+                        <div className="space-y-1">
+                          <p className="text-xs font-medium text-slate-100 truncate">{item.name}</p>
+                          <div className="flex flex-wrap gap-0.5">
+                            {item.vitalityBonus > 0 && (
+                              <span className="rounded bg-green-500/20 px-1 py-0.5 text-[10px] text-green-400">
+                                V+{item.vitalityBonus}
+                              </span>
+                            )}
+                            {item.strengthBonus > 0 && (
+                              <span className="rounded bg-red-500/20 px-1 py-0.5 text-[10px] text-red-400">
+                                S+{item.strengthBonus}
+                              </span>
+                            )}
+                            {item.speedBonus > 0 && (
+                              <span className="rounded bg-yellow-500/20 px-1 py-0.5 text-[10px] text-yellow-400">
+                                Sp+{item.speedBonus}
+                              </span>
+                            )}
+                            {item.dexterityBonus > 0 && (
+                              <span className="rounded bg-blue-500/20 px-1 py-0.5 text-[10px] text-blue-400">
+                                D+{item.dexterityBonus}
+                              </span>
+                            )}
+                          </div>
+                          <button
+                            onClick={() => {
+                              if (slot === "RING") {
+                                unequipMutation.mutate({
+                                  fromSlot: slot,
+                                  ringIndex: getRingSlotIndex(),
+                                });
+                              } else {
+                                unequipMutation.mutate({ fromSlot: slot });
+                              }
+                            }}
+                            disabled={unequipMutation.isPending}
+                            className="mt-1 w-full rounded bg-red-500/20 px-2 py-1 text-[10px] text-red-400 transition hover:bg-red-500/30 disabled:opacity-50"
+                          >
+                            Unequip
+                          </button>
+                        </div>
+                      ) : (
+                        <p className="text-[10px] text-slate-500">Empty</p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
