@@ -120,10 +120,20 @@ export type Equipment = Prisma.EquipmentModel
  */
 export type Occupation = Prisma.OccupationModel
 /**
+ * Model Skill
+ * 
+ */
+export type Skill = Prisma.SkillModel
+/**
  * Model PlayerSkill
  * 
  */
 export type PlayerSkill = Prisma.PlayerSkillModel
+/**
+ * Model PlayerSkillLoadout
+ * 
+ */
+export type PlayerSkillLoadout = Prisma.PlayerSkillLoadoutModel
 /**
  * Model Encounter
  * 

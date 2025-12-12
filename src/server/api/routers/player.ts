@@ -163,6 +163,9 @@ export const playerRouter = createTRPCRouter({
           equipment: {
             create: {},
           },
+          skillLoadout: {
+            create: {},
+          },
           bankAccount: {
             create: {
               gold: 0,

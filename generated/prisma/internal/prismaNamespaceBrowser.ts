@@ -67,7 +67,9 @@ export const ModelName = {
   InventoryItem: 'InventoryItem',
   Equipment: 'Equipment',
   Occupation: 'Occupation',
+  Skill: 'Skill',
   PlayerSkill: 'PlayerSkill',
+  PlayerSkillLoadout: 'PlayerSkillLoadout',
   Encounter: 'Encounter',
   CombatLog: 'CombatLog',
   DeathLog: 'DeathLog',
@@ -323,13 +325,18 @@ export type InventoryItemScalarFieldEnum = (typeof InventoryItemScalarFieldEnum)
 export const EquipmentScalarFieldEnum = {
   id: 'id',
   playerId: 'playerId',
-  weaponId: 'weaponId',
-  headId: 'headId',
-  chestId: 'chestId',
-  legsId: 'legsId',
-  feetId: 'feetId',
-  accessory1Id: 'accessory1Id',
-  accessory2Id: 'accessory2Id',
+  headItemId: 'headItemId',
+  leftArmItemId: 'leftArmItemId',
+  rightArmItemId: 'rightArmItemId',
+  bodyItemId: 'bodyItemId',
+  legsItemId: 'legsItemId',
+  feetItemId: 'feetItemId',
+  ring1ItemId: 'ring1ItemId',
+  ring2ItemId: 'ring2ItemId',
+  ring3ItemId: 'ring3ItemId',
+  necklaceItemId: 'necklaceItemId',
+  beltItemId: 'beltItemId',
+  cloakItemId: 'cloakItemId',
   updatedAt: 'updatedAt'
 } as const
 
@@ -349,16 +356,47 @@ export const OccupationScalarFieldEnum = {
 export type OccupationScalarFieldEnum = (typeof OccupationScalarFieldEnum)[keyof typeof OccupationScalarFieldEnum]
 
 
+export const SkillScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  description: 'description',
+  staminaCost: 'staminaCost',
+  cooldownSeconds: 'cooldownSeconds',
+  tags: 'tags',
+  jobUnlock: 'jobUnlock',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SkillScalarFieldEnum = (typeof SkillScalarFieldEnum)[keyof typeof SkillScalarFieldEnum]
+
+
 export const PlayerSkillScalarFieldEnum = {
   id: 'id',
   playerId: 'playerId',
-  skillName: 'skillName',
-  level: 'level',
-  experience: 'experience',
-  createdAt: 'createdAt'
+  skillId: 'skillId',
+  learnedAt: 'learnedAt'
 } as const
 
 export type PlayerSkillScalarFieldEnum = (typeof PlayerSkillScalarFieldEnum)[keyof typeof PlayerSkillScalarFieldEnum]
+
+
+export const PlayerSkillLoadoutScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  slot1SkillId: 'slot1SkillId',
+  slot2SkillId: 'slot2SkillId',
+  slot3SkillId: 'slot3SkillId',
+  slot4SkillId: 'slot4SkillId',
+  slot5SkillId: 'slot5SkillId',
+  slot6SkillId: 'slot6SkillId',
+  slot7SkillId: 'slot7SkillId',
+  slot8SkillId: 'slot8SkillId',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlayerSkillLoadoutScalarFieldEnum = (typeof PlayerSkillLoadoutScalarFieldEnum)[keyof typeof PlayerSkillLoadoutScalarFieldEnum]
 
 
 export const EncounterScalarFieldEnum = {

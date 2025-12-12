@@ -257,16 +257,228 @@ async function main() {
       id: "cloth-shirt",
       name: "Cloth Shirt",
       description: "A basic cloth shirt.",
-      itemType: "ARMOR",
+      itemType: "EQUIPMENT",
       itemRarity: "COMMON",
       tier: 1,
       value: 30,
       stackable: false,
       maxStack: 1,
-      equipmentSlot: "CHEST",
+      equipmentSlot: "BODY",
       vitalityBonus: 1,
     },
   });
+
+  // Equipment items
+  console.log("Creating equipment items...");
+
+  const ironHelmet = await prisma.item.upsert({
+    where: { id: "iron-helmet" },
+    update: {},
+    create: {
+      id: "iron-helmet",
+      key: "iron-helmet",
+      name: "Iron Helmet",
+      description: "A sturdy iron helmet that protects the head.",
+      itemType: "EQUIPMENT",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 50,
+      stackable: false,
+      maxStack: 1,
+      equipmentSlot: "HEAD",
+      vitalityBonus: 2,
+      strengthBonus: 1,
+    },
+  });
+
+  const ironSword = await prisma.item.upsert({
+    where: { id: "iron-sword" },
+    update: {},
+    create: {
+      id: "iron-sword",
+      key: "iron-sword",
+      name: "Iron Sword",
+      description: "A basic iron sword for combat.",
+      itemType: "EQUIPMENT",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 60,
+      stackable: false,
+      maxStack: 1,
+      equipmentSlot: "LEFT_ARM",
+      strengthBonus: 3,
+      dexterityBonus: 1,
+    },
+  });
+
+  const ironShield = await prisma.item.upsert({
+    where: { id: "iron-shield" },
+    update: {},
+    create: {
+      id: "iron-shield",
+      key: "iron-shield",
+      name: "Iron Shield",
+      description: "A defensive iron shield.",
+      itemType: "EQUIPMENT",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 55,
+      stackable: false,
+      maxStack: 1,
+      equipmentSlot: "RIGHT_ARM",
+      vitalityBonus: 2,
+      hpBonus: 10,
+    },
+  });
+
+  const leatherArmor = await prisma.item.upsert({
+    where: { id: "leather-armor" },
+    update: {},
+    create: {
+      id: "leather-armor",
+      key: "leather-armor",
+      name: "Leather Armor",
+      description: "Lightweight leather body armor.",
+      itemType: "EQUIPMENT",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 70,
+      stackable: false,
+      maxStack: 1,
+      equipmentSlot: "BODY",
+      vitalityBonus: 3,
+      speedBonus: 1,
+    },
+  });
+
+  const leatherBoots = await prisma.item.upsert({
+    where: { id: "leather-boots" },
+    update: {},
+    create: {
+      id: "leather-boots",
+      key: "leather-boots",
+      name: "Leather Boots",
+      description: "Comfortable leather boots.",
+      itemType: "EQUIPMENT",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 40,
+      stackable: false,
+      maxStack: 1,
+      equipmentSlot: "FEET",
+      speedBonus: 2,
+    },
+  });
+
+  const copperRing = await prisma.item.upsert({
+    where: { id: "copper-ring" },
+    update: {},
+    create: {
+      id: "copper-ring",
+      key: "copper-ring",
+      name: "Copper Ring",
+      description: "A simple copper ring with minor magical properties.",
+      itemType: "EQUIPMENT",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 30,
+      stackable: false,
+      maxStack: 1,
+      equipmentSlot: "RING",
+      vitalityBonus: 1,
+      spBonus: 5,
+    },
+  });
+
+  const amuletOfHealth = await prisma.item.upsert({
+    where: { id: "amulet-of-health" },
+    update: {},
+    create: {
+      id: "amulet-of-health",
+      key: "amulet-of-health",
+      name: "Amulet of Health",
+      description: "A magical amulet that increases vitality.",
+      itemType: "EQUIPMENT",
+      itemRarity: "UNCOMMON",
+      tier: 1,
+      value: 80,
+      stackable: false,
+      maxStack: 1,
+      equipmentSlot: "NECKLACE",
+      vitalityBonus: 4,
+      hpBonus: 20,
+    },
+  });
+
+  // Skills
+  console.log("Creating skills...");
+
+  const basicAttack = await prisma.skill.upsert({
+    where: { id: "basic-attack" },
+    update: {},
+    create: {
+      id: "basic-attack",
+      key: "basic-attack",
+      name: "Basic Attack",
+      description: "A simple melee attack.",
+      staminaCost: 5,
+      cooldownSeconds: 0,
+    },
+  });
+
+  const powerStrike = await prisma.skill.upsert({
+    where: { id: "power-strike" },
+    update: {},
+    create: {
+      id: "power-strike",
+      key: "power-strike",
+      name: "Power Strike",
+      description: "A powerful attack that deals extra damage.",
+      staminaCost: 15,
+      cooldownSeconds: 3,
+    },
+  });
+
+  const heal = await prisma.skill.upsert({
+    where: { id: "heal" },
+    update: {},
+    create: {
+      id: "heal",
+      key: "heal",
+      name: "Heal",
+      description: "Restores a small amount of health.",
+      staminaCost: 10,
+      cooldownSeconds: 5,
+    },
+  });
+
+  const dodge = await prisma.skill.upsert({
+    where: { id: "dodge" },
+    update: {},
+    create: {
+      id: "dodge",
+      key: "dodge",
+      name: "Dodge",
+      description: "Increases evasion for a short time.",
+      staminaCost: 8,
+      cooldownSeconds: 10,
+    },
+  });
+
+  const shieldBash = await prisma.skill.upsert({
+    where: { id: "shield-bash" },
+    update: {},
+    create: {
+      id: "shield-bash",
+      key: "shield-bash",
+      name: "Shield Bash",
+      description: "Bash with your shield, stunning the enemy.",
+      staminaCost: 12,
+      cooldownSeconds: 8,
+    },
+  });
+
+  console.log("✅ Seed completed!");
 
   // Get job IDs
   const blacksmithJob = await prisma.job.findUnique({ where: { key: "blacksmith" } });

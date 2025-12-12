@@ -20,86 +20,52 @@ export type PlayerSkillModel = runtime.Types.Result.DefaultSelection<Prisma.$Pla
 
 export type AggregatePlayerSkill = {
   _count: PlayerSkillCountAggregateOutputType | null
-  _avg: PlayerSkillAvgAggregateOutputType | null
-  _sum: PlayerSkillSumAggregateOutputType | null
   _min: PlayerSkillMinAggregateOutputType | null
   _max: PlayerSkillMaxAggregateOutputType | null
-}
-
-export type PlayerSkillAvgAggregateOutputType = {
-  level: number | null
-  experience: number | null
-}
-
-export type PlayerSkillSumAggregateOutputType = {
-  level: number | null
-  experience: number | null
 }
 
 export type PlayerSkillMinAggregateOutputType = {
   id: string | null
   playerId: string | null
-  skillName: string | null
-  level: number | null
-  experience: number | null
-  createdAt: Date | null
+  skillId: string | null
+  learnedAt: Date | null
 }
 
 export type PlayerSkillMaxAggregateOutputType = {
   id: string | null
   playerId: string | null
-  skillName: string | null
-  level: number | null
-  experience: number | null
-  createdAt: Date | null
+  skillId: string | null
+  learnedAt: Date | null
 }
 
 export type PlayerSkillCountAggregateOutputType = {
   id: number
   playerId: number
-  skillName: number
-  level: number
-  experience: number
-  createdAt: number
+  skillId: number
+  learnedAt: number
   _all: number
 }
 
 
-export type PlayerSkillAvgAggregateInputType = {
-  level?: true
-  experience?: true
-}
-
-export type PlayerSkillSumAggregateInputType = {
-  level?: true
-  experience?: true
-}
-
 export type PlayerSkillMinAggregateInputType = {
   id?: true
   playerId?: true
-  skillName?: true
-  level?: true
-  experience?: true
-  createdAt?: true
+  skillId?: true
+  learnedAt?: true
 }
 
 export type PlayerSkillMaxAggregateInputType = {
   id?: true
   playerId?: true
-  skillName?: true
-  level?: true
-  experience?: true
-  createdAt?: true
+  skillId?: true
+  learnedAt?: true
 }
 
 export type PlayerSkillCountAggregateInputType = {
   id?: true
   playerId?: true
-  skillName?: true
-  level?: true
-  experience?: true
-  createdAt?: true
+  skillId?: true
+  learnedAt?: true
   _all?: true
 }
 
@@ -141,18 +107,6 @@ export type PlayerSkillAggregateArgs<ExtArgs extends runtime.Types.Extensions.In
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: PlayerSkillAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: PlayerSkillSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: PlayerSkillMinAggregateInputType
@@ -183,8 +137,6 @@ export type PlayerSkillGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   _count?: PlayerSkillCountAggregateInputType | true
-  _avg?: PlayerSkillAvgAggregateInputType
-  _sum?: PlayerSkillSumAggregateInputType
   _min?: PlayerSkillMinAggregateInputType
   _max?: PlayerSkillMaxAggregateInputType
 }
@@ -192,13 +144,9 @@ export type PlayerSkillGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type PlayerSkillGroupByOutputType = {
   id: string
   playerId: string
-  skillName: string
-  level: number
-  experience: number
-  createdAt: Date
+  skillId: string
+  learnedAt: Date
   _count: PlayerSkillCountAggregateOutputType | null
-  _avg: PlayerSkillAvgAggregateOutputType | null
-  _sum: PlayerSkillSumAggregateOutputType | null
   _min: PlayerSkillMinAggregateOutputType | null
   _max: PlayerSkillMaxAggregateOutputType | null
 }
@@ -224,49 +172,42 @@ export type PlayerSkillWhereInput = {
   NOT?: Prisma.PlayerSkillWhereInput | Prisma.PlayerSkillWhereInput[]
   id?: Prisma.StringFilter<"PlayerSkill"> | string
   playerId?: Prisma.StringFilter<"PlayerSkill"> | string
-  skillName?: Prisma.StringFilter<"PlayerSkill"> | string
-  level?: Prisma.IntFilter<"PlayerSkill"> | number
-  experience?: Prisma.IntFilter<"PlayerSkill"> | number
-  createdAt?: Prisma.DateTimeFilter<"PlayerSkill"> | Date | string
+  skillId?: Prisma.StringFilter<"PlayerSkill"> | string
+  learnedAt?: Prisma.DateTimeFilter<"PlayerSkill"> | Date | string
   player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
+  skill?: Prisma.XOR<Prisma.SkillScalarRelationFilter, Prisma.SkillWhereInput>
 }
 
 export type PlayerSkillOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  skillName?: Prisma.SortOrder
-  level?: Prisma.SortOrder
-  experience?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  skillId?: Prisma.SortOrder
+  learnedAt?: Prisma.SortOrder
   player?: Prisma.PlayerOrderByWithRelationInput
+  skill?: Prisma.SkillOrderByWithRelationInput
 }
 
 export type PlayerSkillWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  playerId_skillName?: Prisma.PlayerSkillPlayerIdSkillNameCompoundUniqueInput
+  playerId_skillId?: Prisma.PlayerSkillPlayerIdSkillIdCompoundUniqueInput
   AND?: Prisma.PlayerSkillWhereInput | Prisma.PlayerSkillWhereInput[]
   OR?: Prisma.PlayerSkillWhereInput[]
   NOT?: Prisma.PlayerSkillWhereInput | Prisma.PlayerSkillWhereInput[]
   playerId?: Prisma.StringFilter<"PlayerSkill"> | string
-  skillName?: Prisma.StringFilter<"PlayerSkill"> | string
-  level?: Prisma.IntFilter<"PlayerSkill"> | number
-  experience?: Prisma.IntFilter<"PlayerSkill"> | number
-  createdAt?: Prisma.DateTimeFilter<"PlayerSkill"> | Date | string
+  skillId?: Prisma.StringFilter<"PlayerSkill"> | string
+  learnedAt?: Prisma.DateTimeFilter<"PlayerSkill"> | Date | string
   player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
-}, "id" | "playerId_skillName">
+  skill?: Prisma.XOR<Prisma.SkillScalarRelationFilter, Prisma.SkillWhereInput>
+}, "id" | "playerId_skillId">
 
 export type PlayerSkillOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  skillName?: Prisma.SortOrder
-  level?: Prisma.SortOrder
-  experience?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  skillId?: Prisma.SortOrder
+  learnedAt?: Prisma.SortOrder
   _count?: Prisma.PlayerSkillCountOrderByAggregateInput
-  _avg?: Prisma.PlayerSkillAvgOrderByAggregateInput
   _max?: Prisma.PlayerSkillMaxOrderByAggregateInput
   _min?: Prisma.PlayerSkillMinOrderByAggregateInput
-  _sum?: Prisma.PlayerSkillSumOrderByAggregateInput
 }
 
 export type PlayerSkillScalarWhereWithAggregatesInput = {
@@ -275,72 +216,55 @@ export type PlayerSkillScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PlayerSkillScalarWhereWithAggregatesInput | Prisma.PlayerSkillScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"PlayerSkill"> | string
   playerId?: Prisma.StringWithAggregatesFilter<"PlayerSkill"> | string
-  skillName?: Prisma.StringWithAggregatesFilter<"PlayerSkill"> | string
-  level?: Prisma.IntWithAggregatesFilter<"PlayerSkill"> | number
-  experience?: Prisma.IntWithAggregatesFilter<"PlayerSkill"> | number
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"PlayerSkill"> | Date | string
+  skillId?: Prisma.StringWithAggregatesFilter<"PlayerSkill"> | string
+  learnedAt?: Prisma.DateTimeWithAggregatesFilter<"PlayerSkill"> | Date | string
 }
 
 export type PlayerSkillCreateInput = {
   id?: string
-  skillName: string
-  level?: number
-  experience?: number
-  createdAt?: Date | string
+  learnedAt?: Date | string
   player: Prisma.PlayerCreateNestedOneWithoutSkillsInput
+  skill: Prisma.SkillCreateNestedOneWithoutPlayerSkillsInput
 }
 
 export type PlayerSkillUncheckedCreateInput = {
   id?: string
   playerId: string
-  skillName: string
-  level?: number
-  experience?: number
-  createdAt?: Date | string
+  skillId: string
+  learnedAt?: Date | string
 }
 
 export type PlayerSkillUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  skillName?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  experience?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  learnedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   player?: Prisma.PlayerUpdateOneRequiredWithoutSkillsNestedInput
+  skill?: Prisma.SkillUpdateOneRequiredWithoutPlayerSkillsNestedInput
 }
 
 export type PlayerSkillUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  skillName?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  experience?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  skillId?: Prisma.StringFieldUpdateOperationsInput | string
+  learnedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PlayerSkillCreateManyInput = {
   id?: string
   playerId: string
-  skillName: string
-  level?: number
-  experience?: number
-  createdAt?: Date | string
+  skillId: string
+  learnedAt?: Date | string
 }
 
 export type PlayerSkillUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  skillName?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  experience?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  learnedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PlayerSkillUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  skillName?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  experience?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  skillId?: Prisma.StringFieldUpdateOperationsInput | string
+  learnedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PlayerSkillListRelationFilter = {
@@ -353,46 +277,30 @@ export type PlayerSkillOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type PlayerSkillPlayerIdSkillNameCompoundUniqueInput = {
+export type PlayerSkillPlayerIdSkillIdCompoundUniqueInput = {
   playerId: string
-  skillName: string
+  skillId: string
 }
 
 export type PlayerSkillCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  skillName?: Prisma.SortOrder
-  level?: Prisma.SortOrder
-  experience?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-}
-
-export type PlayerSkillAvgOrderByAggregateInput = {
-  level?: Prisma.SortOrder
-  experience?: Prisma.SortOrder
+  skillId?: Prisma.SortOrder
+  learnedAt?: Prisma.SortOrder
 }
 
 export type PlayerSkillMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  skillName?: Prisma.SortOrder
-  level?: Prisma.SortOrder
-  experience?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  skillId?: Prisma.SortOrder
+  learnedAt?: Prisma.SortOrder
 }
 
 export type PlayerSkillMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  skillName?: Prisma.SortOrder
-  level?: Prisma.SortOrder
-  experience?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-}
-
-export type PlayerSkillSumOrderByAggregateInput = {
-  level?: Prisma.SortOrder
-  experience?: Prisma.SortOrder
+  skillId?: Prisma.SortOrder
+  learnedAt?: Prisma.SortOrder
 }
 
 export type PlayerSkillCreateNestedManyWithoutPlayerInput = {
@@ -437,20 +345,58 @@ export type PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput = {
   deleteMany?: Prisma.PlayerSkillScalarWhereInput | Prisma.PlayerSkillScalarWhereInput[]
 }
 
+export type PlayerSkillCreateNestedManyWithoutSkillInput = {
+  create?: Prisma.XOR<Prisma.PlayerSkillCreateWithoutSkillInput, Prisma.PlayerSkillUncheckedCreateWithoutSkillInput> | Prisma.PlayerSkillCreateWithoutSkillInput[] | Prisma.PlayerSkillUncheckedCreateWithoutSkillInput[]
+  connectOrCreate?: Prisma.PlayerSkillCreateOrConnectWithoutSkillInput | Prisma.PlayerSkillCreateOrConnectWithoutSkillInput[]
+  createMany?: Prisma.PlayerSkillCreateManySkillInputEnvelope
+  connect?: Prisma.PlayerSkillWhereUniqueInput | Prisma.PlayerSkillWhereUniqueInput[]
+}
+
+export type PlayerSkillUncheckedCreateNestedManyWithoutSkillInput = {
+  create?: Prisma.XOR<Prisma.PlayerSkillCreateWithoutSkillInput, Prisma.PlayerSkillUncheckedCreateWithoutSkillInput> | Prisma.PlayerSkillCreateWithoutSkillInput[] | Prisma.PlayerSkillUncheckedCreateWithoutSkillInput[]
+  connectOrCreate?: Prisma.PlayerSkillCreateOrConnectWithoutSkillInput | Prisma.PlayerSkillCreateOrConnectWithoutSkillInput[]
+  createMany?: Prisma.PlayerSkillCreateManySkillInputEnvelope
+  connect?: Prisma.PlayerSkillWhereUniqueInput | Prisma.PlayerSkillWhereUniqueInput[]
+}
+
+export type PlayerSkillUpdateManyWithoutSkillNestedInput = {
+  create?: Prisma.XOR<Prisma.PlayerSkillCreateWithoutSkillInput, Prisma.PlayerSkillUncheckedCreateWithoutSkillInput> | Prisma.PlayerSkillCreateWithoutSkillInput[] | Prisma.PlayerSkillUncheckedCreateWithoutSkillInput[]
+  connectOrCreate?: Prisma.PlayerSkillCreateOrConnectWithoutSkillInput | Prisma.PlayerSkillCreateOrConnectWithoutSkillInput[]
+  upsert?: Prisma.PlayerSkillUpsertWithWhereUniqueWithoutSkillInput | Prisma.PlayerSkillUpsertWithWhereUniqueWithoutSkillInput[]
+  createMany?: Prisma.PlayerSkillCreateManySkillInputEnvelope
+  set?: Prisma.PlayerSkillWhereUniqueInput | Prisma.PlayerSkillWhereUniqueInput[]
+  disconnect?: Prisma.PlayerSkillWhereUniqueInput | Prisma.PlayerSkillWhereUniqueInput[]
+  delete?: Prisma.PlayerSkillWhereUniqueInput | Prisma.PlayerSkillWhereUniqueInput[]
+  connect?: Prisma.PlayerSkillWhereUniqueInput | Prisma.PlayerSkillWhereUniqueInput[]
+  update?: Prisma.PlayerSkillUpdateWithWhereUniqueWithoutSkillInput | Prisma.PlayerSkillUpdateWithWhereUniqueWithoutSkillInput[]
+  updateMany?: Prisma.PlayerSkillUpdateManyWithWhereWithoutSkillInput | Prisma.PlayerSkillUpdateManyWithWhereWithoutSkillInput[]
+  deleteMany?: Prisma.PlayerSkillScalarWhereInput | Prisma.PlayerSkillScalarWhereInput[]
+}
+
+export type PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput = {
+  create?: Prisma.XOR<Prisma.PlayerSkillCreateWithoutSkillInput, Prisma.PlayerSkillUncheckedCreateWithoutSkillInput> | Prisma.PlayerSkillCreateWithoutSkillInput[] | Prisma.PlayerSkillUncheckedCreateWithoutSkillInput[]
+  connectOrCreate?: Prisma.PlayerSkillCreateOrConnectWithoutSkillInput | Prisma.PlayerSkillCreateOrConnectWithoutSkillInput[]
+  upsert?: Prisma.PlayerSkillUpsertWithWhereUniqueWithoutSkillInput | Prisma.PlayerSkillUpsertWithWhereUniqueWithoutSkillInput[]
+  createMany?: Prisma.PlayerSkillCreateManySkillInputEnvelope
+  set?: Prisma.PlayerSkillWhereUniqueInput | Prisma.PlayerSkillWhereUniqueInput[]
+  disconnect?: Prisma.PlayerSkillWhereUniqueInput | Prisma.PlayerSkillWhereUniqueInput[]
+  delete?: Prisma.PlayerSkillWhereUniqueInput | Prisma.PlayerSkillWhereUniqueInput[]
+  connect?: Prisma.PlayerSkillWhereUniqueInput | Prisma.PlayerSkillWhereUniqueInput[]
+  update?: Prisma.PlayerSkillUpdateWithWhereUniqueWithoutSkillInput | Prisma.PlayerSkillUpdateWithWhereUniqueWithoutSkillInput[]
+  updateMany?: Prisma.PlayerSkillUpdateManyWithWhereWithoutSkillInput | Prisma.PlayerSkillUpdateManyWithWhereWithoutSkillInput[]
+  deleteMany?: Prisma.PlayerSkillScalarWhereInput | Prisma.PlayerSkillScalarWhereInput[]
+}
+
 export type PlayerSkillCreateWithoutPlayerInput = {
   id?: string
-  skillName: string
-  level?: number
-  experience?: number
-  createdAt?: Date | string
+  learnedAt?: Date | string
+  skill: Prisma.SkillCreateNestedOneWithoutPlayerSkillsInput
 }
 
 export type PlayerSkillUncheckedCreateWithoutPlayerInput = {
   id?: string
-  skillName: string
-  level?: number
-  experience?: number
-  createdAt?: Date | string
+  skillId: string
+  learnedAt?: Date | string
 }
 
 export type PlayerSkillCreateOrConnectWithoutPlayerInput = {
@@ -485,42 +431,94 @@ export type PlayerSkillScalarWhereInput = {
   NOT?: Prisma.PlayerSkillScalarWhereInput | Prisma.PlayerSkillScalarWhereInput[]
   id?: Prisma.StringFilter<"PlayerSkill"> | string
   playerId?: Prisma.StringFilter<"PlayerSkill"> | string
-  skillName?: Prisma.StringFilter<"PlayerSkill"> | string
-  level?: Prisma.IntFilter<"PlayerSkill"> | number
-  experience?: Prisma.IntFilter<"PlayerSkill"> | number
-  createdAt?: Prisma.DateTimeFilter<"PlayerSkill"> | Date | string
+  skillId?: Prisma.StringFilter<"PlayerSkill"> | string
+  learnedAt?: Prisma.DateTimeFilter<"PlayerSkill"> | Date | string
+}
+
+export type PlayerSkillCreateWithoutSkillInput = {
+  id?: string
+  learnedAt?: Date | string
+  player: Prisma.PlayerCreateNestedOneWithoutSkillsInput
+}
+
+export type PlayerSkillUncheckedCreateWithoutSkillInput = {
+  id?: string
+  playerId: string
+  learnedAt?: Date | string
+}
+
+export type PlayerSkillCreateOrConnectWithoutSkillInput = {
+  where: Prisma.PlayerSkillWhereUniqueInput
+  create: Prisma.XOR<Prisma.PlayerSkillCreateWithoutSkillInput, Prisma.PlayerSkillUncheckedCreateWithoutSkillInput>
+}
+
+export type PlayerSkillCreateManySkillInputEnvelope = {
+  data: Prisma.PlayerSkillCreateManySkillInput | Prisma.PlayerSkillCreateManySkillInput[]
+  skipDuplicates?: boolean
+}
+
+export type PlayerSkillUpsertWithWhereUniqueWithoutSkillInput = {
+  where: Prisma.PlayerSkillWhereUniqueInput
+  update: Prisma.XOR<Prisma.PlayerSkillUpdateWithoutSkillInput, Prisma.PlayerSkillUncheckedUpdateWithoutSkillInput>
+  create: Prisma.XOR<Prisma.PlayerSkillCreateWithoutSkillInput, Prisma.PlayerSkillUncheckedCreateWithoutSkillInput>
+}
+
+export type PlayerSkillUpdateWithWhereUniqueWithoutSkillInput = {
+  where: Prisma.PlayerSkillWhereUniqueInput
+  data: Prisma.XOR<Prisma.PlayerSkillUpdateWithoutSkillInput, Prisma.PlayerSkillUncheckedUpdateWithoutSkillInput>
+}
+
+export type PlayerSkillUpdateManyWithWhereWithoutSkillInput = {
+  where: Prisma.PlayerSkillScalarWhereInput
+  data: Prisma.XOR<Prisma.PlayerSkillUpdateManyMutationInput, Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillInput>
 }
 
 export type PlayerSkillCreateManyPlayerInput = {
   id?: string
-  skillName: string
-  level?: number
-  experience?: number
-  createdAt?: Date | string
+  skillId: string
+  learnedAt?: Date | string
 }
 
 export type PlayerSkillUpdateWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  skillName?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  experience?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  learnedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  skill?: Prisma.SkillUpdateOneRequiredWithoutPlayerSkillsNestedInput
 }
 
 export type PlayerSkillUncheckedUpdateWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  skillName?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  experience?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  skillId?: Prisma.StringFieldUpdateOperationsInput | string
+  learnedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PlayerSkillUncheckedUpdateManyWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  skillName?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  experience?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  skillId?: Prisma.StringFieldUpdateOperationsInput | string
+  learnedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PlayerSkillCreateManySkillInput = {
+  id?: string
+  playerId: string
+  learnedAt?: Date | string
+}
+
+export type PlayerSkillUpdateWithoutSkillInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  learnedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  player?: Prisma.PlayerUpdateOneRequiredWithoutSkillsNestedInput
+}
+
+export type PlayerSkillUncheckedUpdateWithoutSkillInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  learnedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PlayerSkillUncheckedUpdateManyWithoutSkillInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  learnedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -528,65 +526,62 @@ export type PlayerSkillUncheckedUpdateManyWithoutPlayerInput = {
 export type PlayerSkillSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   playerId?: boolean
-  skillName?: boolean
-  level?: boolean
-  experience?: boolean
-  createdAt?: boolean
+  skillId?: boolean
+  learnedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
+  skill?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["playerSkill"]>
 
 export type PlayerSkillSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   playerId?: boolean
-  skillName?: boolean
-  level?: boolean
-  experience?: boolean
-  createdAt?: boolean
+  skillId?: boolean
+  learnedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
+  skill?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["playerSkill"]>
 
 export type PlayerSkillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   playerId?: boolean
-  skillName?: boolean
-  level?: boolean
-  experience?: boolean
-  createdAt?: boolean
+  skillId?: boolean
+  learnedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
+  skill?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["playerSkill"]>
 
 export type PlayerSkillSelectScalar = {
   id?: boolean
   playerId?: boolean
-  skillName?: boolean
-  level?: boolean
-  experience?: boolean
-  createdAt?: boolean
+  skillId?: boolean
+  learnedAt?: boolean
 }
 
-export type PlayerSkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "skillName" | "level" | "experience" | "createdAt", ExtArgs["result"]["playerSkill"]>
+export type PlayerSkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "skillId" | "learnedAt", ExtArgs["result"]["playerSkill"]>
 export type PlayerSkillInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
+  skill?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
 }
 export type PlayerSkillIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
+  skill?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
 }
 export type PlayerSkillIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
+  skill?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
 }
 
 export type $PlayerSkillPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PlayerSkill"
   objects: {
     player: Prisma.$PlayerPayload<ExtArgs>
+    skill: Prisma.$SkillPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     playerId: string
-    skillName: string
-    level: number
-    experience: number
-    createdAt: Date
+    skillId: string
+    learnedAt: Date
   }, ExtArgs["result"]["playerSkill"]>
   composites: {}
 }
@@ -982,6 +977,7 @@ readonly fields: PlayerSkillFieldRefs;
 export interface Prisma__PlayerSkillClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   player<T extends Prisma.PlayerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlayerDefaultArgs<ExtArgs>>): Prisma.Prisma__PlayerClient<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  skill<T extends Prisma.SkillDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SkillDefaultArgs<ExtArgs>>): Prisma.Prisma__SkillClient<runtime.Types.Result.GetResult<Prisma.$SkillPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1013,10 +1009,8 @@ export interface Prisma__PlayerSkillClient<T, Null = never, ExtArgs extends runt
 export interface PlayerSkillFieldRefs {
   readonly id: Prisma.FieldRef<"PlayerSkill", 'String'>
   readonly playerId: Prisma.FieldRef<"PlayerSkill", 'String'>
-  readonly skillName: Prisma.FieldRef<"PlayerSkill", 'String'>
-  readonly level: Prisma.FieldRef<"PlayerSkill", 'Int'>
-  readonly experience: Prisma.FieldRef<"PlayerSkill", 'Int'>
-  readonly createdAt: Prisma.FieldRef<"PlayerSkill", 'DateTime'>
+  readonly skillId: Prisma.FieldRef<"PlayerSkill", 'String'>
+  readonly learnedAt: Prisma.FieldRef<"PlayerSkill", 'DateTime'>
 }
     
 

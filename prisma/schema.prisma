@@ -119,6 +119,7 @@ model Player {
   occupation                 Occupation?
   user                       User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   skills                     PlayerSkill[]
+  skillLoadout               PlayerSkillLoadout?
   stats                      PlayerStats?
   userJobs                   UserJob[]
   craftAttempts              CraftAttempt[]
@@ -226,13 +227,18 @@ model Item {
   spBonus              Int                 @default(0)
   createdAt            DateTime            @default(now())
   bankVaultItems       BankVaultItem[]
-  equippedAsAccessory1 Equipment[]         @relation("Accessory1")
-  equippedAsAccessory2 Equipment[]         @relation("Accessory2")
-  equippedAsChest      Equipment[]         @relation("Chest")
-  equippedAsFeet       Equipment[]         @relation("Feet")
   equippedAsHead       Equipment[]         @relation("Head")
-  equippedAsLegs       Equipment[]         @relation("Legs")
-  equippedAsWeapon     Equipment[]         @relation("Weapon")
+  equippedAsLeftArm   Equipment[]         @relation("LeftArm")
+  equippedAsRightArm  Equipment[]         @relation("RightArm")
+  equippedAsBody      Equipment[]         @relation("Body")
+  equippedAsLegs      Equipment[]         @relation("Legs")
+  equippedAsFeet       Equipment[]         @relation("Feet")
+  equippedAsRing1      Equipment[]         @relation("Ring1")
+  equippedAsRing2     Equipment[]         @relation("Ring2")
+  equippedAsRing3      Equipment[]         @relation("Ring3")
+  equippedAsNecklace   Equipment[]         @relation("Necklace")
+  equippedAsBelt       Equipment[]         @relation("Belt")
+  equippedAsCloak      Equipment[]         @relation("Cloak")
   inventoryItems       InventoryItem[]
   marketListings       MarketListing[]
   marketTransactions   MarketTransaction[]
@@ -261,24 +267,34 @@ model InventoryItem {
 }
 
 model Equipment {
-  id           String   @id @default(cuid())
-  playerId     String   @unique
-  weaponId     String?
-  headId       String?
-  chestId      String?
-  legsId       String?
-  feetId       String?
-  accessory1Id String?
-  accessory2Id String?
-  updatedAt    DateTime @updatedAt
-  accessory1   Item?    @relation("Accessory1", fields: [accessory1Id], references: [id])
-  accessory2   Item?    @relation("Accessory2", fields: [accessory2Id], references: [id])
-  chest        Item?    @relation("Chest", fields: [chestId], references: [id])
-  feet         Item?    @relation("Feet", fields: [feetId], references: [id])
-  head         Item?    @relation("Head", fields: [headId], references: [id])
-  legs         Item?    @relation("Legs", fields: [legsId], references: [id])
-  player       Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  weapon       Item?    @relation("Weapon", fields: [weaponId], references: [id])
+  id            String   @id @default(cuid())
+  playerId      String   @unique
+  headItemId    String?
+  leftArmItemId String?
+  rightArmItemId String?
+  bodyItemId    String?
+  legsItemId    String?
+  feetItemId    String?
+  ring1ItemId   String?
+  ring2ItemId   String?
+  ring3ItemId   String?
+  necklaceItemId String?
+  beltItemId    String?
+  cloakItemId   String?
+  updatedAt     DateTime @updatedAt
+  head          Item?    @relation("Head", fields: [headItemId], references: [id])
+  leftArm       Item?    @relation("LeftArm", fields: [leftArmItemId], references: [id])
+  rightArm      Item?    @relation("RightArm", fields: [rightArmItemId], references: [id])
+  body          Item?    @relation("Body", fields: [bodyItemId], references: [id])
+  legs          Item?    @relation("Legs", fields: [legsItemId], references: [id])
+  feet          Item?    @relation("Feet", fields: [feetItemId], references: [id])
+  ring1         Item?    @relation("Ring1", fields: [ring1ItemId], references: [id])
+  ring2         Item?    @relation("Ring2", fields: [ring2ItemId], references: [id])
+  ring3         Item?    @relation("Ring3", fields: [ring3ItemId], references: [id])
+  necklace      Item?    @relation("Necklace", fields: [necklaceItemId], references: [id])
+  belt          Item?    @relation("Belt", fields: [beltItemId], references: [id])
+  cloak         Item?    @relation("Cloak", fields: [cloakItemId], references: [id])
+  player        Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
 }
 
 model Occupation {
@@ -292,16 +308,65 @@ model Occupation {
   player       Player               @relation(fields: [playerId], references: [id], onDelete: Cascade)
 }
 
+model Skill {
+  id            String   @id @default(cuid())
+  key           String   @unique
+  name          String
+  description   String?
+  staminaCost   Int      @default(0)
+  cooldownSeconds Int    @default(0)
+  tags          String?  // JSON array placeholder
+  jobUnlock     String?  // Job key that unlocks this skill
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  playerSkills  PlayerSkill[]
+  slot1Loadouts PlayerSkillLoadout[] @relation("Slot1")
+  slot2Loadouts PlayerSkillLoadout[] @relation("Slot2")
+  slot3Loadouts PlayerSkillLoadout[] @relation("Slot3")
+  slot4Loadouts PlayerSkillLoadout[] @relation("Slot4")
+  slot5Loadouts PlayerSkillLoadout[] @relation("Slot5")
+  slot6Loadouts PlayerSkillLoadout[] @relation("Slot6")
+  slot7Loadouts PlayerSkillLoadout[] @relation("Slot7")
+  slot8Loadouts PlayerSkillLoadout[] @relation("Slot8")
+
+  @@index([key])
+}
+
 model PlayerSkill {
   id         String   @id @default(cuid())
   playerId   String
-  skillName  String
-  level      Int      @default(1)
-  experience Int      @default(0)
-  createdAt  DateTime @default(now())
+  skillId    String
+  learnedAt  DateTime @default(now())
   player     Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  skill      Skill    @relation(fields: [skillId], references: [id], onDelete: Cascade)
 
-  @@unique([playerId, skillName])
+  @@unique([playerId, skillId])
+  @@index([playerId])
+  @@index([skillId])
+}
+
+model PlayerSkillLoadout {
+  id         String   @id @default(cuid())
+  playerId   String   @unique
+  slot1SkillId String?
+  slot2SkillId String?
+  slot3SkillId String?
+  slot4SkillId String?
+  slot5SkillId String?
+  slot6SkillId String?
+  slot7SkillId String?
+  slot8SkillId String?
+  updatedAt  DateTime @updatedAt
+  player     Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  slot1Skill Skill?   @relation("Slot1", fields: [slot1SkillId], references: [id])
+  slot2Skill Skill?   @relation("Slot2", fields: [slot2SkillId], references: [id])
+  slot3Skill Skill?   @relation("Slot3", fields: [slot3SkillId], references: [id])
+  slot4Skill Skill?   @relation("Slot4", fields: [slot4SkillId], references: [id])
+  slot5Skill Skill?   @relation("Slot5", fields: [slot5SkillId], references: [id])
+  slot6Skill Skill?   @relation("Slot6", fields: [slot6SkillId], references: [id])
+  slot7Skill Skill?   @relation("Slot7", fields: [slot7SkillId], references: [id])
+  slot8Skill Skill?   @relation("Slot8", fields: [slot8SkillId], references: [id])
+
   @@index([playerId])
 }
 
@@ -537,6 +602,7 @@ enum ItemType {
   MATERIAL
   QUEST_ITEM
   TOOL
+  EQUIPMENT
 }
 
 enum ItemRarity {
@@ -548,13 +614,16 @@ enum ItemRarity {
 }
 
 enum EquipmentSlot {
-  WEAPON
   HEAD
-  CHEST
+  LEFT_ARM
+  RIGHT_ARM
+  BODY
   LEGS
   FEET
-  ACCESSORY_1
-  ACCESSORY_2
+  RING
+  NECKLACE
+  BELT
+  CLOAK
 }
 
 enum PrimaryOccupation {

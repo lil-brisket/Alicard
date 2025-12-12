@@ -7,6 +7,8 @@ import { hallOfTheDeadRouter } from "~/server/api/routers/hallOfTheDead";
 import { jobsRouter } from "~/server/api/routers/jobs";
 import { recipesRouter } from "~/server/api/routers/recipes";
 import { gatheringRouter } from "~/server/api/routers/gathering";
+import { equipmentRouter } from "~/server/api/routers/equipment";
+import { skillsRouter } from "~/server/api/routers/skills";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -24,6 +26,8 @@ export const appRouter = createTRPCRouter({
   jobs: jobsRouter,
   recipes: recipesRouter,
   gathering: gatheringRouter,
+  equipment: equipmentRouter,
+  skills: skillsRouter,
 });
 
 // export type definition of API

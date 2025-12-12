@@ -66,7 +66,8 @@ export const ItemType = {
   CONSUMABLE: 'CONSUMABLE',
   MATERIAL: 'MATERIAL',
   QUEST_ITEM: 'QUEST_ITEM',
-  TOOL: 'TOOL'
+  TOOL: 'TOOL',
+  EQUIPMENT: 'EQUIPMENT'
 } as const
 
 export type ItemType = (typeof ItemType)[keyof typeof ItemType]
@@ -84,13 +85,16 @@ export type ItemRarity = (typeof ItemRarity)[keyof typeof ItemRarity]
 
 
 export const EquipmentSlot = {
-  WEAPON: 'WEAPON',
   HEAD: 'HEAD',
-  CHEST: 'CHEST',
+  LEFT_ARM: 'LEFT_ARM',
+  RIGHT_ARM: 'RIGHT_ARM',
+  BODY: 'BODY',
   LEGS: 'LEGS',
   FEET: 'FEET',
-  ACCESSORY_1: 'ACCESSORY_1',
-  ACCESSORY_2: 'ACCESSORY_2'
+  RING: 'RING',
+  NECKLACE: 'NECKLACE',
+  BELT: 'BELT',
+  CLOAK: 'CLOAK'
 } as const
 
 export type EquipmentSlot = (typeof EquipmentSlot)[keyof typeof EquipmentSlot]

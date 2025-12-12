@@ -27,39 +27,54 @@ export type AggregateEquipment = {
 export type EquipmentMinAggregateOutputType = {
   id: string | null
   playerId: string | null
-  weaponId: string | null
-  headId: string | null
-  chestId: string | null
-  legsId: string | null
-  feetId: string | null
-  accessory1Id: string | null
-  accessory2Id: string | null
+  headItemId: string | null
+  leftArmItemId: string | null
+  rightArmItemId: string | null
+  bodyItemId: string | null
+  legsItemId: string | null
+  feetItemId: string | null
+  ring1ItemId: string | null
+  ring2ItemId: string | null
+  ring3ItemId: string | null
+  necklaceItemId: string | null
+  beltItemId: string | null
+  cloakItemId: string | null
   updatedAt: Date | null
 }
 
 export type EquipmentMaxAggregateOutputType = {
   id: string | null
   playerId: string | null
-  weaponId: string | null
-  headId: string | null
-  chestId: string | null
-  legsId: string | null
-  feetId: string | null
-  accessory1Id: string | null
-  accessory2Id: string | null
+  headItemId: string | null
+  leftArmItemId: string | null
+  rightArmItemId: string | null
+  bodyItemId: string | null
+  legsItemId: string | null
+  feetItemId: string | null
+  ring1ItemId: string | null
+  ring2ItemId: string | null
+  ring3ItemId: string | null
+  necklaceItemId: string | null
+  beltItemId: string | null
+  cloakItemId: string | null
   updatedAt: Date | null
 }
 
 export type EquipmentCountAggregateOutputType = {
   id: number
   playerId: number
-  weaponId: number
-  headId: number
-  chestId: number
-  legsId: number
-  feetId: number
-  accessory1Id: number
-  accessory2Id: number
+  headItemId: number
+  leftArmItemId: number
+  rightArmItemId: number
+  bodyItemId: number
+  legsItemId: number
+  feetItemId: number
+  ring1ItemId: number
+  ring2ItemId: number
+  ring3ItemId: number
+  necklaceItemId: number
+  beltItemId: number
+  cloakItemId: number
   updatedAt: number
   _all: number
 }
@@ -68,39 +83,54 @@ export type EquipmentCountAggregateOutputType = {
 export type EquipmentMinAggregateInputType = {
   id?: true
   playerId?: true
-  weaponId?: true
-  headId?: true
-  chestId?: true
-  legsId?: true
-  feetId?: true
-  accessory1Id?: true
-  accessory2Id?: true
+  headItemId?: true
+  leftArmItemId?: true
+  rightArmItemId?: true
+  bodyItemId?: true
+  legsItemId?: true
+  feetItemId?: true
+  ring1ItemId?: true
+  ring2ItemId?: true
+  ring3ItemId?: true
+  necklaceItemId?: true
+  beltItemId?: true
+  cloakItemId?: true
   updatedAt?: true
 }
 
 export type EquipmentMaxAggregateInputType = {
   id?: true
   playerId?: true
-  weaponId?: true
-  headId?: true
-  chestId?: true
-  legsId?: true
-  feetId?: true
-  accessory1Id?: true
-  accessory2Id?: true
+  headItemId?: true
+  leftArmItemId?: true
+  rightArmItemId?: true
+  bodyItemId?: true
+  legsItemId?: true
+  feetItemId?: true
+  ring1ItemId?: true
+  ring2ItemId?: true
+  ring3ItemId?: true
+  necklaceItemId?: true
+  beltItemId?: true
+  cloakItemId?: true
   updatedAt?: true
 }
 
 export type EquipmentCountAggregateInputType = {
   id?: true
   playerId?: true
-  weaponId?: true
-  headId?: true
-  chestId?: true
-  legsId?: true
-  feetId?: true
-  accessory1Id?: true
-  accessory2Id?: true
+  headItemId?: true
+  leftArmItemId?: true
+  rightArmItemId?: true
+  bodyItemId?: true
+  legsItemId?: true
+  feetItemId?: true
+  ring1ItemId?: true
+  ring2ItemId?: true
+  ring3ItemId?: true
+  necklaceItemId?: true
+  beltItemId?: true
+  cloakItemId?: true
   updatedAt?: true
   _all?: true
 }
@@ -180,13 +210,18 @@ export type EquipmentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 export type EquipmentGroupByOutputType = {
   id: string
   playerId: string
-  weaponId: string | null
-  headId: string | null
-  chestId: string | null
-  legsId: string | null
-  feetId: string | null
-  accessory1Id: string | null
-  accessory2Id: string | null
+  headItemId: string | null
+  leftArmItemId: string | null
+  rightArmItemId: string | null
+  bodyItemId: string | null
+  legsItemId: string | null
+  feetItemId: string | null
+  ring1ItemId: string | null
+  ring2ItemId: string | null
+  ring3ItemId: string | null
+  necklaceItemId: string | null
+  beltItemId: string | null
+  cloakItemId: string | null
   updatedAt: Date
   _count: EquipmentCountAggregateOutputType | null
   _min: EquipmentMinAggregateOutputType | null
@@ -214,43 +249,63 @@ export type EquipmentWhereInput = {
   NOT?: Prisma.EquipmentWhereInput | Prisma.EquipmentWhereInput[]
   id?: Prisma.StringFilter<"Equipment"> | string
   playerId?: Prisma.StringFilter<"Equipment"> | string
-  weaponId?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  headId?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  chestId?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  legsId?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  feetId?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  accessory1Id?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  accessory2Id?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  headItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  leftArmItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  rightArmItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  bodyItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  legsItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  feetItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  ring1ItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  ring2ItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  ring3ItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  necklaceItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  beltItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  cloakItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
   updatedAt?: Prisma.DateTimeFilter<"Equipment"> | Date | string
-  accessory1?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
-  accessory2?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
-  chest?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
-  feet?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
   head?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  leftArm?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  rightArm?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  body?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
   legs?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  feet?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  ring1?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  ring2?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  ring3?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  necklace?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  belt?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  cloak?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
   player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
-  weapon?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
 }
 
 export type EquipmentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  weaponId?: Prisma.SortOrderInput | Prisma.SortOrder
-  headId?: Prisma.SortOrderInput | Prisma.SortOrder
-  chestId?: Prisma.SortOrderInput | Prisma.SortOrder
-  legsId?: Prisma.SortOrderInput | Prisma.SortOrder
-  feetId?: Prisma.SortOrderInput | Prisma.SortOrder
-  accessory1Id?: Prisma.SortOrderInput | Prisma.SortOrder
-  accessory2Id?: Prisma.SortOrderInput | Prisma.SortOrder
+  headItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  leftArmItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  rightArmItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  bodyItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  legsItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  feetItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  ring1ItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  ring2ItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  ring3ItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  necklaceItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  beltItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  cloakItemId?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  accessory1?: Prisma.ItemOrderByWithRelationInput
-  accessory2?: Prisma.ItemOrderByWithRelationInput
-  chest?: Prisma.ItemOrderByWithRelationInput
-  feet?: Prisma.ItemOrderByWithRelationInput
   head?: Prisma.ItemOrderByWithRelationInput
+  leftArm?: Prisma.ItemOrderByWithRelationInput
+  rightArm?: Prisma.ItemOrderByWithRelationInput
+  body?: Prisma.ItemOrderByWithRelationInput
   legs?: Prisma.ItemOrderByWithRelationInput
+  feet?: Prisma.ItemOrderByWithRelationInput
+  ring1?: Prisma.ItemOrderByWithRelationInput
+  ring2?: Prisma.ItemOrderByWithRelationInput
+  ring3?: Prisma.ItemOrderByWithRelationInput
+  necklace?: Prisma.ItemOrderByWithRelationInput
+  belt?: Prisma.ItemOrderByWithRelationInput
+  cloak?: Prisma.ItemOrderByWithRelationInput
   player?: Prisma.PlayerOrderByWithRelationInput
-  weapon?: Prisma.ItemOrderByWithRelationInput
 }
 
 export type EquipmentWhereUniqueInput = Prisma.AtLeast<{
@@ -259,34 +314,49 @@ export type EquipmentWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.EquipmentWhereInput | Prisma.EquipmentWhereInput[]
   OR?: Prisma.EquipmentWhereInput[]
   NOT?: Prisma.EquipmentWhereInput | Prisma.EquipmentWhereInput[]
-  weaponId?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  headId?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  chestId?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  legsId?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  feetId?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  accessory1Id?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  accessory2Id?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  headItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  leftArmItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  rightArmItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  bodyItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  legsItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  feetItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  ring1ItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  ring2ItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  ring3ItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  necklaceItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  beltItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  cloakItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
   updatedAt?: Prisma.DateTimeFilter<"Equipment"> | Date | string
-  accessory1?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
-  accessory2?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
-  chest?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
-  feet?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
   head?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  leftArm?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  rightArm?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  body?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
   legs?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  feet?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  ring1?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  ring2?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  ring3?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  necklace?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  belt?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
+  cloak?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
   player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
-  weapon?: Prisma.XOR<Prisma.ItemNullableScalarRelationFilter, Prisma.ItemWhereInput> | null
 }, "id" | "playerId">
 
 export type EquipmentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  weaponId?: Prisma.SortOrderInput | Prisma.SortOrder
-  headId?: Prisma.SortOrderInput | Prisma.SortOrder
-  chestId?: Prisma.SortOrderInput | Prisma.SortOrder
-  legsId?: Prisma.SortOrderInput | Prisma.SortOrder
-  feetId?: Prisma.SortOrderInput | Prisma.SortOrder
-  accessory1Id?: Prisma.SortOrderInput | Prisma.SortOrder
-  accessory2Id?: Prisma.SortOrderInput | Prisma.SortOrder
+  headItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  leftArmItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  rightArmItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  bodyItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  legsItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  feetItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  ring1ItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  ring2ItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  ring3ItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  necklaceItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  beltItemId?: Prisma.SortOrderInput | Prisma.SortOrder
+  cloakItemId?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.EquipmentCountOrderByAggregateInput
   _max?: Prisma.EquipmentMaxOrderByAggregateInput
@@ -299,78 +369,108 @@ export type EquipmentScalarWhereWithAggregatesInput = {
   NOT?: Prisma.EquipmentScalarWhereWithAggregatesInput | Prisma.EquipmentScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Equipment"> | string
   playerId?: Prisma.StringWithAggregatesFilter<"Equipment"> | string
-  weaponId?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
-  headId?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
-  chestId?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
-  legsId?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
-  feetId?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
-  accessory1Id?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
-  accessory2Id?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
+  headItemId?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
+  leftArmItemId?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
+  rightArmItemId?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
+  bodyItemId?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
+  legsItemId?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
+  feetItemId?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
+  ring1ItemId?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
+  ring2ItemId?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
+  ring3ItemId?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
+  necklaceItemId?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
+  beltItemId?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
+  cloakItemId?: Prisma.StringNullableWithAggregatesFilter<"Equipment"> | string | null
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Equipment"> | Date | string
 }
 
 export type EquipmentCreateInput = {
   id?: string
   updatedAt?: Date | string
-  accessory1?: Prisma.ItemCreateNestedOneWithoutEquippedAsAccessory1Input
-  accessory2?: Prisma.ItemCreateNestedOneWithoutEquippedAsAccessory2Input
-  chest?: Prisma.ItemCreateNestedOneWithoutEquippedAsChestInput
-  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
   head?: Prisma.ItemCreateNestedOneWithoutEquippedAsHeadInput
+  leftArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsLeftArmInput
+  rightArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsRightArmInput
+  body?: Prisma.ItemCreateNestedOneWithoutEquippedAsBodyInput
   legs?: Prisma.ItemCreateNestedOneWithoutEquippedAsLegsInput
+  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
+  ring1?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing1Input
+  ring2?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing2Input
+  ring3?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing3Input
+  necklace?: Prisma.ItemCreateNestedOneWithoutEquippedAsNecklaceInput
+  belt?: Prisma.ItemCreateNestedOneWithoutEquippedAsBeltInput
+  cloak?: Prisma.ItemCreateNestedOneWithoutEquippedAsCloakInput
   player: Prisma.PlayerCreateNestedOneWithoutEquipmentInput
-  weapon?: Prisma.ItemCreateNestedOneWithoutEquippedAsWeaponInput
 }
 
 export type EquipmentUncheckedCreateInput = {
   id?: string
   playerId: string
-  weaponId?: string | null
-  headId?: string | null
-  chestId?: string | null
-  legsId?: string | null
-  feetId?: string | null
-  accessory1Id?: string | null
-  accessory2Id?: string | null
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
   updatedAt?: Date | string
 }
 
 export type EquipmentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accessory1?: Prisma.ItemUpdateOneWithoutEquippedAsAccessory1NestedInput
-  accessory2?: Prisma.ItemUpdateOneWithoutEquippedAsAccessory2NestedInput
-  chest?: Prisma.ItemUpdateOneWithoutEquippedAsChestNestedInput
-  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
   head?: Prisma.ItemUpdateOneWithoutEquippedAsHeadNestedInput
+  leftArm?: Prisma.ItemUpdateOneWithoutEquippedAsLeftArmNestedInput
+  rightArm?: Prisma.ItemUpdateOneWithoutEquippedAsRightArmNestedInput
+  body?: Prisma.ItemUpdateOneWithoutEquippedAsBodyNestedInput
   legs?: Prisma.ItemUpdateOneWithoutEquippedAsLegsNestedInput
+  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
+  ring1?: Prisma.ItemUpdateOneWithoutEquippedAsRing1NestedInput
+  ring2?: Prisma.ItemUpdateOneWithoutEquippedAsRing2NestedInput
+  ring3?: Prisma.ItemUpdateOneWithoutEquippedAsRing3NestedInput
+  necklace?: Prisma.ItemUpdateOneWithoutEquippedAsNecklaceNestedInput
+  belt?: Prisma.ItemUpdateOneWithoutEquippedAsBeltNestedInput
+  cloak?: Prisma.ItemUpdateOneWithoutEquippedAsCloakNestedInput
   player?: Prisma.PlayerUpdateOneRequiredWithoutEquipmentNestedInput
-  weapon?: Prisma.ItemUpdateOneWithoutEquippedAsWeaponNestedInput
 }
 
 export type EquipmentUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  weaponId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  chestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  legsId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EquipmentCreateManyInput = {
   id?: string
   playerId: string
-  weaponId?: string | null
-  headId?: string | null
-  chestId?: string | null
-  legsId?: string | null
-  feetId?: string | null
-  accessory1Id?: string | null
-  accessory2Id?: string | null
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
   updatedAt?: Date | string
 }
 
@@ -382,13 +482,18 @@ export type EquipmentUpdateManyMutationInput = {
 export type EquipmentUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  weaponId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  chestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  legsId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -410,39 +515,54 @@ export type EquipmentOrderByRelationAggregateInput = {
 export type EquipmentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  weaponId?: Prisma.SortOrder
-  headId?: Prisma.SortOrder
-  chestId?: Prisma.SortOrder
-  legsId?: Prisma.SortOrder
-  feetId?: Prisma.SortOrder
-  accessory1Id?: Prisma.SortOrder
-  accessory2Id?: Prisma.SortOrder
+  headItemId?: Prisma.SortOrder
+  leftArmItemId?: Prisma.SortOrder
+  rightArmItemId?: Prisma.SortOrder
+  bodyItemId?: Prisma.SortOrder
+  legsItemId?: Prisma.SortOrder
+  feetItemId?: Prisma.SortOrder
+  ring1ItemId?: Prisma.SortOrder
+  ring2ItemId?: Prisma.SortOrder
+  ring3ItemId?: Prisma.SortOrder
+  necklaceItemId?: Prisma.SortOrder
+  beltItemId?: Prisma.SortOrder
+  cloakItemId?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type EquipmentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  weaponId?: Prisma.SortOrder
-  headId?: Prisma.SortOrder
-  chestId?: Prisma.SortOrder
-  legsId?: Prisma.SortOrder
-  feetId?: Prisma.SortOrder
-  accessory1Id?: Prisma.SortOrder
-  accessory2Id?: Prisma.SortOrder
+  headItemId?: Prisma.SortOrder
+  leftArmItemId?: Prisma.SortOrder
+  rightArmItemId?: Prisma.SortOrder
+  bodyItemId?: Prisma.SortOrder
+  legsItemId?: Prisma.SortOrder
+  feetItemId?: Prisma.SortOrder
+  ring1ItemId?: Prisma.SortOrder
+  ring2ItemId?: Prisma.SortOrder
+  ring3ItemId?: Prisma.SortOrder
+  necklaceItemId?: Prisma.SortOrder
+  beltItemId?: Prisma.SortOrder
+  cloakItemId?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type EquipmentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  weaponId?: Prisma.SortOrder
-  headId?: Prisma.SortOrder
-  chestId?: Prisma.SortOrder
-  legsId?: Prisma.SortOrder
-  feetId?: Prisma.SortOrder
-  accessory1Id?: Prisma.SortOrder
-  accessory2Id?: Prisma.SortOrder
+  headItemId?: Prisma.SortOrder
+  leftArmItemId?: Prisma.SortOrder
+  rightArmItemId?: Prisma.SortOrder
+  bodyItemId?: Prisma.SortOrder
+  legsItemId?: Prisma.SortOrder
+  feetItemId?: Prisma.SortOrder
+  ring1ItemId?: Prisma.SortOrder
+  ring2ItemId?: Prisma.SortOrder
+  ring3ItemId?: Prisma.SortOrder
+  necklaceItemId?: Prisma.SortOrder
+  beltItemId?: Prisma.SortOrder
+  cloakItemId?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -478,38 +598,31 @@ export type EquipmentUncheckedUpdateOneWithoutPlayerNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EquipmentUpdateToOneWithWhereWithoutPlayerInput, Prisma.EquipmentUpdateWithoutPlayerInput>, Prisma.EquipmentUncheckedUpdateWithoutPlayerInput>
 }
 
-export type EquipmentCreateNestedManyWithoutAccessory1Input = {
-  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutAccessory1Input, Prisma.EquipmentUncheckedCreateWithoutAccessory1Input> | Prisma.EquipmentCreateWithoutAccessory1Input[] | Prisma.EquipmentUncheckedCreateWithoutAccessory1Input[]
-  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutAccessory1Input | Prisma.EquipmentCreateOrConnectWithoutAccessory1Input[]
-  createMany?: Prisma.EquipmentCreateManyAccessory1InputEnvelope
-  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-}
-
-export type EquipmentCreateNestedManyWithoutAccessory2Input = {
-  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutAccessory2Input, Prisma.EquipmentUncheckedCreateWithoutAccessory2Input> | Prisma.EquipmentCreateWithoutAccessory2Input[] | Prisma.EquipmentUncheckedCreateWithoutAccessory2Input[]
-  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutAccessory2Input | Prisma.EquipmentCreateOrConnectWithoutAccessory2Input[]
-  createMany?: Prisma.EquipmentCreateManyAccessory2InputEnvelope
-  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-}
-
-export type EquipmentCreateNestedManyWithoutChestInput = {
-  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutChestInput, Prisma.EquipmentUncheckedCreateWithoutChestInput> | Prisma.EquipmentCreateWithoutChestInput[] | Prisma.EquipmentUncheckedCreateWithoutChestInput[]
-  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutChestInput | Prisma.EquipmentCreateOrConnectWithoutChestInput[]
-  createMany?: Prisma.EquipmentCreateManyChestInputEnvelope
-  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-}
-
-export type EquipmentCreateNestedManyWithoutFeetInput = {
-  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutFeetInput, Prisma.EquipmentUncheckedCreateWithoutFeetInput> | Prisma.EquipmentCreateWithoutFeetInput[] | Prisma.EquipmentUncheckedCreateWithoutFeetInput[]
-  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutFeetInput | Prisma.EquipmentCreateOrConnectWithoutFeetInput[]
-  createMany?: Prisma.EquipmentCreateManyFeetInputEnvelope
-  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-}
-
 export type EquipmentCreateNestedManyWithoutHeadInput = {
   create?: Prisma.XOR<Prisma.EquipmentCreateWithoutHeadInput, Prisma.EquipmentUncheckedCreateWithoutHeadInput> | Prisma.EquipmentCreateWithoutHeadInput[] | Prisma.EquipmentUncheckedCreateWithoutHeadInput[]
   connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutHeadInput | Prisma.EquipmentCreateOrConnectWithoutHeadInput[]
   createMany?: Prisma.EquipmentCreateManyHeadInputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+}
+
+export type EquipmentCreateNestedManyWithoutLeftArmInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutLeftArmInput, Prisma.EquipmentUncheckedCreateWithoutLeftArmInput> | Prisma.EquipmentCreateWithoutLeftArmInput[] | Prisma.EquipmentUncheckedCreateWithoutLeftArmInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutLeftArmInput | Prisma.EquipmentCreateOrConnectWithoutLeftArmInput[]
+  createMany?: Prisma.EquipmentCreateManyLeftArmInputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+}
+
+export type EquipmentCreateNestedManyWithoutRightArmInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutRightArmInput, Prisma.EquipmentUncheckedCreateWithoutRightArmInput> | Prisma.EquipmentCreateWithoutRightArmInput[] | Prisma.EquipmentUncheckedCreateWithoutRightArmInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutRightArmInput | Prisma.EquipmentCreateOrConnectWithoutRightArmInput[]
+  createMany?: Prisma.EquipmentCreateManyRightArmInputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+}
+
+export type EquipmentCreateNestedManyWithoutBodyInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutBodyInput, Prisma.EquipmentUncheckedCreateWithoutBodyInput> | Prisma.EquipmentCreateWithoutBodyInput[] | Prisma.EquipmentUncheckedCreateWithoutBodyInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutBodyInput | Prisma.EquipmentCreateOrConnectWithoutBodyInput[]
+  createMany?: Prisma.EquipmentCreateManyBodyInputEnvelope
   connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
 }
 
@@ -520,38 +633,52 @@ export type EquipmentCreateNestedManyWithoutLegsInput = {
   connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
 }
 
-export type EquipmentCreateNestedManyWithoutWeaponInput = {
-  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutWeaponInput, Prisma.EquipmentUncheckedCreateWithoutWeaponInput> | Prisma.EquipmentCreateWithoutWeaponInput[] | Prisma.EquipmentUncheckedCreateWithoutWeaponInput[]
-  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutWeaponInput | Prisma.EquipmentCreateOrConnectWithoutWeaponInput[]
-  createMany?: Prisma.EquipmentCreateManyWeaponInputEnvelope
-  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-}
-
-export type EquipmentUncheckedCreateNestedManyWithoutAccessory1Input = {
-  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutAccessory1Input, Prisma.EquipmentUncheckedCreateWithoutAccessory1Input> | Prisma.EquipmentCreateWithoutAccessory1Input[] | Prisma.EquipmentUncheckedCreateWithoutAccessory1Input[]
-  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutAccessory1Input | Prisma.EquipmentCreateOrConnectWithoutAccessory1Input[]
-  createMany?: Prisma.EquipmentCreateManyAccessory1InputEnvelope
-  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-}
-
-export type EquipmentUncheckedCreateNestedManyWithoutAccessory2Input = {
-  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutAccessory2Input, Prisma.EquipmentUncheckedCreateWithoutAccessory2Input> | Prisma.EquipmentCreateWithoutAccessory2Input[] | Prisma.EquipmentUncheckedCreateWithoutAccessory2Input[]
-  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutAccessory2Input | Prisma.EquipmentCreateOrConnectWithoutAccessory2Input[]
-  createMany?: Prisma.EquipmentCreateManyAccessory2InputEnvelope
-  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-}
-
-export type EquipmentUncheckedCreateNestedManyWithoutChestInput = {
-  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutChestInput, Prisma.EquipmentUncheckedCreateWithoutChestInput> | Prisma.EquipmentCreateWithoutChestInput[] | Prisma.EquipmentUncheckedCreateWithoutChestInput[]
-  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutChestInput | Prisma.EquipmentCreateOrConnectWithoutChestInput[]
-  createMany?: Prisma.EquipmentCreateManyChestInputEnvelope
-  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-}
-
-export type EquipmentUncheckedCreateNestedManyWithoutFeetInput = {
+export type EquipmentCreateNestedManyWithoutFeetInput = {
   create?: Prisma.XOR<Prisma.EquipmentCreateWithoutFeetInput, Prisma.EquipmentUncheckedCreateWithoutFeetInput> | Prisma.EquipmentCreateWithoutFeetInput[] | Prisma.EquipmentUncheckedCreateWithoutFeetInput[]
   connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutFeetInput | Prisma.EquipmentCreateOrConnectWithoutFeetInput[]
   createMany?: Prisma.EquipmentCreateManyFeetInputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+}
+
+export type EquipmentCreateNestedManyWithoutRing1Input = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutRing1Input, Prisma.EquipmentUncheckedCreateWithoutRing1Input> | Prisma.EquipmentCreateWithoutRing1Input[] | Prisma.EquipmentUncheckedCreateWithoutRing1Input[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutRing1Input | Prisma.EquipmentCreateOrConnectWithoutRing1Input[]
+  createMany?: Prisma.EquipmentCreateManyRing1InputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+}
+
+export type EquipmentCreateNestedManyWithoutRing2Input = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutRing2Input, Prisma.EquipmentUncheckedCreateWithoutRing2Input> | Prisma.EquipmentCreateWithoutRing2Input[] | Prisma.EquipmentUncheckedCreateWithoutRing2Input[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutRing2Input | Prisma.EquipmentCreateOrConnectWithoutRing2Input[]
+  createMany?: Prisma.EquipmentCreateManyRing2InputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+}
+
+export type EquipmentCreateNestedManyWithoutRing3Input = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutRing3Input, Prisma.EquipmentUncheckedCreateWithoutRing3Input> | Prisma.EquipmentCreateWithoutRing3Input[] | Prisma.EquipmentUncheckedCreateWithoutRing3Input[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutRing3Input | Prisma.EquipmentCreateOrConnectWithoutRing3Input[]
+  createMany?: Prisma.EquipmentCreateManyRing3InputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+}
+
+export type EquipmentCreateNestedManyWithoutNecklaceInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutNecklaceInput, Prisma.EquipmentUncheckedCreateWithoutNecklaceInput> | Prisma.EquipmentCreateWithoutNecklaceInput[] | Prisma.EquipmentUncheckedCreateWithoutNecklaceInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutNecklaceInput | Prisma.EquipmentCreateOrConnectWithoutNecklaceInput[]
+  createMany?: Prisma.EquipmentCreateManyNecklaceInputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+}
+
+export type EquipmentCreateNestedManyWithoutBeltInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutBeltInput, Prisma.EquipmentUncheckedCreateWithoutBeltInput> | Prisma.EquipmentCreateWithoutBeltInput[] | Prisma.EquipmentUncheckedCreateWithoutBeltInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutBeltInput | Prisma.EquipmentCreateOrConnectWithoutBeltInput[]
+  createMany?: Prisma.EquipmentCreateManyBeltInputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+}
+
+export type EquipmentCreateNestedManyWithoutCloakInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutCloakInput, Prisma.EquipmentUncheckedCreateWithoutCloakInput> | Prisma.EquipmentCreateWithoutCloakInput[] | Prisma.EquipmentUncheckedCreateWithoutCloakInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutCloakInput | Prisma.EquipmentCreateOrConnectWithoutCloakInput[]
+  createMany?: Prisma.EquipmentCreateManyCloakInputEnvelope
   connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
 }
 
@@ -562,6 +689,27 @@ export type EquipmentUncheckedCreateNestedManyWithoutHeadInput = {
   connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
 }
 
+export type EquipmentUncheckedCreateNestedManyWithoutLeftArmInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutLeftArmInput, Prisma.EquipmentUncheckedCreateWithoutLeftArmInput> | Prisma.EquipmentCreateWithoutLeftArmInput[] | Prisma.EquipmentUncheckedCreateWithoutLeftArmInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutLeftArmInput | Prisma.EquipmentCreateOrConnectWithoutLeftArmInput[]
+  createMany?: Prisma.EquipmentCreateManyLeftArmInputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+}
+
+export type EquipmentUncheckedCreateNestedManyWithoutRightArmInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutRightArmInput, Prisma.EquipmentUncheckedCreateWithoutRightArmInput> | Prisma.EquipmentCreateWithoutRightArmInput[] | Prisma.EquipmentUncheckedCreateWithoutRightArmInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutRightArmInput | Prisma.EquipmentCreateOrConnectWithoutRightArmInput[]
+  createMany?: Prisma.EquipmentCreateManyRightArmInputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+}
+
+export type EquipmentUncheckedCreateNestedManyWithoutBodyInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutBodyInput, Prisma.EquipmentUncheckedCreateWithoutBodyInput> | Prisma.EquipmentCreateWithoutBodyInput[] | Prisma.EquipmentUncheckedCreateWithoutBodyInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutBodyInput | Prisma.EquipmentCreateOrConnectWithoutBodyInput[]
+  createMany?: Prisma.EquipmentCreateManyBodyInputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+}
+
 export type EquipmentUncheckedCreateNestedManyWithoutLegsInput = {
   create?: Prisma.XOR<Prisma.EquipmentCreateWithoutLegsInput, Prisma.EquipmentUncheckedCreateWithoutLegsInput> | Prisma.EquipmentCreateWithoutLegsInput[] | Prisma.EquipmentUncheckedCreateWithoutLegsInput[]
   connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutLegsInput | Prisma.EquipmentCreateOrConnectWithoutLegsInput[]
@@ -569,67 +717,53 @@ export type EquipmentUncheckedCreateNestedManyWithoutLegsInput = {
   connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
 }
 
-export type EquipmentUncheckedCreateNestedManyWithoutWeaponInput = {
-  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutWeaponInput, Prisma.EquipmentUncheckedCreateWithoutWeaponInput> | Prisma.EquipmentCreateWithoutWeaponInput[] | Prisma.EquipmentUncheckedCreateWithoutWeaponInput[]
-  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutWeaponInput | Prisma.EquipmentCreateOrConnectWithoutWeaponInput[]
-  createMany?: Prisma.EquipmentCreateManyWeaponInputEnvelope
-  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-}
-
-export type EquipmentUpdateManyWithoutAccessory1NestedInput = {
-  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutAccessory1Input, Prisma.EquipmentUncheckedCreateWithoutAccessory1Input> | Prisma.EquipmentCreateWithoutAccessory1Input[] | Prisma.EquipmentUncheckedCreateWithoutAccessory1Input[]
-  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutAccessory1Input | Prisma.EquipmentCreateOrConnectWithoutAccessory1Input[]
-  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutAccessory1Input | Prisma.EquipmentUpsertWithWhereUniqueWithoutAccessory1Input[]
-  createMany?: Prisma.EquipmentCreateManyAccessory1InputEnvelope
-  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutAccessory1Input | Prisma.EquipmentUpdateWithWhereUniqueWithoutAccessory1Input[]
-  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutAccessory1Input | Prisma.EquipmentUpdateManyWithWhereWithoutAccessory1Input[]
-  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
-}
-
-export type EquipmentUpdateManyWithoutAccessory2NestedInput = {
-  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutAccessory2Input, Prisma.EquipmentUncheckedCreateWithoutAccessory2Input> | Prisma.EquipmentCreateWithoutAccessory2Input[] | Prisma.EquipmentUncheckedCreateWithoutAccessory2Input[]
-  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutAccessory2Input | Prisma.EquipmentCreateOrConnectWithoutAccessory2Input[]
-  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutAccessory2Input | Prisma.EquipmentUpsertWithWhereUniqueWithoutAccessory2Input[]
-  createMany?: Prisma.EquipmentCreateManyAccessory2InputEnvelope
-  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutAccessory2Input | Prisma.EquipmentUpdateWithWhereUniqueWithoutAccessory2Input[]
-  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutAccessory2Input | Prisma.EquipmentUpdateManyWithWhereWithoutAccessory2Input[]
-  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
-}
-
-export type EquipmentUpdateManyWithoutChestNestedInput = {
-  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutChestInput, Prisma.EquipmentUncheckedCreateWithoutChestInput> | Prisma.EquipmentCreateWithoutChestInput[] | Prisma.EquipmentUncheckedCreateWithoutChestInput[]
-  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutChestInput | Prisma.EquipmentCreateOrConnectWithoutChestInput[]
-  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutChestInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutChestInput[]
-  createMany?: Prisma.EquipmentCreateManyChestInputEnvelope
-  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutChestInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutChestInput[]
-  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutChestInput | Prisma.EquipmentUpdateManyWithWhereWithoutChestInput[]
-  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
-}
-
-export type EquipmentUpdateManyWithoutFeetNestedInput = {
+export type EquipmentUncheckedCreateNestedManyWithoutFeetInput = {
   create?: Prisma.XOR<Prisma.EquipmentCreateWithoutFeetInput, Prisma.EquipmentUncheckedCreateWithoutFeetInput> | Prisma.EquipmentCreateWithoutFeetInput[] | Prisma.EquipmentUncheckedCreateWithoutFeetInput[]
   connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutFeetInput | Prisma.EquipmentCreateOrConnectWithoutFeetInput[]
-  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutFeetInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutFeetInput[]
   createMany?: Prisma.EquipmentCreateManyFeetInputEnvelope
-  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
   connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutFeetInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutFeetInput[]
-  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutFeetInput | Prisma.EquipmentUpdateManyWithWhereWithoutFeetInput[]
-  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUncheckedCreateNestedManyWithoutRing1Input = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutRing1Input, Prisma.EquipmentUncheckedCreateWithoutRing1Input> | Prisma.EquipmentCreateWithoutRing1Input[] | Prisma.EquipmentUncheckedCreateWithoutRing1Input[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutRing1Input | Prisma.EquipmentCreateOrConnectWithoutRing1Input[]
+  createMany?: Prisma.EquipmentCreateManyRing1InputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+}
+
+export type EquipmentUncheckedCreateNestedManyWithoutRing2Input = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutRing2Input, Prisma.EquipmentUncheckedCreateWithoutRing2Input> | Prisma.EquipmentCreateWithoutRing2Input[] | Prisma.EquipmentUncheckedCreateWithoutRing2Input[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutRing2Input | Prisma.EquipmentCreateOrConnectWithoutRing2Input[]
+  createMany?: Prisma.EquipmentCreateManyRing2InputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+}
+
+export type EquipmentUncheckedCreateNestedManyWithoutRing3Input = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutRing3Input, Prisma.EquipmentUncheckedCreateWithoutRing3Input> | Prisma.EquipmentCreateWithoutRing3Input[] | Prisma.EquipmentUncheckedCreateWithoutRing3Input[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutRing3Input | Prisma.EquipmentCreateOrConnectWithoutRing3Input[]
+  createMany?: Prisma.EquipmentCreateManyRing3InputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+}
+
+export type EquipmentUncheckedCreateNestedManyWithoutNecklaceInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutNecklaceInput, Prisma.EquipmentUncheckedCreateWithoutNecklaceInput> | Prisma.EquipmentCreateWithoutNecklaceInput[] | Prisma.EquipmentUncheckedCreateWithoutNecklaceInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutNecklaceInput | Prisma.EquipmentCreateOrConnectWithoutNecklaceInput[]
+  createMany?: Prisma.EquipmentCreateManyNecklaceInputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+}
+
+export type EquipmentUncheckedCreateNestedManyWithoutBeltInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutBeltInput, Prisma.EquipmentUncheckedCreateWithoutBeltInput> | Prisma.EquipmentCreateWithoutBeltInput[] | Prisma.EquipmentUncheckedCreateWithoutBeltInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutBeltInput | Prisma.EquipmentCreateOrConnectWithoutBeltInput[]
+  createMany?: Prisma.EquipmentCreateManyBeltInputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+}
+
+export type EquipmentUncheckedCreateNestedManyWithoutCloakInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutCloakInput, Prisma.EquipmentUncheckedCreateWithoutCloakInput> | Prisma.EquipmentCreateWithoutCloakInput[] | Prisma.EquipmentUncheckedCreateWithoutCloakInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutCloakInput | Prisma.EquipmentCreateOrConnectWithoutCloakInput[]
+  createMany?: Prisma.EquipmentCreateManyCloakInputEnvelope
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
 }
 
 export type EquipmentUpdateManyWithoutHeadNestedInput = {
@@ -643,6 +777,48 @@ export type EquipmentUpdateManyWithoutHeadNestedInput = {
   connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
   update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutHeadInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutHeadInput[]
   updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutHeadInput | Prisma.EquipmentUpdateManyWithWhereWithoutHeadInput[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUpdateManyWithoutLeftArmNestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutLeftArmInput, Prisma.EquipmentUncheckedCreateWithoutLeftArmInput> | Prisma.EquipmentCreateWithoutLeftArmInput[] | Prisma.EquipmentUncheckedCreateWithoutLeftArmInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutLeftArmInput | Prisma.EquipmentCreateOrConnectWithoutLeftArmInput[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutLeftArmInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutLeftArmInput[]
+  createMany?: Prisma.EquipmentCreateManyLeftArmInputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutLeftArmInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutLeftArmInput[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutLeftArmInput | Prisma.EquipmentUpdateManyWithWhereWithoutLeftArmInput[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUpdateManyWithoutRightArmNestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutRightArmInput, Prisma.EquipmentUncheckedCreateWithoutRightArmInput> | Prisma.EquipmentCreateWithoutRightArmInput[] | Prisma.EquipmentUncheckedCreateWithoutRightArmInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutRightArmInput | Prisma.EquipmentCreateOrConnectWithoutRightArmInput[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutRightArmInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutRightArmInput[]
+  createMany?: Prisma.EquipmentCreateManyRightArmInputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutRightArmInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutRightArmInput[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutRightArmInput | Prisma.EquipmentUpdateManyWithWhereWithoutRightArmInput[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUpdateManyWithoutBodyNestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutBodyInput, Prisma.EquipmentUncheckedCreateWithoutBodyInput> | Prisma.EquipmentCreateWithoutBodyInput[] | Prisma.EquipmentUncheckedCreateWithoutBodyInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutBodyInput | Prisma.EquipmentCreateOrConnectWithoutBodyInput[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutBodyInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutBodyInput[]
+  createMany?: Prisma.EquipmentCreateManyBodyInputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutBodyInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutBodyInput[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutBodyInput | Prisma.EquipmentUpdateManyWithWhereWithoutBodyInput[]
   deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
 }
 
@@ -660,63 +836,7 @@ export type EquipmentUpdateManyWithoutLegsNestedInput = {
   deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
 }
 
-export type EquipmentUpdateManyWithoutWeaponNestedInput = {
-  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutWeaponInput, Prisma.EquipmentUncheckedCreateWithoutWeaponInput> | Prisma.EquipmentCreateWithoutWeaponInput[] | Prisma.EquipmentUncheckedCreateWithoutWeaponInput[]
-  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutWeaponInput | Prisma.EquipmentCreateOrConnectWithoutWeaponInput[]
-  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutWeaponInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutWeaponInput[]
-  createMany?: Prisma.EquipmentCreateManyWeaponInputEnvelope
-  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutWeaponInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutWeaponInput[]
-  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutWeaponInput | Prisma.EquipmentUpdateManyWithWhereWithoutWeaponInput[]
-  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
-}
-
-export type EquipmentUncheckedUpdateManyWithoutAccessory1NestedInput = {
-  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutAccessory1Input, Prisma.EquipmentUncheckedCreateWithoutAccessory1Input> | Prisma.EquipmentCreateWithoutAccessory1Input[] | Prisma.EquipmentUncheckedCreateWithoutAccessory1Input[]
-  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutAccessory1Input | Prisma.EquipmentCreateOrConnectWithoutAccessory1Input[]
-  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutAccessory1Input | Prisma.EquipmentUpsertWithWhereUniqueWithoutAccessory1Input[]
-  createMany?: Prisma.EquipmentCreateManyAccessory1InputEnvelope
-  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutAccessory1Input | Prisma.EquipmentUpdateWithWhereUniqueWithoutAccessory1Input[]
-  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutAccessory1Input | Prisma.EquipmentUpdateManyWithWhereWithoutAccessory1Input[]
-  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
-}
-
-export type EquipmentUncheckedUpdateManyWithoutAccessory2NestedInput = {
-  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutAccessory2Input, Prisma.EquipmentUncheckedCreateWithoutAccessory2Input> | Prisma.EquipmentCreateWithoutAccessory2Input[] | Prisma.EquipmentUncheckedCreateWithoutAccessory2Input[]
-  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutAccessory2Input | Prisma.EquipmentCreateOrConnectWithoutAccessory2Input[]
-  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutAccessory2Input | Prisma.EquipmentUpsertWithWhereUniqueWithoutAccessory2Input[]
-  createMany?: Prisma.EquipmentCreateManyAccessory2InputEnvelope
-  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutAccessory2Input | Prisma.EquipmentUpdateWithWhereUniqueWithoutAccessory2Input[]
-  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutAccessory2Input | Prisma.EquipmentUpdateManyWithWhereWithoutAccessory2Input[]
-  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
-}
-
-export type EquipmentUncheckedUpdateManyWithoutChestNestedInput = {
-  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutChestInput, Prisma.EquipmentUncheckedCreateWithoutChestInput> | Prisma.EquipmentCreateWithoutChestInput[] | Prisma.EquipmentUncheckedCreateWithoutChestInput[]
-  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutChestInput | Prisma.EquipmentCreateOrConnectWithoutChestInput[]
-  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutChestInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutChestInput[]
-  createMany?: Prisma.EquipmentCreateManyChestInputEnvelope
-  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutChestInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutChestInput[]
-  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutChestInput | Prisma.EquipmentUpdateManyWithWhereWithoutChestInput[]
-  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
-}
-
-export type EquipmentUncheckedUpdateManyWithoutFeetNestedInput = {
+export type EquipmentUpdateManyWithoutFeetNestedInput = {
   create?: Prisma.XOR<Prisma.EquipmentCreateWithoutFeetInput, Prisma.EquipmentUncheckedCreateWithoutFeetInput> | Prisma.EquipmentCreateWithoutFeetInput[] | Prisma.EquipmentUncheckedCreateWithoutFeetInput[]
   connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutFeetInput | Prisma.EquipmentCreateOrConnectWithoutFeetInput[]
   upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutFeetInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutFeetInput[]
@@ -727,6 +847,90 @@ export type EquipmentUncheckedUpdateManyWithoutFeetNestedInput = {
   connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
   update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutFeetInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutFeetInput[]
   updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutFeetInput | Prisma.EquipmentUpdateManyWithWhereWithoutFeetInput[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUpdateManyWithoutRing1NestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutRing1Input, Prisma.EquipmentUncheckedCreateWithoutRing1Input> | Prisma.EquipmentCreateWithoutRing1Input[] | Prisma.EquipmentUncheckedCreateWithoutRing1Input[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutRing1Input | Prisma.EquipmentCreateOrConnectWithoutRing1Input[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutRing1Input | Prisma.EquipmentUpsertWithWhereUniqueWithoutRing1Input[]
+  createMany?: Prisma.EquipmentCreateManyRing1InputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutRing1Input | Prisma.EquipmentUpdateWithWhereUniqueWithoutRing1Input[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutRing1Input | Prisma.EquipmentUpdateManyWithWhereWithoutRing1Input[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUpdateManyWithoutRing2NestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutRing2Input, Prisma.EquipmentUncheckedCreateWithoutRing2Input> | Prisma.EquipmentCreateWithoutRing2Input[] | Prisma.EquipmentUncheckedCreateWithoutRing2Input[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutRing2Input | Prisma.EquipmentCreateOrConnectWithoutRing2Input[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutRing2Input | Prisma.EquipmentUpsertWithWhereUniqueWithoutRing2Input[]
+  createMany?: Prisma.EquipmentCreateManyRing2InputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutRing2Input | Prisma.EquipmentUpdateWithWhereUniqueWithoutRing2Input[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutRing2Input | Prisma.EquipmentUpdateManyWithWhereWithoutRing2Input[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUpdateManyWithoutRing3NestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutRing3Input, Prisma.EquipmentUncheckedCreateWithoutRing3Input> | Prisma.EquipmentCreateWithoutRing3Input[] | Prisma.EquipmentUncheckedCreateWithoutRing3Input[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutRing3Input | Prisma.EquipmentCreateOrConnectWithoutRing3Input[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutRing3Input | Prisma.EquipmentUpsertWithWhereUniqueWithoutRing3Input[]
+  createMany?: Prisma.EquipmentCreateManyRing3InputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutRing3Input | Prisma.EquipmentUpdateWithWhereUniqueWithoutRing3Input[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutRing3Input | Prisma.EquipmentUpdateManyWithWhereWithoutRing3Input[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUpdateManyWithoutNecklaceNestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutNecklaceInput, Prisma.EquipmentUncheckedCreateWithoutNecklaceInput> | Prisma.EquipmentCreateWithoutNecklaceInput[] | Prisma.EquipmentUncheckedCreateWithoutNecklaceInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutNecklaceInput | Prisma.EquipmentCreateOrConnectWithoutNecklaceInput[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutNecklaceInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutNecklaceInput[]
+  createMany?: Prisma.EquipmentCreateManyNecklaceInputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutNecklaceInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutNecklaceInput[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutNecklaceInput | Prisma.EquipmentUpdateManyWithWhereWithoutNecklaceInput[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUpdateManyWithoutBeltNestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutBeltInput, Prisma.EquipmentUncheckedCreateWithoutBeltInput> | Prisma.EquipmentCreateWithoutBeltInput[] | Prisma.EquipmentUncheckedCreateWithoutBeltInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutBeltInput | Prisma.EquipmentCreateOrConnectWithoutBeltInput[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutBeltInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutBeltInput[]
+  createMany?: Prisma.EquipmentCreateManyBeltInputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutBeltInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutBeltInput[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutBeltInput | Prisma.EquipmentUpdateManyWithWhereWithoutBeltInput[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUpdateManyWithoutCloakNestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutCloakInput, Prisma.EquipmentUncheckedCreateWithoutCloakInput> | Prisma.EquipmentCreateWithoutCloakInput[] | Prisma.EquipmentUncheckedCreateWithoutCloakInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutCloakInput | Prisma.EquipmentCreateOrConnectWithoutCloakInput[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutCloakInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutCloakInput[]
+  createMany?: Prisma.EquipmentCreateManyCloakInputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutCloakInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutCloakInput[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutCloakInput | Prisma.EquipmentUpdateManyWithWhereWithoutCloakInput[]
   deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
 }
 
@@ -744,6 +948,48 @@ export type EquipmentUncheckedUpdateManyWithoutHeadNestedInput = {
   deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
 }
 
+export type EquipmentUncheckedUpdateManyWithoutLeftArmNestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutLeftArmInput, Prisma.EquipmentUncheckedCreateWithoutLeftArmInput> | Prisma.EquipmentCreateWithoutLeftArmInput[] | Prisma.EquipmentUncheckedCreateWithoutLeftArmInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutLeftArmInput | Prisma.EquipmentCreateOrConnectWithoutLeftArmInput[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutLeftArmInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutLeftArmInput[]
+  createMany?: Prisma.EquipmentCreateManyLeftArmInputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutLeftArmInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutLeftArmInput[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutLeftArmInput | Prisma.EquipmentUpdateManyWithWhereWithoutLeftArmInput[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUncheckedUpdateManyWithoutRightArmNestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutRightArmInput, Prisma.EquipmentUncheckedCreateWithoutRightArmInput> | Prisma.EquipmentCreateWithoutRightArmInput[] | Prisma.EquipmentUncheckedCreateWithoutRightArmInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutRightArmInput | Prisma.EquipmentCreateOrConnectWithoutRightArmInput[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutRightArmInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutRightArmInput[]
+  createMany?: Prisma.EquipmentCreateManyRightArmInputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutRightArmInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutRightArmInput[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutRightArmInput | Prisma.EquipmentUpdateManyWithWhereWithoutRightArmInput[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUncheckedUpdateManyWithoutBodyNestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutBodyInput, Prisma.EquipmentUncheckedCreateWithoutBodyInput> | Prisma.EquipmentCreateWithoutBodyInput[] | Prisma.EquipmentUncheckedCreateWithoutBodyInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutBodyInput | Prisma.EquipmentCreateOrConnectWithoutBodyInput[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutBodyInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutBodyInput[]
+  createMany?: Prisma.EquipmentCreateManyBodyInputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutBodyInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutBodyInput[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutBodyInput | Prisma.EquipmentUpdateManyWithWhereWithoutBodyInput[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
 export type EquipmentUncheckedUpdateManyWithoutLegsNestedInput = {
   create?: Prisma.XOR<Prisma.EquipmentCreateWithoutLegsInput, Prisma.EquipmentUncheckedCreateWithoutLegsInput> | Prisma.EquipmentCreateWithoutLegsInput[] | Prisma.EquipmentUncheckedCreateWithoutLegsInput[]
   connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutLegsInput | Prisma.EquipmentCreateOrConnectWithoutLegsInput[]
@@ -758,41 +1004,135 @@ export type EquipmentUncheckedUpdateManyWithoutLegsNestedInput = {
   deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
 }
 
-export type EquipmentUncheckedUpdateManyWithoutWeaponNestedInput = {
-  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutWeaponInput, Prisma.EquipmentUncheckedCreateWithoutWeaponInput> | Prisma.EquipmentCreateWithoutWeaponInput[] | Prisma.EquipmentUncheckedCreateWithoutWeaponInput[]
-  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutWeaponInput | Prisma.EquipmentCreateOrConnectWithoutWeaponInput[]
-  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutWeaponInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutWeaponInput[]
-  createMany?: Prisma.EquipmentCreateManyWeaponInputEnvelope
+export type EquipmentUncheckedUpdateManyWithoutFeetNestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutFeetInput, Prisma.EquipmentUncheckedCreateWithoutFeetInput> | Prisma.EquipmentCreateWithoutFeetInput[] | Prisma.EquipmentUncheckedCreateWithoutFeetInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutFeetInput | Prisma.EquipmentCreateOrConnectWithoutFeetInput[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutFeetInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutFeetInput[]
+  createMany?: Prisma.EquipmentCreateManyFeetInputEnvelope
   set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
   disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
   delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
   connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
-  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutWeaponInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutWeaponInput[]
-  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutWeaponInput | Prisma.EquipmentUpdateManyWithWhereWithoutWeaponInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutFeetInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutFeetInput[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutFeetInput | Prisma.EquipmentUpdateManyWithWhereWithoutFeetInput[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUncheckedUpdateManyWithoutRing1NestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutRing1Input, Prisma.EquipmentUncheckedCreateWithoutRing1Input> | Prisma.EquipmentCreateWithoutRing1Input[] | Prisma.EquipmentUncheckedCreateWithoutRing1Input[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutRing1Input | Prisma.EquipmentCreateOrConnectWithoutRing1Input[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutRing1Input | Prisma.EquipmentUpsertWithWhereUniqueWithoutRing1Input[]
+  createMany?: Prisma.EquipmentCreateManyRing1InputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutRing1Input | Prisma.EquipmentUpdateWithWhereUniqueWithoutRing1Input[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutRing1Input | Prisma.EquipmentUpdateManyWithWhereWithoutRing1Input[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUncheckedUpdateManyWithoutRing2NestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutRing2Input, Prisma.EquipmentUncheckedCreateWithoutRing2Input> | Prisma.EquipmentCreateWithoutRing2Input[] | Prisma.EquipmentUncheckedCreateWithoutRing2Input[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutRing2Input | Prisma.EquipmentCreateOrConnectWithoutRing2Input[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutRing2Input | Prisma.EquipmentUpsertWithWhereUniqueWithoutRing2Input[]
+  createMany?: Prisma.EquipmentCreateManyRing2InputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutRing2Input | Prisma.EquipmentUpdateWithWhereUniqueWithoutRing2Input[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutRing2Input | Prisma.EquipmentUpdateManyWithWhereWithoutRing2Input[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUncheckedUpdateManyWithoutRing3NestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutRing3Input, Prisma.EquipmentUncheckedCreateWithoutRing3Input> | Prisma.EquipmentCreateWithoutRing3Input[] | Prisma.EquipmentUncheckedCreateWithoutRing3Input[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutRing3Input | Prisma.EquipmentCreateOrConnectWithoutRing3Input[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutRing3Input | Prisma.EquipmentUpsertWithWhereUniqueWithoutRing3Input[]
+  createMany?: Prisma.EquipmentCreateManyRing3InputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutRing3Input | Prisma.EquipmentUpdateWithWhereUniqueWithoutRing3Input[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutRing3Input | Prisma.EquipmentUpdateManyWithWhereWithoutRing3Input[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUncheckedUpdateManyWithoutNecklaceNestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutNecklaceInput, Prisma.EquipmentUncheckedCreateWithoutNecklaceInput> | Prisma.EquipmentCreateWithoutNecklaceInput[] | Prisma.EquipmentUncheckedCreateWithoutNecklaceInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutNecklaceInput | Prisma.EquipmentCreateOrConnectWithoutNecklaceInput[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutNecklaceInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutNecklaceInput[]
+  createMany?: Prisma.EquipmentCreateManyNecklaceInputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutNecklaceInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutNecklaceInput[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutNecklaceInput | Prisma.EquipmentUpdateManyWithWhereWithoutNecklaceInput[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUncheckedUpdateManyWithoutBeltNestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutBeltInput, Prisma.EquipmentUncheckedCreateWithoutBeltInput> | Prisma.EquipmentCreateWithoutBeltInput[] | Prisma.EquipmentUncheckedCreateWithoutBeltInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutBeltInput | Prisma.EquipmentCreateOrConnectWithoutBeltInput[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutBeltInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutBeltInput[]
+  createMany?: Prisma.EquipmentCreateManyBeltInputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutBeltInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutBeltInput[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutBeltInput | Prisma.EquipmentUpdateManyWithWhereWithoutBeltInput[]
+  deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+}
+
+export type EquipmentUncheckedUpdateManyWithoutCloakNestedInput = {
+  create?: Prisma.XOR<Prisma.EquipmentCreateWithoutCloakInput, Prisma.EquipmentUncheckedCreateWithoutCloakInput> | Prisma.EquipmentCreateWithoutCloakInput[] | Prisma.EquipmentUncheckedCreateWithoutCloakInput[]
+  connectOrCreate?: Prisma.EquipmentCreateOrConnectWithoutCloakInput | Prisma.EquipmentCreateOrConnectWithoutCloakInput[]
+  upsert?: Prisma.EquipmentUpsertWithWhereUniqueWithoutCloakInput | Prisma.EquipmentUpsertWithWhereUniqueWithoutCloakInput[]
+  createMany?: Prisma.EquipmentCreateManyCloakInputEnvelope
+  set?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  disconnect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  delete?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  connect?: Prisma.EquipmentWhereUniqueInput | Prisma.EquipmentWhereUniqueInput[]
+  update?: Prisma.EquipmentUpdateWithWhereUniqueWithoutCloakInput | Prisma.EquipmentUpdateWithWhereUniqueWithoutCloakInput[]
+  updateMany?: Prisma.EquipmentUpdateManyWithWhereWithoutCloakInput | Prisma.EquipmentUpdateManyWithWhereWithoutCloakInput[]
   deleteMany?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
 }
 
 export type EquipmentCreateWithoutPlayerInput = {
   id?: string
   updatedAt?: Date | string
-  accessory1?: Prisma.ItemCreateNestedOneWithoutEquippedAsAccessory1Input
-  accessory2?: Prisma.ItemCreateNestedOneWithoutEquippedAsAccessory2Input
-  chest?: Prisma.ItemCreateNestedOneWithoutEquippedAsChestInput
-  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
   head?: Prisma.ItemCreateNestedOneWithoutEquippedAsHeadInput
+  leftArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsLeftArmInput
+  rightArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsRightArmInput
+  body?: Prisma.ItemCreateNestedOneWithoutEquippedAsBodyInput
   legs?: Prisma.ItemCreateNestedOneWithoutEquippedAsLegsInput
-  weapon?: Prisma.ItemCreateNestedOneWithoutEquippedAsWeaponInput
+  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
+  ring1?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing1Input
+  ring2?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing2Input
+  ring3?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing3Input
+  necklace?: Prisma.ItemCreateNestedOneWithoutEquippedAsNecklaceInput
+  belt?: Prisma.ItemCreateNestedOneWithoutEquippedAsBeltInput
+  cloak?: Prisma.ItemCreateNestedOneWithoutEquippedAsCloakInput
 }
 
 export type EquipmentUncheckedCreateWithoutPlayerInput = {
   id?: string
-  weaponId?: string | null
-  headId?: string | null
-  chestId?: string | null
-  legsId?: string | null
-  feetId?: string | null
-  accessory1Id?: string | null
-  accessory2Id?: string | null
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
   updatedAt?: Date | string
 }
 
@@ -815,184 +1155,68 @@ export type EquipmentUpdateToOneWithWhereWithoutPlayerInput = {
 export type EquipmentUpdateWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accessory1?: Prisma.ItemUpdateOneWithoutEquippedAsAccessory1NestedInput
-  accessory2?: Prisma.ItemUpdateOneWithoutEquippedAsAccessory2NestedInput
-  chest?: Prisma.ItemUpdateOneWithoutEquippedAsChestNestedInput
-  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
   head?: Prisma.ItemUpdateOneWithoutEquippedAsHeadNestedInput
+  leftArm?: Prisma.ItemUpdateOneWithoutEquippedAsLeftArmNestedInput
+  rightArm?: Prisma.ItemUpdateOneWithoutEquippedAsRightArmNestedInput
+  body?: Prisma.ItemUpdateOneWithoutEquippedAsBodyNestedInput
   legs?: Prisma.ItemUpdateOneWithoutEquippedAsLegsNestedInput
-  weapon?: Prisma.ItemUpdateOneWithoutEquippedAsWeaponNestedInput
+  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
+  ring1?: Prisma.ItemUpdateOneWithoutEquippedAsRing1NestedInput
+  ring2?: Prisma.ItemUpdateOneWithoutEquippedAsRing2NestedInput
+  ring3?: Prisma.ItemUpdateOneWithoutEquippedAsRing3NestedInput
+  necklace?: Prisma.ItemUpdateOneWithoutEquippedAsNecklaceNestedInput
+  belt?: Prisma.ItemUpdateOneWithoutEquippedAsBeltNestedInput
+  cloak?: Prisma.ItemUpdateOneWithoutEquippedAsCloakNestedInput
 }
 
 export type EquipmentUncheckedUpdateWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  weaponId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  chestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  legsId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type EquipmentCreateWithoutAccessory1Input = {
-  id?: string
-  updatedAt?: Date | string
-  accessory2?: Prisma.ItemCreateNestedOneWithoutEquippedAsAccessory2Input
-  chest?: Prisma.ItemCreateNestedOneWithoutEquippedAsChestInput
-  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
-  head?: Prisma.ItemCreateNestedOneWithoutEquippedAsHeadInput
-  legs?: Prisma.ItemCreateNestedOneWithoutEquippedAsLegsInput
-  player: Prisma.PlayerCreateNestedOneWithoutEquipmentInput
-  weapon?: Prisma.ItemCreateNestedOneWithoutEquippedAsWeaponInput
-}
-
-export type EquipmentUncheckedCreateWithoutAccessory1Input = {
-  id?: string
-  playerId: string
-  weaponId?: string | null
-  headId?: string | null
-  chestId?: string | null
-  legsId?: string | null
-  feetId?: string | null
-  accessory2Id?: string | null
-  updatedAt?: Date | string
-}
-
-export type EquipmentCreateOrConnectWithoutAccessory1Input = {
-  where: Prisma.EquipmentWhereUniqueInput
-  create: Prisma.XOR<Prisma.EquipmentCreateWithoutAccessory1Input, Prisma.EquipmentUncheckedCreateWithoutAccessory1Input>
-}
-
-export type EquipmentCreateManyAccessory1InputEnvelope = {
-  data: Prisma.EquipmentCreateManyAccessory1Input | Prisma.EquipmentCreateManyAccessory1Input[]
-  skipDuplicates?: boolean
-}
-
-export type EquipmentCreateWithoutAccessory2Input = {
-  id?: string
-  updatedAt?: Date | string
-  accessory1?: Prisma.ItemCreateNestedOneWithoutEquippedAsAccessory1Input
-  chest?: Prisma.ItemCreateNestedOneWithoutEquippedAsChestInput
-  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
-  head?: Prisma.ItemCreateNestedOneWithoutEquippedAsHeadInput
-  legs?: Prisma.ItemCreateNestedOneWithoutEquippedAsLegsInput
-  player: Prisma.PlayerCreateNestedOneWithoutEquipmentInput
-  weapon?: Prisma.ItemCreateNestedOneWithoutEquippedAsWeaponInput
-}
-
-export type EquipmentUncheckedCreateWithoutAccessory2Input = {
-  id?: string
-  playerId: string
-  weaponId?: string | null
-  headId?: string | null
-  chestId?: string | null
-  legsId?: string | null
-  feetId?: string | null
-  accessory1Id?: string | null
-  updatedAt?: Date | string
-}
-
-export type EquipmentCreateOrConnectWithoutAccessory2Input = {
-  where: Prisma.EquipmentWhereUniqueInput
-  create: Prisma.XOR<Prisma.EquipmentCreateWithoutAccessory2Input, Prisma.EquipmentUncheckedCreateWithoutAccessory2Input>
-}
-
-export type EquipmentCreateManyAccessory2InputEnvelope = {
-  data: Prisma.EquipmentCreateManyAccessory2Input | Prisma.EquipmentCreateManyAccessory2Input[]
-  skipDuplicates?: boolean
-}
-
-export type EquipmentCreateWithoutChestInput = {
-  id?: string
-  updatedAt?: Date | string
-  accessory1?: Prisma.ItemCreateNestedOneWithoutEquippedAsAccessory1Input
-  accessory2?: Prisma.ItemCreateNestedOneWithoutEquippedAsAccessory2Input
-  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
-  head?: Prisma.ItemCreateNestedOneWithoutEquippedAsHeadInput
-  legs?: Prisma.ItemCreateNestedOneWithoutEquippedAsLegsInput
-  player: Prisma.PlayerCreateNestedOneWithoutEquipmentInput
-  weapon?: Prisma.ItemCreateNestedOneWithoutEquippedAsWeaponInput
-}
-
-export type EquipmentUncheckedCreateWithoutChestInput = {
-  id?: string
-  playerId: string
-  weaponId?: string | null
-  headId?: string | null
-  legsId?: string | null
-  feetId?: string | null
-  accessory1Id?: string | null
-  accessory2Id?: string | null
-  updatedAt?: Date | string
-}
-
-export type EquipmentCreateOrConnectWithoutChestInput = {
-  where: Prisma.EquipmentWhereUniqueInput
-  create: Prisma.XOR<Prisma.EquipmentCreateWithoutChestInput, Prisma.EquipmentUncheckedCreateWithoutChestInput>
-}
-
-export type EquipmentCreateManyChestInputEnvelope = {
-  data: Prisma.EquipmentCreateManyChestInput | Prisma.EquipmentCreateManyChestInput[]
-  skipDuplicates?: boolean
-}
-
-export type EquipmentCreateWithoutFeetInput = {
-  id?: string
-  updatedAt?: Date | string
-  accessory1?: Prisma.ItemCreateNestedOneWithoutEquippedAsAccessory1Input
-  accessory2?: Prisma.ItemCreateNestedOneWithoutEquippedAsAccessory2Input
-  chest?: Prisma.ItemCreateNestedOneWithoutEquippedAsChestInput
-  head?: Prisma.ItemCreateNestedOneWithoutEquippedAsHeadInput
-  legs?: Prisma.ItemCreateNestedOneWithoutEquippedAsLegsInput
-  player: Prisma.PlayerCreateNestedOneWithoutEquipmentInput
-  weapon?: Prisma.ItemCreateNestedOneWithoutEquippedAsWeaponInput
-}
-
-export type EquipmentUncheckedCreateWithoutFeetInput = {
-  id?: string
-  playerId: string
-  weaponId?: string | null
-  headId?: string | null
-  chestId?: string | null
-  legsId?: string | null
-  accessory1Id?: string | null
-  accessory2Id?: string | null
-  updatedAt?: Date | string
-}
-
-export type EquipmentCreateOrConnectWithoutFeetInput = {
-  where: Prisma.EquipmentWhereUniqueInput
-  create: Prisma.XOR<Prisma.EquipmentCreateWithoutFeetInput, Prisma.EquipmentUncheckedCreateWithoutFeetInput>
-}
-
-export type EquipmentCreateManyFeetInputEnvelope = {
-  data: Prisma.EquipmentCreateManyFeetInput | Prisma.EquipmentCreateManyFeetInput[]
-  skipDuplicates?: boolean
 }
 
 export type EquipmentCreateWithoutHeadInput = {
   id?: string
   updatedAt?: Date | string
-  accessory1?: Prisma.ItemCreateNestedOneWithoutEquippedAsAccessory1Input
-  accessory2?: Prisma.ItemCreateNestedOneWithoutEquippedAsAccessory2Input
-  chest?: Prisma.ItemCreateNestedOneWithoutEquippedAsChestInput
-  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
+  leftArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsLeftArmInput
+  rightArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsRightArmInput
+  body?: Prisma.ItemCreateNestedOneWithoutEquippedAsBodyInput
   legs?: Prisma.ItemCreateNestedOneWithoutEquippedAsLegsInput
+  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
+  ring1?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing1Input
+  ring2?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing2Input
+  ring3?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing3Input
+  necklace?: Prisma.ItemCreateNestedOneWithoutEquippedAsNecklaceInput
+  belt?: Prisma.ItemCreateNestedOneWithoutEquippedAsBeltInput
+  cloak?: Prisma.ItemCreateNestedOneWithoutEquippedAsCloakInput
   player: Prisma.PlayerCreateNestedOneWithoutEquipmentInput
-  weapon?: Prisma.ItemCreateNestedOneWithoutEquippedAsWeaponInput
 }
 
 export type EquipmentUncheckedCreateWithoutHeadInput = {
   id?: string
   playerId: string
-  weaponId?: string | null
-  chestId?: string | null
-  legsId?: string | null
-  feetId?: string | null
-  accessory1Id?: string | null
-  accessory2Id?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
   updatedAt?: Date | string
 }
 
@@ -1006,27 +1230,169 @@ export type EquipmentCreateManyHeadInputEnvelope = {
   skipDuplicates?: boolean
 }
 
+export type EquipmentCreateWithoutLeftArmInput = {
+  id?: string
+  updatedAt?: Date | string
+  head?: Prisma.ItemCreateNestedOneWithoutEquippedAsHeadInput
+  rightArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsRightArmInput
+  body?: Prisma.ItemCreateNestedOneWithoutEquippedAsBodyInput
+  legs?: Prisma.ItemCreateNestedOneWithoutEquippedAsLegsInput
+  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
+  ring1?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing1Input
+  ring2?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing2Input
+  ring3?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing3Input
+  necklace?: Prisma.ItemCreateNestedOneWithoutEquippedAsNecklaceInput
+  belt?: Prisma.ItemCreateNestedOneWithoutEquippedAsBeltInput
+  cloak?: Prisma.ItemCreateNestedOneWithoutEquippedAsCloakInput
+  player: Prisma.PlayerCreateNestedOneWithoutEquipmentInput
+}
+
+export type EquipmentUncheckedCreateWithoutLeftArmInput = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
+  updatedAt?: Date | string
+}
+
+export type EquipmentCreateOrConnectWithoutLeftArmInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutLeftArmInput, Prisma.EquipmentUncheckedCreateWithoutLeftArmInput>
+}
+
+export type EquipmentCreateManyLeftArmInputEnvelope = {
+  data: Prisma.EquipmentCreateManyLeftArmInput | Prisma.EquipmentCreateManyLeftArmInput[]
+  skipDuplicates?: boolean
+}
+
+export type EquipmentCreateWithoutRightArmInput = {
+  id?: string
+  updatedAt?: Date | string
+  head?: Prisma.ItemCreateNestedOneWithoutEquippedAsHeadInput
+  leftArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsLeftArmInput
+  body?: Prisma.ItemCreateNestedOneWithoutEquippedAsBodyInput
+  legs?: Prisma.ItemCreateNestedOneWithoutEquippedAsLegsInput
+  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
+  ring1?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing1Input
+  ring2?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing2Input
+  ring3?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing3Input
+  necklace?: Prisma.ItemCreateNestedOneWithoutEquippedAsNecklaceInput
+  belt?: Prisma.ItemCreateNestedOneWithoutEquippedAsBeltInput
+  cloak?: Prisma.ItemCreateNestedOneWithoutEquippedAsCloakInput
+  player: Prisma.PlayerCreateNestedOneWithoutEquipmentInput
+}
+
+export type EquipmentUncheckedCreateWithoutRightArmInput = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
+  updatedAt?: Date | string
+}
+
+export type EquipmentCreateOrConnectWithoutRightArmInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutRightArmInput, Prisma.EquipmentUncheckedCreateWithoutRightArmInput>
+}
+
+export type EquipmentCreateManyRightArmInputEnvelope = {
+  data: Prisma.EquipmentCreateManyRightArmInput | Prisma.EquipmentCreateManyRightArmInput[]
+  skipDuplicates?: boolean
+}
+
+export type EquipmentCreateWithoutBodyInput = {
+  id?: string
+  updatedAt?: Date | string
+  head?: Prisma.ItemCreateNestedOneWithoutEquippedAsHeadInput
+  leftArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsLeftArmInput
+  rightArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsRightArmInput
+  legs?: Prisma.ItemCreateNestedOneWithoutEquippedAsLegsInput
+  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
+  ring1?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing1Input
+  ring2?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing2Input
+  ring3?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing3Input
+  necklace?: Prisma.ItemCreateNestedOneWithoutEquippedAsNecklaceInput
+  belt?: Prisma.ItemCreateNestedOneWithoutEquippedAsBeltInput
+  cloak?: Prisma.ItemCreateNestedOneWithoutEquippedAsCloakInput
+  player: Prisma.PlayerCreateNestedOneWithoutEquipmentInput
+}
+
+export type EquipmentUncheckedCreateWithoutBodyInput = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
+  updatedAt?: Date | string
+}
+
+export type EquipmentCreateOrConnectWithoutBodyInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutBodyInput, Prisma.EquipmentUncheckedCreateWithoutBodyInput>
+}
+
+export type EquipmentCreateManyBodyInputEnvelope = {
+  data: Prisma.EquipmentCreateManyBodyInput | Prisma.EquipmentCreateManyBodyInput[]
+  skipDuplicates?: boolean
+}
+
 export type EquipmentCreateWithoutLegsInput = {
   id?: string
   updatedAt?: Date | string
-  accessory1?: Prisma.ItemCreateNestedOneWithoutEquippedAsAccessory1Input
-  accessory2?: Prisma.ItemCreateNestedOneWithoutEquippedAsAccessory2Input
-  chest?: Prisma.ItemCreateNestedOneWithoutEquippedAsChestInput
-  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
   head?: Prisma.ItemCreateNestedOneWithoutEquippedAsHeadInput
+  leftArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsLeftArmInput
+  rightArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsRightArmInput
+  body?: Prisma.ItemCreateNestedOneWithoutEquippedAsBodyInput
+  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
+  ring1?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing1Input
+  ring2?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing2Input
+  ring3?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing3Input
+  necklace?: Prisma.ItemCreateNestedOneWithoutEquippedAsNecklaceInput
+  belt?: Prisma.ItemCreateNestedOneWithoutEquippedAsBeltInput
+  cloak?: Prisma.ItemCreateNestedOneWithoutEquippedAsCloakInput
   player: Prisma.PlayerCreateNestedOneWithoutEquipmentInput
-  weapon?: Prisma.ItemCreateNestedOneWithoutEquippedAsWeaponInput
 }
 
 export type EquipmentUncheckedCreateWithoutLegsInput = {
   id?: string
   playerId: string
-  weaponId?: string | null
-  headId?: string | null
-  chestId?: string | null
-  feetId?: string | null
-  accessory1Id?: string | null
-  accessory2Id?: string | null
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
   updatedAt?: Date | string
 }
 
@@ -1040,118 +1406,312 @@ export type EquipmentCreateManyLegsInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type EquipmentCreateWithoutWeaponInput = {
+export type EquipmentCreateWithoutFeetInput = {
   id?: string
   updatedAt?: Date | string
-  accessory1?: Prisma.ItemCreateNestedOneWithoutEquippedAsAccessory1Input
-  accessory2?: Prisma.ItemCreateNestedOneWithoutEquippedAsAccessory2Input
-  chest?: Prisma.ItemCreateNestedOneWithoutEquippedAsChestInput
-  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
   head?: Prisma.ItemCreateNestedOneWithoutEquippedAsHeadInput
+  leftArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsLeftArmInput
+  rightArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsRightArmInput
+  body?: Prisma.ItemCreateNestedOneWithoutEquippedAsBodyInput
   legs?: Prisma.ItemCreateNestedOneWithoutEquippedAsLegsInput
+  ring1?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing1Input
+  ring2?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing2Input
+  ring3?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing3Input
+  necklace?: Prisma.ItemCreateNestedOneWithoutEquippedAsNecklaceInput
+  belt?: Prisma.ItemCreateNestedOneWithoutEquippedAsBeltInput
+  cloak?: Prisma.ItemCreateNestedOneWithoutEquippedAsCloakInput
   player: Prisma.PlayerCreateNestedOneWithoutEquipmentInput
 }
 
-export type EquipmentUncheckedCreateWithoutWeaponInput = {
+export type EquipmentUncheckedCreateWithoutFeetInput = {
   id?: string
   playerId: string
-  headId?: string | null
-  chestId?: string | null
-  legsId?: string | null
-  feetId?: string | null
-  accessory1Id?: string | null
-  accessory2Id?: string | null
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
   updatedAt?: Date | string
 }
 
-export type EquipmentCreateOrConnectWithoutWeaponInput = {
+export type EquipmentCreateOrConnectWithoutFeetInput = {
   where: Prisma.EquipmentWhereUniqueInput
-  create: Prisma.XOR<Prisma.EquipmentCreateWithoutWeaponInput, Prisma.EquipmentUncheckedCreateWithoutWeaponInput>
-}
-
-export type EquipmentCreateManyWeaponInputEnvelope = {
-  data: Prisma.EquipmentCreateManyWeaponInput | Prisma.EquipmentCreateManyWeaponInput[]
-  skipDuplicates?: boolean
-}
-
-export type EquipmentUpsertWithWhereUniqueWithoutAccessory1Input = {
-  where: Prisma.EquipmentWhereUniqueInput
-  update: Prisma.XOR<Prisma.EquipmentUpdateWithoutAccessory1Input, Prisma.EquipmentUncheckedUpdateWithoutAccessory1Input>
-  create: Prisma.XOR<Prisma.EquipmentCreateWithoutAccessory1Input, Prisma.EquipmentUncheckedCreateWithoutAccessory1Input>
-}
-
-export type EquipmentUpdateWithWhereUniqueWithoutAccessory1Input = {
-  where: Prisma.EquipmentWhereUniqueInput
-  data: Prisma.XOR<Prisma.EquipmentUpdateWithoutAccessory1Input, Prisma.EquipmentUncheckedUpdateWithoutAccessory1Input>
-}
-
-export type EquipmentUpdateManyWithWhereWithoutAccessory1Input = {
-  where: Prisma.EquipmentScalarWhereInput
-  data: Prisma.XOR<Prisma.EquipmentUpdateManyMutationInput, Prisma.EquipmentUncheckedUpdateManyWithoutAccessory1Input>
-}
-
-export type EquipmentScalarWhereInput = {
-  AND?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
-  OR?: Prisma.EquipmentScalarWhereInput[]
-  NOT?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
-  id?: Prisma.StringFilter<"Equipment"> | string
-  playerId?: Prisma.StringFilter<"Equipment"> | string
-  weaponId?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  headId?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  chestId?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  legsId?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  feetId?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  accessory1Id?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  accessory2Id?: Prisma.StringNullableFilter<"Equipment"> | string | null
-  updatedAt?: Prisma.DateTimeFilter<"Equipment"> | Date | string
-}
-
-export type EquipmentUpsertWithWhereUniqueWithoutAccessory2Input = {
-  where: Prisma.EquipmentWhereUniqueInput
-  update: Prisma.XOR<Prisma.EquipmentUpdateWithoutAccessory2Input, Prisma.EquipmentUncheckedUpdateWithoutAccessory2Input>
-  create: Prisma.XOR<Prisma.EquipmentCreateWithoutAccessory2Input, Prisma.EquipmentUncheckedCreateWithoutAccessory2Input>
-}
-
-export type EquipmentUpdateWithWhereUniqueWithoutAccessory2Input = {
-  where: Prisma.EquipmentWhereUniqueInput
-  data: Prisma.XOR<Prisma.EquipmentUpdateWithoutAccessory2Input, Prisma.EquipmentUncheckedUpdateWithoutAccessory2Input>
-}
-
-export type EquipmentUpdateManyWithWhereWithoutAccessory2Input = {
-  where: Prisma.EquipmentScalarWhereInput
-  data: Prisma.XOR<Prisma.EquipmentUpdateManyMutationInput, Prisma.EquipmentUncheckedUpdateManyWithoutAccessory2Input>
-}
-
-export type EquipmentUpsertWithWhereUniqueWithoutChestInput = {
-  where: Prisma.EquipmentWhereUniqueInput
-  update: Prisma.XOR<Prisma.EquipmentUpdateWithoutChestInput, Prisma.EquipmentUncheckedUpdateWithoutChestInput>
-  create: Prisma.XOR<Prisma.EquipmentCreateWithoutChestInput, Prisma.EquipmentUncheckedCreateWithoutChestInput>
-}
-
-export type EquipmentUpdateWithWhereUniqueWithoutChestInput = {
-  where: Prisma.EquipmentWhereUniqueInput
-  data: Prisma.XOR<Prisma.EquipmentUpdateWithoutChestInput, Prisma.EquipmentUncheckedUpdateWithoutChestInput>
-}
-
-export type EquipmentUpdateManyWithWhereWithoutChestInput = {
-  where: Prisma.EquipmentScalarWhereInput
-  data: Prisma.XOR<Prisma.EquipmentUpdateManyMutationInput, Prisma.EquipmentUncheckedUpdateManyWithoutChestInput>
-}
-
-export type EquipmentUpsertWithWhereUniqueWithoutFeetInput = {
-  where: Prisma.EquipmentWhereUniqueInput
-  update: Prisma.XOR<Prisma.EquipmentUpdateWithoutFeetInput, Prisma.EquipmentUncheckedUpdateWithoutFeetInput>
   create: Prisma.XOR<Prisma.EquipmentCreateWithoutFeetInput, Prisma.EquipmentUncheckedCreateWithoutFeetInput>
 }
 
-export type EquipmentUpdateWithWhereUniqueWithoutFeetInput = {
-  where: Prisma.EquipmentWhereUniqueInput
-  data: Prisma.XOR<Prisma.EquipmentUpdateWithoutFeetInput, Prisma.EquipmentUncheckedUpdateWithoutFeetInput>
+export type EquipmentCreateManyFeetInputEnvelope = {
+  data: Prisma.EquipmentCreateManyFeetInput | Prisma.EquipmentCreateManyFeetInput[]
+  skipDuplicates?: boolean
 }
 
-export type EquipmentUpdateManyWithWhereWithoutFeetInput = {
-  where: Prisma.EquipmentScalarWhereInput
-  data: Prisma.XOR<Prisma.EquipmentUpdateManyMutationInput, Prisma.EquipmentUncheckedUpdateManyWithoutFeetInput>
+export type EquipmentCreateWithoutRing1Input = {
+  id?: string
+  updatedAt?: Date | string
+  head?: Prisma.ItemCreateNestedOneWithoutEquippedAsHeadInput
+  leftArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsLeftArmInput
+  rightArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsRightArmInput
+  body?: Prisma.ItemCreateNestedOneWithoutEquippedAsBodyInput
+  legs?: Prisma.ItemCreateNestedOneWithoutEquippedAsLegsInput
+  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
+  ring2?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing2Input
+  ring3?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing3Input
+  necklace?: Prisma.ItemCreateNestedOneWithoutEquippedAsNecklaceInput
+  belt?: Prisma.ItemCreateNestedOneWithoutEquippedAsBeltInput
+  cloak?: Prisma.ItemCreateNestedOneWithoutEquippedAsCloakInput
+  player: Prisma.PlayerCreateNestedOneWithoutEquipmentInput
+}
+
+export type EquipmentUncheckedCreateWithoutRing1Input = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
+  updatedAt?: Date | string
+}
+
+export type EquipmentCreateOrConnectWithoutRing1Input = {
+  where: Prisma.EquipmentWhereUniqueInput
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutRing1Input, Prisma.EquipmentUncheckedCreateWithoutRing1Input>
+}
+
+export type EquipmentCreateManyRing1InputEnvelope = {
+  data: Prisma.EquipmentCreateManyRing1Input | Prisma.EquipmentCreateManyRing1Input[]
+  skipDuplicates?: boolean
+}
+
+export type EquipmentCreateWithoutRing2Input = {
+  id?: string
+  updatedAt?: Date | string
+  head?: Prisma.ItemCreateNestedOneWithoutEquippedAsHeadInput
+  leftArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsLeftArmInput
+  rightArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsRightArmInput
+  body?: Prisma.ItemCreateNestedOneWithoutEquippedAsBodyInput
+  legs?: Prisma.ItemCreateNestedOneWithoutEquippedAsLegsInput
+  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
+  ring1?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing1Input
+  ring3?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing3Input
+  necklace?: Prisma.ItemCreateNestedOneWithoutEquippedAsNecklaceInput
+  belt?: Prisma.ItemCreateNestedOneWithoutEquippedAsBeltInput
+  cloak?: Prisma.ItemCreateNestedOneWithoutEquippedAsCloakInput
+  player: Prisma.PlayerCreateNestedOneWithoutEquipmentInput
+}
+
+export type EquipmentUncheckedCreateWithoutRing2Input = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
+  updatedAt?: Date | string
+}
+
+export type EquipmentCreateOrConnectWithoutRing2Input = {
+  where: Prisma.EquipmentWhereUniqueInput
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutRing2Input, Prisma.EquipmentUncheckedCreateWithoutRing2Input>
+}
+
+export type EquipmentCreateManyRing2InputEnvelope = {
+  data: Prisma.EquipmentCreateManyRing2Input | Prisma.EquipmentCreateManyRing2Input[]
+  skipDuplicates?: boolean
+}
+
+export type EquipmentCreateWithoutRing3Input = {
+  id?: string
+  updatedAt?: Date | string
+  head?: Prisma.ItemCreateNestedOneWithoutEquippedAsHeadInput
+  leftArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsLeftArmInput
+  rightArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsRightArmInput
+  body?: Prisma.ItemCreateNestedOneWithoutEquippedAsBodyInput
+  legs?: Prisma.ItemCreateNestedOneWithoutEquippedAsLegsInput
+  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
+  ring1?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing1Input
+  ring2?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing2Input
+  necklace?: Prisma.ItemCreateNestedOneWithoutEquippedAsNecklaceInput
+  belt?: Prisma.ItemCreateNestedOneWithoutEquippedAsBeltInput
+  cloak?: Prisma.ItemCreateNestedOneWithoutEquippedAsCloakInput
+  player: Prisma.PlayerCreateNestedOneWithoutEquipmentInput
+}
+
+export type EquipmentUncheckedCreateWithoutRing3Input = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
+  updatedAt?: Date | string
+}
+
+export type EquipmentCreateOrConnectWithoutRing3Input = {
+  where: Prisma.EquipmentWhereUniqueInput
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutRing3Input, Prisma.EquipmentUncheckedCreateWithoutRing3Input>
+}
+
+export type EquipmentCreateManyRing3InputEnvelope = {
+  data: Prisma.EquipmentCreateManyRing3Input | Prisma.EquipmentCreateManyRing3Input[]
+  skipDuplicates?: boolean
+}
+
+export type EquipmentCreateWithoutNecklaceInput = {
+  id?: string
+  updatedAt?: Date | string
+  head?: Prisma.ItemCreateNestedOneWithoutEquippedAsHeadInput
+  leftArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsLeftArmInput
+  rightArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsRightArmInput
+  body?: Prisma.ItemCreateNestedOneWithoutEquippedAsBodyInput
+  legs?: Prisma.ItemCreateNestedOneWithoutEquippedAsLegsInput
+  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
+  ring1?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing1Input
+  ring2?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing2Input
+  ring3?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing3Input
+  belt?: Prisma.ItemCreateNestedOneWithoutEquippedAsBeltInput
+  cloak?: Prisma.ItemCreateNestedOneWithoutEquippedAsCloakInput
+  player: Prisma.PlayerCreateNestedOneWithoutEquipmentInput
+}
+
+export type EquipmentUncheckedCreateWithoutNecklaceInput = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
+  updatedAt?: Date | string
+}
+
+export type EquipmentCreateOrConnectWithoutNecklaceInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutNecklaceInput, Prisma.EquipmentUncheckedCreateWithoutNecklaceInput>
+}
+
+export type EquipmentCreateManyNecklaceInputEnvelope = {
+  data: Prisma.EquipmentCreateManyNecklaceInput | Prisma.EquipmentCreateManyNecklaceInput[]
+  skipDuplicates?: boolean
+}
+
+export type EquipmentCreateWithoutBeltInput = {
+  id?: string
+  updatedAt?: Date | string
+  head?: Prisma.ItemCreateNestedOneWithoutEquippedAsHeadInput
+  leftArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsLeftArmInput
+  rightArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsRightArmInput
+  body?: Prisma.ItemCreateNestedOneWithoutEquippedAsBodyInput
+  legs?: Prisma.ItemCreateNestedOneWithoutEquippedAsLegsInput
+  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
+  ring1?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing1Input
+  ring2?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing2Input
+  ring3?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing3Input
+  necklace?: Prisma.ItemCreateNestedOneWithoutEquippedAsNecklaceInput
+  cloak?: Prisma.ItemCreateNestedOneWithoutEquippedAsCloakInput
+  player: Prisma.PlayerCreateNestedOneWithoutEquipmentInput
+}
+
+export type EquipmentUncheckedCreateWithoutBeltInput = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  cloakItemId?: string | null
+  updatedAt?: Date | string
+}
+
+export type EquipmentCreateOrConnectWithoutBeltInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutBeltInput, Prisma.EquipmentUncheckedCreateWithoutBeltInput>
+}
+
+export type EquipmentCreateManyBeltInputEnvelope = {
+  data: Prisma.EquipmentCreateManyBeltInput | Prisma.EquipmentCreateManyBeltInput[]
+  skipDuplicates?: boolean
+}
+
+export type EquipmentCreateWithoutCloakInput = {
+  id?: string
+  updatedAt?: Date | string
+  head?: Prisma.ItemCreateNestedOneWithoutEquippedAsHeadInput
+  leftArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsLeftArmInput
+  rightArm?: Prisma.ItemCreateNestedOneWithoutEquippedAsRightArmInput
+  body?: Prisma.ItemCreateNestedOneWithoutEquippedAsBodyInput
+  legs?: Prisma.ItemCreateNestedOneWithoutEquippedAsLegsInput
+  feet?: Prisma.ItemCreateNestedOneWithoutEquippedAsFeetInput
+  ring1?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing1Input
+  ring2?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing2Input
+  ring3?: Prisma.ItemCreateNestedOneWithoutEquippedAsRing3Input
+  necklace?: Prisma.ItemCreateNestedOneWithoutEquippedAsNecklaceInput
+  belt?: Prisma.ItemCreateNestedOneWithoutEquippedAsBeltInput
+  player: Prisma.PlayerCreateNestedOneWithoutEquipmentInput
+}
+
+export type EquipmentUncheckedCreateWithoutCloakInput = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  updatedAt?: Date | string
+}
+
+export type EquipmentCreateOrConnectWithoutCloakInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutCloakInput, Prisma.EquipmentUncheckedCreateWithoutCloakInput>
+}
+
+export type EquipmentCreateManyCloakInputEnvelope = {
+  data: Prisma.EquipmentCreateManyCloakInput | Prisma.EquipmentCreateManyCloakInput[]
+  skipDuplicates?: boolean
 }
 
 export type EquipmentUpsertWithWhereUniqueWithoutHeadInput = {
@@ -1170,6 +1730,75 @@ export type EquipmentUpdateManyWithWhereWithoutHeadInput = {
   data: Prisma.XOR<Prisma.EquipmentUpdateManyMutationInput, Prisma.EquipmentUncheckedUpdateManyWithoutHeadInput>
 }
 
+export type EquipmentScalarWhereInput = {
+  AND?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+  OR?: Prisma.EquipmentScalarWhereInput[]
+  NOT?: Prisma.EquipmentScalarWhereInput | Prisma.EquipmentScalarWhereInput[]
+  id?: Prisma.StringFilter<"Equipment"> | string
+  playerId?: Prisma.StringFilter<"Equipment"> | string
+  headItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  leftArmItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  rightArmItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  bodyItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  legsItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  feetItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  ring1ItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  ring2ItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  ring3ItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  necklaceItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  beltItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  cloakItemId?: Prisma.StringNullableFilter<"Equipment"> | string | null
+  updatedAt?: Prisma.DateTimeFilter<"Equipment"> | Date | string
+}
+
+export type EquipmentUpsertWithWhereUniqueWithoutLeftArmInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  update: Prisma.XOR<Prisma.EquipmentUpdateWithoutLeftArmInput, Prisma.EquipmentUncheckedUpdateWithoutLeftArmInput>
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutLeftArmInput, Prisma.EquipmentUncheckedCreateWithoutLeftArmInput>
+}
+
+export type EquipmentUpdateWithWhereUniqueWithoutLeftArmInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateWithoutLeftArmInput, Prisma.EquipmentUncheckedUpdateWithoutLeftArmInput>
+}
+
+export type EquipmentUpdateManyWithWhereWithoutLeftArmInput = {
+  where: Prisma.EquipmentScalarWhereInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateManyMutationInput, Prisma.EquipmentUncheckedUpdateManyWithoutLeftArmInput>
+}
+
+export type EquipmentUpsertWithWhereUniqueWithoutRightArmInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  update: Prisma.XOR<Prisma.EquipmentUpdateWithoutRightArmInput, Prisma.EquipmentUncheckedUpdateWithoutRightArmInput>
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutRightArmInput, Prisma.EquipmentUncheckedCreateWithoutRightArmInput>
+}
+
+export type EquipmentUpdateWithWhereUniqueWithoutRightArmInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateWithoutRightArmInput, Prisma.EquipmentUncheckedUpdateWithoutRightArmInput>
+}
+
+export type EquipmentUpdateManyWithWhereWithoutRightArmInput = {
+  where: Prisma.EquipmentScalarWhereInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateManyMutationInput, Prisma.EquipmentUncheckedUpdateManyWithoutRightArmInput>
+}
+
+export type EquipmentUpsertWithWhereUniqueWithoutBodyInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  update: Prisma.XOR<Prisma.EquipmentUpdateWithoutBodyInput, Prisma.EquipmentUncheckedUpdateWithoutBodyInput>
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutBodyInput, Prisma.EquipmentUncheckedCreateWithoutBodyInput>
+}
+
+export type EquipmentUpdateWithWhereUniqueWithoutBodyInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateWithoutBodyInput, Prisma.EquipmentUncheckedUpdateWithoutBodyInput>
+}
+
+export type EquipmentUpdateManyWithWhereWithoutBodyInput = {
+  where: Prisma.EquipmentScalarWhereInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateManyMutationInput, Prisma.EquipmentUncheckedUpdateManyWithoutBodyInput>
+}
+
 export type EquipmentUpsertWithWhereUniqueWithoutLegsInput = {
   where: Prisma.EquipmentWhereUniqueInput
   update: Prisma.XOR<Prisma.EquipmentUpdateWithoutLegsInput, Prisma.EquipmentUncheckedUpdateWithoutLegsInput>
@@ -1186,355 +1815,931 @@ export type EquipmentUpdateManyWithWhereWithoutLegsInput = {
   data: Prisma.XOR<Prisma.EquipmentUpdateManyMutationInput, Prisma.EquipmentUncheckedUpdateManyWithoutLegsInput>
 }
 
-export type EquipmentUpsertWithWhereUniqueWithoutWeaponInput = {
+export type EquipmentUpsertWithWhereUniqueWithoutFeetInput = {
   where: Prisma.EquipmentWhereUniqueInput
-  update: Prisma.XOR<Prisma.EquipmentUpdateWithoutWeaponInput, Prisma.EquipmentUncheckedUpdateWithoutWeaponInput>
-  create: Prisma.XOR<Prisma.EquipmentCreateWithoutWeaponInput, Prisma.EquipmentUncheckedCreateWithoutWeaponInput>
+  update: Prisma.XOR<Prisma.EquipmentUpdateWithoutFeetInput, Prisma.EquipmentUncheckedUpdateWithoutFeetInput>
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutFeetInput, Prisma.EquipmentUncheckedCreateWithoutFeetInput>
 }
 
-export type EquipmentUpdateWithWhereUniqueWithoutWeaponInput = {
+export type EquipmentUpdateWithWhereUniqueWithoutFeetInput = {
   where: Prisma.EquipmentWhereUniqueInput
-  data: Prisma.XOR<Prisma.EquipmentUpdateWithoutWeaponInput, Prisma.EquipmentUncheckedUpdateWithoutWeaponInput>
+  data: Prisma.XOR<Prisma.EquipmentUpdateWithoutFeetInput, Prisma.EquipmentUncheckedUpdateWithoutFeetInput>
 }
 
-export type EquipmentUpdateManyWithWhereWithoutWeaponInput = {
+export type EquipmentUpdateManyWithWhereWithoutFeetInput = {
   where: Prisma.EquipmentScalarWhereInput
-  data: Prisma.XOR<Prisma.EquipmentUpdateManyMutationInput, Prisma.EquipmentUncheckedUpdateManyWithoutWeaponInput>
+  data: Prisma.XOR<Prisma.EquipmentUpdateManyMutationInput, Prisma.EquipmentUncheckedUpdateManyWithoutFeetInput>
 }
 
-export type EquipmentCreateManyAccessory1Input = {
-  id?: string
-  playerId: string
-  weaponId?: string | null
-  headId?: string | null
-  chestId?: string | null
-  legsId?: string | null
-  feetId?: string | null
-  accessory2Id?: string | null
-  updatedAt?: Date | string
+export type EquipmentUpsertWithWhereUniqueWithoutRing1Input = {
+  where: Prisma.EquipmentWhereUniqueInput
+  update: Prisma.XOR<Prisma.EquipmentUpdateWithoutRing1Input, Prisma.EquipmentUncheckedUpdateWithoutRing1Input>
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutRing1Input, Prisma.EquipmentUncheckedCreateWithoutRing1Input>
 }
 
-export type EquipmentCreateManyAccessory2Input = {
-  id?: string
-  playerId: string
-  weaponId?: string | null
-  headId?: string | null
-  chestId?: string | null
-  legsId?: string | null
-  feetId?: string | null
-  accessory1Id?: string | null
-  updatedAt?: Date | string
+export type EquipmentUpdateWithWhereUniqueWithoutRing1Input = {
+  where: Prisma.EquipmentWhereUniqueInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateWithoutRing1Input, Prisma.EquipmentUncheckedUpdateWithoutRing1Input>
 }
 
-export type EquipmentCreateManyChestInput = {
-  id?: string
-  playerId: string
-  weaponId?: string | null
-  headId?: string | null
-  legsId?: string | null
-  feetId?: string | null
-  accessory1Id?: string | null
-  accessory2Id?: string | null
-  updatedAt?: Date | string
+export type EquipmentUpdateManyWithWhereWithoutRing1Input = {
+  where: Prisma.EquipmentScalarWhereInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateManyMutationInput, Prisma.EquipmentUncheckedUpdateManyWithoutRing1Input>
 }
 
-export type EquipmentCreateManyFeetInput = {
-  id?: string
-  playerId: string
-  weaponId?: string | null
-  headId?: string | null
-  chestId?: string | null
-  legsId?: string | null
-  accessory1Id?: string | null
-  accessory2Id?: string | null
-  updatedAt?: Date | string
+export type EquipmentUpsertWithWhereUniqueWithoutRing2Input = {
+  where: Prisma.EquipmentWhereUniqueInput
+  update: Prisma.XOR<Prisma.EquipmentUpdateWithoutRing2Input, Prisma.EquipmentUncheckedUpdateWithoutRing2Input>
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutRing2Input, Prisma.EquipmentUncheckedCreateWithoutRing2Input>
+}
+
+export type EquipmentUpdateWithWhereUniqueWithoutRing2Input = {
+  where: Prisma.EquipmentWhereUniqueInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateWithoutRing2Input, Prisma.EquipmentUncheckedUpdateWithoutRing2Input>
+}
+
+export type EquipmentUpdateManyWithWhereWithoutRing2Input = {
+  where: Prisma.EquipmentScalarWhereInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateManyMutationInput, Prisma.EquipmentUncheckedUpdateManyWithoutRing2Input>
+}
+
+export type EquipmentUpsertWithWhereUniqueWithoutRing3Input = {
+  where: Prisma.EquipmentWhereUniqueInput
+  update: Prisma.XOR<Prisma.EquipmentUpdateWithoutRing3Input, Prisma.EquipmentUncheckedUpdateWithoutRing3Input>
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutRing3Input, Prisma.EquipmentUncheckedCreateWithoutRing3Input>
+}
+
+export type EquipmentUpdateWithWhereUniqueWithoutRing3Input = {
+  where: Prisma.EquipmentWhereUniqueInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateWithoutRing3Input, Prisma.EquipmentUncheckedUpdateWithoutRing3Input>
+}
+
+export type EquipmentUpdateManyWithWhereWithoutRing3Input = {
+  where: Prisma.EquipmentScalarWhereInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateManyMutationInput, Prisma.EquipmentUncheckedUpdateManyWithoutRing3Input>
+}
+
+export type EquipmentUpsertWithWhereUniqueWithoutNecklaceInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  update: Prisma.XOR<Prisma.EquipmentUpdateWithoutNecklaceInput, Prisma.EquipmentUncheckedUpdateWithoutNecklaceInput>
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutNecklaceInput, Prisma.EquipmentUncheckedCreateWithoutNecklaceInput>
+}
+
+export type EquipmentUpdateWithWhereUniqueWithoutNecklaceInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateWithoutNecklaceInput, Prisma.EquipmentUncheckedUpdateWithoutNecklaceInput>
+}
+
+export type EquipmentUpdateManyWithWhereWithoutNecklaceInput = {
+  where: Prisma.EquipmentScalarWhereInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateManyMutationInput, Prisma.EquipmentUncheckedUpdateManyWithoutNecklaceInput>
+}
+
+export type EquipmentUpsertWithWhereUniqueWithoutBeltInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  update: Prisma.XOR<Prisma.EquipmentUpdateWithoutBeltInput, Prisma.EquipmentUncheckedUpdateWithoutBeltInput>
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutBeltInput, Prisma.EquipmentUncheckedCreateWithoutBeltInput>
+}
+
+export type EquipmentUpdateWithWhereUniqueWithoutBeltInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateWithoutBeltInput, Prisma.EquipmentUncheckedUpdateWithoutBeltInput>
+}
+
+export type EquipmentUpdateManyWithWhereWithoutBeltInput = {
+  where: Prisma.EquipmentScalarWhereInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateManyMutationInput, Prisma.EquipmentUncheckedUpdateManyWithoutBeltInput>
+}
+
+export type EquipmentUpsertWithWhereUniqueWithoutCloakInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  update: Prisma.XOR<Prisma.EquipmentUpdateWithoutCloakInput, Prisma.EquipmentUncheckedUpdateWithoutCloakInput>
+  create: Prisma.XOR<Prisma.EquipmentCreateWithoutCloakInput, Prisma.EquipmentUncheckedCreateWithoutCloakInput>
+}
+
+export type EquipmentUpdateWithWhereUniqueWithoutCloakInput = {
+  where: Prisma.EquipmentWhereUniqueInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateWithoutCloakInput, Prisma.EquipmentUncheckedUpdateWithoutCloakInput>
+}
+
+export type EquipmentUpdateManyWithWhereWithoutCloakInput = {
+  where: Prisma.EquipmentScalarWhereInput
+  data: Prisma.XOR<Prisma.EquipmentUpdateManyMutationInput, Prisma.EquipmentUncheckedUpdateManyWithoutCloakInput>
 }
 
 export type EquipmentCreateManyHeadInput = {
   id?: string
   playerId: string
-  weaponId?: string | null
-  chestId?: string | null
-  legsId?: string | null
-  feetId?: string | null
-  accessory1Id?: string | null
-  accessory2Id?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
+  updatedAt?: Date | string
+}
+
+export type EquipmentCreateManyLeftArmInput = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
+  updatedAt?: Date | string
+}
+
+export type EquipmentCreateManyRightArmInput = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
+  updatedAt?: Date | string
+}
+
+export type EquipmentCreateManyBodyInput = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
   updatedAt?: Date | string
 }
 
 export type EquipmentCreateManyLegsInput = {
   id?: string
   playerId: string
-  weaponId?: string | null
-  headId?: string | null
-  chestId?: string | null
-  feetId?: string | null
-  accessory1Id?: string | null
-  accessory2Id?: string | null
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
   updatedAt?: Date | string
 }
 
-export type EquipmentCreateManyWeaponInput = {
+export type EquipmentCreateManyFeetInput = {
   id?: string
   playerId: string
-  headId?: string | null
-  chestId?: string | null
-  legsId?: string | null
-  feetId?: string | null
-  accessory1Id?: string | null
-  accessory2Id?: string | null
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
   updatedAt?: Date | string
 }
 
-export type EquipmentUpdateWithoutAccessory1Input = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accessory2?: Prisma.ItemUpdateOneWithoutEquippedAsAccessory2NestedInput
-  chest?: Prisma.ItemUpdateOneWithoutEquippedAsChestNestedInput
-  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
-  head?: Prisma.ItemUpdateOneWithoutEquippedAsHeadNestedInput
-  legs?: Prisma.ItemUpdateOneWithoutEquippedAsLegsNestedInput
-  player?: Prisma.PlayerUpdateOneRequiredWithoutEquipmentNestedInput
-  weapon?: Prisma.ItemUpdateOneWithoutEquippedAsWeaponNestedInput
+export type EquipmentCreateManyRing1Input = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
+  updatedAt?: Date | string
 }
 
-export type EquipmentUncheckedUpdateWithoutAccessory1Input = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  weaponId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  chestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  legsId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type EquipmentCreateManyRing2Input = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
+  updatedAt?: Date | string
 }
 
-export type EquipmentUncheckedUpdateManyWithoutAccessory1Input = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  weaponId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  chestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  legsId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type EquipmentCreateManyRing3Input = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
+  updatedAt?: Date | string
 }
 
-export type EquipmentUpdateWithoutAccessory2Input = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accessory1?: Prisma.ItemUpdateOneWithoutEquippedAsAccessory1NestedInput
-  chest?: Prisma.ItemUpdateOneWithoutEquippedAsChestNestedInput
-  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
-  head?: Prisma.ItemUpdateOneWithoutEquippedAsHeadNestedInput
-  legs?: Prisma.ItemUpdateOneWithoutEquippedAsLegsNestedInput
-  player?: Prisma.PlayerUpdateOneRequiredWithoutEquipmentNestedInput
-  weapon?: Prisma.ItemUpdateOneWithoutEquippedAsWeaponNestedInput
+export type EquipmentCreateManyNecklaceInput = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  beltItemId?: string | null
+  cloakItemId?: string | null
+  updatedAt?: Date | string
 }
 
-export type EquipmentUncheckedUpdateWithoutAccessory2Input = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  weaponId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  chestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  legsId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type EquipmentCreateManyBeltInput = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  cloakItemId?: string | null
+  updatedAt?: Date | string
 }
 
-export type EquipmentUncheckedUpdateManyWithoutAccessory2Input = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  weaponId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  chestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  legsId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type EquipmentUpdateWithoutChestInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accessory1?: Prisma.ItemUpdateOneWithoutEquippedAsAccessory1NestedInput
-  accessory2?: Prisma.ItemUpdateOneWithoutEquippedAsAccessory2NestedInput
-  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
-  head?: Prisma.ItemUpdateOneWithoutEquippedAsHeadNestedInput
-  legs?: Prisma.ItemUpdateOneWithoutEquippedAsLegsNestedInput
-  player?: Prisma.PlayerUpdateOneRequiredWithoutEquipmentNestedInput
-  weapon?: Prisma.ItemUpdateOneWithoutEquippedAsWeaponNestedInput
-}
-
-export type EquipmentUncheckedUpdateWithoutChestInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  weaponId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  legsId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type EquipmentUncheckedUpdateManyWithoutChestInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  weaponId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  legsId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type EquipmentUpdateWithoutFeetInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accessory1?: Prisma.ItemUpdateOneWithoutEquippedAsAccessory1NestedInput
-  accessory2?: Prisma.ItemUpdateOneWithoutEquippedAsAccessory2NestedInput
-  chest?: Prisma.ItemUpdateOneWithoutEquippedAsChestNestedInput
-  head?: Prisma.ItemUpdateOneWithoutEquippedAsHeadNestedInput
-  legs?: Prisma.ItemUpdateOneWithoutEquippedAsLegsNestedInput
-  player?: Prisma.PlayerUpdateOneRequiredWithoutEquipmentNestedInput
-  weapon?: Prisma.ItemUpdateOneWithoutEquippedAsWeaponNestedInput
-}
-
-export type EquipmentUncheckedUpdateWithoutFeetInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  weaponId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  chestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  legsId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type EquipmentUncheckedUpdateManyWithoutFeetInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  weaponId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  chestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  legsId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type EquipmentCreateManyCloakInput = {
+  id?: string
+  playerId: string
+  headItemId?: string | null
+  leftArmItemId?: string | null
+  rightArmItemId?: string | null
+  bodyItemId?: string | null
+  legsItemId?: string | null
+  feetItemId?: string | null
+  ring1ItemId?: string | null
+  ring2ItemId?: string | null
+  ring3ItemId?: string | null
+  necklaceItemId?: string | null
+  beltItemId?: string | null
+  updatedAt?: Date | string
 }
 
 export type EquipmentUpdateWithoutHeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accessory1?: Prisma.ItemUpdateOneWithoutEquippedAsAccessory1NestedInput
-  accessory2?: Prisma.ItemUpdateOneWithoutEquippedAsAccessory2NestedInput
-  chest?: Prisma.ItemUpdateOneWithoutEquippedAsChestNestedInput
-  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
+  leftArm?: Prisma.ItemUpdateOneWithoutEquippedAsLeftArmNestedInput
+  rightArm?: Prisma.ItemUpdateOneWithoutEquippedAsRightArmNestedInput
+  body?: Prisma.ItemUpdateOneWithoutEquippedAsBodyNestedInput
   legs?: Prisma.ItemUpdateOneWithoutEquippedAsLegsNestedInput
+  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
+  ring1?: Prisma.ItemUpdateOneWithoutEquippedAsRing1NestedInput
+  ring2?: Prisma.ItemUpdateOneWithoutEquippedAsRing2NestedInput
+  ring3?: Prisma.ItemUpdateOneWithoutEquippedAsRing3NestedInput
+  necklace?: Prisma.ItemUpdateOneWithoutEquippedAsNecklaceNestedInput
+  belt?: Prisma.ItemUpdateOneWithoutEquippedAsBeltNestedInput
+  cloak?: Prisma.ItemUpdateOneWithoutEquippedAsCloakNestedInput
   player?: Prisma.PlayerUpdateOneRequiredWithoutEquipmentNestedInput
-  weapon?: Prisma.ItemUpdateOneWithoutEquippedAsWeaponNestedInput
 }
 
 export type EquipmentUncheckedUpdateWithoutHeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  weaponId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  chestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  legsId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EquipmentUncheckedUpdateManyWithoutHeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  weaponId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  chestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  legsId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUpdateWithoutLeftArmInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  head?: Prisma.ItemUpdateOneWithoutEquippedAsHeadNestedInput
+  rightArm?: Prisma.ItemUpdateOneWithoutEquippedAsRightArmNestedInput
+  body?: Prisma.ItemUpdateOneWithoutEquippedAsBodyNestedInput
+  legs?: Prisma.ItemUpdateOneWithoutEquippedAsLegsNestedInput
+  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
+  ring1?: Prisma.ItemUpdateOneWithoutEquippedAsRing1NestedInput
+  ring2?: Prisma.ItemUpdateOneWithoutEquippedAsRing2NestedInput
+  ring3?: Prisma.ItemUpdateOneWithoutEquippedAsRing3NestedInput
+  necklace?: Prisma.ItemUpdateOneWithoutEquippedAsNecklaceNestedInput
+  belt?: Prisma.ItemUpdateOneWithoutEquippedAsBeltNestedInput
+  cloak?: Prisma.ItemUpdateOneWithoutEquippedAsCloakNestedInput
+  player?: Prisma.PlayerUpdateOneRequiredWithoutEquipmentNestedInput
+}
+
+export type EquipmentUncheckedUpdateWithoutLeftArmInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUncheckedUpdateManyWithoutLeftArmInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUpdateWithoutRightArmInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  head?: Prisma.ItemUpdateOneWithoutEquippedAsHeadNestedInput
+  leftArm?: Prisma.ItemUpdateOneWithoutEquippedAsLeftArmNestedInput
+  body?: Prisma.ItemUpdateOneWithoutEquippedAsBodyNestedInput
+  legs?: Prisma.ItemUpdateOneWithoutEquippedAsLegsNestedInput
+  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
+  ring1?: Prisma.ItemUpdateOneWithoutEquippedAsRing1NestedInput
+  ring2?: Prisma.ItemUpdateOneWithoutEquippedAsRing2NestedInput
+  ring3?: Prisma.ItemUpdateOneWithoutEquippedAsRing3NestedInput
+  necklace?: Prisma.ItemUpdateOneWithoutEquippedAsNecklaceNestedInput
+  belt?: Prisma.ItemUpdateOneWithoutEquippedAsBeltNestedInput
+  cloak?: Prisma.ItemUpdateOneWithoutEquippedAsCloakNestedInput
+  player?: Prisma.PlayerUpdateOneRequiredWithoutEquipmentNestedInput
+}
+
+export type EquipmentUncheckedUpdateWithoutRightArmInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUncheckedUpdateManyWithoutRightArmInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUpdateWithoutBodyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  head?: Prisma.ItemUpdateOneWithoutEquippedAsHeadNestedInput
+  leftArm?: Prisma.ItemUpdateOneWithoutEquippedAsLeftArmNestedInput
+  rightArm?: Prisma.ItemUpdateOneWithoutEquippedAsRightArmNestedInput
+  legs?: Prisma.ItemUpdateOneWithoutEquippedAsLegsNestedInput
+  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
+  ring1?: Prisma.ItemUpdateOneWithoutEquippedAsRing1NestedInput
+  ring2?: Prisma.ItemUpdateOneWithoutEquippedAsRing2NestedInput
+  ring3?: Prisma.ItemUpdateOneWithoutEquippedAsRing3NestedInput
+  necklace?: Prisma.ItemUpdateOneWithoutEquippedAsNecklaceNestedInput
+  belt?: Prisma.ItemUpdateOneWithoutEquippedAsBeltNestedInput
+  cloak?: Prisma.ItemUpdateOneWithoutEquippedAsCloakNestedInput
+  player?: Prisma.PlayerUpdateOneRequiredWithoutEquipmentNestedInput
+}
+
+export type EquipmentUncheckedUpdateWithoutBodyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUncheckedUpdateManyWithoutBodyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EquipmentUpdateWithoutLegsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accessory1?: Prisma.ItemUpdateOneWithoutEquippedAsAccessory1NestedInput
-  accessory2?: Prisma.ItemUpdateOneWithoutEquippedAsAccessory2NestedInput
-  chest?: Prisma.ItemUpdateOneWithoutEquippedAsChestNestedInput
-  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
   head?: Prisma.ItemUpdateOneWithoutEquippedAsHeadNestedInput
+  leftArm?: Prisma.ItemUpdateOneWithoutEquippedAsLeftArmNestedInput
+  rightArm?: Prisma.ItemUpdateOneWithoutEquippedAsRightArmNestedInput
+  body?: Prisma.ItemUpdateOneWithoutEquippedAsBodyNestedInput
+  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
+  ring1?: Prisma.ItemUpdateOneWithoutEquippedAsRing1NestedInput
+  ring2?: Prisma.ItemUpdateOneWithoutEquippedAsRing2NestedInput
+  ring3?: Prisma.ItemUpdateOneWithoutEquippedAsRing3NestedInput
+  necklace?: Prisma.ItemUpdateOneWithoutEquippedAsNecklaceNestedInput
+  belt?: Prisma.ItemUpdateOneWithoutEquippedAsBeltNestedInput
+  cloak?: Prisma.ItemUpdateOneWithoutEquippedAsCloakNestedInput
   player?: Prisma.PlayerUpdateOneRequiredWithoutEquipmentNestedInput
-  weapon?: Prisma.ItemUpdateOneWithoutEquippedAsWeaponNestedInput
 }
 
 export type EquipmentUncheckedUpdateWithoutLegsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  weaponId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  chestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EquipmentUncheckedUpdateManyWithoutLegsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  weaponId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  chestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type EquipmentUpdateWithoutWeaponInput = {
+export type EquipmentUpdateWithoutFeetInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accessory1?: Prisma.ItemUpdateOneWithoutEquippedAsAccessory1NestedInput
-  accessory2?: Prisma.ItemUpdateOneWithoutEquippedAsAccessory2NestedInput
-  chest?: Prisma.ItemUpdateOneWithoutEquippedAsChestNestedInput
-  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
   head?: Prisma.ItemUpdateOneWithoutEquippedAsHeadNestedInput
+  leftArm?: Prisma.ItemUpdateOneWithoutEquippedAsLeftArmNestedInput
+  rightArm?: Prisma.ItemUpdateOneWithoutEquippedAsRightArmNestedInput
+  body?: Prisma.ItemUpdateOneWithoutEquippedAsBodyNestedInput
   legs?: Prisma.ItemUpdateOneWithoutEquippedAsLegsNestedInput
+  ring1?: Prisma.ItemUpdateOneWithoutEquippedAsRing1NestedInput
+  ring2?: Prisma.ItemUpdateOneWithoutEquippedAsRing2NestedInput
+  ring3?: Prisma.ItemUpdateOneWithoutEquippedAsRing3NestedInput
+  necklace?: Prisma.ItemUpdateOneWithoutEquippedAsNecklaceNestedInput
+  belt?: Prisma.ItemUpdateOneWithoutEquippedAsBeltNestedInput
+  cloak?: Prisma.ItemUpdateOneWithoutEquippedAsCloakNestedInput
   player?: Prisma.PlayerUpdateOneRequiredWithoutEquipmentNestedInput
 }
 
-export type EquipmentUncheckedUpdateWithoutWeaponInput = {
+export type EquipmentUncheckedUpdateWithoutFeetInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  chestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  legsId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type EquipmentUncheckedUpdateManyWithoutWeaponInput = {
+export type EquipmentUncheckedUpdateManyWithoutFeetInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  chestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  legsId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accessory2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUpdateWithoutRing1Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  head?: Prisma.ItemUpdateOneWithoutEquippedAsHeadNestedInput
+  leftArm?: Prisma.ItemUpdateOneWithoutEquippedAsLeftArmNestedInput
+  rightArm?: Prisma.ItemUpdateOneWithoutEquippedAsRightArmNestedInput
+  body?: Prisma.ItemUpdateOneWithoutEquippedAsBodyNestedInput
+  legs?: Prisma.ItemUpdateOneWithoutEquippedAsLegsNestedInput
+  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
+  ring2?: Prisma.ItemUpdateOneWithoutEquippedAsRing2NestedInput
+  ring3?: Prisma.ItemUpdateOneWithoutEquippedAsRing3NestedInput
+  necklace?: Prisma.ItemUpdateOneWithoutEquippedAsNecklaceNestedInput
+  belt?: Prisma.ItemUpdateOneWithoutEquippedAsBeltNestedInput
+  cloak?: Prisma.ItemUpdateOneWithoutEquippedAsCloakNestedInput
+  player?: Prisma.PlayerUpdateOneRequiredWithoutEquipmentNestedInput
+}
+
+export type EquipmentUncheckedUpdateWithoutRing1Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUncheckedUpdateManyWithoutRing1Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUpdateWithoutRing2Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  head?: Prisma.ItemUpdateOneWithoutEquippedAsHeadNestedInput
+  leftArm?: Prisma.ItemUpdateOneWithoutEquippedAsLeftArmNestedInput
+  rightArm?: Prisma.ItemUpdateOneWithoutEquippedAsRightArmNestedInput
+  body?: Prisma.ItemUpdateOneWithoutEquippedAsBodyNestedInput
+  legs?: Prisma.ItemUpdateOneWithoutEquippedAsLegsNestedInput
+  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
+  ring1?: Prisma.ItemUpdateOneWithoutEquippedAsRing1NestedInput
+  ring3?: Prisma.ItemUpdateOneWithoutEquippedAsRing3NestedInput
+  necklace?: Prisma.ItemUpdateOneWithoutEquippedAsNecklaceNestedInput
+  belt?: Prisma.ItemUpdateOneWithoutEquippedAsBeltNestedInput
+  cloak?: Prisma.ItemUpdateOneWithoutEquippedAsCloakNestedInput
+  player?: Prisma.PlayerUpdateOneRequiredWithoutEquipmentNestedInput
+}
+
+export type EquipmentUncheckedUpdateWithoutRing2Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUncheckedUpdateManyWithoutRing2Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUpdateWithoutRing3Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  head?: Prisma.ItemUpdateOneWithoutEquippedAsHeadNestedInput
+  leftArm?: Prisma.ItemUpdateOneWithoutEquippedAsLeftArmNestedInput
+  rightArm?: Prisma.ItemUpdateOneWithoutEquippedAsRightArmNestedInput
+  body?: Prisma.ItemUpdateOneWithoutEquippedAsBodyNestedInput
+  legs?: Prisma.ItemUpdateOneWithoutEquippedAsLegsNestedInput
+  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
+  ring1?: Prisma.ItemUpdateOneWithoutEquippedAsRing1NestedInput
+  ring2?: Prisma.ItemUpdateOneWithoutEquippedAsRing2NestedInput
+  necklace?: Prisma.ItemUpdateOneWithoutEquippedAsNecklaceNestedInput
+  belt?: Prisma.ItemUpdateOneWithoutEquippedAsBeltNestedInput
+  cloak?: Prisma.ItemUpdateOneWithoutEquippedAsCloakNestedInput
+  player?: Prisma.PlayerUpdateOneRequiredWithoutEquipmentNestedInput
+}
+
+export type EquipmentUncheckedUpdateWithoutRing3Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUncheckedUpdateManyWithoutRing3Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUpdateWithoutNecklaceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  head?: Prisma.ItemUpdateOneWithoutEquippedAsHeadNestedInput
+  leftArm?: Prisma.ItemUpdateOneWithoutEquippedAsLeftArmNestedInput
+  rightArm?: Prisma.ItemUpdateOneWithoutEquippedAsRightArmNestedInput
+  body?: Prisma.ItemUpdateOneWithoutEquippedAsBodyNestedInput
+  legs?: Prisma.ItemUpdateOneWithoutEquippedAsLegsNestedInput
+  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
+  ring1?: Prisma.ItemUpdateOneWithoutEquippedAsRing1NestedInput
+  ring2?: Prisma.ItemUpdateOneWithoutEquippedAsRing2NestedInput
+  ring3?: Prisma.ItemUpdateOneWithoutEquippedAsRing3NestedInput
+  belt?: Prisma.ItemUpdateOneWithoutEquippedAsBeltNestedInput
+  cloak?: Prisma.ItemUpdateOneWithoutEquippedAsCloakNestedInput
+  player?: Prisma.PlayerUpdateOneRequiredWithoutEquipmentNestedInput
+}
+
+export type EquipmentUncheckedUpdateWithoutNecklaceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUncheckedUpdateManyWithoutNecklaceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUpdateWithoutBeltInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  head?: Prisma.ItemUpdateOneWithoutEquippedAsHeadNestedInput
+  leftArm?: Prisma.ItemUpdateOneWithoutEquippedAsLeftArmNestedInput
+  rightArm?: Prisma.ItemUpdateOneWithoutEquippedAsRightArmNestedInput
+  body?: Prisma.ItemUpdateOneWithoutEquippedAsBodyNestedInput
+  legs?: Prisma.ItemUpdateOneWithoutEquippedAsLegsNestedInput
+  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
+  ring1?: Prisma.ItemUpdateOneWithoutEquippedAsRing1NestedInput
+  ring2?: Prisma.ItemUpdateOneWithoutEquippedAsRing2NestedInput
+  ring3?: Prisma.ItemUpdateOneWithoutEquippedAsRing3NestedInput
+  necklace?: Prisma.ItemUpdateOneWithoutEquippedAsNecklaceNestedInput
+  cloak?: Prisma.ItemUpdateOneWithoutEquippedAsCloakNestedInput
+  player?: Prisma.PlayerUpdateOneRequiredWithoutEquipmentNestedInput
+}
+
+export type EquipmentUncheckedUpdateWithoutBeltInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUncheckedUpdateManyWithoutBeltInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cloakItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUpdateWithoutCloakInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  head?: Prisma.ItemUpdateOneWithoutEquippedAsHeadNestedInput
+  leftArm?: Prisma.ItemUpdateOneWithoutEquippedAsLeftArmNestedInput
+  rightArm?: Prisma.ItemUpdateOneWithoutEquippedAsRightArmNestedInput
+  body?: Prisma.ItemUpdateOneWithoutEquippedAsBodyNestedInput
+  legs?: Prisma.ItemUpdateOneWithoutEquippedAsLegsNestedInput
+  feet?: Prisma.ItemUpdateOneWithoutEquippedAsFeetNestedInput
+  ring1?: Prisma.ItemUpdateOneWithoutEquippedAsRing1NestedInput
+  ring2?: Prisma.ItemUpdateOneWithoutEquippedAsRing2NestedInput
+  ring3?: Prisma.ItemUpdateOneWithoutEquippedAsRing3NestedInput
+  necklace?: Prisma.ItemUpdateOneWithoutEquippedAsNecklaceNestedInput
+  belt?: Prisma.ItemUpdateOneWithoutEquippedAsBeltNestedInput
+  player?: Prisma.PlayerUpdateOneRequiredWithoutEquipmentNestedInput
+}
+
+export type EquipmentUncheckedUpdateWithoutCloakInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EquipmentUncheckedUpdateManyWithoutCloakInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  headItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leftArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rightArmItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bodyItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legsItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feetItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring1ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring2ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ring3ItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  necklaceItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beltItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1543,133 +2748,193 @@ export type EquipmentUncheckedUpdateManyWithoutWeaponInput = {
 export type EquipmentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   playerId?: boolean
-  weaponId?: boolean
-  headId?: boolean
-  chestId?: boolean
-  legsId?: boolean
-  feetId?: boolean
-  accessory1Id?: boolean
-  accessory2Id?: boolean
+  headItemId?: boolean
+  leftArmItemId?: boolean
+  rightArmItemId?: boolean
+  bodyItemId?: boolean
+  legsItemId?: boolean
+  feetItemId?: boolean
+  ring1ItemId?: boolean
+  ring2ItemId?: boolean
+  ring3ItemId?: boolean
+  necklaceItemId?: boolean
+  beltItemId?: boolean
+  cloakItemId?: boolean
   updatedAt?: boolean
-  accessory1?: boolean | Prisma.Equipment$accessory1Args<ExtArgs>
-  accessory2?: boolean | Prisma.Equipment$accessory2Args<ExtArgs>
-  chest?: boolean | Prisma.Equipment$chestArgs<ExtArgs>
-  feet?: boolean | Prisma.Equipment$feetArgs<ExtArgs>
   head?: boolean | Prisma.Equipment$headArgs<ExtArgs>
+  leftArm?: boolean | Prisma.Equipment$leftArmArgs<ExtArgs>
+  rightArm?: boolean | Prisma.Equipment$rightArmArgs<ExtArgs>
+  body?: boolean | Prisma.Equipment$bodyArgs<ExtArgs>
   legs?: boolean | Prisma.Equipment$legsArgs<ExtArgs>
+  feet?: boolean | Prisma.Equipment$feetArgs<ExtArgs>
+  ring1?: boolean | Prisma.Equipment$ring1Args<ExtArgs>
+  ring2?: boolean | Prisma.Equipment$ring2Args<ExtArgs>
+  ring3?: boolean | Prisma.Equipment$ring3Args<ExtArgs>
+  necklace?: boolean | Prisma.Equipment$necklaceArgs<ExtArgs>
+  belt?: boolean | Prisma.Equipment$beltArgs<ExtArgs>
+  cloak?: boolean | Prisma.Equipment$cloakArgs<ExtArgs>
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  weapon?: boolean | Prisma.Equipment$weaponArgs<ExtArgs>
 }, ExtArgs["result"]["equipment"]>
 
 export type EquipmentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   playerId?: boolean
-  weaponId?: boolean
-  headId?: boolean
-  chestId?: boolean
-  legsId?: boolean
-  feetId?: boolean
-  accessory1Id?: boolean
-  accessory2Id?: boolean
+  headItemId?: boolean
+  leftArmItemId?: boolean
+  rightArmItemId?: boolean
+  bodyItemId?: boolean
+  legsItemId?: boolean
+  feetItemId?: boolean
+  ring1ItemId?: boolean
+  ring2ItemId?: boolean
+  ring3ItemId?: boolean
+  necklaceItemId?: boolean
+  beltItemId?: boolean
+  cloakItemId?: boolean
   updatedAt?: boolean
-  accessory1?: boolean | Prisma.Equipment$accessory1Args<ExtArgs>
-  accessory2?: boolean | Prisma.Equipment$accessory2Args<ExtArgs>
-  chest?: boolean | Prisma.Equipment$chestArgs<ExtArgs>
-  feet?: boolean | Prisma.Equipment$feetArgs<ExtArgs>
   head?: boolean | Prisma.Equipment$headArgs<ExtArgs>
+  leftArm?: boolean | Prisma.Equipment$leftArmArgs<ExtArgs>
+  rightArm?: boolean | Prisma.Equipment$rightArmArgs<ExtArgs>
+  body?: boolean | Prisma.Equipment$bodyArgs<ExtArgs>
   legs?: boolean | Prisma.Equipment$legsArgs<ExtArgs>
+  feet?: boolean | Prisma.Equipment$feetArgs<ExtArgs>
+  ring1?: boolean | Prisma.Equipment$ring1Args<ExtArgs>
+  ring2?: boolean | Prisma.Equipment$ring2Args<ExtArgs>
+  ring3?: boolean | Prisma.Equipment$ring3Args<ExtArgs>
+  necklace?: boolean | Prisma.Equipment$necklaceArgs<ExtArgs>
+  belt?: boolean | Prisma.Equipment$beltArgs<ExtArgs>
+  cloak?: boolean | Prisma.Equipment$cloakArgs<ExtArgs>
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  weapon?: boolean | Prisma.Equipment$weaponArgs<ExtArgs>
 }, ExtArgs["result"]["equipment"]>
 
 export type EquipmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   playerId?: boolean
-  weaponId?: boolean
-  headId?: boolean
-  chestId?: boolean
-  legsId?: boolean
-  feetId?: boolean
-  accessory1Id?: boolean
-  accessory2Id?: boolean
+  headItemId?: boolean
+  leftArmItemId?: boolean
+  rightArmItemId?: boolean
+  bodyItemId?: boolean
+  legsItemId?: boolean
+  feetItemId?: boolean
+  ring1ItemId?: boolean
+  ring2ItemId?: boolean
+  ring3ItemId?: boolean
+  necklaceItemId?: boolean
+  beltItemId?: boolean
+  cloakItemId?: boolean
   updatedAt?: boolean
-  accessory1?: boolean | Prisma.Equipment$accessory1Args<ExtArgs>
-  accessory2?: boolean | Prisma.Equipment$accessory2Args<ExtArgs>
-  chest?: boolean | Prisma.Equipment$chestArgs<ExtArgs>
-  feet?: boolean | Prisma.Equipment$feetArgs<ExtArgs>
   head?: boolean | Prisma.Equipment$headArgs<ExtArgs>
+  leftArm?: boolean | Prisma.Equipment$leftArmArgs<ExtArgs>
+  rightArm?: boolean | Prisma.Equipment$rightArmArgs<ExtArgs>
+  body?: boolean | Prisma.Equipment$bodyArgs<ExtArgs>
   legs?: boolean | Prisma.Equipment$legsArgs<ExtArgs>
+  feet?: boolean | Prisma.Equipment$feetArgs<ExtArgs>
+  ring1?: boolean | Prisma.Equipment$ring1Args<ExtArgs>
+  ring2?: boolean | Prisma.Equipment$ring2Args<ExtArgs>
+  ring3?: boolean | Prisma.Equipment$ring3Args<ExtArgs>
+  necklace?: boolean | Prisma.Equipment$necklaceArgs<ExtArgs>
+  belt?: boolean | Prisma.Equipment$beltArgs<ExtArgs>
+  cloak?: boolean | Prisma.Equipment$cloakArgs<ExtArgs>
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  weapon?: boolean | Prisma.Equipment$weaponArgs<ExtArgs>
 }, ExtArgs["result"]["equipment"]>
 
 export type EquipmentSelectScalar = {
   id?: boolean
   playerId?: boolean
-  weaponId?: boolean
-  headId?: boolean
-  chestId?: boolean
-  legsId?: boolean
-  feetId?: boolean
-  accessory1Id?: boolean
-  accessory2Id?: boolean
+  headItemId?: boolean
+  leftArmItemId?: boolean
+  rightArmItemId?: boolean
+  bodyItemId?: boolean
+  legsItemId?: boolean
+  feetItemId?: boolean
+  ring1ItemId?: boolean
+  ring2ItemId?: boolean
+  ring3ItemId?: boolean
+  necklaceItemId?: boolean
+  beltItemId?: boolean
+  cloakItemId?: boolean
   updatedAt?: boolean
 }
 
-export type EquipmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "weaponId" | "headId" | "chestId" | "legsId" | "feetId" | "accessory1Id" | "accessory2Id" | "updatedAt", ExtArgs["result"]["equipment"]>
+export type EquipmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "headItemId" | "leftArmItemId" | "rightArmItemId" | "bodyItemId" | "legsItemId" | "feetItemId" | "ring1ItemId" | "ring2ItemId" | "ring3ItemId" | "necklaceItemId" | "beltItemId" | "cloakItemId" | "updatedAt", ExtArgs["result"]["equipment"]>
 export type EquipmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  accessory1?: boolean | Prisma.Equipment$accessory1Args<ExtArgs>
-  accessory2?: boolean | Prisma.Equipment$accessory2Args<ExtArgs>
-  chest?: boolean | Prisma.Equipment$chestArgs<ExtArgs>
-  feet?: boolean | Prisma.Equipment$feetArgs<ExtArgs>
   head?: boolean | Prisma.Equipment$headArgs<ExtArgs>
+  leftArm?: boolean | Prisma.Equipment$leftArmArgs<ExtArgs>
+  rightArm?: boolean | Prisma.Equipment$rightArmArgs<ExtArgs>
+  body?: boolean | Prisma.Equipment$bodyArgs<ExtArgs>
   legs?: boolean | Prisma.Equipment$legsArgs<ExtArgs>
+  feet?: boolean | Prisma.Equipment$feetArgs<ExtArgs>
+  ring1?: boolean | Prisma.Equipment$ring1Args<ExtArgs>
+  ring2?: boolean | Prisma.Equipment$ring2Args<ExtArgs>
+  ring3?: boolean | Prisma.Equipment$ring3Args<ExtArgs>
+  necklace?: boolean | Prisma.Equipment$necklaceArgs<ExtArgs>
+  belt?: boolean | Prisma.Equipment$beltArgs<ExtArgs>
+  cloak?: boolean | Prisma.Equipment$cloakArgs<ExtArgs>
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  weapon?: boolean | Prisma.Equipment$weaponArgs<ExtArgs>
 }
 export type EquipmentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  accessory1?: boolean | Prisma.Equipment$accessory1Args<ExtArgs>
-  accessory2?: boolean | Prisma.Equipment$accessory2Args<ExtArgs>
-  chest?: boolean | Prisma.Equipment$chestArgs<ExtArgs>
-  feet?: boolean | Prisma.Equipment$feetArgs<ExtArgs>
   head?: boolean | Prisma.Equipment$headArgs<ExtArgs>
+  leftArm?: boolean | Prisma.Equipment$leftArmArgs<ExtArgs>
+  rightArm?: boolean | Prisma.Equipment$rightArmArgs<ExtArgs>
+  body?: boolean | Prisma.Equipment$bodyArgs<ExtArgs>
   legs?: boolean | Prisma.Equipment$legsArgs<ExtArgs>
+  feet?: boolean | Prisma.Equipment$feetArgs<ExtArgs>
+  ring1?: boolean | Prisma.Equipment$ring1Args<ExtArgs>
+  ring2?: boolean | Prisma.Equipment$ring2Args<ExtArgs>
+  ring3?: boolean | Prisma.Equipment$ring3Args<ExtArgs>
+  necklace?: boolean | Prisma.Equipment$necklaceArgs<ExtArgs>
+  belt?: boolean | Prisma.Equipment$beltArgs<ExtArgs>
+  cloak?: boolean | Prisma.Equipment$cloakArgs<ExtArgs>
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  weapon?: boolean | Prisma.Equipment$weaponArgs<ExtArgs>
 }
 export type EquipmentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  accessory1?: boolean | Prisma.Equipment$accessory1Args<ExtArgs>
-  accessory2?: boolean | Prisma.Equipment$accessory2Args<ExtArgs>
-  chest?: boolean | Prisma.Equipment$chestArgs<ExtArgs>
-  feet?: boolean | Prisma.Equipment$feetArgs<ExtArgs>
   head?: boolean | Prisma.Equipment$headArgs<ExtArgs>
+  leftArm?: boolean | Prisma.Equipment$leftArmArgs<ExtArgs>
+  rightArm?: boolean | Prisma.Equipment$rightArmArgs<ExtArgs>
+  body?: boolean | Prisma.Equipment$bodyArgs<ExtArgs>
   legs?: boolean | Prisma.Equipment$legsArgs<ExtArgs>
+  feet?: boolean | Prisma.Equipment$feetArgs<ExtArgs>
+  ring1?: boolean | Prisma.Equipment$ring1Args<ExtArgs>
+  ring2?: boolean | Prisma.Equipment$ring2Args<ExtArgs>
+  ring3?: boolean | Prisma.Equipment$ring3Args<ExtArgs>
+  necklace?: boolean | Prisma.Equipment$necklaceArgs<ExtArgs>
+  belt?: boolean | Prisma.Equipment$beltArgs<ExtArgs>
+  cloak?: boolean | Prisma.Equipment$cloakArgs<ExtArgs>
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
-  weapon?: boolean | Prisma.Equipment$weaponArgs<ExtArgs>
 }
 
 export type $EquipmentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Equipment"
   objects: {
-    accessory1: Prisma.$ItemPayload<ExtArgs> | null
-    accessory2: Prisma.$ItemPayload<ExtArgs> | null
-    chest: Prisma.$ItemPayload<ExtArgs> | null
-    feet: Prisma.$ItemPayload<ExtArgs> | null
     head: Prisma.$ItemPayload<ExtArgs> | null
+    leftArm: Prisma.$ItemPayload<ExtArgs> | null
+    rightArm: Prisma.$ItemPayload<ExtArgs> | null
+    body: Prisma.$ItemPayload<ExtArgs> | null
     legs: Prisma.$ItemPayload<ExtArgs> | null
+    feet: Prisma.$ItemPayload<ExtArgs> | null
+    ring1: Prisma.$ItemPayload<ExtArgs> | null
+    ring2: Prisma.$ItemPayload<ExtArgs> | null
+    ring3: Prisma.$ItemPayload<ExtArgs> | null
+    necklace: Prisma.$ItemPayload<ExtArgs> | null
+    belt: Prisma.$ItemPayload<ExtArgs> | null
+    cloak: Prisma.$ItemPayload<ExtArgs> | null
     player: Prisma.$PlayerPayload<ExtArgs>
-    weapon: Prisma.$ItemPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     playerId: string
-    weaponId: string | null
-    headId: string | null
-    chestId: string | null
-    legsId: string | null
-    feetId: string | null
-    accessory1Id: string | null
-    accessory2Id: string | null
+    headItemId: string | null
+    leftArmItemId: string | null
+    rightArmItemId: string | null
+    bodyItemId: string | null
+    legsItemId: string | null
+    feetItemId: string | null
+    ring1ItemId: string | null
+    ring2ItemId: string | null
+    ring3ItemId: string | null
+    necklaceItemId: string | null
+    beltItemId: string | null
+    cloakItemId: string | null
     updatedAt: Date
   }, ExtArgs["result"]["equipment"]>
   composites: {}
@@ -2065,14 +3330,19 @@ readonly fields: EquipmentFieldRefs;
  */
 export interface Prisma__EquipmentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  accessory1<T extends Prisma.Equipment$accessory1Args<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipment$accessory1Args<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  accessory2<T extends Prisma.Equipment$accessory2Args<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipment$accessory2Args<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  chest<T extends Prisma.Equipment$chestArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipment$chestArgs<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  feet<T extends Prisma.Equipment$feetArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipment$feetArgs<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   head<T extends Prisma.Equipment$headArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipment$headArgs<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  leftArm<T extends Prisma.Equipment$leftArmArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipment$leftArmArgs<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  rightArm<T extends Prisma.Equipment$rightArmArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipment$rightArmArgs<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  body<T extends Prisma.Equipment$bodyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipment$bodyArgs<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   legs<T extends Prisma.Equipment$legsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipment$legsArgs<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  feet<T extends Prisma.Equipment$feetArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipment$feetArgs<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  ring1<T extends Prisma.Equipment$ring1Args<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipment$ring1Args<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  ring2<T extends Prisma.Equipment$ring2Args<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipment$ring2Args<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  ring3<T extends Prisma.Equipment$ring3Args<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipment$ring3Args<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  necklace<T extends Prisma.Equipment$necklaceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipment$necklaceArgs<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  belt<T extends Prisma.Equipment$beltArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipment$beltArgs<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  cloak<T extends Prisma.Equipment$cloakArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipment$cloakArgs<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   player<T extends Prisma.PlayerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlayerDefaultArgs<ExtArgs>>): Prisma.Prisma__PlayerClient<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  weapon<T extends Prisma.Equipment$weaponArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Equipment$weaponArgs<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2104,13 +3374,18 @@ export interface Prisma__EquipmentClient<T, Null = never, ExtArgs extends runtim
 export interface EquipmentFieldRefs {
   readonly id: Prisma.FieldRef<"Equipment", 'String'>
   readonly playerId: Prisma.FieldRef<"Equipment", 'String'>
-  readonly weaponId: Prisma.FieldRef<"Equipment", 'String'>
-  readonly headId: Prisma.FieldRef<"Equipment", 'String'>
-  readonly chestId: Prisma.FieldRef<"Equipment", 'String'>
-  readonly legsId: Prisma.FieldRef<"Equipment", 'String'>
-  readonly feetId: Prisma.FieldRef<"Equipment", 'String'>
-  readonly accessory1Id: Prisma.FieldRef<"Equipment", 'String'>
-  readonly accessory2Id: Prisma.FieldRef<"Equipment", 'String'>
+  readonly headItemId: Prisma.FieldRef<"Equipment", 'String'>
+  readonly leftArmItemId: Prisma.FieldRef<"Equipment", 'String'>
+  readonly rightArmItemId: Prisma.FieldRef<"Equipment", 'String'>
+  readonly bodyItemId: Prisma.FieldRef<"Equipment", 'String'>
+  readonly legsItemId: Prisma.FieldRef<"Equipment", 'String'>
+  readonly feetItemId: Prisma.FieldRef<"Equipment", 'String'>
+  readonly ring1ItemId: Prisma.FieldRef<"Equipment", 'String'>
+  readonly ring2ItemId: Prisma.FieldRef<"Equipment", 'String'>
+  readonly ring3ItemId: Prisma.FieldRef<"Equipment", 'String'>
+  readonly necklaceItemId: Prisma.FieldRef<"Equipment", 'String'>
+  readonly beltItemId: Prisma.FieldRef<"Equipment", 'String'>
+  readonly cloakItemId: Prisma.FieldRef<"Equipment", 'String'>
   readonly updatedAt: Prisma.FieldRef<"Equipment", 'DateTime'>
 }
     
@@ -2508,85 +3783,66 @@ export type EquipmentDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * Equipment.accessory1
- */
-export type Equipment$accessory1Args<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Item
-   */
-  select?: Prisma.ItemSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Item
-   */
-  omit?: Prisma.ItemOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ItemInclude<ExtArgs> | null
-  where?: Prisma.ItemWhereInput
-}
-
-/**
- * Equipment.accessory2
- */
-export type Equipment$accessory2Args<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Item
-   */
-  select?: Prisma.ItemSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Item
-   */
-  omit?: Prisma.ItemOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ItemInclude<ExtArgs> | null
-  where?: Prisma.ItemWhereInput
-}
-
-/**
- * Equipment.chest
- */
-export type Equipment$chestArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Item
-   */
-  select?: Prisma.ItemSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Item
-   */
-  omit?: Prisma.ItemOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ItemInclude<ExtArgs> | null
-  where?: Prisma.ItemWhereInput
-}
-
-/**
- * Equipment.feet
- */
-export type Equipment$feetArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Item
-   */
-  select?: Prisma.ItemSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Item
-   */
-  omit?: Prisma.ItemOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ItemInclude<ExtArgs> | null
-  where?: Prisma.ItemWhereInput
-}
-
-/**
  * Equipment.head
  */
 export type Equipment$headArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Item
+   */
+  select?: Prisma.ItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Item
+   */
+  omit?: Prisma.ItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ItemInclude<ExtArgs> | null
+  where?: Prisma.ItemWhereInput
+}
+
+/**
+ * Equipment.leftArm
+ */
+export type Equipment$leftArmArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Item
+   */
+  select?: Prisma.ItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Item
+   */
+  omit?: Prisma.ItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ItemInclude<ExtArgs> | null
+  where?: Prisma.ItemWhereInput
+}
+
+/**
+ * Equipment.rightArm
+ */
+export type Equipment$rightArmArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Item
+   */
+  select?: Prisma.ItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Item
+   */
+  omit?: Prisma.ItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ItemInclude<ExtArgs> | null
+  where?: Prisma.ItemWhereInput
+}
+
+/**
+ * Equipment.body
+ */
+export type Equipment$bodyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Item
    */
@@ -2622,9 +3878,123 @@ export type Equipment$legsArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Equipment.weapon
+ * Equipment.feet
  */
-export type Equipment$weaponArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Equipment$feetArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Item
+   */
+  select?: Prisma.ItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Item
+   */
+  omit?: Prisma.ItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ItemInclude<ExtArgs> | null
+  where?: Prisma.ItemWhereInput
+}
+
+/**
+ * Equipment.ring1
+ */
+export type Equipment$ring1Args<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Item
+   */
+  select?: Prisma.ItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Item
+   */
+  omit?: Prisma.ItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ItemInclude<ExtArgs> | null
+  where?: Prisma.ItemWhereInput
+}
+
+/**
+ * Equipment.ring2
+ */
+export type Equipment$ring2Args<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Item
+   */
+  select?: Prisma.ItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Item
+   */
+  omit?: Prisma.ItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ItemInclude<ExtArgs> | null
+  where?: Prisma.ItemWhereInput
+}
+
+/**
+ * Equipment.ring3
+ */
+export type Equipment$ring3Args<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Item
+   */
+  select?: Prisma.ItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Item
+   */
+  omit?: Prisma.ItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ItemInclude<ExtArgs> | null
+  where?: Prisma.ItemWhereInput
+}
+
+/**
+ * Equipment.necklace
+ */
+export type Equipment$necklaceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Item
+   */
+  select?: Prisma.ItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Item
+   */
+  omit?: Prisma.ItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ItemInclude<ExtArgs> | null
+  where?: Prisma.ItemWhereInput
+}
+
+/**
+ * Equipment.belt
+ */
+export type Equipment$beltArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Item
+   */
+  select?: Prisma.ItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Item
+   */
+  omit?: Prisma.ItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ItemInclude<ExtArgs> | null
+  where?: Prisma.ItemWhereInput
+}
+
+/**
+ * Equipment.cloak
+ */
+export type Equipment$cloakArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Item
    */
