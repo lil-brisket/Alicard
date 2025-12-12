@@ -35,55 +35,50 @@ export async function addItemToInventory(
   }
 
   if (item.stackable) {
-    // Find existing stack
-    const existing = await client.inventoryItem.findFirst({
+    // Find all existing stacks for this item
+    const existingStacks = await client.inventoryItem.findMany({
       where: {
         playerId,
         itemId,
       },
+      orderBy: { createdAt: "asc" },
     });
 
-    if (existing) {
-      // Check if adding quantity would exceed max stack
-      const newQuantity = existing.quantity + quantity;
-      if (newQuantity > item.maxStack) {
-        // Split into multiple stacks
-        const remaining = newQuantity - item.maxStack;
-        await client.inventoryItem.update({
-          where: { id: existing.id },
-          data: { quantity: item.maxStack },
-        });
+    let remainingToAdd = quantity;
 
-        // Create new stack for remaining
-        if (remaining > 0) {
-          await client.inventoryItem.create({
-            data: {
-              playerId,
-              itemId,
-              quantity: remaining,
-            },
-          });
-        }
-      } else {
-        // Update existing stack
+    // Fill existing partial stacks first
+    for (const stack of existingStacks) {
+      if (remainingToAdd <= 0) break;
+
+      const spaceAvailable = item.maxStack - stack.quantity;
+      if (spaceAvailable > 0) {
+        const toAdd = Math.min(remainingToAdd, spaceAvailable);
+        const newQuantity = stack.quantity + toAdd;
+        
         if (newQuantity < 0) {
           throw new Error(`Inventory quantity would become negative: ${newQuantity}`);
         }
-        
+
         await client.inventoryItem.update({
-          where: { id: existing.id },
+          where: { id: stack.id },
           data: { quantity: newQuantity },
         });
+
+        remainingToAdd -= toAdd;
       }
-    } else {
-      // Create new stack
+    }
+
+    // Create new stacks for any remaining quantity
+    while (remainingToAdd > 0) {
+      const stackSize = Math.min(remainingToAdd, item.maxStack);
       await client.inventoryItem.create({
         data: {
           playerId,
           itemId,
-          quantity,
+          quantity: stackSize,
         },
       });
+      remainingToAdd -= stackSize;
     }
   } else {
     // Non-stackable: create multiple entries

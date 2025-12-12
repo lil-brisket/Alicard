@@ -113,7 +113,8 @@ function GatheringNodeCard({
   const utils = api.useUtils();
   const gatherMutation = api.gathering.gatherFromNode.useMutation({
     onSuccess: () => {
-      // Could invalidate inventory queries here
+      // Invalidate inventory queries to refresh the inventory
+      void utils.player.getInventory.invalidate();
     },
   });
 

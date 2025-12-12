@@ -284,5 +284,32 @@ export const playerRouter = createTRPCRouter({
 
     return player.stats;
   }),
+
+  // Get player inventory
+  getInventory: protectedProcedure.query(async ({ ctx }) => {
+    const player = await ctx.db.player.findUnique({
+      where: { userId: ctx.session.user.id },
+    });
+
+    if (!player || player.isDeleted) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "Character not found",
+      });
+    }
+
+    const inventoryItems = await ctx.db.inventoryItem.findMany({
+      where: { playerId: player.id },
+      include: {
+        item: true,
+      },
+      orderBy: [
+        { item: { name: "asc" } },
+        { createdAt: "asc" },
+      ],
+    });
+
+    return inventoryItems;
+  }),
 });
 
