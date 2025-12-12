@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { api } from "~/trpc/react";
 import { RecipeCard } from "./_components/recipe-card";
 
@@ -20,6 +21,13 @@ export default function RecipesPage() {
     return (
       <div className="min-h-screen bg-slate-950 text-slate-100">
         <div className="mx-auto max-w-5xl p-4 md:p-8">
+          <Link
+            href="/hub"
+            className="inline-flex items-center gap-2 mb-6 text-sm text-slate-400 hover:text-slate-200 transition-colors"
+          >
+            <span>←</span>
+            <span>Back to Hub</span>
+          </Link>
           <h1 className="text-2xl font-bold text-cyan-400">Recipes</h1>
           <p className="mt-2 text-slate-400">Loading...</p>
         </div>
@@ -30,6 +38,13 @@ export default function RecipesPage() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto max-w-5xl p-4 md:p-8">
+        <Link
+          href="/hub"
+          className="inline-flex items-center gap-2 mb-6 text-sm text-slate-400 hover:text-slate-200 transition-colors"
+        >
+          <span>←</span>
+          <span>Back to Hub</span>
+        </Link>
         <h1 className="text-2xl font-bold text-cyan-400">Recipes</h1>
         <p className="mt-2 text-slate-400">
           Browse available crafting recipes

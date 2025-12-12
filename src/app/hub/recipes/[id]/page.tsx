@@ -25,6 +25,13 @@ export default function RecipeDetailPage({ params }: Props) {
     return (
       <div className="min-h-screen bg-slate-950 text-slate-100">
         <div className="mx-auto max-w-5xl p-4 md:p-8">
+          <Link
+            href="/hub/recipes"
+            className="inline-flex items-center gap-2 mb-6 text-sm text-slate-400 hover:text-slate-200 transition-colors"
+          >
+            <span>←</span>
+            <span>Back to Recipes</span>
+          </Link>
           <p className="text-slate-400">Loading...</p>
         </div>
       </div>
@@ -35,6 +42,13 @@ export default function RecipeDetailPage({ params }: Props) {
     return (
       <div className="min-h-screen bg-slate-950 text-slate-100">
         <div className="mx-auto max-w-5xl p-4 md:p-8">
+          <Link
+            href="/hub/recipes"
+            className="inline-flex items-center gap-2 mb-6 text-sm text-slate-400 hover:text-slate-200 transition-colors"
+          >
+            <span>←</span>
+            <span>Back to Recipes</span>
+          </Link>
           <p className="text-slate-400">Recipe not found</p>
         </div>
       </div>
@@ -55,9 +69,10 @@ export default function RecipeDetailPage({ params }: Props) {
       <div className="mx-auto max-w-5xl p-4 md:p-8">
         <Link
           href="/hub/recipes"
-          className="text-cyan-400 hover:text-cyan-300"
+          className="inline-flex items-center gap-2 mb-6 text-sm text-slate-400 hover:text-slate-200 transition-colors"
         >
-          ← Back to Recipes
+          <span>←</span>
+          <span>Back to Recipes</span>
         </Link>
         
         <h1 className="mt-4 text-2xl font-bold text-cyan-400">{recipe.name}</h1>

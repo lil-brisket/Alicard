@@ -21,9 +21,10 @@ type JobCardProps = {
     };
     active: boolean;
   } | null;
+  basePath?: string;
 };
 
-export function JobCard({ job, userJob }: JobCardProps) {
+export function JobCard({ job, userJob, basePath = "/hub/jobs" }: JobCardProps) {
   const level = userJob?.level ?? 1;
   const xp = userJob?.totalXp ?? 0;
   const progress = userJob?.progress ?? { current: 0, needed: 100 };
@@ -31,7 +32,7 @@ export function JobCard({ job, userJob }: JobCardProps) {
 
   return (
     <Link
-      href={`/hub/jobs/${job.key}`}
+      href={`${basePath}/${job.key}`}
       className="group block rounded-xl border border-slate-800 bg-slate-950/60 p-4 transition hover:border-cyan-500/70 hover:bg-slate-900/80"
     >
       <div className="flex items-start justify-between">
