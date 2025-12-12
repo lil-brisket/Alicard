@@ -15,7 +15,10 @@ export const jobsRouter = createTRPCRouter({
   // Get all available jobs
   listJobs: protectedProcedure.query(async () => {
     return await db.job.findMany({
-      orderBy: { category: "asc", name: "asc" },
+      orderBy: [
+        { category: "asc" },
+        { name: "asc" },
+      ],
     });
   }),
 
@@ -28,11 +31,9 @@ export const jobsRouter = createTRPCRouter({
       where: { userId },
     });
 
+    // If player doesn't exist, return empty array (user needs to create character first)
     if (!player) {
-      throw new TRPCError({
-        code: "NOT_FOUND",
-        message: "Player not found",
-      });
+      return [];
     }
 
     // Get all jobs
