@@ -59,19 +59,17 @@ export default function JobsPage() {
             return (
               <div key={job.id} className="space-y-2">
                 <JobCard job={job} userJob={userJob ?? null} />
-                {userJob && (
-                  <div className="ml-4 flex items-center gap-2">
-                    <button
-                      onClick={() => {
-                        addXpMutation.mutate({ jobId: job.id, xp: 10 });
-                      }}
-                      disabled={addXpMutation.isPending}
-                      className="rounded bg-cyan-500/20 px-3 py-1 text-xs text-cyan-400 transition hover:bg-cyan-500/30 disabled:opacity-50"
-                    >
-                      {addXpMutation.isPending ? "Training..." : "Train +10 XP"}
-                    </button>
-                  </div>
-                )}
+                <div className="ml-4 flex items-center gap-2">
+                  <button
+                    onClick={() => {
+                      addXpMutation.mutate({ jobId: job.id, xp: 10 });
+                    }}
+                    disabled={addXpMutation.isPending}
+                    className="rounded bg-cyan-500/20 px-3 py-1 text-xs text-cyan-400 transition hover:bg-cyan-500/30 disabled:opacity-50"
+                  >
+                    {addXpMutation.isPending ? "Training..." : "Train +10 XP"}
+                  </button>
+                </div>
               </div>
             );
           })}

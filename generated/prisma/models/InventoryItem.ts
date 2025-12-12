@@ -232,6 +232,7 @@ export type InventoryItemOrderByWithRelationInput = {
 
 export type InventoryItemWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  playerId_itemId?: Prisma.InventoryItemPlayerIdItemIdCompoundUniqueInput
   AND?: Prisma.InventoryItemWhereInput | Prisma.InventoryItemWhereInput[]
   OR?: Prisma.InventoryItemWhereInput[]
   NOT?: Prisma.InventoryItemWhereInput | Prisma.InventoryItemWhereInput[]
@@ -241,7 +242,7 @@ export type InventoryItemWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"InventoryItem"> | Date | string
   item?: Prisma.XOR<Prisma.ItemScalarRelationFilter, Prisma.ItemWhereInput>
   player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
-}, "id">
+}, "id" | "playerId_itemId">
 
 export type InventoryItemOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -329,6 +330,11 @@ export type InventoryItemListRelationFilter = {
 
 export type InventoryItemOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type InventoryItemPlayerIdItemIdCompoundUniqueInput = {
+  playerId: string
+  itemId: string
 }
 
 export type InventoryItemCountOrderByAggregateInput = {

@@ -71,30 +71,28 @@ export default function JobsPage() {
                 return (
                   <div key={job.id} className="space-y-2">
                     <JobCard job={job} userJob={userJob ?? null} basePath="/jobs" />
-                    {userJob && (
-                      <div className="ml-4 flex items-center gap-2">
+                    <div className="ml-4 flex items-center gap-2">
+                      <button
+                        onClick={() => {
+                          addXpMutation.mutate({ jobId: job.id, xp: 10 });
+                        }}
+                        disabled={addXpMutation.isPending}
+                        className="rounded bg-cyan-500/20 px-3 py-1 text-xs text-cyan-400 transition hover:bg-cyan-500/30 disabled:opacity-50"
+                      >
+                        {addXpMutation.isPending ? "Training..." : "Train +10 XP"}
+                      </button>
+                      {userJob && !userJob.active && (
                         <button
                           onClick={() => {
-                            addXpMutation.mutate({ jobId: job.id, xp: 10 });
+                            setActiveJobMutation.mutate({ jobId: job.id });
                           }}
-                          disabled={addXpMutation.isPending}
-                          className="rounded bg-cyan-500/20 px-3 py-1 text-xs text-cyan-400 transition hover:bg-cyan-500/30 disabled:opacity-50"
+                          disabled={setActiveJobMutation.isPending}
+                          className="rounded bg-emerald-500/20 px-3 py-1 text-xs text-emerald-400 transition hover:bg-emerald-500/30 disabled:opacity-50"
                         >
-                          {addXpMutation.isPending ? "Training..." : "Train +10 XP"}
+                          {setActiveJobMutation.isPending ? "Activating..." : "Set Active"}
                         </button>
-                        {!userJob.active && (
-                          <button
-                            onClick={() => {
-                              setActiveJobMutation.mutate({ jobId: job.id });
-                            }}
-                            disabled={setActiveJobMutation.isPending}
-                            className="rounded bg-emerald-500/20 px-3 py-1 text-xs text-emerald-400 transition hover:bg-emerald-500/30 disabled:opacity-50"
-                          >
-                            {setActiveJobMutation.isPending ? "Activating..." : "Set Active"}
-                          </button>
-                        )}
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 );
               })}
@@ -111,30 +109,28 @@ export default function JobsPage() {
                 return (
                   <div key={job.id} className="space-y-2">
                     <JobCard job={job} userJob={userJob ?? null} basePath="/jobs" />
-                    {userJob && (
-                      <div className="ml-4 flex items-center gap-2">
+                    <div className="ml-4 flex items-center gap-2">
+                      <button
+                        onClick={() => {
+                          addXpMutation.mutate({ jobId: job.id, xp: 10 });
+                        }}
+                        disabled={addXpMutation.isPending}
+                        className="rounded bg-cyan-500/20 px-3 py-1 text-xs text-cyan-400 transition hover:bg-cyan-500/30 disabled:opacity-50"
+                      >
+                        {addXpMutation.isPending ? "Training..." : "Train +10 XP"}
+                      </button>
+                      {userJob && !userJob.active && (
                         <button
                           onClick={() => {
-                            addXpMutation.mutate({ jobId: job.id, xp: 10 });
+                            setActiveJobMutation.mutate({ jobId: job.id });
                           }}
-                          disabled={addXpMutation.isPending}
-                          className="rounded bg-cyan-500/20 px-3 py-1 text-xs text-cyan-400 transition hover:bg-cyan-500/30 disabled:opacity-50"
+                          disabled={setActiveJobMutation.isPending}
+                          className="rounded bg-emerald-500/20 px-3 py-1 text-xs text-emerald-400 transition hover:bg-emerald-500/30 disabled:opacity-50"
                         >
-                          {addXpMutation.isPending ? "Training..." : "Train +10 XP"}
+                          {setActiveJobMutation.isPending ? "Activating..." : "Set Active"}
                         </button>
-                        {!userJob.active && (
-                          <button
-                            onClick={() => {
-                              setActiveJobMutation.mutate({ jobId: job.id });
-                            }}
-                            disabled={setActiveJobMutation.isPending}
-                            className="rounded bg-emerald-500/20 px-3 py-1 text-xs text-emerald-400 transition hover:bg-emerald-500/30 disabled:opacity-50"
-                          >
-                            {setActiveJobMutation.isPending ? "Activating..." : "Set Active"}
-                          </button>
-                        )}
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 );
               })}

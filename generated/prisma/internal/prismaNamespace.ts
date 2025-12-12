@@ -3472,6 +3472,7 @@ export type ShopItemScalarFieldEnum = (typeof ShopItemScalarFieldEnum)[keyof typ
 
 export const ItemScalarFieldEnum = {
   id: 'id',
+  key: 'key',
   name: 'name',
   description: 'description',
   itemType: 'itemType',

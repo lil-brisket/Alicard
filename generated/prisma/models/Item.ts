@@ -52,6 +52,7 @@ export type ItemSumAggregateOutputType = {
 
 export type ItemMinAggregateOutputType = {
   id: string | null
+  key: string | null
   name: string | null
   description: string | null
   itemType: $Enums.ItemType | null
@@ -72,6 +73,7 @@ export type ItemMinAggregateOutputType = {
 
 export type ItemMaxAggregateOutputType = {
   id: string | null
+  key: string | null
   name: string | null
   description: string | null
   itemType: $Enums.ItemType | null
@@ -92,6 +94,7 @@ export type ItemMaxAggregateOutputType = {
 
 export type ItemCountAggregateOutputType = {
   id: number
+  key: number
   name: number
   description: number
   itemType: number
@@ -138,6 +141,7 @@ export type ItemSumAggregateInputType = {
 
 export type ItemMinAggregateInputType = {
   id?: true
+  key?: true
   name?: true
   description?: true
   itemType?: true
@@ -158,6 +162,7 @@ export type ItemMinAggregateInputType = {
 
 export type ItemMaxAggregateInputType = {
   id?: true
+  key?: true
   name?: true
   description?: true
   itemType?: true
@@ -178,6 +183,7 @@ export type ItemMaxAggregateInputType = {
 
 export type ItemCountAggregateInputType = {
   id?: true
+  key?: true
   name?: true
   description?: true
   itemType?: true
@@ -285,6 +291,7 @@ export type ItemGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 
 export type ItemGroupByOutputType = {
   id: string
+  key: string | null
   name: string
   description: string | null
   itemType: $Enums.ItemType
@@ -328,6 +335,7 @@ export type ItemWhereInput = {
   OR?: Prisma.ItemWhereInput[]
   NOT?: Prisma.ItemWhereInput | Prisma.ItemWhereInput[]
   id?: Prisma.StringFilter<"Item"> | string
+  key?: Prisma.StringNullableFilter<"Item"> | string | null
   name?: Prisma.StringFilter<"Item"> | string
   description?: Prisma.StringNullableFilter<"Item"> | string | null
   itemType?: Prisma.EnumItemTypeFilter<"Item"> | $Enums.ItemType
@@ -363,6 +371,7 @@ export type ItemWhereInput = {
 
 export type ItemOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  key?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   itemType?: Prisma.SortOrder
@@ -398,6 +407,7 @@ export type ItemOrderByWithRelationInput = {
 
 export type ItemWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  key?: string
   AND?: Prisma.ItemWhereInput | Prisma.ItemWhereInput[]
   OR?: Prisma.ItemWhereInput[]
   NOT?: Prisma.ItemWhereInput | Prisma.ItemWhereInput[]
@@ -432,10 +442,11 @@ export type ItemWhereUniqueInput = Prisma.AtLeast<{
   recipeOutputs?: Prisma.RecipeListRelationFilter
   recipeInputs?: Prisma.RecipeInputListRelationFilter
   nodeYields?: Prisma.NodeYieldListRelationFilter
-}, "id">
+}, "id" | "key">
 
 export type ItemOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  key?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   itemType?: Prisma.SortOrder
@@ -464,6 +475,7 @@ export type ItemScalarWhereWithAggregatesInput = {
   OR?: Prisma.ItemScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ItemScalarWhereWithAggregatesInput | Prisma.ItemScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Item"> | string
+  key?: Prisma.StringNullableWithAggregatesFilter<"Item"> | string | null
   name?: Prisma.StringWithAggregatesFilter<"Item"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Item"> | string | null
   itemType?: Prisma.EnumItemTypeWithAggregatesFilter<"Item"> | $Enums.ItemType
@@ -484,6 +496,7 @@ export type ItemScalarWhereWithAggregatesInput = {
 
 export type ItemCreateInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -519,6 +532,7 @@ export type ItemCreateInput = {
 
 export type ItemUncheckedCreateInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -554,6 +568,7 @@ export type ItemUncheckedCreateInput = {
 
 export type ItemUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -589,6 +604,7 @@ export type ItemUpdateInput = {
 
 export type ItemUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -624,6 +640,7 @@ export type ItemUncheckedUpdateInput = {
 
 export type ItemCreateManyInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -644,6 +661,7 @@ export type ItemCreateManyInput = {
 
 export type ItemUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -664,6 +682,7 @@ export type ItemUpdateManyMutationInput = {
 
 export type ItemUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -689,6 +708,7 @@ export type ItemScalarRelationFilter = {
 
 export type ItemCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  key?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   itemType?: Prisma.SortOrder
@@ -721,6 +741,7 @@ export type ItemAvgOrderByAggregateInput = {
 
 export type ItemMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  key?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   itemType?: Prisma.SortOrder
@@ -741,6 +762,7 @@ export type ItemMaxOrderByAggregateInput = {
 
 export type ItemMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  key?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   itemType?: Prisma.SortOrder
@@ -1014,6 +1036,7 @@ export type ItemUpdateOneRequiredWithoutNodeYieldsNestedInput = {
 
 export type ItemCreateWithoutShopItemsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1048,6 +1071,7 @@ export type ItemCreateWithoutShopItemsInput = {
 
 export type ItemUncheckedCreateWithoutShopItemsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1098,6 +1122,7 @@ export type ItemUpdateToOneWithWhereWithoutShopItemsInput = {
 
 export type ItemUpdateWithoutShopItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -1132,6 +1157,7 @@ export type ItemUpdateWithoutShopItemsInput = {
 
 export type ItemUncheckedUpdateWithoutShopItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -1166,6 +1192,7 @@ export type ItemUncheckedUpdateWithoutShopItemsInput = {
 
 export type ItemCreateWithoutInventoryItemsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1200,6 +1227,7 @@ export type ItemCreateWithoutInventoryItemsInput = {
 
 export type ItemUncheckedCreateWithoutInventoryItemsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1250,6 +1278,7 @@ export type ItemUpdateToOneWithWhereWithoutInventoryItemsInput = {
 
 export type ItemUpdateWithoutInventoryItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -1284,6 +1313,7 @@ export type ItemUpdateWithoutInventoryItemsInput = {
 
 export type ItemUncheckedUpdateWithoutInventoryItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -1318,6 +1348,7 @@ export type ItemUncheckedUpdateWithoutInventoryItemsInput = {
 
 export type ItemCreateWithoutEquippedAsAccessory1Input = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1352,6 +1383,7 @@ export type ItemCreateWithoutEquippedAsAccessory1Input = {
 
 export type ItemUncheckedCreateWithoutEquippedAsAccessory1Input = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1391,6 +1423,7 @@ export type ItemCreateOrConnectWithoutEquippedAsAccessory1Input = {
 
 export type ItemCreateWithoutEquippedAsAccessory2Input = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1425,6 +1458,7 @@ export type ItemCreateWithoutEquippedAsAccessory2Input = {
 
 export type ItemUncheckedCreateWithoutEquippedAsAccessory2Input = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1464,6 +1498,7 @@ export type ItemCreateOrConnectWithoutEquippedAsAccessory2Input = {
 
 export type ItemCreateWithoutEquippedAsChestInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1498,6 +1533,7 @@ export type ItemCreateWithoutEquippedAsChestInput = {
 
 export type ItemUncheckedCreateWithoutEquippedAsChestInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1537,6 +1573,7 @@ export type ItemCreateOrConnectWithoutEquippedAsChestInput = {
 
 export type ItemCreateWithoutEquippedAsFeetInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1571,6 +1608,7 @@ export type ItemCreateWithoutEquippedAsFeetInput = {
 
 export type ItemUncheckedCreateWithoutEquippedAsFeetInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1610,6 +1648,7 @@ export type ItemCreateOrConnectWithoutEquippedAsFeetInput = {
 
 export type ItemCreateWithoutEquippedAsHeadInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1644,6 +1683,7 @@ export type ItemCreateWithoutEquippedAsHeadInput = {
 
 export type ItemUncheckedCreateWithoutEquippedAsHeadInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1683,6 +1723,7 @@ export type ItemCreateOrConnectWithoutEquippedAsHeadInput = {
 
 export type ItemCreateWithoutEquippedAsLegsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1717,6 +1758,7 @@ export type ItemCreateWithoutEquippedAsLegsInput = {
 
 export type ItemUncheckedCreateWithoutEquippedAsLegsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1756,6 +1798,7 @@ export type ItemCreateOrConnectWithoutEquippedAsLegsInput = {
 
 export type ItemCreateWithoutEquippedAsWeaponInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1790,6 +1833,7 @@ export type ItemCreateWithoutEquippedAsWeaponInput = {
 
 export type ItemUncheckedCreateWithoutEquippedAsWeaponInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -1840,6 +1884,7 @@ export type ItemUpdateToOneWithWhereWithoutEquippedAsAccessory1Input = {
 
 export type ItemUpdateWithoutEquippedAsAccessory1Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -1874,6 +1919,7 @@ export type ItemUpdateWithoutEquippedAsAccessory1Input = {
 
 export type ItemUncheckedUpdateWithoutEquippedAsAccessory1Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -1919,6 +1965,7 @@ export type ItemUpdateToOneWithWhereWithoutEquippedAsAccessory2Input = {
 
 export type ItemUpdateWithoutEquippedAsAccessory2Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -1953,6 +2000,7 @@ export type ItemUpdateWithoutEquippedAsAccessory2Input = {
 
 export type ItemUncheckedUpdateWithoutEquippedAsAccessory2Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -1998,6 +2046,7 @@ export type ItemUpdateToOneWithWhereWithoutEquippedAsChestInput = {
 
 export type ItemUpdateWithoutEquippedAsChestInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2032,6 +2081,7 @@ export type ItemUpdateWithoutEquippedAsChestInput = {
 
 export type ItemUncheckedUpdateWithoutEquippedAsChestInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2077,6 +2127,7 @@ export type ItemUpdateToOneWithWhereWithoutEquippedAsFeetInput = {
 
 export type ItemUpdateWithoutEquippedAsFeetInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2111,6 +2162,7 @@ export type ItemUpdateWithoutEquippedAsFeetInput = {
 
 export type ItemUncheckedUpdateWithoutEquippedAsFeetInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2156,6 +2208,7 @@ export type ItemUpdateToOneWithWhereWithoutEquippedAsHeadInput = {
 
 export type ItemUpdateWithoutEquippedAsHeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2190,6 +2243,7 @@ export type ItemUpdateWithoutEquippedAsHeadInput = {
 
 export type ItemUncheckedUpdateWithoutEquippedAsHeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2235,6 +2289,7 @@ export type ItemUpdateToOneWithWhereWithoutEquippedAsLegsInput = {
 
 export type ItemUpdateWithoutEquippedAsLegsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2269,6 +2324,7 @@ export type ItemUpdateWithoutEquippedAsLegsInput = {
 
 export type ItemUncheckedUpdateWithoutEquippedAsLegsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2314,6 +2370,7 @@ export type ItemUpdateToOneWithWhereWithoutEquippedAsWeaponInput = {
 
 export type ItemUpdateWithoutEquippedAsWeaponInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2348,6 +2405,7 @@ export type ItemUpdateWithoutEquippedAsWeaponInput = {
 
 export type ItemUncheckedUpdateWithoutEquippedAsWeaponInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2382,6 +2440,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsWeaponInput = {
 
 export type ItemCreateWithoutBankVaultItemsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -2416,6 +2475,7 @@ export type ItemCreateWithoutBankVaultItemsInput = {
 
 export type ItemUncheckedCreateWithoutBankVaultItemsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -2466,6 +2526,7 @@ export type ItemUpdateToOneWithWhereWithoutBankVaultItemsInput = {
 
 export type ItemUpdateWithoutBankVaultItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2500,6 +2561,7 @@ export type ItemUpdateWithoutBankVaultItemsInput = {
 
 export type ItemUncheckedUpdateWithoutBankVaultItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2534,6 +2596,7 @@ export type ItemUncheckedUpdateWithoutBankVaultItemsInput = {
 
 export type ItemCreateWithoutMarketListingsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -2568,6 +2631,7 @@ export type ItemCreateWithoutMarketListingsInput = {
 
 export type ItemUncheckedCreateWithoutMarketListingsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -2618,6 +2682,7 @@ export type ItemUpdateToOneWithWhereWithoutMarketListingsInput = {
 
 export type ItemUpdateWithoutMarketListingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2652,6 +2717,7 @@ export type ItemUpdateWithoutMarketListingsInput = {
 
 export type ItemUncheckedUpdateWithoutMarketListingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2686,6 +2752,7 @@ export type ItemUncheckedUpdateWithoutMarketListingsInput = {
 
 export type ItemCreateWithoutMarketTransactionsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -2720,6 +2787,7 @@ export type ItemCreateWithoutMarketTransactionsInput = {
 
 export type ItemUncheckedCreateWithoutMarketTransactionsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -2770,6 +2838,7 @@ export type ItemUpdateToOneWithWhereWithoutMarketTransactionsInput = {
 
 export type ItemUpdateWithoutMarketTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2804,6 +2873,7 @@ export type ItemUpdateWithoutMarketTransactionsInput = {
 
 export type ItemUncheckedUpdateWithoutMarketTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2838,6 +2908,7 @@ export type ItemUncheckedUpdateWithoutMarketTransactionsInput = {
 
 export type ItemCreateWithoutRecipeOutputsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -2872,6 +2943,7 @@ export type ItemCreateWithoutRecipeOutputsInput = {
 
 export type ItemUncheckedCreateWithoutRecipeOutputsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -2922,6 +2994,7 @@ export type ItemUpdateToOneWithWhereWithoutRecipeOutputsInput = {
 
 export type ItemUpdateWithoutRecipeOutputsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2956,6 +3029,7 @@ export type ItemUpdateWithoutRecipeOutputsInput = {
 
 export type ItemUncheckedUpdateWithoutRecipeOutputsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -2990,6 +3064,7 @@ export type ItemUncheckedUpdateWithoutRecipeOutputsInput = {
 
 export type ItemCreateWithoutRecipeInputsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -3024,6 +3099,7 @@ export type ItemCreateWithoutRecipeInputsInput = {
 
 export type ItemUncheckedCreateWithoutRecipeInputsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -3074,6 +3150,7 @@ export type ItemUpdateToOneWithWhereWithoutRecipeInputsInput = {
 
 export type ItemUpdateWithoutRecipeInputsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -3108,6 +3185,7 @@ export type ItemUpdateWithoutRecipeInputsInput = {
 
 export type ItemUncheckedUpdateWithoutRecipeInputsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -3142,6 +3220,7 @@ export type ItemUncheckedUpdateWithoutRecipeInputsInput = {
 
 export type ItemCreateWithoutNodeYieldsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -3176,6 +3255,7 @@ export type ItemCreateWithoutNodeYieldsInput = {
 
 export type ItemUncheckedCreateWithoutNodeYieldsInput = {
   id?: string
+  key?: string | null
   name: string
   description?: string | null
   itemType: $Enums.ItemType
@@ -3226,6 +3306,7 @@ export type ItemUpdateToOneWithWhereWithoutNodeYieldsInput = {
 
 export type ItemUpdateWithoutNodeYieldsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -3260,6 +3341,7 @@ export type ItemUpdateWithoutNodeYieldsInput = {
 
 export type ItemUncheckedUpdateWithoutNodeYieldsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
@@ -3451,6 +3533,7 @@ export type ItemCountOutputTypeCountNodeYieldsArgs<ExtArgs extends runtime.Types
 
 export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  key?: boolean
   name?: boolean
   description?: boolean
   itemType?: boolean
@@ -3487,6 +3570,7 @@ export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 
 export type ItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  key?: boolean
   name?: boolean
   description?: boolean
   itemType?: boolean
@@ -3507,6 +3591,7 @@ export type ItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 
 export type ItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  key?: boolean
   name?: boolean
   description?: boolean
   itemType?: boolean
@@ -3527,6 +3612,7 @@ export type ItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 
 export type ItemSelectScalar = {
   id?: boolean
+  key?: boolean
   name?: boolean
   description?: boolean
   itemType?: boolean
@@ -3545,7 +3631,7 @@ export type ItemSelectScalar = {
   createdAt?: boolean
 }
 
-export type ItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "itemType" | "itemRarity" | "tier" | "value" | "stackable" | "maxStack" | "equipmentSlot" | "vitalityBonus" | "strengthBonus" | "speedBonus" | "dexterityBonus" | "hpBonus" | "spBonus" | "createdAt", ExtArgs["result"]["item"]>
+export type ItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "description" | "itemType" | "itemRarity" | "tier" | "value" | "stackable" | "maxStack" | "equipmentSlot" | "vitalityBonus" | "strengthBonus" | "speedBonus" | "dexterityBonus" | "hpBonus" | "spBonus" | "createdAt", ExtArgs["result"]["item"]>
 export type ItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   bankVaultItems?: boolean | Prisma.Item$bankVaultItemsArgs<ExtArgs>
   equippedAsAccessory1?: boolean | Prisma.Item$equippedAsAccessory1Args<ExtArgs>
@@ -3588,6 +3674,7 @@ export type $ItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    key: string | null
     name: string
     description: string | null
     itemType: $Enums.ItemType
@@ -4043,6 +4130,7 @@ export interface Prisma__ItemClient<T, Null = never, ExtArgs extends runtime.Typ
  */
 export interface ItemFieldRefs {
   readonly id: Prisma.FieldRef<"Item", 'String'>
+  readonly key: Prisma.FieldRef<"Item", 'String'>
   readonly name: Prisma.FieldRef<"Item", 'String'>
   readonly description: Prisma.FieldRef<"Item", 'String'>
   readonly itemType: Prisma.FieldRef<"Item", 'ItemType'>
