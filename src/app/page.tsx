@@ -19,7 +19,7 @@ export default function LandingPage() {
 
         {session ? (
           <Link
-            href="/play"
+            href="/hub"
             className="rounded-xl px-6 py-3 text-lg font-semibold bg-slate-100 text-black"
           >
             Enter the Tower

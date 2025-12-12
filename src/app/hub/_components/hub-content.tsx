@@ -168,7 +168,7 @@ export function HubContent() {
         <h2 className="mb-4 text-2xl font-bold">Quick Actions</h2>
         <div className="flex flex-wrap gap-3">
           <Link
-            href="/play"
+            href="/world"
             className="rounded-lg bg-[hsl(280,100%,70%)] px-4 py-2 font-semibold text-white transition hover:bg-[hsl(280,100%,65%)]"
           >
             Enter the Tower
