@@ -115,8 +115,8 @@ export default function JobDetailPage({ params }: Props) {
               </div>
               {!progression.isMaxLevel && (
                 <ProgressBar
-                  current={progression.progress.current}
-                  max={progression.progress.needed}
+                  current={progression.xpInLevel}
+                  max={progression.xpToNext}
                   label="XP to Next Level"
                 />
               )}
