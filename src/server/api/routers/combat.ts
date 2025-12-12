@@ -326,13 +326,14 @@ export const combatRouter = createTRPCRouter({
       });
 
       // Sync Character model with PlayerStats
+      // Use updatedStats from database (base values) not playerStats (calculated with equipment)
       await syncCharacterWithPlayerStats(
         player.userId,
         {
           currentHP: playerHP,
-          maxHP: playerStats.maxHP,
+          maxHP: updatedStats.maxHP,
           currentSP: playerSP,
-          maxSP: playerStats.maxSP,
+          maxSP: updatedStats.maxSP,
           vitality: updatedStats.vitality,
           strength: updatedStats.strength,
           speed: updatedStats.speed,
@@ -428,30 +429,35 @@ async function syncCharacterWithPlayerStats(
   playerStats: { currentHP: number; maxHP: number; currentSP: number; maxSP: number; vitality: number; strength: number; speed: number; dexterity: number },
   db: any
 ) {
-  // Find the character by userId
-  const character = await db.character.findFirst({
-    where: { userId },
-    orderBy: { createdAt: "desc" },
-  });
-
-  if (character) {
-    // Calculate max values based on stats (same formula as PlayerStats)
-    const maxHP = 50 + playerStats.vitality * 5;
-    const maxSP = 20 + playerStats.vitality * 2 + playerStats.speed * 1;
-
-    await db.character.update({
-      where: { id: character.id },
-      data: {
-        currentHp: playerStats.currentHP,
-        maxHp: maxHP,
-        currentStamina: playerStats.currentSP,
-        maxStamina: maxSP,
-        vitality: playerStats.vitality,
-        strength: playerStats.strength,
-        speed: playerStats.speed,
-        dexterity: playerStats.dexterity,
-      },
+  try {
+    // Find the character by userId
+    const character = await db.character.findFirst({
+      where: { userId },
+      orderBy: { createdAt: "desc" },
     });
+
+    if (character) {
+      // Use the maxHP and maxSP values from PlayerStats (they may include equipment bonuses or other modifiers)
+      await db.character.update({
+        where: { id: character.id },
+        data: {
+          currentHp: playerStats.currentHP,
+          maxHp: playerStats.maxHP,
+          currentStamina: playerStats.currentSP,
+          maxStamina: playerStats.maxSP,
+          vitality: playerStats.vitality,
+          strength: playerStats.strength,
+          speed: playerStats.speed,
+          dexterity: playerStats.dexterity,
+        },
+      });
+    } else {
+      // Character doesn't exist - this shouldn't happen in normal flow, but log it
+      console.warn(`Character not found for userId: ${userId} when syncing PlayerStats`);
+    }
+  } catch (error) {
+    // Log error but don't throw - we don't want to break combat if sync fails
+    console.error(`Error syncing Character with PlayerStats for userId ${userId}:`, error);
   }
 }
 
