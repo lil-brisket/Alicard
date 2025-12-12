@@ -760,6 +760,122 @@ async function main() {
     },
   });
 
+  // Create achievements
+  console.log("Creating achievements...");
+
+  const firstKill = await prisma.achievement.upsert({
+    where: { key: "first-kill" },
+    update: {},
+    create: {
+      key: "first-kill",
+      name: "First Blood",
+      description: "Defeat your first enemy in combat.",
+      rarity: "COMMON",
+    },
+  });
+
+  const veteran = await prisma.achievement.upsert({
+    where: { key: "veteran" },
+    update: {},
+    create: {
+      key: "veteran",
+      name: "Veteran",
+      description: "Reach level 10.",
+      rarity: "UNCOMMON",
+    },
+  });
+
+  const guildMember = await prisma.achievement.upsert({
+    where: { key: "guild-member" },
+    update: {},
+    create: {
+      key: "guild-member",
+      name: "Guild Member",
+      description: "Join a guild.",
+      rarity: "COMMON",
+    },
+  });
+
+  const masterCrafter = await prisma.achievement.upsert({
+    where: { key: "master-crafter" },
+    update: {},
+    create: {
+      key: "master-crafter",
+      name: "Master Crafter",
+      description: "Craft 100 items.",
+      rarity: "RARE",
+    },
+  });
+
+  const survivor = await prisma.achievement.upsert({
+    where: { key: "survivor" },
+    update: {},
+    create: {
+      key: "survivor",
+      name: "Survivor",
+      description: "Complete 50 encounters without dying.",
+      rarity: "EPIC",
+    },
+  });
+
+  console.log("✅ Achievements created!");
+
+  // Try to attach achievements to first user if exists
+  const firstUser = await prisma.user.findFirst({
+    include: {
+      profile: true,
+    },
+  });
+
+  if (firstUser && firstUser.profile) {
+    console.log("Attaching achievements to dev user...");
+    
+    // Attach 2-3 achievements
+    await prisma.playerAchievement.upsert({
+      where: {
+        profileId_achievementId: {
+          profileId: firstUser.profile.id,
+          achievementId: firstKill.id,
+        },
+      },
+      update: {},
+      create: {
+        profileId: firstUser.profile.id,
+        achievementId: firstKill.id,
+      },
+    });
+
+    await prisma.playerAchievement.upsert({
+      where: {
+        profileId_achievementId: {
+          profileId: firstUser.profile.id,
+          achievementId: veteran.id,
+        },
+      },
+      update: {},
+      create: {
+        profileId: firstUser.profile.id,
+        achievementId: veteran.id,
+      },
+    });
+
+    await prisma.playerAchievement.upsert({
+      where: {
+        profileId_achievementId: {
+          profileId: firstUser.profile.id,
+          achievementId: guildMember.id,
+        },
+      },
+      update: {},
+      create: {
+        profileId: firstUser.profile.id,
+        achievementId: guildMember.id,
+      },
+    });
+
+    console.log("✅ Achievements attached to dev user!");
+  }
+
   console.log("✅ Seed completed!");
 }
 

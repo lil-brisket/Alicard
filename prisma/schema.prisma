@@ -46,21 +46,22 @@ model Session {
 }
 
 model User {
-  id            String      @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String?
-  email         String      @unique
+  email         String         @unique
   emailVerified DateTime?
   image         String?
   password      String
   gender        String
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-  username      String      @unique
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  username      String         @unique
   accounts      Account[]
   characters    Character[]
   player        Player?
   posts         Post[]
   sessions      Session[]
+  profile       PlayerProfile?
 }
 
 model Character {
@@ -792,4 +793,99 @@ model GatherAttempt {
   @@index([playerId])
   @@index([nodeId])
   @@index([createdAt])
+}
+
+model PlayerProfile {
+  id            String           @id @default(cuid())
+  userId        String           @unique
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  profileStats  PlayerProfileStats?
+  pvpRecord     PlayerPvpRecord?
+  pveRecord     PlayerPveRecord?
+  social        PlayerSocial?
+  achievements  PlayerAchievement[]
+
+  @@index([userId])
+}
+
+model PlayerProfileStats {
+  id         String        @id @default(cuid())
+  profileId  String        @unique
+  vitality   Int           @default(10)
+  strength   Int           @default(10)
+  speed      Int           @default(10)
+  dexterity  Int           @default(10)
+  updatedAt  DateTime      @updatedAt
+  profile    PlayerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+}
+
+model PlayerPvpRecord {
+  id        String        @id @default(cuid())
+  profileId String        @unique
+  wins      Int           @default(0)
+  losses    Int           @default(0)
+  updatedAt DateTime      @updatedAt
+  profile   PlayerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+}
+
+model PlayerPveRecord {
+  id           String        @id @default(cuid())
+  profileId    String        @unique
+  totalKills   Int           @default(0)
+  bossesSlain  Int           @default(0)
+  deathsUsed   Int           @default(0)
+  deathsLimit  Int           @default(5)
+  updatedAt    DateTime      @updatedAt
+  profile      PlayerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+}
+
+model Achievement {
+  id          String             @id @default(cuid())
+  key         String             @unique
+  name        String
+  description String?
+  icon        String?
+  rarity      AchievementRarity @default(COMMON)
+  createdAt   DateTime           @default(now())
+  players     PlayerAchievement[]
+
+  @@index([key])
+}
+
+model PlayerAchievement {
+  id            String       @id @default(cuid())
+  profileId     String
+  achievementId String
+  unlockedAt    DateTime     @default(now())
+  profile       PlayerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  achievement   Achievement  @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@unique([profileId, achievementId])
+  @@index([profileId])
+  @@index([achievementId])
+}
+
+model PlayerSocial {
+  id                String        @id @default(cuid())
+  profileId         String        @unique
+  guildName         String?
+  title             String?
+  tagline           String?
+  commendationsHelpful Int        @default(0)
+  commendationsSkilled Int        @default(0)
+  commendationsStrategic Int      @default(0)
+  friendsCount      Int           @default(0)
+  guildRole         String?
+  updatedAt         DateTime      @updatedAt
+  profile           PlayerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+}
+
+enum AchievementRarity {
+  COMMON
+  UNCOMMON
+  RARE
+  EPIC
+  LEGENDARY
 }

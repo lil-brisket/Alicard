@@ -1,78 +1,44 @@
-import { redirect } from "next/navigation";
-import Link from "next/link";
-import { getServerAuthSession } from "~/server/auth";
+import { notFound } from "next/navigation";
 import { api } from "~/trpc/server";
-import { ProfileHeaderCard } from "./_components/profile-header-card";
-import { ProfileStatsCard } from "./_components/profile-stats-card";
-import { ProfilePvpCard } from "./_components/profile-pvp-card";
-import { ProfilePveCard } from "./_components/profile-pve-card";
-import { ProfileAchievementsCard } from "./_components/profile-achievements-card";
-import { ProfileSocialCard } from "./_components/profile-social-card";
+import { ProfileHeaderCard } from "../_components/profile-header-card";
+import { ProfileStatsCard } from "../_components/profile-stats-card";
+import { ProfilePvpCard } from "../_components/profile-pvp-card";
+import { ProfilePveCard } from "../_components/profile-pve-card";
+import { ProfileAchievementsCard } from "../_components/profile-achievements-card";
+import { ProfileSocialCard } from "../_components/profile-social-card";
 
-export default async function ProfilePage() {
-  const session = await getServerAuthSession();
+type ProfileUsernamePageProps = {
+  params: Promise<{ username: string }>;
+};
 
-  if (!session?.user) {
-    redirect("/auth/signin");
+export default async function ProfileUsernamePage({
+  params,
+}: ProfileUsernamePageProps) {
+  const { username } = await params;
+
+  let profile;
+  try {
+    profile = await api.profile.getProfileByHandleOrId({ handle: username });
+  } catch (error) {
+    notFound();
   }
-
-  const profile = await api.profile.getMyProfile();
 
   if (!profile) {
-    return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-5xl p-4 md:p-8">
-          <div className="mb-4 flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-cyan-400">My Profile</h1>
-            <Link
-              href="/hub"
-              className="inline-block rounded-xl bg-cyan-500/20 px-6 py-3 text-cyan-400 transition hover:bg-cyan-500/30"
-            >
-              Return to Hub
-            </Link>
-          </div>
-          <div className="rounded-xl border border-red-500/20 bg-red-950/30 p-8 text-center">
-            <h2 className="text-xl font-semibold text-red-400">Profile Not Found</h2>
-            <p className="mt-2 text-slate-400">
-              Unable to load your profile. Please try again later.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
+    notFound();
   }
 
-  // Get HP/SP from player stats if available
-  // TODO: Get HP/SP from profile stats or player stats
-  let maxHP = 100;
-  let currentHP = 100;
-  let maxSP = 50;
-  let currentSP = 50;
-  
-  try {
-    const user = await api.player.getCurrent();
-    if (user?.stats) {
-      maxHP = user.stats.maxHP;
-      currentHP = user.stats.currentHP;
-      maxSP = user.stats.maxSP;
-      currentSP = user.stats.currentSP;
-    }
-  } catch {
-    // Player might not exist, use defaults
-  }
+  // For public profiles, we don't have access to current HP/SP, so use defaults
+  const maxHP = 100; // TODO: Get from profile stats if available
+  const currentHP = 100;
+  const maxSP = 50;
+  const currentSP = 50;
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto flex min-h-screen max-w-5xl flex-col gap-4 p-4 md:p-8">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-cyan-400">My Profile</h1>
-          <Link
-            href="/hub"
-            className="inline-block rounded-xl bg-cyan-500/20 px-6 py-3 text-cyan-400 transition hover:bg-cyan-500/30"
-          >
-            Return to Hub
-          </Link>
-        </div>
+        <h1 className="text-2xl font-bold text-cyan-400">
+          {profile.user.name ?? profile.user.username}&apos;s Profile
+        </h1>
 
         <main className="mt-4 grid flex-1 grid-cols-1 gap-4 md:mt-6 md:grid-cols-12">
           {/* Left column: md:col-span-5 */}

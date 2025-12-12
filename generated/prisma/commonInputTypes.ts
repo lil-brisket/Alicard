@@ -406,6 +406,23 @@ export type EnumJobCategoryWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumJobCategoryFilter<$PrismaModel>
 }
 
+export type EnumAchievementRarityFilter<$PrismaModel = never> = {
+  equals?: $Enums.AchievementRarity | Prisma.EnumAchievementRarityFieldRefInput<$PrismaModel>
+  in?: $Enums.AchievementRarity[] | Prisma.ListEnumAchievementRarityFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AchievementRarity[] | Prisma.ListEnumAchievementRarityFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAchievementRarityFilter<$PrismaModel> | $Enums.AchievementRarity
+}
+
+export type EnumAchievementRarityWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AchievementRarity | Prisma.EnumAchievementRarityFieldRefInput<$PrismaModel>
+  in?: $Enums.AchievementRarity[] | Prisma.ListEnumAchievementRarityFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AchievementRarity[] | Prisma.ListEnumAchievementRarityFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAchievementRarityWithAggregatesFilter<$PrismaModel> | $Enums.AchievementRarity
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAchievementRarityFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAchievementRarityFilter<$PrismaModel>
+}
+
 export type NestedIntFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
@@ -809,6 +826,23 @@ export type NestedEnumJobCategoryWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumJobCategoryFilter<$PrismaModel>
   _max?: Prisma.NestedEnumJobCategoryFilter<$PrismaModel>
+}
+
+export type NestedEnumAchievementRarityFilter<$PrismaModel = never> = {
+  equals?: $Enums.AchievementRarity | Prisma.EnumAchievementRarityFieldRefInput<$PrismaModel>
+  in?: $Enums.AchievementRarity[] | Prisma.ListEnumAchievementRarityFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AchievementRarity[] | Prisma.ListEnumAchievementRarityFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAchievementRarityFilter<$PrismaModel> | $Enums.AchievementRarity
+}
+
+export type NestedEnumAchievementRarityWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AchievementRarity | Prisma.EnumAchievementRarityFieldRefInput<$PrismaModel>
+  in?: $Enums.AchievementRarity[] | Prisma.ListEnumAchievementRarityFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AchievementRarity[] | Prisma.ListEnumAchievementRarityFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAchievementRarityWithAggregatesFilter<$PrismaModel> | $Enums.AchievementRarity
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAchievementRarityFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAchievementRarityFilter<$PrismaModel>
 }
 
 

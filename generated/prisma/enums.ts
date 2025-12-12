@@ -149,3 +149,14 @@ export const JobCategory = {
 } as const
 
 export type JobCategory = (typeof JobCategory)[keyof typeof JobCategory]
+
+
+export const AchievementRarity = {
+  COMMON: 'COMMON',
+  UNCOMMON: 'UNCOMMON',
+  RARE: 'RARE',
+  EPIC: 'EPIC',
+  LEGENDARY: 'LEGENDARY'
+} as const
+
+export type AchievementRarity = (typeof AchievementRarity)[keyof typeof AchievementRarity]

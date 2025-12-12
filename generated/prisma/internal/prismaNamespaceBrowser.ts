@@ -90,7 +90,14 @@ export const ModelName = {
   CraftAttempt: 'CraftAttempt',
   GatheringNode: 'GatheringNode',
   NodeYield: 'NodeYield',
-  GatherAttempt: 'GatherAttempt'
+  GatherAttempt: 'GatherAttempt',
+  PlayerProfile: 'PlayerProfile',
+  PlayerProfileStats: 'PlayerProfileStats',
+  PlayerPvpRecord: 'PlayerPvpRecord',
+  PlayerPveRecord: 'PlayerPveRecord',
+  Achievement: 'Achievement',
+  PlayerAchievement: 'PlayerAchievement',
+  PlayerSocial: 'PlayerSocial'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -670,6 +677,93 @@ export const GatherAttemptScalarFieldEnum = {
 } as const
 
 export type GatherAttemptScalarFieldEnum = (typeof GatherAttemptScalarFieldEnum)[keyof typeof GatherAttemptScalarFieldEnum]
+
+
+export const PlayerProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlayerProfileScalarFieldEnum = (typeof PlayerProfileScalarFieldEnum)[keyof typeof PlayerProfileScalarFieldEnum]
+
+
+export const PlayerProfileStatsScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  vitality: 'vitality',
+  strength: 'strength',
+  speed: 'speed',
+  dexterity: 'dexterity',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlayerProfileStatsScalarFieldEnum = (typeof PlayerProfileStatsScalarFieldEnum)[keyof typeof PlayerProfileStatsScalarFieldEnum]
+
+
+export const PlayerPvpRecordScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  wins: 'wins',
+  losses: 'losses',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlayerPvpRecordScalarFieldEnum = (typeof PlayerPvpRecordScalarFieldEnum)[keyof typeof PlayerPvpRecordScalarFieldEnum]
+
+
+export const PlayerPveRecordScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  totalKills: 'totalKills',
+  bossesSlain: 'bossesSlain',
+  deathsUsed: 'deathsUsed',
+  deathsLimit: 'deathsLimit',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlayerPveRecordScalarFieldEnum = (typeof PlayerPveRecordScalarFieldEnum)[keyof typeof PlayerPveRecordScalarFieldEnum]
+
+
+export const AchievementScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  description: 'description',
+  icon: 'icon',
+  rarity: 'rarity',
+  createdAt: 'createdAt'
+} as const
+
+export type AchievementScalarFieldEnum = (typeof AchievementScalarFieldEnum)[keyof typeof AchievementScalarFieldEnum]
+
+
+export const PlayerAchievementScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  achievementId: 'achievementId',
+  unlockedAt: 'unlockedAt'
+} as const
+
+export type PlayerAchievementScalarFieldEnum = (typeof PlayerAchievementScalarFieldEnum)[keyof typeof PlayerAchievementScalarFieldEnum]
+
+
+export const PlayerSocialScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  guildName: 'guildName',
+  title: 'title',
+  tagline: 'tagline',
+  commendationsHelpful: 'commendationsHelpful',
+  commendationsSkilled: 'commendationsSkilled',
+  commendationsStrategic: 'commendationsStrategic',
+  friendsCount: 'friendsCount',
+  guildRole: 'guildRole',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlayerSocialScalarFieldEnum = (typeof PlayerSocialScalarFieldEnum)[keyof typeof PlayerSocialScalarFieldEnum]
 
 
 export const SortOrder = {

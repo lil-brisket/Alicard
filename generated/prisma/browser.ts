@@ -217,3 +217,38 @@ export type NodeYield = Prisma.NodeYieldModel
  * 
  */
 export type GatherAttempt = Prisma.GatherAttemptModel
+/**
+ * Model PlayerProfile
+ * 
+ */
+export type PlayerProfile = Prisma.PlayerProfileModel
+/**
+ * Model PlayerProfileStats
+ * 
+ */
+export type PlayerProfileStats = Prisma.PlayerProfileStatsModel
+/**
+ * Model PlayerPvpRecord
+ * 
+ */
+export type PlayerPvpRecord = Prisma.PlayerPvpRecordModel
+/**
+ * Model PlayerPveRecord
+ * 
+ */
+export type PlayerPveRecord = Prisma.PlayerPveRecordModel
+/**
+ * Model Achievement
+ * 
+ */
+export type Achievement = Prisma.AchievementModel
+/**
+ * Model PlayerAchievement
+ * 
+ */
+export type PlayerAchievement = Prisma.PlayerAchievementModel
+/**
+ * Model PlayerSocial
+ * 
+ */
+export type PlayerSocial = Prisma.PlayerSocialModel
