@@ -304,4 +304,60 @@ export const profileRouter = createTRPCRouter({
 
       return { success: true };
     }),
+
+  // Get all achievements for a profile
+  getAchievements: publicProcedure
+    .input(
+      z.object({
+        handle: z.string(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const user = await ctx.db.user.findFirst({
+        where: {
+          OR: [
+            { username: input.handle },
+            { id: input.handle },
+          ],
+        },
+      });
+
+      if (!user) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "User not found",
+        });
+      }
+
+      const profile = await ctx.db.playerProfile.findUnique({
+        where: { userId: user.id },
+      });
+
+      if (!profile) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Profile not found",
+        });
+      }
+
+      const playerAchievements = await ctx.db.playerAchievement.findMany({
+        where: { profileId: profile.id },
+        include: {
+          achievement: true,
+        },
+        orderBy: {
+          unlockedAt: "desc",
+        },
+      });
+
+      return playerAchievements.map((pa) => ({
+        id: pa.achievement.id,
+        key: pa.achievement.key,
+        name: pa.achievement.name,
+        description: pa.achievement.description,
+        icon: pa.achievement.icon,
+        rarity: pa.achievement.rarity,
+        unlockedAt: pa.unlockedAt,
+      }));
+    }),
 });
