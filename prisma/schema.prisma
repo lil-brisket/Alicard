@@ -208,6 +208,7 @@ model ShopItem {
 
 model Item {
   id                   String              @id @default(cuid())
+  key                  String?              @unique
   name                 String
   description          String?
   itemType             ItemType
@@ -254,6 +255,7 @@ model InventoryItem {
   item      Item     @relation(fields: [itemId], references: [id])
   player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
 
+  @@unique([playerId, itemId])
   @@index([playerId])
   @@index([itemId])
 }
@@ -667,6 +669,8 @@ model CraftAttempt {
   player     Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
   recipe     Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
 
+  @@index([playerId, createdAt])
+  @@index([recipeId, createdAt])
   @@index([playerId])
   @@index([recipeId])
   @@index([createdAt])
@@ -714,6 +718,8 @@ model GatherAttempt {
   player     Player        @relation(fields: [playerId], references: [id], onDelete: Cascade)
   node       GatheringNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
 
+  @@index([playerId, createdAt])
+  @@index([nodeId, createdAt])
   @@index([playerId])
   @@index([nodeId])
   @@index([createdAt])

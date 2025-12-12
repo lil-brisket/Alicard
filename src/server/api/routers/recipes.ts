@@ -10,7 +10,9 @@ import { addItemToInventory, hasItem, removeItemFromInventory } from "~/server/l
 import {
   getLevelFromXp,
   getMaxXpForLevel,
+  addXp,
 } from "~/server/lib/job-utils";
+import { checkRateLimit } from "~/server/lib/rate-limit";
 
 // Calculate crafting success chance
 // Success chance = clamp(0.2, 0.95, 0.55 + (jobLevel - difficulty)*0.07)
@@ -33,11 +35,35 @@ export const recipesRouter = createTRPCRouter({
   listRecipes: publicProcedure
     .input(
       z.object({
+        jobKey: z.string().optional(),
         jobId: z.string().optional(),
+        difficultyMax: z.number().int().min(1).max(10).optional(),
+        search: z.string().optional(),
       }).optional()
     )
     .query(async ({ input }) => {
-      const where = input?.jobId ? { jobId: input.jobId } : {};
+      const where: {
+        jobId?: string;
+        difficulty?: { lte: number };
+        name?: { contains: string; mode?: "insensitive" };
+      } = {};
+      
+      if (input?.jobKey) {
+        const job = await db.job.findUnique({ where: { key: input.jobKey } });
+        if (job) {
+          where.jobId = job.id;
+        }
+      } else if (input?.jobId) {
+        where.jobId = input.jobId;
+      }
+      
+      if (input?.difficultyMax !== undefined) {
+        where.difficulty = { lte: input.difficultyMax };
+      }
+      
+      if (input?.search) {
+        where.name = { contains: input.search, mode: "insensitive" };
+      }
       
       return await db.recipe.findMany({
         where,
@@ -94,6 +120,14 @@ export const recipesRouter = createTRPCRouter({
     )
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.session.user.id;
+      
+      // Rate limiting: 1 action per 2 seconds (30 per minute)
+      if (!checkRateLimit(userId, { maxActions: 30, windowMs: 60 * 1000 })) {
+        throw new TRPCError({
+          code: "TOO_MANY_REQUESTS",
+          message: "Rate limit exceeded. Please wait before crafting again.",
+        });
+      }
       
       const player = await db.player.findUnique({
         where: { userId },
@@ -201,19 +235,14 @@ export const recipesRouter = createTRPCRouter({
           },
         });
 
-        // Update job XP (use the jobs router logic for leveling)
-        const oldXp = userJob.xp;
-        const oldLevel = getLevelFromXp(oldXp);
-        const newXp = oldXp + xpGained;
-        const maxXp = getMaxXpForLevel(10);
-        const cappedXp = Math.min(newXp, maxXp);
-        const newLevel = getLevelFromXp(cappedXp);
+        // Update job XP (use the shared addXp function for consistent leveling)
+        const levelResult = addXp(userJob.level, userJob.xp, xpGained, 10);
 
         await tx.userJob.update({
           where: { id: userJob.id },
           data: {
-            xp: cappedXp,
-            level: newLevel,
+            xp: levelResult.newXp,
+            level: levelResult.newLevel,
           },
         });
 
@@ -221,7 +250,11 @@ export const recipesRouter = createTRPCRouter({
           attempt,
           success,
           xpGained,
-          leveledUp: newLevel > oldLevel,
+          leveledUp: levelResult.leveledUp,
+          level: levelResult.newLevel,
+          xpInLevel: levelResult.xpInLevel,
+          xpToNext: levelResult.xpToNext,
+          progressPct: levelResult.progressPct,
         };
       });
 
@@ -231,6 +264,10 @@ export const recipesRouter = createTRPCRouter({
         outputItem: success ? recipe.outputItem : null,
         outputQty: success ? recipe.outputQty : 0,
         leveledUp: result.leveledUp,
+        level: result.level,
+        xpInLevel: result.xpInLevel,
+        xpToNext: result.xpToNext,
+        progressPct: result.progressPct,
       };
     }),
 

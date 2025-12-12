@@ -59,6 +59,14 @@ Ensure your PostgreSQL server is running and update `DATABASE_URL` in `.env` wit
 
 ### 4. Run Database Migrations
 
+**Important:** If you have existing data, run the cleanup script first to handle duplicate records:
+
+```bash
+npm run db:cleanup
+```
+
+Then run migrations:
+
 ```bash
 npm run db:generate
 ```
@@ -68,6 +76,8 @@ This will:
 - Generate Prisma Client
 - Apply database migrations
 - Create all necessary tables
+
+**Note:** The cleanup script merges duplicate `InventoryItem` records (same playerId + itemId) by summing quantities, and handles duplicate `Item` keys. If you're starting fresh, you can skip the cleanup step.
 
 ### 5. Start Development Server
 
@@ -84,6 +94,8 @@ The game will be available at [http://localhost:3000](http://localhost:3000)
 - `npm run start` - Start production server
 - `npm run db:generate` - Generate Prisma Client and run migrations
 - `npm run db:push` - Push schema changes to database (dev only)
+- `npm run db:cleanup` - Clean up duplicate records before migration (if needed)
+- `npm run db:seed` - Seed the database with initial game data
 - `npm run db:studio` - Open Prisma Studio (database GUI)
 - `npm run lint` - Run ESLint
 - `npm run typecheck` - Run TypeScript type checking

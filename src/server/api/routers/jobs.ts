@@ -9,6 +9,7 @@ import {
   getLevelFromXp,
   getXpProgress,
   getMaxXpForLevel,
+  addXp,
 } from "~/server/lib/job-utils";
 
 export const jobsRouter = createTRPCRouter({
@@ -67,20 +68,17 @@ export const jobsRouter = createTRPCRouter({
         include: { job: true },
       });
 
-      return updatedUserJobs.map((uj) => ({
-        ...uj,
-        totalXp: uj.xp,
-        level: getLevelFromXp(uj.xp),
-        progress: getXpProgress(getLevelFromXp(uj.xp), uj.xp),
-      }));
-    }
-
-    return userJobs.map((uj) => ({
-      ...uj,
-      totalXp: uj.xp,
-      level: getLevelFromXp(uj.xp),
-      progress: getXpProgress(getLevelFromXp(uj.xp), uj.xp),
-    }));
+      return userJobs.map((uj) => {
+        const levelResult = addXp(uj.level, uj.xp, 0, 10);
+        return {
+          ...uj,
+          totalXp: uj.xp,
+          level: levelResult.newLevel,
+          xpInLevel: levelResult.xpInLevel,
+          xpToNext: levelResult.xpToNext,
+          progressPct: levelResult.progressPct,
+        };
+      });
   }),
 
   // Add XP to a job
@@ -130,24 +128,23 @@ export const jobsRouter = createTRPCRouter({
         });
       }
 
-      // Update XP (capped at level 10)
-      const oldLevel = getLevelFromXp(userJob.xp);
-      const maxXp = getMaxXpForLevel(10);
-      const newXp = Math.min(userJob.xp + input.xp, maxXp);
-      const newLevel = getLevelFromXp(newXp);
+      // Update XP using shared addXp function for consistent leveling
+      const levelResult = addXp(userJob.level, userJob.xp, input.xp, 10);
 
       const updated = await db.userJob.update({
         where: { id: userJob.id },
-        data: { xp: newXp, level: newLevel },
+        data: { xp: levelResult.newXp, level: levelResult.newLevel },
         include: { job: true },
       });
 
       return {
         ...updated,
         totalXp: updated.xp,
-        level: newLevel,
-        progress: getXpProgress(newLevel, updated.xp),
-        leveledUp: newLevel > oldLevel,
+        level: levelResult.newLevel,
+        xpInLevel: levelResult.xpInLevel,
+        xpToNext: levelResult.xpToNext,
+        progressPct: levelResult.progressPct,
+        leveledUp: levelResult.leveledUp,
       };
     }),
 
@@ -244,14 +241,16 @@ export const jobsRouter = createTRPCRouter({
 
       const level = getLevelFromXp(userJob.xp);
       const progress = getXpProgress(level, userJob.xp);
+      const levelResult = addXp(level, userJob.xp, 0, 10);
 
       return {
         ...userJob,
-        level,
+        level: levelResult.newLevel,
         totalXp: userJob.xp,
-        progress,
-        xpForNextLevel: progress.needed,
-        isMaxLevel: level >= 10,
+        xpInLevel: levelResult.xpInLevel,
+        xpToNext: levelResult.xpToNext,
+        progressPct: levelResult.progressPct,
+        isMaxLevel: levelResult.newLevel >= 10,
       };
     }),
 });

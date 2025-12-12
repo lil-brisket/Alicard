@@ -10,7 +10,9 @@ import { addItemToInventory } from "~/server/lib/inventory";
 import {
   getLevelFromXp,
   getMaxXpForLevel,
+  addXp,
 } from "~/server/lib/job-utils";
+import { checkRateLimit } from "~/server/lib/rate-limit";
 
 // Calculate gathering success chance
 // Success chance = clamp(0.3, 0.98, 0.65 + (jobLevel - dangerTier)*0.06)
@@ -48,11 +50,35 @@ export const gatheringRouter = createTRPCRouter({
   listNodes: publicProcedure
     .input(
       z.object({
+        jobKey: z.string().optional(),
         jobId: z.string().optional(),
+        dangerTierMax: z.number().int().min(1).max(10).optional(),
+        search: z.string().optional(),
       }).optional()
     )
     .query(async ({ input }) => {
-      const where = input?.jobId ? { jobId: input.jobId } : {};
+      const where: {
+        jobId?: string;
+        dangerTier?: { lte: number };
+        name?: { contains: string; mode?: "insensitive" };
+      } = {};
+      
+      if (input?.jobKey) {
+        const job = await db.job.findUnique({ where: { key: input.jobKey } });
+        if (job) {
+          where.jobId = job.id;
+        }
+      } else if (input?.jobId) {
+        where.jobId = input.jobId;
+      }
+      
+      if (input?.dangerTierMax !== undefined) {
+        where.dangerTier = { lte: input.dangerTierMax };
+      }
+      
+      if (input?.search) {
+        where.name = { contains: input.search, mode: "insensitive" };
+      }
       
       return await db.gatheringNode.findMany({
         where,
@@ -77,6 +103,14 @@ export const gatheringRouter = createTRPCRouter({
     )
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.session.user.id;
+      
+      // Rate limiting: 1 action per 2 seconds (30 per minute)
+      if (!checkRateLimit(userId, { maxActions: 30, windowMs: 60 * 1000 })) {
+        throw new TRPCError({
+          code: "TOO_MANY_REQUESTS",
+          message: "Rate limit exceeded. Please wait before gathering again.",
+        });
+      }
       
       const player = await db.player.findUnique({
         where: { userId },
@@ -169,19 +203,14 @@ export const gatheringRouter = createTRPCRouter({
           },
         });
 
-        // Update job XP
-        const oldXp = userJob.xp;
-        const newXp = oldXp + xpGained;
-        const maxXp = getMaxXpForLevel(10);
-        const cappedXp = Math.min(newXp, maxXp);
-        const newLevel = getLevelFromXp(cappedXp);
-        const oldLevel = getLevelFromXp(oldXp);
+        // Update job XP (use the shared addXp function for consistent leveling)
+        const levelResult = addXp(userJob.level, userJob.xp, xpGained, 10);
 
         await tx.userJob.update({
           where: { id: userJob.id },
           data: {
-            xp: cappedXp,
-            level: getLevelFromXp(cappedXp),
+            xp: levelResult.newXp,
+            level: levelResult.newLevel,
           },
         });
 
@@ -189,7 +218,11 @@ export const gatheringRouter = createTRPCRouter({
           attempt,
           success,
           xpGained,
-          leveledUp: newLevel > oldLevel,
+          leveledUp: levelResult.leveledUp,
+          level: levelResult.newLevel,
+          xpInLevel: levelResult.xpInLevel,
+          xpToNext: levelResult.xpToNext,
+          progressPct: levelResult.progressPct,
           items: gatheredItems.map((item) => ({
             itemId: item.itemId,
             qty: item.qty,
@@ -217,6 +250,10 @@ export const gatheringRouter = createTRPCRouter({
         xpGained: result.xpGained,
         items: itemsWithDetails,
         leveledUp: result.leveledUp,
+        level: result.level,
+        xpInLevel: result.xpInLevel,
+        xpToNext: result.xpToNext,
+        progressPct: result.progressPct,
       };
     }),
 

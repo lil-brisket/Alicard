@@ -1,7 +1,24 @@
+import { config } from "dotenv";
 import { PrismaClient } from "../generated/prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { Pool } from "pg";
 
-// @ts-expect-error - PrismaClient constructor types are complex, but this works at runtime
-const prisma = new PrismaClient();
+// Load environment variables from .env file
+config();
+
+if (!process.env.DATABASE_URL) {
+  throw new Error("DATABASE_URL environment variable is not set. Please check your .env file.");
+}
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+
+const adapter = new PrismaPg(pool);
+
+const prisma = new PrismaClient({
+  adapter,
+});
 
 async function main() {
   console.log("🌱 Starting seed...");
@@ -76,6 +93,7 @@ async function main() {
     update: {},
     create: {
       id: "iron-ore",
+      key: "iron-ore",
       name: "Iron Ore",
       description: "A chunk of raw iron ore.",
       itemType: "MATERIAL",
@@ -540,4 +558,5 @@ main()
   })
   .finally(async () => {
     await prisma.$disconnect();
+    await pool.end();
   });

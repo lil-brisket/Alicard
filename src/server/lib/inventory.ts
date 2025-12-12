@@ -10,6 +10,8 @@ type DbClient = Omit<
  * Add items to a player's inventory.
  * If the item is stackable and the player already has it, increment quantity.
  * Otherwise, create a new inventory entry.
+ * 
+ * Enforces quantity >= 0 safety.
  */
 export async function addItemToInventory(
   playerId: string,
@@ -17,6 +19,10 @@ export async function addItemToInventory(
   quantity: number,
   tx?: DbClient
 ): Promise<void> {
+  if (quantity <= 0) {
+    throw new Error(`Cannot add non-positive quantity: ${quantity}`);
+  }
+  
   const client = tx ?? db;
   
   const item = await client.item.findUnique({
@@ -60,6 +66,10 @@ export async function addItemToInventory(
         }
       } else {
         // Update existing stack
+        if (newQuantity < 0) {
+          throw new Error(`Inventory quantity would become negative: ${newQuantity}`);
+        }
+        
         await client.inventoryItem.update({
           where: { id: existing.id },
           data: { quantity: newQuantity },
@@ -92,6 +102,8 @@ export async function addItemToInventory(
 /**
  * Remove items from a player's inventory.
  * Returns true if items were successfully removed, false if insufficient quantity.
+ * 
+ * Enforces quantity >= 0 safety and ensures inventory quantities never go negative.
  */
 export async function removeItemFromInventory(
   playerId: string,
@@ -99,6 +111,10 @@ export async function removeItemFromInventory(
   quantity: number,
   tx?: DbClient
 ): Promise<boolean> {
+  if (quantity <= 0) {
+    throw new Error(`Cannot remove non-positive quantity: ${quantity}`);
+  }
+  
   const client = tx ?? db;
   
   const items = await client.inventoryItem.findMany({
@@ -122,17 +138,27 @@ export async function removeItemFromInventory(
       });
     } else {
       // Reduce quantity in this stack
+      const newQuantity = inventoryItem.quantity - remainingToRemove;
+      if (newQuantity < 0) {
+        throw new Error(`Inventory quantity would become negative: ${newQuantity}`);
+      }
+      
       await client.inventoryItem.update({
         where: { id: inventoryItem.id },
         data: {
-          quantity: inventoryItem.quantity - remainingToRemove,
+          quantity: newQuantity,
         },
       });
       remainingToRemove = 0;
     }
   }
 
-  return remainingToRemove === 0;
+  if (remainingToRemove > 0) {
+    // Insufficient items, but we should have caught this earlier
+    return false;
+  }
+
+  return true;
 }
 
 /**

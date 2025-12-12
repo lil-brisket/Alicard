@@ -48,3 +48,47 @@ export function getMaxXpForLevel(maxLevel: number): number {
   }
   return total;
 }
+
+/**
+ * Add XP to a job and return the updated level and XP.
+ * This is the shared function all routers should use for consistent leveling.
+ * 
+ * @param currentLevel - Current job level
+ * @param currentXp - Current total XP
+ * @param xpDelta - XP to add (must be >= 0)
+ * @param maxLevel - Maximum level cap (default 10)
+ * @returns Object with newLevel, newXp, leveledUp flag, and progress info
+ */
+export function addXp(
+  currentLevel: number,
+  currentXp: number,
+  xpDelta: number,
+  maxLevel: number = 10
+): {
+  newLevel: number;
+  newXp: number;
+  leveledUp: boolean;
+  xpInLevel: number;
+  xpToNext: number;
+  progressPct: number;
+} {
+  if (xpDelta < 0) {
+    throw new Error(`Cannot add negative XP: ${xpDelta}`);
+  }
+
+  const oldLevel = getLevelFromXp(currentXp, maxLevel);
+  const newXp = Math.min(currentXp + xpDelta, getMaxXpForLevel(maxLevel));
+  const newLevel = getLevelFromXp(newXp, maxLevel);
+  const leveledUp = newLevel > oldLevel;
+
+  const progress = getXpProgress(newLevel, newXp);
+
+  return {
+    newLevel,
+    newXp,
+    leveledUp,
+    xpInLevel: progress.current,
+    xpToNext: progress.needed,
+    progressPct: progress.needed > 0 ? (progress.current / progress.needed) * 100 : 100,
+  };
+}
