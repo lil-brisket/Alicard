@@ -20,13 +20,6 @@ export default function JobsPage() {
     return (
       <div className="min-h-screen bg-slate-950 text-slate-100">
         <div className="mx-auto max-w-5xl p-4 md:p-8">
-          <Link
-            href="/hub"
-            className="inline-flex items-center gap-2 mb-6 text-sm text-slate-400 hover:text-slate-200 transition-colors"
-          >
-            <span>←</span>
-            <span>Back to Hub</span>
-          </Link>
           <h1 className="text-2xl font-bold text-cyan-400">Jobs</h1>
           <p className="mt-2 text-slate-400">Loading...</p>
         </div>
@@ -38,13 +31,6 @@ export default function JobsPage() {
     return (
       <div className="min-h-screen bg-slate-950 text-slate-100">
         <div className="mx-auto max-w-5xl p-4 md:p-8">
-          <Link
-            href="/hub"
-            className="inline-flex items-center gap-2 mb-6 text-sm text-slate-400 hover:text-slate-200 transition-colors"
-          >
-            <span>←</span>
-            <span>Back to Hub</span>
-          </Link>
           <h1 className="text-2xl font-bold text-cyan-400">Jobs</h1>
           <div className="mt-4 rounded bg-red-500/20 border border-red-500/50 p-4">
             <p className="text-red-400 font-semibold">Error loading jobs</p>
@@ -62,13 +48,6 @@ export default function JobsPage() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto max-w-5xl p-4 md:p-8">
-        <Link
-          href="/hub"
-          className="inline-flex items-center gap-2 mb-6 text-sm text-slate-400 hover:text-slate-200 transition-colors"
-        >
-          <span>←</span>
-          <span>Back to Hub</span>
-        </Link>
         <h1 className="text-2xl font-bold text-cyan-400">Jobs & Professions</h1>
         <p className="mt-2 text-slate-400">
           Manage your crafting and gathering professions
@@ -96,6 +75,15 @@ export default function JobsPage() {
               </div>
             );
           })}
+        </div>
+
+        <div className="mt-8">
+          <Link
+            href="/hub"
+            className="inline-block rounded-xl bg-cyan-500/20 px-6 py-3 text-cyan-400 transition hover:bg-cyan-500/30"
+          >
+            Return to Hub
+          </Link>
         </div>
       </div>
     </div>

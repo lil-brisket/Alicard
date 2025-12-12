@@ -15,13 +15,6 @@ export default async function CombatPage() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto max-w-5xl p-4 md:p-8">
-        <Link
-          href="/hub"
-          className="inline-flex items-center gap-2 mb-6 text-sm text-slate-400 hover:text-slate-200 transition-colors"
-        >
-          <span>←</span>
-          <span>Back to Hub</span>
-        </Link>
         <h1 className="text-2xl font-bold text-cyan-400">Combat</h1>
         <p className="mt-2 text-slate-400">
           Engage in turn-based combat
