@@ -1,0 +1,65 @@
+"use client";
+
+import { api } from "~/trpc/react";
+import { JobCard } from "./_components/job-card";
+import { ProgressBar } from "./_components/progress-bar";
+
+export default function JobsPage() {
+  const { data: jobs, isLoading: jobsLoading } = api.jobs.listJobs.useQuery();
+  const { data: myJobs, isLoading: myJobsLoading } = api.jobs.getMyJobs.useQuery();
+  const utils = api.useUtils();
+
+  const addXpMutation = api.jobs.addJobXp.useMutation({
+    onSuccess: () => {
+      void utils.jobs.getMyJobs.invalidate();
+    },
+  });
+
+  if (jobsLoading || myJobsLoading) {
+    return (
+      <div className="min-h-screen bg-slate-950 text-slate-100">
+        <div className="mx-auto max-w-5xl p-4 md:p-8">
+          <h1 className="text-2xl font-bold text-cyan-400">Jobs</h1>
+          <p className="mt-2 text-slate-400">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  const myJobsMap = new Map(myJobs?.map((uj) => [uj.jobId, uj]) ?? []);
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-slate-100">
+      <div className="mx-auto max-w-5xl p-4 md:p-8">
+        <h1 className="text-2xl font-bold text-cyan-400">Jobs & Professions</h1>
+        <p className="mt-2 text-slate-400">
+          Manage your crafting and gathering professions
+        </p>
+
+        <div className="mt-6 space-y-4">
+          {jobs?.map((job) => {
+            const userJob = myJobsMap.get(job.id);
+            return (
+              <div key={job.id} className="space-y-2">
+                <JobCard job={job} userJob={userJob ?? null} />
+                {userJob && (
+                  <div className="ml-4 flex items-center gap-2">
+                    <button
+                      onClick={() => {
+                        addXpMutation.mutate({ jobId: job.id, xp: 10 });
+                      }}
+                      disabled={addXpMutation.isPending}
+                      className="rounded bg-cyan-500/20 px-3 py-1 text-xs text-cyan-400 transition hover:bg-cyan-500/30 disabled:opacity-50"
+                    >
+                      {addXpMutation.isPending ? "Training..." : "Train +10 XP"}
+                    </button>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}

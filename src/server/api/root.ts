@@ -4,6 +4,9 @@ import { mapRouter } from "~/server/api/routers/map";
 import { combatRouter } from "~/server/api/routers/combat";
 import { characterRouter } from "~/server/api/routers/character";
 import { hallOfTheDeadRouter } from "~/server/api/routers/hallOfTheDead";
+import { jobsRouter } from "~/server/api/routers/jobs";
+import { recipesRouter } from "~/server/api/routers/recipes";
+import { gatheringRouter } from "~/server/api/routers/gathering";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -18,6 +21,9 @@ export const appRouter = createTRPCRouter({
   combat: combatRouter,
   character: characterRouter,
   hallOfTheDead: hallOfTheDeadRouter,
+  jobs: jobsRouter,
+  recipes: recipesRouter,
+  gathering: gatheringRouter,
 });
 
 // export type definition of API

@@ -120,6 +120,9 @@ model Player {
   user                       User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   skills                     PlayerSkill[]
   stats                      PlayerStats?
+  userJobs                   UserJob[]
+  craftAttempts              CraftAttempt[]
+  gatherAttempts             GatherAttempt[]
 
   @@index([characterName])
   @@index([userId])
@@ -233,6 +236,9 @@ model Item {
   marketListings       MarketListing[]
   marketTransactions   MarketTransaction[]
   shopItems            ShopItem[]
+  recipeOutputs        Recipe[]            @relation("RecipeOutput")
+  recipeInputs         RecipeInput[]       @relation("RecipeInput")
+  nodeYields           NodeYield[]         @relation("NodeYield")
 
   @@index([itemType])
   @@index([itemRarity])
@@ -578,4 +584,137 @@ enum QuestType {
   DELIVER
   EXPLORE
   CRAFT
+}
+
+enum JobCategory {
+  CRAFT
+  GATHER
+}
+
+model Job {
+  id          String        @id @default(cuid())
+  key         String        @unique
+  name        String
+  description String?
+  category    JobCategory
+  icon        String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  userJobs    UserJob[]
+  recipes     Recipe[]
+  nodes       GatheringNode[]
+
+  @@index([category])
+  @@index([key])
+}
+
+model UserJob {
+  id          String   @id @default(cuid())
+  playerId    String
+  jobId       String
+  level       Int      @default(1)
+  xp          Int      @default(0)
+  active      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  player      Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  job         Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@unique([playerId, jobId])
+  @@index([playerId])
+  @@index([jobId])
+}
+
+model Recipe {
+  id            String        @id @default(cuid())
+  jobId         String
+  name          String
+  description   String?
+  difficulty    Int           @default(1)
+  outputItemId  String
+  outputQty     Int           @default(1)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  job           Job           @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  outputItem    Item          @relation("RecipeOutput", fields: [outputItemId], references: [id])
+  inputs        RecipeInput[]
+  craftAttempts CraftAttempt[]
+
+  @@index([jobId])
+  @@index([outputItemId])
+}
+
+model RecipeInput {
+  id        String   @id @default(cuid())
+  recipeId  String
+  itemId    String
+  qty       Int      @default(1)
+  createdAt DateTime @default(now())
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  item      Item     @relation("RecipeInput", fields: [itemId], references: [id])
+
+  @@index([recipeId])
+  @@index([itemId])
+}
+
+model CraftAttempt {
+  id         String   @id @default(cuid())
+  playerId   String
+  recipeId   String
+  success    Boolean
+  xpGained   Int
+  createdAt  DateTime @default(now())
+  player     Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  recipe     Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  @@index([playerId])
+  @@index([recipeId])
+  @@index([createdAt])
+}
+
+model GatheringNode {
+  id          String        @id @default(cuid())
+  key         String        @unique
+  name        String
+  jobId       String
+  dangerTier  Int           @default(1)
+  description String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  job         Job           @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  yields      NodeYield[]
+  gatherAttempts GatherAttempt[]
+
+  @@index([jobId])
+  @@index([key])
+}
+
+model NodeYield {
+  id          String        @id @default(cuid())
+  nodeId      String
+  itemId      String
+  minQty      Int           @default(1)
+  maxQty      Int           @default(1)
+  weight      Int           @default(100)
+  createdAt   DateTime      @default(now())
+  node        GatheringNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+  item        Item          @relation("NodeYield", fields: [itemId], references: [id])
+
+  @@index([nodeId])
+  @@index([itemId])
+}
+
+model GatherAttempt {
+  id         String        @id @default(cuid())
+  playerId   String
+  nodeId     String
+  success    Boolean
+  xpGained   Int
+  createdAt  DateTime      @default(now())
+  player     Player        @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  node       GatheringNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+
+  @@index([playerId])
+  @@index([nodeId])
+  @@index([createdAt])
 }
