@@ -11,6 +11,7 @@ const actionLinks: ActionLink[] = [
   { label: "World", href: "/world", description: "Explore the tower" },
   { label: "Combat", href: "/combat", description: "Engage in battle" },
   { label: "Inventory", href: "/inventory", description: "Manage items" },
+  { label: "Equipment", href: "/equipment", description: "Equip gear" },
   { label: "Skills", href: "/skills", description: "View abilities" },
   { label: "Quests", href: "/quests", description: "Active missions" },
   { label: "Guilds", href: "/guilds", description: "Join a guild" },

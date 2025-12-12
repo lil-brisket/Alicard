@@ -285,7 +285,7 @@ export const equipmentRouter = createTRPCRouter({
           dbField = "ring1ItemId";
         }
       } else {
-        dbField = slotToFieldMap[fieldToUpdate];
+        dbField = slotToFieldMap[input.toSlot];
       }
 
       // Use transaction to handle swap
