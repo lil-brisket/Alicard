@@ -63,6 +63,47 @@
 - After 5 deaths: Account permanently deleted
 - Death logs for tracking
 
+### ✅ Battle MVP System
+- Minimal PvE turn-based battle system with DB persistence
+- Monster templates (content) stored in database
+- Battle instances (runtime) with HP/SP snapshots
+- Simple damage formula: `max(1, attackerStr - floor(defenderVit/2) + rand(0..2))`
+- Turn-based combat: player attack → monster attack per turn
+- Battle states: ACTIVE, WON, LOST, FLED
+- XP and gold rewards on victory
+- Battle log stored as JSON array
+
+**Database Models:**
+- `Monster` - Template with name, level, stats, rewards
+- `Battle` - Instance with userId, monsterId, HP/SP snapshots, status, log
+- `BattleStatus` enum: ACTIVE, WON, LOST, FLED
+
+**API Endpoints:**
+- `battle.listMonsters` - List all available monster templates
+- `battle.startBattle` - Create new battle, snapshot player HP/SP
+- `battle.getActiveBattle` - Get current active battle for user
+- `battle.attack` - Execute one full turn (player + monster attacks)
+- `battle.flee` - End battle by fleeing
+
+**UI:**
+- Combat page shows monster selection when no active battle
+- Active battle view with HP bars, battle log, Attack/Flee buttons
+- Real-time battle state updates
+
+**Monsters (Seeded):**
+- Slime (Level 1) - 20 HP, 10 XP, 5 gold
+- Wolf (Level 3) - 35 HP, 30 XP, 15 gold
+- Bandit (Level 5) - 50 HP, 50 XP, 25 gold
+
+**Testing:**
+1. Run database migration: `npx prisma migrate dev --name add_battle_system`
+2. Run seed: `npm run db:seed` (or `npx prisma db seed`)
+3. Navigate to `/combat` page
+4. Select a monster and start battle
+5. Use Attack button to fight
+6. Win grants XP and gold, loss ends battle
+7. Flee option available at any time
+
 ## Phase 2: Persistence (In Progress)
 
 ### Pending:
@@ -120,6 +161,7 @@
 All game APIs are organized under tRPC routers:
 - `player.*` - Player character management
 - `map.*` - World map and movement
-- `combat.*` - Turn-based combat
+- `combat.*` - Turn-based combat (encounter-based)
+- `battle.*` - Battle MVP (monster template-based)
 - (Future: `inventory.*`, `market.*`, `guild.*`, `bank.*`, `occupation.*`)
 

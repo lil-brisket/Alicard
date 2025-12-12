@@ -820,6 +820,62 @@ async function main() {
 
   console.log("✅ Achievements created!");
 
+  // Create monsters
+  console.log("Creating monsters...");
+
+  const slime = await prisma.monster.upsert({
+    where: { key: "slime-1" },
+    update: {},
+    create: {
+      key: "slime-1",
+      name: "Slime",
+      level: 1,
+      vitality: 3,
+      strength: 2,
+      speed: 2,
+      dexterity: 1,
+      maxHp: 20,
+      xpReward: 10,
+      goldReward: 5,
+    },
+  });
+
+  const wolf = await prisma.monster.upsert({
+    where: { key: "wolf-1" },
+    update: {},
+    create: {
+      key: "wolf-1",
+      name: "Wolf",
+      level: 3,
+      vitality: 5,
+      strength: 6,
+      speed: 7,
+      dexterity: 5,
+      maxHp: 35,
+      xpReward: 30,
+      goldReward: 15,
+    },
+  });
+
+  const bandit = await prisma.monster.upsert({
+    where: { key: "bandit-1" },
+    update: {},
+    create: {
+      key: "bandit-1",
+      name: "Bandit",
+      level: 5,
+      vitality: 7,
+      strength: 8,
+      speed: 6,
+      dexterity: 7,
+      maxHp: 50,
+      xpReward: 50,
+      goldReward: 25,
+    },
+  });
+
+  console.log("✅ Monsters created!");
+
   // Try to attach achievements to first user if exists
   const firstUser = await prisma.user.findFirst({
     include: {

@@ -10,6 +10,7 @@ import { gatheringRouter } from "~/server/api/routers/gathering";
 import { equipmentRouter } from "~/server/api/routers/equipment";
 import { skillsRouter } from "~/server/api/routers/skills";
 import { profileRouter } from "~/server/api/routers/profile";
+import { battleRouter } from "~/server/api/routers/battle";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -30,6 +31,7 @@ export const appRouter = createTRPCRouter({
   equipment: equipmentRouter,
   skills: skillsRouter,
   profile: profileRouter,
+  battle: battleRouter,
 });
 
 // export type definition of API
