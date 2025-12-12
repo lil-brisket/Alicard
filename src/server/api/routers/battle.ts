@@ -9,6 +9,7 @@ import {
   type PlayerStats,
   type MonsterTemplate,
 } from "~/server/battle/engine";
+import { applyRegen } from "~/server/regen/applyRegen";
 
 // Helper function to sync Character model with PlayerStats
 async function syncCharacterWithPlayerStats(
@@ -108,7 +109,66 @@ export const battleRouter = createTRPCRouter({
         });
       }
 
-      // Create battle with snapshot of HP/SP
+      // Apply regen BEFORE starting battle (server-authoritative)
+      const now = new Date();
+      if (!player.stats.lastRegenAt) {
+        const character = await ctx.db.character.findFirst({
+          where: { userId },
+          orderBy: { createdAt: "desc" },
+        });
+        const initialLastRegenAt = character?.createdAt 
+          ? new Date(character.createdAt)
+          : new Date(now.getTime() - 60000);
+        
+        await ctx.db.playerStats.update({
+          where: { playerId: player.id },
+          data: { lastRegenAt: initialLastRegenAt },
+        });
+        player.stats.lastRegenAt = initialLastRegenAt;
+      }
+
+      const regenResult = applyRegen(now, {
+        hp: player.stats.currentHP,
+        sp: player.stats.currentSP,
+        maxHp: player.stats.maxHP,
+        maxSp: player.stats.maxSP,
+        hpRegenPerMin: player.stats.hpRegenPerMin ?? 100,
+        spRegenPerMin: player.stats.spRegenPerMin ?? 100,
+        lastRegenAt: player.stats.lastRegenAt,
+      });
+
+      // Update player stats if regen occurred
+      if (regenResult.didUpdate) {
+        await ctx.db.playerStats.update({
+          where: { playerId: player.id },
+          data: {
+            currentHP: regenResult.hp,
+            currentSP: regenResult.sp,
+            lastRegenAt: regenResult.lastRegenAt,
+          },
+        });
+        player.stats.currentHP = regenResult.hp;
+        player.stats.currentSP = regenResult.sp;
+        player.stats.lastRegenAt = regenResult.lastRegenAt;
+      }
+
+      // Sync Character with PlayerStats after regen
+      await syncCharacterWithPlayerStats(
+        userId,
+        {
+          currentHP: player.stats.currentHP,
+          maxHP: player.stats.maxHP,
+          currentSP: player.stats.currentSP,
+          maxSP: player.stats.maxSP,
+          vitality: player.stats.vitality,
+          strength: player.stats.strength,
+          speed: player.stats.speed,
+          dexterity: player.stats.dexterity,
+        },
+        ctx.db
+      );
+
+      // Create battle with snapshot of HP/SP (AFTER regen applied)
       const battle = await ctx.db.battle.create({
         data: {
           userId,
@@ -203,7 +263,66 @@ export const battleRouter = createTRPCRouter({
         });
       }
 
-      // Prepare stats for engine
+      // Apply regen BEFORE attack (server-authoritative)
+      const now = new Date();
+      if (!player.stats.lastRegenAt) {
+        const character = await ctx.db.character.findFirst({
+          where: { userId },
+          orderBy: { createdAt: "desc" },
+        });
+        const initialLastRegenAt = character?.createdAt 
+          ? new Date(character.createdAt)
+          : new Date(now.getTime() - 60000);
+        
+        await ctx.db.playerStats.update({
+          where: { playerId: player.id },
+          data: { lastRegenAt: initialLastRegenAt },
+        });
+        player.stats.lastRegenAt = initialLastRegenAt;
+      }
+
+      const regenResult = applyRegen(now, {
+        hp: player.stats.currentHP,
+        sp: player.stats.currentSP,
+        maxHp: player.stats.maxHP,
+        maxSp: player.stats.maxSP,
+        hpRegenPerMin: player.stats.hpRegenPerMin ?? 100,
+        spRegenPerMin: player.stats.spRegenPerMin ?? 100,
+        lastRegenAt: player.stats.lastRegenAt,
+      });
+
+      // Update player stats if regen occurred
+      if (regenResult.didUpdate) {
+        await ctx.db.playerStats.update({
+          where: { playerId: player.id },
+          data: {
+            currentHP: regenResult.hp,
+            currentSP: regenResult.sp,
+            lastRegenAt: regenResult.lastRegenAt,
+          },
+        });
+        player.stats.currentHP = regenResult.hp;
+        player.stats.currentSP = regenResult.sp;
+        player.stats.lastRegenAt = regenResult.lastRegenAt;
+      }
+
+      // Sync Character with PlayerStats after regen
+      await syncCharacterWithPlayerStats(
+        userId,
+        {
+          currentHP: player.stats.currentHP,
+          maxHP: player.stats.maxHP,
+          currentSP: player.stats.currentSP,
+          maxSP: player.stats.maxSP,
+          vitality: player.stats.vitality,
+          strength: player.stats.strength,
+          speed: player.stats.speed,
+          dexterity: player.stats.dexterity,
+        },
+        ctx.db
+      );
+
+      // Use battle HP/SP for combat calculations (battle state is authoritative during combat)
       const playerStats: PlayerStats = {
         vitality: player.stats.vitality,
         strength: player.stats.strength,
@@ -342,6 +461,78 @@ export const battleRouter = createTRPCRouter({
           message: "Battle is not active",
         });
       }
+
+      // Get player stats
+      const player = await ctx.db.player.findUnique({
+        where: { userId },
+        include: { stats: true },
+      });
+
+      if (!player || !player.stats) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Player or stats not found",
+        });
+      }
+
+      // Apply regen BEFORE fleeing (server-authoritative)
+      const now = new Date();
+      if (!player.stats.lastRegenAt) {
+        const character = await ctx.db.character.findFirst({
+          where: { userId },
+          orderBy: { createdAt: "desc" },
+        });
+        const initialLastRegenAt = character?.createdAt 
+          ? new Date(character.createdAt)
+          : new Date(now.getTime() - 60000);
+        
+        await ctx.db.playerStats.update({
+          where: { playerId: player.id },
+          data: { lastRegenAt: initialLastRegenAt },
+        });
+        player.stats.lastRegenAt = initialLastRegenAt;
+      }
+
+      const regenResult = applyRegen(now, {
+        hp: player.stats.currentHP,
+        sp: player.stats.currentSP,
+        maxHp: player.stats.maxHP,
+        maxSp: player.stats.maxSP,
+        hpRegenPerMin: player.stats.hpRegenPerMin ?? 100,
+        spRegenPerMin: player.stats.spRegenPerMin ?? 100,
+        lastRegenAt: player.stats.lastRegenAt,
+      });
+
+      // Update player stats if regen occurred
+      if (regenResult.didUpdate) {
+        await ctx.db.playerStats.update({
+          where: { playerId: player.id },
+          data: {
+            currentHP: regenResult.hp,
+            currentSP: regenResult.sp,
+            lastRegenAt: regenResult.lastRegenAt,
+          },
+        });
+        player.stats.currentHP = regenResult.hp;
+        player.stats.currentSP = regenResult.sp;
+        player.stats.lastRegenAt = regenResult.lastRegenAt;
+      }
+
+      // Sync Character with PlayerStats after regen
+      await syncCharacterWithPlayerStats(
+        userId,
+        {
+          currentHP: player.stats.currentHP,
+          maxHP: player.stats.maxHP,
+          currentSP: player.stats.currentSP,
+          maxSP: player.stats.maxSP,
+          vitality: player.stats.vitality,
+          strength: player.stats.strength,
+          speed: player.stats.speed,
+          dexterity: player.stats.dexterity,
+        },
+        ctx.db
+      );
 
       // Append flee message to log
       const currentLog = Array.isArray(battle.log) ? battle.log : [];

@@ -1,3 +1,8 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { api } from "~/trpc/react";
+
 type ProfileStatsCardProps = {
   vitality: number;
   strength: number;
@@ -7,6 +12,8 @@ type ProfileStatsCardProps = {
   currentHP: number;
   maxSP: number;
   currentSP: number;
+  hpRegenPerMin?: number;
+  spRegenPerMin?: number;
 };
 
 export function ProfileStatsCard({
@@ -14,17 +21,170 @@ export function ProfileStatsCard({
   strength,
   speed,
   dexterity,
-  maxHP,
-  currentHP,
-  maxSP,
-  currentSP,
+  maxHP: initialMaxHP,
+  currentHP: initialCurrentHP,
+  maxSP: initialMaxSP,
+  currentSP: initialCurrentSP,
+  hpRegenPerMin: initialHpRegenPerMin = 100,
+  spRegenPerMin: initialSpRegenPerMin = 100,
 }: ProfileStatsCardProps) {
+  // Fetch real-time data
+  const { data: player } = api.player.getCurrent.useQuery(undefined, {
+    refetchInterval: 5000,
+    retry: false,
+  });
+
+  const { data: character } = api.character.getOrCreateCurrent.useQuery(undefined, {
+    refetchInterval: 5000,
+  });
+
+  // Real-time interpolation state
+  const [interpolatedHp, setInterpolatedHp] = useState<number | null>(null);
+  const [interpolatedStamina, setInterpolatedStamina] = useState<number | null>(null);
+  const baseHpRef = useRef<number | null>(null);
+  const baseStaminaRef = useRef<number | null>(null);
+  const maxHpRef = useRef<number | null>(null);
+  const maxStaminaRef = useRef<number | null>(null);
+  const hpRegenPerSecRef = useRef<number>(0);
+  const spRegenPerSecRef = useRef<number>(0);
+  const lastHpSyncRef = useRef<number | null>(null);
+  const lastSpSyncRef = useRef<number | null>(null);
+
+  // Check for active battle (only after we have player/character data to ensure context is ready)
+  const { data: activeBattle } = api.battle.getActiveBattle.useQuery(undefined, {
+    refetchInterval: 2000,
+    retry: false,
+    enabled: player !== undefined || character !== undefined, // Only query after we have some data
+  });
+  const isInBattle = activeBattle?.status === "ACTIVE" ?? false;
+
+  // Use PlayerStats for HP/SP (with regen applied) if available, otherwise fall back to Character or initial props
+  const serverCurrentHp = player?.stats?.currentHP ?? character?.currentHp ?? initialCurrentHP;
+  const serverMaxHp = player?.stats?.maxHP ?? character?.maxHp ?? initialMaxHP;
+  const serverCurrentStamina = player?.stats?.currentSP ?? character?.currentStamina ?? initialCurrentSP;
+  const serverMaxStamina = player?.stats?.maxSP ?? character?.maxStamina ?? initialMaxSP;
+  const hpRegenPerMin = player?.stats?.hpRegenPerMin ?? initialHpRegenPerMin;
+  const spRegenPerMin = player?.stats?.spRegenPerMin ?? initialSpRegenPerMin;
+
+  // Calculate interpolated value based on elapsed time from base
+  const calculateInterpolatedValue = (
+    base: number,
+    max: number,
+    regenPerSec: number,
+    lastSyncTime: number
+  ): number => {
+    if (base >= max) return max;
+    const now = Date.now();
+    const elapsedSeconds = (now - lastSyncTime) / 1000;
+    const regenAmount = elapsedSeconds * regenPerSec;
+    return Math.min(max, base + regenAmount);
+  };
+
+  // Update base values when server data changes
+  useEffect(() => {
+    if (serverCurrentHp !== null && serverCurrentStamina !== null) {
+      // Check if pools are already at max
+      const hpIsFull = serverCurrentHp >= serverMaxHp;
+      const staminaIsFull = serverCurrentStamina >= serverMaxStamina;
+
+      // Check if we need to sync with server (significant difference indicates combat damage or server update)
+      const currentInterpolatedHp = interpolatedHp ?? baseHpRef.current ?? serverCurrentHp;
+      const currentInterpolatedStamina = interpolatedStamina ?? baseStaminaRef.current ?? serverCurrentStamina;
+      
+      const hpDiff = Math.abs(currentInterpolatedHp - serverCurrentHp);
+      const staminaDiff = Math.abs(currentInterpolatedStamina - serverCurrentStamina);
+
+      // Sync base values if server value is significantly different (combat damage) or if not initialized
+      if (baseHpRef.current === null || (hpDiff > 0.1 && serverCurrentHp < currentInterpolatedHp)) {
+        baseHpRef.current = serverCurrentHp;
+        lastHpSyncRef.current = Date.now();
+        if (hpIsFull) {
+          setInterpolatedHp(serverMaxHp);
+        } else {
+          setInterpolatedHp(serverCurrentHp);
+        }
+      }
+
+      if (baseStaminaRef.current === null || (staminaDiff > 0.1 && serverCurrentStamina < currentInterpolatedStamina)) {
+        baseStaminaRef.current = serverCurrentStamina;
+        if (!lastSpSyncRef.current) {
+          lastSpSyncRef.current = Date.now();
+        }
+        if (staminaIsFull) {
+          setInterpolatedStamina(serverMaxStamina);
+        } else {
+          setInterpolatedStamina(serverCurrentStamina);
+        }
+      }
+
+      // If pools are full, ensure they stay at max
+      if (hpIsFull && interpolatedHp !== serverMaxHp) {
+        setInterpolatedHp(serverMaxHp);
+      }
+      if (staminaIsFull && interpolatedStamina !== serverMaxStamina) {
+        setInterpolatedStamina(serverMaxStamina);
+      }
+
+      maxHpRef.current = serverMaxHp;
+      maxStaminaRef.current = serverMaxStamina;
+      hpRegenPerSecRef.current = hpRegenPerMin / 60;
+      spRegenPerSecRef.current = spRegenPerMin / 60;
+    }
+  }, [serverCurrentHp, serverCurrentStamina, serverMaxHp, serverMaxStamina, hpRegenPerMin, spRegenPerMin, interpolatedHp, interpolatedStamina]);
+
+  // Real-time interpolation effect - calculate based on elapsed time
+  // DISABLED during active battle
+  useEffect(() => {
+    if (baseHpRef.current === null || baseStaminaRef.current === null || isInBattle) {
+      // If in battle, use server values directly (no interpolation)
+      if (isInBattle) {
+        setInterpolatedHp(serverCurrentHp);
+        setInterpolatedStamina(serverCurrentStamina);
+      }
+      return;
+    }
+
+    const interval = setInterval(() => {
+      if (maxHpRef.current !== null && maxStaminaRef.current !== null && baseHpRef.current !== null && baseStaminaRef.current !== null) {
+        // Calculate HP interpolation (only if lastHpSyncRef is set)
+        if (lastHpSyncRef.current !== null) {
+          const newHp = calculateInterpolatedValue(
+            baseHpRef.current,
+            maxHpRef.current,
+            hpRegenPerSecRef.current,
+            lastHpSyncRef.current
+          );
+          setInterpolatedHp(newHp);
+        }
+
+        // Calculate Stamina interpolation (only if lastSpSyncRef is set)
+        if (lastSpSyncRef.current !== null) {
+          const newStamina = calculateInterpolatedValue(
+            baseStaminaRef.current,
+            maxStaminaRef.current,
+            spRegenPerSecRef.current,
+            lastSpSyncRef.current
+          );
+          setInterpolatedStamina(newStamina);
+        }
+      }
+    }, 100); // Update every 100ms for smooth animation
+
+    return () => clearInterval(interval);
+  }, [isInBattle, serverCurrentHp, serverCurrentStamina]);
+
   const stats = [
     { label: "Vitality", value: vitality, color: "text-red-400" },
     { label: "Strength", value: strength, color: "text-orange-400" },
     { label: "Speed", value: speed, color: "text-yellow-400" },
     { label: "Dexterity", value: dexterity, color: "text-green-400" },
   ];
+
+  // Use interpolated values if available, otherwise fall back to server values
+  const currentHP = interpolatedHp !== null ? interpolatedHp : serverCurrentHp;
+  const maxHP = serverMaxHp;
+  const currentSP = interpolatedStamina !== null ? interpolatedStamina : serverCurrentStamina;
+  const maxSP = serverMaxStamina;
 
   const hpPercentage = (currentHP / maxHP) * 100;
   const spPercentage = (currentSP / maxSP) * 100;
@@ -51,13 +211,13 @@ export function ProfileStatsCard({
           <div className="mb-1 flex items-center justify-between text-xs">
             <span className="text-slate-400">HP</span>
             <span className="font-medium text-slate-300">
-              {currentHP} / {maxHP}
+              {Math.floor(currentHP)} / {maxHP}
             </span>
           </div>
           <div className="h-2 overflow-hidden rounded-full bg-slate-700/50">
             <div
-              className="h-full bg-gradient-to-r from-red-500 to-red-600 transition-all shadow-[0_0_8px_rgba(239,68,68,0.5)]"
-              style={{ width: `${hpPercentage}%` }}
+              className="h-full bg-gradient-to-r from-red-500 to-red-600 transition-all duration-100 shadow-[0_0_8px_rgba(239,68,68,0.5)]"
+              style={{ width: `${Math.min(100, Math.max(0, hpPercentage))}%` }}
             />
           </div>
         </div>
@@ -66,14 +226,24 @@ export function ProfileStatsCard({
           <div className="mb-1 flex items-center justify-between text-xs">
             <span className="text-slate-400">Stamina</span>
             <span className="font-medium text-slate-300">
-              {currentSP} / {maxSP}
+              {Math.floor(currentSP)} / {maxSP}
             </span>
           </div>
           <div className="h-2 overflow-hidden rounded-full bg-slate-700/50">
             <div
-              className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 transition-all shadow-[0_0_8px_rgba(34,211,238,0.5)]"
-              style={{ width: `${spPercentage}%` }}
+              className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-100 shadow-[0_0_8px_rgba(34,211,238,0.5)]"
+              style={{ width: `${Math.min(100, Math.max(0, spPercentage))}%` }}
             />
+          </div>
+        </div>
+
+        {/* Regen Display */}
+        <div className="mt-4 rounded-lg border border-slate-700/50 bg-slate-800/30 p-3">
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-slate-400">Regen</span>
+            <span className="font-medium text-cyan-400">
+              HP +{hpRegenPerMin ?? 100}/min • SP +{spRegenPerMin ?? 100}/min
+            </span>
           </div>
         </div>
       </div>

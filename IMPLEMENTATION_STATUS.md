@@ -104,6 +104,35 @@
 6. Win grants XP and gold, loss ends battle
 7. Flee option available at any time
 
+### ✅ Real-Time Regeneration System
+- Server-authoritative HP/SP regeneration over real time
+- Base regen: 100 HP per minute and 100 SP per minute
+- Pools refill until max HP/SP over real time
+- Whole-minute tick system prevents fractional rounding and double-dipping
+
+**How It Works:**
+- Regen is computed using `lastRegenAt` timestamp and whole-minute ticks
+- Formula: `elapsedMs = now - lastRegenAt`, `regenTicks = floor(elapsedMs / 60000)`
+- HP/SP updated: `hp = min(maxHp, hp + regenTicks * hpRegenPerMin)`
+- `lastRegenAt` is updated by the amount of time actually consumed in ticks
+- Regen is constant and always applies when character is "touched" (any interaction)
+- Works even when player is AFK or offline - regen applies based on elapsed real time
+
+**Database Fields (PlayerStats):**
+- `hpRegenPerMin` (Int, default 100)
+- `spRegenPerMin` (Int, default 100)
+- `lastRegenAt` (DateTime, default now())
+
+**Integration Points:**
+- `player.getCurrent` - Applies regen when fetching profile/hub (constant regen, regardless of battle status)
+- Character creation - Sets `lastRegenAt` to current time and pools to max
+- Note: Regen is NOT applied when entering battle - players enter with current HP/SP values
+
+**Helper Function:**
+- `src/server/regen/applyRegen.ts` - Core regen calculation logic
+- Returns updated HP/SP values and `didUpdate` boolean
+- All calculations use integers (no floating point)
+
 ## Phase 2: Persistence (In Progress)
 
 ### Pending:

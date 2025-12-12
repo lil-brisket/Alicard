@@ -76,7 +76,7 @@ export default async function HubPage() {
           {/* Left column: md:col-span-5 */}
           <section className="space-y-4 md:col-span-5">
             {/* character card */}
-            <CharacterSummaryCard character={character} />
+            <CharacterSummaryCard />
             {/* stats card */}
             <CoreStatsCard
               vitality={character.vitality}

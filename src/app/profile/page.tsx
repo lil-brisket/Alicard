@@ -42,23 +42,54 @@ export default async function ProfilePage() {
     );
   }
 
-  // Get HP/SP from player stats if available
+  // Get HP/SP from player stats if available, but sync with Character for max values
   // TODO: Get HP/SP from profile stats or player stats
   let maxHP = 100;
   let currentHP = 100;
   let maxSP = 50;
   let currentSP = 50;
+  let hpRegenPerMin: number | undefined;
+  let spRegenPerMin: number | undefined;
   
   try {
+    // Get Character first to get the correct max values
+    const character = await api.character.getOrCreateCurrent();
+    
+    // Calculate correct max values from Character stats
+    // HP = 50 + (Vitality * 5)
+    // SP = 20 + (Vitality * 2) + (Speed * 1)
+    const calculatedMaxHP = 50 + (character.vitality * 5);
+    const calculatedMaxSP = 20 + (character.vitality * 2) + (character.speed * 1);
+    
+    // Use Character values as source of truth for max
+    maxHP = character.maxHp ?? calculatedMaxHP;
+    maxSP = character.maxStamina ?? calculatedMaxSP;
+    currentHP = character.currentHp;
+    currentSP = character.currentStamina;
+    
+    // Get regen values from PlayerStats if available
     const user = await api.player.getCurrent();
     if (user?.stats) {
-      maxHP = user.stats.maxHP;
+      // Use PlayerStats current values (with regen applied) but keep Character max values
       currentHP = user.stats.currentHP;
-      maxSP = user.stats.maxSP;
       currentSP = user.stats.currentSP;
+      // Get regen values - base is always 100 for all accounts
+      hpRegenPerMin = user.stats.hpRegenPerMin ?? 100;
+      spRegenPerMin = user.stats.spRegenPerMin ?? 100;
+      
+      // Ensure max values match Character (they should be synced by getCurrent, but double-check)
+      maxHP = user.stats.maxHP ?? calculatedMaxHP;
+      maxSP = user.stats.maxSP ?? calculatedMaxSP;
+    } else {
+      // If player doesn't exist yet, still show default regen values (base is 100)
+      hpRegenPerMin = 100;
+      spRegenPerMin = 100;
     }
-  } catch {
+  } catch (error) {
     // Player might not exist, use defaults
+    // Regen base is always 100 for all accounts
+    hpRegenPerMin = 100;
+    spRegenPerMin = 100;
   }
 
   return (
@@ -98,6 +129,8 @@ export default async function ProfilePage() {
               currentHP={currentHP}
               maxSP={maxSP}
               currentSP={currentSP}
+              hpRegenPerMin={hpRegenPerMin}
+              spRegenPerMin={spRegenPerMin}
             />
           </section>
 

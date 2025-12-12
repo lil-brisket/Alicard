@@ -5,6 +5,7 @@ import {
   protectedProcedure,
   publicProcedure,
 } from "~/server/api/trpc";
+import { applyRegen } from "~/server/regen/applyRegen";
 
 export const characterRouter = createTRPCRouter({
   // Get or create the main character for the current user
@@ -58,6 +59,64 @@ export const characterRouter = createTRPCRouter({
           location: "Town Square",
         },
       });
+    } else {
+      // Apply regen if character exists (server-authoritative)
+      const player = await ctx.db.player.findUnique({
+        where: { userId },
+        include: { stats: true },
+      });
+
+      if (player?.stats) {
+        const now = new Date();
+        
+        // Ensure lastRegenAt is set
+        if (!player.stats.lastRegenAt) {
+          const initialLastRegenAt = character.createdAt 
+            ? new Date(character.createdAt)
+            : new Date(now.getTime() - 60000);
+          
+          await ctx.db.playerStats.update({
+            where: { playerId: player.id },
+            data: { lastRegenAt: initialLastRegenAt },
+          });
+          player.stats.lastRegenAt = initialLastRegenAt;
+        }
+
+        const regenResult = applyRegen(now, {
+          hp: player.stats.currentHP,
+          sp: player.stats.currentSP,
+          maxHp: player.stats.maxHP,
+          maxSp: player.stats.maxSP,
+          hpRegenPerMin: player.stats.hpRegenPerMin ?? 100,
+          spRegenPerMin: player.stats.spRegenPerMin ?? 100,
+          lastRegenAt: player.stats.lastRegenAt,
+        });
+
+        // Update player stats if regen occurred
+        if (regenResult.didUpdate) {
+          await ctx.db.playerStats.update({
+            where: { playerId: player.id },
+            data: {
+              currentHP: regenResult.hp,
+              currentSP: regenResult.sp,
+              lastRegenAt: regenResult.lastRegenAt,
+            },
+          });
+
+          // Sync Character with PlayerStats after regen
+          await ctx.db.character.update({
+            where: { id: character.id },
+            data: {
+              currentHp: regenResult.hp,
+              currentStamina: regenResult.sp,
+            },
+          });
+
+          // Update character object for return
+          character.currentHp = regenResult.hp;
+          character.currentStamina = regenResult.sp;
+        }
+      }
     }
 
     return character;

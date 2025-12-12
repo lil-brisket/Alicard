@@ -132,19 +132,22 @@ model Player {
 }
 
 model PlayerStats {
-  id         String   @id @default(cuid())
-  playerId   String   @unique
-  vitality   Int      @default(10)
-  strength   Int      @default(10)
-  speed      Int      @default(10)
-  dexterity  Int      @default(10)
-  maxHP      Int      @default(100)
-  currentHP  Int      @default(100)
-  maxSP      Int      @default(50)
-  currentSP  Int      @default(50)
-  statPoints Int      @default(0)
-  updatedAt  DateTime @updatedAt
-  player     Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  id             String   @id @default(cuid())
+  playerId       String   @unique
+  vitality       Int      @default(10)
+  strength       Int      @default(10)
+  speed          Int      @default(10)
+  dexterity      Int      @default(10)
+  maxHP          Int      @default(100)
+  currentHP      Int      @default(100)
+  maxSP          Int      @default(50)
+  currentSP      Int      @default(50)
+  statPoints     Int      @default(0)
+  hpRegenPerMin  Int      @default(100)
+  spRegenPerMin  Int      @default(100)
+  lastRegenAt    DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  player         Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
 }
 
 model MapTile {
