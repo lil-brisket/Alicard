@@ -1,10 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { api } from "~/trpc/react";
 import Link from "next/link";
 
 export default function CombatPage() {
   const utils = api.useUtils();
+  const [error, setError] = useState<string | null>(null);
   const { data: activeBattle, isLoading: battleLoading } =
     api.battle.getActiveBattle.useQuery();
   const { data: monsters, isLoading: monstersLoading } =
@@ -13,19 +15,35 @@ export default function CombatPage() {
 
   const startBattle = api.battle.startBattle.useMutation({
     onSuccess: async () => {
+      setError(null);
       await utils.battle.getActiveBattle.invalidate();
+      await utils.battle.getActiveBattle.refetch();
+    },
+    onError: (error) => {
+      setError(error.message || "Failed to start battle");
+      console.error("Start battle error:", error);
     },
   });
 
   const attack = api.battle.attack.useMutation({
     onSuccess: async () => {
+      setError(null);
       await utils.battle.getActiveBattle.invalidate();
+    },
+    onError: (error) => {
+      setError(error.message || "Failed to attack");
+      console.error("Attack error:", error);
     },
   });
 
   const flee = api.battle.flee.useMutation({
     onSuccess: async () => {
+      setError(null);
       await utils.battle.getActiveBattle.invalidate();
+    },
+    onError: (error) => {
+      setError(error.message || "Failed to flee");
+      console.error("Flee error:", error);
     },
   });
 
@@ -48,6 +66,12 @@ export default function CombatPage() {
       <div className="min-h-screen bg-slate-950 text-slate-100">
         <div className="mx-auto max-w-5xl p-4 md:p-8">
           <h1 className="text-2xl font-bold text-cyan-400">Combat</h1>
+
+          {error && (
+            <div className="mt-4 rounded-xl border border-red-500/50 bg-red-500/10 p-4 text-red-400">
+              {error}
+            </div>
+          )}
 
           <div className="mt-6 space-y-6">
             {/* Battle Status */}
@@ -180,12 +204,18 @@ export default function CombatPage() {
 
   // Show monster selection if no active battle
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-5xl p-4 md:p-8">
-        <h1 className="text-2xl font-bold text-cyan-400">Combat</h1>
-        <p className="mt-2 text-slate-400">
-          Select a monster to start a battle
-        </p>
+      <div className="min-h-screen bg-slate-950 text-slate-100">
+        <div className="mx-auto max-w-5xl p-4 md:p-8">
+          <h1 className="text-2xl font-bold text-cyan-400">Combat</h1>
+          <p className="mt-2 text-slate-400">
+            Select a monster to start a battle
+          </p>
+
+          {error && (
+            <div className="mt-4 rounded-xl border border-red-500/50 bg-red-500/10 p-4 text-red-400">
+              {error}
+            </div>
+          )}
 
         <div className="mt-6">
           {!monsters || monsters.length === 0 ? (
@@ -218,8 +248,19 @@ export default function CombatPage() {
                     </div>
                   </div>
                   <button
+                    type="button"
                     onClick={() => {
-                      startBattle.mutate({ monsterId: monster.id });
+                      setError(null);
+                      console.log("Starting battle with monster:", monster.id);
+                      startBattle.mutate(
+                        { monsterId: monster.id },
+                        {
+                          onError: (error) => {
+                            console.error("Mutation error:", error);
+                            setError(error.message || "Failed to start battle");
+                          },
+                        }
+                      );
                     }}
                     disabled={startBattle.isPending}
                     className="mt-4 w-full rounded-xl bg-cyan-500/20 px-4 py-2 font-semibold text-cyan-400 transition hover:bg-cyan-500/30 disabled:opacity-50"
