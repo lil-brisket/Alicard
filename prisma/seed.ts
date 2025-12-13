@@ -23,6 +23,122 @@ const prisma = new PrismaClient({
 async function main() {
   console.log("🌱 Starting seed...");
 
+  // Create default world (20x20)
+  console.log("Creating default world...");
+  const defaultWorld = await prisma.world.upsert({
+    where: { id: "default-world" },
+    update: {},
+    create: {
+      id: "default-world",
+      name: "Alicard",
+      width: 20,
+      height: 20,
+    },
+  });
+
+  // Generate tiles for the world
+  console.log("Generating tiles for world...");
+  const tiles: Array<{
+    worldId: string;
+    x: number;
+    y: number;
+    tileType: string;
+    zoneType: string;
+    isSafeZone: boolean;
+    description: string;
+  }> = [];
+
+  for (let y = 0; y < 20; y++) {
+    for (let x = 0; x < 20; x++) {
+      // Center town at (10, 10)
+      const distanceFromCenter = Math.sqrt(
+        Math.pow(x - 10, 2) + Math.pow(y - 10, 2)
+      );
+
+      let tileType: string;
+      let zoneType: string;
+      let isSafeZone: boolean;
+      let description: string;
+
+      if (distanceFromCenter < 2) {
+        // Town center
+        tileType = "TOWN";
+        zoneType = "SAFE";
+        isSafeZone = true;
+        description = "Town Square";
+      } else if (distanceFromCenter < 3) {
+        // Road around town
+        tileType = "ROAD";
+        zoneType = "SAFE";
+        isSafeZone = true;
+        description = "Town Road";
+      } else if (
+        (x >= 5 && x <= 8 && y >= 5 && y <= 8) ||
+        (x >= 12 && x <= 15 && y >= 12 && y <= 15)
+      ) {
+        // Water areas
+        tileType = "WATER";
+        zoneType = "LOW_DANGER";
+        isSafeZone = false;
+        description = "Shallow Water";
+      } else if (
+        (x >= 2 && x <= 6 && y >= 2 && y <= 6) ||
+        (x >= 14 && x <= 18 && y >= 14 && y <= 18)
+      ) {
+        // Forest areas
+        tileType = "FOREST";
+        zoneType = distanceFromCenter < 8 ? "LOW_DANGER" : "MEDIUM_DANGER";
+        isSafeZone = false;
+        description = "Dense Forest";
+      } else {
+        // Mostly plain/grass
+        tileType = distanceFromCenter < 5 ? "ROAD" : "PLAIN";
+        zoneType =
+          distanceFromCenter < 5
+            ? "SAFE"
+            : distanceFromCenter < 10
+            ? "LOW_DANGER"
+            : "MEDIUM_DANGER";
+        isSafeZone = distanceFromCenter < 5;
+        description =
+          tileType === "ROAD" ? "Well-traveled Road" : "Grassy Plain";
+      }
+
+      tiles.push({
+        worldId: defaultWorld.id,
+        x,
+        y,
+        tileType,
+        zoneType,
+        isSafeZone,
+        description,
+      });
+    }
+  }
+
+  // Batch create tiles (in chunks to avoid overwhelming the DB)
+  const chunkSize = 100;
+  for (let i = 0; i < tiles.length; i += chunkSize) {
+    const chunk = tiles.slice(i, i + chunkSize);
+    await Promise.all(
+      chunk.map((tile) =>
+        prisma.mapTile.upsert({
+          where: {
+            worldId_x_y: {
+              worldId: tile.worldId,
+              x: tile.x,
+              y: tile.y,
+            },
+          },
+          update: {},
+          create: tile,
+        })
+      )
+    );
+  }
+
+  console.log(`✅ Created ${tiles.length} tiles for world`);
+
   // Create base jobs
   const jobs = [
     {

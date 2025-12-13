@@ -2,10 +2,10 @@
 
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { MapGrid } from "../world-map/_components/map-grid";
-import { MovementControls } from "../world-map/_components/movement-controls";
+import { MapGrid } from "./_components/map-grid";
+import { MovementControls } from "./_components/movement-controls";
 
-export default function WorldPage() {
+export default function WorldMapPage() {
   const { data: session, status } = useSession();
 
   if (status === "loading") {

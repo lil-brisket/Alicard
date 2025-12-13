@@ -41,6 +41,7 @@ export type MapPositionSumAggregateOutputType = {
 export type MapPositionMinAggregateOutputType = {
   id: string | null
   playerId: string | null
+  worldId: string | null
   tileX: number | null
   tileY: number | null
   tileId: number | null
@@ -50,6 +51,7 @@ export type MapPositionMinAggregateOutputType = {
 export type MapPositionMaxAggregateOutputType = {
   id: string | null
   playerId: string | null
+  worldId: string | null
   tileX: number | null
   tileY: number | null
   tileId: number | null
@@ -59,6 +61,7 @@ export type MapPositionMaxAggregateOutputType = {
 export type MapPositionCountAggregateOutputType = {
   id: number
   playerId: number
+  worldId: number
   tileX: number
   tileY: number
   tileId: number
@@ -82,6 +85,7 @@ export type MapPositionSumAggregateInputType = {
 export type MapPositionMinAggregateInputType = {
   id?: true
   playerId?: true
+  worldId?: true
   tileX?: true
   tileY?: true
   tileId?: true
@@ -91,6 +95,7 @@ export type MapPositionMinAggregateInputType = {
 export type MapPositionMaxAggregateInputType = {
   id?: true
   playerId?: true
+  worldId?: true
   tileX?: true
   tileY?: true
   tileId?: true
@@ -100,6 +105,7 @@ export type MapPositionMaxAggregateInputType = {
 export type MapPositionCountAggregateInputType = {
   id?: true
   playerId?: true
+  worldId?: true
   tileX?: true
   tileY?: true
   tileId?: true
@@ -196,6 +202,7 @@ export type MapPositionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type MapPositionGroupByOutputType = {
   id: string
   playerId: string
+  worldId: string
   tileX: number
   tileY: number
   tileId: number | null
@@ -228,23 +235,27 @@ export type MapPositionWhereInput = {
   NOT?: Prisma.MapPositionWhereInput | Prisma.MapPositionWhereInput[]
   id?: Prisma.StringFilter<"MapPosition"> | string
   playerId?: Prisma.StringFilter<"MapPosition"> | string
+  worldId?: Prisma.StringFilter<"MapPosition"> | string
   tileX?: Prisma.IntFilter<"MapPosition"> | number
   tileY?: Prisma.IntFilter<"MapPosition"> | number
   tileId?: Prisma.IntNullableFilter<"MapPosition"> | number | null
   updatedAt?: Prisma.DateTimeFilter<"MapPosition"> | Date | string
   player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
   tile?: Prisma.XOR<Prisma.MapTileNullableScalarRelationFilter, Prisma.MapTileWhereInput> | null
+  world?: Prisma.XOR<Prisma.WorldScalarRelationFilter, Prisma.WorldWhereInput>
 }
 
 export type MapPositionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
+  worldId?: Prisma.SortOrder
   tileX?: Prisma.SortOrder
   tileY?: Prisma.SortOrder
   tileId?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   player?: Prisma.PlayerOrderByWithRelationInput
   tile?: Prisma.MapTileOrderByWithRelationInput
+  world?: Prisma.WorldOrderByWithRelationInput
 }
 
 export type MapPositionWhereUniqueInput = Prisma.AtLeast<{
@@ -253,17 +264,20 @@ export type MapPositionWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.MapPositionWhereInput | Prisma.MapPositionWhereInput[]
   OR?: Prisma.MapPositionWhereInput[]
   NOT?: Prisma.MapPositionWhereInput | Prisma.MapPositionWhereInput[]
+  worldId?: Prisma.StringFilter<"MapPosition"> | string
   tileX?: Prisma.IntFilter<"MapPosition"> | number
   tileY?: Prisma.IntFilter<"MapPosition"> | number
   tileId?: Prisma.IntNullableFilter<"MapPosition"> | number | null
   updatedAt?: Prisma.DateTimeFilter<"MapPosition"> | Date | string
   player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
   tile?: Prisma.XOR<Prisma.MapTileNullableScalarRelationFilter, Prisma.MapTileWhereInput> | null
+  world?: Prisma.XOR<Prisma.WorldScalarRelationFilter, Prisma.WorldWhereInput>
 }, "id" | "playerId">
 
 export type MapPositionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
+  worldId?: Prisma.SortOrder
   tileX?: Prisma.SortOrder
   tileY?: Prisma.SortOrder
   tileId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -281,6 +295,7 @@ export type MapPositionScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MapPositionScalarWhereWithAggregatesInput | Prisma.MapPositionScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"MapPosition"> | string
   playerId?: Prisma.StringWithAggregatesFilter<"MapPosition"> | string
+  worldId?: Prisma.StringWithAggregatesFilter<"MapPosition"> | string
   tileX?: Prisma.IntWithAggregatesFilter<"MapPosition"> | number
   tileY?: Prisma.IntWithAggregatesFilter<"MapPosition"> | number
   tileId?: Prisma.IntNullableWithAggregatesFilter<"MapPosition"> | number | null
@@ -294,11 +309,13 @@ export type MapPositionCreateInput = {
   updatedAt?: Date | string
   player: Prisma.PlayerCreateNestedOneWithoutPositionInput
   tile?: Prisma.MapTileCreateNestedOneWithoutPositionsInput
+  world: Prisma.WorldCreateNestedOneWithoutPositionsInput
 }
 
 export type MapPositionUncheckedCreateInput = {
   id?: string
   playerId: string
+  worldId: string
   tileX: number
   tileY: number
   tileId?: number | null
@@ -312,11 +329,13 @@ export type MapPositionUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   player?: Prisma.PlayerUpdateOneRequiredWithoutPositionNestedInput
   tile?: Prisma.MapTileUpdateOneWithoutPositionsNestedInput
+  world?: Prisma.WorldUpdateOneRequiredWithoutPositionsNestedInput
 }
 
 export type MapPositionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  worldId?: Prisma.StringFieldUpdateOperationsInput | string
   tileX?: Prisma.IntFieldUpdateOperationsInput | number
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
   tileId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -326,6 +345,7 @@ export type MapPositionUncheckedUpdateInput = {
 export type MapPositionCreateManyInput = {
   id?: string
   playerId: string
+  worldId: string
   tileX: number
   tileY: number
   tileId?: number | null
@@ -342,6 +362,7 @@ export type MapPositionUpdateManyMutationInput = {
 export type MapPositionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  worldId?: Prisma.StringFieldUpdateOperationsInput | string
   tileX?: Prisma.IntFieldUpdateOperationsInput | number
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
   tileId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -366,6 +387,7 @@ export type MapPositionOrderByRelationAggregateInput = {
 export type MapPositionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
+  worldId?: Prisma.SortOrder
   tileX?: Prisma.SortOrder
   tileY?: Prisma.SortOrder
   tileId?: Prisma.SortOrder
@@ -381,6 +403,7 @@ export type MapPositionAvgOrderByAggregateInput = {
 export type MapPositionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
+  worldId?: Prisma.SortOrder
   tileX?: Prisma.SortOrder
   tileY?: Prisma.SortOrder
   tileId?: Prisma.SortOrder
@@ -390,6 +413,7 @@ export type MapPositionMaxOrderByAggregateInput = {
 export type MapPositionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
+  worldId?: Prisma.SortOrder
   tileX?: Prisma.SortOrder
   tileY?: Prisma.SortOrder
   tileId?: Prisma.SortOrder
@@ -432,6 +456,48 @@ export type MapPositionUncheckedUpdateOneWithoutPlayerNestedInput = {
   delete?: Prisma.MapPositionWhereInput | boolean
   connect?: Prisma.MapPositionWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.MapPositionUpdateToOneWithWhereWithoutPlayerInput, Prisma.MapPositionUpdateWithoutPlayerInput>, Prisma.MapPositionUncheckedUpdateWithoutPlayerInput>
+}
+
+export type MapPositionCreateNestedManyWithoutWorldInput = {
+  create?: Prisma.XOR<Prisma.MapPositionCreateWithoutWorldInput, Prisma.MapPositionUncheckedCreateWithoutWorldInput> | Prisma.MapPositionCreateWithoutWorldInput[] | Prisma.MapPositionUncheckedCreateWithoutWorldInput[]
+  connectOrCreate?: Prisma.MapPositionCreateOrConnectWithoutWorldInput | Prisma.MapPositionCreateOrConnectWithoutWorldInput[]
+  createMany?: Prisma.MapPositionCreateManyWorldInputEnvelope
+  connect?: Prisma.MapPositionWhereUniqueInput | Prisma.MapPositionWhereUniqueInput[]
+}
+
+export type MapPositionUncheckedCreateNestedManyWithoutWorldInput = {
+  create?: Prisma.XOR<Prisma.MapPositionCreateWithoutWorldInput, Prisma.MapPositionUncheckedCreateWithoutWorldInput> | Prisma.MapPositionCreateWithoutWorldInput[] | Prisma.MapPositionUncheckedCreateWithoutWorldInput[]
+  connectOrCreate?: Prisma.MapPositionCreateOrConnectWithoutWorldInput | Prisma.MapPositionCreateOrConnectWithoutWorldInput[]
+  createMany?: Prisma.MapPositionCreateManyWorldInputEnvelope
+  connect?: Prisma.MapPositionWhereUniqueInput | Prisma.MapPositionWhereUniqueInput[]
+}
+
+export type MapPositionUpdateManyWithoutWorldNestedInput = {
+  create?: Prisma.XOR<Prisma.MapPositionCreateWithoutWorldInput, Prisma.MapPositionUncheckedCreateWithoutWorldInput> | Prisma.MapPositionCreateWithoutWorldInput[] | Prisma.MapPositionUncheckedCreateWithoutWorldInput[]
+  connectOrCreate?: Prisma.MapPositionCreateOrConnectWithoutWorldInput | Prisma.MapPositionCreateOrConnectWithoutWorldInput[]
+  upsert?: Prisma.MapPositionUpsertWithWhereUniqueWithoutWorldInput | Prisma.MapPositionUpsertWithWhereUniqueWithoutWorldInput[]
+  createMany?: Prisma.MapPositionCreateManyWorldInputEnvelope
+  set?: Prisma.MapPositionWhereUniqueInput | Prisma.MapPositionWhereUniqueInput[]
+  disconnect?: Prisma.MapPositionWhereUniqueInput | Prisma.MapPositionWhereUniqueInput[]
+  delete?: Prisma.MapPositionWhereUniqueInput | Prisma.MapPositionWhereUniqueInput[]
+  connect?: Prisma.MapPositionWhereUniqueInput | Prisma.MapPositionWhereUniqueInput[]
+  update?: Prisma.MapPositionUpdateWithWhereUniqueWithoutWorldInput | Prisma.MapPositionUpdateWithWhereUniqueWithoutWorldInput[]
+  updateMany?: Prisma.MapPositionUpdateManyWithWhereWithoutWorldInput | Prisma.MapPositionUpdateManyWithWhereWithoutWorldInput[]
+  deleteMany?: Prisma.MapPositionScalarWhereInput | Prisma.MapPositionScalarWhereInput[]
+}
+
+export type MapPositionUncheckedUpdateManyWithoutWorldNestedInput = {
+  create?: Prisma.XOR<Prisma.MapPositionCreateWithoutWorldInput, Prisma.MapPositionUncheckedCreateWithoutWorldInput> | Prisma.MapPositionCreateWithoutWorldInput[] | Prisma.MapPositionUncheckedCreateWithoutWorldInput[]
+  connectOrCreate?: Prisma.MapPositionCreateOrConnectWithoutWorldInput | Prisma.MapPositionCreateOrConnectWithoutWorldInput[]
+  upsert?: Prisma.MapPositionUpsertWithWhereUniqueWithoutWorldInput | Prisma.MapPositionUpsertWithWhereUniqueWithoutWorldInput[]
+  createMany?: Prisma.MapPositionCreateManyWorldInputEnvelope
+  set?: Prisma.MapPositionWhereUniqueInput | Prisma.MapPositionWhereUniqueInput[]
+  disconnect?: Prisma.MapPositionWhereUniqueInput | Prisma.MapPositionWhereUniqueInput[]
+  delete?: Prisma.MapPositionWhereUniqueInput | Prisma.MapPositionWhereUniqueInput[]
+  connect?: Prisma.MapPositionWhereUniqueInput | Prisma.MapPositionWhereUniqueInput[]
+  update?: Prisma.MapPositionUpdateWithWhereUniqueWithoutWorldInput | Prisma.MapPositionUpdateWithWhereUniqueWithoutWorldInput[]
+  updateMany?: Prisma.MapPositionUpdateManyWithWhereWithoutWorldInput | Prisma.MapPositionUpdateManyWithWhereWithoutWorldInput[]
+  deleteMany?: Prisma.MapPositionScalarWhereInput | Prisma.MapPositionScalarWhereInput[]
 }
 
 export type MapPositionCreateNestedManyWithoutTileInput = {
@@ -482,10 +548,12 @@ export type MapPositionCreateWithoutPlayerInput = {
   tileY: number
   updatedAt?: Date | string
   tile?: Prisma.MapTileCreateNestedOneWithoutPositionsInput
+  world: Prisma.WorldCreateNestedOneWithoutPositionsInput
 }
 
 export type MapPositionUncheckedCreateWithoutPlayerInput = {
   id?: string
+  worldId: string
   tileX: number
   tileY: number
   tileId?: number | null
@@ -514,14 +582,73 @@ export type MapPositionUpdateWithoutPlayerInput = {
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tile?: Prisma.MapTileUpdateOneWithoutPositionsNestedInput
+  world?: Prisma.WorldUpdateOneRequiredWithoutPositionsNestedInput
 }
 
 export type MapPositionUncheckedUpdateWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  worldId?: Prisma.StringFieldUpdateOperationsInput | string
   tileX?: Prisma.IntFieldUpdateOperationsInput | number
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
   tileId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type MapPositionCreateWithoutWorldInput = {
+  id?: string
+  tileX: number
+  tileY: number
+  updatedAt?: Date | string
+  player: Prisma.PlayerCreateNestedOneWithoutPositionInput
+  tile?: Prisma.MapTileCreateNestedOneWithoutPositionsInput
+}
+
+export type MapPositionUncheckedCreateWithoutWorldInput = {
+  id?: string
+  playerId: string
+  tileX: number
+  tileY: number
+  tileId?: number | null
+  updatedAt?: Date | string
+}
+
+export type MapPositionCreateOrConnectWithoutWorldInput = {
+  where: Prisma.MapPositionWhereUniqueInput
+  create: Prisma.XOR<Prisma.MapPositionCreateWithoutWorldInput, Prisma.MapPositionUncheckedCreateWithoutWorldInput>
+}
+
+export type MapPositionCreateManyWorldInputEnvelope = {
+  data: Prisma.MapPositionCreateManyWorldInput | Prisma.MapPositionCreateManyWorldInput[]
+  skipDuplicates?: boolean
+}
+
+export type MapPositionUpsertWithWhereUniqueWithoutWorldInput = {
+  where: Prisma.MapPositionWhereUniqueInput
+  update: Prisma.XOR<Prisma.MapPositionUpdateWithoutWorldInput, Prisma.MapPositionUncheckedUpdateWithoutWorldInput>
+  create: Prisma.XOR<Prisma.MapPositionCreateWithoutWorldInput, Prisma.MapPositionUncheckedCreateWithoutWorldInput>
+}
+
+export type MapPositionUpdateWithWhereUniqueWithoutWorldInput = {
+  where: Prisma.MapPositionWhereUniqueInput
+  data: Prisma.XOR<Prisma.MapPositionUpdateWithoutWorldInput, Prisma.MapPositionUncheckedUpdateWithoutWorldInput>
+}
+
+export type MapPositionUpdateManyWithWhereWithoutWorldInput = {
+  where: Prisma.MapPositionScalarWhereInput
+  data: Prisma.XOR<Prisma.MapPositionUpdateManyMutationInput, Prisma.MapPositionUncheckedUpdateManyWithoutWorldInput>
+}
+
+export type MapPositionScalarWhereInput = {
+  AND?: Prisma.MapPositionScalarWhereInput | Prisma.MapPositionScalarWhereInput[]
+  OR?: Prisma.MapPositionScalarWhereInput[]
+  NOT?: Prisma.MapPositionScalarWhereInput | Prisma.MapPositionScalarWhereInput[]
+  id?: Prisma.StringFilter<"MapPosition"> | string
+  playerId?: Prisma.StringFilter<"MapPosition"> | string
+  worldId?: Prisma.StringFilter<"MapPosition"> | string
+  tileX?: Prisma.IntFilter<"MapPosition"> | number
+  tileY?: Prisma.IntFilter<"MapPosition"> | number
+  tileId?: Prisma.IntNullableFilter<"MapPosition"> | number | null
+  updatedAt?: Prisma.DateTimeFilter<"MapPosition"> | Date | string
 }
 
 export type MapPositionCreateWithoutTileInput = {
@@ -530,11 +657,13 @@ export type MapPositionCreateWithoutTileInput = {
   tileY: number
   updatedAt?: Date | string
   player: Prisma.PlayerCreateNestedOneWithoutPositionInput
+  world: Prisma.WorldCreateNestedOneWithoutPositionsInput
 }
 
 export type MapPositionUncheckedCreateWithoutTileInput = {
   id?: string
   playerId: string
+  worldId: string
   tileX: number
   tileY: number
   updatedAt?: Date | string
@@ -566,21 +695,46 @@ export type MapPositionUpdateManyWithWhereWithoutTileInput = {
   data: Prisma.XOR<Prisma.MapPositionUpdateManyMutationInput, Prisma.MapPositionUncheckedUpdateManyWithoutTileInput>
 }
 
-export type MapPositionScalarWhereInput = {
-  AND?: Prisma.MapPositionScalarWhereInput | Prisma.MapPositionScalarWhereInput[]
-  OR?: Prisma.MapPositionScalarWhereInput[]
-  NOT?: Prisma.MapPositionScalarWhereInput | Prisma.MapPositionScalarWhereInput[]
-  id?: Prisma.StringFilter<"MapPosition"> | string
-  playerId?: Prisma.StringFilter<"MapPosition"> | string
-  tileX?: Prisma.IntFilter<"MapPosition"> | number
-  tileY?: Prisma.IntFilter<"MapPosition"> | number
-  tileId?: Prisma.IntNullableFilter<"MapPosition"> | number | null
-  updatedAt?: Prisma.DateTimeFilter<"MapPosition"> | Date | string
+export type MapPositionCreateManyWorldInput = {
+  id?: string
+  playerId: string
+  tileX: number
+  tileY: number
+  tileId?: number | null
+  updatedAt?: Date | string
+}
+
+export type MapPositionUpdateWithoutWorldInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tileX?: Prisma.IntFieldUpdateOperationsInput | number
+  tileY?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  player?: Prisma.PlayerUpdateOneRequiredWithoutPositionNestedInput
+  tile?: Prisma.MapTileUpdateOneWithoutPositionsNestedInput
+}
+
+export type MapPositionUncheckedUpdateWithoutWorldInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  tileX?: Prisma.IntFieldUpdateOperationsInput | number
+  tileY?: Prisma.IntFieldUpdateOperationsInput | number
+  tileId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type MapPositionUncheckedUpdateManyWithoutWorldInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  tileX?: Prisma.IntFieldUpdateOperationsInput | number
+  tileY?: Prisma.IntFieldUpdateOperationsInput | number
+  tileId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MapPositionCreateManyTileInput = {
   id?: string
   playerId: string
+  worldId: string
   tileX: number
   tileY: number
   updatedAt?: Date | string
@@ -592,11 +746,13 @@ export type MapPositionUpdateWithoutTileInput = {
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   player?: Prisma.PlayerUpdateOneRequiredWithoutPositionNestedInput
+  world?: Prisma.WorldUpdateOneRequiredWithoutPositionsNestedInput
 }
 
 export type MapPositionUncheckedUpdateWithoutTileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  worldId?: Prisma.StringFieldUpdateOperationsInput | string
   tileX?: Prisma.IntFieldUpdateOperationsInput | number
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -605,6 +761,7 @@ export type MapPositionUncheckedUpdateWithoutTileInput = {
 export type MapPositionUncheckedUpdateManyWithoutTileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  worldId?: Prisma.StringFieldUpdateOperationsInput | string
   tileX?: Prisma.IntFieldUpdateOperationsInput | number
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -615,57 +772,67 @@ export type MapPositionUncheckedUpdateManyWithoutTileInput = {
 export type MapPositionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   playerId?: boolean
+  worldId?: boolean
   tileX?: boolean
   tileY?: boolean
   tileId?: boolean
   updatedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   tile?: boolean | Prisma.MapPosition$tileArgs<ExtArgs>
+  world?: boolean | Prisma.WorldDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["mapPosition"]>
 
 export type MapPositionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   playerId?: boolean
+  worldId?: boolean
   tileX?: boolean
   tileY?: boolean
   tileId?: boolean
   updatedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   tile?: boolean | Prisma.MapPosition$tileArgs<ExtArgs>
+  world?: boolean | Prisma.WorldDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["mapPosition"]>
 
 export type MapPositionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   playerId?: boolean
+  worldId?: boolean
   tileX?: boolean
   tileY?: boolean
   tileId?: boolean
   updatedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   tile?: boolean | Prisma.MapPosition$tileArgs<ExtArgs>
+  world?: boolean | Prisma.WorldDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["mapPosition"]>
 
 export type MapPositionSelectScalar = {
   id?: boolean
   playerId?: boolean
+  worldId?: boolean
   tileX?: boolean
   tileY?: boolean
   tileId?: boolean
   updatedAt?: boolean
 }
 
-export type MapPositionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "tileX" | "tileY" | "tileId" | "updatedAt", ExtArgs["result"]["mapPosition"]>
+export type MapPositionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "worldId" | "tileX" | "tileY" | "tileId" | "updatedAt", ExtArgs["result"]["mapPosition"]>
 export type MapPositionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   tile?: boolean | Prisma.MapPosition$tileArgs<ExtArgs>
+  world?: boolean | Prisma.WorldDefaultArgs<ExtArgs>
 }
 export type MapPositionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   tile?: boolean | Prisma.MapPosition$tileArgs<ExtArgs>
+  world?: boolean | Prisma.WorldDefaultArgs<ExtArgs>
 }
 export type MapPositionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   tile?: boolean | Prisma.MapPosition$tileArgs<ExtArgs>
+  world?: boolean | Prisma.WorldDefaultArgs<ExtArgs>
 }
 
 export type $MapPositionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -673,10 +840,12 @@ export type $MapPositionPayload<ExtArgs extends runtime.Types.Extensions.Interna
   objects: {
     player: Prisma.$PlayerPayload<ExtArgs>
     tile: Prisma.$MapTilePayload<ExtArgs> | null
+    world: Prisma.$WorldPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     playerId: string
+    worldId: string
     tileX: number
     tileY: number
     tileId: number | null
@@ -1077,6 +1246,7 @@ export interface Prisma__MapPositionClient<T, Null = never, ExtArgs extends runt
   readonly [Symbol.toStringTag]: "PrismaPromise"
   player<T extends Prisma.PlayerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlayerDefaultArgs<ExtArgs>>): Prisma.Prisma__PlayerClient<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tile<T extends Prisma.MapPosition$tileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MapPosition$tileArgs<ExtArgs>>): Prisma.Prisma__MapTileClient<runtime.Types.Result.GetResult<Prisma.$MapTilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  world<T extends Prisma.WorldDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WorldDefaultArgs<ExtArgs>>): Prisma.Prisma__WorldClient<runtime.Types.Result.GetResult<Prisma.$WorldPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1108,6 +1278,7 @@ export interface Prisma__MapPositionClient<T, Null = never, ExtArgs extends runt
 export interface MapPositionFieldRefs {
   readonly id: Prisma.FieldRef<"MapPosition", 'String'>
   readonly playerId: Prisma.FieldRef<"MapPosition", 'String'>
+  readonly worldId: Prisma.FieldRef<"MapPosition", 'String'>
   readonly tileX: Prisma.FieldRef<"MapPosition", 'Int'>
   readonly tileY: Prisma.FieldRef<"MapPosition", 'Int'>
   readonly tileId: Prisma.FieldRef<"MapPosition", 'Int'>

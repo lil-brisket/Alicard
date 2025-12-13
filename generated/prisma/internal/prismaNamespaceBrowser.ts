@@ -59,6 +59,7 @@ export const ModelName = {
   VerificationToken: 'VerificationToken',
   Player: 'Player',
   PlayerStats: 'PlayerStats',
+  World: 'World',
   MapTile: 'MapTile',
   MapPosition: 'MapPosition',
   NPC: 'NPC',
@@ -249,8 +250,21 @@ export const PlayerStatsScalarFieldEnum = {
 export type PlayerStatsScalarFieldEnum = (typeof PlayerStatsScalarFieldEnum)[keyof typeof PlayerStatsScalarFieldEnum]
 
 
+export const WorldScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  width: 'width',
+  height: 'height',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WorldScalarFieldEnum = (typeof WorldScalarFieldEnum)[keyof typeof WorldScalarFieldEnum]
+
+
 export const MapTileScalarFieldEnum = {
   id: 'id',
+  worldId: 'worldId',
   x: 'x',
   y: 'y',
   tileType: 'tileType',
@@ -258,7 +272,8 @@ export const MapTileScalarFieldEnum = {
   isSafeZone: 'isSafeZone',
   hasResource: 'hasResource',
   resourceType: 'resourceType',
-  description: 'description'
+  description: 'description',
+  meta: 'meta'
 } as const
 
 export type MapTileScalarFieldEnum = (typeof MapTileScalarFieldEnum)[keyof typeof MapTileScalarFieldEnum]
@@ -267,6 +282,7 @@ export type MapTileScalarFieldEnum = (typeof MapTileScalarFieldEnum)[keyof typeo
 export const MapPositionScalarFieldEnum = {
   id: 'id',
   playerId: 'playerId',
+  worldId: 'worldId',
   tileX: 'tileX',
   tileY: 'tileY',
   tileId: 'tileId',
@@ -862,6 +878,14 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: 'DbNull',
+  JsonNull: 'JsonNull'
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const JsonNullValueInput = {

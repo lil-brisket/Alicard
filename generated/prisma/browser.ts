@@ -58,6 +58,11 @@ export type Player = Prisma.PlayerModel
  */
 export type PlayerStats = Prisma.PlayerStatsModel
 /**
+ * Model World
+ * 
+ */
+export type World = Prisma.WorldModel
+/**
  * Model MapTile
  * 
  */

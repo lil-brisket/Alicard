@@ -154,8 +154,22 @@ model PlayerStats {
   player         Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
 }
 
+model World {
+  id        String        @id @default(cuid())
+  name      String
+  width     Int
+  height    Int
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  tiles     MapTile[]
+  positions MapPosition[]
+
+  @@index([name])
+}
+
 model MapTile {
   id           Int           @id @default(autoincrement())
+  worldId      String
   x            Int
   y            Int
   tileType     TileType
@@ -164,27 +178,33 @@ model MapTile {
   hasResource  Boolean       @default(false)
   resourceType ResourceType?
   description  String?
+  meta         Json?         // JSON for additional tile metadata
   encounters   Encounter[]
   positions    MapPosition[]
   npcs         NPC[]
+  world        World         @relation(fields: [worldId], references: [id], onDelete: Cascade)
 
-  @@unique([x, y])
-  @@index([x, y])
+  @@unique([worldId, x, y])
+  @@index([worldId, x, y])
   @@index([tileType])
   @@index([zoneType])
+  @@index([worldId])
 }
 
 model MapPosition {
   id        String   @id @default(cuid())
   playerId  String   @unique
+  worldId   String
   tileX     Int
   tileY     Int
   tileId    Int?
   updatedAt DateTime @updatedAt
   player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
   tile      MapTile? @relation(fields: [tileId], references: [id])
+  world     World    @relation(fields: [worldId], references: [id], onDelete: Cascade)
 
   @@index([tileX, tileY])
+  @@index([worldId])
 }
 
 model NPC {
@@ -603,6 +623,8 @@ enum TileType {
   TOWN
   SHRINE
   ROAD
+  PLAIN
+  WATER
 }
 
 enum ZoneType {

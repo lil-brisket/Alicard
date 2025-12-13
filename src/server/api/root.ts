@@ -14,6 +14,7 @@ import { battleRouter } from "~/server/api/routers/battle";
 import { usersRouter } from "~/server/api/routers/users";
 import { bankRouter } from "~/server/api/routers/bank";
 import { leaderboardsRouter } from "~/server/api/routers/leaderboards";
+import { worldRouter } from "~/server/api/routers/world";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -38,6 +39,7 @@ export const appRouter = createTRPCRouter({
   users: usersRouter,
   bank: bankRouter,
   leaderboards: leaderboardsRouter,
+  world: worldRouter,
 });
 
 // export type definition of API

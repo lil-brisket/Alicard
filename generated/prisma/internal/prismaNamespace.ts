@@ -392,6 +392,7 @@ export const ModelName = {
   VerificationToken: 'VerificationToken',
   Player: 'Player',
   PlayerStats: 'PlayerStats',
+  World: 'World',
   MapTile: 'MapTile',
   MapPosition: 'MapPosition',
   NPC: 'NPC',
@@ -451,7 +452,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "post" | "account" | "session" | "user" | "character" | "verificationToken" | "player" | "playerStats" | "mapTile" | "mapPosition" | "nPC" | "shopItem" | "item" | "inventoryItem" | "equipment" | "occupation" | "skill" | "playerSkill" | "playerSkillLoadout" | "encounter" | "combatLog" | "deathLog" | "deathRecord" | "guild" | "guildMember" | "guildBank" | "guildQuest" | "bankAccount" | "bankVaultItem" | "bankTransaction" | "marketListing" | "marketTransaction" | "quest" | "job" | "userJob" | "recipe" | "recipeInput" | "craftAttempt" | "gatheringNode" | "nodeYield" | "gatherAttempt" | "playerProfile" | "playerProfileStats" | "playerPvpRecord" | "playerPveRecord" | "achievement" | "playerAchievement" | "playerSocial" | "monster" | "battle" | "playerLeaderboardStats" | "playerStatsPeriod"
+    modelProps: "post" | "account" | "session" | "user" | "character" | "verificationToken" | "player" | "playerStats" | "world" | "mapTile" | "mapPosition" | "nPC" | "shopItem" | "item" | "inventoryItem" | "equipment" | "occupation" | "skill" | "playerSkill" | "playerSkillLoadout" | "encounter" | "combatLog" | "deathLog" | "deathRecord" | "guild" | "guildMember" | "guildBank" | "guildQuest" | "bankAccount" | "bankVaultItem" | "bankTransaction" | "marketListing" | "marketTransaction" | "quest" | "job" | "userJob" | "recipe" | "recipeInput" | "craftAttempt" | "gatheringNode" | "nodeYield" | "gatherAttempt" | "playerProfile" | "playerProfileStats" | "playerPvpRecord" | "playerPveRecord" | "achievement" | "playerAchievement" | "playerSocial" | "monster" | "battle" | "playerLeaderboardStats" | "playerStatsPeriod"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1044,6 +1045,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.PlayerStatsCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.PlayerStatsCountAggregateOutputType> | number
+        }
+      }
+    }
+    World: {
+      payload: Prisma.$WorldPayload<ExtArgs>
+      fields: Prisma.WorldFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.WorldFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.WorldFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldPayload>
+        }
+        findFirst: {
+          args: Prisma.WorldFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.WorldFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldPayload>
+        }
+        findMany: {
+          args: Prisma.WorldFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldPayload>[]
+        }
+        create: {
+          args: Prisma.WorldCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldPayload>
+        }
+        createMany: {
+          args: Prisma.WorldCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.WorldCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldPayload>[]
+        }
+        delete: {
+          args: Prisma.WorldDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldPayload>
+        }
+        update: {
+          args: Prisma.WorldUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldPayload>
+        }
+        deleteMany: {
+          args: Prisma.WorldDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.WorldUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.WorldUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldPayload>[]
+        }
+        upsert: {
+          args: Prisma.WorldUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorldPayload>
+        }
+        aggregate: {
+          args: Prisma.WorldAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWorld>
+        }
+        groupBy: {
+          args: Prisma.WorldGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WorldGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.WorldCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WorldCountAggregateOutputType> | number
         }
       }
     }
@@ -4470,8 +4545,21 @@ export const PlayerStatsScalarFieldEnum = {
 export type PlayerStatsScalarFieldEnum = (typeof PlayerStatsScalarFieldEnum)[keyof typeof PlayerStatsScalarFieldEnum]
 
 
+export const WorldScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  width: 'width',
+  height: 'height',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WorldScalarFieldEnum = (typeof WorldScalarFieldEnum)[keyof typeof WorldScalarFieldEnum]
+
+
 export const MapTileScalarFieldEnum = {
   id: 'id',
+  worldId: 'worldId',
   x: 'x',
   y: 'y',
   tileType: 'tileType',
@@ -4479,7 +4567,8 @@ export const MapTileScalarFieldEnum = {
   isSafeZone: 'isSafeZone',
   hasResource: 'hasResource',
   resourceType: 'resourceType',
-  description: 'description'
+  description: 'description',
+  meta: 'meta'
 } as const
 
 export type MapTileScalarFieldEnum = (typeof MapTileScalarFieldEnum)[keyof typeof MapTileScalarFieldEnum]
@@ -4488,6 +4577,7 @@ export type MapTileScalarFieldEnum = (typeof MapTileScalarFieldEnum)[keyof typeo
 export const MapPositionScalarFieldEnum = {
   id: 'id',
   playerId: 'playerId',
+  worldId: 'worldId',
   tileX: 'tileX',
   tileY: 'tileY',
   tileId: 'tileId',
@@ -5085,6 +5175,14 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
 export const JsonNullValueInput = {
   JsonNull: JsonNull
 } as const
@@ -5211,6 +5309,20 @@ export type EnumResourceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
  * Reference to a field of type 'ResourceType[]'
  */
 export type ListEnumResourceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ResourceType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -5383,20 +5495,6 @@ export type ListEnumBattleStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
 
 
 /**
- * Reference to a field of type 'Json'
- */
-export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-/**
- * Reference to a field of type 'QueryMode'
- */
-export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
-    
-
-
-/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -5512,6 +5610,7 @@ export type GlobalOmitConfig = {
   verificationToken?: Prisma.VerificationTokenOmit
   player?: Prisma.PlayerOmit
   playerStats?: Prisma.PlayerStatsOmit
+  world?: Prisma.WorldOmit
   mapTile?: Prisma.MapTileOmit
   mapPosition?: Prisma.MapPositionOmit
   nPC?: Prisma.NPCOmit

@@ -28,7 +28,9 @@ export const TileType = {
   DUNGEON: 'DUNGEON',
   TOWN: 'TOWN',
   SHRINE: 'SHRINE',
-  ROAD: 'ROAD'
+  ROAD: 'ROAD',
+  PLAIN: 'PLAIN',
+  WATER: 'WATER'
 } as const
 
 export type TileType = (typeof TileType)[keyof typeof TileType]

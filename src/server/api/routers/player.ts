@@ -269,22 +269,42 @@ export const playerRouter = createTRPCRouter({
       const maxHP = 50 + input.stats.vitality * 5;
       const maxSP = 20 + input.stats.vitality * 2 + input.stats.speed * 1;
 
-      // Find starting town (tile 0,0 or first safe zone)
+      // Get default world
+      const defaultWorld = await ctx.db.world.findUnique({
+        where: { id: "default-world" },
+      });
+
+      if (!defaultWorld) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Default world not found. Please run seed script.",
+        });
+      }
+
+      // Find starting town (tile 10,10 or first safe zone in default world)
       let startingTile = await ctx.db.mapTile.findFirst({
         where: {
+          worldId: defaultWorld.id,
           isSafeZone: true,
           tileType: "TOWN",
         },
       });
 
-      // If no town exists, create a default starting position
+      // If no town exists, create a default starting position at (10, 10)
       if (!startingTile) {
         startingTile = await ctx.db.mapTile.upsert({
-          where: { x_y: { x: 0, y: 0 } },
+          where: {
+            worldId_x_y: {
+              worldId: defaultWorld.id,
+              x: 10,
+              y: 10,
+            },
+          },
           update: {},
           create: {
-            x: 0,
-            y: 0,
+            worldId: defaultWorld.id,
+            x: 10,
+            y: 10,
             tileType: "TOWN",
             zoneType: "SAFE",
             isSafeZone: true,
@@ -320,6 +340,7 @@ export const playerRouter = createTRPCRouter({
           },
           position: {
             create: {
+              worldId: defaultWorld.id,
               tileX: startingTile.x,
               tileY: startingTile.y,
               tileId: startingTile.id,
@@ -495,5 +516,242 @@ export const playerRouter = createTRPCRouter({
 
     return inventoryItems;
   }),
+
+  // Get player position
+  getPosition: protectedProcedure.query(async ({ ctx }) => {
+    const player = await ctx.db.player.findUnique({
+      where: { userId: ctx.session.user.id },
+      include: {
+        position: {
+          include: {
+            tile: true,
+            world: true,
+          },
+        },
+      },
+    });
+
+    if (!player || player.isDeleted) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "Character not found",
+      });
+    }
+
+    // If no position exists, spawn at (10, 10) in default world
+    if (!player.position) {
+      const defaultWorld = await ctx.db.world.findUnique({
+        where: { id: "default-world" },
+      });
+
+      if (!defaultWorld) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Default world not found",
+        });
+      }
+
+      // Find or create tile at (10, 10)
+      let spawnTile = await ctx.db.mapTile.findUnique({
+        where: {
+          worldId_x_y: {
+            worldId: defaultWorld.id,
+            x: 10,
+            y: 10,
+          },
+        },
+      });
+
+      if (!spawnTile) {
+        spawnTile = await ctx.db.mapTile.create({
+          data: {
+            worldId: defaultWorld.id,
+            x: 10,
+            y: 10,
+            tileType: "TOWN",
+            zoneType: "SAFE",
+            isSafeZone: true,
+            description: "Starting Town",
+          },
+        });
+      }
+
+      const position = await ctx.db.mapPosition.create({
+        data: {
+          playerId: player.id,
+          worldId: defaultWorld.id,
+          tileX: 10,
+          tileY: 10,
+          tileId: spawnTile.id,
+        },
+        include: {
+          tile: true,
+          world: true,
+        },
+      });
+
+      return position;
+    }
+
+    return player.position;
+  }),
+
+  // Move player
+  move: protectedProcedure
+    .input(
+      z.object({
+        direction: z.enum(["north", "south", "east", "west"]),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const player = await ctx.db.player.findUnique({
+        where: { userId: ctx.session.user.id },
+        include: {
+          position: {
+            include: {
+              tile: true,
+              world: true,
+            },
+          },
+        },
+      });
+
+      if (!player || player.isDeleted) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Character not found",
+        });
+      }
+
+      // Get or create position
+      let position = player.position;
+      if (!position) {
+        const defaultWorld = await ctx.db.world.findUnique({
+          where: { id: "default-world" },
+        });
+
+        if (!defaultWorld) {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "Default world not found",
+          });
+        }
+
+        let spawnTile = await ctx.db.mapTile.findUnique({
+          where: {
+            worldId_x_y: {
+              worldId: defaultWorld.id,
+              x: 10,
+              y: 10,
+            },
+          },
+        });
+
+        if (!spawnTile) {
+          spawnTile = await ctx.db.mapTile.create({
+            data: {
+              worldId: defaultWorld.id,
+              x: 10,
+              y: 10,
+              tileType: "TOWN",
+              zoneType: "SAFE",
+              isSafeZone: true,
+              description: "Starting Town",
+            },
+          });
+        }
+
+        position = await ctx.db.mapPosition.create({
+          data: {
+            playerId: player.id,
+            worldId: defaultWorld.id,
+            tileX: 10,
+            tileY: 10,
+            tileId: spawnTile.id,
+          },
+          include: {
+            tile: true,
+            world: true,
+          },
+        });
+      }
+
+      const world = position.world;
+      if (!world) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "World not found",
+        });
+      }
+
+      // Calculate new position
+      let newX = position.tileX;
+      let newY = position.tileY;
+
+      switch (input.direction) {
+        case "north":
+          newY -= 1;
+          break;
+        case "south":
+          newY += 1;
+          break;
+        case "east":
+          newX += 1;
+          break;
+        case "west":
+          newX -= 1;
+          break;
+      }
+
+      // Validate boundaries
+      if (newX < 0 || newX >= world.width || newY < 0 || newY >= world.height) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Cannot move outside world boundaries",
+        });
+      }
+
+      // Get target tile
+      const targetTile = await ctx.db.mapTile.findUnique({
+        where: {
+          worldId_x_y: {
+            worldId: world.id,
+            x: newX,
+            y: newY,
+          },
+        },
+      });
+
+      if (!targetTile) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Target tile does not exist",
+        });
+      }
+
+      // Check if tile is passable (water blocks movement)
+      if (targetTile.tileType === "WATER" || targetTile.tileType === "RIVER") {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Cannot move onto water",
+        });
+      }
+
+      // Update position
+      const updatedPosition = await ctx.db.mapPosition.update({
+        where: { playerId: player.id },
+        data: {
+          tileX: newX,
+          tileY: newY,
+          tileId: targetTile.id,
+        },
+        include: {
+          tile: true,
+          world: true,
+        },
+      });
+
+      return updatedPosition;
+    }),
 });
 
