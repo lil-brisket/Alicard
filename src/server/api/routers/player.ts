@@ -333,7 +333,7 @@ export const playerRouter = createTRPCRouter({
           },
           bankAccount: {
             create: {
-              gold: 0,
+              balanceCoins: 0,
               vaultLevel: 1,
             },
           },

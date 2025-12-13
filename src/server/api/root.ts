@@ -11,6 +11,8 @@ import { equipmentRouter } from "~/server/api/routers/equipment";
 import { skillsRouter } from "~/server/api/routers/skills";
 import { profileRouter } from "~/server/api/routers/profile";
 import { battleRouter } from "~/server/api/routers/battle";
+import { usersRouter } from "~/server/api/routers/users";
+import { bankRouter } from "~/server/api/routers/bank";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -32,6 +34,8 @@ export const appRouter = createTRPCRouter({
   skills: skillsRouter,
   profile: profileRouter,
   battle: battleRouter,
+  users: usersRouter,
+  bank: bankRouter,
 });
 
 // export type definition of API

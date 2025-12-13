@@ -229,6 +229,8 @@ export type UserWhereInput = {
   sessions?: Prisma.SessionListRelationFilter
   profile?: Prisma.XOR<Prisma.PlayerProfileNullableScalarRelationFilter, Prisma.PlayerProfileWhereInput> | null
   battles?: Prisma.BattleListRelationFilter
+  bankTransactionsFrom?: Prisma.BankTransactionListRelationFilter
+  bankTransactionsTo?: Prisma.BankTransactionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -249,6 +251,8 @@ export type UserOrderByWithRelationInput = {
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   profile?: Prisma.PlayerProfileOrderByWithRelationInput
   battles?: Prisma.BattleOrderByRelationAggregateInput
+  bankTransactionsFrom?: Prisma.BankTransactionOrderByRelationAggregateInput
+  bankTransactionsTo?: Prisma.BankTransactionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -272,6 +276,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   sessions?: Prisma.SessionListRelationFilter
   profile?: Prisma.XOR<Prisma.PlayerProfileNullableScalarRelationFilter, Prisma.PlayerProfileWhereInput> | null
   battles?: Prisma.BattleListRelationFilter
+  bankTransactionsFrom?: Prisma.BankTransactionListRelationFilter
+  bankTransactionsTo?: Prisma.BankTransactionListRelationFilter
 }, "id" | "email" | "username">
 
 export type UserOrderByWithAggregationInput = {
@@ -324,6 +330,8 @@ export type UserCreateInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
   battles?: Prisma.BattleCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -344,6 +352,8 @@ export type UserUncheckedCreateInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
   battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
 }
 
 export type UserUpdateInput = {
@@ -364,6 +374,8 @@ export type UserUpdateInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
   battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -384,6 +396,8 @@ export type UserUncheckedUpdateInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
   battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -469,6 +483,11 @@ export type UserMinOrderByAggregateInput = {
   username?: Prisma.SortOrder
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type UserCreateNestedOneWithoutPostsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutPostsInput, Prisma.UserUncheckedCreateWithoutPostsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutPostsInput
@@ -543,6 +562,38 @@ export type UserUpdateOneRequiredWithoutPlayerNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPlayerInput, Prisma.UserUpdateWithoutPlayerInput>, Prisma.UserUncheckedUpdateWithoutPlayerInput>
 }
 
+export type UserCreateNestedOneWithoutBankTransactionsFromInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBankTransactionsFromInput, Prisma.UserUncheckedCreateWithoutBankTransactionsFromInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBankTransactionsFromInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutBankTransactionsToInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBankTransactionsToInput, Prisma.UserUncheckedCreateWithoutBankTransactionsToInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBankTransactionsToInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutBankTransactionsFromNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBankTransactionsFromInput, Prisma.UserUncheckedCreateWithoutBankTransactionsFromInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBankTransactionsFromInput
+  upsert?: Prisma.UserUpsertWithoutBankTransactionsFromInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBankTransactionsFromInput, Prisma.UserUpdateWithoutBankTransactionsFromInput>, Prisma.UserUncheckedUpdateWithoutBankTransactionsFromInput>
+}
+
+export type UserUpdateOneWithoutBankTransactionsToNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBankTransactionsToInput, Prisma.UserUncheckedCreateWithoutBankTransactionsToInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBankTransactionsToInput
+  upsert?: Prisma.UserUpsertWithoutBankTransactionsToInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBankTransactionsToInput, Prisma.UserUpdateWithoutBankTransactionsToInput>, Prisma.UserUncheckedUpdateWithoutBankTransactionsToInput>
+}
+
 export type UserCreateNestedOneWithoutProfileInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutProfileInput, Prisma.UserUncheckedCreateWithoutProfileInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutProfileInput
@@ -588,6 +639,8 @@ export type UserCreateWithoutPostsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
   battles?: Prisma.BattleCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
 }
 
 export type UserUncheckedCreateWithoutPostsInput = {
@@ -607,6 +660,8 @@ export type UserUncheckedCreateWithoutPostsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
   battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
 }
 
 export type UserCreateOrConnectWithoutPostsInput = {
@@ -642,6 +697,8 @@ export type UserUpdateWithoutPostsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
   battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostsInput = {
@@ -661,6 +718,8 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
   battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -680,6 +739,8 @@ export type UserCreateWithoutAccountsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
   battles?: Prisma.BattleCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -699,6 +760,8 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
   battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -734,6 +797,8 @@ export type UserUpdateWithoutAccountsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
   battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -753,6 +818,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
   battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -772,6 +839,8 @@ export type UserCreateWithoutSessionsInput = {
   posts?: Prisma.PostCreateNestedManyWithoutCreatedByInput
   profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
   battles?: Prisma.BattleCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -791,6 +860,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutCreatedByInput
   profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
   battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -826,6 +897,8 @@ export type UserUpdateWithoutSessionsInput = {
   posts?: Prisma.PostUpdateManyWithoutCreatedByNestedInput
   profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
   battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -845,6 +918,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   posts?: Prisma.PostUncheckedUpdateManyWithoutCreatedByNestedInput
   profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
   battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
 }
 
 export type UserCreateWithoutCharactersInput = {
@@ -864,6 +939,8 @@ export type UserCreateWithoutCharactersInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
   battles?: Prisma.BattleCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
 }
 
 export type UserUncheckedCreateWithoutCharactersInput = {
@@ -883,6 +960,8 @@ export type UserUncheckedCreateWithoutCharactersInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
   battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
 }
 
 export type UserCreateOrConnectWithoutCharactersInput = {
@@ -918,6 +997,8 @@ export type UserUpdateWithoutCharactersInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
   battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCharactersInput = {
@@ -937,6 +1018,8 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
   battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
 }
 
 export type UserCreateWithoutPlayerInput = {
@@ -956,6 +1039,8 @@ export type UserCreateWithoutPlayerInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
   battles?: Prisma.BattleCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
 }
 
 export type UserUncheckedCreateWithoutPlayerInput = {
@@ -975,6 +1060,8 @@ export type UserUncheckedCreateWithoutPlayerInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
   battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
 }
 
 export type UserCreateOrConnectWithoutPlayerInput = {
@@ -1010,6 +1097,8 @@ export type UserUpdateWithoutPlayerInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
   battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPlayerInput = {
@@ -1029,6 +1118,208 @@ export type UserUncheckedUpdateWithoutPlayerInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
   battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+}
+
+export type UserCreateWithoutBankTransactionsFromInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
+  battles?: Prisma.BattleCreateNestedManyWithoutUserInput
+  bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
+}
+
+export type UserUncheckedCreateWithoutBankTransactionsFromInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterUncheckedCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerUncheckedCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
+}
+
+export type UserCreateOrConnectWithoutBankTransactionsFromInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBankTransactionsFromInput, Prisma.UserUncheckedCreateWithoutBankTransactionsFromInput>
+}
+
+export type UserCreateWithoutBankTransactionsToInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
+  battles?: Prisma.BattleCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
+}
+
+export type UserUncheckedCreateWithoutBankTransactionsToInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterUncheckedCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerUncheckedCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
+}
+
+export type UserCreateOrConnectWithoutBankTransactionsToInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBankTransactionsToInput, Prisma.UserUncheckedCreateWithoutBankTransactionsToInput>
+}
+
+export type UserUpsertWithoutBankTransactionsFromInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBankTransactionsFromInput, Prisma.UserUncheckedUpdateWithoutBankTransactionsFromInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBankTransactionsFromInput, Prisma.UserUncheckedCreateWithoutBankTransactionsFromInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBankTransactionsFromInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBankTransactionsFromInput, Prisma.UserUncheckedUpdateWithoutBankTransactionsFromInput>
+}
+
+export type UserUpdateWithoutBankTransactionsFromInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBankTransactionsFromInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUncheckedUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUncheckedUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+}
+
+export type UserUpsertWithoutBankTransactionsToInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBankTransactionsToInput, Prisma.UserUncheckedUpdateWithoutBankTransactionsToInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBankTransactionsToInput, Prisma.UserUncheckedCreateWithoutBankTransactionsToInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBankTransactionsToInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBankTransactionsToInput, Prisma.UserUncheckedUpdateWithoutBankTransactionsToInput>
+}
+
+export type UserUpdateWithoutBankTransactionsToInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBankTransactionsToInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUncheckedUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUncheckedUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
 }
 
 export type UserCreateWithoutProfileInput = {
@@ -1048,6 +1339,8 @@ export type UserCreateWithoutProfileInput = {
   posts?: Prisma.PostCreateNestedManyWithoutCreatedByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   battles?: Prisma.BattleCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
 }
 
 export type UserUncheckedCreateWithoutProfileInput = {
@@ -1067,6 +1360,8 @@ export type UserUncheckedCreateWithoutProfileInput = {
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutCreatedByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
 }
 
 export type UserCreateOrConnectWithoutProfileInput = {
@@ -1102,6 +1397,8 @@ export type UserUpdateWithoutProfileInput = {
   posts?: Prisma.PostUpdateManyWithoutCreatedByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfileInput = {
@@ -1121,6 +1418,8 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   posts?: Prisma.PostUncheckedUpdateManyWithoutCreatedByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
 }
 
 export type UserCreateWithoutBattlesInput = {
@@ -1140,6 +1439,8 @@ export type UserCreateWithoutBattlesInput = {
   posts?: Prisma.PostCreateNestedManyWithoutCreatedByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
 }
 
 export type UserUncheckedCreateWithoutBattlesInput = {
@@ -1159,6 +1460,8 @@ export type UserUncheckedCreateWithoutBattlesInput = {
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutCreatedByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
 }
 
 export type UserCreateOrConnectWithoutBattlesInput = {
@@ -1194,6 +1497,8 @@ export type UserUpdateWithoutBattlesInput = {
   posts?: Prisma.PostUpdateManyWithoutCreatedByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBattlesInput = {
@@ -1213,6 +1518,8 @@ export type UserUncheckedUpdateWithoutBattlesInput = {
   posts?: Prisma.PostUncheckedUpdateManyWithoutCreatedByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
 }
 
 
@@ -1226,6 +1533,8 @@ export type UserCountOutputType = {
   posts: number
   sessions: number
   battles: number
+  bankTransactionsFrom: number
+  bankTransactionsTo: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1234,6 +1543,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   posts?: boolean | UserCountOutputTypeCountPostsArgs
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   battles?: boolean | UserCountOutputTypeCountBattlesArgs
+  bankTransactionsFrom?: boolean | UserCountOutputTypeCountBankTransactionsFromArgs
+  bankTransactionsTo?: boolean | UserCountOutputTypeCountBankTransactionsToArgs
 }
 
 /**
@@ -1281,6 +1592,20 @@ export type UserCountOutputTypeCountBattlesArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.BattleWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBankTransactionsFromArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BankTransactionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBankTransactionsToArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BankTransactionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1300,6 +1625,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   profile?: boolean | Prisma.User$profileArgs<ExtArgs>
   battles?: boolean | Prisma.User$battlesArgs<ExtArgs>
+  bankTransactionsFrom?: boolean | Prisma.User$bankTransactionsFromArgs<ExtArgs>
+  bankTransactionsTo?: boolean | Prisma.User$bankTransactionsToArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1351,6 +1678,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   profile?: boolean | Prisma.User$profileArgs<ExtArgs>
   battles?: boolean | Prisma.User$battlesArgs<ExtArgs>
+  bankTransactionsFrom?: boolean | Prisma.User$bankTransactionsFromArgs<ExtArgs>
+  bankTransactionsTo?: boolean | Prisma.User$bankTransactionsToArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1366,6 +1695,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     sessions: Prisma.$SessionPayload<ExtArgs>[]
     profile: Prisma.$PlayerProfilePayload<ExtArgs> | null
     battles: Prisma.$BattlePayload<ExtArgs>[]
+    bankTransactionsFrom: Prisma.$BankTransactionPayload<ExtArgs>[]
+    bankTransactionsTo: Prisma.$BankTransactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1779,6 +2110,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   profile<T extends Prisma.User$profileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$profileArgs<ExtArgs>>): Prisma.Prisma__PlayerProfileClient<runtime.Types.Result.GetResult<Prisma.$PlayerProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   battles<T extends Prisma.User$battlesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$battlesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BattlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bankTransactionsFrom<T extends Prisma.User$bankTransactionsFromArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bankTransactionsFromArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BankTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bankTransactionsTo<T extends Prisma.User$bankTransactionsToArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bankTransactionsToArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BankTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2361,6 +2694,54 @@ export type User$battlesArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.BattleScalarFieldEnum | Prisma.BattleScalarFieldEnum[]
+}
+
+/**
+ * User.bankTransactionsFrom
+ */
+export type User$bankTransactionsFromArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BankTransaction
+   */
+  select?: Prisma.BankTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BankTransaction
+   */
+  omit?: Prisma.BankTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BankTransactionInclude<ExtArgs> | null
+  where?: Prisma.BankTransactionWhereInput
+  orderBy?: Prisma.BankTransactionOrderByWithRelationInput | Prisma.BankTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.BankTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BankTransactionScalarFieldEnum | Prisma.BankTransactionScalarFieldEnum[]
+}
+
+/**
+ * User.bankTransactionsTo
+ */
+export type User$bankTransactionsToArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BankTransaction
+   */
+  select?: Prisma.BankTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BankTransaction
+   */
+  omit?: Prisma.BankTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BankTransactionInclude<ExtArgs> | null
+  where?: Prisma.BankTransactionWhereInput
+  orderBy?: Prisma.BankTransactionOrderByWithRelationInput | Prisma.BankTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.BankTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BankTransactionScalarFieldEnum | Prisma.BankTransactionScalarFieldEnum[]
 }
 
 /**

@@ -80,6 +80,7 @@ export const ModelName = {
   GuildQuest: 'GuildQuest',
   BankAccount: 'BankAccount',
   BankVaultItem: 'BankVaultItem',
+  BankTransaction: 'BankTransaction',
   MarketListing: 'MarketListing',
   MarketTransaction: 'MarketTransaction',
   Quest: 'Quest',
@@ -514,7 +515,8 @@ export type GuildQuestScalarFieldEnum = (typeof GuildQuestScalarFieldEnum)[keyof
 export const BankAccountScalarFieldEnum = {
   id: 'id',
   playerId: 'playerId',
-  gold: 'gold',
+  balanceCoins: 'balanceCoins',
+  lastInterestClaimedAt: 'lastInterestClaimedAt',
   vaultLevel: 'vaultLevel',
   updatedAt: 'updatedAt'
 } as const
@@ -531,6 +533,20 @@ export const BankVaultItemScalarFieldEnum = {
 } as const
 
 export type BankVaultItemScalarFieldEnum = (typeof BankVaultItemScalarFieldEnum)[keyof typeof BankVaultItemScalarFieldEnum]
+
+
+export const BankTransactionScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  amountCoins: 'amountCoins',
+  fromUserId: 'fromUserId',
+  toUserId: 'toUserId',
+  note: 'note',
+  accountId: 'accountId',
+  createdAt: 'createdAt'
+} as const
+
+export type BankTransactionScalarFieldEnum = (typeof BankTransactionScalarFieldEnum)[keyof typeof BankTransactionScalarFieldEnum]
 
 
 export const MarketListingScalarFieldEnum = {

@@ -413,6 +413,7 @@ export const ModelName = {
   GuildQuest: 'GuildQuest',
   BankAccount: 'BankAccount',
   BankVaultItem: 'BankVaultItem',
+  BankTransaction: 'BankTransaction',
   MarketListing: 'MarketListing',
   MarketTransaction: 'MarketTransaction',
   Quest: 'Quest',
@@ -448,7 +449,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "post" | "account" | "session" | "user" | "character" | "verificationToken" | "player" | "playerStats" | "mapTile" | "mapPosition" | "nPC" | "shopItem" | "item" | "inventoryItem" | "equipment" | "occupation" | "skill" | "playerSkill" | "playerSkillLoadout" | "encounter" | "combatLog" | "deathLog" | "deathRecord" | "guild" | "guildMember" | "guildBank" | "guildQuest" | "bankAccount" | "bankVaultItem" | "marketListing" | "marketTransaction" | "quest" | "job" | "userJob" | "recipe" | "recipeInput" | "craftAttempt" | "gatheringNode" | "nodeYield" | "gatherAttempt" | "playerProfile" | "playerProfileStats" | "playerPvpRecord" | "playerPveRecord" | "achievement" | "playerAchievement" | "playerSocial" | "monster" | "battle"
+    modelProps: "post" | "account" | "session" | "user" | "character" | "verificationToken" | "player" | "playerStats" | "mapTile" | "mapPosition" | "nPC" | "shopItem" | "item" | "inventoryItem" | "equipment" | "occupation" | "skill" | "playerSkill" | "playerSkillLoadout" | "encounter" | "combatLog" | "deathLog" | "deathRecord" | "guild" | "guildMember" | "guildBank" | "guildQuest" | "bankAccount" | "bankVaultItem" | "bankTransaction" | "marketListing" | "marketTransaction" | "quest" | "job" | "userJob" | "recipe" | "recipeInput" | "craftAttempt" | "gatheringNode" | "nodeYield" | "gatherAttempt" | "playerProfile" | "playerProfileStats" | "playerPvpRecord" | "playerPveRecord" | "achievement" | "playerAchievement" | "playerSocial" | "monster" | "battle"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2598,6 +2599,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BankTransaction: {
+      payload: Prisma.$BankTransactionPayload<ExtArgs>
+      fields: Prisma.BankTransactionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BankTransactionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BankTransactionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BankTransactionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BankTransactionPayload>
+        }
+        findFirst: {
+          args: Prisma.BankTransactionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BankTransactionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BankTransactionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BankTransactionPayload>
+        }
+        findMany: {
+          args: Prisma.BankTransactionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BankTransactionPayload>[]
+        }
+        create: {
+          args: Prisma.BankTransactionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BankTransactionPayload>
+        }
+        createMany: {
+          args: Prisma.BankTransactionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BankTransactionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BankTransactionPayload>[]
+        }
+        delete: {
+          args: Prisma.BankTransactionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BankTransactionPayload>
+        }
+        update: {
+          args: Prisma.BankTransactionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BankTransactionPayload>
+        }
+        deleteMany: {
+          args: Prisma.BankTransactionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BankTransactionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BankTransactionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BankTransactionPayload>[]
+        }
+        upsert: {
+          args: Prisma.BankTransactionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BankTransactionPayload>
+        }
+        aggregate: {
+          args: Prisma.BankTransactionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBankTransaction>
+        }
+        groupBy: {
+          args: Prisma.BankTransactionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BankTransactionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BankTransactionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BankTransactionCountAggregateOutputType> | number
+        }
+      }
+    }
     MarketListing: {
       payload: Prisma.$MarketListingPayload<ExtArgs>
       fields: Prisma.MarketListingFieldRefs
@@ -4513,7 +4588,8 @@ export type GuildQuestScalarFieldEnum = (typeof GuildQuestScalarFieldEnum)[keyof
 export const BankAccountScalarFieldEnum = {
   id: 'id',
   playerId: 'playerId',
-  gold: 'gold',
+  balanceCoins: 'balanceCoins',
+  lastInterestClaimedAt: 'lastInterestClaimedAt',
   vaultLevel: 'vaultLevel',
   updatedAt: 'updatedAt'
 } as const
@@ -4530,6 +4606,20 @@ export const BankVaultItemScalarFieldEnum = {
 } as const
 
 export type BankVaultItemScalarFieldEnum = (typeof BankVaultItemScalarFieldEnum)[keyof typeof BankVaultItemScalarFieldEnum]
+
+
+export const BankTransactionScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  amountCoins: 'amountCoins',
+  fromUserId: 'fromUserId',
+  toUserId: 'toUserId',
+  note: 'note',
+  accountId: 'accountId',
+  createdAt: 'createdAt'
+} as const
+
+export type BankTransactionScalarFieldEnum = (typeof BankTransactionScalarFieldEnum)[keyof typeof BankTransactionScalarFieldEnum]
 
 
 export const MarketListingScalarFieldEnum = {
@@ -5042,6 +5132,20 @@ export type ListEnumGuildRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
 
 
 /**
+ * Reference to a field of type 'BankTransactionType'
+ */
+export type EnumBankTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BankTransactionType'>
+    
+
+
+/**
+ * Reference to a field of type 'BankTransactionType[]'
+ */
+export type ListEnumBankTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BankTransactionType[]'>
+    
+
+
+/**
  * Reference to a field of type 'QuestType'
  */
 export type EnumQuestTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QuestType'>
@@ -5248,6 +5352,7 @@ export type GlobalOmitConfig = {
   guildQuest?: Prisma.GuildQuestOmit
   bankAccount?: Prisma.BankAccountOmit
   bankVaultItem?: Prisma.BankVaultItemOmit
+  bankTransaction?: Prisma.BankTransactionOmit
   marketListing?: Prisma.MarketListingOmit
   marketTransaction?: Prisma.MarketTransactionOmit
   quest?: Prisma.QuestOmit

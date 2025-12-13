@@ -128,7 +128,7 @@ export const jobsRouter = createTRPCRouter({
           },
           bankAccount: {
             create: {
-              gold: 0,
+              balanceCoins: 0,
               vaultLevel: 1,
             },
           },
@@ -307,7 +307,7 @@ export const jobsRouter = createTRPCRouter({
             },
             bankAccount: {
               create: {
-                gold: 0,
+                balanceCoins: 0,
                 vaultLevel: 1,
               },
             },

@@ -185,6 +185,11 @@ export type BankAccount = Prisma.BankAccountModel
  */
 export type BankVaultItem = Prisma.BankVaultItemModel
 /**
+ * Model BankTransaction
+ * 
+ */
+export type BankTransaction = Prisma.BankTransactionModel
+/**
  * Model MarketListing
  * 
  */

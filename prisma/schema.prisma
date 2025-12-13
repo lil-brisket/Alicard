@@ -46,23 +46,25 @@ model Session {
 }
 
 model User {
-  id            String         @id @default(cuid())
-  name          String?
-  email         String         @unique
-  emailVerified DateTime?
-  image         String?
-  password      String
-  gender        String
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  username      String         @unique
-  accounts      Account[]
-  characters    Character[]
-  player        Player?
-  posts         Post[]
-  sessions      Session[]
-  profile       PlayerProfile?
-  battles       Battle[]
+  id                    String              @id @default(cuid())
+  name                  String?
+  email                 String              @unique
+  emailVerified         DateTime?
+  image                 String?
+  password              String
+  gender                String
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+  username              String              @unique
+  accounts              Account[]
+  characters            Character[]
+  player                Player?
+  posts                 Post[]
+  sessions              Session[]
+  profile               PlayerProfile?
+  battles               Battle[]
+  bankTransactionsFrom  BankTransaction[]   @relation("BankTransactionFrom")
+  bankTransactionsTo    BankTransaction[]   @relation("BankTransactionTo")
 }
 
 model Character {
@@ -480,13 +482,15 @@ model GuildQuest {
 }
 
 model BankAccount {
-  id         String          @id @default(cuid())
-  playerId   String          @unique
-  gold       Int             @default(0)
-  vaultLevel Int             @default(1)
-  updatedAt  DateTime        @updatedAt
-  player     Player          @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  vaultItems BankVaultItem[]
+  id                  String            @id @default(cuid())
+  playerId            String            @unique
+  balanceCoins        Int               @default(0)
+  lastInterestClaimedAt DateTime?
+  vaultLevel          Int               @default(1)
+  updatedAt           DateTime          @updatedAt
+  player              Player            @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  vaultItems          BankVaultItem[]
+  transactions        BankTransaction[]
 }
 
 model BankVaultItem {
@@ -500,6 +504,32 @@ model BankVaultItem {
 
   @@index([accountId])
   @@index([itemId])
+}
+
+model BankTransaction {
+  id        String            @id @default(cuid())
+  type      BankTransactionType
+  amountCoins Int
+  fromUserId String?
+  toUserId   String?
+  note       String?
+  accountId  String?
+  createdAt  DateTime         @default(now())
+  account    BankAccount?      @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  fromUser   User?             @relation("BankTransactionFrom", fields: [fromUserId], references: [id])
+  toUser     User?             @relation("BankTransactionTo", fields: [toUserId], references: [id])
+
+  @@index([fromUserId])
+  @@index([toUserId])
+  @@index([accountId])
+  @@index([createdAt])
+}
+
+enum BankTransactionType {
+  TRANSFER
+  DEPOSIT
+  WITHDRAW
+  INTEREST
 }
 
 model MarketListing {

@@ -9,6 +9,16 @@
 * 🟢 You can import this file directly.
 */
 
+export const BankTransactionType = {
+  TRANSFER: 'TRANSFER',
+  DEPOSIT: 'DEPOSIT',
+  WITHDRAW: 'WITHDRAW',
+  INTEREST: 'INTEREST'
+} as const
+
+export type BankTransactionType = (typeof BankTransactionType)[keyof typeof BankTransactionType]
+
+
 export const TileType = {
   GRASS: 'GRASS',
   FOREST: 'FOREST',
