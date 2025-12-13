@@ -4236,6 +4236,9 @@ export const PlayerStatsScalarFieldEnum = {
   maxSP: 'maxSP',
   currentSP: 'currentSP',
   statPoints: 'statPoints',
+  hpRegenPerMin: 'hpRegenPerMin',
+  spRegenPerMin: 'spRegenPerMin',
+  lastRegenAt: 'lastRegenAt',
   updatedAt: 'updatedAt'
 } as const
 

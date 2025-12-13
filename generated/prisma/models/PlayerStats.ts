@@ -36,6 +36,8 @@ export type PlayerStatsAvgAggregateOutputType = {
   maxSP: number | null
   currentSP: number | null
   statPoints: number | null
+  hpRegenPerMin: number | null
+  spRegenPerMin: number | null
 }
 
 export type PlayerStatsSumAggregateOutputType = {
@@ -48,6 +50,8 @@ export type PlayerStatsSumAggregateOutputType = {
   maxSP: number | null
   currentSP: number | null
   statPoints: number | null
+  hpRegenPerMin: number | null
+  spRegenPerMin: number | null
 }
 
 export type PlayerStatsMinAggregateOutputType = {
@@ -62,6 +66,9 @@ export type PlayerStatsMinAggregateOutputType = {
   maxSP: number | null
   currentSP: number | null
   statPoints: number | null
+  hpRegenPerMin: number | null
+  spRegenPerMin: number | null
+  lastRegenAt: Date | null
   updatedAt: Date | null
 }
 
@@ -77,6 +84,9 @@ export type PlayerStatsMaxAggregateOutputType = {
   maxSP: number | null
   currentSP: number | null
   statPoints: number | null
+  hpRegenPerMin: number | null
+  spRegenPerMin: number | null
+  lastRegenAt: Date | null
   updatedAt: Date | null
 }
 
@@ -92,6 +102,9 @@ export type PlayerStatsCountAggregateOutputType = {
   maxSP: number
   currentSP: number
   statPoints: number
+  hpRegenPerMin: number
+  spRegenPerMin: number
+  lastRegenAt: number
   updatedAt: number
   _all: number
 }
@@ -107,6 +120,8 @@ export type PlayerStatsAvgAggregateInputType = {
   maxSP?: true
   currentSP?: true
   statPoints?: true
+  hpRegenPerMin?: true
+  spRegenPerMin?: true
 }
 
 export type PlayerStatsSumAggregateInputType = {
@@ -119,6 +134,8 @@ export type PlayerStatsSumAggregateInputType = {
   maxSP?: true
   currentSP?: true
   statPoints?: true
+  hpRegenPerMin?: true
+  spRegenPerMin?: true
 }
 
 export type PlayerStatsMinAggregateInputType = {
@@ -133,6 +150,9 @@ export type PlayerStatsMinAggregateInputType = {
   maxSP?: true
   currentSP?: true
   statPoints?: true
+  hpRegenPerMin?: true
+  spRegenPerMin?: true
+  lastRegenAt?: true
   updatedAt?: true
 }
 
@@ -148,6 +168,9 @@ export type PlayerStatsMaxAggregateInputType = {
   maxSP?: true
   currentSP?: true
   statPoints?: true
+  hpRegenPerMin?: true
+  spRegenPerMin?: true
+  lastRegenAt?: true
   updatedAt?: true
 }
 
@@ -163,6 +186,9 @@ export type PlayerStatsCountAggregateInputType = {
   maxSP?: true
   currentSP?: true
   statPoints?: true
+  hpRegenPerMin?: true
+  spRegenPerMin?: true
+  lastRegenAt?: true
   updatedAt?: true
   _all?: true
 }
@@ -265,6 +291,9 @@ export type PlayerStatsGroupByOutputType = {
   maxSP: number
   currentSP: number
   statPoints: number
+  hpRegenPerMin: number
+  spRegenPerMin: number
+  lastRegenAt: Date
   updatedAt: Date
   _count: PlayerStatsCountAggregateOutputType | null
   _avg: PlayerStatsAvgAggregateOutputType | null
@@ -303,6 +332,9 @@ export type PlayerStatsWhereInput = {
   maxSP?: Prisma.IntFilter<"PlayerStats"> | number
   currentSP?: Prisma.IntFilter<"PlayerStats"> | number
   statPoints?: Prisma.IntFilter<"PlayerStats"> | number
+  hpRegenPerMin?: Prisma.IntFilter<"PlayerStats"> | number
+  spRegenPerMin?: Prisma.IntFilter<"PlayerStats"> | number
+  lastRegenAt?: Prisma.DateTimeFilter<"PlayerStats"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PlayerStats"> | Date | string
   player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
 }
@@ -319,6 +351,9 @@ export type PlayerStatsOrderByWithRelationInput = {
   maxSP?: Prisma.SortOrder
   currentSP?: Prisma.SortOrder
   statPoints?: Prisma.SortOrder
+  hpRegenPerMin?: Prisma.SortOrder
+  spRegenPerMin?: Prisma.SortOrder
+  lastRegenAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   player?: Prisma.PlayerOrderByWithRelationInput
 }
@@ -338,6 +373,9 @@ export type PlayerStatsWhereUniqueInput = Prisma.AtLeast<{
   maxSP?: Prisma.IntFilter<"PlayerStats"> | number
   currentSP?: Prisma.IntFilter<"PlayerStats"> | number
   statPoints?: Prisma.IntFilter<"PlayerStats"> | number
+  hpRegenPerMin?: Prisma.IntFilter<"PlayerStats"> | number
+  spRegenPerMin?: Prisma.IntFilter<"PlayerStats"> | number
+  lastRegenAt?: Prisma.DateTimeFilter<"PlayerStats"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PlayerStats"> | Date | string
   player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
 }, "id" | "playerId">
@@ -354,6 +392,9 @@ export type PlayerStatsOrderByWithAggregationInput = {
   maxSP?: Prisma.SortOrder
   currentSP?: Prisma.SortOrder
   statPoints?: Prisma.SortOrder
+  hpRegenPerMin?: Prisma.SortOrder
+  spRegenPerMin?: Prisma.SortOrder
+  lastRegenAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.PlayerStatsCountOrderByAggregateInput
   _avg?: Prisma.PlayerStatsAvgOrderByAggregateInput
@@ -377,6 +418,9 @@ export type PlayerStatsScalarWhereWithAggregatesInput = {
   maxSP?: Prisma.IntWithAggregatesFilter<"PlayerStats"> | number
   currentSP?: Prisma.IntWithAggregatesFilter<"PlayerStats"> | number
   statPoints?: Prisma.IntWithAggregatesFilter<"PlayerStats"> | number
+  hpRegenPerMin?: Prisma.IntWithAggregatesFilter<"PlayerStats"> | number
+  spRegenPerMin?: Prisma.IntWithAggregatesFilter<"PlayerStats"> | number
+  lastRegenAt?: Prisma.DateTimeWithAggregatesFilter<"PlayerStats"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"PlayerStats"> | Date | string
 }
 
@@ -391,6 +435,9 @@ export type PlayerStatsCreateInput = {
   maxSP?: number
   currentSP?: number
   statPoints?: number
+  hpRegenPerMin?: number
+  spRegenPerMin?: number
+  lastRegenAt?: Date | string
   updatedAt?: Date | string
   player: Prisma.PlayerCreateNestedOneWithoutStatsInput
 }
@@ -407,6 +454,9 @@ export type PlayerStatsUncheckedCreateInput = {
   maxSP?: number
   currentSP?: number
   statPoints?: number
+  hpRegenPerMin?: number
+  spRegenPerMin?: number
+  lastRegenAt?: Date | string
   updatedAt?: Date | string
 }
 
@@ -421,6 +471,9 @@ export type PlayerStatsUpdateInput = {
   maxSP?: Prisma.IntFieldUpdateOperationsInput | number
   currentSP?: Prisma.IntFieldUpdateOperationsInput | number
   statPoints?: Prisma.IntFieldUpdateOperationsInput | number
+  hpRegenPerMin?: Prisma.IntFieldUpdateOperationsInput | number
+  spRegenPerMin?: Prisma.IntFieldUpdateOperationsInput | number
+  lastRegenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   player?: Prisma.PlayerUpdateOneRequiredWithoutStatsNestedInput
 }
@@ -437,6 +490,9 @@ export type PlayerStatsUncheckedUpdateInput = {
   maxSP?: Prisma.IntFieldUpdateOperationsInput | number
   currentSP?: Prisma.IntFieldUpdateOperationsInput | number
   statPoints?: Prisma.IntFieldUpdateOperationsInput | number
+  hpRegenPerMin?: Prisma.IntFieldUpdateOperationsInput | number
+  spRegenPerMin?: Prisma.IntFieldUpdateOperationsInput | number
+  lastRegenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -452,6 +508,9 @@ export type PlayerStatsCreateManyInput = {
   maxSP?: number
   currentSP?: number
   statPoints?: number
+  hpRegenPerMin?: number
+  spRegenPerMin?: number
+  lastRegenAt?: Date | string
   updatedAt?: Date | string
 }
 
@@ -466,6 +525,9 @@ export type PlayerStatsUpdateManyMutationInput = {
   maxSP?: Prisma.IntFieldUpdateOperationsInput | number
   currentSP?: Prisma.IntFieldUpdateOperationsInput | number
   statPoints?: Prisma.IntFieldUpdateOperationsInput | number
+  hpRegenPerMin?: Prisma.IntFieldUpdateOperationsInput | number
+  spRegenPerMin?: Prisma.IntFieldUpdateOperationsInput | number
+  lastRegenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -481,6 +543,9 @@ export type PlayerStatsUncheckedUpdateManyInput = {
   maxSP?: Prisma.IntFieldUpdateOperationsInput | number
   currentSP?: Prisma.IntFieldUpdateOperationsInput | number
   statPoints?: Prisma.IntFieldUpdateOperationsInput | number
+  hpRegenPerMin?: Prisma.IntFieldUpdateOperationsInput | number
+  spRegenPerMin?: Prisma.IntFieldUpdateOperationsInput | number
+  lastRegenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -501,6 +566,9 @@ export type PlayerStatsCountOrderByAggregateInput = {
   maxSP?: Prisma.SortOrder
   currentSP?: Prisma.SortOrder
   statPoints?: Prisma.SortOrder
+  hpRegenPerMin?: Prisma.SortOrder
+  spRegenPerMin?: Prisma.SortOrder
+  lastRegenAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -514,6 +582,8 @@ export type PlayerStatsAvgOrderByAggregateInput = {
   maxSP?: Prisma.SortOrder
   currentSP?: Prisma.SortOrder
   statPoints?: Prisma.SortOrder
+  hpRegenPerMin?: Prisma.SortOrder
+  spRegenPerMin?: Prisma.SortOrder
 }
 
 export type PlayerStatsMaxOrderByAggregateInput = {
@@ -528,6 +598,9 @@ export type PlayerStatsMaxOrderByAggregateInput = {
   maxSP?: Prisma.SortOrder
   currentSP?: Prisma.SortOrder
   statPoints?: Prisma.SortOrder
+  hpRegenPerMin?: Prisma.SortOrder
+  spRegenPerMin?: Prisma.SortOrder
+  lastRegenAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -543,6 +616,9 @@ export type PlayerStatsMinOrderByAggregateInput = {
   maxSP?: Prisma.SortOrder
   currentSP?: Prisma.SortOrder
   statPoints?: Prisma.SortOrder
+  hpRegenPerMin?: Prisma.SortOrder
+  spRegenPerMin?: Prisma.SortOrder
+  lastRegenAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -556,6 +632,8 @@ export type PlayerStatsSumOrderByAggregateInput = {
   maxSP?: Prisma.SortOrder
   currentSP?: Prisma.SortOrder
   statPoints?: Prisma.SortOrder
+  hpRegenPerMin?: Prisma.SortOrder
+  spRegenPerMin?: Prisma.SortOrder
 }
 
 export type PlayerStatsCreateNestedOneWithoutPlayerInput = {
@@ -601,6 +679,9 @@ export type PlayerStatsCreateWithoutPlayerInput = {
   maxSP?: number
   currentSP?: number
   statPoints?: number
+  hpRegenPerMin?: number
+  spRegenPerMin?: number
+  lastRegenAt?: Date | string
   updatedAt?: Date | string
 }
 
@@ -615,6 +696,9 @@ export type PlayerStatsUncheckedCreateWithoutPlayerInput = {
   maxSP?: number
   currentSP?: number
   statPoints?: number
+  hpRegenPerMin?: number
+  spRegenPerMin?: number
+  lastRegenAt?: Date | string
   updatedAt?: Date | string
 }
 
@@ -645,6 +729,9 @@ export type PlayerStatsUpdateWithoutPlayerInput = {
   maxSP?: Prisma.IntFieldUpdateOperationsInput | number
   currentSP?: Prisma.IntFieldUpdateOperationsInput | number
   statPoints?: Prisma.IntFieldUpdateOperationsInput | number
+  hpRegenPerMin?: Prisma.IntFieldUpdateOperationsInput | number
+  spRegenPerMin?: Prisma.IntFieldUpdateOperationsInput | number
+  lastRegenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -659,6 +746,9 @@ export type PlayerStatsUncheckedUpdateWithoutPlayerInput = {
   maxSP?: Prisma.IntFieldUpdateOperationsInput | number
   currentSP?: Prisma.IntFieldUpdateOperationsInput | number
   statPoints?: Prisma.IntFieldUpdateOperationsInput | number
+  hpRegenPerMin?: Prisma.IntFieldUpdateOperationsInput | number
+  spRegenPerMin?: Prisma.IntFieldUpdateOperationsInput | number
+  lastRegenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -676,6 +766,9 @@ export type PlayerStatsSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   maxSP?: boolean
   currentSP?: boolean
   statPoints?: boolean
+  hpRegenPerMin?: boolean
+  spRegenPerMin?: boolean
+  lastRegenAt?: boolean
   updatedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["playerStats"]>
@@ -692,6 +785,9 @@ export type PlayerStatsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   maxSP?: boolean
   currentSP?: boolean
   statPoints?: boolean
+  hpRegenPerMin?: boolean
+  spRegenPerMin?: boolean
+  lastRegenAt?: boolean
   updatedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["playerStats"]>
@@ -708,6 +804,9 @@ export type PlayerStatsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   maxSP?: boolean
   currentSP?: boolean
   statPoints?: boolean
+  hpRegenPerMin?: boolean
+  spRegenPerMin?: boolean
+  lastRegenAt?: boolean
   updatedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["playerStats"]>
@@ -724,10 +823,13 @@ export type PlayerStatsSelectScalar = {
   maxSP?: boolean
   currentSP?: boolean
   statPoints?: boolean
+  hpRegenPerMin?: boolean
+  spRegenPerMin?: boolean
+  lastRegenAt?: boolean
   updatedAt?: boolean
 }
 
-export type PlayerStatsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "vitality" | "strength" | "speed" | "dexterity" | "maxHP" | "currentHP" | "maxSP" | "currentSP" | "statPoints" | "updatedAt", ExtArgs["result"]["playerStats"]>
+export type PlayerStatsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "vitality" | "strength" | "speed" | "dexterity" | "maxHP" | "currentHP" | "maxSP" | "currentSP" | "statPoints" | "hpRegenPerMin" | "spRegenPerMin" | "lastRegenAt" | "updatedAt", ExtArgs["result"]["playerStats"]>
 export type PlayerStatsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }
@@ -755,6 +857,9 @@ export type $PlayerStatsPayload<ExtArgs extends runtime.Types.Extensions.Interna
     maxSP: number
     currentSP: number
     statPoints: number
+    hpRegenPerMin: number
+    spRegenPerMin: number
+    lastRegenAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["playerStats"]>
   composites: {}
@@ -1191,6 +1296,9 @@ export interface PlayerStatsFieldRefs {
   readonly maxSP: Prisma.FieldRef<"PlayerStats", 'Int'>
   readonly currentSP: Prisma.FieldRef<"PlayerStats", 'Int'>
   readonly statPoints: Prisma.FieldRef<"PlayerStats", 'Int'>
+  readonly hpRegenPerMin: Prisma.FieldRef<"PlayerStats", 'Int'>
+  readonly spRegenPerMin: Prisma.FieldRef<"PlayerStats", 'Int'>
+  readonly lastRegenAt: Prisma.FieldRef<"PlayerStats", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"PlayerStats", 'DateTime'>
 }
     
