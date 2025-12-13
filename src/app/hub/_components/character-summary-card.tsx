@@ -99,12 +99,24 @@ export function CharacterSummaryCard() {
         }
       }
 
-      // If pools are full, ensure they stay at max
-      if (hpIsFull && interpolatedHp !== serverMaxHp) {
-        setInterpolatedHp(serverMaxHp);
+      // If pools are full, ensure they stay at max (only update if different to prevent loops)
+      if (hpIsFull) {
+        if (interpolatedHp === null || Math.abs(interpolatedHp - serverMaxHp) > 0.01) {
+          setInterpolatedHp(serverMaxHp);
+        }
+        // Stop interpolation by clearing sync time when full
+        if (baseHpRef.current >= serverMaxHp) {
+          baseHpRef.current = serverMaxHp;
+        }
       }
-      if (staminaIsFull && interpolatedStamina !== serverMaxStamina) {
-        setInterpolatedStamina(serverMaxStamina);
+      if (staminaIsFull) {
+        if (interpolatedStamina === null || Math.abs(interpolatedStamina - serverMaxStamina) > 0.01) {
+          setInterpolatedStamina(serverMaxStamina);
+        }
+        // Stop interpolation by clearing sync time when full
+        if (baseStaminaRef.current >= serverMaxStamina) {
+          baseStaminaRef.current = serverMaxStamina;
+        }
       }
 
       maxHpRef.current = serverMaxHp;
@@ -112,10 +124,10 @@ export function CharacterSummaryCard() {
       hpRegenPerSecRef.current = hpRegenPerMin / 60; // Convert per minute to per second
       spRegenPerSecRef.current = spRegenPerMin / 60;
     }
-  }, [serverCurrentHp, serverCurrentStamina, serverMaxHp, serverMaxStamina, hpRegenPerMin, spRegenPerMin, character, interpolatedHp, interpolatedStamina]);
+  }, [serverCurrentHp, serverCurrentStamina, serverMaxHp, serverMaxStamina, hpRegenPerMin, spRegenPerMin, character]);
 
   // Real-time interpolation effect - calculate based on elapsed time
-  // DISABLED during active battle
+  // DISABLED during active battle or when pools are full
   useEffect(() => {
     if (!character || baseHpRef.current === null || baseStaminaRef.current === null || isInBattle) {
       // If in battle, use server values directly (no interpolation)
@@ -128,32 +140,52 @@ export function CharacterSummaryCard() {
 
     const interval = setInterval(() => {
       if (maxHpRef.current !== null && maxStaminaRef.current !== null && baseHpRef.current !== null && baseStaminaRef.current !== null) {
-        // Calculate HP interpolation (only if lastHpSyncRef is set)
-        if (lastHpSyncRef.current !== null) {
+        // Calculate HP interpolation (only if lastHpSyncRef is set and not full)
+        if (lastHpSyncRef.current !== null && baseHpRef.current < maxHpRef.current) {
           const newHp = calculateInterpolatedValue(
             baseHpRef.current,
             maxHpRef.current,
             hpRegenPerSecRef.current,
             lastHpSyncRef.current
           );
-          setInterpolatedHp(newHp);
+          // Cap at max
+          const cappedHp = Math.min(newHp, maxHpRef.current);
+          setInterpolatedHp(cappedHp);
+          
+          // If we reached max, update base to stop further interpolation
+          if (cappedHp >= maxHpRef.current) {
+            baseHpRef.current = maxHpRef.current;
+          }
+        } else if (baseHpRef.current >= maxHpRef.current) {
+          // Pool is full, ensure it stays at max
+          setInterpolatedHp(maxHpRef.current);
         }
 
-        // Calculate Stamina interpolation (only if lastSpSyncRef is set)
-        if (lastSpSyncRef.current !== null) {
+        // Calculate Stamina interpolation (only if lastSpSyncRef is set and not full)
+        if (lastSpSyncRef.current !== null && baseStaminaRef.current < maxStaminaRef.current) {
           const newStamina = calculateInterpolatedValue(
             baseStaminaRef.current,
             maxStaminaRef.current,
             spRegenPerSecRef.current,
             lastSpSyncRef.current
           );
-          setInterpolatedStamina(newStamina);
+          // Cap at max
+          const cappedStamina = Math.min(newStamina, maxStaminaRef.current);
+          setInterpolatedStamina(cappedStamina);
+          
+          // If we reached max, update base to stop further interpolation
+          if (cappedStamina >= maxStaminaRef.current) {
+            baseStaminaRef.current = maxStaminaRef.current;
+          }
+        } else if (baseStaminaRef.current >= maxStaminaRef.current) {
+          // Pool is full, ensure it stays at max
+          setInterpolatedStamina(maxStaminaRef.current);
         }
       }
     }, 100); // Update every 100ms for smooth animation
 
     return () => clearInterval(interval);
-  }, [character, isInBattle, serverCurrentHp, serverCurrentStamina]);
+  }, [character, isInBattle, serverCurrentHp, serverCurrentStamina, serverMaxHp, serverMaxStamina]);
 
   // Only show loading if character is loading (character is required, player is optional)
   if (characterLoading || !character) {
