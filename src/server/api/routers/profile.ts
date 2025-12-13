@@ -62,6 +62,28 @@ export const profileRouter = createTRPCRouter({
       });
     }
 
+    // Get player with bank account and jobs
+    const player = await ctx.db.player.findUnique({
+      where: { userId: ctx.session.user.id },
+      include: {
+        bankAccount: true,
+        userJobs: {
+          include: {
+            job: {
+              select: {
+                id: true,
+                key: true,
+                name: true,
+              },
+            },
+          },
+          orderBy: {
+            level: "desc",
+          },
+        },
+      },
+    });
+
     let profile = await ctx.db.playerProfile.findUnique({
       where: { userId: ctx.session.user.id },
       include: {
@@ -170,6 +192,20 @@ export const profileRouter = createTRPCRouter({
       ),
       level: user.player?.level ?? 1,
       status: (user.player?.deathCount ?? 0) >= 5 ? "Fallen" : "Alive",
+      bankAccount: player?.bankAccount
+        ? {
+            balanceCoins: player.bankAccount.balanceCoins,
+            vaultLevel: player.bankAccount.vaultLevel,
+          }
+        : null,
+      jobs: player?.userJobs.map((uj) => ({
+        id: uj.id,
+        jobKey: uj.job.key,
+        jobName: uj.job.name,
+        level: uj.level,
+        xp: uj.xp,
+        active: uj.active,
+      })) ?? [],
     };
   }),
 
@@ -204,6 +240,28 @@ export const profileRouter = createTRPCRouter({
           message: "Profile not found",
         });
       }
+
+      // Get player with bank account and jobs
+      const player = await ctx.db.player.findUnique({
+        where: { userId: user.id },
+        include: {
+          bankAccount: true,
+          userJobs: {
+            include: {
+              job: {
+                select: {
+                  id: true,
+                  key: true,
+                  name: true,
+                },
+              },
+            },
+            orderBy: {
+              level: "desc",
+            },
+          },
+        },
+      });
 
       const profile = await ctx.db.playerProfile.findUnique({
         where: { userId: user.id },
@@ -259,6 +317,20 @@ export const profileRouter = createTRPCRouter({
         ),
         level: user.player?.level ?? 1,
         status: (user.player?.deathCount ?? 0) >= 5 ? "Fallen" : "Alive",
+        bankAccount: player?.bankAccount
+          ? {
+              balanceCoins: player.bankAccount.balanceCoins,
+              vaultLevel: player.bankAccount.vaultLevel,
+            }
+          : null,
+        jobs: player?.userJobs.map((uj) => ({
+          id: uj.id,
+          jobKey: uj.job.key,
+          jobName: uj.job.name,
+          level: uj.level,
+          xp: uj.xp,
+          active: uj.active,
+        })) ?? [],
       };
     }),
 

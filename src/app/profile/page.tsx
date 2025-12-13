@@ -8,6 +8,8 @@ import { ProfilePvpCard } from "./_components/profile-pvp-card";
 import { ProfilePveCard } from "./_components/profile-pve-card";
 import { ProfileAchievementsCard } from "./_components/profile-achievements-card";
 import { ProfileSocialCard } from "./_components/profile-social-card";
+import { ProfileBankingCard } from "./_components/profile-banking-card";
+import { ProfileJobsCard } from "./_components/profile-jobs-card";
 
 export default async function ProfilePage() {
   const session = await getServerAuthSession();
@@ -149,6 +151,13 @@ export default async function ProfilePage() {
               deathsLimit={profile.pveRecord?.deathsLimit ?? 5}
               deathsRemaining={profile.deathsRemaining}
             />
+
+            <ProfileBankingCard
+              balanceCoins={profile.bankAccount?.balanceCoins ?? 0}
+              vaultLevel={profile.bankAccount?.vaultLevel ?? 1}
+            />
+
+            <ProfileJobsCard jobs={profile.jobs ?? []} />
 
             <ProfileAchievementsCard
               achievements={profile.achievements.map((pa) => ({

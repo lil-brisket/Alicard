@@ -23,7 +23,7 @@ export function ProfilePveCard({
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div className="rounded-lg border border-slate-700/50 bg-slate-800/30 p-4">
-            <p className="mb-1 text-xs text-slate-400">Total Kills</p>
+            <p className="mb-1 text-xs text-slate-400">Combat Kills</p>
             <p className="text-2xl font-bold text-orange-400">{totalKills}</p>
           </div>
           <div className="rounded-lg border border-slate-700/50 bg-slate-800/30 p-4">
