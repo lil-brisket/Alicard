@@ -3,8 +3,6 @@ import { redirect } from "next/navigation";
 import { getServerAuthSession } from "~/server/auth";
 import { db } from "~/server/db";
 import { HubHeader } from "./_components/hub-header";
-import { CharacterSummaryCard } from "./_components/character-summary-card";
-import { CoreStatsCard } from "./_components/core-stats-card";
 import { ActionGrid } from "./_components/action-grid";
 import { HallOfDeadCard } from "./_components/hall-of-dead-card";
 
@@ -72,22 +70,8 @@ export default async function HubPage() {
           level={character.level}
         />
 
-        <main className="mt-4 grid flex-1 grid-cols-1 gap-4 md:mt-6 md:grid-cols-12">
-          {/* Left column: md:col-span-5 */}
-          <section className="space-y-4 md:col-span-5">
-            {/* character card */}
-            <CharacterSummaryCard />
-            {/* stats card */}
-            <CoreStatsCard
-              vitality={character.vitality}
-              strength={character.strength}
-              speed={character.speed}
-              dexterity={character.dexterity}
-            />
-          </section>
-
-          {/* Right column: md:col-span-7 */}
-          <section className="space-y-4 md:col-span-7">
+        <main className="mt-4 flex-1 md:mt-6">
+          <section className="space-y-4">
             {/* actions card */}
             <ActionGrid />
             {/* hall of the dead card */}
