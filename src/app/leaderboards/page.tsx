@@ -10,6 +10,12 @@ type TabType = "pve" | "pvp" | "jobs";
 export default function LeaderboardsPage() {
   const { data: session } = useSession();
   const [activeTab, setActiveTab] = useState<TabType>("pve");
+  const [selectedJobKey, setSelectedJobKey] = useState<string>("");
+
+  // Get all jobs for the filter dropdown
+  const { data: allJobs } = api.jobs.listJobs.useQuery(undefined, {
+    enabled: activeTab === "jobs",
+  });
 
   // PvE Query
   const { data: pveData, isLoading: pveLoading } =
@@ -31,6 +37,7 @@ export default function LeaderboardsPage() {
     api.leaderboards.getJobs.useQuery({
       timeframe: "all-time",
       limit: 50,
+      jobKey: selectedJobKey || undefined,
     });
 
   const isLoading =
@@ -66,7 +73,10 @@ export default function LeaderboardsPage() {
         {/* Tabs */}
         <div className="mb-4 flex gap-2 border-b border-slate-800">
           <button
-            onClick={() => setActiveTab("pve")}
+            onClick={() => {
+              setActiveTab("pve");
+              setSelectedJobKey("");
+            }}
             className={`px-4 py-2 font-medium transition ${
               activeTab === "pve"
                 ? "border-b-2 border-cyan-400 text-cyan-400"
@@ -76,7 +86,10 @@ export default function LeaderboardsPage() {
             PvE
           </button>
           <button
-            onClick={() => setActiveTab("pvp")}
+            onClick={() => {
+              setActiveTab("pvp");
+              setSelectedJobKey("");
+            }}
             className={`px-4 py-2 font-medium transition ${
               activeTab === "pvp"
                 ? "border-b-2 border-cyan-400 text-cyan-400"
@@ -86,7 +99,10 @@ export default function LeaderboardsPage() {
             PvP
           </button>
           <button
-            onClick={() => setActiveTab("jobs")}
+            onClick={() => {
+              setActiveTab("jobs");
+              // Don't reset filter when switching to jobs tab
+            }}
             className={`px-4 py-2 font-medium transition ${
               activeTab === "jobs"
                 ? "border-b-2 border-cyan-400 text-cyan-400"
@@ -96,6 +112,27 @@ export default function LeaderboardsPage() {
             Jobs
           </button>
         </div>
+
+        {/* Job Filter - Only show when Jobs tab is active */}
+        {activeTab === "jobs" && allJobs && allJobs.length > 0 && (
+          <div className="mb-4 flex items-center gap-4">
+            <label className="text-sm font-medium text-slate-300">
+              Filter by Job:
+            </label>
+            <select
+              value={selectedJobKey}
+              onChange={(e) => setSelectedJobKey(e.target.value)}
+              className="rounded-lg border border-slate-700 bg-slate-900 px-4 py-2 text-slate-100 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
+            >
+              <option value="">All Jobs</option>
+              {allJobs.map((job) => (
+                <option key={job.id} value={job.key}>
+                  {job.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
 
         {/* Table */}

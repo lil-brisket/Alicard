@@ -3,6 +3,7 @@ import { TRPCError } from "@trpc/server";
 import {
   createTRPCRouter,
   protectedProcedure,
+  publicProcedure,
 } from "~/server/api/trpc";
 import { db } from "~/server/db";
 import {
@@ -13,8 +14,8 @@ import {
 } from "~/server/lib/job-utils";
 
 export const jobsRouter = createTRPCRouter({
-  // Get all available jobs
-  listJobs: protectedProcedure.query(async () => {
+  // Get all available jobs (public for leaderboard filtering)
+  listJobs: publicProcedure.query(async () => {
     return await db.job.findMany({
       orderBy: [
         { category: "asc" },

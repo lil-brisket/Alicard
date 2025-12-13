@@ -208,9 +208,58 @@ export const leaderboardsRouter = createTRPCRouter({
       z.object({
         timeframe: z.enum(["all-time", "daily", "weekly"]).default("all-time"),
         limit: z.number().min(1).max(100).default(50),
+        jobKey: z.string().optional(), // Filter by specific job
       })
     )
     .query(async ({ ctx, input }) => {
+      if (input.jobKey) {
+        // Filter by specific job - get all users with this job and sort by XP
+        const jobRecords = await ctx.db.userJob.findMany({
+          where: {
+            job: {
+              key: input.jobKey,
+            },
+          },
+          include: {
+            player: {
+              include: {
+                user: {
+                  select: {
+                    id: true,
+                    username: true,
+                    name: true,
+                    image: true,
+                  },
+                },
+              },
+            },
+            job: {
+              select: {
+                key: true,
+                name: true,
+              },
+            },
+          },
+          orderBy: {
+            xp: "desc",
+          },
+          take: input.limit,
+        });
+
+        return jobRecords.map((record, index) => ({
+          rank: index + 1,
+          userId: record.player.userId,
+          username: record.player.user.username,
+          avatarUrl: record.player.user.image,
+          jobXpTotal: record.xp, // Use specific job XP when filtering
+          topJob: {
+            key: record.job.key,
+            name: record.job.name,
+            xp: record.xp,
+          },
+        }));
+      }
+
       if (input.timeframe === "all-time") {
         // Use PlayerLeaderboardStats
         const stats = await ctx.db.playerLeaderboardStats.findMany({
