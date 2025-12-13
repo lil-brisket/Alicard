@@ -206,7 +206,7 @@ export function MovementControls() {
         <button
           onClick={() => handleMove("north")}
           disabled={moveMutation.isPending}
-          className="w-full rounded-lg bg-cyan-600 px-6 py-3 font-semibold text-white transition hover:bg-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed sm:w-auto"
+          className="w-full rounded-lg bg-cyan-600 px-6 py-3 font-semibold text-white disabled:opacity-50 disabled:cursor-not-allowed sm:w-auto"
         >
           ↑ North (W / ↑)
         </button>
@@ -216,14 +216,14 @@ export function MovementControls() {
           <button
             onClick={() => handleMove("west")}
             disabled={moveMutation.isPending}
-            className="flex-1 rounded-lg bg-cyan-600 px-6 py-3 font-semibold text-white transition hover:bg-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed sm:flex-none"
+            className="flex-1 rounded-lg bg-cyan-600 px-6 py-3 font-semibold text-white disabled:opacity-50 disabled:cursor-not-allowed sm:flex-none"
           >
             ← West (A / ←)
           </button>
           <button
             onClick={() => handleMove("east")}
             disabled={moveMutation.isPending}
-            className="flex-1 rounded-lg bg-cyan-600 px-6 py-3 font-semibold text-white transition hover:bg-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed sm:flex-none"
+            className="flex-1 rounded-lg bg-cyan-600 px-6 py-3 font-semibold text-white disabled:opacity-50 disabled:cursor-not-allowed sm:flex-none"
           >
             East → (D / →)
           </button>
@@ -233,7 +233,7 @@ export function MovementControls() {
         <button
           onClick={() => handleMove("south")}
           disabled={moveMutation.isPending}
-          className="w-full rounded-lg bg-cyan-600 px-6 py-3 font-semibold text-white transition hover:bg-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed sm:w-auto"
+          className="w-full rounded-lg bg-cyan-600 px-6 py-3 font-semibold text-white disabled:opacity-50 disabled:cursor-not-allowed sm:w-auto"
         >
           ↓ South (S / ↓)
         </button>
