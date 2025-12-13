@@ -6,10 +6,10 @@ import { TileCell } from "./tile-cell";
 export function MapGrid() {
   const { data: world, isLoading: worldLoading } =
     api.world.getActiveWorld.useQuery();
-  const { data: position, isLoading: positionLoading } =
-    api.player.getPosition.useQuery();
+  const { data: position } = api.player.getPosition.useQuery();
 
-  if (worldLoading || positionLoading) {
+  // Only show loading on initial world load
+  if (worldLoading && !world) {
     return (
       <div className="flex h-96 items-center justify-center">
         <p className="text-slate-400">Loading map...</p>

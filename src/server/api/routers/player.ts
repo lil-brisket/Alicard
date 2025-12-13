@@ -600,7 +600,16 @@ export const playerRouter = createTRPCRouter({
   move: protectedProcedure
     .input(
       z.object({
-        direction: z.enum(["north", "south", "east", "west"]),
+        direction: z.enum([
+          "north",
+          "south",
+          "east",
+          "west",
+          "northeast",
+          "northwest",
+          "southeast",
+          "southwest",
+        ]),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -700,6 +709,22 @@ export const playerRouter = createTRPCRouter({
           break;
         case "west":
           newX -= 1;
+          break;
+        case "northeast":
+          newX += 1;
+          newY -= 1;
+          break;
+        case "northwest":
+          newX -= 1;
+          newY -= 1;
+          break;
+        case "southeast":
+          newX += 1;
+          newY += 1;
+          break;
+        case "southwest":
+          newX -= 1;
+          newY += 1;
           break;
       }
 
