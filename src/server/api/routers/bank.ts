@@ -200,6 +200,190 @@ export const bankRouter = createTRPCRouter({
       return { success: true };
     }),
 
+  // Deposit coins from wallet to bank
+  deposit: protectedProcedure
+    .input(
+      z.object({
+        amountCoins: z.number().int().positive("Amount must be positive"),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.session.user.id;
+
+      // Validate: amount must be positive
+      if (input.amountCoins <= 0) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Amount must be greater than 0",
+        });
+      }
+
+      // Get player with wallet and bank account
+      const player = await ctx.db.player.findUnique({
+        where: { userId },
+        select: {
+          id: true,
+          gold: true,
+          bankAccount: true,
+        },
+      });
+
+      if (!player) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Player not found",
+        });
+      }
+
+      // Validate: player has enough coins in wallet
+      if (player.gold < input.amountCoins) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Insufficient funds in wallet",
+        });
+      }
+
+      // Upsert bank account if it doesn't exist
+      let bankAccount = player.bankAccount;
+      if (!bankAccount) {
+        bankAccount = await ctx.db.bankAccount.create({
+          data: {
+            playerId: player.id,
+            balanceCoins: 0,
+            vaultLevel: 1,
+          },
+        });
+      }
+
+      // Perform atomic deposit
+      await ctx.db.$transaction(async (tx) => {
+        // Decrement wallet
+        await tx.player.update({
+          where: { id: player.id },
+          data: {
+            gold: {
+              decrement: input.amountCoins,
+            },
+          },
+        });
+
+        // Increment bank balance
+        await tx.bankAccount.update({
+          where: { id: bankAccount.id },
+          data: {
+            balanceCoins: {
+              increment: input.amountCoins,
+            },
+          },
+        });
+
+        // Create transaction ledger entry
+        await tx.bankTransaction.create({
+          data: {
+            type: "DEPOSIT",
+            amountCoins: input.amountCoins,
+            accountId: bankAccount.id,
+            note: "Deposit from wallet",
+          },
+        });
+      });
+
+      return { success: true };
+    }),
+
+  // Withdraw coins from bank to wallet
+  withdraw: protectedProcedure
+    .input(
+      z.object({
+        amountCoins: z.number().int().positive("Amount must be positive"),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.session.user.id;
+
+      // Validate: amount must be positive
+      if (input.amountCoins <= 0) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Amount must be greater than 0",
+        });
+      }
+
+      // Get player with wallet and bank account
+      const player = await ctx.db.player.findUnique({
+        where: { userId },
+        select: {
+          id: true,
+          gold: true,
+          bankAccount: true,
+        },
+      });
+
+      if (!player) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Player not found",
+        });
+      }
+
+      // Upsert bank account if it doesn't exist
+      let bankAccount = player.bankAccount;
+      if (!bankAccount) {
+        bankAccount = await ctx.db.bankAccount.create({
+          data: {
+            playerId: player.id,
+            balanceCoins: 0,
+            vaultLevel: 1,
+          },
+        });
+      }
+
+      // Validate: bank has enough coins
+      if (bankAccount.balanceCoins < input.amountCoins) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Insufficient funds in bank",
+        });
+      }
+
+      // Perform atomic withdrawal
+      await ctx.db.$transaction(async (tx) => {
+        // Decrement bank balance
+        await tx.bankAccount.update({
+          where: { id: bankAccount.id },
+          data: {
+            balanceCoins: {
+              decrement: input.amountCoins,
+            },
+          },
+        });
+
+        // Increment wallet
+        await tx.player.update({
+          where: { id: player.id },
+          data: {
+            gold: {
+              increment: input.amountCoins,
+            },
+          },
+        });
+
+        // Create transaction ledger entry
+        await tx.bankTransaction.create({
+          data: {
+            type: "WITHDRAW",
+            amountCoins: input.amountCoins,
+            accountId: bankAccount.id,
+            note: "Withdraw to wallet",
+          },
+        });
+      });
+
+      return {
+        success: true,
+      };
+    }),
+
   // Claim daily interest (10% of bank balance)
   claimDailyInterest: protectedProcedure.mutation(async ({ ctx }) => {
     const userId = ctx.session.user.id;

@@ -48,6 +48,8 @@ export default function BankPage() {
   const [selectedRecipient, setSelectedRecipient] = useState<{ id: string; username: string } | null>(null);
   const [amount, setAmount] = useState("");
   const [showRecipientDropdown, setShowRecipientDropdown] = useState(false);
+  const [depositAmount, setDepositAmount] = useState("");
+  const [withdrawAmount, setWithdrawAmount] = useState("");
 
   // Get bank overview
   const { data: overview, refetch: refetchOverview } = api.bank.getOverview.useQuery();
@@ -89,6 +91,30 @@ export default function BankPage() {
     },
   });
 
+  // Deposit mutation
+  const depositMutation = api.bank.deposit.useMutation({
+    onSuccess: () => {
+      toast.success("Deposit completed successfully!");
+      setDepositAmount("");
+      void refetchOverview();
+    },
+    onError: (error) => {
+      toast.error(error.message || "Deposit failed");
+    },
+  });
+
+  // Withdraw mutation
+  const withdrawMutation = api.bank.withdraw.useMutation({
+    onSuccess: () => {
+      toast.success("Withdrawal completed successfully!");
+      setWithdrawAmount("");
+      void refetchOverview();
+    },
+    onError: (error) => {
+      toast.error(error.message || "Withdrawal failed");
+    },
+  });
+
   // Filter search results (exclude already selected)
   const filteredResults = useMemo(() => {
     if (!selectedRecipient) return searchResults;
@@ -115,6 +141,30 @@ export default function BankPage() {
 
   const handleClaimInterest = () => {
     claimInterestMutation.mutate();
+  };
+
+  const handleDeposit = () => {
+    const amountNum = parseInt(depositAmount, 10);
+    if (isNaN(amountNum) || amountNum <= 0) {
+      toast.error("Please enter a valid amount");
+      return;
+    }
+
+    depositMutation.mutate({
+      amountCoins: amountNum,
+    });
+  };
+
+  const handleWithdraw = () => {
+    const amountNum = parseInt(withdrawAmount, 10);
+    if (isNaN(amountNum) || amountNum <= 0) {
+      toast.error("Please enter a valid amount");
+      return;
+    }
+
+    withdrawMutation.mutate({
+      amountCoins: amountNum,
+    });
   };
 
   const interestAmount = overview
@@ -156,6 +206,76 @@ export default function BankPage() {
             <p className="text-3xl font-bold text-cyan-400">
               {overview ? formatCoins(overview.bankBalanceCoins) : "..."} coins
             </p>
+          </div>
+        </div>
+
+        {/* Deposit/Withdraw Section */}
+        <div className="mb-6 rounded-xl bg-white/10 p-6">
+          <h2 className="mb-4 text-xl font-semibold">Deposit & Withdraw</h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            {/* Deposit */}
+            <div className="flex flex-col rounded-lg border border-slate-700 bg-slate-900/50 p-4">
+              <h3 className="mb-3 text-lg font-semibold text-green-400">
+                Deposit to Bank
+              </h3>
+              <p className="mb-3 text-sm text-slate-400">
+                Transfer coins from your wallet to your bank account
+              </p>
+              <div className="flex flex-1 flex-col">
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-slate-300">
+                    Amount (coins)
+                  </label>
+                  <input
+                    type="number"
+                    value={depositAmount}
+                    onChange={(e) => setDepositAmount(e.target.value)}
+                    placeholder="Enter amount..."
+                    min="1"
+                    className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-2 text-slate-100 placeholder:text-slate-500 focus:border-green-500 focus:outline-none"
+                  />
+                </div>
+                <button
+                  onClick={handleDeposit}
+                  disabled={!depositAmount || depositMutation.isPending}
+                  className="mt-3 w-full rounded-lg bg-green-600 px-4 py-2 font-semibold text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {depositMutation.isPending ? "Depositing..." : "Deposit"}
+                </button>
+              </div>
+            </div>
+
+            {/* Withdraw */}
+            <div className="flex flex-col rounded-lg border border-slate-700 bg-slate-900/50 p-4">
+              <h3 className="mb-3 text-lg font-semibold text-orange-400">
+                Withdraw from Bank
+              </h3>
+              <p className="mb-3 text-sm text-slate-400">
+                Transfer coins from your bank account to your wallet
+              </p>
+              <div className="flex flex-1 flex-col">
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-slate-300">
+                    Amount (coins)
+                  </label>
+                  <input
+                    type="number"
+                    value={withdrawAmount}
+                    onChange={(e) => setWithdrawAmount(e.target.value)}
+                    placeholder="Enter amount..."
+                    min="1"
+                    className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-2 text-slate-100 placeholder:text-slate-500 focus:border-orange-500 focus:outline-none"
+                  />
+                </div>
+                <button
+                  onClick={handleWithdraw}
+                  disabled={!withdrawAmount || withdrawMutation.isPending}
+                  className="mt-3 w-full rounded-lg bg-orange-600 px-4 py-2 font-semibold text-white transition hover:bg-orange-700 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {withdrawMutation.isPending ? "Withdrawing..." : "Withdraw"}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
