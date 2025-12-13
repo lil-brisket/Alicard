@@ -29,11 +29,15 @@ export type AggregatePlayerPvpRecord = {
 export type PlayerPvpRecordAvgAggregateOutputType = {
   wins: number | null
   losses: number | null
+  pvpWinStreakCurrent: number | null
+  pvpWinStreakBest: number | null
 }
 
 export type PlayerPvpRecordSumAggregateOutputType = {
   wins: number | null
   losses: number | null
+  pvpWinStreakCurrent: number | null
+  pvpWinStreakBest: number | null
 }
 
 export type PlayerPvpRecordMinAggregateOutputType = {
@@ -41,6 +45,8 @@ export type PlayerPvpRecordMinAggregateOutputType = {
   profileId: string | null
   wins: number | null
   losses: number | null
+  pvpWinStreakCurrent: number | null
+  pvpWinStreakBest: number | null
   updatedAt: Date | null
 }
 
@@ -49,6 +55,8 @@ export type PlayerPvpRecordMaxAggregateOutputType = {
   profileId: string | null
   wins: number | null
   losses: number | null
+  pvpWinStreakCurrent: number | null
+  pvpWinStreakBest: number | null
   updatedAt: Date | null
 }
 
@@ -57,6 +65,8 @@ export type PlayerPvpRecordCountAggregateOutputType = {
   profileId: number
   wins: number
   losses: number
+  pvpWinStreakCurrent: number
+  pvpWinStreakBest: number
   updatedAt: number
   _all: number
 }
@@ -65,11 +75,15 @@ export type PlayerPvpRecordCountAggregateOutputType = {
 export type PlayerPvpRecordAvgAggregateInputType = {
   wins?: true
   losses?: true
+  pvpWinStreakCurrent?: true
+  pvpWinStreakBest?: true
 }
 
 export type PlayerPvpRecordSumAggregateInputType = {
   wins?: true
   losses?: true
+  pvpWinStreakCurrent?: true
+  pvpWinStreakBest?: true
 }
 
 export type PlayerPvpRecordMinAggregateInputType = {
@@ -77,6 +91,8 @@ export type PlayerPvpRecordMinAggregateInputType = {
   profileId?: true
   wins?: true
   losses?: true
+  pvpWinStreakCurrent?: true
+  pvpWinStreakBest?: true
   updatedAt?: true
 }
 
@@ -85,6 +101,8 @@ export type PlayerPvpRecordMaxAggregateInputType = {
   profileId?: true
   wins?: true
   losses?: true
+  pvpWinStreakCurrent?: true
+  pvpWinStreakBest?: true
   updatedAt?: true
 }
 
@@ -93,6 +111,8 @@ export type PlayerPvpRecordCountAggregateInputType = {
   profileId?: true
   wins?: true
   losses?: true
+  pvpWinStreakCurrent?: true
+  pvpWinStreakBest?: true
   updatedAt?: true
   _all?: true
 }
@@ -188,6 +208,8 @@ export type PlayerPvpRecordGroupByOutputType = {
   profileId: string
   wins: number
   losses: number
+  pvpWinStreakCurrent: number
+  pvpWinStreakBest: number
   updatedAt: Date
   _count: PlayerPvpRecordCountAggregateOutputType | null
   _avg: PlayerPvpRecordAvgAggregateOutputType | null
@@ -219,6 +241,8 @@ export type PlayerPvpRecordWhereInput = {
   profileId?: Prisma.StringFilter<"PlayerPvpRecord"> | string
   wins?: Prisma.IntFilter<"PlayerPvpRecord"> | number
   losses?: Prisma.IntFilter<"PlayerPvpRecord"> | number
+  pvpWinStreakCurrent?: Prisma.IntFilter<"PlayerPvpRecord"> | number
+  pvpWinStreakBest?: Prisma.IntFilter<"PlayerPvpRecord"> | number
   updatedAt?: Prisma.DateTimeFilter<"PlayerPvpRecord"> | Date | string
   profile?: Prisma.XOR<Prisma.PlayerProfileScalarRelationFilter, Prisma.PlayerProfileWhereInput>
 }
@@ -228,6 +252,8 @@ export type PlayerPvpRecordOrderByWithRelationInput = {
   profileId?: Prisma.SortOrder
   wins?: Prisma.SortOrder
   losses?: Prisma.SortOrder
+  pvpWinStreakCurrent?: Prisma.SortOrder
+  pvpWinStreakBest?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   profile?: Prisma.PlayerProfileOrderByWithRelationInput
 }
@@ -240,6 +266,8 @@ export type PlayerPvpRecordWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.PlayerPvpRecordWhereInput | Prisma.PlayerPvpRecordWhereInput[]
   wins?: Prisma.IntFilter<"PlayerPvpRecord"> | number
   losses?: Prisma.IntFilter<"PlayerPvpRecord"> | number
+  pvpWinStreakCurrent?: Prisma.IntFilter<"PlayerPvpRecord"> | number
+  pvpWinStreakBest?: Prisma.IntFilter<"PlayerPvpRecord"> | number
   updatedAt?: Prisma.DateTimeFilter<"PlayerPvpRecord"> | Date | string
   profile?: Prisma.XOR<Prisma.PlayerProfileScalarRelationFilter, Prisma.PlayerProfileWhereInput>
 }, "id" | "profileId">
@@ -249,6 +277,8 @@ export type PlayerPvpRecordOrderByWithAggregationInput = {
   profileId?: Prisma.SortOrder
   wins?: Prisma.SortOrder
   losses?: Prisma.SortOrder
+  pvpWinStreakCurrent?: Prisma.SortOrder
+  pvpWinStreakBest?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.PlayerPvpRecordCountOrderByAggregateInput
   _avg?: Prisma.PlayerPvpRecordAvgOrderByAggregateInput
@@ -265,6 +295,8 @@ export type PlayerPvpRecordScalarWhereWithAggregatesInput = {
   profileId?: Prisma.StringWithAggregatesFilter<"PlayerPvpRecord"> | string
   wins?: Prisma.IntWithAggregatesFilter<"PlayerPvpRecord"> | number
   losses?: Prisma.IntWithAggregatesFilter<"PlayerPvpRecord"> | number
+  pvpWinStreakCurrent?: Prisma.IntWithAggregatesFilter<"PlayerPvpRecord"> | number
+  pvpWinStreakBest?: Prisma.IntWithAggregatesFilter<"PlayerPvpRecord"> | number
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"PlayerPvpRecord"> | Date | string
 }
 
@@ -272,6 +304,8 @@ export type PlayerPvpRecordCreateInput = {
   id?: string
   wins?: number
   losses?: number
+  pvpWinStreakCurrent?: number
+  pvpWinStreakBest?: number
   updatedAt?: Date | string
   profile: Prisma.PlayerProfileCreateNestedOneWithoutPvpRecordInput
 }
@@ -281,6 +315,8 @@ export type PlayerPvpRecordUncheckedCreateInput = {
   profileId: string
   wins?: number
   losses?: number
+  pvpWinStreakCurrent?: number
+  pvpWinStreakBest?: number
   updatedAt?: Date | string
 }
 
@@ -288,6 +324,8 @@ export type PlayerPvpRecordUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
+  pvpWinStreakCurrent?: Prisma.IntFieldUpdateOperationsInput | number
+  pvpWinStreakBest?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   profile?: Prisma.PlayerProfileUpdateOneRequiredWithoutPvpRecordNestedInput
 }
@@ -297,6 +335,8 @@ export type PlayerPvpRecordUncheckedUpdateInput = {
   profileId?: Prisma.StringFieldUpdateOperationsInput | string
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
+  pvpWinStreakCurrent?: Prisma.IntFieldUpdateOperationsInput | number
+  pvpWinStreakBest?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -305,6 +345,8 @@ export type PlayerPvpRecordCreateManyInput = {
   profileId: string
   wins?: number
   losses?: number
+  pvpWinStreakCurrent?: number
+  pvpWinStreakBest?: number
   updatedAt?: Date | string
 }
 
@@ -312,6 +354,8 @@ export type PlayerPvpRecordUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
+  pvpWinStreakCurrent?: Prisma.IntFieldUpdateOperationsInput | number
+  pvpWinStreakBest?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -320,6 +364,8 @@ export type PlayerPvpRecordUncheckedUpdateManyInput = {
   profileId?: Prisma.StringFieldUpdateOperationsInput | string
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
+  pvpWinStreakCurrent?: Prisma.IntFieldUpdateOperationsInput | number
+  pvpWinStreakBest?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -333,12 +379,16 @@ export type PlayerPvpRecordCountOrderByAggregateInput = {
   profileId?: Prisma.SortOrder
   wins?: Prisma.SortOrder
   losses?: Prisma.SortOrder
+  pvpWinStreakCurrent?: Prisma.SortOrder
+  pvpWinStreakBest?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type PlayerPvpRecordAvgOrderByAggregateInput = {
   wins?: Prisma.SortOrder
   losses?: Prisma.SortOrder
+  pvpWinStreakCurrent?: Prisma.SortOrder
+  pvpWinStreakBest?: Prisma.SortOrder
 }
 
 export type PlayerPvpRecordMaxOrderByAggregateInput = {
@@ -346,6 +396,8 @@ export type PlayerPvpRecordMaxOrderByAggregateInput = {
   profileId?: Prisma.SortOrder
   wins?: Prisma.SortOrder
   losses?: Prisma.SortOrder
+  pvpWinStreakCurrent?: Prisma.SortOrder
+  pvpWinStreakBest?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -354,12 +406,16 @@ export type PlayerPvpRecordMinOrderByAggregateInput = {
   profileId?: Prisma.SortOrder
   wins?: Prisma.SortOrder
   losses?: Prisma.SortOrder
+  pvpWinStreakCurrent?: Prisma.SortOrder
+  pvpWinStreakBest?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type PlayerPvpRecordSumOrderByAggregateInput = {
   wins?: Prisma.SortOrder
   losses?: Prisma.SortOrder
+  pvpWinStreakCurrent?: Prisma.SortOrder
+  pvpWinStreakBest?: Prisma.SortOrder
 }
 
 export type PlayerPvpRecordCreateNestedOneWithoutProfileInput = {
@@ -398,6 +454,8 @@ export type PlayerPvpRecordCreateWithoutProfileInput = {
   id?: string
   wins?: number
   losses?: number
+  pvpWinStreakCurrent?: number
+  pvpWinStreakBest?: number
   updatedAt?: Date | string
 }
 
@@ -405,6 +463,8 @@ export type PlayerPvpRecordUncheckedCreateWithoutProfileInput = {
   id?: string
   wins?: number
   losses?: number
+  pvpWinStreakCurrent?: number
+  pvpWinStreakBest?: number
   updatedAt?: Date | string
 }
 
@@ -428,6 +488,8 @@ export type PlayerPvpRecordUpdateWithoutProfileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
+  pvpWinStreakCurrent?: Prisma.IntFieldUpdateOperationsInput | number
+  pvpWinStreakBest?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -435,6 +497,8 @@ export type PlayerPvpRecordUncheckedUpdateWithoutProfileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   wins?: Prisma.IntFieldUpdateOperationsInput | number
   losses?: Prisma.IntFieldUpdateOperationsInput | number
+  pvpWinStreakCurrent?: Prisma.IntFieldUpdateOperationsInput | number
+  pvpWinStreakBest?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -445,6 +509,8 @@ export type PlayerPvpRecordSelect<ExtArgs extends runtime.Types.Extensions.Inter
   profileId?: boolean
   wins?: boolean
   losses?: boolean
+  pvpWinStreakCurrent?: boolean
+  pvpWinStreakBest?: boolean
   updatedAt?: boolean
   profile?: boolean | Prisma.PlayerProfileDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["playerPvpRecord"]>
@@ -454,6 +520,8 @@ export type PlayerPvpRecordSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   profileId?: boolean
   wins?: boolean
   losses?: boolean
+  pvpWinStreakCurrent?: boolean
+  pvpWinStreakBest?: boolean
   updatedAt?: boolean
   profile?: boolean | Prisma.PlayerProfileDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["playerPvpRecord"]>
@@ -463,6 +531,8 @@ export type PlayerPvpRecordSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   profileId?: boolean
   wins?: boolean
   losses?: boolean
+  pvpWinStreakCurrent?: boolean
+  pvpWinStreakBest?: boolean
   updatedAt?: boolean
   profile?: boolean | Prisma.PlayerProfileDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["playerPvpRecord"]>
@@ -472,10 +542,12 @@ export type PlayerPvpRecordSelectScalar = {
   profileId?: boolean
   wins?: boolean
   losses?: boolean
+  pvpWinStreakCurrent?: boolean
+  pvpWinStreakBest?: boolean
   updatedAt?: boolean
 }
 
-export type PlayerPvpRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profileId" | "wins" | "losses" | "updatedAt", ExtArgs["result"]["playerPvpRecord"]>
+export type PlayerPvpRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profileId" | "wins" | "losses" | "pvpWinStreakCurrent" | "pvpWinStreakBest" | "updatedAt", ExtArgs["result"]["playerPvpRecord"]>
 export type PlayerPvpRecordInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   profile?: boolean | Prisma.PlayerProfileDefaultArgs<ExtArgs>
 }
@@ -496,6 +568,8 @@ export type $PlayerPvpRecordPayload<ExtArgs extends runtime.Types.Extensions.Int
     profileId: string
     wins: number
     losses: number
+    pvpWinStreakCurrent: number
+    pvpWinStreakBest: number
     updatedAt: Date
   }, ExtArgs["result"]["playerPvpRecord"]>
   composites: {}
@@ -925,6 +999,8 @@ export interface PlayerPvpRecordFieldRefs {
   readonly profileId: Prisma.FieldRef<"PlayerPvpRecord", 'String'>
   readonly wins: Prisma.FieldRef<"PlayerPvpRecord", 'Int'>
   readonly losses: Prisma.FieldRef<"PlayerPvpRecord", 'Int'>
+  readonly pvpWinStreakCurrent: Prisma.FieldRef<"PlayerPvpRecord", 'Int'>
+  readonly pvpWinStreakBest: Prisma.FieldRef<"PlayerPvpRecord", 'Int'>
   readonly updatedAt: Prisma.FieldRef<"PlayerPvpRecord", 'DateTime'>
 }
     

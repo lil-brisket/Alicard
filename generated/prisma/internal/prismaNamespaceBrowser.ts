@@ -100,7 +100,9 @@ export const ModelName = {
   PlayerAchievement: 'PlayerAchievement',
   PlayerSocial: 'PlayerSocial',
   Monster: 'Monster',
-  Battle: 'Battle'
+  Battle: 'Battle',
+  PlayerLeaderboardStats: 'PlayerLeaderboardStats',
+  PlayerStatsPeriod: 'PlayerStatsPeriod'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -728,6 +730,8 @@ export const PlayerPvpRecordScalarFieldEnum = {
   profileId: 'profileId',
   wins: 'wins',
   losses: 'losses',
+  pvpWinStreakCurrent: 'pvpWinStreakCurrent',
+  pvpWinStreakBest: 'pvpWinStreakBest',
   updatedAt: 'updatedAt'
 } as const
 
@@ -821,6 +825,35 @@ export const BattleScalarFieldEnum = {
 } as const
 
 export type BattleScalarFieldEnum = (typeof BattleScalarFieldEnum)[keyof typeof BattleScalarFieldEnum]
+
+
+export const PlayerLeaderboardStatsScalarFieldEnum = {
+  userId: 'userId',
+  pveKills: 'pveKills',
+  pvpKills: 'pvpKills',
+  pvpWins: 'pvpWins',
+  pvpLosses: 'pvpLosses',
+  jobXpTotal: 'jobXpTotal',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlayerLeaderboardStatsScalarFieldEnum = (typeof PlayerLeaderboardStatsScalarFieldEnum)[keyof typeof PlayerLeaderboardStatsScalarFieldEnum]
+
+
+export const PlayerStatsPeriodScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  periodType: 'periodType',
+  periodStart: 'periodStart',
+  pveKills: 'pveKills',
+  pvpKills: 'pvpKills',
+  pvpWins: 'pvpWins',
+  pvpLosses: 'pvpLosses',
+  jobXpTotal: 'jobXpTotal',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlayerStatsPeriodScalarFieldEnum = (typeof PlayerStatsPeriodScalarFieldEnum)[keyof typeof PlayerStatsPeriodScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -124,10 +124,21 @@ export const protectedProcedure = t.procedure
     if (!ctx.session?.user) {
       throw new TRPCError({ code: "UNAUTHORIZED" });
     }
+    
+    // Ensure db is available
+    if (!ctx.db) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Database client is not available",
+      });
+    }
+    
     return next({
       ctx: {
         // infers the `session` as non-nullable
         session: { ...ctx.session, user: ctx.session.user },
+        db: ctx.db,
+        headers: ctx.headers,
       },
     });
   });

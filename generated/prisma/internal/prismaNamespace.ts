@@ -433,7 +433,9 @@ export const ModelName = {
   PlayerAchievement: 'PlayerAchievement',
   PlayerSocial: 'PlayerSocial',
   Monster: 'Monster',
-  Battle: 'Battle'
+  Battle: 'Battle',
+  PlayerLeaderboardStats: 'PlayerLeaderboardStats',
+  PlayerStatsPeriod: 'PlayerStatsPeriod'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -449,7 +451,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "post" | "account" | "session" | "user" | "character" | "verificationToken" | "player" | "playerStats" | "mapTile" | "mapPosition" | "nPC" | "shopItem" | "item" | "inventoryItem" | "equipment" | "occupation" | "skill" | "playerSkill" | "playerSkillLoadout" | "encounter" | "combatLog" | "deathLog" | "deathRecord" | "guild" | "guildMember" | "guildBank" | "guildQuest" | "bankAccount" | "bankVaultItem" | "bankTransaction" | "marketListing" | "marketTransaction" | "quest" | "job" | "userJob" | "recipe" | "recipeInput" | "craftAttempt" | "gatheringNode" | "nodeYield" | "gatherAttempt" | "playerProfile" | "playerProfileStats" | "playerPvpRecord" | "playerPveRecord" | "achievement" | "playerAchievement" | "playerSocial" | "monster" | "battle"
+    modelProps: "post" | "account" | "session" | "user" | "character" | "verificationToken" | "player" | "playerStats" | "mapTile" | "mapPosition" | "nPC" | "shopItem" | "item" | "inventoryItem" | "equipment" | "occupation" | "skill" | "playerSkill" | "playerSkillLoadout" | "encounter" | "combatLog" | "deathLog" | "deathRecord" | "guild" | "guildMember" | "guildBank" | "guildQuest" | "bankAccount" | "bankVaultItem" | "bankTransaction" | "marketListing" | "marketTransaction" | "quest" | "job" | "userJob" | "recipe" | "recipeInput" | "craftAttempt" | "gatheringNode" | "nodeYield" | "gatherAttempt" | "playerProfile" | "playerProfileStats" | "playerPvpRecord" | "playerPveRecord" | "achievement" | "playerAchievement" | "playerSocial" | "monster" | "battle" | "playerLeaderboardStats" | "playerStatsPeriod"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4153,6 +4155,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PlayerLeaderboardStats: {
+      payload: Prisma.$PlayerLeaderboardStatsPayload<ExtArgs>
+      fields: Prisma.PlayerLeaderboardStatsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PlayerLeaderboardStatsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerLeaderboardStatsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PlayerLeaderboardStatsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerLeaderboardStatsPayload>
+        }
+        findFirst: {
+          args: Prisma.PlayerLeaderboardStatsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerLeaderboardStatsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PlayerLeaderboardStatsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerLeaderboardStatsPayload>
+        }
+        findMany: {
+          args: Prisma.PlayerLeaderboardStatsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerLeaderboardStatsPayload>[]
+        }
+        create: {
+          args: Prisma.PlayerLeaderboardStatsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerLeaderboardStatsPayload>
+        }
+        createMany: {
+          args: Prisma.PlayerLeaderboardStatsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PlayerLeaderboardStatsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerLeaderboardStatsPayload>[]
+        }
+        delete: {
+          args: Prisma.PlayerLeaderboardStatsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerLeaderboardStatsPayload>
+        }
+        update: {
+          args: Prisma.PlayerLeaderboardStatsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerLeaderboardStatsPayload>
+        }
+        deleteMany: {
+          args: Prisma.PlayerLeaderboardStatsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PlayerLeaderboardStatsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PlayerLeaderboardStatsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerLeaderboardStatsPayload>[]
+        }
+        upsert: {
+          args: Prisma.PlayerLeaderboardStatsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerLeaderboardStatsPayload>
+        }
+        aggregate: {
+          args: Prisma.PlayerLeaderboardStatsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePlayerLeaderboardStats>
+        }
+        groupBy: {
+          args: Prisma.PlayerLeaderboardStatsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlayerLeaderboardStatsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PlayerLeaderboardStatsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlayerLeaderboardStatsCountAggregateOutputType> | number
+        }
+      }
+    }
+    PlayerStatsPeriod: {
+      payload: Prisma.$PlayerStatsPeriodPayload<ExtArgs>
+      fields: Prisma.PlayerStatsPeriodFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PlayerStatsPeriodFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerStatsPeriodPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PlayerStatsPeriodFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerStatsPeriodPayload>
+        }
+        findFirst: {
+          args: Prisma.PlayerStatsPeriodFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerStatsPeriodPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PlayerStatsPeriodFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerStatsPeriodPayload>
+        }
+        findMany: {
+          args: Prisma.PlayerStatsPeriodFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerStatsPeriodPayload>[]
+        }
+        create: {
+          args: Prisma.PlayerStatsPeriodCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerStatsPeriodPayload>
+        }
+        createMany: {
+          args: Prisma.PlayerStatsPeriodCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PlayerStatsPeriodCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerStatsPeriodPayload>[]
+        }
+        delete: {
+          args: Prisma.PlayerStatsPeriodDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerStatsPeriodPayload>
+        }
+        update: {
+          args: Prisma.PlayerStatsPeriodUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerStatsPeriodPayload>
+        }
+        deleteMany: {
+          args: Prisma.PlayerStatsPeriodDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PlayerStatsPeriodUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PlayerStatsPeriodUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerStatsPeriodPayload>[]
+        }
+        upsert: {
+          args: Prisma.PlayerStatsPeriodUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerStatsPeriodPayload>
+        }
+        aggregate: {
+          args: Prisma.PlayerStatsPeriodAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePlayerStatsPeriod>
+        }
+        groupBy: {
+          args: Prisma.PlayerStatsPeriodGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlayerStatsPeriodGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PlayerStatsPeriodCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlayerStatsPeriodCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4801,6 +4951,8 @@ export const PlayerPvpRecordScalarFieldEnum = {
   profileId: 'profileId',
   wins: 'wins',
   losses: 'losses',
+  pvpWinStreakCurrent: 'pvpWinStreakCurrent',
+  pvpWinStreakBest: 'pvpWinStreakBest',
   updatedAt: 'updatedAt'
 } as const
 
@@ -4894,6 +5046,35 @@ export const BattleScalarFieldEnum = {
 } as const
 
 export type BattleScalarFieldEnum = (typeof BattleScalarFieldEnum)[keyof typeof BattleScalarFieldEnum]
+
+
+export const PlayerLeaderboardStatsScalarFieldEnum = {
+  userId: 'userId',
+  pveKills: 'pveKills',
+  pvpKills: 'pvpKills',
+  pvpWins: 'pvpWins',
+  pvpLosses: 'pvpLosses',
+  jobXpTotal: 'jobXpTotal',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlayerLeaderboardStatsScalarFieldEnum = (typeof PlayerLeaderboardStatsScalarFieldEnum)[keyof typeof PlayerLeaderboardStatsScalarFieldEnum]
+
+
+export const PlayerStatsPeriodScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  periodType: 'periodType',
+  periodStart: 'periodStart',
+  pveKills: 'pveKills',
+  pvpKills: 'pvpKills',
+  pvpWins: 'pvpWins',
+  pvpLosses: 'pvpLosses',
+  jobXpTotal: 'jobXpTotal',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlayerStatsPeriodScalarFieldEnum = (typeof PlayerStatsPeriodScalarFieldEnum)[keyof typeof PlayerStatsPeriodScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -5373,6 +5554,8 @@ export type GlobalOmitConfig = {
   playerSocial?: Prisma.PlayerSocialOmit
   monster?: Prisma.MonsterOmit
   battle?: Prisma.BattleOmit
+  playerLeaderboardStats?: Prisma.PlayerLeaderboardStatsOmit
+  playerStatsPeriod?: Prisma.PlayerStatsPeriodOmit
 }
 
 /* Types for Logging */

@@ -231,6 +231,8 @@ export type UserWhereInput = {
   battles?: Prisma.BattleListRelationFilter
   bankTransactionsFrom?: Prisma.BankTransactionListRelationFilter
   bankTransactionsTo?: Prisma.BankTransactionListRelationFilter
+  leaderboardStats?: Prisma.XOR<Prisma.PlayerLeaderboardStatsNullableScalarRelationFilter, Prisma.PlayerLeaderboardStatsWhereInput> | null
+  statsPeriods?: Prisma.PlayerStatsPeriodListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -253,6 +255,8 @@ export type UserOrderByWithRelationInput = {
   battles?: Prisma.BattleOrderByRelationAggregateInput
   bankTransactionsFrom?: Prisma.BankTransactionOrderByRelationAggregateInput
   bankTransactionsTo?: Prisma.BankTransactionOrderByRelationAggregateInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsOrderByWithRelationInput
+  statsPeriods?: Prisma.PlayerStatsPeriodOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -278,6 +282,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   battles?: Prisma.BattleListRelationFilter
   bankTransactionsFrom?: Prisma.BankTransactionListRelationFilter
   bankTransactionsTo?: Prisma.BankTransactionListRelationFilter
+  leaderboardStats?: Prisma.XOR<Prisma.PlayerLeaderboardStatsNullableScalarRelationFilter, Prisma.PlayerLeaderboardStatsWhereInput> | null
+  statsPeriods?: Prisma.PlayerStatsPeriodListRelationFilter
 }, "id" | "email" | "username">
 
 export type UserOrderByWithAggregationInput = {
@@ -332,6 +338,8 @@ export type UserCreateInput = {
   battles?: Prisma.BattleCreateNestedManyWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
   bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -354,6 +362,8 @@ export type UserUncheckedCreateInput = {
   battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -376,6 +386,8 @@ export type UserUpdateInput = {
   battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -398,6 +410,8 @@ export type UserUncheckedUpdateInput = {
   battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -622,6 +636,34 @@ export type UserUpdateOneRequiredWithoutBattlesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBattlesInput, Prisma.UserUpdateWithoutBattlesInput>, Prisma.UserUncheckedUpdateWithoutBattlesInput>
 }
 
+export type UserCreateNestedOneWithoutLeaderboardStatsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutLeaderboardStatsInput, Prisma.UserUncheckedCreateWithoutLeaderboardStatsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutLeaderboardStatsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutLeaderboardStatsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutLeaderboardStatsInput, Prisma.UserUncheckedCreateWithoutLeaderboardStatsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutLeaderboardStatsInput
+  upsert?: Prisma.UserUpsertWithoutLeaderboardStatsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutLeaderboardStatsInput, Prisma.UserUpdateWithoutLeaderboardStatsInput>, Prisma.UserUncheckedUpdateWithoutLeaderboardStatsInput>
+}
+
+export type UserCreateNestedOneWithoutStatsPeriodsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStatsPeriodsInput, Prisma.UserUncheckedCreateWithoutStatsPeriodsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStatsPeriodsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStatsPeriodsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStatsPeriodsInput, Prisma.UserUncheckedCreateWithoutStatsPeriodsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStatsPeriodsInput
+  upsert?: Prisma.UserUpsertWithoutStatsPeriodsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStatsPeriodsInput, Prisma.UserUpdateWithoutStatsPeriodsInput>, Prisma.UserUncheckedUpdateWithoutStatsPeriodsInput>
+}
+
 export type UserCreateWithoutPostsInput = {
   id?: string
   name?: string | null
@@ -641,6 +683,8 @@ export type UserCreateWithoutPostsInput = {
   battles?: Prisma.BattleCreateNestedManyWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
   bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPostsInput = {
@@ -662,6 +706,8 @@ export type UserUncheckedCreateWithoutPostsInput = {
   battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPostsInput = {
@@ -699,6 +745,8 @@ export type UserUpdateWithoutPostsInput = {
   battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostsInput = {
@@ -720,6 +768,8 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -741,6 +791,8 @@ export type UserCreateWithoutAccountsInput = {
   battles?: Prisma.BattleCreateNestedManyWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
   bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -762,6 +814,8 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -799,6 +853,8 @@ export type UserUpdateWithoutAccountsInput = {
   battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -820,6 +876,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -841,6 +899,8 @@ export type UserCreateWithoutSessionsInput = {
   battles?: Prisma.BattleCreateNestedManyWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
   bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -862,6 +922,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -899,6 +961,8 @@ export type UserUpdateWithoutSessionsInput = {
   battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -920,6 +984,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCharactersInput = {
@@ -941,6 +1007,8 @@ export type UserCreateWithoutCharactersInput = {
   battles?: Prisma.BattleCreateNestedManyWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
   bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCharactersInput = {
@@ -962,6 +1030,8 @@ export type UserUncheckedCreateWithoutCharactersInput = {
   battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCharactersInput = {
@@ -999,6 +1069,8 @@ export type UserUpdateWithoutCharactersInput = {
   battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCharactersInput = {
@@ -1020,6 +1092,8 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
   battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPlayerInput = {
@@ -1041,6 +1115,8 @@ export type UserCreateWithoutPlayerInput = {
   battles?: Prisma.BattleCreateNestedManyWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
   bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPlayerInput = {
@@ -1062,6 +1138,8 @@ export type UserUncheckedCreateWithoutPlayerInput = {
   battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPlayerInput = {
@@ -1099,6 +1177,8 @@ export type UserUpdateWithoutPlayerInput = {
   battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPlayerInput = {
@@ -1120,6 +1200,8 @@ export type UserUncheckedUpdateWithoutPlayerInput = {
   battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBankTransactionsFromInput = {
@@ -1141,6 +1223,8 @@ export type UserCreateWithoutBankTransactionsFromInput = {
   profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
   battles?: Prisma.BattleCreateNestedManyWithoutUserInput
   bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBankTransactionsFromInput = {
@@ -1162,6 +1246,8 @@ export type UserUncheckedCreateWithoutBankTransactionsFromInput = {
   profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
   battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBankTransactionsFromInput = {
@@ -1188,6 +1274,8 @@ export type UserCreateWithoutBankTransactionsToInput = {
   profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
   battles?: Prisma.BattleCreateNestedManyWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBankTransactionsToInput = {
@@ -1209,6 +1297,8 @@ export type UserUncheckedCreateWithoutBankTransactionsToInput = {
   profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
   battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBankTransactionsToInput = {
@@ -1246,6 +1336,8 @@ export type UserUpdateWithoutBankTransactionsFromInput = {
   profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
   battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBankTransactionsFromInput = {
@@ -1267,6 +1359,8 @@ export type UserUncheckedUpdateWithoutBankTransactionsFromInput = {
   profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
   battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutBankTransactionsToInput = {
@@ -1299,6 +1393,8 @@ export type UserUpdateWithoutBankTransactionsToInput = {
   profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
   battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBankTransactionsToInput = {
@@ -1320,6 +1416,8 @@ export type UserUncheckedUpdateWithoutBankTransactionsToInput = {
   profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
   battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProfileInput = {
@@ -1341,6 +1439,8 @@ export type UserCreateWithoutProfileInput = {
   battles?: Prisma.BattleCreateNestedManyWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
   bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProfileInput = {
@@ -1362,6 +1462,8 @@ export type UserUncheckedCreateWithoutProfileInput = {
   battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProfileInput = {
@@ -1399,6 +1501,8 @@ export type UserUpdateWithoutProfileInput = {
   battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfileInput = {
@@ -1420,6 +1524,8 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBattlesInput = {
@@ -1441,6 +1547,8 @@ export type UserCreateWithoutBattlesInput = {
   profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
   bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBattlesInput = {
@@ -1462,6 +1570,8 @@ export type UserUncheckedCreateWithoutBattlesInput = {
   profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBattlesInput = {
@@ -1499,6 +1609,8 @@ export type UserUpdateWithoutBattlesInput = {
   profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBattlesInput = {
@@ -1520,6 +1632,224 @@ export type UserUncheckedUpdateWithoutBattlesInput = {
   profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
   bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
   bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutLeaderboardStatsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
+  battles?: Prisma.BattleCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutLeaderboardStatsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterUncheckedCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerUncheckedCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutLeaderboardStatsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutLeaderboardStatsInput, Prisma.UserUncheckedCreateWithoutLeaderboardStatsInput>
+}
+
+export type UserUpsertWithoutLeaderboardStatsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutLeaderboardStatsInput, Prisma.UserUncheckedUpdateWithoutLeaderboardStatsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutLeaderboardStatsInput, Prisma.UserUncheckedCreateWithoutLeaderboardStatsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutLeaderboardStatsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutLeaderboardStatsInput, Prisma.UserUncheckedUpdateWithoutLeaderboardStatsInput>
+}
+
+export type UserUpdateWithoutLeaderboardStatsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutLeaderboardStatsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUncheckedUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUncheckedUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutStatsPeriodsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
+  battles?: Prisma.BattleCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutStatsPeriodsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterUncheckedCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerUncheckedCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutStatsPeriodsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStatsPeriodsInput, Prisma.UserUncheckedCreateWithoutStatsPeriodsInput>
+}
+
+export type UserUpsertWithoutStatsPeriodsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStatsPeriodsInput, Prisma.UserUncheckedUpdateWithoutStatsPeriodsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStatsPeriodsInput, Prisma.UserUncheckedCreateWithoutStatsPeriodsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStatsPeriodsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStatsPeriodsInput, Prisma.UserUncheckedUpdateWithoutStatsPeriodsInput>
+}
+
+export type UserUpdateWithoutStatsPeriodsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStatsPeriodsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUncheckedUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUncheckedUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
 }
 
 
@@ -1535,6 +1865,7 @@ export type UserCountOutputType = {
   battles: number
   bankTransactionsFrom: number
   bankTransactionsTo: number
+  statsPeriods: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1545,6 +1876,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   battles?: boolean | UserCountOutputTypeCountBattlesArgs
   bankTransactionsFrom?: boolean | UserCountOutputTypeCountBankTransactionsFromArgs
   bankTransactionsTo?: boolean | UserCountOutputTypeCountBankTransactionsToArgs
+  statsPeriods?: boolean | UserCountOutputTypeCountStatsPeriodsArgs
 }
 
 /**
@@ -1606,6 +1938,13 @@ export type UserCountOutputTypeCountBankTransactionsToArgs<ExtArgs extends runti
   where?: Prisma.BankTransactionWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStatsPeriodsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PlayerStatsPeriodWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1627,6 +1966,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   battles?: boolean | Prisma.User$battlesArgs<ExtArgs>
   bankTransactionsFrom?: boolean | Prisma.User$bankTransactionsFromArgs<ExtArgs>
   bankTransactionsTo?: boolean | Prisma.User$bankTransactionsToArgs<ExtArgs>
+  leaderboardStats?: boolean | Prisma.User$leaderboardStatsArgs<ExtArgs>
+  statsPeriods?: boolean | Prisma.User$statsPeriodsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1680,6 +2021,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   battles?: boolean | Prisma.User$battlesArgs<ExtArgs>
   bankTransactionsFrom?: boolean | Prisma.User$bankTransactionsFromArgs<ExtArgs>
   bankTransactionsTo?: boolean | Prisma.User$bankTransactionsToArgs<ExtArgs>
+  leaderboardStats?: boolean | Prisma.User$leaderboardStatsArgs<ExtArgs>
+  statsPeriods?: boolean | Prisma.User$statsPeriodsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1697,6 +2040,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     battles: Prisma.$BattlePayload<ExtArgs>[]
     bankTransactionsFrom: Prisma.$BankTransactionPayload<ExtArgs>[]
     bankTransactionsTo: Prisma.$BankTransactionPayload<ExtArgs>[]
+    leaderboardStats: Prisma.$PlayerLeaderboardStatsPayload<ExtArgs> | null
+    statsPeriods: Prisma.$PlayerStatsPeriodPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2112,6 +2457,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   battles<T extends Prisma.User$battlesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$battlesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BattlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   bankTransactionsFrom<T extends Prisma.User$bankTransactionsFromArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bankTransactionsFromArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BankTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   bankTransactionsTo<T extends Prisma.User$bankTransactionsToArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bankTransactionsToArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BankTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leaderboardStats<T extends Prisma.User$leaderboardStatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$leaderboardStatsArgs<ExtArgs>>): Prisma.Prisma__PlayerLeaderboardStatsClient<runtime.Types.Result.GetResult<Prisma.$PlayerLeaderboardStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  statsPeriods<T extends Prisma.User$statsPeriodsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$statsPeriodsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlayerStatsPeriodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2742,6 +3089,49 @@ export type User$bankTransactionsToArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.BankTransactionScalarFieldEnum | Prisma.BankTransactionScalarFieldEnum[]
+}
+
+/**
+ * User.leaderboardStats
+ */
+export type User$leaderboardStatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PlayerLeaderboardStats
+   */
+  select?: Prisma.PlayerLeaderboardStatsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PlayerLeaderboardStats
+   */
+  omit?: Prisma.PlayerLeaderboardStatsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlayerLeaderboardStatsInclude<ExtArgs> | null
+  where?: Prisma.PlayerLeaderboardStatsWhereInput
+}
+
+/**
+ * User.statsPeriods
+ */
+export type User$statsPeriodsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PlayerStatsPeriod
+   */
+  select?: Prisma.PlayerStatsPeriodSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PlayerStatsPeriod
+   */
+  omit?: Prisma.PlayerStatsPeriodOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlayerStatsPeriodInclude<ExtArgs> | null
+  where?: Prisma.PlayerStatsPeriodWhereInput
+  orderBy?: Prisma.PlayerStatsPeriodOrderByWithRelationInput | Prisma.PlayerStatsPeriodOrderByWithRelationInput[]
+  cursor?: Prisma.PlayerStatsPeriodWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PlayerStatsPeriodScalarFieldEnum | Prisma.PlayerStatsPeriodScalarFieldEnum[]
 }
 
 /**

@@ -267,3 +267,13 @@ export type Monster = Prisma.MonsterModel
  * 
  */
 export type Battle = Prisma.BattleModel
+/**
+ * Model PlayerLeaderboardStats
+ * 
+ */
+export type PlayerLeaderboardStats = Prisma.PlayerLeaderboardStatsModel
+/**
+ * Model PlayerStatsPeriod
+ * 
+ */
+export type PlayerStatsPeriod = Prisma.PlayerStatsPeriodModel
