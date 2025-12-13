@@ -373,6 +373,60 @@ export const battleRouter = createTRPCRouter({
             gold: { increment: battle.monster.goldReward },
           },
         });
+
+        // Update PvE stats
+        const profile = await ctx.db.playerProfile.findUnique({
+          where: { userId: player.userId },
+          include: { pveRecord: true },
+        });
+
+        if (profile) {
+          // Update or create PlayerPveRecord
+          if (profile.pveRecord) {
+            await ctx.db.playerPveRecord.update({
+              where: { profileId: profile.id },
+              data: {
+                totalKills: { increment: 1 },
+              },
+            });
+          } else {
+            await ctx.db.playerPveRecord.create({
+              data: {
+                profileId: profile.id,
+                totalKills: 1,
+                bossesSlain: 0,
+                deathsUsed: player.deathCount ?? 0,
+                deathsLimit: 5,
+              },
+            });
+          }
+
+          // Update or create PlayerLeaderboardStats
+          const existingStats = await ctx.db.playerLeaderboardStats.findUnique({
+            where: { userId: player.userId },
+          });
+
+          if (existingStats) {
+            await ctx.db.playerLeaderboardStats.update({
+              where: { userId: player.userId },
+              data: {
+                pveKills: { increment: 1 },
+              },
+            });
+          } else {
+            await ctx.db.playerLeaderboardStats.create({
+              data: {
+                userId: player.userId,
+                pveKills: 1,
+                pvpKills: 0,
+                pvpWins: 0,
+                pvpLosses: 0,
+                jobXpTotal: 0,
+              },
+            });
+          }
+        }
+
         updatedLog.push({
           message: `You gained ${battle.monster.xpReward} XP and ${battle.monster.goldReward} gold!`,
           turnNumber: updatedState.turnNumber,

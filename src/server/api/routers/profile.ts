@@ -129,6 +129,8 @@ export const profileRouter = createTRPCRouter({
             create: {
               wins: 0,
               losses: 0,
+              pvpWinStreakCurrent: 0,
+              pvpWinStreakBest: 0,
             },
           },
           pveRecord: {

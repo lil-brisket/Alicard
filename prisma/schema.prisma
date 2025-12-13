@@ -65,6 +65,8 @@ model User {
   battles               Battle[]
   bankTransactionsFrom  BankTransaction[]   @relation("BankTransactionFrom")
   bankTransactionsTo    BankTransaction[]   @relation("BankTransactionTo")
+  leaderboardStats      PlayerLeaderboardStats?
+  statsPeriods          PlayerStatsPeriod[]
 }
 
 model Character {
@@ -856,12 +858,14 @@ model PlayerProfileStats {
 }
 
 model PlayerPvpRecord {
-  id        String        @id @default(cuid())
-  profileId String        @unique
-  wins      Int           @default(0)
-  losses    Int           @default(0)
-  updatedAt DateTime      @updatedAt
-  profile   PlayerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  id                 String        @id @default(cuid())
+  profileId          String        @unique
+  wins               Int           @default(0)
+  losses             Int           @default(0)
+  pvpWinStreakCurrent Int          @default(0)
+  pvpWinStreakBest    Int          @default(0)
+  updatedAt          DateTime      @updatedAt
+  profile            PlayerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 }
 
 model PlayerPveRecord {
@@ -969,4 +973,37 @@ model Battle {
   @@index([userId])
   @@index([status])
   @@index([userId, status])
+}
+
+model PlayerLeaderboardStats {
+  userId      String   @id
+  pveKills    Int      @default(0)
+  pvpKills    Int      @default(0)
+  pvpWins     Int      @default(0)
+  pvpLosses   Int      @default(0)
+  jobXpTotal  Int      @default(0)
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([pveKills])
+  @@index([pvpKills])
+  @@index([jobXpTotal])
+}
+
+model PlayerStatsPeriod {
+  id          String   @id @default(cuid())
+  userId      String
+  periodType  String   // "daily" | "weekly"
+  periodStart DateTime
+  pveKills    Int      @default(0)
+  pvpKills    Int      @default(0)
+  pvpWins     Int      @default(0)
+  pvpLosses   Int      @default(0)
+  jobXpTotal  Int      @default(0)
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, periodType, periodStart])
+  @@index([periodType, periodStart])
+  @@index([userId, periodType, periodStart])
 }

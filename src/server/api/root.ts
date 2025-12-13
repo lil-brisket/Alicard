@@ -13,6 +13,7 @@ import { profileRouter } from "~/server/api/routers/profile";
 import { battleRouter } from "~/server/api/routers/battle";
 import { usersRouter } from "~/server/api/routers/users";
 import { bankRouter } from "~/server/api/routers/bank";
+import { leaderboardsRouter } from "~/server/api/routers/leaderboards";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -36,6 +37,7 @@ export const appRouter = createTRPCRouter({
   battle: battleRouter,
   users: usersRouter,
   bank: bankRouter,
+  leaderboards: leaderboardsRouter,
 });
 
 // export type definition of API
