@@ -2,6 +2,7 @@ import { config } from "dotenv";
 import { PrismaClient } from "../generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
+import bcrypt from "bcryptjs";
 
 // Load environment variables from .env file
 config();
@@ -1047,6 +1048,128 @@ async function main() {
 
     console.log("✅ Achievements attached to dev user!");
   }
+
+  // Create admin user
+  console.log("Creating admin user...");
+  const adminPassword = await bcrypt.hash("admin123", 10);
+  const adminUser = await prisma.user.upsert({
+    where: { email: "admin@alicard.com" },
+    update: {
+      role: "ADMIN",
+    },
+    create: {
+      email: "admin@alicard.com",
+      username: "admin",
+      password: adminPassword,
+      gender: "OTHER",
+      role: "ADMIN",
+    },
+  });
+  console.log("✅ Admin user created:", adminUser.username);
+
+  // Create regular player user
+  console.log("Creating player user...");
+  const playerPassword = await bcrypt.hash("player123", 10);
+  const playerUser = await prisma.user.upsert({
+    where: { email: "player@alicard.com" },
+    update: {},
+    create: {
+      email: "player@alicard.com",
+      username: "player",
+      password: playerPassword,
+      gender: "OTHER",
+      role: "PLAYER",
+    },
+  });
+  console.log("✅ Player user created:", playerUser.username);
+
+  // Create content templates
+  console.log("Creating content templates...");
+
+  // Item Templates
+  const itemTemplate1 = await prisma.itemTemplate.create({
+    data: {
+      name: "Steel Sword",
+      description: "A well-crafted steel sword",
+      rarity: "RARE",
+      stackable: false,
+      maxStack: 1,
+      value: 150,
+    },
+  });
+
+  const itemTemplate2 = await prisma.itemTemplate.create({
+    data: {
+      name: "Health Potion",
+      description: "Restores 50 HP",
+      rarity: "COMMON",
+      stackable: true,
+      maxStack: 99,
+      value: 25,
+    },
+  });
+
+  console.log("✅ Item templates created");
+
+  // Monster Templates
+  const monsterTemplate1 = await prisma.monsterTemplate.create({
+    data: {
+      name: "Goblin Warrior",
+      level: 5,
+      hp: 60,
+      sp: 20,
+      statsJSON: {
+        vitality: 8,
+        strength: 7,
+        speed: 6,
+        dexterity: 5,
+      },
+    },
+  });
+
+  console.log("✅ Monster template created");
+
+  // Quest Templates
+  const questTemplate1 = await prisma.questTemplate.create({
+    data: {
+      title: "Slay the Goblin",
+      description: "Defeat 5 goblins in the forest",
+      stepsJSON: [
+        { type: "KILL", target: "goblin", count: 5 },
+        { type: "RETURN", npc: "quest-giver" },
+      ],
+      rewardsJSON: {
+        gold: 100,
+        xp: 200,
+        items: [{ id: "health-potion", qty: 3 }],
+      },
+    },
+  });
+
+  console.log("✅ Quest template created");
+
+  // Map Zones
+  const mapZone1 = await prisma.mapZone.create({
+    data: {
+      name: "Forest Zone",
+      width: 10,
+      height: 10,
+      tilesJSON: {
+        "0,0": { type: "GRASS", zone: "LOW_DANGER" },
+        "1,1": { type: "FOREST", zone: "MEDIUM_DANGER" },
+      },
+      poisJSON: [
+        { x: 5, y: 5, type: "NPC", name: "Forest Guide" },
+      ],
+      spawnJSON: {
+        monsters: [
+          { type: "goblin", x: 3, y: 3, chance: 0.3 },
+        ],
+      },
+    },
+  });
+
+  console.log("✅ Map zone created");
 
   console.log("✅ Seed completed!");
 }

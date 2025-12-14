@@ -45,6 +45,12 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+enum UserRole {
+  PLAYER
+  MODERATOR
+  ADMIN
+}
+
 model User {
   id                    String              @id @default(cuid())
   name                  String?
@@ -56,6 +62,15 @@ model User {
   createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
   username              String              @unique
+  role                  UserRole            @default(PLAYER)
+  // Moderation fields
+  isBanned              Boolean             @default(false)
+  bannedUntil           DateTime?
+  banReason             String?
+  isMuted               Boolean             @default(false)
+  mutedUntil            DateTime?
+  muteReason            String?
+  deletedAt             DateTime?           // soft delete
   // Account-level flags (banned, admin, tester can be added here)
   accounts              Account[]
   characters            Character[]
@@ -69,6 +84,7 @@ model User {
   // Leaderboard stats are account-level aggregations (okay to keep on User)
   leaderboardStats      PlayerLeaderboardStats?
   statsPeriods          PlayerStatsPeriod[]
+  adminActions          AdminActionLog[]    @relation("AdminActor")
 }
 
 model Character {
@@ -1063,4 +1079,87 @@ model PlayerStatsPeriod {
   @@unique([userId, periodType, periodStart])
   @@index([periodType, periodStart])
   @@index([userId, periodType, periodStart])
+}
+
+// Admin & Moderation
+model AdminActionLog {
+  id                String   @id @default(cuid())
+  actorId           String
+  targetUserId      String?
+  targetCharacterId String?
+  action            String
+  reason            String?
+  metadata          Json?
+  createdAt         DateTime @default(now())
+  actor             User     @relation("AdminActor", fields: [actorId], references: [id], onDelete: Cascade)
+
+  @@index([targetUserId, createdAt])
+  @@index([targetCharacterId, createdAt])
+  @@index([actorId, createdAt])
+}
+
+// Content Templates (Game CMS)
+model ItemTemplate {
+  id          String      @id @default(cuid())
+  name        String
+  description String?
+  rarity      ItemRarity  @default(COMMON)
+  stackable   Boolean     @default(false)
+  maxStack    Int         @default(1)
+  value       Int         @default(0)
+  icon        String?
+  isArchived  Boolean     @default(false)
+  deletedAt   DateTime?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([isArchived])
+  @@index([rarity])
+}
+
+model MonsterTemplate {
+  id          String   @id @default(cuid())
+  name        String
+  level       Int      @default(1)
+  hp          Int
+  sp          Int      @default(0)
+  statsJSON   Json     // { vitality, strength, speed, dexterity }
+  lootTableId String?
+  isArchived  Boolean  @default(false)
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([isArchived])
+  @@index([level])
+}
+
+model QuestTemplate {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  stepsJSON   Json     // Array of quest steps
+  rewardsJSON Json?    // Rewards structure
+  isArchived  Boolean  @default(false)
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([isArchived])
+}
+
+model MapZone {
+  id          String   @id @default(cuid())
+  name        String
+  width       Int
+  height      Int
+  tilesJSON   Json     // Tile data structure
+  poisJSON    Json?    // Points of interest
+  spawnJSON   Json?    // Spawn data
+  isArchived  Boolean  @default(false)
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([isArchived])
 }
