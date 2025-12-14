@@ -42,7 +42,7 @@ export type BattleSumAggregateOutputType = {
 
 export type BattleMinAggregateOutputType = {
   id: string | null
-  userId: string | null
+  playerId: string | null
   monsterId: string | null
   status: $Enums.BattleStatus | null
   turnNumber: number | null
@@ -55,7 +55,7 @@ export type BattleMinAggregateOutputType = {
 
 export type BattleMaxAggregateOutputType = {
   id: string | null
-  userId: string | null
+  playerId: string | null
   monsterId: string | null
   status: $Enums.BattleStatus | null
   turnNumber: number | null
@@ -68,7 +68,7 @@ export type BattleMaxAggregateOutputType = {
 
 export type BattleCountAggregateOutputType = {
   id: number
-  userId: number
+  playerId: number
   monsterId: number
   status: number
   turnNumber: number
@@ -98,7 +98,7 @@ export type BattleSumAggregateInputType = {
 
 export type BattleMinAggregateInputType = {
   id?: true
-  userId?: true
+  playerId?: true
   monsterId?: true
   status?: true
   turnNumber?: true
@@ -111,7 +111,7 @@ export type BattleMinAggregateInputType = {
 
 export type BattleMaxAggregateInputType = {
   id?: true
-  userId?: true
+  playerId?: true
   monsterId?: true
   status?: true
   turnNumber?: true
@@ -124,7 +124,7 @@ export type BattleMaxAggregateInputType = {
 
 export type BattleCountAggregateInputType = {
   id?: true
-  userId?: true
+  playerId?: true
   monsterId?: true
   status?: true
   turnNumber?: true
@@ -225,7 +225,7 @@ export type BattleGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 
 export type BattleGroupByOutputType = {
   id: string
-  userId: string
+  playerId: string
   monsterId: string
   status: $Enums.BattleStatus
   turnNumber: number
@@ -262,7 +262,7 @@ export type BattleWhereInput = {
   OR?: Prisma.BattleWhereInput[]
   NOT?: Prisma.BattleWhereInput | Prisma.BattleWhereInput[]
   id?: Prisma.StringFilter<"Battle"> | string
-  userId?: Prisma.StringFilter<"Battle"> | string
+  playerId?: Prisma.StringFilter<"Battle"> | string
   monsterId?: Prisma.StringFilter<"Battle"> | string
   status?: Prisma.EnumBattleStatusFilter<"Battle"> | $Enums.BattleStatus
   turnNumber?: Prisma.IntFilter<"Battle"> | number
@@ -272,13 +272,13 @@ export type BattleWhereInput = {
   log?: Prisma.JsonFilter<"Battle">
   createdAt?: Prisma.DateTimeFilter<"Battle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Battle"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
   monster?: Prisma.XOR<Prisma.MonsterScalarRelationFilter, Prisma.MonsterWhereInput>
 }
 
 export type BattleOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  playerId?: Prisma.SortOrder
   monsterId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   turnNumber?: Prisma.SortOrder
@@ -288,7 +288,7 @@ export type BattleOrderByWithRelationInput = {
   log?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
+  player?: Prisma.PlayerOrderByWithRelationInput
   monster?: Prisma.MonsterOrderByWithRelationInput
 }
 
@@ -297,7 +297,7 @@ export type BattleWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.BattleWhereInput | Prisma.BattleWhereInput[]
   OR?: Prisma.BattleWhereInput[]
   NOT?: Prisma.BattleWhereInput | Prisma.BattleWhereInput[]
-  userId?: Prisma.StringFilter<"Battle"> | string
+  playerId?: Prisma.StringFilter<"Battle"> | string
   monsterId?: Prisma.StringFilter<"Battle"> | string
   status?: Prisma.EnumBattleStatusFilter<"Battle"> | $Enums.BattleStatus
   turnNumber?: Prisma.IntFilter<"Battle"> | number
@@ -307,13 +307,13 @@ export type BattleWhereUniqueInput = Prisma.AtLeast<{
   log?: Prisma.JsonFilter<"Battle">
   createdAt?: Prisma.DateTimeFilter<"Battle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Battle"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
   monster?: Prisma.XOR<Prisma.MonsterScalarRelationFilter, Prisma.MonsterWhereInput>
 }, "id">
 
 export type BattleOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  playerId?: Prisma.SortOrder
   monsterId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   turnNumber?: Prisma.SortOrder
@@ -335,7 +335,7 @@ export type BattleScalarWhereWithAggregatesInput = {
   OR?: Prisma.BattleScalarWhereWithAggregatesInput[]
   NOT?: Prisma.BattleScalarWhereWithAggregatesInput | Prisma.BattleScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Battle"> | string
-  userId?: Prisma.StringWithAggregatesFilter<"Battle"> | string
+  playerId?: Prisma.StringWithAggregatesFilter<"Battle"> | string
   monsterId?: Prisma.StringWithAggregatesFilter<"Battle"> | string
   status?: Prisma.EnumBattleStatusWithAggregatesFilter<"Battle"> | $Enums.BattleStatus
   turnNumber?: Prisma.IntWithAggregatesFilter<"Battle"> | number
@@ -357,13 +357,13 @@ export type BattleCreateInput = {
   log?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutBattlesInput
+  player: Prisma.PlayerCreateNestedOneWithoutBattlesInput
   monster: Prisma.MonsterCreateNestedOneWithoutBattlesInput
 }
 
 export type BattleUncheckedCreateInput = {
   id?: string
-  userId: string
+  playerId: string
   monsterId: string
   status?: $Enums.BattleStatus
   turnNumber?: number
@@ -385,13 +385,13 @@ export type BattleUpdateInput = {
   log?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutBattlesNestedInput
+  player?: Prisma.PlayerUpdateOneRequiredWithoutBattlesNestedInput
   monster?: Prisma.MonsterUpdateOneRequiredWithoutBattlesNestedInput
 }
 
 export type BattleUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
   monsterId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBattleStatusFieldUpdateOperationsInput | $Enums.BattleStatus
   turnNumber?: Prisma.IntFieldUpdateOperationsInput | number
@@ -405,7 +405,7 @@ export type BattleUncheckedUpdateInput = {
 
 export type BattleCreateManyInput = {
   id?: string
-  userId: string
+  playerId: string
   monsterId: string
   status?: $Enums.BattleStatus
   turnNumber?: number
@@ -431,7 +431,7 @@ export type BattleUpdateManyMutationInput = {
 
 export type BattleUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
   monsterId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBattleStatusFieldUpdateOperationsInput | $Enums.BattleStatus
   turnNumber?: Prisma.IntFieldUpdateOperationsInput | number
@@ -455,7 +455,7 @@ export type BattleOrderByRelationAggregateInput = {
 
 export type BattleCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  playerId?: Prisma.SortOrder
   monsterId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   turnNumber?: Prisma.SortOrder
@@ -476,7 +476,7 @@ export type BattleAvgOrderByAggregateInput = {
 
 export type BattleMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  playerId?: Prisma.SortOrder
   monsterId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   turnNumber?: Prisma.SortOrder
@@ -489,7 +489,7 @@ export type BattleMaxOrderByAggregateInput = {
 
 export type BattleMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  playerId?: Prisma.SortOrder
   monsterId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   turnNumber?: Prisma.SortOrder
@@ -507,45 +507,45 @@ export type BattleSumOrderByAggregateInput = {
   monsterHp?: Prisma.SortOrder
 }
 
-export type BattleCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.BattleCreateWithoutUserInput, Prisma.BattleUncheckedCreateWithoutUserInput> | Prisma.BattleCreateWithoutUserInput[] | Prisma.BattleUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.BattleCreateOrConnectWithoutUserInput | Prisma.BattleCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.BattleCreateManyUserInputEnvelope
+export type BattleCreateNestedManyWithoutPlayerInput = {
+  create?: Prisma.XOR<Prisma.BattleCreateWithoutPlayerInput, Prisma.BattleUncheckedCreateWithoutPlayerInput> | Prisma.BattleCreateWithoutPlayerInput[] | Prisma.BattleUncheckedCreateWithoutPlayerInput[]
+  connectOrCreate?: Prisma.BattleCreateOrConnectWithoutPlayerInput | Prisma.BattleCreateOrConnectWithoutPlayerInput[]
+  createMany?: Prisma.BattleCreateManyPlayerInputEnvelope
   connect?: Prisma.BattleWhereUniqueInput | Prisma.BattleWhereUniqueInput[]
 }
 
-export type BattleUncheckedCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.BattleCreateWithoutUserInput, Prisma.BattleUncheckedCreateWithoutUserInput> | Prisma.BattleCreateWithoutUserInput[] | Prisma.BattleUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.BattleCreateOrConnectWithoutUserInput | Prisma.BattleCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.BattleCreateManyUserInputEnvelope
+export type BattleUncheckedCreateNestedManyWithoutPlayerInput = {
+  create?: Prisma.XOR<Prisma.BattleCreateWithoutPlayerInput, Prisma.BattleUncheckedCreateWithoutPlayerInput> | Prisma.BattleCreateWithoutPlayerInput[] | Prisma.BattleUncheckedCreateWithoutPlayerInput[]
+  connectOrCreate?: Prisma.BattleCreateOrConnectWithoutPlayerInput | Prisma.BattleCreateOrConnectWithoutPlayerInput[]
+  createMany?: Prisma.BattleCreateManyPlayerInputEnvelope
   connect?: Prisma.BattleWhereUniqueInput | Prisma.BattleWhereUniqueInput[]
 }
 
-export type BattleUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.BattleCreateWithoutUserInput, Prisma.BattleUncheckedCreateWithoutUserInput> | Prisma.BattleCreateWithoutUserInput[] | Prisma.BattleUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.BattleCreateOrConnectWithoutUserInput | Prisma.BattleCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.BattleUpsertWithWhereUniqueWithoutUserInput | Prisma.BattleUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.BattleCreateManyUserInputEnvelope
+export type BattleUpdateManyWithoutPlayerNestedInput = {
+  create?: Prisma.XOR<Prisma.BattleCreateWithoutPlayerInput, Prisma.BattleUncheckedCreateWithoutPlayerInput> | Prisma.BattleCreateWithoutPlayerInput[] | Prisma.BattleUncheckedCreateWithoutPlayerInput[]
+  connectOrCreate?: Prisma.BattleCreateOrConnectWithoutPlayerInput | Prisma.BattleCreateOrConnectWithoutPlayerInput[]
+  upsert?: Prisma.BattleUpsertWithWhereUniqueWithoutPlayerInput | Prisma.BattleUpsertWithWhereUniqueWithoutPlayerInput[]
+  createMany?: Prisma.BattleCreateManyPlayerInputEnvelope
   set?: Prisma.BattleWhereUniqueInput | Prisma.BattleWhereUniqueInput[]
   disconnect?: Prisma.BattleWhereUniqueInput | Prisma.BattleWhereUniqueInput[]
   delete?: Prisma.BattleWhereUniqueInput | Prisma.BattleWhereUniqueInput[]
   connect?: Prisma.BattleWhereUniqueInput | Prisma.BattleWhereUniqueInput[]
-  update?: Prisma.BattleUpdateWithWhereUniqueWithoutUserInput | Prisma.BattleUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.BattleUpdateManyWithWhereWithoutUserInput | Prisma.BattleUpdateManyWithWhereWithoutUserInput[]
+  update?: Prisma.BattleUpdateWithWhereUniqueWithoutPlayerInput | Prisma.BattleUpdateWithWhereUniqueWithoutPlayerInput[]
+  updateMany?: Prisma.BattleUpdateManyWithWhereWithoutPlayerInput | Prisma.BattleUpdateManyWithWhereWithoutPlayerInput[]
   deleteMany?: Prisma.BattleScalarWhereInput | Prisma.BattleScalarWhereInput[]
 }
 
-export type BattleUncheckedUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.BattleCreateWithoutUserInput, Prisma.BattleUncheckedCreateWithoutUserInput> | Prisma.BattleCreateWithoutUserInput[] | Prisma.BattleUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.BattleCreateOrConnectWithoutUserInput | Prisma.BattleCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.BattleUpsertWithWhereUniqueWithoutUserInput | Prisma.BattleUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.BattleCreateManyUserInputEnvelope
+export type BattleUncheckedUpdateManyWithoutPlayerNestedInput = {
+  create?: Prisma.XOR<Prisma.BattleCreateWithoutPlayerInput, Prisma.BattleUncheckedCreateWithoutPlayerInput> | Prisma.BattleCreateWithoutPlayerInput[] | Prisma.BattleUncheckedCreateWithoutPlayerInput[]
+  connectOrCreate?: Prisma.BattleCreateOrConnectWithoutPlayerInput | Prisma.BattleCreateOrConnectWithoutPlayerInput[]
+  upsert?: Prisma.BattleUpsertWithWhereUniqueWithoutPlayerInput | Prisma.BattleUpsertWithWhereUniqueWithoutPlayerInput[]
+  createMany?: Prisma.BattleCreateManyPlayerInputEnvelope
   set?: Prisma.BattleWhereUniqueInput | Prisma.BattleWhereUniqueInput[]
   disconnect?: Prisma.BattleWhereUniqueInput | Prisma.BattleWhereUniqueInput[]
   delete?: Prisma.BattleWhereUniqueInput | Prisma.BattleWhereUniqueInput[]
   connect?: Prisma.BattleWhereUniqueInput | Prisma.BattleWhereUniqueInput[]
-  update?: Prisma.BattleUpdateWithWhereUniqueWithoutUserInput | Prisma.BattleUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.BattleUpdateManyWithWhereWithoutUserInput | Prisma.BattleUpdateManyWithWhereWithoutUserInput[]
+  update?: Prisma.BattleUpdateWithWhereUniqueWithoutPlayerInput | Prisma.BattleUpdateWithWhereUniqueWithoutPlayerInput[]
+  updateMany?: Prisma.BattleUpdateManyWithWhereWithoutPlayerInput | Prisma.BattleUpdateManyWithWhereWithoutPlayerInput[]
   deleteMany?: Prisma.BattleScalarWhereInput | Prisma.BattleScalarWhereInput[]
 }
 
@@ -595,7 +595,7 @@ export type EnumBattleStatusFieldUpdateOperationsInput = {
   set?: $Enums.BattleStatus
 }
 
-export type BattleCreateWithoutUserInput = {
+export type BattleCreateWithoutPlayerInput = {
   id?: string
   status?: $Enums.BattleStatus
   turnNumber?: number
@@ -608,7 +608,7 @@ export type BattleCreateWithoutUserInput = {
   monster: Prisma.MonsterCreateNestedOneWithoutBattlesInput
 }
 
-export type BattleUncheckedCreateWithoutUserInput = {
+export type BattleUncheckedCreateWithoutPlayerInput = {
   id?: string
   monsterId: string
   status?: $Enums.BattleStatus
@@ -621,30 +621,30 @@ export type BattleUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string
 }
 
-export type BattleCreateOrConnectWithoutUserInput = {
+export type BattleCreateOrConnectWithoutPlayerInput = {
   where: Prisma.BattleWhereUniqueInput
-  create: Prisma.XOR<Prisma.BattleCreateWithoutUserInput, Prisma.BattleUncheckedCreateWithoutUserInput>
+  create: Prisma.XOR<Prisma.BattleCreateWithoutPlayerInput, Prisma.BattleUncheckedCreateWithoutPlayerInput>
 }
 
-export type BattleCreateManyUserInputEnvelope = {
-  data: Prisma.BattleCreateManyUserInput | Prisma.BattleCreateManyUserInput[]
+export type BattleCreateManyPlayerInputEnvelope = {
+  data: Prisma.BattleCreateManyPlayerInput | Prisma.BattleCreateManyPlayerInput[]
   skipDuplicates?: boolean
 }
 
-export type BattleUpsertWithWhereUniqueWithoutUserInput = {
+export type BattleUpsertWithWhereUniqueWithoutPlayerInput = {
   where: Prisma.BattleWhereUniqueInput
-  update: Prisma.XOR<Prisma.BattleUpdateWithoutUserInput, Prisma.BattleUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.BattleCreateWithoutUserInput, Prisma.BattleUncheckedCreateWithoutUserInput>
+  update: Prisma.XOR<Prisma.BattleUpdateWithoutPlayerInput, Prisma.BattleUncheckedUpdateWithoutPlayerInput>
+  create: Prisma.XOR<Prisma.BattleCreateWithoutPlayerInput, Prisma.BattleUncheckedCreateWithoutPlayerInput>
 }
 
-export type BattleUpdateWithWhereUniqueWithoutUserInput = {
+export type BattleUpdateWithWhereUniqueWithoutPlayerInput = {
   where: Prisma.BattleWhereUniqueInput
-  data: Prisma.XOR<Prisma.BattleUpdateWithoutUserInput, Prisma.BattleUncheckedUpdateWithoutUserInput>
+  data: Prisma.XOR<Prisma.BattleUpdateWithoutPlayerInput, Prisma.BattleUncheckedUpdateWithoutPlayerInput>
 }
 
-export type BattleUpdateManyWithWhereWithoutUserInput = {
+export type BattleUpdateManyWithWhereWithoutPlayerInput = {
   where: Prisma.BattleScalarWhereInput
-  data: Prisma.XOR<Prisma.BattleUpdateManyMutationInput, Prisma.BattleUncheckedUpdateManyWithoutUserInput>
+  data: Prisma.XOR<Prisma.BattleUpdateManyMutationInput, Prisma.BattleUncheckedUpdateManyWithoutPlayerInput>
 }
 
 export type BattleScalarWhereInput = {
@@ -652,7 +652,7 @@ export type BattleScalarWhereInput = {
   OR?: Prisma.BattleScalarWhereInput[]
   NOT?: Prisma.BattleScalarWhereInput | Prisma.BattleScalarWhereInput[]
   id?: Prisma.StringFilter<"Battle"> | string
-  userId?: Prisma.StringFilter<"Battle"> | string
+  playerId?: Prisma.StringFilter<"Battle"> | string
   monsterId?: Prisma.StringFilter<"Battle"> | string
   status?: Prisma.EnumBattleStatusFilter<"Battle"> | $Enums.BattleStatus
   turnNumber?: Prisma.IntFilter<"Battle"> | number
@@ -674,12 +674,12 @@ export type BattleCreateWithoutMonsterInput = {
   log?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutBattlesInput
+  player: Prisma.PlayerCreateNestedOneWithoutBattlesInput
 }
 
 export type BattleUncheckedCreateWithoutMonsterInput = {
   id?: string
-  userId: string
+  playerId: string
   status?: $Enums.BattleStatus
   turnNumber?: number
   playerHp: number
@@ -716,7 +716,7 @@ export type BattleUpdateManyWithWhereWithoutMonsterInput = {
   data: Prisma.XOR<Prisma.BattleUpdateManyMutationInput, Prisma.BattleUncheckedUpdateManyWithoutMonsterInput>
 }
 
-export type BattleCreateManyUserInput = {
+export type BattleCreateManyPlayerInput = {
   id?: string
   monsterId: string
   status?: $Enums.BattleStatus
@@ -729,7 +729,7 @@ export type BattleCreateManyUserInput = {
   updatedAt?: Date | string
 }
 
-export type BattleUpdateWithoutUserInput = {
+export type BattleUpdateWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBattleStatusFieldUpdateOperationsInput | $Enums.BattleStatus
   turnNumber?: Prisma.IntFieldUpdateOperationsInput | number
@@ -742,7 +742,7 @@ export type BattleUpdateWithoutUserInput = {
   monster?: Prisma.MonsterUpdateOneRequiredWithoutBattlesNestedInput
 }
 
-export type BattleUncheckedUpdateWithoutUserInput = {
+export type BattleUncheckedUpdateWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   monsterId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBattleStatusFieldUpdateOperationsInput | $Enums.BattleStatus
@@ -755,7 +755,7 @@ export type BattleUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type BattleUncheckedUpdateManyWithoutUserInput = {
+export type BattleUncheckedUpdateManyWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   monsterId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBattleStatusFieldUpdateOperationsInput | $Enums.BattleStatus
@@ -770,7 +770,7 @@ export type BattleUncheckedUpdateManyWithoutUserInput = {
 
 export type BattleCreateManyMonsterInput = {
   id?: string
-  userId: string
+  playerId: string
   status?: $Enums.BattleStatus
   turnNumber?: number
   playerHp: number
@@ -791,12 +791,12 @@ export type BattleUpdateWithoutMonsterInput = {
   log?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutBattlesNestedInput
+  player?: Prisma.PlayerUpdateOneRequiredWithoutBattlesNestedInput
 }
 
 export type BattleUncheckedUpdateWithoutMonsterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBattleStatusFieldUpdateOperationsInput | $Enums.BattleStatus
   turnNumber?: Prisma.IntFieldUpdateOperationsInput | number
   playerHp?: Prisma.IntFieldUpdateOperationsInput | number
@@ -809,7 +809,7 @@ export type BattleUncheckedUpdateWithoutMonsterInput = {
 
 export type BattleUncheckedUpdateManyWithoutMonsterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  playerId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumBattleStatusFieldUpdateOperationsInput | $Enums.BattleStatus
   turnNumber?: Prisma.IntFieldUpdateOperationsInput | number
   playerHp?: Prisma.IntFieldUpdateOperationsInput | number
@@ -824,7 +824,7 @@ export type BattleUncheckedUpdateManyWithoutMonsterInput = {
 
 export type BattleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  userId?: boolean
+  playerId?: boolean
   monsterId?: boolean
   status?: boolean
   turnNumber?: boolean
@@ -834,13 +834,13 @@ export type BattleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   log?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   monster?: boolean | Prisma.MonsterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["battle"]>
 
 export type BattleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  userId?: boolean
+  playerId?: boolean
   monsterId?: boolean
   status?: boolean
   turnNumber?: boolean
@@ -850,13 +850,13 @@ export type BattleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   log?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   monster?: boolean | Prisma.MonsterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["battle"]>
 
 export type BattleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  userId?: boolean
+  playerId?: boolean
   monsterId?: boolean
   status?: boolean
   turnNumber?: boolean
@@ -866,13 +866,13 @@ export type BattleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   log?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   monster?: boolean | Prisma.MonsterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["battle"]>
 
 export type BattleSelectScalar = {
   id?: boolean
-  userId?: boolean
+  playerId?: boolean
   monsterId?: boolean
   status?: boolean
   turnNumber?: boolean
@@ -884,29 +884,29 @@ export type BattleSelectScalar = {
   updatedAt?: boolean
 }
 
-export type BattleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "monsterId" | "status" | "turnNumber" | "playerHp" | "playerSp" | "monsterHp" | "log" | "createdAt" | "updatedAt", ExtArgs["result"]["battle"]>
+export type BattleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "monsterId" | "status" | "turnNumber" | "playerHp" | "playerSp" | "monsterHp" | "log" | "createdAt" | "updatedAt", ExtArgs["result"]["battle"]>
 export type BattleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   monster?: boolean | Prisma.MonsterDefaultArgs<ExtArgs>
 }
 export type BattleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   monster?: boolean | Prisma.MonsterDefaultArgs<ExtArgs>
 }
 export type BattleIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   monster?: boolean | Prisma.MonsterDefaultArgs<ExtArgs>
 }
 
 export type $BattlePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Battle"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
+    player: Prisma.$PlayerPayload<ExtArgs>
     monster: Prisma.$MonsterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    userId: string
+    playerId: string
     monsterId: string
     status: $Enums.BattleStatus
     turnNumber: number
@@ -1310,7 +1310,7 @@ readonly fields: BattleFieldRefs;
  */
 export interface Prisma__BattleClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  player<T extends Prisma.PlayerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlayerDefaultArgs<ExtArgs>>): Prisma.Prisma__PlayerClient<runtime.Types.Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   monster<T extends Prisma.MonsterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MonsterDefaultArgs<ExtArgs>>): Prisma.Prisma__MonsterClient<runtime.Types.Result.GetResult<Prisma.$MonsterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1342,7 +1342,7 @@ export interface Prisma__BattleClient<T, Null = never, ExtArgs extends runtime.T
  */
 export interface BattleFieldRefs {
   readonly id: Prisma.FieldRef<"Battle", 'String'>
-  readonly userId: Prisma.FieldRef<"Battle", 'String'>
+  readonly playerId: Prisma.FieldRef<"Battle", 'String'>
   readonly monsterId: Prisma.FieldRef<"Battle", 'String'>
   readonly status: Prisma.FieldRef<"Battle", 'BattleStatus'>
   readonly turnNumber: Prisma.FieldRef<"Battle", 'Int'>

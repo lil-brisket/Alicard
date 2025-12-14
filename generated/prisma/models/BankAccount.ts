@@ -41,6 +41,7 @@ export type BankAccountMinAggregateOutputType = {
   playerId: string | null
   balanceCoins: number | null
   lastInterestClaimedAt: Date | null
+  lastInterestApplied: Date | null
   vaultLevel: number | null
   updatedAt: Date | null
 }
@@ -50,6 +51,7 @@ export type BankAccountMaxAggregateOutputType = {
   playerId: string | null
   balanceCoins: number | null
   lastInterestClaimedAt: Date | null
+  lastInterestApplied: Date | null
   vaultLevel: number | null
   updatedAt: Date | null
 }
@@ -59,6 +61,7 @@ export type BankAccountCountAggregateOutputType = {
   playerId: number
   balanceCoins: number
   lastInterestClaimedAt: number
+  lastInterestApplied: number
   vaultLevel: number
   updatedAt: number
   _all: number
@@ -80,6 +83,7 @@ export type BankAccountMinAggregateInputType = {
   playerId?: true
   balanceCoins?: true
   lastInterestClaimedAt?: true
+  lastInterestApplied?: true
   vaultLevel?: true
   updatedAt?: true
 }
@@ -89,6 +93,7 @@ export type BankAccountMaxAggregateInputType = {
   playerId?: true
   balanceCoins?: true
   lastInterestClaimedAt?: true
+  lastInterestApplied?: true
   vaultLevel?: true
   updatedAt?: true
 }
@@ -98,6 +103,7 @@ export type BankAccountCountAggregateInputType = {
   playerId?: true
   balanceCoins?: true
   lastInterestClaimedAt?: true
+  lastInterestApplied?: true
   vaultLevel?: true
   updatedAt?: true
   _all?: true
@@ -194,6 +200,7 @@ export type BankAccountGroupByOutputType = {
   playerId: string
   balanceCoins: number
   lastInterestClaimedAt: Date | null
+  lastInterestApplied: Date | null
   vaultLevel: number
   updatedAt: Date
   _count: BankAccountCountAggregateOutputType | null
@@ -226,6 +233,7 @@ export type BankAccountWhereInput = {
   playerId?: Prisma.StringFilter<"BankAccount"> | string
   balanceCoins?: Prisma.IntFilter<"BankAccount"> | number
   lastInterestClaimedAt?: Prisma.DateTimeNullableFilter<"BankAccount"> | Date | string | null
+  lastInterestApplied?: Prisma.DateTimeNullableFilter<"BankAccount"> | Date | string | null
   vaultLevel?: Prisma.IntFilter<"BankAccount"> | number
   updatedAt?: Prisma.DateTimeFilter<"BankAccount"> | Date | string
   player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
@@ -238,6 +246,7 @@ export type BankAccountOrderByWithRelationInput = {
   playerId?: Prisma.SortOrder
   balanceCoins?: Prisma.SortOrder
   lastInterestClaimedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastInterestApplied?: Prisma.SortOrderInput | Prisma.SortOrder
   vaultLevel?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   player?: Prisma.PlayerOrderByWithRelationInput
@@ -253,6 +262,7 @@ export type BankAccountWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.BankAccountWhereInput | Prisma.BankAccountWhereInput[]
   balanceCoins?: Prisma.IntFilter<"BankAccount"> | number
   lastInterestClaimedAt?: Prisma.DateTimeNullableFilter<"BankAccount"> | Date | string | null
+  lastInterestApplied?: Prisma.DateTimeNullableFilter<"BankAccount"> | Date | string | null
   vaultLevel?: Prisma.IntFilter<"BankAccount"> | number
   updatedAt?: Prisma.DateTimeFilter<"BankAccount"> | Date | string
   player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
@@ -265,6 +275,7 @@ export type BankAccountOrderByWithAggregationInput = {
   playerId?: Prisma.SortOrder
   balanceCoins?: Prisma.SortOrder
   lastInterestClaimedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastInterestApplied?: Prisma.SortOrderInput | Prisma.SortOrder
   vaultLevel?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.BankAccountCountOrderByAggregateInput
@@ -282,6 +293,7 @@ export type BankAccountScalarWhereWithAggregatesInput = {
   playerId?: Prisma.StringWithAggregatesFilter<"BankAccount"> | string
   balanceCoins?: Prisma.IntWithAggregatesFilter<"BankAccount"> | number
   lastInterestClaimedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BankAccount"> | Date | string | null
+  lastInterestApplied?: Prisma.DateTimeNullableWithAggregatesFilter<"BankAccount"> | Date | string | null
   vaultLevel?: Prisma.IntWithAggregatesFilter<"BankAccount"> | number
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"BankAccount"> | Date | string
 }
@@ -290,6 +302,7 @@ export type BankAccountCreateInput = {
   id?: string
   balanceCoins?: number
   lastInterestClaimedAt?: Date | string | null
+  lastInterestApplied?: Date | string | null
   vaultLevel?: number
   updatedAt?: Date | string
   player: Prisma.PlayerCreateNestedOneWithoutBankAccountInput
@@ -302,6 +315,7 @@ export type BankAccountUncheckedCreateInput = {
   playerId: string
   balanceCoins?: number
   lastInterestClaimedAt?: Date | string | null
+  lastInterestApplied?: Date | string | null
   vaultLevel?: number
   updatedAt?: Date | string
   vaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutAccountInput
@@ -312,6 +326,7 @@ export type BankAccountUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   balanceCoins?: Prisma.IntFieldUpdateOperationsInput | number
   lastInterestClaimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastInterestApplied?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vaultLevel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   player?: Prisma.PlayerUpdateOneRequiredWithoutBankAccountNestedInput
@@ -324,6 +339,7 @@ export type BankAccountUncheckedUpdateInput = {
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
   balanceCoins?: Prisma.IntFieldUpdateOperationsInput | number
   lastInterestClaimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastInterestApplied?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vaultLevel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutAccountNestedInput
@@ -335,6 +351,7 @@ export type BankAccountCreateManyInput = {
   playerId: string
   balanceCoins?: number
   lastInterestClaimedAt?: Date | string | null
+  lastInterestApplied?: Date | string | null
   vaultLevel?: number
   updatedAt?: Date | string
 }
@@ -343,6 +360,7 @@ export type BankAccountUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   balanceCoins?: Prisma.IntFieldUpdateOperationsInput | number
   lastInterestClaimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastInterestApplied?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vaultLevel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -352,6 +370,7 @@ export type BankAccountUncheckedUpdateManyInput = {
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
   balanceCoins?: Prisma.IntFieldUpdateOperationsInput | number
   lastInterestClaimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastInterestApplied?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vaultLevel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -366,6 +385,7 @@ export type BankAccountCountOrderByAggregateInput = {
   playerId?: Prisma.SortOrder
   balanceCoins?: Prisma.SortOrder
   lastInterestClaimedAt?: Prisma.SortOrder
+  lastInterestApplied?: Prisma.SortOrder
   vaultLevel?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -380,6 +400,7 @@ export type BankAccountMaxOrderByAggregateInput = {
   playerId?: Prisma.SortOrder
   balanceCoins?: Prisma.SortOrder
   lastInterestClaimedAt?: Prisma.SortOrder
+  lastInterestApplied?: Prisma.SortOrder
   vaultLevel?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -389,6 +410,7 @@ export type BankAccountMinOrderByAggregateInput = {
   playerId?: Prisma.SortOrder
   balanceCoins?: Prisma.SortOrder
   lastInterestClaimedAt?: Prisma.SortOrder
+  lastInterestApplied?: Prisma.SortOrder
   vaultLevel?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -469,6 +491,7 @@ export type BankAccountCreateWithoutPlayerInput = {
   id?: string
   balanceCoins?: number
   lastInterestClaimedAt?: Date | string | null
+  lastInterestApplied?: Date | string | null
   vaultLevel?: number
   updatedAt?: Date | string
   vaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutAccountInput
@@ -479,6 +502,7 @@ export type BankAccountUncheckedCreateWithoutPlayerInput = {
   id?: string
   balanceCoins?: number
   lastInterestClaimedAt?: Date | string | null
+  lastInterestApplied?: Date | string | null
   vaultLevel?: number
   updatedAt?: Date | string
   vaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutAccountInput
@@ -505,6 +529,7 @@ export type BankAccountUpdateWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   balanceCoins?: Prisma.IntFieldUpdateOperationsInput | number
   lastInterestClaimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastInterestApplied?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vaultLevel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vaultItems?: Prisma.BankVaultItemUpdateManyWithoutAccountNestedInput
@@ -515,6 +540,7 @@ export type BankAccountUncheckedUpdateWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   balanceCoins?: Prisma.IntFieldUpdateOperationsInput | number
   lastInterestClaimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastInterestApplied?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vaultLevel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutAccountNestedInput
@@ -525,6 +551,7 @@ export type BankAccountCreateWithoutVaultItemsInput = {
   id?: string
   balanceCoins?: number
   lastInterestClaimedAt?: Date | string | null
+  lastInterestApplied?: Date | string | null
   vaultLevel?: number
   updatedAt?: Date | string
   player: Prisma.PlayerCreateNestedOneWithoutBankAccountInput
@@ -536,6 +563,7 @@ export type BankAccountUncheckedCreateWithoutVaultItemsInput = {
   playerId: string
   balanceCoins?: number
   lastInterestClaimedAt?: Date | string | null
+  lastInterestApplied?: Date | string | null
   vaultLevel?: number
   updatedAt?: Date | string
   transactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutAccountInput
@@ -561,6 +589,7 @@ export type BankAccountUpdateWithoutVaultItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   balanceCoins?: Prisma.IntFieldUpdateOperationsInput | number
   lastInterestClaimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastInterestApplied?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vaultLevel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   player?: Prisma.PlayerUpdateOneRequiredWithoutBankAccountNestedInput
@@ -572,6 +601,7 @@ export type BankAccountUncheckedUpdateWithoutVaultItemsInput = {
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
   balanceCoins?: Prisma.IntFieldUpdateOperationsInput | number
   lastInterestClaimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastInterestApplied?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vaultLevel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutAccountNestedInput
@@ -581,6 +611,7 @@ export type BankAccountCreateWithoutTransactionsInput = {
   id?: string
   balanceCoins?: number
   lastInterestClaimedAt?: Date | string | null
+  lastInterestApplied?: Date | string | null
   vaultLevel?: number
   updatedAt?: Date | string
   player: Prisma.PlayerCreateNestedOneWithoutBankAccountInput
@@ -592,6 +623,7 @@ export type BankAccountUncheckedCreateWithoutTransactionsInput = {
   playerId: string
   balanceCoins?: number
   lastInterestClaimedAt?: Date | string | null
+  lastInterestApplied?: Date | string | null
   vaultLevel?: number
   updatedAt?: Date | string
   vaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutAccountInput
@@ -617,6 +649,7 @@ export type BankAccountUpdateWithoutTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   balanceCoins?: Prisma.IntFieldUpdateOperationsInput | number
   lastInterestClaimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastInterestApplied?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vaultLevel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   player?: Prisma.PlayerUpdateOneRequiredWithoutBankAccountNestedInput
@@ -628,6 +661,7 @@ export type BankAccountUncheckedUpdateWithoutTransactionsInput = {
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
   balanceCoins?: Prisma.IntFieldUpdateOperationsInput | number
   lastInterestClaimedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastInterestApplied?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vaultLevel?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutAccountNestedInput
@@ -678,6 +712,7 @@ export type BankAccountSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   playerId?: boolean
   balanceCoins?: boolean
   lastInterestClaimedAt?: boolean
+  lastInterestApplied?: boolean
   vaultLevel?: boolean
   updatedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
@@ -691,6 +726,7 @@ export type BankAccountSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   playerId?: boolean
   balanceCoins?: boolean
   lastInterestClaimedAt?: boolean
+  lastInterestApplied?: boolean
   vaultLevel?: boolean
   updatedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
@@ -701,6 +737,7 @@ export type BankAccountSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   playerId?: boolean
   balanceCoins?: boolean
   lastInterestClaimedAt?: boolean
+  lastInterestApplied?: boolean
   vaultLevel?: boolean
   updatedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
@@ -711,11 +748,12 @@ export type BankAccountSelectScalar = {
   playerId?: boolean
   balanceCoins?: boolean
   lastInterestClaimedAt?: boolean
+  lastInterestApplied?: boolean
   vaultLevel?: boolean
   updatedAt?: boolean
 }
 
-export type BankAccountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "balanceCoins" | "lastInterestClaimedAt" | "vaultLevel" | "updatedAt", ExtArgs["result"]["bankAccount"]>
+export type BankAccountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "balanceCoins" | "lastInterestClaimedAt" | "lastInterestApplied" | "vaultLevel" | "updatedAt", ExtArgs["result"]["bankAccount"]>
 export type BankAccountInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   vaultItems?: boolean | Prisma.BankAccount$vaultItemsArgs<ExtArgs>
@@ -741,6 +779,7 @@ export type $BankAccountPayload<ExtArgs extends runtime.Types.Extensions.Interna
     playerId: string
     balanceCoins: number
     lastInterestClaimedAt: Date | null
+    lastInterestApplied: Date | null
     vaultLevel: number
     updatedAt: Date
   }, ExtArgs["result"]["bankAccount"]>
@@ -1173,6 +1212,7 @@ export interface BankAccountFieldRefs {
   readonly playerId: Prisma.FieldRef<"BankAccount", 'String'>
   readonly balanceCoins: Prisma.FieldRef<"BankAccount", 'Int'>
   readonly lastInterestClaimedAt: Prisma.FieldRef<"BankAccount", 'DateTime'>
+  readonly lastInterestApplied: Prisma.FieldRef<"BankAccount", 'DateTime'>
   readonly vaultLevel: Prisma.FieldRef<"BankAccount", 'Int'>
   readonly updatedAt: Prisma.FieldRef<"BankAccount", 'DateTime'>
 }

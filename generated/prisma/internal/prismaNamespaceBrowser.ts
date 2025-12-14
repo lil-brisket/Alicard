@@ -56,6 +56,7 @@ export const ModelName = {
   Session: 'Session',
   User: 'User',
   Character: 'Character',
+  Position: 'Position',
   VerificationToken: 'VerificationToken',
   Player: 'Player',
   PlayerStats: 'PlayerStats',
@@ -103,7 +104,12 @@ export const ModelName = {
   Monster: 'Monster',
   Battle: 'Battle',
   PlayerLeaderboardStats: 'PlayerLeaderboardStats',
-  PlayerStatsPeriod: 'PlayerStatsPeriod'
+  PlayerStatsPeriod: 'PlayerStatsPeriod',
+  AdminActionLog: 'AdminActionLog',
+  ItemTemplate: 'ItemTemplate',
+  MonsterTemplate: 'MonsterTemplate',
+  QuestTemplate: 'QuestTemplate',
+  MapZone: 'MapZone'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -172,7 +178,15 @@ export const UserScalarFieldEnum = {
   gender: 'gender',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  username: 'username'
+  username: 'username',
+  role: 'role',
+  isBanned: 'isBanned',
+  bannedUntil: 'bannedUntil',
+  banReason: 'banReason',
+  isMuted: 'isMuted',
+  mutedUntil: 'mutedUntil',
+  muteReason: 'muteReason',
+  deletedAt: 'deletedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -204,6 +218,19 @@ export const CharacterScalarFieldEnum = {
 export type CharacterScalarFieldEnum = (typeof CharacterScalarFieldEnum)[keyof typeof CharacterScalarFieldEnum]
 
 
+export const PositionScalarFieldEnum = {
+  id: 'id',
+  characterId: 'characterId',
+  x: 'x',
+  y: 'y',
+  zone: 'zone',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PositionScalarFieldEnum = (typeof PositionScalarFieldEnum)[keyof typeof PositionScalarFieldEnum]
+
+
 export const VerificationTokenScalarFieldEnum = {
   identifier: 'identifier',
   token: 'token',
@@ -232,6 +259,14 @@ export type PlayerScalarFieldEnum = (typeof PlayerScalarFieldEnum)[keyof typeof 
 export const PlayerStatsScalarFieldEnum = {
   id: 'id',
   playerId: 'playerId',
+  vitalityBase: 'vitalityBase',
+  strengthBase: 'strengthBase',
+  speedBase: 'speedBase',
+  dexterityBase: 'dexterityBase',
+  vitalityTrain: 'vitalityTrain',
+  strengthTrain: 'strengthTrain',
+  speedTrain: 'speedTrain',
+  dexterityTrain: 'dexterityTrain',
   vitality: 'vitality',
   strength: 'strength',
   speed: 'speed',
@@ -460,8 +495,8 @@ export type CombatLogScalarFieldEnum = (typeof CombatLogScalarFieldEnum)[keyof t
 export const DeathLogScalarFieldEnum = {
   id: 'id',
   playerId: 'playerId',
-  deathCount: 'deathCount',
   cause: 'cause',
+  location: 'location',
   locationX: 'locationX',
   locationY: 'locationY',
   createdAt: 'createdAt'
@@ -535,6 +570,7 @@ export const BankAccountScalarFieldEnum = {
   playerId: 'playerId',
   balanceCoins: 'balanceCoins',
   lastInterestClaimedAt: 'lastInterestClaimedAt',
+  lastInterestApplied: 'lastInterestApplied',
   vaultLevel: 'vaultLevel',
   updatedAt: 'updatedAt'
 } as const
@@ -828,7 +864,7 @@ export type MonsterScalarFieldEnum = (typeof MonsterScalarFieldEnum)[keyof typeo
 
 export const BattleScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
+  playerId: 'playerId',
   monsterId: 'monsterId',
   status: 'status',
   turnNumber: 'turnNumber',
@@ -870,6 +906,87 @@ export const PlayerStatsPeriodScalarFieldEnum = {
 } as const
 
 export type PlayerStatsPeriodScalarFieldEnum = (typeof PlayerStatsPeriodScalarFieldEnum)[keyof typeof PlayerStatsPeriodScalarFieldEnum]
+
+
+export const AdminActionLogScalarFieldEnum = {
+  id: 'id',
+  actorId: 'actorId',
+  targetUserId: 'targetUserId',
+  targetCharacterId: 'targetCharacterId',
+  action: 'action',
+  reason: 'reason',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+} as const
+
+export type AdminActionLogScalarFieldEnum = (typeof AdminActionLogScalarFieldEnum)[keyof typeof AdminActionLogScalarFieldEnum]
+
+
+export const ItemTemplateScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  rarity: 'rarity',
+  stackable: 'stackable',
+  maxStack: 'maxStack',
+  value: 'value',
+  icon: 'icon',
+  isArchived: 'isArchived',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ItemTemplateScalarFieldEnum = (typeof ItemTemplateScalarFieldEnum)[keyof typeof ItemTemplateScalarFieldEnum]
+
+
+export const MonsterTemplateScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  level: 'level',
+  hp: 'hp',
+  sp: 'sp',
+  statsJSON: 'statsJSON',
+  lootTableId: 'lootTableId',
+  isArchived: 'isArchived',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MonsterTemplateScalarFieldEnum = (typeof MonsterTemplateScalarFieldEnum)[keyof typeof MonsterTemplateScalarFieldEnum]
+
+
+export const QuestTemplateScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  stepsJSON: 'stepsJSON',
+  rewardsJSON: 'rewardsJSON',
+  isArchived: 'isArchived',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type QuestTemplateScalarFieldEnum = (typeof QuestTemplateScalarFieldEnum)[keyof typeof QuestTemplateScalarFieldEnum]
+
+
+export const MapZoneScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  width: 'width',
+  height: 'height',
+  tilesJSON: 'tilesJSON',
+  poisJSON: 'poisJSON',
+  spawnJSON: 'spawnJSON',
+  isArchived: 'isArchived',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MapZoneScalarFieldEnum = (typeof MapZoneScalarFieldEnum)[keyof typeof MapZoneScalarFieldEnum]
 
 
 export const SortOrder = {

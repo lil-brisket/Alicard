@@ -27,13 +27,11 @@ export type AggregateDeathLog = {
 }
 
 export type DeathLogAvgAggregateOutputType = {
-  deathCount: number | null
   locationX: number | null
   locationY: number | null
 }
 
 export type DeathLogSumAggregateOutputType = {
-  deathCount: number | null
   locationX: number | null
   locationY: number | null
 }
@@ -41,8 +39,8 @@ export type DeathLogSumAggregateOutputType = {
 export type DeathLogMinAggregateOutputType = {
   id: string | null
   playerId: string | null
-  deathCount: number | null
   cause: string | null
+  location: string | null
   locationX: number | null
   locationY: number | null
   createdAt: Date | null
@@ -51,8 +49,8 @@ export type DeathLogMinAggregateOutputType = {
 export type DeathLogMaxAggregateOutputType = {
   id: string | null
   playerId: string | null
-  deathCount: number | null
   cause: string | null
+  location: string | null
   locationX: number | null
   locationY: number | null
   createdAt: Date | null
@@ -61,8 +59,8 @@ export type DeathLogMaxAggregateOutputType = {
 export type DeathLogCountAggregateOutputType = {
   id: number
   playerId: number
-  deathCount: number
   cause: number
+  location: number
   locationX: number
   locationY: number
   createdAt: number
@@ -71,13 +69,11 @@ export type DeathLogCountAggregateOutputType = {
 
 
 export type DeathLogAvgAggregateInputType = {
-  deathCount?: true
   locationX?: true
   locationY?: true
 }
 
 export type DeathLogSumAggregateInputType = {
-  deathCount?: true
   locationX?: true
   locationY?: true
 }
@@ -85,8 +81,8 @@ export type DeathLogSumAggregateInputType = {
 export type DeathLogMinAggregateInputType = {
   id?: true
   playerId?: true
-  deathCount?: true
   cause?: true
+  location?: true
   locationX?: true
   locationY?: true
   createdAt?: true
@@ -95,8 +91,8 @@ export type DeathLogMinAggregateInputType = {
 export type DeathLogMaxAggregateInputType = {
   id?: true
   playerId?: true
-  deathCount?: true
   cause?: true
+  location?: true
   locationX?: true
   locationY?: true
   createdAt?: true
@@ -105,8 +101,8 @@ export type DeathLogMaxAggregateInputType = {
 export type DeathLogCountAggregateInputType = {
   id?: true
   playerId?: true
-  deathCount?: true
   cause?: true
+  location?: true
   locationX?: true
   locationY?: true
   createdAt?: true
@@ -202,8 +198,8 @@ export type DeathLogGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type DeathLogGroupByOutputType = {
   id: string
   playerId: string
-  deathCount: number
-  cause: string | null
+  cause: string
+  location: string | null
   locationX: number | null
   locationY: number | null
   createdAt: Date
@@ -235,8 +231,8 @@ export type DeathLogWhereInput = {
   NOT?: Prisma.DeathLogWhereInput | Prisma.DeathLogWhereInput[]
   id?: Prisma.StringFilter<"DeathLog"> | string
   playerId?: Prisma.StringFilter<"DeathLog"> | string
-  deathCount?: Prisma.IntFilter<"DeathLog"> | number
-  cause?: Prisma.StringNullableFilter<"DeathLog"> | string | null
+  cause?: Prisma.StringFilter<"DeathLog"> | string
+  location?: Prisma.StringNullableFilter<"DeathLog"> | string | null
   locationX?: Prisma.IntNullableFilter<"DeathLog"> | number | null
   locationY?: Prisma.IntNullableFilter<"DeathLog"> | number | null
   createdAt?: Prisma.DateTimeFilter<"DeathLog"> | Date | string
@@ -246,8 +242,8 @@ export type DeathLogWhereInput = {
 export type DeathLogOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  deathCount?: Prisma.SortOrder
-  cause?: Prisma.SortOrderInput | Prisma.SortOrder
+  cause?: Prisma.SortOrder
+  location?: Prisma.SortOrderInput | Prisma.SortOrder
   locationX?: Prisma.SortOrderInput | Prisma.SortOrder
   locationY?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -260,8 +256,8 @@ export type DeathLogWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.DeathLogWhereInput[]
   NOT?: Prisma.DeathLogWhereInput | Prisma.DeathLogWhereInput[]
   playerId?: Prisma.StringFilter<"DeathLog"> | string
-  deathCount?: Prisma.IntFilter<"DeathLog"> | number
-  cause?: Prisma.StringNullableFilter<"DeathLog"> | string | null
+  cause?: Prisma.StringFilter<"DeathLog"> | string
+  location?: Prisma.StringNullableFilter<"DeathLog"> | string | null
   locationX?: Prisma.IntNullableFilter<"DeathLog"> | number | null
   locationY?: Prisma.IntNullableFilter<"DeathLog"> | number | null
   createdAt?: Prisma.DateTimeFilter<"DeathLog"> | Date | string
@@ -271,8 +267,8 @@ export type DeathLogWhereUniqueInput = Prisma.AtLeast<{
 export type DeathLogOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  deathCount?: Prisma.SortOrder
-  cause?: Prisma.SortOrderInput | Prisma.SortOrder
+  cause?: Prisma.SortOrder
+  location?: Prisma.SortOrderInput | Prisma.SortOrder
   locationX?: Prisma.SortOrderInput | Prisma.SortOrder
   locationY?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -289,8 +285,8 @@ export type DeathLogScalarWhereWithAggregatesInput = {
   NOT?: Prisma.DeathLogScalarWhereWithAggregatesInput | Prisma.DeathLogScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"DeathLog"> | string
   playerId?: Prisma.StringWithAggregatesFilter<"DeathLog"> | string
-  deathCount?: Prisma.IntWithAggregatesFilter<"DeathLog"> | number
-  cause?: Prisma.StringNullableWithAggregatesFilter<"DeathLog"> | string | null
+  cause?: Prisma.StringWithAggregatesFilter<"DeathLog"> | string
+  location?: Prisma.StringNullableWithAggregatesFilter<"DeathLog"> | string | null
   locationX?: Prisma.IntNullableWithAggregatesFilter<"DeathLog"> | number | null
   locationY?: Prisma.IntNullableWithAggregatesFilter<"DeathLog"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"DeathLog"> | Date | string
@@ -298,8 +294,8 @@ export type DeathLogScalarWhereWithAggregatesInput = {
 
 export type DeathLogCreateInput = {
   id?: string
-  deathCount: number
-  cause?: string | null
+  cause: string
+  location?: string | null
   locationX?: number | null
   locationY?: number | null
   createdAt?: Date | string
@@ -309,8 +305,8 @@ export type DeathLogCreateInput = {
 export type DeathLogUncheckedCreateInput = {
   id?: string
   playerId: string
-  deathCount: number
-  cause?: string | null
+  cause: string
+  location?: string | null
   locationX?: number | null
   locationY?: number | null
   createdAt?: Date | string
@@ -318,8 +314,8 @@ export type DeathLogUncheckedCreateInput = {
 
 export type DeathLogUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  deathCount?: Prisma.IntFieldUpdateOperationsInput | number
-  cause?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cause?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationX?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   locationY?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -329,8 +325,8 @@ export type DeathLogUpdateInput = {
 export type DeathLogUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  deathCount?: Prisma.IntFieldUpdateOperationsInput | number
-  cause?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cause?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationX?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   locationY?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -339,8 +335,8 @@ export type DeathLogUncheckedUpdateInput = {
 export type DeathLogCreateManyInput = {
   id?: string
   playerId: string
-  deathCount: number
-  cause?: string | null
+  cause: string
+  location?: string | null
   locationX?: number | null
   locationY?: number | null
   createdAt?: Date | string
@@ -348,8 +344,8 @@ export type DeathLogCreateManyInput = {
 
 export type DeathLogUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  deathCount?: Prisma.IntFieldUpdateOperationsInput | number
-  cause?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cause?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationX?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   locationY?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -358,8 +354,8 @@ export type DeathLogUpdateManyMutationInput = {
 export type DeathLogUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
-  deathCount?: Prisma.IntFieldUpdateOperationsInput | number
-  cause?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cause?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationX?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   locationY?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -378,15 +374,14 @@ export type DeathLogOrderByRelationAggregateInput = {
 export type DeathLogCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  deathCount?: Prisma.SortOrder
   cause?: Prisma.SortOrder
+  location?: Prisma.SortOrder
   locationX?: Prisma.SortOrder
   locationY?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type DeathLogAvgOrderByAggregateInput = {
-  deathCount?: Prisma.SortOrder
   locationX?: Prisma.SortOrder
   locationY?: Prisma.SortOrder
 }
@@ -394,8 +389,8 @@ export type DeathLogAvgOrderByAggregateInput = {
 export type DeathLogMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  deathCount?: Prisma.SortOrder
   cause?: Prisma.SortOrder
+  location?: Prisma.SortOrder
   locationX?: Prisma.SortOrder
   locationY?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -404,15 +399,14 @@ export type DeathLogMaxOrderByAggregateInput = {
 export type DeathLogMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
-  deathCount?: Prisma.SortOrder
   cause?: Prisma.SortOrder
+  location?: Prisma.SortOrder
   locationX?: Prisma.SortOrder
   locationY?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type DeathLogSumOrderByAggregateInput = {
-  deathCount?: Prisma.SortOrder
   locationX?: Prisma.SortOrder
   locationY?: Prisma.SortOrder
 }
@@ -461,8 +455,8 @@ export type DeathLogUncheckedUpdateManyWithoutPlayerNestedInput = {
 
 export type DeathLogCreateWithoutPlayerInput = {
   id?: string
-  deathCount: number
-  cause?: string | null
+  cause: string
+  location?: string | null
   locationX?: number | null
   locationY?: number | null
   createdAt?: Date | string
@@ -470,8 +464,8 @@ export type DeathLogCreateWithoutPlayerInput = {
 
 export type DeathLogUncheckedCreateWithoutPlayerInput = {
   id?: string
-  deathCount: number
-  cause?: string | null
+  cause: string
+  location?: string | null
   locationX?: number | null
   locationY?: number | null
   createdAt?: Date | string
@@ -509,8 +503,8 @@ export type DeathLogScalarWhereInput = {
   NOT?: Prisma.DeathLogScalarWhereInput | Prisma.DeathLogScalarWhereInput[]
   id?: Prisma.StringFilter<"DeathLog"> | string
   playerId?: Prisma.StringFilter<"DeathLog"> | string
-  deathCount?: Prisma.IntFilter<"DeathLog"> | number
-  cause?: Prisma.StringNullableFilter<"DeathLog"> | string | null
+  cause?: Prisma.StringFilter<"DeathLog"> | string
+  location?: Prisma.StringNullableFilter<"DeathLog"> | string | null
   locationX?: Prisma.IntNullableFilter<"DeathLog"> | number | null
   locationY?: Prisma.IntNullableFilter<"DeathLog"> | number | null
   createdAt?: Prisma.DateTimeFilter<"DeathLog"> | Date | string
@@ -518,8 +512,8 @@ export type DeathLogScalarWhereInput = {
 
 export type DeathLogCreateManyPlayerInput = {
   id?: string
-  deathCount: number
-  cause?: string | null
+  cause: string
+  location?: string | null
   locationX?: number | null
   locationY?: number | null
   createdAt?: Date | string
@@ -527,8 +521,8 @@ export type DeathLogCreateManyPlayerInput = {
 
 export type DeathLogUpdateWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  deathCount?: Prisma.IntFieldUpdateOperationsInput | number
-  cause?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cause?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationX?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   locationY?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -536,8 +530,8 @@ export type DeathLogUpdateWithoutPlayerInput = {
 
 export type DeathLogUncheckedUpdateWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  deathCount?: Prisma.IntFieldUpdateOperationsInput | number
-  cause?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cause?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationX?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   locationY?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -545,8 +539,8 @@ export type DeathLogUncheckedUpdateWithoutPlayerInput = {
 
 export type DeathLogUncheckedUpdateManyWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  deathCount?: Prisma.IntFieldUpdateOperationsInput | number
-  cause?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cause?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationX?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   locationY?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -557,8 +551,8 @@ export type DeathLogUncheckedUpdateManyWithoutPlayerInput = {
 export type DeathLogSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   playerId?: boolean
-  deathCount?: boolean
   cause?: boolean
+  location?: boolean
   locationX?: boolean
   locationY?: boolean
   createdAt?: boolean
@@ -568,8 +562,8 @@ export type DeathLogSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type DeathLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   playerId?: boolean
-  deathCount?: boolean
   cause?: boolean
+  location?: boolean
   locationX?: boolean
   locationY?: boolean
   createdAt?: boolean
@@ -579,8 +573,8 @@ export type DeathLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type DeathLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   playerId?: boolean
-  deathCount?: boolean
   cause?: boolean
+  location?: boolean
   locationX?: boolean
   locationY?: boolean
   createdAt?: boolean
@@ -590,14 +584,14 @@ export type DeathLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type DeathLogSelectScalar = {
   id?: boolean
   playerId?: boolean
-  deathCount?: boolean
   cause?: boolean
+  location?: boolean
   locationX?: boolean
   locationY?: boolean
   createdAt?: boolean
 }
 
-export type DeathLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "deathCount" | "cause" | "locationX" | "locationY" | "createdAt", ExtArgs["result"]["deathLog"]>
+export type DeathLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "cause" | "location" | "locationX" | "locationY" | "createdAt", ExtArgs["result"]["deathLog"]>
 export type DeathLogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }
@@ -616,8 +610,8 @@ export type $DeathLogPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     playerId: string
-    deathCount: number
-    cause: string | null
+    cause: string
+    location: string | null
     locationX: number | null
     locationY: number | null
     createdAt: Date
@@ -1047,8 +1041,8 @@ export interface Prisma__DeathLogClient<T, Null = never, ExtArgs extends runtime
 export interface DeathLogFieldRefs {
   readonly id: Prisma.FieldRef<"DeathLog", 'String'>
   readonly playerId: Prisma.FieldRef<"DeathLog", 'String'>
-  readonly deathCount: Prisma.FieldRef<"DeathLog", 'Int'>
   readonly cause: Prisma.FieldRef<"DeathLog", 'String'>
+  readonly location: Prisma.FieldRef<"DeathLog", 'String'>
   readonly locationX: Prisma.FieldRef<"DeathLog", 'Int'>
   readonly locationY: Prisma.FieldRef<"DeathLog", 'Int'>
   readonly createdAt: Prisma.FieldRef<"DeathLog", 'DateTime'>

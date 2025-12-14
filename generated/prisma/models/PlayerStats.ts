@@ -27,6 +27,14 @@ export type AggregatePlayerStats = {
 }
 
 export type PlayerStatsAvgAggregateOutputType = {
+  vitalityBase: number | null
+  strengthBase: number | null
+  speedBase: number | null
+  dexterityBase: number | null
+  vitalityTrain: number | null
+  strengthTrain: number | null
+  speedTrain: number | null
+  dexterityTrain: number | null
   vitality: number | null
   strength: number | null
   speed: number | null
@@ -41,6 +49,14 @@ export type PlayerStatsAvgAggregateOutputType = {
 }
 
 export type PlayerStatsSumAggregateOutputType = {
+  vitalityBase: number | null
+  strengthBase: number | null
+  speedBase: number | null
+  dexterityBase: number | null
+  vitalityTrain: number | null
+  strengthTrain: number | null
+  speedTrain: number | null
+  dexterityTrain: number | null
   vitality: number | null
   strength: number | null
   speed: number | null
@@ -57,6 +73,14 @@ export type PlayerStatsSumAggregateOutputType = {
 export type PlayerStatsMinAggregateOutputType = {
   id: string | null
   playerId: string | null
+  vitalityBase: number | null
+  strengthBase: number | null
+  speedBase: number | null
+  dexterityBase: number | null
+  vitalityTrain: number | null
+  strengthTrain: number | null
+  speedTrain: number | null
+  dexterityTrain: number | null
   vitality: number | null
   strength: number | null
   speed: number | null
@@ -75,6 +99,14 @@ export type PlayerStatsMinAggregateOutputType = {
 export type PlayerStatsMaxAggregateOutputType = {
   id: string | null
   playerId: string | null
+  vitalityBase: number | null
+  strengthBase: number | null
+  speedBase: number | null
+  dexterityBase: number | null
+  vitalityTrain: number | null
+  strengthTrain: number | null
+  speedTrain: number | null
+  dexterityTrain: number | null
   vitality: number | null
   strength: number | null
   speed: number | null
@@ -93,6 +125,14 @@ export type PlayerStatsMaxAggregateOutputType = {
 export type PlayerStatsCountAggregateOutputType = {
   id: number
   playerId: number
+  vitalityBase: number
+  strengthBase: number
+  speedBase: number
+  dexterityBase: number
+  vitalityTrain: number
+  strengthTrain: number
+  speedTrain: number
+  dexterityTrain: number
   vitality: number
   strength: number
   speed: number
@@ -111,6 +151,14 @@ export type PlayerStatsCountAggregateOutputType = {
 
 
 export type PlayerStatsAvgAggregateInputType = {
+  vitalityBase?: true
+  strengthBase?: true
+  speedBase?: true
+  dexterityBase?: true
+  vitalityTrain?: true
+  strengthTrain?: true
+  speedTrain?: true
+  dexterityTrain?: true
   vitality?: true
   strength?: true
   speed?: true
@@ -125,6 +173,14 @@ export type PlayerStatsAvgAggregateInputType = {
 }
 
 export type PlayerStatsSumAggregateInputType = {
+  vitalityBase?: true
+  strengthBase?: true
+  speedBase?: true
+  dexterityBase?: true
+  vitalityTrain?: true
+  strengthTrain?: true
+  speedTrain?: true
+  dexterityTrain?: true
   vitality?: true
   strength?: true
   speed?: true
@@ -141,6 +197,14 @@ export type PlayerStatsSumAggregateInputType = {
 export type PlayerStatsMinAggregateInputType = {
   id?: true
   playerId?: true
+  vitalityBase?: true
+  strengthBase?: true
+  speedBase?: true
+  dexterityBase?: true
+  vitalityTrain?: true
+  strengthTrain?: true
+  speedTrain?: true
+  dexterityTrain?: true
   vitality?: true
   strength?: true
   speed?: true
@@ -159,6 +223,14 @@ export type PlayerStatsMinAggregateInputType = {
 export type PlayerStatsMaxAggregateInputType = {
   id?: true
   playerId?: true
+  vitalityBase?: true
+  strengthBase?: true
+  speedBase?: true
+  dexterityBase?: true
+  vitalityTrain?: true
+  strengthTrain?: true
+  speedTrain?: true
+  dexterityTrain?: true
   vitality?: true
   strength?: true
   speed?: true
@@ -177,6 +249,14 @@ export type PlayerStatsMaxAggregateInputType = {
 export type PlayerStatsCountAggregateInputType = {
   id?: true
   playerId?: true
+  vitalityBase?: true
+  strengthBase?: true
+  speedBase?: true
+  dexterityBase?: true
+  vitalityTrain?: true
+  strengthTrain?: true
+  speedTrain?: true
+  dexterityTrain?: true
   vitality?: true
   strength?: true
   speed?: true
@@ -282,6 +362,14 @@ export type PlayerStatsGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type PlayerStatsGroupByOutputType = {
   id: string
   playerId: string
+  vitalityBase: number
+  strengthBase: number
+  speedBase: number
+  dexterityBase: number
+  vitalityTrain: number
+  strengthTrain: number
+  speedTrain: number
+  dexterityTrain: number
   vitality: number
   strength: number
   speed: number
@@ -323,6 +411,14 @@ export type PlayerStatsWhereInput = {
   NOT?: Prisma.PlayerStatsWhereInput | Prisma.PlayerStatsWhereInput[]
   id?: Prisma.StringFilter<"PlayerStats"> | string
   playerId?: Prisma.StringFilter<"PlayerStats"> | string
+  vitalityBase?: Prisma.IntFilter<"PlayerStats"> | number
+  strengthBase?: Prisma.IntFilter<"PlayerStats"> | number
+  speedBase?: Prisma.IntFilter<"PlayerStats"> | number
+  dexterityBase?: Prisma.IntFilter<"PlayerStats"> | number
+  vitalityTrain?: Prisma.IntFilter<"PlayerStats"> | number
+  strengthTrain?: Prisma.IntFilter<"PlayerStats"> | number
+  speedTrain?: Prisma.IntFilter<"PlayerStats"> | number
+  dexterityTrain?: Prisma.IntFilter<"PlayerStats"> | number
   vitality?: Prisma.IntFilter<"PlayerStats"> | number
   strength?: Prisma.IntFilter<"PlayerStats"> | number
   speed?: Prisma.IntFilter<"PlayerStats"> | number
@@ -342,6 +438,14 @@ export type PlayerStatsWhereInput = {
 export type PlayerStatsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
+  vitalityBase?: Prisma.SortOrder
+  strengthBase?: Prisma.SortOrder
+  speedBase?: Prisma.SortOrder
+  dexterityBase?: Prisma.SortOrder
+  vitalityTrain?: Prisma.SortOrder
+  strengthTrain?: Prisma.SortOrder
+  speedTrain?: Prisma.SortOrder
+  dexterityTrain?: Prisma.SortOrder
   vitality?: Prisma.SortOrder
   strength?: Prisma.SortOrder
   speed?: Prisma.SortOrder
@@ -364,6 +468,14 @@ export type PlayerStatsWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.PlayerStatsWhereInput | Prisma.PlayerStatsWhereInput[]
   OR?: Prisma.PlayerStatsWhereInput[]
   NOT?: Prisma.PlayerStatsWhereInput | Prisma.PlayerStatsWhereInput[]
+  vitalityBase?: Prisma.IntFilter<"PlayerStats"> | number
+  strengthBase?: Prisma.IntFilter<"PlayerStats"> | number
+  speedBase?: Prisma.IntFilter<"PlayerStats"> | number
+  dexterityBase?: Prisma.IntFilter<"PlayerStats"> | number
+  vitalityTrain?: Prisma.IntFilter<"PlayerStats"> | number
+  strengthTrain?: Prisma.IntFilter<"PlayerStats"> | number
+  speedTrain?: Prisma.IntFilter<"PlayerStats"> | number
+  dexterityTrain?: Prisma.IntFilter<"PlayerStats"> | number
   vitality?: Prisma.IntFilter<"PlayerStats"> | number
   strength?: Prisma.IntFilter<"PlayerStats"> | number
   speed?: Prisma.IntFilter<"PlayerStats"> | number
@@ -383,6 +495,14 @@ export type PlayerStatsWhereUniqueInput = Prisma.AtLeast<{
 export type PlayerStatsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
+  vitalityBase?: Prisma.SortOrder
+  strengthBase?: Prisma.SortOrder
+  speedBase?: Prisma.SortOrder
+  dexterityBase?: Prisma.SortOrder
+  vitalityTrain?: Prisma.SortOrder
+  strengthTrain?: Prisma.SortOrder
+  speedTrain?: Prisma.SortOrder
+  dexterityTrain?: Prisma.SortOrder
   vitality?: Prisma.SortOrder
   strength?: Prisma.SortOrder
   speed?: Prisma.SortOrder
@@ -409,6 +529,14 @@ export type PlayerStatsScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PlayerStatsScalarWhereWithAggregatesInput | Prisma.PlayerStatsScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"PlayerStats"> | string
   playerId?: Prisma.StringWithAggregatesFilter<"PlayerStats"> | string
+  vitalityBase?: Prisma.IntWithAggregatesFilter<"PlayerStats"> | number
+  strengthBase?: Prisma.IntWithAggregatesFilter<"PlayerStats"> | number
+  speedBase?: Prisma.IntWithAggregatesFilter<"PlayerStats"> | number
+  dexterityBase?: Prisma.IntWithAggregatesFilter<"PlayerStats"> | number
+  vitalityTrain?: Prisma.IntWithAggregatesFilter<"PlayerStats"> | number
+  strengthTrain?: Prisma.IntWithAggregatesFilter<"PlayerStats"> | number
+  speedTrain?: Prisma.IntWithAggregatesFilter<"PlayerStats"> | number
+  dexterityTrain?: Prisma.IntWithAggregatesFilter<"PlayerStats"> | number
   vitality?: Prisma.IntWithAggregatesFilter<"PlayerStats"> | number
   strength?: Prisma.IntWithAggregatesFilter<"PlayerStats"> | number
   speed?: Prisma.IntWithAggregatesFilter<"PlayerStats"> | number
@@ -426,6 +554,14 @@ export type PlayerStatsScalarWhereWithAggregatesInput = {
 
 export type PlayerStatsCreateInput = {
   id?: string
+  vitalityBase?: number
+  strengthBase?: number
+  speedBase?: number
+  dexterityBase?: number
+  vitalityTrain?: number
+  strengthTrain?: number
+  speedTrain?: number
+  dexterityTrain?: number
   vitality?: number
   strength?: number
   speed?: number
@@ -445,6 +581,14 @@ export type PlayerStatsCreateInput = {
 export type PlayerStatsUncheckedCreateInput = {
   id?: string
   playerId: string
+  vitalityBase?: number
+  strengthBase?: number
+  speedBase?: number
+  dexterityBase?: number
+  vitalityTrain?: number
+  strengthTrain?: number
+  speedTrain?: number
+  dexterityTrain?: number
   vitality?: number
   strength?: number
   speed?: number
@@ -462,6 +606,14 @@ export type PlayerStatsUncheckedCreateInput = {
 
 export type PlayerStatsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  vitalityBase?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBase?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBase?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBase?: Prisma.IntFieldUpdateOperationsInput | number
+  vitalityTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  speedTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityTrain?: Prisma.IntFieldUpdateOperationsInput | number
   vitality?: Prisma.IntFieldUpdateOperationsInput | number
   strength?: Prisma.IntFieldUpdateOperationsInput | number
   speed?: Prisma.IntFieldUpdateOperationsInput | number
@@ -481,6 +633,14 @@ export type PlayerStatsUpdateInput = {
 export type PlayerStatsUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  vitalityBase?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBase?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBase?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBase?: Prisma.IntFieldUpdateOperationsInput | number
+  vitalityTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  speedTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityTrain?: Prisma.IntFieldUpdateOperationsInput | number
   vitality?: Prisma.IntFieldUpdateOperationsInput | number
   strength?: Prisma.IntFieldUpdateOperationsInput | number
   speed?: Prisma.IntFieldUpdateOperationsInput | number
@@ -499,6 +659,14 @@ export type PlayerStatsUncheckedUpdateInput = {
 export type PlayerStatsCreateManyInput = {
   id?: string
   playerId: string
+  vitalityBase?: number
+  strengthBase?: number
+  speedBase?: number
+  dexterityBase?: number
+  vitalityTrain?: number
+  strengthTrain?: number
+  speedTrain?: number
+  dexterityTrain?: number
   vitality?: number
   strength?: number
   speed?: number
@@ -516,6 +684,14 @@ export type PlayerStatsCreateManyInput = {
 
 export type PlayerStatsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  vitalityBase?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBase?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBase?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBase?: Prisma.IntFieldUpdateOperationsInput | number
+  vitalityTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  speedTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityTrain?: Prisma.IntFieldUpdateOperationsInput | number
   vitality?: Prisma.IntFieldUpdateOperationsInput | number
   strength?: Prisma.IntFieldUpdateOperationsInput | number
   speed?: Prisma.IntFieldUpdateOperationsInput | number
@@ -534,6 +710,14 @@ export type PlayerStatsUpdateManyMutationInput = {
 export type PlayerStatsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
+  vitalityBase?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBase?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBase?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBase?: Prisma.IntFieldUpdateOperationsInput | number
+  vitalityTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  speedTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityTrain?: Prisma.IntFieldUpdateOperationsInput | number
   vitality?: Prisma.IntFieldUpdateOperationsInput | number
   strength?: Prisma.IntFieldUpdateOperationsInput | number
   speed?: Prisma.IntFieldUpdateOperationsInput | number
@@ -557,6 +741,14 @@ export type PlayerStatsNullableScalarRelationFilter = {
 export type PlayerStatsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
+  vitalityBase?: Prisma.SortOrder
+  strengthBase?: Prisma.SortOrder
+  speedBase?: Prisma.SortOrder
+  dexterityBase?: Prisma.SortOrder
+  vitalityTrain?: Prisma.SortOrder
+  strengthTrain?: Prisma.SortOrder
+  speedTrain?: Prisma.SortOrder
+  dexterityTrain?: Prisma.SortOrder
   vitality?: Prisma.SortOrder
   strength?: Prisma.SortOrder
   speed?: Prisma.SortOrder
@@ -573,6 +765,14 @@ export type PlayerStatsCountOrderByAggregateInput = {
 }
 
 export type PlayerStatsAvgOrderByAggregateInput = {
+  vitalityBase?: Prisma.SortOrder
+  strengthBase?: Prisma.SortOrder
+  speedBase?: Prisma.SortOrder
+  dexterityBase?: Prisma.SortOrder
+  vitalityTrain?: Prisma.SortOrder
+  strengthTrain?: Prisma.SortOrder
+  speedTrain?: Prisma.SortOrder
+  dexterityTrain?: Prisma.SortOrder
   vitality?: Prisma.SortOrder
   strength?: Prisma.SortOrder
   speed?: Prisma.SortOrder
@@ -589,6 +789,14 @@ export type PlayerStatsAvgOrderByAggregateInput = {
 export type PlayerStatsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
+  vitalityBase?: Prisma.SortOrder
+  strengthBase?: Prisma.SortOrder
+  speedBase?: Prisma.SortOrder
+  dexterityBase?: Prisma.SortOrder
+  vitalityTrain?: Prisma.SortOrder
+  strengthTrain?: Prisma.SortOrder
+  speedTrain?: Prisma.SortOrder
+  dexterityTrain?: Prisma.SortOrder
   vitality?: Prisma.SortOrder
   strength?: Prisma.SortOrder
   speed?: Prisma.SortOrder
@@ -607,6 +815,14 @@ export type PlayerStatsMaxOrderByAggregateInput = {
 export type PlayerStatsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
+  vitalityBase?: Prisma.SortOrder
+  strengthBase?: Prisma.SortOrder
+  speedBase?: Prisma.SortOrder
+  dexterityBase?: Prisma.SortOrder
+  vitalityTrain?: Prisma.SortOrder
+  strengthTrain?: Prisma.SortOrder
+  speedTrain?: Prisma.SortOrder
+  dexterityTrain?: Prisma.SortOrder
   vitality?: Prisma.SortOrder
   strength?: Prisma.SortOrder
   speed?: Prisma.SortOrder
@@ -623,6 +839,14 @@ export type PlayerStatsMinOrderByAggregateInput = {
 }
 
 export type PlayerStatsSumOrderByAggregateInput = {
+  vitalityBase?: Prisma.SortOrder
+  strengthBase?: Prisma.SortOrder
+  speedBase?: Prisma.SortOrder
+  dexterityBase?: Prisma.SortOrder
+  vitalityTrain?: Prisma.SortOrder
+  strengthTrain?: Prisma.SortOrder
+  speedTrain?: Prisma.SortOrder
+  dexterityTrain?: Prisma.SortOrder
   vitality?: Prisma.SortOrder
   strength?: Prisma.SortOrder
   speed?: Prisma.SortOrder
@@ -670,6 +894,14 @@ export type PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput = {
 
 export type PlayerStatsCreateWithoutPlayerInput = {
   id?: string
+  vitalityBase?: number
+  strengthBase?: number
+  speedBase?: number
+  dexterityBase?: number
+  vitalityTrain?: number
+  strengthTrain?: number
+  speedTrain?: number
+  dexterityTrain?: number
   vitality?: number
   strength?: number
   speed?: number
@@ -687,6 +919,14 @@ export type PlayerStatsCreateWithoutPlayerInput = {
 
 export type PlayerStatsUncheckedCreateWithoutPlayerInput = {
   id?: string
+  vitalityBase?: number
+  strengthBase?: number
+  speedBase?: number
+  dexterityBase?: number
+  vitalityTrain?: number
+  strengthTrain?: number
+  speedTrain?: number
+  dexterityTrain?: number
   vitality?: number
   strength?: number
   speed?: number
@@ -720,6 +960,14 @@ export type PlayerStatsUpdateToOneWithWhereWithoutPlayerInput = {
 
 export type PlayerStatsUpdateWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  vitalityBase?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBase?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBase?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBase?: Prisma.IntFieldUpdateOperationsInput | number
+  vitalityTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  speedTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityTrain?: Prisma.IntFieldUpdateOperationsInput | number
   vitality?: Prisma.IntFieldUpdateOperationsInput | number
   strength?: Prisma.IntFieldUpdateOperationsInput | number
   speed?: Prisma.IntFieldUpdateOperationsInput | number
@@ -737,6 +985,14 @@ export type PlayerStatsUpdateWithoutPlayerInput = {
 
 export type PlayerStatsUncheckedUpdateWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  vitalityBase?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBase?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBase?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBase?: Prisma.IntFieldUpdateOperationsInput | number
+  vitalityTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  speedTrain?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityTrain?: Prisma.IntFieldUpdateOperationsInput | number
   vitality?: Prisma.IntFieldUpdateOperationsInput | number
   strength?: Prisma.IntFieldUpdateOperationsInput | number
   speed?: Prisma.IntFieldUpdateOperationsInput | number
@@ -757,6 +1013,14 @@ export type PlayerStatsUncheckedUpdateWithoutPlayerInput = {
 export type PlayerStatsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   playerId?: boolean
+  vitalityBase?: boolean
+  strengthBase?: boolean
+  speedBase?: boolean
+  dexterityBase?: boolean
+  vitalityTrain?: boolean
+  strengthTrain?: boolean
+  speedTrain?: boolean
+  dexterityTrain?: boolean
   vitality?: boolean
   strength?: boolean
   speed?: boolean
@@ -776,6 +1040,14 @@ export type PlayerStatsSelect<ExtArgs extends runtime.Types.Extensions.InternalA
 export type PlayerStatsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   playerId?: boolean
+  vitalityBase?: boolean
+  strengthBase?: boolean
+  speedBase?: boolean
+  dexterityBase?: boolean
+  vitalityTrain?: boolean
+  strengthTrain?: boolean
+  speedTrain?: boolean
+  dexterityTrain?: boolean
   vitality?: boolean
   strength?: boolean
   speed?: boolean
@@ -795,6 +1067,14 @@ export type PlayerStatsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
 export type PlayerStatsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   playerId?: boolean
+  vitalityBase?: boolean
+  strengthBase?: boolean
+  speedBase?: boolean
+  dexterityBase?: boolean
+  vitalityTrain?: boolean
+  strengthTrain?: boolean
+  speedTrain?: boolean
+  dexterityTrain?: boolean
   vitality?: boolean
   strength?: boolean
   speed?: boolean
@@ -814,6 +1094,14 @@ export type PlayerStatsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type PlayerStatsSelectScalar = {
   id?: boolean
   playerId?: boolean
+  vitalityBase?: boolean
+  strengthBase?: boolean
+  speedBase?: boolean
+  dexterityBase?: boolean
+  vitalityTrain?: boolean
+  strengthTrain?: boolean
+  speedTrain?: boolean
+  dexterityTrain?: boolean
   vitality?: boolean
   strength?: boolean
   speed?: boolean
@@ -829,7 +1117,7 @@ export type PlayerStatsSelectScalar = {
   updatedAt?: boolean
 }
 
-export type PlayerStatsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "vitality" | "strength" | "speed" | "dexterity" | "maxHP" | "currentHP" | "maxSP" | "currentSP" | "statPoints" | "hpRegenPerMin" | "spRegenPerMin" | "lastRegenAt" | "updatedAt", ExtArgs["result"]["playerStats"]>
+export type PlayerStatsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "vitalityBase" | "strengthBase" | "speedBase" | "dexterityBase" | "vitalityTrain" | "strengthTrain" | "speedTrain" | "dexterityTrain" | "vitality" | "strength" | "speed" | "dexterity" | "maxHP" | "currentHP" | "maxSP" | "currentSP" | "statPoints" | "hpRegenPerMin" | "spRegenPerMin" | "lastRegenAt" | "updatedAt", ExtArgs["result"]["playerStats"]>
 export type PlayerStatsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
 }
@@ -848,6 +1136,14 @@ export type $PlayerStatsPayload<ExtArgs extends runtime.Types.Extensions.Interna
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     playerId: string
+    vitalityBase: number
+    strengthBase: number
+    speedBase: number
+    dexterityBase: number
+    vitalityTrain: number
+    strengthTrain: number
+    speedTrain: number
+    dexterityTrain: number
     vitality: number
     strength: number
     speed: number
@@ -1287,6 +1583,14 @@ export interface Prisma__PlayerStatsClient<T, Null = never, ExtArgs extends runt
 export interface PlayerStatsFieldRefs {
   readonly id: Prisma.FieldRef<"PlayerStats", 'String'>
   readonly playerId: Prisma.FieldRef<"PlayerStats", 'String'>
+  readonly vitalityBase: Prisma.FieldRef<"PlayerStats", 'Int'>
+  readonly strengthBase: Prisma.FieldRef<"PlayerStats", 'Int'>
+  readonly speedBase: Prisma.FieldRef<"PlayerStats", 'Int'>
+  readonly dexterityBase: Prisma.FieldRef<"PlayerStats", 'Int'>
+  readonly vitalityTrain: Prisma.FieldRef<"PlayerStats", 'Int'>
+  readonly strengthTrain: Prisma.FieldRef<"PlayerStats", 'Int'>
+  readonly speedTrain: Prisma.FieldRef<"PlayerStats", 'Int'>
+  readonly dexterityTrain: Prisma.FieldRef<"PlayerStats", 'Int'>
   readonly vitality: Prisma.FieldRef<"PlayerStats", 'Int'>
   readonly strength: Prisma.FieldRef<"PlayerStats", 'Int'>
   readonly speed: Prisma.FieldRef<"PlayerStats", 'Int'>

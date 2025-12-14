@@ -43,6 +43,11 @@ export type User = Prisma.UserModel
  */
 export type Character = Prisma.CharacterModel
 /**
+ * Model Position
+ * 
+ */
+export type Position = Prisma.PositionModel
+/**
  * Model VerificationToken
  * 
  */
@@ -282,3 +287,28 @@ export type PlayerLeaderboardStats = Prisma.PlayerLeaderboardStatsModel
  * 
  */
 export type PlayerStatsPeriod = Prisma.PlayerStatsPeriodModel
+/**
+ * Model AdminActionLog
+ * 
+ */
+export type AdminActionLog = Prisma.AdminActionLogModel
+/**
+ * Model ItemTemplate
+ * 
+ */
+export type ItemTemplate = Prisma.ItemTemplateModel
+/**
+ * Model MonsterTemplate
+ * 
+ */
+export type MonsterTemplate = Prisma.MonsterTemplateModel
+/**
+ * Model QuestTemplate
+ * 
+ */
+export type QuestTemplate = Prisma.QuestTemplateModel
+/**
+ * Model MapZone
+ * 
+ */
+export type MapZone = Prisma.MapZoneModel

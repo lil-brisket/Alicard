@@ -269,6 +269,7 @@ export type PlayerWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Player"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Player"> | Date | string
   bankAccount?: Prisma.XOR<Prisma.BankAccountNullableScalarRelationFilter, Prisma.BankAccountWhereInput> | null
+  battles?: Prisma.BattleListRelationFilter
   combatLogs?: Prisma.CombatLogListRelationFilter
   deathLogs?: Prisma.DeathLogListRelationFilter
   equipment?: Prisma.XOR<Prisma.EquipmentNullableScalarRelationFilter, Prisma.EquipmentWhereInput> | null
@@ -300,6 +301,7 @@ export type PlayerOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   bankAccount?: Prisma.BankAccountOrderByWithRelationInput
+  battles?: Prisma.BattleOrderByRelationAggregateInput
   combatLogs?: Prisma.CombatLogOrderByRelationAggregateInput
   deathLogs?: Prisma.DeathLogOrderByRelationAggregateInput
   equipment?: Prisma.EquipmentOrderByWithRelationInput
@@ -334,6 +336,7 @@ export type PlayerWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Player"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Player"> | Date | string
   bankAccount?: Prisma.XOR<Prisma.BankAccountNullableScalarRelationFilter, Prisma.BankAccountWhereInput> | null
+  battles?: Prisma.BattleListRelationFilter
   combatLogs?: Prisma.CombatLogListRelationFilter
   deathLogs?: Prisma.DeathLogListRelationFilter
   equipment?: Prisma.XOR<Prisma.EquipmentNullableScalarRelationFilter, Prisma.EquipmentWhereInput> | null
@@ -398,6 +401,7 @@ export type PlayerCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
@@ -429,6 +433,7 @@ export type PlayerUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
@@ -458,6 +463,7 @@ export type PlayerUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
@@ -489,6 +495,7 @@ export type PlayerUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
@@ -638,10 +645,6 @@ export type PlayerUncheckedUpdateOneWithoutUserNestedInput = {
   delete?: Prisma.PlayerWhereInput | boolean
   connect?: Prisma.PlayerWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.PlayerUpdateToOneWithWhereWithoutUserInput, Prisma.PlayerUpdateWithoutUserInput>, Prisma.PlayerUncheckedUpdateWithoutUserInput>
-}
-
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
 }
 
 export type PlayerCreateNestedOneWithoutStatsInput = {
@@ -882,6 +885,20 @@ export type PlayerUpdateOneRequiredWithoutGatherAttemptsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PlayerUpdateToOneWithWhereWithoutGatherAttemptsInput, Prisma.PlayerUpdateWithoutGatherAttemptsInput>, Prisma.PlayerUncheckedUpdateWithoutGatherAttemptsInput>
 }
 
+export type PlayerCreateNestedOneWithoutBattlesInput = {
+  create?: Prisma.XOR<Prisma.PlayerCreateWithoutBattlesInput, Prisma.PlayerUncheckedCreateWithoutBattlesInput>
+  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutBattlesInput
+  connect?: Prisma.PlayerWhereUniqueInput
+}
+
+export type PlayerUpdateOneRequiredWithoutBattlesNestedInput = {
+  create?: Prisma.XOR<Prisma.PlayerCreateWithoutBattlesInput, Prisma.PlayerUncheckedCreateWithoutBattlesInput>
+  connectOrCreate?: Prisma.PlayerCreateOrConnectWithoutBattlesInput
+  upsert?: Prisma.PlayerUpsertWithoutBattlesInput
+  connect?: Prisma.PlayerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PlayerUpdateToOneWithWhereWithoutBattlesInput, Prisma.PlayerUpdateWithoutBattlesInput>, Prisma.PlayerUncheckedUpdateWithoutBattlesInput>
+}
+
 export type PlayerCreateWithoutUserInput = {
   id?: string
   characterName: string
@@ -893,6 +910,7 @@ export type PlayerCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
@@ -922,6 +940,7 @@ export type PlayerUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
@@ -967,6 +986,7 @@ export type PlayerUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
@@ -996,6 +1016,7 @@ export type PlayerUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
@@ -1025,6 +1046,7 @@ export type PlayerCreateWithoutStatsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
@@ -1055,6 +1077,7 @@ export type PlayerUncheckedCreateWithoutStatsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
@@ -1099,6 +1122,7 @@ export type PlayerUpdateWithoutStatsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
@@ -1129,6 +1153,7 @@ export type PlayerUncheckedUpdateWithoutStatsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
@@ -1157,6 +1182,7 @@ export type PlayerCreateWithoutPositionInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
@@ -1187,6 +1213,7 @@ export type PlayerUncheckedCreateWithoutPositionInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
@@ -1231,6 +1258,7 @@ export type PlayerUpdateWithoutPositionInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
@@ -1261,6 +1289,7 @@ export type PlayerUncheckedUpdateWithoutPositionInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
@@ -1289,6 +1318,7 @@ export type PlayerCreateWithoutInventoryInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
@@ -1319,6 +1349,7 @@ export type PlayerUncheckedCreateWithoutInventoryInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
@@ -1363,6 +1394,7 @@ export type PlayerUpdateWithoutInventoryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
@@ -1393,6 +1425,7 @@ export type PlayerUncheckedUpdateWithoutInventoryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
@@ -1421,6 +1454,7 @@ export type PlayerCreateWithoutEquipmentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   guildMember?: Prisma.GuildMemberCreateNestedOneWithoutPlayerInput
@@ -1451,6 +1485,7 @@ export type PlayerUncheckedCreateWithoutEquipmentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   guildMember?: Prisma.GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
@@ -1495,6 +1530,7 @@ export type PlayerUpdateWithoutEquipmentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   guildMember?: Prisma.GuildMemberUpdateOneWithoutPlayerNestedInput
@@ -1525,6 +1561,7 @@ export type PlayerUncheckedUpdateWithoutEquipmentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   guildMember?: Prisma.GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
@@ -1553,6 +1590,7 @@ export type PlayerCreateWithoutOccupationInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
@@ -1583,6 +1621,7 @@ export type PlayerUncheckedCreateWithoutOccupationInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
@@ -1627,6 +1666,7 @@ export type PlayerUpdateWithoutOccupationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
@@ -1657,6 +1697,7 @@ export type PlayerUncheckedUpdateWithoutOccupationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
@@ -1685,6 +1726,7 @@ export type PlayerCreateWithoutSkillsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
@@ -1715,6 +1757,7 @@ export type PlayerUncheckedCreateWithoutSkillsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
@@ -1759,6 +1802,7 @@ export type PlayerUpdateWithoutSkillsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
@@ -1789,6 +1833,7 @@ export type PlayerUncheckedUpdateWithoutSkillsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
@@ -1817,6 +1862,7 @@ export type PlayerCreateWithoutSkillLoadoutInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
@@ -1847,6 +1893,7 @@ export type PlayerUncheckedCreateWithoutSkillLoadoutInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
@@ -1891,6 +1938,7 @@ export type PlayerUpdateWithoutSkillLoadoutInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
@@ -1921,6 +1969,7 @@ export type PlayerUncheckedUpdateWithoutSkillLoadoutInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
@@ -1949,6 +1998,7 @@ export type PlayerCreateWithoutCombatLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
   guildMember?: Prisma.GuildMemberCreateNestedOneWithoutPlayerInput
@@ -1979,6 +2029,7 @@ export type PlayerUncheckedCreateWithoutCombatLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
   guildMember?: Prisma.GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
@@ -2023,6 +2074,7 @@ export type PlayerUpdateWithoutCombatLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
   guildMember?: Prisma.GuildMemberUpdateOneWithoutPlayerNestedInput
@@ -2053,6 +2105,7 @@ export type PlayerUncheckedUpdateWithoutCombatLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
   guildMember?: Prisma.GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
@@ -2081,6 +2134,7 @@ export type PlayerCreateWithoutDeathLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
   guildMember?: Prisma.GuildMemberCreateNestedOneWithoutPlayerInput
@@ -2111,6 +2165,7 @@ export type PlayerUncheckedCreateWithoutDeathLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
   guildMember?: Prisma.GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
@@ -2155,6 +2210,7 @@ export type PlayerUpdateWithoutDeathLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
   guildMember?: Prisma.GuildMemberUpdateOneWithoutPlayerNestedInput
@@ -2185,6 +2241,7 @@ export type PlayerUncheckedUpdateWithoutDeathLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
   guildMember?: Prisma.GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
@@ -2213,6 +2270,7 @@ export type PlayerCreateWithoutGuildMemberInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
@@ -2243,6 +2301,7 @@ export type PlayerUncheckedCreateWithoutGuildMemberInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
@@ -2287,6 +2346,7 @@ export type PlayerUpdateWithoutGuildMemberInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
@@ -2317,6 +2377,7 @@ export type PlayerUncheckedUpdateWithoutGuildMemberInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
@@ -2344,6 +2405,7 @@ export type PlayerCreateWithoutBankAccountInput = {
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
@@ -2374,6 +2436,7 @@ export type PlayerUncheckedCreateWithoutBankAccountInput = {
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
@@ -2418,6 +2481,7 @@ export type PlayerUpdateWithoutBankAccountInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
@@ -2448,6 +2512,7 @@ export type PlayerUncheckedUpdateWithoutBankAccountInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
@@ -2477,6 +2542,7 @@ export type PlayerCreateWithoutMarketListingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
@@ -2507,6 +2573,7 @@ export type PlayerUncheckedCreateWithoutMarketListingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
@@ -2551,6 +2618,7 @@ export type PlayerUpdateWithoutMarketListingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
@@ -2581,6 +2649,7 @@ export type PlayerUncheckedUpdateWithoutMarketListingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
@@ -2609,6 +2678,7 @@ export type PlayerCreateWithoutMarketTransactionsAsBuyerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
@@ -2639,6 +2709,7 @@ export type PlayerUncheckedCreateWithoutMarketTransactionsAsBuyerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
@@ -2672,6 +2743,7 @@ export type PlayerCreateWithoutMarketTransactionsAsSellerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
@@ -2702,6 +2774,7 @@ export type PlayerUncheckedCreateWithoutMarketTransactionsAsSellerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
@@ -2746,6 +2819,7 @@ export type PlayerUpdateWithoutMarketTransactionsAsBuyerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
@@ -2776,6 +2850,7 @@ export type PlayerUncheckedUpdateWithoutMarketTransactionsAsBuyerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
@@ -2815,6 +2890,7 @@ export type PlayerUpdateWithoutMarketTransactionsAsSellerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
@@ -2845,6 +2921,7 @@ export type PlayerUncheckedUpdateWithoutMarketTransactionsAsSellerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
@@ -2873,6 +2950,7 @@ export type PlayerCreateWithoutUserJobsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
@@ -2903,6 +2981,7 @@ export type PlayerUncheckedCreateWithoutUserJobsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
@@ -2947,6 +3026,7 @@ export type PlayerUpdateWithoutUserJobsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
@@ -2977,6 +3057,7 @@ export type PlayerUncheckedUpdateWithoutUserJobsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
@@ -3005,6 +3086,7 @@ export type PlayerCreateWithoutCraftAttemptsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
@@ -3035,6 +3117,7 @@ export type PlayerUncheckedCreateWithoutCraftAttemptsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
@@ -3079,6 +3162,7 @@ export type PlayerUpdateWithoutCraftAttemptsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
@@ -3109,6 +3193,7 @@ export type PlayerUncheckedUpdateWithoutCraftAttemptsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
@@ -3137,6 +3222,7 @@ export type PlayerCreateWithoutGatherAttemptsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
@@ -3167,6 +3253,7 @@ export type PlayerUncheckedCreateWithoutGatherAttemptsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  battles?: Prisma.BattleUncheckedCreateNestedManyWithoutPlayerInput
   combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
   deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
   equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
@@ -3211,6 +3298,7 @@ export type PlayerUpdateWithoutGatherAttemptsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
@@ -3241,6 +3329,7 @@ export type PlayerUncheckedUpdateWithoutGatherAttemptsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  battles?: Prisma.BattleUncheckedUpdateManyWithoutPlayerNestedInput
   combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
   deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
   equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
@@ -3258,12 +3347,149 @@ export type PlayerUncheckedUpdateWithoutGatherAttemptsInput = {
   craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
 }
 
+export type PlayerCreateWithoutBattlesInput = {
+  id?: string
+  characterName: string
+  level?: number
+  experience?: number
+  gold?: number
+  deathCount?: number
+  isDeleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  bankAccount?: Prisma.BankAccountCreateNestedOneWithoutPlayerInput
+  combatLogs?: Prisma.CombatLogCreateNestedManyWithoutPlayerInput
+  deathLogs?: Prisma.DeathLogCreateNestedManyWithoutPlayerInput
+  equipment?: Prisma.EquipmentCreateNestedOneWithoutPlayerInput
+  guildMember?: Prisma.GuildMemberCreateNestedOneWithoutPlayerInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutPlayerInput
+  position?: Prisma.MapPositionCreateNestedOneWithoutPlayerInput
+  marketListings?: Prisma.MarketListingCreateNestedManyWithoutPlayerInput
+  marketTransactionsAsBuyer?: Prisma.MarketTransactionCreateNestedManyWithoutBuyerInput
+  marketTransactionsAsSeller?: Prisma.MarketTransactionCreateNestedManyWithoutSellerInput
+  occupation?: Prisma.OccupationCreateNestedOneWithoutPlayerInput
+  user: Prisma.UserCreateNestedOneWithoutPlayerInput
+  skills?: Prisma.PlayerSkillCreateNestedManyWithoutPlayerInput
+  skillLoadout?: Prisma.PlayerSkillLoadoutCreateNestedOneWithoutPlayerInput
+  stats?: Prisma.PlayerStatsCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutPlayerInput
+}
+
+export type PlayerUncheckedCreateWithoutBattlesInput = {
+  id?: string
+  userId: string
+  characterName: string
+  level?: number
+  experience?: number
+  gold?: number
+  deathCount?: number
+  isDeleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  bankAccount?: Prisma.BankAccountUncheckedCreateNestedOneWithoutPlayerInput
+  combatLogs?: Prisma.CombatLogUncheckedCreateNestedManyWithoutPlayerInput
+  deathLogs?: Prisma.DeathLogUncheckedCreateNestedManyWithoutPlayerInput
+  equipment?: Prisma.EquipmentUncheckedCreateNestedOneWithoutPlayerInput
+  guildMember?: Prisma.GuildMemberUncheckedCreateNestedOneWithoutPlayerInput
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutPlayerInput
+  position?: Prisma.MapPositionUncheckedCreateNestedOneWithoutPlayerInput
+  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutPlayerInput
+  marketTransactionsAsBuyer?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutBuyerInput
+  marketTransactionsAsSeller?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutSellerInput
+  occupation?: Prisma.OccupationUncheckedCreateNestedOneWithoutPlayerInput
+  skills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutPlayerInput
+  skillLoadout?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedOneWithoutPlayerInput
+  stats?: Prisma.PlayerStatsUncheckedCreateNestedOneWithoutPlayerInput
+  userJobs?: Prisma.UserJobUncheckedCreateNestedManyWithoutPlayerInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutPlayerInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutPlayerInput
+}
+
+export type PlayerCreateOrConnectWithoutBattlesInput = {
+  where: Prisma.PlayerWhereUniqueInput
+  create: Prisma.XOR<Prisma.PlayerCreateWithoutBattlesInput, Prisma.PlayerUncheckedCreateWithoutBattlesInput>
+}
+
+export type PlayerUpsertWithoutBattlesInput = {
+  update: Prisma.XOR<Prisma.PlayerUpdateWithoutBattlesInput, Prisma.PlayerUncheckedUpdateWithoutBattlesInput>
+  create: Prisma.XOR<Prisma.PlayerCreateWithoutBattlesInput, Prisma.PlayerUncheckedCreateWithoutBattlesInput>
+  where?: Prisma.PlayerWhereInput
+}
+
+export type PlayerUpdateToOneWithWhereWithoutBattlesInput = {
+  where?: Prisma.PlayerWhereInput
+  data: Prisma.XOR<Prisma.PlayerUpdateWithoutBattlesInput, Prisma.PlayerUncheckedUpdateWithoutBattlesInput>
+}
+
+export type PlayerUpdateWithoutBattlesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  characterName?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  experience?: Prisma.IntFieldUpdateOperationsInput | number
+  gold?: Prisma.IntFieldUpdateOperationsInput | number
+  deathCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccount?: Prisma.BankAccountUpdateOneWithoutPlayerNestedInput
+  combatLogs?: Prisma.CombatLogUpdateManyWithoutPlayerNestedInput
+  deathLogs?: Prisma.DeathLogUpdateManyWithoutPlayerNestedInput
+  equipment?: Prisma.EquipmentUpdateOneWithoutPlayerNestedInput
+  guildMember?: Prisma.GuildMemberUpdateOneWithoutPlayerNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutPlayerNestedInput
+  position?: Prisma.MapPositionUpdateOneWithoutPlayerNestedInput
+  marketListings?: Prisma.MarketListingUpdateManyWithoutPlayerNestedInput
+  marketTransactionsAsBuyer?: Prisma.MarketTransactionUpdateManyWithoutBuyerNestedInput
+  marketTransactionsAsSeller?: Prisma.MarketTransactionUpdateManyWithoutSellerNestedInput
+  occupation?: Prisma.OccupationUpdateOneWithoutPlayerNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutPlayerNestedInput
+  skills?: Prisma.PlayerSkillUpdateManyWithoutPlayerNestedInput
+  skillLoadout?: Prisma.PlayerSkillLoadoutUpdateOneWithoutPlayerNestedInput
+  stats?: Prisma.PlayerStatsUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutPlayerNestedInput
+}
+
+export type PlayerUncheckedUpdateWithoutBattlesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  characterName?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  experience?: Prisma.IntFieldUpdateOperationsInput | number
+  gold?: Prisma.IntFieldUpdateOperationsInput | number
+  deathCount?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccount?: Prisma.BankAccountUncheckedUpdateOneWithoutPlayerNestedInput
+  combatLogs?: Prisma.CombatLogUncheckedUpdateManyWithoutPlayerNestedInput
+  deathLogs?: Prisma.DeathLogUncheckedUpdateManyWithoutPlayerNestedInput
+  equipment?: Prisma.EquipmentUncheckedUpdateOneWithoutPlayerNestedInput
+  guildMember?: Prisma.GuildMemberUncheckedUpdateOneWithoutPlayerNestedInput
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutPlayerNestedInput
+  position?: Prisma.MapPositionUncheckedUpdateOneWithoutPlayerNestedInput
+  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutPlayerNestedInput
+  marketTransactionsAsBuyer?: Prisma.MarketTransactionUncheckedUpdateManyWithoutBuyerNestedInput
+  marketTransactionsAsSeller?: Prisma.MarketTransactionUncheckedUpdateManyWithoutSellerNestedInput
+  occupation?: Prisma.OccupationUncheckedUpdateOneWithoutPlayerNestedInput
+  skills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutPlayerNestedInput
+  skillLoadout?: Prisma.PlayerSkillLoadoutUncheckedUpdateOneWithoutPlayerNestedInput
+  stats?: Prisma.PlayerStatsUncheckedUpdateOneWithoutPlayerNestedInput
+  userJobs?: Prisma.UserJobUncheckedUpdateManyWithoutPlayerNestedInput
+  craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+  gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutPlayerNestedInput
+}
+
 
 /**
  * Count Type PlayerCountOutputType
  */
 
 export type PlayerCountOutputType = {
+  battles: number
   combatLogs: number
   deathLogs: number
   inventory: number
@@ -3277,6 +3503,7 @@ export type PlayerCountOutputType = {
 }
 
 export type PlayerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  battles?: boolean | PlayerCountOutputTypeCountBattlesArgs
   combatLogs?: boolean | PlayerCountOutputTypeCountCombatLogsArgs
   deathLogs?: boolean | PlayerCountOutputTypeCountDeathLogsArgs
   inventory?: boolean | PlayerCountOutputTypeCountInventoryArgs
@@ -3297,6 +3524,13 @@ export type PlayerCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
    * Select specific fields to fetch from the PlayerCountOutputType
    */
   select?: Prisma.PlayerCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * PlayerCountOutputType without action
+ */
+export type PlayerCountOutputTypeCountBattlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BattleWhereInput
 }
 
 /**
@@ -3382,6 +3616,7 @@ export type PlayerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   createdAt?: boolean
   updatedAt?: boolean
   bankAccount?: boolean | Prisma.Player$bankAccountArgs<ExtArgs>
+  battles?: boolean | Prisma.Player$battlesArgs<ExtArgs>
   combatLogs?: boolean | Prisma.Player$combatLogsArgs<ExtArgs>
   deathLogs?: boolean | Prisma.Player$deathLogsArgs<ExtArgs>
   equipment?: boolean | Prisma.Player$equipmentArgs<ExtArgs>
@@ -3446,6 +3681,7 @@ export type PlayerSelectScalar = {
 export type PlayerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "characterName" | "level" | "experience" | "gold" | "deathCount" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["player"]>
 export type PlayerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   bankAccount?: boolean | Prisma.Player$bankAccountArgs<ExtArgs>
+  battles?: boolean | Prisma.Player$battlesArgs<ExtArgs>
   combatLogs?: boolean | Prisma.Player$combatLogsArgs<ExtArgs>
   deathLogs?: boolean | Prisma.Player$deathLogsArgs<ExtArgs>
   equipment?: boolean | Prisma.Player$equipmentArgs<ExtArgs>
@@ -3476,6 +3712,7 @@ export type $PlayerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name: "Player"
   objects: {
     bankAccount: Prisma.$BankAccountPayload<ExtArgs> | null
+    battles: Prisma.$BattlePayload<ExtArgs>[]
     combatLogs: Prisma.$CombatLogPayload<ExtArgs>[]
     deathLogs: Prisma.$DeathLogPayload<ExtArgs>[]
     equipment: Prisma.$EquipmentPayload<ExtArgs> | null
@@ -3900,6 +4137,7 @@ readonly fields: PlayerFieldRefs;
 export interface Prisma__PlayerClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   bankAccount<T extends Prisma.Player$bankAccountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Player$bankAccountArgs<ExtArgs>>): Prisma.Prisma__BankAccountClient<runtime.Types.Result.GetResult<Prisma.$BankAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  battles<T extends Prisma.Player$battlesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Player$battlesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BattlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   combatLogs<T extends Prisma.Player$combatLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Player$combatLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CombatLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   deathLogs<T extends Prisma.Player$deathLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Player$deathLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeathLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   equipment<T extends Prisma.Player$equipmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Player$equipmentArgs<ExtArgs>>): Prisma.Prisma__EquipmentClient<runtime.Types.Result.GetResult<Prisma.$EquipmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -4368,6 +4606,30 @@ export type Player$bankAccountArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   include?: Prisma.BankAccountInclude<ExtArgs> | null
   where?: Prisma.BankAccountWhereInput
+}
+
+/**
+ * Player.battles
+ */
+export type Player$battlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Battle
+   */
+  select?: Prisma.BattleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Battle
+   */
+  omit?: Prisma.BattleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BattleInclude<ExtArgs> | null
+  where?: Prisma.BattleWhereInput
+  orderBy?: Prisma.BattleOrderByWithRelationInput | Prisma.BattleOrderByWithRelationInput[]
+  cursor?: Prisma.BattleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BattleScalarFieldEnum | Prisma.BattleScalarFieldEnum[]
 }
 
 /**

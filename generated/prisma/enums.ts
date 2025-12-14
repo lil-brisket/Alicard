@@ -9,6 +9,15 @@
 * 🟢 You can import this file directly.
 */
 
+export const UserRole = {
+  PLAYER: 'PLAYER',
+  MODERATOR: 'MODERATOR',
+  ADMIN: 'ADMIN'
+} as const
+
+export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+
 export const BankTransactionType = {
   TRANSFER: 'TRANSFER',
   DEPOSIT: 'DEPOSIT',

@@ -376,6 +376,7 @@ export type CharacterWhereInput = {
   maxHp?: Prisma.IntFilter<"Character"> | number
   deathAt?: Prisma.DateTimeNullableFilter<"Character"> | Date | string | null
   deathReason?: Prisma.StringNullableFilter<"Character"> | string | null
+  position?: Prisma.XOR<Prisma.PositionNullableScalarRelationFilter, Prisma.PositionWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
@@ -400,6 +401,7 @@ export type CharacterOrderByWithRelationInput = {
   maxHp?: Prisma.SortOrder
   deathAt?: Prisma.SortOrderInput | Prisma.SortOrder
   deathReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  position?: Prisma.PositionOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -427,6 +429,7 @@ export type CharacterWhereUniqueInput = Prisma.AtLeast<{
   maxHp?: Prisma.IntFilter<"Character"> | number
   deathAt?: Prisma.DateTimeNullableFilter<"Character"> | Date | string | null
   deathReason?: Prisma.StringNullableFilter<"Character"> | string | null
+  position?: Prisma.XOR<Prisma.PositionNullableScalarRelationFilter, Prisma.PositionWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
@@ -504,6 +507,7 @@ export type CharacterCreateInput = {
   maxHp: number
   deathAt?: Date | string | null
   deathReason?: string | null
+  position?: Prisma.PositionCreateNestedOneWithoutCharacterInput
   user: Prisma.UserCreateNestedOneWithoutCharactersInput
 }
 
@@ -528,6 +532,7 @@ export type CharacterUncheckedCreateInput = {
   maxHp: number
   deathAt?: Date | string | null
   deathReason?: string | null
+  position?: Prisma.PositionUncheckedCreateNestedOneWithoutCharacterInput
 }
 
 export type CharacterUpdateInput = {
@@ -550,6 +555,7 @@ export type CharacterUpdateInput = {
   maxHp?: Prisma.IntFieldUpdateOperationsInput | number
   deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.PositionUpdateOneWithoutCharacterNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutCharactersNestedInput
 }
 
@@ -574,6 +580,7 @@ export type CharacterUncheckedUpdateInput = {
   maxHp?: Prisma.IntFieldUpdateOperationsInput | number
   deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.PositionUncheckedUpdateOneWithoutCharacterNestedInput
 }
 
 export type CharacterCreateManyInput = {
@@ -751,6 +758,11 @@ export type CharacterSumOrderByAggregateInput = {
   maxHp?: Prisma.SortOrder
 }
 
+export type CharacterScalarRelationFilter = {
+  is?: Prisma.CharacterWhereInput
+  isNot?: Prisma.CharacterWhereInput
+}
+
 export type CharacterCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.CharacterCreateWithoutUserInput, Prisma.CharacterUncheckedCreateWithoutUserInput> | Prisma.CharacterCreateWithoutUserInput[] | Prisma.CharacterUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.CharacterCreateOrConnectWithoutUserInput | Prisma.CharacterCreateOrConnectWithoutUserInput[]
@@ -793,6 +805,20 @@ export type CharacterUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.CharacterScalarWhereInput | Prisma.CharacterScalarWhereInput[]
 }
 
+export type CharacterCreateNestedOneWithoutPositionInput = {
+  create?: Prisma.XOR<Prisma.CharacterCreateWithoutPositionInput, Prisma.CharacterUncheckedCreateWithoutPositionInput>
+  connectOrCreate?: Prisma.CharacterCreateOrConnectWithoutPositionInput
+  connect?: Prisma.CharacterWhereUniqueInput
+}
+
+export type CharacterUpdateOneRequiredWithoutPositionNestedInput = {
+  create?: Prisma.XOR<Prisma.CharacterCreateWithoutPositionInput, Prisma.CharacterUncheckedCreateWithoutPositionInput>
+  connectOrCreate?: Prisma.CharacterCreateOrConnectWithoutPositionInput
+  upsert?: Prisma.CharacterUpsertWithoutPositionInput
+  connect?: Prisma.CharacterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CharacterUpdateToOneWithWhereWithoutPositionInput, Prisma.CharacterUpdateWithoutPositionInput>, Prisma.CharacterUncheckedUpdateWithoutPositionInput>
+}
+
 export type CharacterCreateWithoutUserInput = {
   id?: string
   name: string
@@ -813,6 +839,7 @@ export type CharacterCreateWithoutUserInput = {
   maxHp: number
   deathAt?: Date | string | null
   deathReason?: string | null
+  position?: Prisma.PositionCreateNestedOneWithoutCharacterInput
 }
 
 export type CharacterUncheckedCreateWithoutUserInput = {
@@ -835,6 +862,7 @@ export type CharacterUncheckedCreateWithoutUserInput = {
   maxHp: number
   deathAt?: Date | string | null
   deathReason?: string | null
+  position?: Prisma.PositionUncheckedCreateNestedOneWithoutCharacterInput
 }
 
 export type CharacterCreateOrConnectWithoutUserInput = {
@@ -889,6 +917,114 @@ export type CharacterScalarWhereInput = {
   deathReason?: Prisma.StringNullableFilter<"Character"> | string | null
 }
 
+export type CharacterCreateWithoutPositionInput = {
+  id?: string
+  name: string
+  level?: number
+  vitality?: number
+  strength?: number
+  speed?: number
+  dexterity?: number
+  maxStamina: number
+  currentStamina: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currentHp: number
+  deaths?: number
+  floor?: number
+  gender: string
+  location?: string
+  maxHp: number
+  deathAt?: Date | string | null
+  deathReason?: string | null
+  user: Prisma.UserCreateNestedOneWithoutCharactersInput
+}
+
+export type CharacterUncheckedCreateWithoutPositionInput = {
+  id?: string
+  userId: string
+  name: string
+  level?: number
+  vitality?: number
+  strength?: number
+  speed?: number
+  dexterity?: number
+  maxStamina: number
+  currentStamina: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currentHp: number
+  deaths?: number
+  floor?: number
+  gender: string
+  location?: string
+  maxHp: number
+  deathAt?: Date | string | null
+  deathReason?: string | null
+}
+
+export type CharacterCreateOrConnectWithoutPositionInput = {
+  where: Prisma.CharacterWhereUniqueInput
+  create: Prisma.XOR<Prisma.CharacterCreateWithoutPositionInput, Prisma.CharacterUncheckedCreateWithoutPositionInput>
+}
+
+export type CharacterUpsertWithoutPositionInput = {
+  update: Prisma.XOR<Prisma.CharacterUpdateWithoutPositionInput, Prisma.CharacterUncheckedUpdateWithoutPositionInput>
+  create: Prisma.XOR<Prisma.CharacterCreateWithoutPositionInput, Prisma.CharacterUncheckedCreateWithoutPositionInput>
+  where?: Prisma.CharacterWhereInput
+}
+
+export type CharacterUpdateToOneWithWhereWithoutPositionInput = {
+  where?: Prisma.CharacterWhereInput
+  data: Prisma.XOR<Prisma.CharacterUpdateWithoutPositionInput, Prisma.CharacterUncheckedUpdateWithoutPositionInput>
+}
+
+export type CharacterUpdateWithoutPositionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  vitality?: Prisma.IntFieldUpdateOperationsInput | number
+  strength?: Prisma.IntFieldUpdateOperationsInput | number
+  speed?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterity?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStamina?: Prisma.IntFieldUpdateOperationsInput | number
+  currentStamina?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  floor?: Prisma.IntFieldUpdateOperationsInput | number
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  maxHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user?: Prisma.UserUpdateOneRequiredWithoutCharactersNestedInput
+}
+
+export type CharacterUncheckedUpdateWithoutPositionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  vitality?: Prisma.IntFieldUpdateOperationsInput | number
+  strength?: Prisma.IntFieldUpdateOperationsInput | number
+  speed?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterity?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStamina?: Prisma.IntFieldUpdateOperationsInput | number
+  currentStamina?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  floor?: Prisma.IntFieldUpdateOperationsInput | number
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  maxHp?: Prisma.IntFieldUpdateOperationsInput | number
+  deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
 export type CharacterCreateManyUserInput = {
   id?: string
   name: string
@@ -931,6 +1067,7 @@ export type CharacterUpdateWithoutUserInput = {
   maxHp?: Prisma.IntFieldUpdateOperationsInput | number
   deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.PositionUpdateOneWithoutCharacterNestedInput
 }
 
 export type CharacterUncheckedUpdateWithoutUserInput = {
@@ -953,6 +1090,7 @@ export type CharacterUncheckedUpdateWithoutUserInput = {
   maxHp?: Prisma.IntFieldUpdateOperationsInput | number
   deathAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deathReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.PositionUncheckedUpdateOneWithoutCharacterNestedInput
 }
 
 export type CharacterUncheckedUpdateManyWithoutUserInput = {
@@ -1000,6 +1138,7 @@ export type CharacterSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   maxHp?: boolean
   deathAt?: boolean
   deathReason?: boolean
+  position?: boolean | Prisma.Character$positionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["character"]>
 
@@ -1076,6 +1215,7 @@ export type CharacterSelectScalar = {
 
 export type CharacterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "level" | "vitality" | "strength" | "speed" | "dexterity" | "maxStamina" | "currentStamina" | "createdAt" | "updatedAt" | "currentHp" | "deaths" | "floor" | "gender" | "location" | "maxHp" | "deathAt" | "deathReason", ExtArgs["result"]["character"]>
 export type CharacterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  position?: boolean | Prisma.Character$positionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type CharacterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1088,6 +1228,7 @@ export type CharacterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
 export type $CharacterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Character"
   objects: {
+    position: Prisma.$PositionPayload<ExtArgs> | null
     user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1505,6 +1646,7 @@ readonly fields: CharacterFieldRefs;
  */
 export interface Prisma__CharacterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  position<T extends Prisma.Character$positionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Character$positionArgs<ExtArgs>>): Prisma.Prisma__PositionClient<runtime.Types.Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1948,6 +2090,25 @@ export type CharacterDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Limit how many Characters to delete.
    */
   limit?: number
+}
+
+/**
+ * Character.position
+ */
+export type Character$positionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Position
+   */
+  select?: Prisma.PositionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Position
+   */
+  omit?: Prisma.PositionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PositionInclude<ExtArgs> | null
+  where?: Prisma.PositionWhereInput
 }
 
 /**
