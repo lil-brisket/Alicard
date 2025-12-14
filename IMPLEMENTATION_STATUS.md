@@ -133,6 +133,92 @@
 - Returns updated HP/SP values and `didUpdate` boolean
 - All calculations use integers (no floating point)
 
+### ✅ Admin Panel (Accounts/Moderation)
+- Complete admin and moderation system for managing players and enforcing rules
+- Role-based access control: PLAYER, MODERATOR, ADMIN
+- User management with search, view, update capabilities
+- Ban/unban system with reason and expiry dates
+- Mute/unmute chat system with reason and expiry dates
+- Soft delete for users (never truly delete in production)
+- Complete audit log of all admin actions
+- Server-side role gating for all admin routes
+
+**Database Models:**
+- `UserRole` enum: PLAYER, MODERATOR, ADMIN
+- `User` extended with: role, isBanned, bannedUntil, banReason, isMuted, mutedUntil, muteReason, deletedAt
+- `AdminActionLog` - Complete audit trail with actor, target, action, reason, metadata
+
+**API Endpoints (admin.*):**
+- `admin.users.searchUsers` - Search users by username/email/ID
+- `admin.users.getUserById` - Get user with full details and characters
+- `admin.users.updateUser` - Update user fields (role changes require ADMIN)
+- `admin.users.banUser` - Ban user with reason and optional expiry
+- `admin.users.unbanUser` - Remove ban from user
+- `admin.users.muteUser` - Mute user chat with reason and optional expiry
+- `admin.users.unmuteUser` - Remove mute from user
+- `admin.users.softDeleteUser` - Soft delete user (ADMIN only)
+- `admin.users.listAdminActions` - View audit log of admin actions
+
+**UI Pages:**
+- `/admin` - Admin panel layout with navigation
+- `/admin/users` - User search and list
+- `/admin/users/[id]` - User detail page with ban/mute/role controls
+- `/admin/actions` - Admin action log viewer
+- `/forbidden` - 403 page for unauthorized access
+
+**Security:**
+- `moderatorProcedure` - Requires MODERATOR or ADMIN role
+- `adminProcedure` - Requires ADMIN role only
+- Server-side role checking in all pages
+- All mutations write to AdminActionLog
+
+### ✅ Content Panel (Game CMS)
+- Complete content management system for game data
+- CRUD operations for items, monsters, quests, and maps
+- Safe delete via archiving (isArchived flag)
+- JSON field support for complex data structures
+- Server-side validation with Zod
+- Admin-only access (requires ADMIN role)
+
+**Database Models:**
+- `ItemTemplate` - Item templates with rarity, stackable, value, icon
+- `MonsterTemplate` - Monster templates with level, HP, SP, statsJSON
+- `QuestTemplate` - Quest templates with stepsJSON, rewardsJSON
+- `MapZone` - Map zones with tilesJSON, poisJSON, spawnJSON
+- All templates support: isArchived, deletedAt, createdAt, updatedAt
+
+**API Endpoints (content.*):**
+- `content.items.*` - list, get, create, update, archive, unarchive, delete
+- `content.monsters.*` - list, get, create, update, archive, unarchive, delete
+- `content.quests.*` - list, get, create, update, archive, unarchive, delete
+- `content.maps.*` - list, get, create, update, archive, unarchive, delete
+
+**UI Pages:**
+- `/content` - Content panel layout with navigation
+- `/content/items` - Item template list and management
+- `/content/items/new` - Create new item template
+- `/content/items/[id]` - Edit item template
+- `/content/monsters` - Monster template list
+- `/content/monsters/[id]` - Edit monster template
+- `/content/quests` - Quest template list
+- `/content/quests/[id]` - Edit quest template
+- `/content/maps` - Map zone list
+- `/content/maps/[id]` - Edit map zone
+
+**Features:**
+- JSON textarea input with server-side parsing and validation
+- Archive/unarchive for safe deletion
+- Hard delete available but recommended to use archive instead
+- All operations require ADMIN role
+
+**Seed Data:**
+- Admin user: `admin@alicard.com` / `admin123` (ADMIN role)
+- Player user: `player@alicard.com` / `player123` (PLAYER role)
+- Sample item templates (Steel Sword, Health Potion)
+- Sample monster template (Goblin Warrior)
+- Sample quest template (Slay the Goblin)
+- Sample map zone (Forest Zone)
+
 ## Phase 2: Persistence (In Progress)
 
 ### Pending:
@@ -192,5 +278,7 @@ All game APIs are organized under tRPC routers:
 - `map.*` - World map and movement
 - `combat.*` - Turn-based combat (encounter-based)
 - `battle.*` - Battle MVP (monster template-based)
+- `admin.*` - Admin panel (user management, moderation, audit logs)
+- `content.*` - Content CMS (items, monsters, quests, maps)
 - (Future: `inventory.*`, `market.*`, `guild.*`, `bank.*`, `occupation.*`)
 
