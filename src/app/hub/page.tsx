@@ -5,6 +5,7 @@ import { db } from "~/server/db";
 import { HubHeader } from "./_components/hub-header";
 import { ActionGrid } from "./_components/action-grid";
 import { HallOfDeadCard } from "./_components/hall-of-dead-card";
+import { AdminPanelSection } from "./_components/admin-panel-section";
 
 export default async function HubPage() {
   const session = await getServerAuthSession();
@@ -16,7 +17,7 @@ export default async function HubPage() {
   // Fetch user from database
   const user = await db.user.findUnique({
     where: { id: session.user.id },
-    select: { id: true, username: true, gender: true },
+    select: { id: true, username: true, gender: true, role: true },
   });
 
   if (!user) {
@@ -72,6 +73,10 @@ export default async function HubPage() {
 
         <main className="mt-4 flex-1 md:mt-6">
           <section className="space-y-4">
+            {/* Admin Panel (if moderator or admin) */}
+            {(user.role === "MODERATOR" || user.role === "ADMIN") && (
+              <AdminPanelSection role={user.role} />
+            )}
             {/* actions card */}
             <ActionGrid />
             {/* hall of the dead card */}
