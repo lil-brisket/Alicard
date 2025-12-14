@@ -10,6 +10,7 @@ import {
   type MonsterTemplate,
 } from "~/server/battle/engine";
 import { applyRegen } from "~/server/regen/applyRegen";
+import { syncPveKillsToLeaderboard } from "~/server/lib/leaderboard-sync";
 
 // Helper function to sync Character model with PlayerStats
 async function syncCharacterWithPlayerStats(
@@ -70,10 +71,22 @@ export const battleRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.session.user.id;
 
+      // Get player first
+      const player = await ctx.db.player.findUnique({
+        where: { userId },
+      });
+
+      if (!player) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Player not found",
+        });
+      }
+
       // Check if user already has an active battle
       const activeBattle = await ctx.db.battle.findFirst({
         where: {
-          userId,
+          playerId: player.id,
           status: "ACTIVE",
         },
       });
@@ -97,13 +110,13 @@ export const battleRouter = createTRPCRouter({
         });
       }
 
-      // Get player stats (from PlayerStats model)
-      const player = await ctx.db.player.findUnique({
-        where: { userId },
+      // Get player stats (from PlayerStats model) - already fetched above, but need stats
+      const playerWithStats = await ctx.db.player.findUnique({
+        where: { id: player.id },
         include: { stats: true },
       });
 
-      if (!player || !player.stats) {
+      if (!playerWithStats || !playerWithStats.stats) {
         throw new TRPCError({
           code: "NOT_FOUND",
           message: "Player or stats not found",
@@ -112,7 +125,7 @@ export const battleRouter = createTRPCRouter({
 
       // Apply regen BEFORE starting battle (server-authoritative)
       const now = new Date();
-      if (!player.stats.lastRegenAt) {
+      if (!playerWithStats.stats.lastRegenAt) {
         const character = await ctx.db.character.findFirst({
           where: { userId },
           orderBy: { createdAt: "desc" },
@@ -122,49 +135,49 @@ export const battleRouter = createTRPCRouter({
           : new Date(now.getTime() - 60000);
         
         await ctx.db.playerStats.update({
-          where: { playerId: player.id },
+          where: { playerId: playerWithStats.id },
           data: { lastRegenAt: initialLastRegenAt },
         });
-        player.stats.lastRegenAt = initialLastRegenAt;
+        playerWithStats.stats.lastRegenAt = initialLastRegenAt;
       }
 
       const regenResult = applyRegen(now, {
-        hp: player.stats.currentHP,
-        sp: player.stats.currentSP,
-        maxHp: player.stats.maxHP,
-        maxSp: player.stats.maxSP,
-        hpRegenPerMin: player.stats.hpRegenPerMin ?? 100,
-        spRegenPerMin: player.stats.spRegenPerMin ?? 100,
-        lastRegenAt: player.stats.lastRegenAt,
+        hp: playerWithStats.stats.currentHP,
+        sp: playerWithStats.stats.currentSP,
+        maxHp: playerWithStats.stats.maxHP,
+        maxSp: playerWithStats.stats.maxSP,
+        hpRegenPerMin: playerWithStats.stats.hpRegenPerMin ?? 100,
+        spRegenPerMin: playerWithStats.stats.spRegenPerMin ?? 100,
+        lastRegenAt: playerWithStats.stats.lastRegenAt,
       });
 
       // Update player stats if regen occurred
       if (regenResult.didUpdate) {
         await ctx.db.playerStats.update({
-          where: { playerId: player.id },
+          where: { playerId: playerWithStats.id },
           data: {
             currentHP: regenResult.hp,
             currentSP: regenResult.sp,
             lastRegenAt: regenResult.lastRegenAt,
           },
         });
-        player.stats.currentHP = regenResult.hp;
-        player.stats.currentSP = regenResult.sp;
-        player.stats.lastRegenAt = regenResult.lastRegenAt;
+        playerWithStats.stats.currentHP = regenResult.hp;
+        playerWithStats.stats.currentSP = regenResult.sp;
+        playerWithStats.stats.lastRegenAt = regenResult.lastRegenAt;
       }
 
       // Sync Character with PlayerStats after regen
       await syncCharacterWithPlayerStats(
         userId,
         {
-          currentHP: player.stats.currentHP,
-          maxHP: player.stats.maxHP,
-          currentSP: player.stats.currentSP,
-          maxSP: player.stats.maxSP,
-          vitality: player.stats.vitality,
-          strength: player.stats.strength,
-          speed: player.stats.speed,
-          dexterity: player.stats.dexterity,
+          currentHP: playerWithStats.stats.currentHP,
+          maxHP: playerWithStats.stats.maxHP,
+          currentSP: playerWithStats.stats.currentSP,
+          maxSP: playerWithStats.stats.maxSP,
+          vitality: playerWithStats.stats.vitality,
+          strength: playerWithStats.stats.strength,
+          speed: playerWithStats.stats.speed,
+          dexterity: playerWithStats.stats.dexterity,
         },
         ctx.db
       );
@@ -172,12 +185,12 @@ export const battleRouter = createTRPCRouter({
       // Create battle with snapshot of HP/SP (AFTER regen applied)
       const battle = await ctx.db.battle.create({
         data: {
-          userId,
+          playerId: playerWithStats.id,
           monsterId: monster.id,
           status: "ACTIVE",
           turnNumber: 1,
-          playerHp: player.stats.currentHP,
-          playerSp: player.stats.currentSP,
+          playerHp: playerWithStats.stats.currentHP,
+          playerSp: playerWithStats.stats.currentSP,
           monsterHp: monster.maxHp,
           log: [
             {
@@ -198,9 +211,18 @@ export const battleRouter = createTRPCRouter({
   getActiveBattle: protectedProcedure.query(async ({ ctx }) => {
     const userId = ctx.session.user.id;
 
+    // Get player first
+    const player = await ctx.db.player.findUnique({
+      where: { userId },
+    });
+
+    if (!player) {
+      return null;
+    }
+
     const battle = await ctx.db.battle.findFirst({
       where: {
-        userId,
+        playerId: player.id,
         status: "ACTIVE",
       },
       include: {
@@ -238,7 +260,19 @@ export const battleRouter = createTRPCRouter({
         });
       }
 
-      if (battle.userId !== userId) {
+      // Get player to verify ownership
+      const player = await ctx.db.player.findUnique({
+        where: { userId },
+      });
+
+      if (!player) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Player not found",
+        });
+      }
+
+      if (battle.playerId !== player.id) {
         throw new TRPCError({
           code: "FORBIDDEN",
           message: "You do not own this battle",
@@ -252,13 +286,13 @@ export const battleRouter = createTRPCRouter({
         });
       }
 
-      // Get current player stats
-      const player = await ctx.db.player.findUnique({
-        where: { userId },
+      // Get current player stats (player already fetched above)
+      const playerWithStats = await ctx.db.player.findUnique({
+        where: { id: player.id },
         include: { stats: true },
       });
 
-      if (!player || !player.stats) {
+      if (!playerWithStats || !playerWithStats.stats) {
         throw new TRPCError({
           code: "NOT_FOUND",
           message: "Player or stats not found",
@@ -267,7 +301,7 @@ export const battleRouter = createTRPCRouter({
 
       // Apply regen BEFORE attack (server-authoritative)
       const now = new Date();
-      if (!player.stats.lastRegenAt) {
+      if (!playerWithStats.stats.lastRegenAt) {
         const character = await ctx.db.character.findFirst({
           where: { userId },
           orderBy: { createdAt: "desc" },
@@ -277,63 +311,63 @@ export const battleRouter = createTRPCRouter({
           : new Date(now.getTime() - 60000);
         
         await ctx.db.playerStats.update({
-          where: { playerId: player.id },
+          where: { playerId: playerWithStats.id },
           data: { lastRegenAt: initialLastRegenAt },
         });
-        player.stats.lastRegenAt = initialLastRegenAt;
+        playerWithStats.stats.lastRegenAt = initialLastRegenAt;
       }
 
       const regenResult = applyRegen(now, {
-        hp: player.stats.currentHP,
-        sp: player.stats.currentSP,
-        maxHp: player.stats.maxHP,
-        maxSp: player.stats.maxSP,
-        hpRegenPerMin: player.stats.hpRegenPerMin ?? 100,
-        spRegenPerMin: player.stats.spRegenPerMin ?? 100,
-        lastRegenAt: player.stats.lastRegenAt,
+        hp: playerWithStats.stats.currentHP,
+        sp: playerWithStats.stats.currentSP,
+        maxHp: playerWithStats.stats.maxHP,
+        maxSp: playerWithStats.stats.maxSP,
+        hpRegenPerMin: playerWithStats.stats.hpRegenPerMin ?? 100,
+        spRegenPerMin: playerWithStats.stats.spRegenPerMin ?? 100,
+        lastRegenAt: playerWithStats.stats.lastRegenAt,
       });
 
       // Update player stats if regen occurred
       if (regenResult.didUpdate) {
         await ctx.db.playerStats.update({
-          where: { playerId: player.id },
+          where: { playerId: playerWithStats.id },
           data: {
             currentHP: regenResult.hp,
             currentSP: regenResult.sp,
             lastRegenAt: regenResult.lastRegenAt,
           },
         });
-        player.stats.currentHP = regenResult.hp;
-        player.stats.currentSP = regenResult.sp;
-        player.stats.lastRegenAt = regenResult.lastRegenAt;
+        playerWithStats.stats.currentHP = regenResult.hp;
+        playerWithStats.stats.currentSP = regenResult.sp;
+        playerWithStats.stats.lastRegenAt = regenResult.lastRegenAt;
       }
 
       // Sync Character with PlayerStats after regen
       await syncCharacterWithPlayerStats(
         userId,
         {
-          currentHP: player.stats.currentHP,
-          maxHP: player.stats.maxHP,
-          currentSP: player.stats.currentSP,
-          maxSP: player.stats.maxSP,
-          vitality: player.stats.vitality,
-          strength: player.stats.strength,
-          speed: player.stats.speed,
-          dexterity: player.stats.dexterity,
+          currentHP: playerWithStats.stats.currentHP,
+          maxHP: playerWithStats.stats.maxHP,
+          currentSP: playerWithStats.stats.currentSP,
+          maxSP: playerWithStats.stats.maxSP,
+          vitality: playerWithStats.stats.vitality,
+          strength: playerWithStats.stats.strength,
+          speed: playerWithStats.stats.speed,
+          dexterity: playerWithStats.stats.dexterity,
         },
         ctx.db
       );
 
       // Use battle HP/SP for combat calculations (battle state is authoritative during combat)
       const playerStats: PlayerStats = {
-        vitality: player.stats.vitality,
-        strength: player.stats.strength,
-        speed: player.stats.speed,
-        dexterity: player.stats.dexterity,
+        vitality: playerWithStats.stats.vitality,
+        strength: playerWithStats.stats.strength,
+        speed: playerWithStats.stats.speed,
+        dexterity: playerWithStats.stats.dexterity,
         currentHp: battle.playerHp,
         currentSp: battle.playerSp,
-        maxHp: player.stats.maxHP,
-        maxSp: player.stats.maxSP,
+        maxHp: playerWithStats.stats.maxHP,
+        maxSp: playerWithStats.stats.maxSP,
       };
 
       const monsterTemplate: MonsterTemplate = {
@@ -369,7 +403,7 @@ export const battleRouter = createTRPCRouter({
         newStatus = "WON";
         // Grant rewards
         await ctx.db.player.update({
-          where: { id: player.id },
+          where: { id: playerWithStats.id },
           data: {
             experience: { increment: battle.monster.xpReward },
             gold: { increment: battle.monster.goldReward },
@@ -378,7 +412,7 @@ export const battleRouter = createTRPCRouter({
 
         // Update PvE stats
         const profile = await ctx.db.playerProfile.findUnique({
-          where: { userId: player.userId },
+          where: { userId: playerWithStats.userId },
           include: { pveRecord: true },
         });
 
@@ -397,36 +431,14 @@ export const battleRouter = createTRPCRouter({
                 profileId: profile.id,
                 totalKills: 1,
                 bossesSlain: 0,
-                deathsUsed: player.deathCount ?? 0,
+                deathsUsed: playerWithStats.deathCount ?? 0,
                 deathsLimit: 5,
               },
             });
           }
 
-          // Update or create PlayerLeaderboardStats
-          const existingStats = await ctx.db.playerLeaderboardStats.findUnique({
-            where: { userId: player.userId },
-          });
-
-          if (existingStats) {
-            await ctx.db.playerLeaderboardStats.update({
-              where: { userId: player.userId },
-              data: {
-                pveKills: { increment: 1 },
-              },
-            });
-          } else {
-            await ctx.db.playerLeaderboardStats.create({
-              data: {
-                userId: player.userId,
-                pveKills: 1,
-                pvpKills: 0,
-                pvpWins: 0,
-                pvpLosses: 0,
-                jobXpTotal: 0,
-              },
-            });
-          }
+          // Sync PvE kills from profile to leaderboard
+          await syncPveKillsToLeaderboard(playerWithStats.userId, ctx.db);
         }
 
         updatedLog.push({
@@ -455,7 +467,7 @@ export const battleRouter = createTRPCRouter({
 
       // Update player HP/SP in stats
       const updatedStats = await ctx.db.playerStats.update({
-        where: { playerId: player.id },
+        where: { playerId: playerWithStats.id },
         data: {
           currentHP: updatedState.playerHp,
           currentSP: updatedState.playerSp,
@@ -464,7 +476,7 @@ export const battleRouter = createTRPCRouter({
 
       // Sync Character model with PlayerStats
       await syncCharacterWithPlayerStats(
-        player.userId,
+        playerWithStats.userId,
         {
           currentHP: updatedStats.currentHP,
           maxHP: updatedStats.maxHP,
@@ -505,7 +517,19 @@ export const battleRouter = createTRPCRouter({
         });
       }
 
-      if (battle.userId !== userId) {
+      // Get player to verify ownership
+      const player = await ctx.db.player.findUnique({
+        where: { userId },
+      });
+
+      if (!player) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Player not found",
+        });
+      }
+
+      if (battle.playerId !== player.id) {
         throw new TRPCError({
           code: "FORBIDDEN",
           message: "You do not own this battle",
@@ -519,13 +543,13 @@ export const battleRouter = createTRPCRouter({
         });
       }
 
-      // Get player stats
-      const player = await ctx.db.player.findUnique({
-        where: { userId },
+      // Get player stats (player already fetched above)
+      const playerWithStats = await ctx.db.player.findUnique({
+        where: { id: player.id },
         include: { stats: true },
       });
 
-      if (!player || !player.stats) {
+      if (!playerWithStats || !playerWithStats.stats) {
         throw new TRPCError({
           code: "NOT_FOUND",
           message: "Player or stats not found",
@@ -534,7 +558,7 @@ export const battleRouter = createTRPCRouter({
 
       // Apply regen BEFORE fleeing (server-authoritative)
       const now = new Date();
-      if (!player.stats.lastRegenAt) {
+      if (!playerWithStats.stats.lastRegenAt) {
         const character = await ctx.db.character.findFirst({
           where: { userId },
           orderBy: { createdAt: "desc" },
@@ -544,49 +568,49 @@ export const battleRouter = createTRPCRouter({
           : new Date(now.getTime() - 60000);
         
         await ctx.db.playerStats.update({
-          where: { playerId: player.id },
+          where: { playerId: playerWithStats.id },
           data: { lastRegenAt: initialLastRegenAt },
         });
-        player.stats.lastRegenAt = initialLastRegenAt;
+        playerWithStats.stats.lastRegenAt = initialLastRegenAt;
       }
 
       const regenResult = applyRegen(now, {
-        hp: player.stats.currentHP,
-        sp: player.stats.currentSP,
-        maxHp: player.stats.maxHP,
-        maxSp: player.stats.maxSP,
-        hpRegenPerMin: player.stats.hpRegenPerMin ?? 100,
-        spRegenPerMin: player.stats.spRegenPerMin ?? 100,
-        lastRegenAt: player.stats.lastRegenAt,
+        hp: playerWithStats.stats.currentHP,
+        sp: playerWithStats.stats.currentSP,
+        maxHp: playerWithStats.stats.maxHP,
+        maxSp: playerWithStats.stats.maxSP,
+        hpRegenPerMin: playerWithStats.stats.hpRegenPerMin ?? 100,
+        spRegenPerMin: playerWithStats.stats.spRegenPerMin ?? 100,
+        lastRegenAt: playerWithStats.stats.lastRegenAt,
       });
 
       // Update player stats if regen occurred
       if (regenResult.didUpdate) {
         await ctx.db.playerStats.update({
-          where: { playerId: player.id },
+          where: { playerId: playerWithStats.id },
           data: {
             currentHP: regenResult.hp,
             currentSP: regenResult.sp,
             lastRegenAt: regenResult.lastRegenAt,
           },
         });
-        player.stats.currentHP = regenResult.hp;
-        player.stats.currentSP = regenResult.sp;
-        player.stats.lastRegenAt = regenResult.lastRegenAt;
+        playerWithStats.stats.currentHP = regenResult.hp;
+        playerWithStats.stats.currentSP = regenResult.sp;
+        playerWithStats.stats.lastRegenAt = regenResult.lastRegenAt;
       }
 
       // Sync Character with PlayerStats after regen
       await syncCharacterWithPlayerStats(
         userId,
         {
-          currentHP: player.stats.currentHP,
-          maxHP: player.stats.maxHP,
-          currentSP: player.stats.currentSP,
-          maxSP: player.stats.maxSP,
-          vitality: player.stats.vitality,
-          strength: player.stats.strength,
-          speed: player.stats.speed,
-          dexterity: player.stats.dexterity,
+          currentHP: playerWithStats.stats.currentHP,
+          maxHP: playerWithStats.stats.maxHP,
+          currentSP: playerWithStats.stats.currentSP,
+          maxSP: playerWithStats.stats.maxSP,
+          vitality: playerWithStats.stats.vitality,
+          strength: playerWithStats.stats.strength,
+          speed: playerWithStats.stats.speed,
+          dexterity: playerWithStats.stats.dexterity,
         },
         ctx.db
       );

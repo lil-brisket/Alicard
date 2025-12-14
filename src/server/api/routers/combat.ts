@@ -4,6 +4,7 @@ import {
   createTRPCRouter,
   protectedProcedure,
 } from "~/server/api/trpc";
+import { syncPveKillsToLeaderboard } from "~/server/lib/leaderboard-sync";
 
 // Combat action types
 const combatActionSchema = z.enum([
@@ -392,30 +393,8 @@ export const combatRouter = createTRPCRouter({
               });
             }
 
-            // Update or create PlayerLeaderboardStats
-            const existingStats = await ctx.db.playerLeaderboardStats.findUnique({
-              where: { userId: player.userId },
-            });
-
-            if (existingStats) {
-              await ctx.db.playerLeaderboardStats.update({
-                where: { userId: player.userId },
-                data: {
-                  pveKills: { increment: 1 },
-                },
-              });
-            } else {
-              await ctx.db.playerLeaderboardStats.create({
-                data: {
-                  userId: player.userId,
-                  pveKills: 1,
-                  pvpKills: 0,
-                  pvpWins: 0,
-                  pvpLosses: 0,
-                  jobXpTotal: 0,
-                },
-              });
-            }
+            // Sync PvE kills from profile to leaderboard
+            await syncPveKillsToLeaderboard(player.userId, ctx.db);
           }
 
           combatLog.push(`You gained ${expGain} experience and ${goldGain} gold!`);

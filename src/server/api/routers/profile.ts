@@ -5,6 +5,7 @@ import {
   protectedProcedure,
   publicProcedure,
 } from "~/server/api/trpc";
+import { syncPveKillsToLeaderboard } from "~/server/lib/leaderboard-sync";
 
 // Helper function to calculate power score
 function calculatePowerScore(
@@ -300,6 +301,9 @@ export const profileRouter = createTRPCRouter({
         });
       }
 
+      // Sync PvE kills to leaderboard (ensures data stays in sync)
+      await syncPveKillsToLeaderboard(ctx.session.user.id, ctx.db);
+
       return {
         ...profile,
         powerScore: calculatePowerScore(
@@ -434,4 +438,10 @@ export const profileRouter = createTRPCRouter({
         unlockedAt: pa.unlockedAt,
       }));
     }),
+
+  // Sync PvE kills from profile to leaderboard
+  syncPveKills: protectedProcedure.mutation(async ({ ctx }) => {
+    await syncPveKillsToLeaderboard(ctx.session.user.id, ctx.db);
+    return { success: true };
+  }),
 });

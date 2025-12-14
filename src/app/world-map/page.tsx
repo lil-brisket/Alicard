@@ -24,7 +24,7 @@ export default function WorldMapPage() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto max-w-7xl p-4 md:p-8">
-        <div className="mb-4 flex items-center justify-between">
+        <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 className="mb-2 text-2xl font-bold text-cyan-400">World Map</h1>
             <p className="text-slate-400">
@@ -33,7 +33,7 @@ export default function WorldMapPage() {
           </div>
           <Link
             href="/hub"
-            className="rounded-lg bg-cyan-600 px-6 py-3 font-semibold text-white"
+            className="inline-block rounded-lg bg-cyan-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-cyan-700 active:bg-cyan-800"
           >
             Return to Hub
           </Link>
@@ -43,8 +43,17 @@ export default function WorldMapPage() {
           <MapGrid />
         </div>
 
-        <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
+        <div className="mb-4 rounded-xl border border-slate-800 bg-slate-900/60 p-4">
           <MovementControls />
+        </div>
+
+        <div className="flex justify-center">
+          <Link
+            href="/hub"
+            className="rounded-lg bg-cyan-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-cyan-700 active:bg-cyan-800"
+          >
+            Return to Hub
+          </Link>
         </div>
       </div>
     </div>
