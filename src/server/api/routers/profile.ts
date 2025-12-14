@@ -302,7 +302,10 @@ export const profileRouter = createTRPCRouter({
       }
 
       // Sync PvE kills to leaderboard (ensures data stays in sync)
-      await syncPveKillsToLeaderboard(ctx.session.user.id, ctx.db);
+      // Only sync if we have a session (for the profile owner viewing their own profile)
+      if (ctx.session?.user?.id) {
+        await syncPveKillsToLeaderboard(ctx.session.user.id, ctx.db);
+      }
 
       return {
         ...profile,

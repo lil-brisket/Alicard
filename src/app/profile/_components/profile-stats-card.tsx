@@ -56,7 +56,7 @@ export function ProfileStatsCard({
     retry: false,
     enabled: player !== undefined || character !== undefined, // Only query after we have some data
   });
-  const isInBattle = activeBattle?.status === "ACTIVE" ?? false;
+  const isInBattle = activeBattle?.status === "ACTIVE";
 
   // Use PlayerStats for HP/SP (with regen applied) if available, otherwise fall back to Character or initial props
   const serverCurrentHp = player?.stats?.currentHP ?? character?.currentHp ?? initialCurrentHP;

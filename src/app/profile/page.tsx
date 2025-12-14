@@ -114,7 +114,7 @@ export default async function ProfilePage() {
               avatar={profile.user.image}
               displayName={profile.user.name}
               username={profile.user.username}
-              status={profile.status}
+              status={profile.status === "Fallen" ? "Fallen" : "Alive"}
               level={profile.level}
               powerScore={profile.powerScore}
               guildName={profile.social?.guildName}

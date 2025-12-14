@@ -43,8 +43,8 @@ async function main() {
     worldId: string;
     x: number;
     y: number;
-    tileType: string;
-    zoneType: string;
+    tileType: "GRASS" | "FOREST" | "MOUNTAIN" | "RIVER" | "DESERT" | "DUNGEON" | "TOWN" | "SHRINE" | "ROAD" | "PLAIN" | "WATER";
+    zoneType: "SAFE" | "LOW_DANGER" | "MEDIUM_DANGER" | "HIGH_DANGER" | "EXTREME_DANGER";
     isSafeZone: boolean;
     description: string;
   }> = [];
@@ -56,8 +56,8 @@ async function main() {
         Math.pow(x - 10, 2) + Math.pow(y - 10, 2)
       );
 
-      let tileType: string;
-      let zoneType: string;
+      let tileType: "GRASS" | "FOREST" | "MOUNTAIN" | "RIVER" | "DESERT" | "DUNGEON" | "TOWN" | "SHRINE" | "ROAD" | "PLAIN" | "WATER";
+      let zoneType: "SAFE" | "LOW_DANGER" | "MEDIUM_DANGER" | "HIGH_DANGER" | "EXTREME_DANGER";
       let isSafeZone: boolean;
       let description: string;
 

@@ -37,7 +37,7 @@ export function CharacterSummaryCard() {
     retry: false,
     enabled: !characterLoading && character !== undefined && typeof window !== "undefined",
   });
-  const isInBattle = activeBattle?.status === "ACTIVE" ?? false;
+  const isInBattle = activeBattle?.status === "ACTIVE";
 
   // Use PlayerStats for HP/SP (with regen applied) if available, otherwise fall back to Character
   // Player might not exist yet, so we gracefully fall back to character data

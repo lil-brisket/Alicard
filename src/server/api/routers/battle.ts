@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
+import { Prisma } from "~/server/types/prisma";
 import {
   createTRPCRouter,
   protectedProcedure,
@@ -398,7 +399,7 @@ export const battleRouter = createTRPCRouter({
       const updatedLog = [...currentLog, ...events];
 
       // Determine new status
-      let newStatus = battle.status;
+      let newStatus: "ACTIVE" | "WON" | "LOST" | "FLED" = battle.status;
       if (updatedState.monsterHp <= 0) {
         newStatus = "WON";
         // Grant rewards
@@ -458,7 +459,7 @@ export const battleRouter = createTRPCRouter({
           playerHp: updatedState.playerHp,
           playerSp: updatedState.playerSp,
           monsterHp: updatedState.monsterHp,
-          log: updatedLog,
+          log: updatedLog as unknown as Prisma.InputJsonValue,
         },
         include: {
           monster: true,
@@ -630,7 +631,7 @@ export const battleRouter = createTRPCRouter({
         where: { id: input.battleId },
         data: {
           status: "FLED",
-          log: updatedLog,
+          log: updatedLog as unknown as Prisma.InputJsonValue,
         },
         include: {
           monster: true,

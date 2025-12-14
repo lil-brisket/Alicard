@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
+import { Prisma } from "~/server/types/prisma";
 import {
   createTRPCRouter,
   adminProcedure,
@@ -53,49 +54,39 @@ export const contentMapsRouter = createTRPCRouter({
         name: z.string().min(1, "Name is required"),
         width: z.number().min(1),
         height: z.number().min(1),
-        tilesJSON: z
-          .string()
-          .transform((str, ctx) => {
+        tilesJSON: z.union([
+          z.string().transform((str) => {
             try {
-              return JSON.parse(str);
+              return JSON.parse(str) as unknown;
             } catch {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: "Invalid JSON for tiles",
-              });
-              return z.NEVER;
+              throw new Error("Invalid JSON for tiles");
             }
-          })
-          .or(z.record(z.unknown())),
+          }),
+          z.record(z.string(), z.unknown()),
+        ]),
         poisJSON: z
-          .string()
-          .transform((str, ctx) => {
-            try {
-              return JSON.parse(str);
-            } catch {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: "Invalid JSON for POIs",
-              });
-              return z.NEVER;
-            }
-          })
-          .or(z.array(z.unknown()))
+          .union([
+            z.string().transform((str) => {
+              try {
+                return JSON.parse(str) as unknown;
+              } catch {
+                throw new Error("Invalid JSON for POIs");
+              }
+            }),
+            z.array(z.unknown()),
+          ])
           .optional(),
         spawnJSON: z
-          .string()
-          .transform((str, ctx) => {
-            try {
-              return JSON.parse(str);
-            } catch {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: "Invalid JSON for spawns",
-              });
-              return z.NEVER;
-            }
-          })
-          .or(z.record(z.unknown()))
+          .union([
+            z.string().transform((str) => {
+              try {
+                return JSON.parse(str) as unknown;
+              } catch {
+                throw new Error("Invalid JSON for spawns");
+              }
+            }),
+            z.record(z.string(), z.unknown()),
+          ])
           .optional(),
       })
     )
@@ -122,9 +113,9 @@ export const contentMapsRouter = createTRPCRouter({
           name: input.name,
           width: input.width,
           height: input.height,
-          tilesJSON: tiles,
-          poisJSON: pois,
-          spawnJSON: spawns,
+          tilesJSON: tiles as Prisma.InputJsonValue,
+          poisJSON: pois as Prisma.InputJsonValue,
+          spawnJSON: spawns as Prisma.InputJsonValue,
         },
       });
 
@@ -140,50 +131,41 @@ export const contentMapsRouter = createTRPCRouter({
         width: z.number().min(1).optional(),
         height: z.number().min(1).optional(),
         tilesJSON: z
-          .string()
-          .transform((str, ctx) => {
-            try {
-              return JSON.parse(str);
-            } catch {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: "Invalid JSON for tiles",
-              });
-              return z.NEVER;
-            }
-          })
-          .or(z.record(z.unknown()))
+          .union([
+            z.string().transform((str) => {
+              try {
+                return JSON.parse(str) as unknown;
+              } catch {
+                throw new Error("Invalid JSON for tiles");
+              }
+            }),
+            z.record(z.string(), z.unknown()),
+          ])
           .optional(),
         poisJSON: z
-          .string()
-          .transform((str, ctx) => {
-            try {
-              return JSON.parse(str);
-            } catch {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: "Invalid JSON for POIs",
-              });
-              return z.NEVER;
-            }
-          })
-          .or(z.array(z.unknown()))
+          .union([
+            z.string().transform((str) => {
+              try {
+                return JSON.parse(str) as unknown;
+              } catch {
+                throw new Error("Invalid JSON for POIs");
+              }
+            }),
+            z.array(z.unknown()),
+          ])
           .optional()
           .nullable(),
         spawnJSON: z
-          .string()
-          .transform((str, ctx) => {
-            try {
-              return JSON.parse(str);
-            } catch {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: "Invalid JSON for spawns",
-              });
-              return z.NEVER;
-            }
-          })
-          .or(z.record(z.unknown()))
+          .union([
+            z.string().transform((str) => {
+              try {
+                return JSON.parse(str) as unknown;
+              } catch {
+                throw new Error("Invalid JSON for spawns");
+              }
+            }),
+            z.record(z.string(), z.unknown()),
+          ])
           .optional()
           .nullable(),
       })
@@ -238,7 +220,18 @@ export const contentMapsRouter = createTRPCRouter({
 
       const updatedMap = await ctx.db.mapZone.update({
         where: { id },
-        data: updatePayload,
+        data: {
+          ...updateData,
+          ...(tilesJSON !== undefined && {
+            tilesJSON: (typeof tilesJSON === "string" ? JSON.parse(tilesJSON) : tilesJSON) as Prisma.InputJsonValue,
+          }),
+          ...(poisJSON !== undefined && {
+            poisJSON: poisJSON === null ? Prisma.JsonNull : (typeof poisJSON === "string" ? JSON.parse(poisJSON) : poisJSON) as Prisma.InputJsonValue,
+          }),
+          ...(spawnJSON !== undefined && {
+            spawnJSON: spawnJSON === null ? Prisma.JsonNull : (typeof spawnJSON === "string" ? JSON.parse(spawnJSON) : spawnJSON) as Prisma.InputJsonValue,
+          }),
+        },
       });
 
       return updatedMap;

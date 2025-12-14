@@ -65,6 +65,11 @@ async function cleanupInventoryDuplicates() {
     // Keep the oldest record, delete the rest
     const [keep, ...toDelete] = items;
 
+    if (!keep) {
+      console.log("  ⚠️  No items to keep, skipping...");
+      continue;
+    }
+
     console.log(
       `  Merging ${items.length} records for player ${playerId.substring(0, 8)}... item ${itemId.substring(0, 8)}... (total qty: ${totalQuantity})`
     );
@@ -137,6 +142,11 @@ async function cleanupItemKeyDuplicates() {
 
     // Keep the oldest item's key, null out the rest
     const [keep, ...toNull] = items;
+
+    if (!keep) {
+      console.log("  ⚠️  No items to keep, skipping...");
+      continue;
+    }
 
     console.log(
       `  Keeping key "${key}" for item ${keep.id.substring(0, 8)}..., nulling ${toNull.length} others`

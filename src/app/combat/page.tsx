@@ -140,15 +140,18 @@ export default function CombatPage() {
                 {log.length === 0 ? (
                   <p className="text-slate-400">No battle events yet...</p>
                 ) : (
-                  log.map((event: { message: string; turnNumber: number }, idx: number) => (
-                    <div
-                      key={idx}
-                      className="rounded bg-slate-900/50 p-2 text-sm"
-                    >
-                      <span className="text-slate-400">Turn {event.turnNumber}:</span>{" "}
-                      {event.message}
-                    </div>
-                  ))
+                  (Array.isArray(log) ? log : []).map((event: unknown, idx: number) => {
+                    const battleEvent = event as { message: string; turnNumber: number };
+                    return (
+                      <div
+                        key={idx}
+                        className="rounded bg-slate-900/50 p-2 text-sm"
+                      >
+                        <span className="text-slate-400">Turn {battleEvent.turnNumber}:</span>{" "}
+                        {battleEvent.message}
+                      </div>
+                    );
+                  })
                 )}
               </div>
             </div>

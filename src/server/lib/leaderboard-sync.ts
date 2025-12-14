@@ -1,4 +1,4 @@
-import type { PrismaClient } from "../../generated/prisma/client";
+import type { PrismaClient } from "~/server/types/prisma";
 
 /**
  * Syncs PvE kills from PlayerPveRecord (profile) to PlayerLeaderboardStats (leaderboard)

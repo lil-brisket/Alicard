@@ -70,8 +70,8 @@ function getPrimaryStat(item: { vitalityBonus?: number; strengthBonus?: number; 
     { label: "HP", value: item.hpBonus ?? 0 },
     { label: "SP", value: item.spBonus ?? 0 },
   ];
-  const primary = stats.find(s => s.value > 0) || stats[0];
-  return primary.value > 0 ? primary : null;
+  const primary = stats.find(s => s.value > 0) ?? stats[0];
+  return primary && primary.value > 0 ? primary : null;
 }
 
 export default function EquipmentPage() {

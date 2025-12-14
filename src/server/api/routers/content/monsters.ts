@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
+import { Prisma } from "~/server/types/prisma";
 import {
   createTRPCRouter,
   adminProcedure,
@@ -159,7 +160,12 @@ export const contentMonstersRouter = createTRPCRouter({
 
       const updatedMonster = await ctx.db.monsterTemplate.update({
         where: { id },
-        data: updatePayload,
+        data: {
+          ...updateData,
+          ...(statsJSON !== undefined && {
+            statsJSON: (typeof statsJSON === "string" ? JSON.parse(statsJSON) : statsJSON) as Prisma.InputJsonValue,
+          }),
+        },
       });
 
       return updatedMonster;

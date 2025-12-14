@@ -65,9 +65,22 @@ export const jobsRouter = createTRPCRouter({
         characterName = `${baseName} #${suffix}`;
       }
 
+      // Get default world
+      const defaultWorld = await db.world.findUnique({
+        where: { id: "default-world" },
+      });
+
+      if (!defaultWorld) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Default world not found. Please run seed script.",
+        });
+      }
+
       // Find starting tile
       let startingTile = await db.mapTile.findFirst({
         where: {
+          worldId: defaultWorld.id,
           isSafeZone: true,
           tileType: "TOWN",
         },
@@ -75,11 +88,18 @@ export const jobsRouter = createTRPCRouter({
 
       if (!startingTile) {
         startingTile = await db.mapTile.upsert({
-          where: { x_y: { x: 0, y: 0 } },
+          where: {
+            worldId_x_y: {
+              worldId: defaultWorld.id,
+              x: 10,
+              y: 10,
+            },
+          },
           update: {},
           create: {
-            x: 0,
-            y: 0,
+            worldId: defaultWorld.id,
+            x: 10,
+            y: 10,
             tileType: "TOWN",
             zoneType: "SAFE",
             isSafeZone: true,
@@ -119,6 +139,7 @@ export const jobsRouter = createTRPCRouter({
           },
           position: {
             create: {
+              worldId: defaultWorld.id,
               tileX: startingTile.x,
               tileY: startingTile.y,
               tileId: startingTile.id,
@@ -244,9 +265,22 @@ export const jobsRouter = createTRPCRouter({
           characterName = `${baseName} #${suffix}`;
         }
 
+        // Get default world
+        const defaultWorld = await db.world.findUnique({
+          where: { id: "default-world" },
+        });
+
+        if (!defaultWorld) {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "Default world not found. Please run seed script.",
+          });
+        }
+
         // Find starting tile
         let startingTile = await db.mapTile.findFirst({
           where: {
+            worldId: defaultWorld.id,
             isSafeZone: true,
             tileType: "TOWN",
           },
@@ -254,11 +288,18 @@ export const jobsRouter = createTRPCRouter({
 
         if (!startingTile) {
           startingTile = await db.mapTile.upsert({
-            where: { x_y: { x: 0, y: 0 } },
+            where: {
+              worldId_x_y: {
+                worldId: defaultWorld.id,
+                x: 10,
+                y: 10,
+              },
+            },
             update: {},
             create: {
-              x: 0,
-              y: 0,
+              worldId: defaultWorld.id,
+              x: 10,
+              y: 10,
               tileType: "TOWN",
               zoneType: "SAFE",
               isSafeZone: true,
@@ -298,6 +339,7 @@ export const jobsRouter = createTRPCRouter({
             },
             position: {
               create: {
+                worldId: defaultWorld.id,
                 tileX: startingTile.x,
                 tileY: startingTile.y,
                 tileId: startingTile.id,

@@ -148,7 +148,8 @@ export const skillsRouter = createTRPCRouter({
       }
 
       // Determine which slot field to update
-      const slotField = `slot${input.slotIndex}SkillId` as const;
+      type SlotField = `slot${number}SkillId`;
+      const slotField: SlotField = `slot${input.slotIndex}SkillId` as SlotField;
 
       // Use transaction to handle replacement
       await ctx.db.$transaction(async (tx) => {
@@ -194,8 +195,9 @@ export const skillsRouter = createTRPCRouter({
         });
       }
 
-      const slotField = `slot${input.slotIndex}SkillId` as const;
-      const currentSkillId = loadout[slotField];
+      type SlotField = `slot${number}SkillId`;
+      const slotField: SlotField = `slot${input.slotIndex}SkillId` as SlotField;
+      const currentSkillId = loadout[slotField as keyof typeof loadout] as string | null;
 
       if (!currentSkillId) {
         throw new TRPCError({
@@ -208,7 +210,7 @@ export const skillsRouter = createTRPCRouter({
         where: { playerId: player.id },
         data: {
           [slotField]: null,
-        },
+        } as Record<SlotField, null>,
       });
 
       return { success: true };

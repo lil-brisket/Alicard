@@ -224,12 +224,12 @@ export default function LeaderboardsPage() {
                           </span>
                         </div>
                       </td>
-                      {activeTab === "pve" && (
+                      {activeTab === "pve" && "pveKills" in entry && (
                         <td className="px-4 py-3 text-right text-sm text-slate-300">
                           {entry.pveKills.toLocaleString()}
                         </td>
                       )}
-                      {activeTab === "pvp" && (
+                      {activeTab === "pvp" && "pvpKills" in entry && (
                         <>
                           <td className="px-4 py-3 text-right text-sm text-slate-300">
                             {entry.pvpKills.toLocaleString()}
@@ -242,7 +242,7 @@ export default function LeaderboardsPage() {
                           </td>
                         </>
                       )}
-                      {activeTab === "jobs" && (
+                      {activeTab === "jobs" && "jobXpTotal" in entry && (
                         <>
                           <td className="px-4 py-3 text-right text-sm text-slate-300">
                             {entry.jobXpTotal.toLocaleString()}

@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
+import { Prisma } from "~/server/types/prisma";
 import {
   createTRPCRouter,
   adminProcedure,
@@ -52,34 +53,27 @@ export const contentQuestsRouter = createTRPCRouter({
       z.object({
         title: z.string().min(1, "Title is required"),
         description: z.string().optional(),
-        stepsJSON: z
-          .string()
-          .transform((str, ctx) => {
+        stepsJSON: z.union([
+          z.string().transform((str) => {
             try {
-              return JSON.parse(str);
+              return JSON.parse(str) as unknown;
             } catch {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: "Invalid JSON for steps",
-              });
-              return z.NEVER;
+              throw new Error("Invalid JSON for steps");
             }
-          })
-          .or(z.array(z.unknown())),
+          }),
+          z.array(z.unknown()),
+        ]),
         rewardsJSON: z
-          .string()
-          .transform((str, ctx) => {
-            try {
-              return JSON.parse(str);
-            } catch {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: "Invalid JSON for rewards",
-              });
-              return z.NEVER;
-            }
-          })
-          .or(z.record(z.unknown()))
+          .union([
+            z.string().transform((str) => {
+              try {
+                return JSON.parse(str) as unknown;
+              } catch {
+                throw new Error("Invalid JSON for rewards");
+              }
+            }),
+            z.record(z.string(), z.unknown()),
+          ])
           .optional(),
       })
     )
@@ -99,8 +93,8 @@ export const contentQuestsRouter = createTRPCRouter({
         data: {
           title: input.title,
           description: input.description,
-          stepsJSON: steps,
-          rewardsJSON: rewards,
+          stepsJSON: steps as Prisma.InputJsonValue,
+          rewardsJSON: rewards as Prisma.InputJsonValue,
         },
       });
 
@@ -115,34 +109,28 @@ export const contentQuestsRouter = createTRPCRouter({
         title: z.string().min(1).optional(),
         description: z.string().optional().nullable(),
         stepsJSON: z
-          .string()
-          .transform((str, ctx) => {
-            try {
-              return JSON.parse(str);
-            } catch {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: "Invalid JSON for steps",
-              });
-              return z.NEVER;
-            }
-          })
-          .or(z.array(z.unknown()))
+          .union([
+            z.string().transform((str) => {
+              try {
+                return JSON.parse(str) as unknown;
+              } catch {
+                throw new Error("Invalid JSON for steps");
+              }
+            }),
+            z.array(z.unknown()),
+          ])
           .optional(),
         rewardsJSON: z
-          .string()
-          .transform((str, ctx) => {
-            try {
-              return JSON.parse(str);
-            } catch {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: "Invalid JSON for rewards",
-              });
-              return z.NEVER;
-            }
-          })
-          .or(z.record(z.unknown()))
+          .union([
+            z.string().transform((str) => {
+              try {
+                return JSON.parse(str) as unknown;
+              } catch {
+                throw new Error("Invalid JSON for rewards");
+              }
+            }),
+            z.record(z.string(), z.unknown()),
+          ])
           .optional()
           .nullable(),
       })
@@ -186,7 +174,15 @@ export const contentQuestsRouter = createTRPCRouter({
 
       const updatedQuest = await ctx.db.questTemplate.update({
         where: { id },
-        data: updatePayload,
+        data: {
+          ...updateData,
+          ...(stepsJSON !== undefined && {
+            stepsJSON: (typeof stepsJSON === "string" ? JSON.parse(stepsJSON) : stepsJSON) as Prisma.InputJsonValue,
+          }),
+          ...(rewardsJSON !== undefined && {
+            rewardsJSON: rewardsJSON === null ? Prisma.JsonNull : (typeof rewardsJSON === "string" ? JSON.parse(rewardsJSON) : rewardsJSON) as Prisma.InputJsonValue,
+          }),
+        },
       });
 
       return updatedQuest;

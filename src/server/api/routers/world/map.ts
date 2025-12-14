@@ -134,7 +134,13 @@ export const mapRouter = createTRPCRouter({
 
       // Check if tile exists, create if it doesn't
       let targetTile = await ctx.db.mapTile.findUnique({
-        where: { x_y: { x: newX, y: newY } },
+        where: {
+          worldId_x_y: {
+            worldId: player.position.worldId,
+            x: newX,
+            y: newY,
+          },
+        },
       });
 
       if (!targetTile) {
@@ -144,6 +150,7 @@ export const mapRouter = createTRPCRouter({
         
         targetTile = await ctx.db.mapTile.create({
           data: {
+            worldId: player.position.worldId,
             x: newX,
             y: newY,
             tileType,
@@ -200,8 +207,27 @@ export const mapRouter = createTRPCRouter({
       })
     )
     .query(async ({ ctx, input }) => {
+      // Get player position to get worldId
+      const player = await ctx.db.player.findUnique({
+        where: { userId: ctx.session.user.id },
+        include: { position: true },
+      });
+
+      if (!player || !player.position) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Player position not found",
+        });
+      }
+
       const tile = await ctx.db.mapTile.findUnique({
-        where: { x_y: { x: input.x, y: input.y } },
+        where: {
+          worldId_x_y: {
+            worldId: player.position.worldId,
+            x: input.x,
+            y: input.y,
+          },
+        },
         include: {
           npcs: true,
           encounters: {

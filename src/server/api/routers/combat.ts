@@ -31,13 +31,18 @@ export const combatRouter = createTRPCRouter({
           stats: true,
           equipment: {
             include: {
-              weapon: true,
               head: true,
-              chest: true,
+              leftArm: true,
+              rightArm: true,
+              body: true,
               legs: true,
               feet: true,
-              accessory1: true,
-              accessory2: true,
+              ring1: true,
+              ring2: true,
+              ring3: true,
+              necklace: true,
+              belt: true,
+              cloak: true,
             },
           },
         },
@@ -138,16 +143,25 @@ export const combatRouter = createTRPCRouter({
           stats: true,
           equipment: {
             include: {
-              weapon: true,
               head: true,
-              chest: true,
+              leftArm: true,
+              rightArm: true,
+              body: true,
               legs: true,
               feet: true,
-              accessory1: true,
-              accessory2: true,
+              ring1: true,
+              ring2: true,
+              ring3: true,
+              necklace: true,
+              belt: true,
+              cloak: true,
             },
           },
-          skills: true,
+          skills: {
+            include: {
+              skill: true,
+            },
+          },
         },
       });
 
@@ -228,7 +242,7 @@ export const combatRouter = createTRPCRouter({
               message: "Skill name required for skill action",
             });
           }
-          const skill = player.skills.find((s) => s.skillName === input.skillName);
+          const skill = player.skills.find((s) => s.skill.name === input.skillName);
           if (!skill) {
             throw new TRPCError({
               code: "NOT_FOUND",
