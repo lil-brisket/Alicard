@@ -16,6 +16,7 @@ const combatActionSchema = z.enum([
 
 export const combatRouter = createTRPCRouter({
   // Start combat with an encounter
+  // TODO: rate limit combat start (e.g., max 5 combat starts per minute)
   startCombat: protectedProcedure
     .input(
       z.object({
@@ -118,6 +119,8 @@ export const combatRouter = createTRPCRouter({
     }),
 
   // Execute combat action
+  // TODO: rate limit combat actions (e.g., max 10 actions per second, 300 per minute)
+  // This prevents combat spam and ensures fair turn-based gameplay
   executeAction: protectedProcedure
     .input(
       z.object({

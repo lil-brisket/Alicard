@@ -60,6 +60,7 @@ export const battleRouter = createTRPCRouter({
   }),
 
   // Start a new battle with a monster
+  // TODO: rate limit battle start (e.g., max 5 battles per minute)
   startBattle: protectedProcedure
     .input(
       z.object({
@@ -214,6 +215,7 @@ export const battleRouter = createTRPCRouter({
   }),
 
   // Execute an attack turn
+  // TODO: rate limit attack actions (e.g., max 10 attacks per second, 300 per minute)
   attack: protectedProcedure
     .input(
       z.object({
@@ -480,6 +482,7 @@ export const battleRouter = createTRPCRouter({
     }),
 
   // Flee from battle
+  // TODO: rate limit flee actions (e.g., max 5 flees per minute)
   flee: protectedProcedure
     .input(
       z.object({

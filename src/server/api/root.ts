@@ -1,26 +1,39 @@
+// Feature-based router organization
+// economy/ - Economic systems (banking, market, etc.)
+import { bankRouter } from "~/server/api/routers/economy/bank";
+
+// character/ - Character progression and management
+import { playerRouter } from "~/server/api/routers/character/player";
+import { characterRouter } from "~/server/api/routers/character/character";
+import { equipmentRouter } from "~/server/api/routers/character/equipment";
+import { skillsRouter } from "~/server/api/routers/character/skills";
+
+// world/ - World map and movement
+import { worldRouter } from "~/server/api/routers/world/world";
+import { mapRouter } from "~/server/api/routers/world/map";
+
+// Other routers (to be organized later or kept at root)
 import { postRouter } from "~/server/api/routers/post";
-import { playerRouter } from "~/server/api/routers/player";
-import { mapRouter } from "~/server/api/routers/map";
 import { combatRouter } from "~/server/api/routers/combat";
-import { characterRouter } from "~/server/api/routers/character";
 import { hallOfTheDeadRouter } from "~/server/api/routers/hallOfTheDead";
 import { jobsRouter } from "~/server/api/routers/jobs";
 import { recipesRouter } from "~/server/api/routers/recipes";
 import { gatheringRouter } from "~/server/api/routers/gathering";
-import { equipmentRouter } from "~/server/api/routers/equipment";
-import { skillsRouter } from "~/server/api/routers/skills";
 import { profileRouter } from "~/server/api/routers/profile";
 import { battleRouter } from "~/server/api/routers/battle";
 import { usersRouter } from "~/server/api/routers/users";
-import { bankRouter } from "~/server/api/routers/bank";
 import { leaderboardsRouter } from "~/server/api/routers/leaderboards";
-import { worldRouter } from "~/server/api/routers/world";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
 /**
  * This is the primary router for your server.
  *
  * All routers added in /api/routers should be manually added here.
+ *
+ * Router Discipline:
+ * - Public routers (publicProcedure): leaderboards, profile viewing, hall of the dead
+ * - Protected routers (protectedProcedure): bank, inventory, movement, combat, character progression
+ * - Double-check that sensitive operations (bank transfers, movement, combat) are protected
  */
 export const appRouter = createTRPCRouter({
   post: postRouter,

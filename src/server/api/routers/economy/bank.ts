@@ -65,6 +65,7 @@ export const bankRouter = createTRPCRouter({
   }),
 
   // Transfer coins from wallet to another player's wallet
+  // TODO: rate limit transfer actions (e.g., max 10 transfers per minute)
   transfer: protectedProcedure
     .input(
       z.object({
@@ -201,6 +202,7 @@ export const bankRouter = createTRPCRouter({
     }),
 
   // Deposit coins from wallet to bank
+  // TODO: rate limit deposit actions (e.g., max 20 deposits per minute)
   deposit: protectedProcedure
     .input(
       z.object({
@@ -292,6 +294,7 @@ export const bankRouter = createTRPCRouter({
     }),
 
   // Withdraw coins from bank to wallet
+  // TODO: rate limit withdraw actions (e.g., max 20 withdrawals per minute)
   withdraw: protectedProcedure
     .input(
       z.object({
@@ -385,6 +388,7 @@ export const bankRouter = createTRPCRouter({
     }),
 
   // Claim daily interest (10% of bank balance)
+  // Note: Already rate-limited by daily claim check, but consider additional rate limiting
   claimDailyInterest: protectedProcedure.mutation(async ({ ctx }) => {
     const userId = ctx.session.user.id;
 

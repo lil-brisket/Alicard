@@ -85,6 +85,8 @@ export const mapRouter = createTRPCRouter({
     }),
 
   // Move player to new position
+  // TODO: rate limit movement actions (e.g., max 1 move per second, 60 moves per minute)
+  // This prevents accidental DDOS-by-player and movement abuse
   move: protectedProcedure
     .input(
       z.object({

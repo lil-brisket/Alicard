@@ -56,15 +56,17 @@ model User {
   createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
   username              String              @unique
+  // Account-level flags (banned, admin, tester can be added here)
   accounts              Account[]
   characters            Character[]
   player                Player?
   posts                 Post[]
   sessions              Session[]
   profile               PlayerProfile?
-  battles               Battle[]
+  // Note: Battle moved to playerId - battles are character-specific, not account-level
   bankTransactionsFrom  BankTransaction[]   @relation("BankTransactionFrom")
   bankTransactionsTo    BankTransaction[]   @relation("BankTransactionTo")
+  // Leaderboard stats are account-level aggregations (okay to keep on User)
   leaderboardStats      PlayerLeaderboardStats?
   statsPeriods          PlayerStatsPeriod[]
 }
@@ -90,7 +92,24 @@ model Character {
   maxHp          Int
   deathAt        DateTime?
   deathReason    String?
+  position       Position? // World map position
   user           User      @relation(fields: [userId], references: [id])
+}
+
+// Simple position model for character world map tracking
+// Separate from MapPosition which is more complex (tile-based)
+model Position {
+  id          String    @id @default(cuid())
+  characterId String    @unique
+  x           Int
+  y           Int
+  zone        String    // Zone name/identifier
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+
+  @@index([x, y])
+  @@index([zone])
 }
 
 model VerificationToken {
@@ -113,6 +132,7 @@ model Player {
   createdAt                  DateTime            @default(now())
   updatedAt                  DateTime            @updatedAt
   bankAccount                BankAccount?
+  battles                    Battle[]           // Character-specific battles
   combatLogs                 CombatLog[]
   deathLogs                  DeathLog[]
   equipment                  Equipment?
@@ -138,10 +158,22 @@ model Player {
 model PlayerStats {
   id             String   @id @default(cuid())
   playerId       String   @unique
+  // Base stats (permanent, from level-ups and base character)
+  vitalityBase   Int      @default(10)
+  strengthBase   Int      @default(10)
+  speedBase      Int      @default(10)
+  dexterityBase  Int      @default(10)
+  // Trained stats (from training, can decay, soft caps apply)
+  vitalityTrain  Int      @default(0)
+  strengthTrain  Int      @default(0)
+  speedTrain     Int      @default(0)
+  dexterityTrain Int      @default(0)
+  // Computed totals (base + trained) - can be calculated or stored for performance
   vitality       Int      @default(10)
   strength       Int      @default(10)
   speed          Int      @default(10)
   dexterity      Int      @default(10)
+  // HP/SP
   maxHP          Int      @default(100)
   currentHP      Int      @default(100)
   maxSP          Int      @default(50)
@@ -285,7 +317,7 @@ model InventoryItem {
   id        String   @id @default(cuid())
   playerId  String
   itemId    String
-  quantity  Int      @default(1)
+  quantity  Int      @default(1) // Must be >= 0, enforced at application level
   createdAt DateTime @default(now())
   item      Item     @relation(fields: [itemId], references: [id])
   player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
@@ -293,6 +325,7 @@ model InventoryItem {
   @@unique([playerId, itemId])
   @@index([playerId])
   @@index([itemId])
+  // Note: Stack safety enforced in application logic (quantity >= 0, quantity <= item.maxStack if stackable)
 }
 
 model Equipment {
@@ -432,16 +465,17 @@ model CombatLog {
 }
 
 model DeathLog {
-  id         String   @id @default(cuid())
-  playerId   String
-  deathCount Int
-  cause      String?
-  locationX  Int?
-  locationY  Int?
-  createdAt  DateTime @default(now())
-  player     Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  id          String   @id @default(cuid())
+  playerId    String   // Character/Player ID (character-specific death tracking)
+  cause       String   // Cause of death (required for permadeath integrity)
+  location    String?  // Location/zone where death occurred
+  locationX   Int?     // X coordinate if applicable
+  locationY   Int?     // Y coordinate if applicable
+  createdAt   DateTime @default(now())
+  player      Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
 
   @@index([playerId])
+  @@index([createdAt])
 }
 
 model DeathRecord {
@@ -507,7 +541,8 @@ model BankAccount {
   id                  String            @id @default(cuid())
   playerId            String            @unique
   balanceCoins        Int               @default(0)
-  lastInterestClaimedAt DateTime?
+  lastInterestClaimedAt DateTime?       // When user manually claimed interest
+  lastInterestApplied DateTime?         // When automatic interest was last applied (audit safety)
   vaultLevel          Int               @default(1)
   updatedAt           DateTime          @updatedAt
   player              Player            @relation(fields: [playerId], references: [id], onDelete: Cascade)
@@ -979,7 +1014,7 @@ model Monster {
 
 model Battle {
   id          String      @id @default(cuid())
-  userId      String
+  playerId    String      // Changed from userId - battles are character-specific, not account-level
   monsterId   String
   status      BattleStatus @default(ACTIVE)
   turnNumber  Int         @default(1)
@@ -989,12 +1024,12 @@ model Battle {
   log         Json        @default("[]")
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
-  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  player      Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
   monster     Monster     @relation(fields: [monsterId], references: [id])
 
-  @@index([userId])
+  @@index([playerId])
   @@index([status])
-  @@index([userId, status])
+  @@index([playerId, status])
 }
 
 model PlayerLeaderboardStats {
