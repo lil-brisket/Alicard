@@ -142,3 +142,95 @@ export const protectedProcedure = t.procedure
       },
     });
   });
+
+/**
+ * Moderator procedure (MODERATOR or ADMIN role required)
+ *
+ * Requires user to be authenticated and have MODERATOR or ADMIN role.
+ */
+export const moderatorProcedure = t.procedure
+  .use(timingMiddleware)
+  .use(async ({ ctx, next }) => {
+    if (!ctx.session?.user) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+
+    if (!ctx.db) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Database client is not available",
+      });
+    }
+
+    // Fetch user from database to check role
+    const user = await ctx.db.user.findUnique({
+      where: { id: ctx.session.user.id },
+      select: { id: true, role: true },
+    });
+
+    if (!user) {
+      throw new TRPCError({ code: "UNAUTHORIZED", message: "User not found" });
+    }
+
+    if (user.role !== "MODERATOR" && user.role !== "ADMIN") {
+      throw new TRPCError({
+        code: "FORBIDDEN",
+        message: "Moderator or Admin role required",
+      });
+    }
+
+    return next({
+      ctx: {
+        session: { ...ctx.session, user: ctx.session.user },
+        db: ctx.db,
+        headers: ctx.headers,
+        userRole: user.role,
+      },
+    });
+  });
+
+/**
+ * Admin procedure (ADMIN role required)
+ *
+ * Requires user to be authenticated and have ADMIN role.
+ */
+export const adminProcedure = t.procedure
+  .use(timingMiddleware)
+  .use(async ({ ctx, next }) => {
+    if (!ctx.session?.user) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+
+    if (!ctx.db) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Database client is not available",
+      });
+    }
+
+    // Fetch user from database to check role
+    const user = await ctx.db.user.findUnique({
+      where: { id: ctx.session.user.id },
+      select: { id: true, role: true },
+    });
+
+    if (!user) {
+      throw new TRPCError({ code: "UNAUTHORIZED", message: "User not found" });
+    }
+
+    if (user.role !== "ADMIN") {
+      throw new TRPCError({
+        code: "FORBIDDEN",
+        message: "Admin role required",
+      });
+    }
+
+    return next({
+      ctx: {
+        session: { ...ctx.session, user: ctx.session.user },
+        db: ctx.db,
+        headers: ctx.headers,
+        userRole: user.role,
+      },
+    });
+  });
