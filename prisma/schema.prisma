@@ -49,6 +49,7 @@ enum UserRole {
   PLAYER
   MODERATOR
   ADMIN
+  CONTENT
 }
 
 model User {
@@ -62,7 +63,10 @@ model User {
   createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
   username              String              @unique
-  role                  UserRole            @default(PLAYER)
+  role                  UserRole            @default(PLAYER) // Legacy single role for backward compatibility
+  // Player created data
+  credit                Int                 @default(0) // Player-created credit/currency
+  deletedDates          Json?               // Array of deletion dates for tracking
   // Moderation fields
   isBanned              Boolean             @default(false)
   bannedUntil           DateTime?
@@ -85,6 +89,10 @@ model User {
   leaderboardStats      PlayerLeaderboardStats?
   statsPeriods          PlayerStatsPeriod[]
   adminActions          AdminActionLog[]    @relation("AdminActor")
+  // Multi-role support
+  roles                 UserRoleAssignment[]
+  // IP history tracking
+  ipHistory             UserIpHistory[]
 }
 
 model Character {
@@ -102,6 +110,7 @@ model Character {
   updatedAt      DateTime  @updatedAt
   currentHp      Int
   deaths         Int       @default(0)
+  permDeaths     Int       @default(0) // Admin-editable permanent death count
   floor          Int       @default(1)
   gender         String
   location       String    @default("Town Square")
@@ -1162,4 +1171,31 @@ model MapZone {
   updatedAt   DateTime @updatedAt
 
   @@index([isArchived])
+}
+
+// Multi-role support: Many-to-many relationship between User and UserRole
+model UserRoleAssignment {
+  id        String   @id @default(cuid())
+  userId    String
+  role      UserRole
+  assignedAt DateTime @default(now())
+  assignedBy String?  // Admin who assigned the role
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, role])
+  @@index([userId])
+  @@index([role])
+}
+
+// IP history tracking for moderation
+model UserIpHistory {
+  id        String   @id @default(cuid())
+  userId    String
+  ipAddress String
+  userAgent String?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([ipAddress])
 }

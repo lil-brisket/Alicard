@@ -143,11 +143,16 @@ src/
 
 ### 3.4 Prisma Rules
 
+- **MIGRATIONS ONLY**: All schema changes MUST go through migrations
+- **NEVER** use `prisma db push` - it's disabled in this project
+- **ALWAYS** create migrations: `npm run db:generate`
 - All model changes must be incremental
 - Avoid hard deletes for major entities; use flags:
   - `isActive`
   - `isDeleted`
   - `deathCount`
+- Before committing schema changes, run `npm run db:check`
+- Migration names must be descriptive: `add_user_email_verification`, not `update`
 
 ### 3.5 Game Logic Rules
 
@@ -281,7 +286,37 @@ When committing changes, AI must:
 - Use breaking change notation when applicable
 - Never use generic messages like "update files" or "fix stuff"
 
-## 6. Summary Checklist
+## 6. Database Migration Rules
+
+### 6.1 Mandatory Migration Workflow
+
+**CRITICAL**: This project enforces production-grade migration policies.
+
+- ✅ **ALWAYS** use `npm run db:generate` for schema changes
+- ❌ **NEVER** use `prisma db push` (disabled)
+- ✅ **ALWAYS** run `npm run db:check` before committing schema changes
+- ✅ **ALWAYS** commit both `schema.prisma` and migration files together
+- ✅ Use descriptive migration names following the pattern: `add_<feature>`, `update_<model>_<field>`, `remove_<deprecated>`
+
+### 6.2 Schema Change Process
+
+When modifying `prisma/schema.prisma`:
+
+1. Make the change in `schema.prisma`
+2. Run `npm run db:generate` (creates migration)
+3. Review the generated migration SQL
+4. Run `npm run db:check` to verify no drift
+5. Commit both files together
+
+### 6.3 AI Behavior for Schema Changes
+
+AI must:
+- Never suggest using `db:push`
+- Always create migrations for schema changes
+- Verify migrations before completing the task
+- Include migration files in any schema-related commits
+
+## 7. Summary Checklist
 
 AI must always abide by:
 
@@ -294,4 +329,6 @@ AI must always abide by:
 - ✅ Maintain the MMO design rules
 - ✅ Keep turn-based gameplay intact
 - ✅ Use Conventional Commit Messages for all commits
+- ✅ **Use migrations for ALL database schema changes**
+- ✅ **Never use `prisma db push`**
 

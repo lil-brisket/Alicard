@@ -1,17 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { api } from "~/trpc/react";
 import { toast } from "react-hot-toast";
 import type { RouterOutputs } from "~/trpc/react";
 
 type User = RouterOutputs["admin"]["users"]["getUserById"];
 
+const ALL_ROLES = ["PLAYER", "MODERATOR", "ADMIN", "CONTENT"] as const;
+type UserRole = (typeof ALL_ROLES)[number];
+
 export function UserDetailForm({ user }: { user: User }) {
   const utils = api.useUtils();
   const [banReason, setBanReason] = useState("");
+  const [banDuration, setBanDuration] = useState<"1h" | "6h" | "12h" | "24h" | "3d" | "7d" | "30d" | "permanent">("24h");
   const [muteReason, setMuteReason] = useState("");
+  const [muteDuration, setMuteDuration] = useState<"15m" | "30m" | "1h" | "6h" | "12h" | "24h" | "3d" | "7d" | "permanent">("1h");
   const [role, setRole] = useState(user.role);
+  const [selectedRoles, setSelectedRoles] = useState<UserRole[]>(
+    user.roles?.map((r) => r.role as UserRole) ?? [user.role as UserRole]
+  );
+  const [credit, setCredit] = useState(user.credit ?? 0);
 
   const updateUser = api.admin.users.updateUser.useMutation({
     onSuccess: () => {
@@ -79,42 +88,84 @@ export function UserDetailForm({ user }: { user: User }) {
     <div className="space-y-4">
       <div>
         <label className="block text-sm font-medium text-slate-300">
-          Role (Admin only)
+          Roles (Admin only) - Multi-select
         </label>
-        <select
-          value={role}
-          onChange={(e) => setRole(e.target.value as "PLAYER" | "MODERATOR" | "ADMIN")}
-          className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
-          disabled={updateUser.isPending}
-        >
-          <option value="PLAYER">PLAYER</option>
-          <option value="MODERATOR">MODERATOR</option>
-          <option value="ADMIN">ADMIN</option>
-        </select>
+        <div className="mt-2 space-y-2">
+          {ALL_ROLES.map((r) => (
+            <label key={r} className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={selectedRoles.includes(r)}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setSelectedRoles([...selectedRoles, r]);
+                  } else {
+                    setSelectedRoles(selectedRoles.filter((role) => role !== r));
+                  }
+                }}
+                className="rounded border-slate-700 bg-slate-800 text-cyan-600 focus:ring-cyan-500"
+                disabled={updateUser.isPending}
+              />
+              <span className="text-sm text-slate-300">{r}</span>
+            </label>
+          ))}
+        </div>
         <button
           onClick={() =>
             updateUser.mutate({
               id: user.id,
-              role: role as "PLAYER" | "MODERATOR" | "ADMIN",
+              roles: selectedRoles,
             })
           }
-          disabled={updateUser.isPending || role === user.role}
+          disabled={updateUser.isPending || selectedRoles.length === 0}
           className="mt-2 rounded-lg bg-cyan-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-cyan-700 disabled:opacity-50"
         >
-          Update Role
+          Update Roles
         </button>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-slate-300">
+          Credit
+        </label>
+        <div className="mt-1 flex gap-2">
+          <input
+            type="number"
+            value={credit}
+            onChange={(e) => setCredit(Number(e.target.value))}
+            className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
+            disabled={updateUser.isPending}
+          />
+          <button
+            onClick={() =>
+              updateUser.mutate({
+                id: user.id,
+                credit,
+              })
+            }
+            disabled={updateUser.isPending}
+            className="rounded-lg bg-cyan-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-cyan-700 disabled:opacity-50"
+          >
+            Update
+          </button>
+        </div>
       </div>
 
       <div className="border-t border-slate-800 pt-4">
         <h4 className="mb-2 text-sm font-semibold text-slate-300">Ban User</h4>
         {user.isBanned ? (
-          <button
-            onClick={() => unbanUser.mutate({ id: user.id })}
-            disabled={unbanUser.isPending}
-            className="rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700 disabled:opacity-50"
-          >
-            Unban User
-          </button>
+          <div className="space-y-2">
+            <p className="text-sm text-slate-400">
+              Banned until: {user.bannedUntil ? new Date(user.bannedUntil).toLocaleString() : "Permanent"}
+            </p>
+            <button
+              onClick={() => unbanUser.mutate({ id: user.id })}
+              disabled={unbanUser.isPending}
+              className="rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700 disabled:opacity-50"
+            >
+              Unban User
+            </button>
+          </div>
         ) : (
           <div className="space-y-2">
             <input
@@ -124,11 +175,26 @@ export function UserDetailForm({ user }: { user: User }) {
               onChange={(e) => setBanReason(e.target.value)}
               className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
             />
+            <select
+              value={banDuration}
+              onChange={(e) => setBanDuration(e.target.value as typeof banDuration)}
+              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
+            >
+              <option value="1h">1 Hour</option>
+              <option value="6h">6 Hours</option>
+              <option value="12h">12 Hours</option>
+              <option value="24h">24 Hours</option>
+              <option value="3d">3 Days</option>
+              <option value="7d">7 Days</option>
+              <option value="30d">30 Days</option>
+              <option value="permanent">Permanent</option>
+            </select>
             <button
               onClick={() =>
                 banUser.mutate({
                   id: user.id,
                   reason: banReason,
+                  duration: banDuration,
                 })
               }
               disabled={banUser.isPending || !banReason}
@@ -143,13 +209,18 @@ export function UserDetailForm({ user }: { user: User }) {
       <div className="border-t border-slate-800 pt-4">
         <h4 className="mb-2 text-sm font-semibold text-slate-300">Mute User</h4>
         {user.isMuted ? (
-          <button
-            onClick={() => unmuteUser.mutate({ id: user.id })}
-            disabled={unmuteUser.isPending}
-            className="rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700 disabled:opacity-50"
-          >
-            Unmute User
-          </button>
+          <div className="space-y-2">
+            <p className="text-sm text-slate-400">
+              Muted until: {user.mutedUntil ? new Date(user.mutedUntil).toLocaleString() : "Permanent"}
+            </p>
+            <button
+              onClick={() => unmuteUser.mutate({ id: user.id })}
+              disabled={unmuteUser.isPending}
+              className="rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700 disabled:opacity-50"
+            >
+              Unmute User
+            </button>
+          </div>
         ) : (
           <div className="space-y-2">
             <input
@@ -159,11 +230,27 @@ export function UserDetailForm({ user }: { user: User }) {
               onChange={(e) => setMuteReason(e.target.value)}
               className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
             />
+            <select
+              value={muteDuration}
+              onChange={(e) => setMuteDuration(e.target.value as typeof muteDuration)}
+              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
+            >
+              <option value="15m">15 Minutes</option>
+              <option value="30m">30 Minutes</option>
+              <option value="1h">1 Hour</option>
+              <option value="6h">6 Hours</option>
+              <option value="12h">12 Hours</option>
+              <option value="24h">24 Hours</option>
+              <option value="3d">3 Days</option>
+              <option value="7d">7 Days</option>
+              <option value="permanent">Permanent</option>
+            </select>
             <button
               onClick={() =>
                 muteUser.mutate({
                   id: user.id,
                   reason: muteReason,
+                  duration: muteDuration,
                 })
               }
               disabled={muteUser.isPending || !muteReason}

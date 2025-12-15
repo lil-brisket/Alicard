@@ -109,7 +109,9 @@ export const ModelName = {
   ItemTemplate: 'ItemTemplate',
   MonsterTemplate: 'MonsterTemplate',
   QuestTemplate: 'QuestTemplate',
-  MapZone: 'MapZone'
+  MapZone: 'MapZone',
+  UserRoleAssignment: 'UserRoleAssignment',
+  UserIpHistory: 'UserIpHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -180,6 +182,8 @@ export const UserScalarFieldEnum = {
   updatedAt: 'updatedAt',
   username: 'username',
   role: 'role',
+  credit: 'credit',
+  deletedDates: 'deletedDates',
   isBanned: 'isBanned',
   bannedUntil: 'bannedUntil',
   banReason: 'banReason',
@@ -207,6 +211,7 @@ export const CharacterScalarFieldEnum = {
   updatedAt: 'updatedAt',
   currentHp: 'currentHp',
   deaths: 'deaths',
+  permDeaths: 'permDeaths',
   floor: 'floor',
   gender: 'gender',
   location: 'location',
@@ -987,6 +992,28 @@ export const MapZoneScalarFieldEnum = {
 } as const
 
 export type MapZoneScalarFieldEnum = (typeof MapZoneScalarFieldEnum)[keyof typeof MapZoneScalarFieldEnum]
+
+
+export const UserRoleAssignmentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  role: 'role',
+  assignedAt: 'assignedAt',
+  assignedBy: 'assignedBy'
+} as const
+
+export type UserRoleAssignmentScalarFieldEnum = (typeof UserRoleAssignmentScalarFieldEnum)[keyof typeof UserRoleAssignmentScalarFieldEnum]
+
+
+export const UserIpHistoryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt'
+} as const
+
+export type UserIpHistoryScalarFieldEnum = (typeof UserIpHistoryScalarFieldEnum)[keyof typeof UserIpHistoryScalarFieldEnum]
 
 
 export const SortOrder = {

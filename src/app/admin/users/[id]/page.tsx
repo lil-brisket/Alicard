@@ -1,9 +1,95 @@
 "use client";
 
-import { use } from "react";
+import { use, useState } from "react";
 import Link from "next/link";
 import { api } from "~/trpc/react";
+import { toast } from "react-hot-toast";
 import { UserDetailForm } from "./_components/user-detail-form";
+
+function CharacterCard({ 
+  character, 
+  userId 
+}: { 
+  character: { id: string; name: string; level: number; currentHp: number; maxHp: number; deaths: number; permDeaths?: number | null }; 
+  userId: string;
+}) {
+  const utils = api.useUtils();
+  const [permDeaths, setPermDeaths] = useState(character.permDeaths ?? 0);
+  const [reason, setReason] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+
+  const updatePermDeaths = api.admin.users.updatePermDeaths.useMutation({
+    onSuccess: () => {
+      toast.success("Perm deaths updated");
+      void utils.admin.users.getUserById.invalidate({ id: userId });
+      setIsEditing(false);
+      setReason("");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  return (
+    <div className="rounded border border-slate-800 bg-slate-800/30 p-3">
+      <div className="font-medium">{character.name}</div>
+      <div className="text-sm text-slate-400">
+        Level {character.level} | HP: {character.currentHp}/{character.maxHp} |
+        Deaths: {character.deaths} | Perm Deaths: {character.permDeaths ?? 0}
+      </div>
+      {isEditing ? (
+        <div className="mt-2 space-y-2">
+          <input
+            type="number"
+            value={permDeaths}
+            onChange={(e) => setPermDeaths(Number(e.target.value))}
+            className="w-full rounded-lg border border-slate-700 bg-slate-800 px-2 py-1 text-sm text-slate-100"
+            min="0"
+          />
+          <input
+            type="text"
+            placeholder="Reason for change..."
+            value={reason}
+            onChange={(e) => setReason(e.target.value)}
+            className="w-full rounded-lg border border-slate-700 bg-slate-800 px-2 py-1 text-sm text-slate-100"
+          />
+          <div className="flex gap-2">
+            <button
+              onClick={() => {
+                updatePermDeaths.mutate({
+                  characterId: character.id,
+                  permDeaths,
+                  reason,
+                });
+              }}
+              disabled={updatePermDeaths.isPending || !reason}
+              className="rounded bg-cyan-600 px-3 py-1 text-xs text-white transition hover:bg-cyan-700 disabled:opacity-50"
+            >
+              Save
+            </button>
+            <button
+              onClick={() => {
+                setIsEditing(false);
+                setPermDeaths(character.permDeaths ?? 0);
+                setReason("");
+              }}
+              className="rounded bg-slate-600 px-3 py-1 text-xs text-white transition hover:bg-slate-700"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      ) : (
+        <button
+          onClick={() => setIsEditing(true)}
+          className="mt-2 rounded bg-cyan-600 px-3 py-1 text-xs text-white transition hover:bg-cyan-700"
+        >
+          Edit Perm Deaths
+        </button>
+      )}
+    </div>
+  );
+}
 
 export default function AdminUserDetailPage({
   params,
@@ -74,21 +160,38 @@ export default function AdminUserDetailPage({
             {user.characters.length > 0 ? (
               <div className="space-y-2">
                 {user.characters.map((char) => (
-                  <div
-                    key={char.id}
-                    className="rounded border border-slate-800 bg-slate-800/30 p-3"
-                  >
-                    <div className="font-medium">{char.name}</div>
-                    <div className="text-sm text-slate-400">
-                      Level {char.level} | HP: {char.currentHp}/{char.maxHp} |
-                      Deaths: {char.deaths}
-                    </div>
-                  </div>
+                  <CharacterCard key={char.id} character={char} userId={user.id} />
                 ))}
               </div>
             ) : (
               <p className="text-sm text-slate-400">No characters</p>
             )}
+          </div>
+
+          <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+            <h3 className="mb-4 text-lg font-semibold text-cyan-400">
+              Player Data
+            </h3>
+            <div className="space-y-2 text-sm">
+              <div>
+                <span className="text-slate-400">Created:</span>{" "}
+                <span className="text-slate-200">
+                  {new Date(user.createdAt).toLocaleString()}
+                </span>
+              </div>
+              <div>
+                <span className="text-slate-400">Credit:</span>{" "}
+                <span className="text-slate-200">{user.credit ?? 0}</span>
+              </div>
+              {user.deletedAt && (
+                <div>
+                  <span className="text-slate-400">Deleted:</span>{" "}
+                  <span className="text-red-400">
+                    {new Date(user.deletedAt).toLocaleString()}
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">

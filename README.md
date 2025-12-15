@@ -59,13 +59,19 @@ Ensure your PostgreSQL server is running and update `DATABASE_URL` in `.env` wit
 
 ### 4. Run Database Migrations
 
-**Important:** If you have existing data, run the cleanup script first to handle duplicate records:
+**⚠️ IMPORTANT: Production Workflow**
+
+This project uses **Prisma Migrations** exclusively. Never use `prisma db push` in production.
+
+**For Development:**
+
+If you have existing data, run the cleanup script first to handle duplicate records:
 
 ```bash
 npm run db:cleanup
 ```
 
-Then run migrations:
+Then create and apply migrations:
 
 ```bash
 npm run db:generate
@@ -74,8 +80,25 @@ npm run db:generate
 This will:
 
 - Generate Prisma Client
-- Apply database migrations
-- Create all necessary tables
+- Create a new migration file (if schema changed)
+- Apply all pending migrations
+- Create/update all necessary tables
+
+**For Production:**
+
+```bash
+npm run db:migrate
+```
+
+This applies all pending migrations without creating new ones.
+
+**Checking for Drift:**
+
+Before committing, always check for migration drift:
+
+```bash
+npm run db:check
+```
 
 **Note:** The cleanup script merges duplicate `InventoryItem` records (same playerId + itemId) by summing quantities, and handles duplicate `Item` keys. If you're starting fresh, you can skip the cleanup step.
 
@@ -87,18 +110,42 @@ npm run dev
 
 The game will be available at [http://localhost:3000](http://localhost:3000)
 
+## Database Migration Workflow
+
+**⚠️ CRITICAL: Production-Grade Migration Policy**
+
+This project enforces a **migration-only workflow**. All database schema changes must go through Prisma migrations.
+
+### Quick Reference
+
+- **Development**: `npm run db:generate` - Create and apply migration
+- **Production**: `npm run db:migrate` - Apply pending migrations
+- **Check Drift**: `npm run db:check` - Verify schema sync (run before commits)
+- **❌ NEVER**: `prisma db push` (disabled)
+
+### Full Documentation
+
+See [`prisma/MIGRATION_WORKFLOW.md`](./prisma/MIGRATION_WORKFLOW.md) for complete workflow documentation.
+
 ## Available Scripts
 
 - `npm run dev` - Start development server with Turbo
 - `npm run build` - Build for production
 - `npm run start` - Start production server
-- `npm run db:generate` - Generate Prisma Client and run migrations
-- `npm run db:push` - Push schema changes to database (dev only)
+- `npm run db:generate` - Create migration and apply it (development)
+- `npm run db:migrate` - Apply pending migrations (production)
+- `npm run db:check` - Check for migration drift (run before commits)
 - `npm run db:cleanup` - Clean up duplicate records before migration (if needed)
 - `npm run db:seed` - Seed the database with initial game data
 - `npm run db:studio` - Open Prisma Studio (database GUI)
 - `npm run lint` - Run ESLint
 - `npm run typecheck` - Run TypeScript type checking
+
+**⚠️ Database Schema Changes:**
+
+- **ALWAYS** use `npm run db:generate` to create migrations
+- **NEVER** use `prisma db push` (disabled in this project)
+- **ALWAYS** run `npm run db:check` before committing schema changes
 
 ## Tech Stack
 

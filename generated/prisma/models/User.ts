@@ -20,8 +20,18 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
+}
+
+export type UserAvgAggregateOutputType = {
+  credit: number | null
+}
+
+export type UserSumAggregateOutputType = {
+  credit: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -36,6 +46,7 @@ export type UserMinAggregateOutputType = {
   updatedAt: Date | null
   username: string | null
   role: $Enums.UserRole | null
+  credit: number | null
   isBanned: boolean | null
   bannedUntil: Date | null
   banReason: string | null
@@ -57,6 +68,7 @@ export type UserMaxAggregateOutputType = {
   updatedAt: Date | null
   username: string | null
   role: $Enums.UserRole | null
+  credit: number | null
   isBanned: boolean | null
   bannedUntil: Date | null
   banReason: string | null
@@ -78,6 +90,8 @@ export type UserCountAggregateOutputType = {
   updatedAt: number
   username: number
   role: number
+  credit: number
+  deletedDates: number
   isBanned: number
   bannedUntil: number
   banReason: number
@@ -88,6 +102,14 @@ export type UserCountAggregateOutputType = {
   _all: number
 }
 
+
+export type UserAvgAggregateInputType = {
+  credit?: true
+}
+
+export type UserSumAggregateInputType = {
+  credit?: true
+}
 
 export type UserMinAggregateInputType = {
   id?: true
@@ -101,6 +123,7 @@ export type UserMinAggregateInputType = {
   updatedAt?: true
   username?: true
   role?: true
+  credit?: true
   isBanned?: true
   bannedUntil?: true
   banReason?: true
@@ -122,6 +145,7 @@ export type UserMaxAggregateInputType = {
   updatedAt?: true
   username?: true
   role?: true
+  credit?: true
   isBanned?: true
   bannedUntil?: true
   banReason?: true
@@ -143,6 +167,8 @@ export type UserCountAggregateInputType = {
   updatedAt?: true
   username?: true
   role?: true
+  credit?: true
+  deletedDates?: true
   isBanned?: true
   bannedUntil?: true
   banReason?: true
@@ -191,6 +217,18 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -221,6 +259,8 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
+  _avg?: UserAvgAggregateInputType
+  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
@@ -237,6 +277,8 @@ export type UserGroupByOutputType = {
   updatedAt: Date
   username: string
   role: $Enums.UserRole
+  credit: number
+  deletedDates: runtime.JsonValue | null
   isBanned: boolean
   bannedUntil: Date | null
   banReason: string | null
@@ -245,6 +287,8 @@ export type UserGroupByOutputType = {
   muteReason: string | null
   deletedAt: Date | null
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -279,6 +323,8 @@ export type UserWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   username?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
+  credit?: Prisma.IntFilter<"User"> | number
+  deletedDates?: Prisma.JsonNullableFilter<"User">
   isBanned?: Prisma.BoolFilter<"User"> | boolean
   bannedUntil?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   banReason?: Prisma.StringNullableFilter<"User"> | string | null
@@ -297,6 +343,8 @@ export type UserWhereInput = {
   leaderboardStats?: Prisma.XOR<Prisma.PlayerLeaderboardStatsNullableScalarRelationFilter, Prisma.PlayerLeaderboardStatsWhereInput> | null
   statsPeriods?: Prisma.PlayerStatsPeriodListRelationFilter
   adminActions?: Prisma.AdminActionLogListRelationFilter
+  roles?: Prisma.UserRoleAssignmentListRelationFilter
+  ipHistory?: Prisma.UserIpHistoryListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -311,6 +359,8 @@ export type UserOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   username?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  credit?: Prisma.SortOrder
+  deletedDates?: Prisma.SortOrderInput | Prisma.SortOrder
   isBanned?: Prisma.SortOrder
   bannedUntil?: Prisma.SortOrderInput | Prisma.SortOrder
   banReason?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -329,6 +379,8 @@ export type UserOrderByWithRelationInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsOrderByWithRelationInput
   statsPeriods?: Prisma.PlayerStatsPeriodOrderByRelationAggregateInput
   adminActions?: Prisma.AdminActionLogOrderByRelationAggregateInput
+  roles?: Prisma.UserRoleAssignmentOrderByRelationAggregateInput
+  ipHistory?: Prisma.UserIpHistoryOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -346,6 +398,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
+  credit?: Prisma.IntFilter<"User"> | number
+  deletedDates?: Prisma.JsonNullableFilter<"User">
   isBanned?: Prisma.BoolFilter<"User"> | boolean
   bannedUntil?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   banReason?: Prisma.StringNullableFilter<"User"> | string | null
@@ -364,6 +418,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   leaderboardStats?: Prisma.XOR<Prisma.PlayerLeaderboardStatsNullableScalarRelationFilter, Prisma.PlayerLeaderboardStatsWhereInput> | null
   statsPeriods?: Prisma.PlayerStatsPeriodListRelationFilter
   adminActions?: Prisma.AdminActionLogListRelationFilter
+  roles?: Prisma.UserRoleAssignmentListRelationFilter
+  ipHistory?: Prisma.UserIpHistoryListRelationFilter
 }, "id" | "email" | "username">
 
 export type UserOrderByWithAggregationInput = {
@@ -378,6 +434,8 @@ export type UserOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   username?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  credit?: Prisma.SortOrder
+  deletedDates?: Prisma.SortOrderInput | Prisma.SortOrder
   isBanned?: Prisma.SortOrder
   bannedUntil?: Prisma.SortOrderInput | Prisma.SortOrder
   banReason?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -386,8 +444,10 @@ export type UserOrderByWithAggregationInput = {
   muteReason?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
+  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
+  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -405,6 +465,8 @@ export type UserScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   username?: Prisma.StringWithAggregatesFilter<"User"> | string
   role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
+  credit?: Prisma.IntWithAggregatesFilter<"User"> | number
+  deletedDates?: Prisma.JsonNullableWithAggregatesFilter<"User">
   isBanned?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   bannedUntil?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   banReason?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -426,6 +488,8 @@ export type UserCreateInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -444,6 +508,8 @@ export type UserCreateInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -458,6 +524,8 @@ export type UserUncheckedCreateInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -476,6 +544,8 @@ export type UserUncheckedCreateInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogUncheckedCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -490,6 +560,8 @@ export type UserUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -508,6 +580,8 @@ export type UserUpdateInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -522,6 +596,8 @@ export type UserUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -540,6 +616,8 @@ export type UserUncheckedUpdateInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUncheckedUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -554,6 +632,8 @@ export type UserCreateManyInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -575,6 +655,8 @@ export type UserUpdateManyMutationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -596,6 +678,8 @@ export type UserUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -622,6 +706,8 @@ export type UserCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   username?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  credit?: Prisma.SortOrder
+  deletedDates?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
   bannedUntil?: Prisma.SortOrder
   banReason?: Prisma.SortOrder
@@ -629,6 +715,10 @@ export type UserCountOrderByAggregateInput = {
   mutedUntil?: Prisma.SortOrder
   muteReason?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+}
+
+export type UserAvgOrderByAggregateInput = {
+  credit?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -643,6 +733,7 @@ export type UserMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   username?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  credit?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
   bannedUntil?: Prisma.SortOrder
   banReason?: Prisma.SortOrder
@@ -664,6 +755,7 @@ export type UserMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   username?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  credit?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
   bannedUntil?: Prisma.SortOrder
   banReason?: Prisma.SortOrder
@@ -671,6 +763,10 @@ export type UserMinOrderByAggregateInput = {
   mutedUntil?: Prisma.SortOrder
   muteReason?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+}
+
+export type UserSumOrderByAggregateInput = {
+  credit?: Prisma.SortOrder
 }
 
 export type UserNullableScalarRelationFilter = {
@@ -848,6 +944,34 @@ export type UserUpdateOneRequiredWithoutAdminActionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAdminActionsInput, Prisma.UserUpdateWithoutAdminActionsInput>, Prisma.UserUncheckedUpdateWithoutAdminActionsInput>
 }
 
+export type UserCreateNestedOneWithoutRolesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRolesInput, Prisma.UserUncheckedCreateWithoutRolesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRolesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutRolesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRolesInput, Prisma.UserUncheckedCreateWithoutRolesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRolesInput
+  upsert?: Prisma.UserUpsertWithoutRolesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRolesInput, Prisma.UserUpdateWithoutRolesInput>, Prisma.UserUncheckedUpdateWithoutRolesInput>
+}
+
+export type UserCreateNestedOneWithoutIpHistoryInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIpHistoryInput, Prisma.UserUncheckedCreateWithoutIpHistoryInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIpHistoryInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutIpHistoryNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIpHistoryInput, Prisma.UserUncheckedCreateWithoutIpHistoryInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIpHistoryInput
+  upsert?: Prisma.UserUpsertWithoutIpHistoryInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutIpHistoryInput, Prisma.UserUpdateWithoutIpHistoryInput>, Prisma.UserUncheckedUpdateWithoutIpHistoryInput>
+}
+
 export type UserCreateWithoutPostsInput = {
   id?: string
   name?: string | null
@@ -860,6 +984,8 @@ export type UserCreateWithoutPostsInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -877,6 +1003,8 @@ export type UserCreateWithoutPostsInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPostsInput = {
@@ -891,6 +1019,8 @@ export type UserUncheckedCreateWithoutPostsInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -908,6 +1038,8 @@ export type UserUncheckedCreateWithoutPostsInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogUncheckedCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPostsInput = {
@@ -938,6 +1070,8 @@ export type UserUpdateWithoutPostsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -955,6 +1089,8 @@ export type UserUpdateWithoutPostsInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostsInput = {
@@ -969,6 +1105,8 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -986,6 +1124,8 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUncheckedUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -1000,6 +1140,8 @@ export type UserCreateWithoutAccountsInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -1017,6 +1159,8 @@ export type UserCreateWithoutAccountsInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -1031,6 +1175,8 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -1048,6 +1194,8 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogUncheckedCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -1078,6 +1226,8 @@ export type UserUpdateWithoutAccountsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1095,6 +1245,8 @@ export type UserUpdateWithoutAccountsInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -1109,6 +1261,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1126,6 +1280,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUncheckedUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -1140,6 +1296,8 @@ export type UserCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -1157,6 +1315,8 @@ export type UserCreateWithoutSessionsInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1171,6 +1331,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -1188,6 +1350,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogUncheckedCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1218,6 +1382,8 @@ export type UserUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1235,6 +1401,8 @@ export type UserUpdateWithoutSessionsInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1249,6 +1417,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1266,6 +1436,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUncheckedUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCharactersInput = {
@@ -1280,6 +1452,8 @@ export type UserCreateWithoutCharactersInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -1297,6 +1471,8 @@ export type UserCreateWithoutCharactersInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCharactersInput = {
@@ -1311,6 +1487,8 @@ export type UserUncheckedCreateWithoutCharactersInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -1328,6 +1506,8 @@ export type UserUncheckedCreateWithoutCharactersInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogUncheckedCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCharactersInput = {
@@ -1358,6 +1538,8 @@ export type UserUpdateWithoutCharactersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1375,6 +1557,8 @@ export type UserUpdateWithoutCharactersInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCharactersInput = {
@@ -1389,6 +1573,8 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1406,6 +1592,8 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUncheckedUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPlayerInput = {
@@ -1420,6 +1608,8 @@ export type UserCreateWithoutPlayerInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -1437,6 +1627,8 @@ export type UserCreateWithoutPlayerInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPlayerInput = {
@@ -1451,6 +1643,8 @@ export type UserUncheckedCreateWithoutPlayerInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -1468,6 +1662,8 @@ export type UserUncheckedCreateWithoutPlayerInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogUncheckedCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPlayerInput = {
@@ -1498,6 +1694,8 @@ export type UserUpdateWithoutPlayerInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1515,6 +1713,8 @@ export type UserUpdateWithoutPlayerInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPlayerInput = {
@@ -1529,6 +1729,8 @@ export type UserUncheckedUpdateWithoutPlayerInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1546,6 +1748,8 @@ export type UserUncheckedUpdateWithoutPlayerInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUncheckedUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBankTransactionsFromInput = {
@@ -1560,6 +1764,8 @@ export type UserCreateWithoutBankTransactionsFromInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -1577,6 +1783,8 @@ export type UserCreateWithoutBankTransactionsFromInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBankTransactionsFromInput = {
@@ -1591,6 +1799,8 @@ export type UserUncheckedCreateWithoutBankTransactionsFromInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -1608,6 +1818,8 @@ export type UserUncheckedCreateWithoutBankTransactionsFromInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogUncheckedCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBankTransactionsFromInput = {
@@ -1627,6 +1839,8 @@ export type UserCreateWithoutBankTransactionsToInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -1644,6 +1858,8 @@ export type UserCreateWithoutBankTransactionsToInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBankTransactionsToInput = {
@@ -1658,6 +1874,8 @@ export type UserUncheckedCreateWithoutBankTransactionsToInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -1675,6 +1893,8 @@ export type UserUncheckedCreateWithoutBankTransactionsToInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogUncheckedCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBankTransactionsToInput = {
@@ -1705,6 +1925,8 @@ export type UserUpdateWithoutBankTransactionsFromInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1722,6 +1944,8 @@ export type UserUpdateWithoutBankTransactionsFromInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBankTransactionsFromInput = {
@@ -1736,6 +1960,8 @@ export type UserUncheckedUpdateWithoutBankTransactionsFromInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1753,6 +1979,8 @@ export type UserUncheckedUpdateWithoutBankTransactionsFromInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUncheckedUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutBankTransactionsToInput = {
@@ -1778,6 +2006,8 @@ export type UserUpdateWithoutBankTransactionsToInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1795,6 +2025,8 @@ export type UserUpdateWithoutBankTransactionsToInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBankTransactionsToInput = {
@@ -1809,6 +2041,8 @@ export type UserUncheckedUpdateWithoutBankTransactionsToInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1826,6 +2060,8 @@ export type UserUncheckedUpdateWithoutBankTransactionsToInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUncheckedUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProfileInput = {
@@ -1840,6 +2076,8 @@ export type UserCreateWithoutProfileInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -1857,6 +2095,8 @@ export type UserCreateWithoutProfileInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProfileInput = {
@@ -1871,6 +2111,8 @@ export type UserUncheckedCreateWithoutProfileInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -1888,6 +2130,8 @@ export type UserUncheckedCreateWithoutProfileInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogUncheckedCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProfileInput = {
@@ -1918,6 +2162,8 @@ export type UserUpdateWithoutProfileInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1935,6 +2181,8 @@ export type UserUpdateWithoutProfileInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfileInput = {
@@ -1949,6 +2197,8 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1966,6 +2216,8 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUncheckedUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutLeaderboardStatsInput = {
@@ -1980,6 +2232,8 @@ export type UserCreateWithoutLeaderboardStatsInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -1997,6 +2251,8 @@ export type UserCreateWithoutLeaderboardStatsInput = {
   bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutLeaderboardStatsInput = {
@@ -2011,6 +2267,8 @@ export type UserUncheckedCreateWithoutLeaderboardStatsInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -2028,6 +2286,8 @@ export type UserUncheckedCreateWithoutLeaderboardStatsInput = {
   bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
   adminActions?: Prisma.AdminActionLogUncheckedCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutLeaderboardStatsInput = {
@@ -2058,6 +2318,8 @@ export type UserUpdateWithoutLeaderboardStatsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2075,6 +2337,8 @@ export type UserUpdateWithoutLeaderboardStatsInput = {
   bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLeaderboardStatsInput = {
@@ -2089,6 +2353,8 @@ export type UserUncheckedUpdateWithoutLeaderboardStatsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2106,6 +2372,8 @@ export type UserUncheckedUpdateWithoutLeaderboardStatsInput = {
   bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUncheckedUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutStatsPeriodsInput = {
@@ -2120,6 +2388,8 @@ export type UserCreateWithoutStatsPeriodsInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -2137,6 +2407,8 @@ export type UserCreateWithoutStatsPeriodsInput = {
   bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
   leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
   adminActions?: Prisma.AdminActionLogCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStatsPeriodsInput = {
@@ -2151,6 +2423,8 @@ export type UserUncheckedCreateWithoutStatsPeriodsInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -2168,6 +2442,8 @@ export type UserUncheckedCreateWithoutStatsPeriodsInput = {
   bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
   adminActions?: Prisma.AdminActionLogUncheckedCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStatsPeriodsInput = {
@@ -2198,6 +2474,8 @@ export type UserUpdateWithoutStatsPeriodsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2215,6 +2493,8 @@ export type UserUpdateWithoutStatsPeriodsInput = {
   bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStatsPeriodsInput = {
@@ -2229,6 +2509,8 @@ export type UserUncheckedUpdateWithoutStatsPeriodsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2246,6 +2528,8 @@ export type UserUncheckedUpdateWithoutStatsPeriodsInput = {
   bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
   adminActions?: Prisma.AdminActionLogUncheckedUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAdminActionsInput = {
@@ -2260,6 +2544,8 @@ export type UserCreateWithoutAdminActionsInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -2277,6 +2563,8 @@ export type UserCreateWithoutAdminActionsInput = {
   bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
   leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAdminActionsInput = {
@@ -2291,6 +2579,8 @@ export type UserUncheckedCreateWithoutAdminActionsInput = {
   updatedAt?: Date | string
   username: string
   role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: boolean
   bannedUntil?: Date | string | null
   banReason?: string | null
@@ -2308,6 +2598,8 @@ export type UserUncheckedCreateWithoutAdminActionsInput = {
   bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAdminActionsInput = {
@@ -2338,6 +2630,8 @@ export type UserUpdateWithoutAdminActionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2355,6 +2649,8 @@ export type UserUpdateWithoutAdminActionsInput = {
   bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAdminActionsInput = {
@@ -2369,6 +2665,8 @@ export type UserUncheckedUpdateWithoutAdminActionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2386,6 +2684,320 @@ export type UserUncheckedUpdateWithoutAdminActionsInput = {
   bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
   leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
   statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutRolesInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: boolean
+  bannedUntil?: Date | string | null
+  banReason?: string | null
+  isMuted?: boolean
+  mutedUntil?: Date | string | null
+  muteReason?: string | null
+  deletedAt?: Date | string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
+  adminActions?: Prisma.AdminActionLogCreateNestedManyWithoutActorInput
+  ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutRolesInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: boolean
+  bannedUntil?: Date | string | null
+  banReason?: string | null
+  isMuted?: boolean
+  mutedUntil?: Date | string | null
+  muteReason?: string | null
+  deletedAt?: Date | string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterUncheckedCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerUncheckedCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
+  adminActions?: Prisma.AdminActionLogUncheckedCreateNestedManyWithoutActorInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutRolesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRolesInput, Prisma.UserUncheckedCreateWithoutRolesInput>
+}
+
+export type UserUpsertWithoutRolesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRolesInput, Prisma.UserUncheckedUpdateWithoutRolesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRolesInput, Prisma.UserUncheckedCreateWithoutRolesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRolesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRolesInput, Prisma.UserUncheckedUpdateWithoutRolesInput>
+}
+
+export type UserUpdateWithoutRolesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMuted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mutedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  muteReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
+  adminActions?: Prisma.AdminActionLogUpdateManyWithoutActorNestedInput
+  ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRolesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMuted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mutedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  muteReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUncheckedUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUncheckedUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
+  adminActions?: Prisma.AdminActionLogUncheckedUpdateManyWithoutActorNestedInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutIpHistoryInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: boolean
+  bannedUntil?: Date | string | null
+  banReason?: string | null
+  isMuted?: boolean
+  mutedUntil?: Date | string | null
+  muteReason?: string | null
+  deletedAt?: Date | string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
+  adminActions?: Prisma.AdminActionLogCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutIpHistoryInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: boolean
+  bannedUntil?: Date | string | null
+  banReason?: string | null
+  isMuted?: boolean
+  mutedUntil?: Date | string | null
+  muteReason?: string | null
+  deletedAt?: Date | string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterUncheckedCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerUncheckedCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
+  adminActions?: Prisma.AdminActionLogUncheckedCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutIpHistoryInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutIpHistoryInput, Prisma.UserUncheckedCreateWithoutIpHistoryInput>
+}
+
+export type UserUpsertWithoutIpHistoryInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutIpHistoryInput, Prisma.UserUncheckedUpdateWithoutIpHistoryInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutIpHistoryInput, Prisma.UserUncheckedCreateWithoutIpHistoryInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutIpHistoryInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutIpHistoryInput, Prisma.UserUncheckedUpdateWithoutIpHistoryInput>
+}
+
+export type UserUpdateWithoutIpHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMuted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mutedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  muteReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
+  adminActions?: Prisma.AdminActionLogUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutIpHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMuted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mutedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  muteReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUncheckedUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUncheckedUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
+  adminActions?: Prisma.AdminActionLogUncheckedUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -2402,6 +3014,8 @@ export type UserCountOutputType = {
   bankTransactionsTo: number
   statsPeriods: number
   adminActions: number
+  roles: number
+  ipHistory: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2413,6 +3027,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   bankTransactionsTo?: boolean | UserCountOutputTypeCountBankTransactionsToArgs
   statsPeriods?: boolean | UserCountOutputTypeCountStatsPeriodsArgs
   adminActions?: boolean | UserCountOutputTypeCountAdminActionsArgs
+  roles?: boolean | UserCountOutputTypeCountRolesArgs
+  ipHistory?: boolean | UserCountOutputTypeCountIpHistoryArgs
 }
 
 /**
@@ -2481,6 +3097,20 @@ export type UserCountOutputTypeCountAdminActionsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.AdminActionLogWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserRoleAssignmentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountIpHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserIpHistoryWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2494,6 +3124,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   username?: boolean
   role?: boolean
+  credit?: boolean
+  deletedDates?: boolean
   isBanned?: boolean
   bannedUntil?: boolean
   banReason?: boolean
@@ -2512,6 +3144,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   leaderboardStats?: boolean | Prisma.User$leaderboardStatsArgs<ExtArgs>
   statsPeriods?: boolean | Prisma.User$statsPeriodsArgs<ExtArgs>
   adminActions?: boolean | Prisma.User$adminActionsArgs<ExtArgs>
+  roles?: boolean | Prisma.User$rolesArgs<ExtArgs>
+  ipHistory?: boolean | Prisma.User$ipHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2527,6 +3161,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   username?: boolean
   role?: boolean
+  credit?: boolean
+  deletedDates?: boolean
   isBanned?: boolean
   bannedUntil?: boolean
   banReason?: boolean
@@ -2548,6 +3184,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   username?: boolean
   role?: boolean
+  credit?: boolean
+  deletedDates?: boolean
   isBanned?: boolean
   bannedUntil?: boolean
   banReason?: boolean
@@ -2569,6 +3207,8 @@ export type UserSelectScalar = {
   updatedAt?: boolean
   username?: boolean
   role?: boolean
+  credit?: boolean
+  deletedDates?: boolean
   isBanned?: boolean
   bannedUntil?: boolean
   banReason?: boolean
@@ -2578,7 +3218,7 @@ export type UserSelectScalar = {
   deletedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "password" | "gender" | "createdAt" | "updatedAt" | "username" | "role" | "isBanned" | "bannedUntil" | "banReason" | "isMuted" | "mutedUntil" | "muteReason" | "deletedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "password" | "gender" | "createdAt" | "updatedAt" | "username" | "role" | "credit" | "deletedDates" | "isBanned" | "bannedUntil" | "banReason" | "isMuted" | "mutedUntil" | "muteReason" | "deletedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   characters?: boolean | Prisma.User$charactersArgs<ExtArgs>
@@ -2591,6 +3231,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   leaderboardStats?: boolean | Prisma.User$leaderboardStatsArgs<ExtArgs>
   statsPeriods?: boolean | Prisma.User$statsPeriodsArgs<ExtArgs>
   adminActions?: boolean | Prisma.User$adminActionsArgs<ExtArgs>
+  roles?: boolean | Prisma.User$rolesArgs<ExtArgs>
+  ipHistory?: boolean | Prisma.User$ipHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2610,6 +3252,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     leaderboardStats: Prisma.$PlayerLeaderboardStatsPayload<ExtArgs> | null
     statsPeriods: Prisma.$PlayerStatsPeriodPayload<ExtArgs>[]
     adminActions: Prisma.$AdminActionLogPayload<ExtArgs>[]
+    roles: Prisma.$UserRoleAssignmentPayload<ExtArgs>[]
+    ipHistory: Prisma.$UserIpHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2623,6 +3267,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     updatedAt: Date
     username: string
     role: $Enums.UserRole
+    credit: number
+    deletedDates: runtime.JsonValue | null
     isBanned: boolean
     bannedUntil: Date | null
     banReason: string | null
@@ -3035,6 +3681,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   leaderboardStats<T extends Prisma.User$leaderboardStatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$leaderboardStatsArgs<ExtArgs>>): Prisma.Prisma__PlayerLeaderboardStatsClient<runtime.Types.Result.GetResult<Prisma.$PlayerLeaderboardStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   statsPeriods<T extends Prisma.User$statsPeriodsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$statsPeriodsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlayerStatsPeriodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   adminActions<T extends Prisma.User$adminActionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$adminActionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdminActionLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  roles<T extends Prisma.User$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserRoleAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ipHistory<T extends Prisma.User$ipHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ipHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserIpHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3075,6 +3723,8 @@ export interface UserFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly username: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'UserRole'>
+  readonly credit: Prisma.FieldRef<"User", 'Int'>
+  readonly deletedDates: Prisma.FieldRef<"User", 'Json'>
   readonly isBanned: Prisma.FieldRef<"User", 'Boolean'>
   readonly bannedUntil: Prisma.FieldRef<"User", 'DateTime'>
   readonly banReason: Prisma.FieldRef<"User", 'String'>
@@ -3716,6 +4366,54 @@ export type User$adminActionsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.AdminActionLogScalarFieldEnum | Prisma.AdminActionLogScalarFieldEnum[]
+}
+
+/**
+ * User.roles
+ */
+export type User$rolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserRoleAssignment
+   */
+  select?: Prisma.UserRoleAssignmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserRoleAssignment
+   */
+  omit?: Prisma.UserRoleAssignmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserRoleAssignmentInclude<ExtArgs> | null
+  where?: Prisma.UserRoleAssignmentWhereInput
+  orderBy?: Prisma.UserRoleAssignmentOrderByWithRelationInput | Prisma.UserRoleAssignmentOrderByWithRelationInput[]
+  cursor?: Prisma.UserRoleAssignmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserRoleAssignmentScalarFieldEnum | Prisma.UserRoleAssignmentScalarFieldEnum[]
+}
+
+/**
+ * User.ipHistory
+ */
+export type User$ipHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserIpHistory
+   */
+  select?: Prisma.UserIpHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserIpHistory
+   */
+  omit?: Prisma.UserIpHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIpHistoryInclude<ExtArgs> | null
+  where?: Prisma.UserIpHistoryWhereInput
+  orderBy?: Prisma.UserIpHistoryOrderByWithRelationInput | Prisma.UserIpHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.UserIpHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserIpHistoryScalarFieldEnum | Prisma.UserIpHistoryScalarFieldEnum[]
 }
 
 /**

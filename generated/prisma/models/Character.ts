@@ -36,6 +36,7 @@ export type CharacterAvgAggregateOutputType = {
   currentStamina: number | null
   currentHp: number | null
   deaths: number | null
+  permDeaths: number | null
   floor: number | null
   maxHp: number | null
 }
@@ -50,6 +51,7 @@ export type CharacterSumAggregateOutputType = {
   currentStamina: number | null
   currentHp: number | null
   deaths: number | null
+  permDeaths: number | null
   floor: number | null
   maxHp: number | null
 }
@@ -69,6 +71,7 @@ export type CharacterMinAggregateOutputType = {
   updatedAt: Date | null
   currentHp: number | null
   deaths: number | null
+  permDeaths: number | null
   floor: number | null
   gender: string | null
   location: string | null
@@ -92,6 +95,7 @@ export type CharacterMaxAggregateOutputType = {
   updatedAt: Date | null
   currentHp: number | null
   deaths: number | null
+  permDeaths: number | null
   floor: number | null
   gender: string | null
   location: string | null
@@ -115,6 +119,7 @@ export type CharacterCountAggregateOutputType = {
   updatedAt: number
   currentHp: number
   deaths: number
+  permDeaths: number
   floor: number
   gender: number
   location: number
@@ -135,6 +140,7 @@ export type CharacterAvgAggregateInputType = {
   currentStamina?: true
   currentHp?: true
   deaths?: true
+  permDeaths?: true
   floor?: true
   maxHp?: true
 }
@@ -149,6 +155,7 @@ export type CharacterSumAggregateInputType = {
   currentStamina?: true
   currentHp?: true
   deaths?: true
+  permDeaths?: true
   floor?: true
   maxHp?: true
 }
@@ -168,6 +175,7 @@ export type CharacterMinAggregateInputType = {
   updatedAt?: true
   currentHp?: true
   deaths?: true
+  permDeaths?: true
   floor?: true
   gender?: true
   location?: true
@@ -191,6 +199,7 @@ export type CharacterMaxAggregateInputType = {
   updatedAt?: true
   currentHp?: true
   deaths?: true
+  permDeaths?: true
   floor?: true
   gender?: true
   location?: true
@@ -214,6 +223,7 @@ export type CharacterCountAggregateInputType = {
   updatedAt?: true
   currentHp?: true
   deaths?: true
+  permDeaths?: true
   floor?: true
   gender?: true
   location?: true
@@ -324,6 +334,7 @@ export type CharacterGroupByOutputType = {
   updatedAt: Date
   currentHp: number
   deaths: number
+  permDeaths: number
   floor: number
   gender: string
   location: string
@@ -370,6 +381,7 @@ export type CharacterWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Character"> | Date | string
   currentHp?: Prisma.IntFilter<"Character"> | number
   deaths?: Prisma.IntFilter<"Character"> | number
+  permDeaths?: Prisma.IntFilter<"Character"> | number
   floor?: Prisma.IntFilter<"Character"> | number
   gender?: Prisma.StringFilter<"Character"> | string
   location?: Prisma.StringFilter<"Character"> | string
@@ -395,6 +407,7 @@ export type CharacterOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   currentHp?: Prisma.SortOrder
   deaths?: Prisma.SortOrder
+  permDeaths?: Prisma.SortOrder
   floor?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   location?: Prisma.SortOrder
@@ -423,6 +436,7 @@ export type CharacterWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Character"> | Date | string
   currentHp?: Prisma.IntFilter<"Character"> | number
   deaths?: Prisma.IntFilter<"Character"> | number
+  permDeaths?: Prisma.IntFilter<"Character"> | number
   floor?: Prisma.IntFilter<"Character"> | number
   gender?: Prisma.StringFilter<"Character"> | string
   location?: Prisma.StringFilter<"Character"> | string
@@ -448,6 +462,7 @@ export type CharacterOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   currentHp?: Prisma.SortOrder
   deaths?: Prisma.SortOrder
+  permDeaths?: Prisma.SortOrder
   floor?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   location?: Prisma.SortOrder
@@ -479,6 +494,7 @@ export type CharacterScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Character"> | Date | string
   currentHp?: Prisma.IntWithAggregatesFilter<"Character"> | number
   deaths?: Prisma.IntWithAggregatesFilter<"Character"> | number
+  permDeaths?: Prisma.IntWithAggregatesFilter<"Character"> | number
   floor?: Prisma.IntWithAggregatesFilter<"Character"> | number
   gender?: Prisma.StringWithAggregatesFilter<"Character"> | string
   location?: Prisma.StringWithAggregatesFilter<"Character"> | string
@@ -501,6 +517,7 @@ export type CharacterCreateInput = {
   updatedAt?: Date | string
   currentHp: number
   deaths?: number
+  permDeaths?: number
   floor?: number
   gender: string
   location?: string
@@ -526,6 +543,7 @@ export type CharacterUncheckedCreateInput = {
   updatedAt?: Date | string
   currentHp: number
   deaths?: number
+  permDeaths?: number
   floor?: number
   gender: string
   location?: string
@@ -549,6 +567,7 @@ export type CharacterUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   currentHp?: Prisma.IntFieldUpdateOperationsInput | number
   deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  permDeaths?: Prisma.IntFieldUpdateOperationsInput | number
   floor?: Prisma.IntFieldUpdateOperationsInput | number
   gender?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
@@ -574,6 +593,7 @@ export type CharacterUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   currentHp?: Prisma.IntFieldUpdateOperationsInput | number
   deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  permDeaths?: Prisma.IntFieldUpdateOperationsInput | number
   floor?: Prisma.IntFieldUpdateOperationsInput | number
   gender?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
@@ -598,6 +618,7 @@ export type CharacterCreateManyInput = {
   updatedAt?: Date | string
   currentHp: number
   deaths?: number
+  permDeaths?: number
   floor?: number
   gender: string
   location?: string
@@ -620,6 +641,7 @@ export type CharacterUpdateManyMutationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   currentHp?: Prisma.IntFieldUpdateOperationsInput | number
   deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  permDeaths?: Prisma.IntFieldUpdateOperationsInput | number
   floor?: Prisma.IntFieldUpdateOperationsInput | number
   gender?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
@@ -643,6 +665,7 @@ export type CharacterUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   currentHp?: Prisma.IntFieldUpdateOperationsInput | number
   deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  permDeaths?: Prisma.IntFieldUpdateOperationsInput | number
   floor?: Prisma.IntFieldUpdateOperationsInput | number
   gender?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
@@ -676,6 +699,7 @@ export type CharacterCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   currentHp?: Prisma.SortOrder
   deaths?: Prisma.SortOrder
+  permDeaths?: Prisma.SortOrder
   floor?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   location?: Prisma.SortOrder
@@ -694,6 +718,7 @@ export type CharacterAvgOrderByAggregateInput = {
   currentStamina?: Prisma.SortOrder
   currentHp?: Prisma.SortOrder
   deaths?: Prisma.SortOrder
+  permDeaths?: Prisma.SortOrder
   floor?: Prisma.SortOrder
   maxHp?: Prisma.SortOrder
 }
@@ -713,6 +738,7 @@ export type CharacterMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   currentHp?: Prisma.SortOrder
   deaths?: Prisma.SortOrder
+  permDeaths?: Prisma.SortOrder
   floor?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   location?: Prisma.SortOrder
@@ -736,6 +762,7 @@ export type CharacterMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   currentHp?: Prisma.SortOrder
   deaths?: Prisma.SortOrder
+  permDeaths?: Prisma.SortOrder
   floor?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   location?: Prisma.SortOrder
@@ -754,6 +781,7 @@ export type CharacterSumOrderByAggregateInput = {
   currentStamina?: Prisma.SortOrder
   currentHp?: Prisma.SortOrder
   deaths?: Prisma.SortOrder
+  permDeaths?: Prisma.SortOrder
   floor?: Prisma.SortOrder
   maxHp?: Prisma.SortOrder
 }
@@ -833,6 +861,7 @@ export type CharacterCreateWithoutUserInput = {
   updatedAt?: Date | string
   currentHp: number
   deaths?: number
+  permDeaths?: number
   floor?: number
   gender: string
   location?: string
@@ -856,6 +885,7 @@ export type CharacterUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string
   currentHp: number
   deaths?: number
+  permDeaths?: number
   floor?: number
   gender: string
   location?: string
@@ -909,6 +939,7 @@ export type CharacterScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Character"> | Date | string
   currentHp?: Prisma.IntFilter<"Character"> | number
   deaths?: Prisma.IntFilter<"Character"> | number
+  permDeaths?: Prisma.IntFilter<"Character"> | number
   floor?: Prisma.IntFilter<"Character"> | number
   gender?: Prisma.StringFilter<"Character"> | string
   location?: Prisma.StringFilter<"Character"> | string
@@ -931,6 +962,7 @@ export type CharacterCreateWithoutPositionInput = {
   updatedAt?: Date | string
   currentHp: number
   deaths?: number
+  permDeaths?: number
   floor?: number
   gender: string
   location?: string
@@ -955,6 +987,7 @@ export type CharacterUncheckedCreateWithoutPositionInput = {
   updatedAt?: Date | string
   currentHp: number
   deaths?: number
+  permDeaths?: number
   floor?: number
   gender: string
   location?: string
@@ -993,6 +1026,7 @@ export type CharacterUpdateWithoutPositionInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   currentHp?: Prisma.IntFieldUpdateOperationsInput | number
   deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  permDeaths?: Prisma.IntFieldUpdateOperationsInput | number
   floor?: Prisma.IntFieldUpdateOperationsInput | number
   gender?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1017,6 +1051,7 @@ export type CharacterUncheckedUpdateWithoutPositionInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   currentHp?: Prisma.IntFieldUpdateOperationsInput | number
   deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  permDeaths?: Prisma.IntFieldUpdateOperationsInput | number
   floor?: Prisma.IntFieldUpdateOperationsInput | number
   gender?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1039,6 +1074,7 @@ export type CharacterCreateManyUserInput = {
   updatedAt?: Date | string
   currentHp: number
   deaths?: number
+  permDeaths?: number
   floor?: number
   gender: string
   location?: string
@@ -1061,6 +1097,7 @@ export type CharacterUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   currentHp?: Prisma.IntFieldUpdateOperationsInput | number
   deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  permDeaths?: Prisma.IntFieldUpdateOperationsInput | number
   floor?: Prisma.IntFieldUpdateOperationsInput | number
   gender?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1084,6 +1121,7 @@ export type CharacterUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   currentHp?: Prisma.IntFieldUpdateOperationsInput | number
   deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  permDeaths?: Prisma.IntFieldUpdateOperationsInput | number
   floor?: Prisma.IntFieldUpdateOperationsInput | number
   gender?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1107,6 +1145,7 @@ export type CharacterUncheckedUpdateManyWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   currentHp?: Prisma.IntFieldUpdateOperationsInput | number
   deaths?: Prisma.IntFieldUpdateOperationsInput | number
+  permDeaths?: Prisma.IntFieldUpdateOperationsInput | number
   floor?: Prisma.IntFieldUpdateOperationsInput | number
   gender?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1132,6 +1171,7 @@ export type CharacterSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   updatedAt?: boolean
   currentHp?: boolean
   deaths?: boolean
+  permDeaths?: boolean
   floor?: boolean
   gender?: boolean
   location?: boolean
@@ -1157,6 +1197,7 @@ export type CharacterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   updatedAt?: boolean
   currentHp?: boolean
   deaths?: boolean
+  permDeaths?: boolean
   floor?: boolean
   gender?: boolean
   location?: boolean
@@ -1181,6 +1222,7 @@ export type CharacterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   updatedAt?: boolean
   currentHp?: boolean
   deaths?: boolean
+  permDeaths?: boolean
   floor?: boolean
   gender?: boolean
   location?: boolean
@@ -1205,6 +1247,7 @@ export type CharacterSelectScalar = {
   updatedAt?: boolean
   currentHp?: boolean
   deaths?: boolean
+  permDeaths?: boolean
   floor?: boolean
   gender?: boolean
   location?: boolean
@@ -1213,7 +1256,7 @@ export type CharacterSelectScalar = {
   deathReason?: boolean
 }
 
-export type CharacterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "level" | "vitality" | "strength" | "speed" | "dexterity" | "maxStamina" | "currentStamina" | "createdAt" | "updatedAt" | "currentHp" | "deaths" | "floor" | "gender" | "location" | "maxHp" | "deathAt" | "deathReason", ExtArgs["result"]["character"]>
+export type CharacterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "level" | "vitality" | "strength" | "speed" | "dexterity" | "maxStamina" | "currentStamina" | "createdAt" | "updatedAt" | "currentHp" | "deaths" | "permDeaths" | "floor" | "gender" | "location" | "maxHp" | "deathAt" | "deathReason", ExtArgs["result"]["character"]>
 export type CharacterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   position?: boolean | Prisma.Character$positionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1246,6 +1289,7 @@ export type $CharacterPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     updatedAt: Date
     currentHp: number
     deaths: number
+    permDeaths: number
     floor: number
     gender: string
     location: string
@@ -1691,6 +1735,7 @@ export interface CharacterFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"Character", 'DateTime'>
   readonly currentHp: Prisma.FieldRef<"Character", 'Int'>
   readonly deaths: Prisma.FieldRef<"Character", 'Int'>
+  readonly permDeaths: Prisma.FieldRef<"Character", 'Int'>
   readonly floor: Prisma.FieldRef<"Character", 'Int'>
   readonly gender: Prisma.FieldRef<"Character", 'String'>
   readonly location: Prisma.FieldRef<"Character", 'String'>

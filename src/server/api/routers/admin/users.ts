@@ -50,7 +50,7 @@ export const adminUsersRouter = createTRPCRouter({
       return users;
     }),
 
-  // Get user by ID with full details including characters
+  // Get user by ID with full details including characters, roles, and IP history
   getUserById: moderatorProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
@@ -65,6 +65,7 @@ export const adminUsersRouter = createTRPCRouter({
               currentHp: true,
               maxHp: true,
               deaths: true,
+              permDeaths: true,
               createdAt: true,
             },
           },
@@ -75,6 +76,20 @@ export const adminUsersRouter = createTRPCRouter({
               level: true,
               gold: true,
             },
+          },
+          roles: {
+            select: {
+              id: true,
+              role: true,
+              assignedAt: true,
+              assignedBy: true,
+            },
+          },
+          ipHistory: {
+            orderBy: {
+              createdAt: "desc",
+            },
+            take: 50,
           },
         },
       });
@@ -89,13 +104,15 @@ export const adminUsersRouter = createTRPCRouter({
       return user;
     }),
 
-  // Update user fields (moderator can update most, admin can update role)
+  // Update user fields (moderator can update most, admin can update roles)
   updateUser: moderatorProcedure
     .input(
       z.object({
         id: z.string(),
         username: z.string().optional(),
-        role: z.enum(["PLAYER", "MODERATOR", "ADMIN"]).optional(),
+        role: z.enum(["PLAYER", "MODERATOR", "ADMIN", "CONTENT"]).optional(), // Legacy single role
+        roles: z.array(z.enum(["PLAYER", "MODERATOR", "ADMIN", "CONTENT"])).optional(), // Multi-role support
+        credit: z.number().optional(),
         isBanned: z.boolean().optional(),
         bannedUntil: z.date().nullable().optional(),
         banReason: z.string().nullable().optional(),
@@ -105,10 +122,10 @@ export const adminUsersRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const { id, role, ...updateData } = input;
+      const { id, role, roles, ...updateData } = input;
 
       // Only ADMIN can change roles
-      if (role !== undefined && ctx.userRole !== "ADMIN") {
+      if ((role !== undefined || roles !== undefined) && ctx.userRole !== "ADMIN") {
         throw new TRPCError({
           code: "FORBIDDEN",
           message: "Only admins can change user roles",
@@ -126,11 +143,28 @@ export const adminUsersRouter = createTRPCRouter({
         });
       }
 
+      // Update multi-roles if provided
+      if (roles !== undefined) {
+        // Delete all existing role assignments
+        await ctx.db.userRoleAssignment.deleteMany({
+          where: { userId: id },
+        });
+
+        // Create new role assignments
+        await ctx.db.userRoleAssignment.createMany({
+          data: roles.map((r) => ({
+            userId: id,
+            role: r,
+            assignedBy: ctx.session.user.id,
+          })),
+        });
+      }
+
       const updatedUser = await ctx.db.user.update({
         where: { id },
         data: {
           ...updateData,
-          ...(role !== undefined && { role }),
+          ...(role !== undefined && { role }), // Legacy single role field
         },
       });
 
@@ -140,10 +174,11 @@ export const adminUsersRouter = createTRPCRouter({
           actorId: ctx.session.user.id,
           targetUserId: id,
           action: "UPDATE_USER",
-          reason: `Updated user fields: ${Object.keys(updateData).join(", ")}${role ? `, role: ${role}` : ""}`,
+          reason: `Updated user fields: ${Object.keys(updateData).join(", ")}${role ? `, role: ${role}` : ""}${roles ? `, roles: ${roles.join(", ")}` : ""}`,
           metadata: {
             changes: updateData,
             ...(role && { roleChange: role }),
+            ...(roles && { rolesChange: roles }),
           },
         },
       });
@@ -151,13 +186,61 @@ export const adminUsersRouter = createTRPCRouter({
       return updatedUser;
     }),
 
-  // Ban user
+  // Update character perm deaths (ADMIN only)
+  updatePermDeaths: adminProcedure
+    .input(
+      z.object({
+        characterId: z.string(),
+        permDeaths: z.number().int().min(0),
+        reason: z.string().min(1, "Reason is required"),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const character = await ctx.db.character.findUnique({
+        where: { id: input.characterId },
+      });
+
+      if (!character) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Character not found",
+        });
+      }
+
+      const oldPermDeaths = character.permDeaths ?? 0;
+      const updatedCharacter = await ctx.db.character.update({
+        where: { id: input.characterId },
+        data: {
+          permDeaths: input.permDeaths,
+        },
+      });
+
+      // Log admin action
+      await ctx.db.adminActionLog.create({
+        data: {
+          actorId: ctx.session.user.id,
+          targetCharacterId: input.characterId,
+          action: "UPDATE_PERM_DEATHS",
+          reason: input.reason,
+          metadata: {
+            oldPermDeaths,
+            newPermDeaths: input.permDeaths,
+            change: input.permDeaths - oldPermDeaths,
+          },
+        },
+      });
+
+      return updatedCharacter;
+    }),
+
+  // Ban user with duration options
   banUser: moderatorProcedure
     .input(
       z.object({
         id: z.string(),
         reason: z.string().min(1, "Reason is required"),
-        until: z.date().optional(),
+        duration: z.enum(["1h", "6h", "12h", "24h", "3d", "7d", "30d", "permanent"]).optional(),
+        until: z.date().optional(), // Custom date override
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -172,11 +255,28 @@ export const adminUsersRouter = createTRPCRouter({
         });
       }
 
+      let bannedUntil: Date | null = null;
+
+      if (input.until) {
+        bannedUntil = input.until;
+      } else if (input.duration && input.duration !== "permanent") {
+        const durationMap: Record<string, number> = {
+          "1h": 1 * 60 * 60 * 1000,
+          "6h": 6 * 60 * 60 * 1000,
+          "12h": 12 * 60 * 60 * 1000,
+          "24h": 24 * 60 * 60 * 1000,
+          "3d": 3 * 24 * 60 * 60 * 1000,
+          "7d": 7 * 24 * 60 * 60 * 1000,
+          "30d": 30 * 24 * 60 * 60 * 1000,
+        };
+        bannedUntil = new Date(Date.now() + durationMap[input.duration]!);
+      }
+
       const updatedUser = await ctx.db.user.update({
         where: { id: input.id },
         data: {
           isBanned: true,
-          bannedUntil: input.until ?? null,
+          bannedUntil,
           banReason: input.reason,
         },
       });
@@ -189,7 +289,8 @@ export const adminUsersRouter = createTRPCRouter({
           action: "BAN_USER",
           reason: input.reason,
           metadata: {
-            bannedUntil: input.until,
+            duration: input.duration,
+            bannedUntil,
           },
         },
       });
@@ -234,13 +335,14 @@ export const adminUsersRouter = createTRPCRouter({
       return updatedUser;
     }),
 
-  // Mute user
+  // Mute user with duration options
   muteUser: moderatorProcedure
     .input(
       z.object({
         id: z.string(),
         reason: z.string().min(1, "Reason is required"),
-        until: z.date().optional(),
+        duration: z.enum(["15m", "30m", "1h", "6h", "12h", "24h", "3d", "7d", "permanent"]).optional(),
+        until: z.date().optional(), // Custom date override
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -255,11 +357,29 @@ export const adminUsersRouter = createTRPCRouter({
         });
       }
 
+      let mutedUntil: Date | null = null;
+
+      if (input.until) {
+        mutedUntil = input.until;
+      } else if (input.duration && input.duration !== "permanent") {
+        const durationMap: Record<string, number> = {
+          "15m": 15 * 60 * 1000,
+          "30m": 30 * 60 * 1000,
+          "1h": 1 * 60 * 60 * 1000,
+          "6h": 6 * 60 * 60 * 1000,
+          "12h": 12 * 60 * 60 * 1000,
+          "24h": 24 * 60 * 60 * 1000,
+          "3d": 3 * 24 * 60 * 60 * 1000,
+          "7d": 7 * 24 * 60 * 60 * 1000,
+        };
+        mutedUntil = new Date(Date.now() + durationMap[input.duration]!);
+      }
+
       const updatedUser = await ctx.db.user.update({
         where: { id: input.id },
         data: {
           isMuted: true,
-          mutedUntil: input.until ?? null,
+          mutedUntil,
           muteReason: input.reason,
         },
       });
@@ -272,7 +392,8 @@ export const adminUsersRouter = createTRPCRouter({
           action: "MUTE_USER",
           reason: input.reason,
           metadata: {
-            mutedUntil: input.until,
+            duration: input.duration,
+            mutedUntil,
           },
         },
       });
@@ -389,5 +510,27 @@ export const adminUsersRouter = createTRPCRouter({
       });
 
       return actions;
+    }),
+
+  // Get IP history for a user (MODERATOR only)
+  getIpHistory: moderatorProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+        limit: z.number().min(1).max(100).default(50),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const ipHistory = await ctx.db.userIpHistory.findMany({
+        where: {
+          userId: input.userId,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+        take: input.limit,
+      });
+
+      return ipHistory;
     }),
 });

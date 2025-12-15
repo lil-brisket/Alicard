@@ -449,8 +449,9 @@ Since the game is text-oriented:
 1. **Run Database Migration**
    ```bash
    npm run db:generate
-   npm run db:push
    ```
+   
+   **Note:** This project uses migrations exclusively. Never use `prisma db push`.
 
 2. **Implement Inventory System**
    - Add/remove items

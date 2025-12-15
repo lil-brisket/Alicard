@@ -312,3 +312,13 @@ export type QuestTemplate = Prisma.QuestTemplateModel
  * 
  */
 export type MapZone = Prisma.MapZoneModel
+/**
+ * Model UserRoleAssignment
+ * 
+ */
+export type UserRoleAssignment = Prisma.UserRoleAssignmentModel
+/**
+ * Model UserIpHistory
+ * 
+ */
+export type UserIpHistory = Prisma.UserIpHistoryModel
