@@ -261,71 +261,82 @@ export const leaderboardsRouter = createTRPCRouter({
       }
 
       if (input.timeframe === "all-time") {
-        // Use PlayerLeaderboardStats
-        const stats = await ctx.db.playerLeaderboardStats.findMany({
+        // Aggregate job XP directly from userJob table for "All Jobs"
+        // Get all players with jobs and aggregate their total XP
+        const allJobRecords = await ctx.db.userJob.findMany({
           include: {
-            user: {
+            player: {
+              include: {
+                user: {
+                  select: {
+                    id: true,
+                    username: true,
+                    name: true,
+                    image: true,
+                  },
+                },
+              },
+            },
+            job: {
               select: {
-                id: true,
-                username: true,
+                key: true,
                 name: true,
-                image: true,
               },
             },
           },
-          orderBy: {
-            jobXpTotal: "desc",
-          },
-          take: input.limit,
         });
 
-        // Get top job for each user
-        const statsWithTopJob = await Promise.all(
-          stats.map(async (stat, index) => {
-            // Get player from user
-            const player = await ctx.db.player.findUnique({
-              where: { userId: stat.userId },
-              select: { id: true },
-            });
+        // Aggregate total XP per user
+        const userJobTotals = new Map<
+          string,
+          {
+            userId: string;
+            username: string;
+            avatarUrl: string | null;
+            jobXpTotal: number;
+            topJob: { key: string; name: string; xp: number } | null;
+          }
+        >();
 
-            let topJob = null;
-            if (player) {
-              const jobRecord = await ctx.db.userJob.findFirst({
-                where: { playerId: player.id },
-                include: {
-                  job: {
-                    select: {
-                      key: true,
-                      name: true,
-                    },
-                  },
-                },
-                orderBy: {
-                  xp: "desc",
-                },
-              });
+        for (const record of allJobRecords) {
+          const userId = record.player.userId;
+          const existing = userJobTotals.get(userId);
 
-              if (jobRecord) {
-                topJob = {
-                  key: jobRecord.job.key,
-                  name: jobRecord.job.name,
-                  xp: jobRecord.xp,
-                };
-              }
+          if (existing) {
+            existing.jobXpTotal += record.xp;
+            // Update top job if this one has more XP
+            if (record.xp > (existing.topJob?.xp ?? 0)) {
+              existing.topJob = {
+                key: record.job.key,
+                name: record.job.name,
+                xp: record.xp,
+              };
             }
+          } else {
+            userJobTotals.set(userId, {
+              userId,
+              username: record.player.user.username,
+              avatarUrl: record.player.user.image,
+              jobXpTotal: record.xp,
+              topJob: {
+                key: record.job.key,
+                name: record.job.name,
+                xp: record.xp,
+              },
+            });
+          }
+        }
 
-            return {
-              rank: index + 1,
-              userId: stat.userId,
-              username: stat.user.username,
-              avatarUrl: stat.user.image,
-              jobXpTotal: stat.jobXpTotal,
-              topJob,
-            };
-          })
-        );
+        // Sort by total XP descending and apply limit
+        const sortedResults = Array.from(userJobTotals.values())
+          .sort((a, b) => b.jobXpTotal - a.jobXpTotal)
+          .slice(0, input.limit)
+          .map((entry, index) => ({
+            ...entry,
+            rank: index + 1,
+          }));
 
-        return statsWithTopJob;
+        return sortedResults;
       } else {
         // Use PlayerStatsPeriod
         const periodStart = getPeriodStart(input.timeframe);
