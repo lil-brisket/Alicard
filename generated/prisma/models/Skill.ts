@@ -29,13 +29,15 @@ export type AggregateSkill = {
 export type SkillAvgAggregateOutputType = {
   version: number | null
   staminaCost: number | null
-  cooldownSeconds: number | null
+  cooldownTurns: number | null
+  levelUnlock: number | null
 }
 
 export type SkillSumAggregateOutputType = {
   version: number | null
   staminaCost: number | null
-  cooldownSeconds: number | null
+  cooldownTurns: number | null
+  levelUnlock: number | null
 }
 
 export type SkillMinAggregateOutputType = {
@@ -49,8 +51,8 @@ export type SkillMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   staminaCost: number | null
-  cooldownSeconds: number | null
-  jobUnlock: string | null
+  cooldownTurns: number | null
+  levelUnlock: number | null
 }
 
 export type SkillMaxAggregateOutputType = {
@@ -64,8 +66,8 @@ export type SkillMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   staminaCost: number | null
-  cooldownSeconds: number | null
-  jobUnlock: string | null
+  cooldownTurns: number | null
+  levelUnlock: number | null
 }
 
 export type SkillCountAggregateOutputType = {
@@ -80,8 +82,8 @@ export type SkillCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   staminaCost: number
-  cooldownSeconds: number
-  jobUnlock: number
+  cooldownTurns: number
+  levelUnlock: number
   _all: number
 }
 
@@ -89,13 +91,15 @@ export type SkillCountAggregateOutputType = {
 export type SkillAvgAggregateInputType = {
   version?: true
   staminaCost?: true
-  cooldownSeconds?: true
+  cooldownTurns?: true
+  levelUnlock?: true
 }
 
 export type SkillSumAggregateInputType = {
   version?: true
   staminaCost?: true
-  cooldownSeconds?: true
+  cooldownTurns?: true
+  levelUnlock?: true
 }
 
 export type SkillMinAggregateInputType = {
@@ -109,8 +113,8 @@ export type SkillMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   staminaCost?: true
-  cooldownSeconds?: true
-  jobUnlock?: true
+  cooldownTurns?: true
+  levelUnlock?: true
 }
 
 export type SkillMaxAggregateInputType = {
@@ -124,8 +128,8 @@ export type SkillMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   staminaCost?: true
-  cooldownSeconds?: true
-  jobUnlock?: true
+  cooldownTurns?: true
+  levelUnlock?: true
 }
 
 export type SkillCountAggregateInputType = {
@@ -140,8 +144,8 @@ export type SkillCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   staminaCost?: true
-  cooldownSeconds?: true
-  jobUnlock?: true
+  cooldownTurns?: true
+  levelUnlock?: true
   _all?: true
 }
 
@@ -243,8 +247,8 @@ export type SkillGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   staminaCost: number
-  cooldownSeconds: number
-  jobUnlock: string | null
+  cooldownTurns: number
+  levelUnlock: number | null
   _count: SkillCountAggregateOutputType | null
   _avg: SkillAvgAggregateOutputType | null
   _sum: SkillSumAggregateOutputType | null
@@ -282,8 +286,8 @@ export type SkillWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
   staminaCost?: Prisma.IntFilter<"Skill"> | number
-  cooldownSeconds?: Prisma.IntFilter<"Skill"> | number
-  jobUnlock?: Prisma.StringNullableFilter<"Skill"> | string | null
+  cooldownTurns?: Prisma.IntFilter<"Skill"> | number
+  levelUnlock?: Prisma.IntNullableFilter<"Skill"> | number | null
   playerSkills?: Prisma.PlayerSkillListRelationFilter
   slot1Loadouts?: Prisma.PlayerSkillLoadoutListRelationFilter
   slot2Loadouts?: Prisma.PlayerSkillLoadoutListRelationFilter
@@ -307,8 +311,8 @@ export type SkillOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   staminaCost?: Prisma.SortOrder
-  cooldownSeconds?: Prisma.SortOrder
-  jobUnlock?: Prisma.SortOrderInput | Prisma.SortOrder
+  cooldownTurns?: Prisma.SortOrder
+  levelUnlock?: Prisma.SortOrderInput | Prisma.SortOrder
   playerSkills?: Prisma.PlayerSkillOrderByRelationAggregateInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutOrderByRelationAggregateInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutOrderByRelationAggregateInput
@@ -335,8 +339,8 @@ export type SkillWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
   staminaCost?: Prisma.IntFilter<"Skill"> | number
-  cooldownSeconds?: Prisma.IntFilter<"Skill"> | number
-  jobUnlock?: Prisma.StringNullableFilter<"Skill"> | string | null
+  cooldownTurns?: Prisma.IntFilter<"Skill"> | number
+  levelUnlock?: Prisma.IntNullableFilter<"Skill"> | number | null
   playerSkills?: Prisma.PlayerSkillListRelationFilter
   slot1Loadouts?: Prisma.PlayerSkillLoadoutListRelationFilter
   slot2Loadouts?: Prisma.PlayerSkillLoadoutListRelationFilter
@@ -360,8 +364,8 @@ export type SkillOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   staminaCost?: Prisma.SortOrder
-  cooldownSeconds?: Prisma.SortOrder
-  jobUnlock?: Prisma.SortOrderInput | Prisma.SortOrder
+  cooldownTurns?: Prisma.SortOrder
+  levelUnlock?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SkillCountOrderByAggregateInput
   _avg?: Prisma.SkillAvgOrderByAggregateInput
   _max?: Prisma.SkillMaxOrderByAggregateInput
@@ -384,8 +388,8 @@ export type SkillScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Skill"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Skill"> | Date | string
   staminaCost?: Prisma.IntWithAggregatesFilter<"Skill"> | number
-  cooldownSeconds?: Prisma.IntWithAggregatesFilter<"Skill"> | number
-  jobUnlock?: Prisma.StringNullableWithAggregatesFilter<"Skill"> | string | null
+  cooldownTurns?: Prisma.IntWithAggregatesFilter<"Skill"> | number
+  levelUnlock?: Prisma.IntNullableWithAggregatesFilter<"Skill"> | number | null
 }
 
 export type SkillCreateInput = {
@@ -400,8 +404,8 @@ export type SkillCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
@@ -425,8 +429,8 @@ export type SkillUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
@@ -450,8 +454,8 @@ export type SkillUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
@@ -475,8 +479,8 @@ export type SkillUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
@@ -500,8 +504,8 @@ export type SkillCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
 }
 
 export type SkillUpdateManyMutationInput = {
@@ -516,8 +520,8 @@ export type SkillUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type SkillUncheckedUpdateManyInput = {
@@ -532,8 +536,8 @@ export type SkillUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type SkillCountOrderByAggregateInput = {
@@ -548,14 +552,15 @@ export type SkillCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   staminaCost?: Prisma.SortOrder
-  cooldownSeconds?: Prisma.SortOrder
-  jobUnlock?: Prisma.SortOrder
+  cooldownTurns?: Prisma.SortOrder
+  levelUnlock?: Prisma.SortOrder
 }
 
 export type SkillAvgOrderByAggregateInput = {
   version?: Prisma.SortOrder
   staminaCost?: Prisma.SortOrder
-  cooldownSeconds?: Prisma.SortOrder
+  cooldownTurns?: Prisma.SortOrder
+  levelUnlock?: Prisma.SortOrder
 }
 
 export type SkillMaxOrderByAggregateInput = {
@@ -569,8 +574,8 @@ export type SkillMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   staminaCost?: Prisma.SortOrder
-  cooldownSeconds?: Prisma.SortOrder
-  jobUnlock?: Prisma.SortOrder
+  cooldownTurns?: Prisma.SortOrder
+  levelUnlock?: Prisma.SortOrder
 }
 
 export type SkillMinOrderByAggregateInput = {
@@ -584,14 +589,15 @@ export type SkillMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   staminaCost?: Prisma.SortOrder
-  cooldownSeconds?: Prisma.SortOrder
-  jobUnlock?: Prisma.SortOrder
+  cooldownTurns?: Prisma.SortOrder
+  levelUnlock?: Prisma.SortOrder
 }
 
 export type SkillSumOrderByAggregateInput = {
   version?: Prisma.SortOrder
   staminaCost?: Prisma.SortOrder
-  cooldownSeconds?: Prisma.SortOrder
+  cooldownTurns?: Prisma.SortOrder
+  levelUnlock?: Prisma.SortOrder
 }
 
 export type SkillScalarRelationFilter = {
@@ -762,8 +768,8 @@ export type SkillCreateWithoutPlayerSkillsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot3SkillInput
@@ -786,8 +792,8 @@ export type SkillUncheckedCreateWithoutPlayerSkillsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot3SkillInput
@@ -826,8 +832,8 @@ export type SkillUpdateWithoutPlayerSkillsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot3SkillNestedInput
@@ -850,8 +856,8 @@ export type SkillUncheckedUpdateWithoutPlayerSkillsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot3SkillNestedInput
@@ -874,8 +880,8 @@ export type SkillCreateWithoutSlot1LoadoutsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot3SkillInput
@@ -898,8 +904,8 @@ export type SkillUncheckedCreateWithoutSlot1LoadoutsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot3SkillInput
@@ -927,8 +933,8 @@ export type SkillCreateWithoutSlot2LoadoutsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot3SkillInput
@@ -951,8 +957,8 @@ export type SkillUncheckedCreateWithoutSlot2LoadoutsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot3SkillInput
@@ -980,8 +986,8 @@ export type SkillCreateWithoutSlot3LoadoutsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
@@ -1004,8 +1010,8 @@ export type SkillUncheckedCreateWithoutSlot3LoadoutsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
@@ -1033,8 +1039,8 @@ export type SkillCreateWithoutSlot4LoadoutsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
@@ -1057,8 +1063,8 @@ export type SkillUncheckedCreateWithoutSlot4LoadoutsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
@@ -1086,8 +1092,8 @@ export type SkillCreateWithoutSlot5LoadoutsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
@@ -1110,8 +1116,8 @@ export type SkillUncheckedCreateWithoutSlot5LoadoutsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
@@ -1139,8 +1145,8 @@ export type SkillCreateWithoutSlot6LoadoutsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
@@ -1163,8 +1169,8 @@ export type SkillUncheckedCreateWithoutSlot6LoadoutsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
@@ -1192,8 +1198,8 @@ export type SkillCreateWithoutSlot7LoadoutsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
@@ -1216,8 +1222,8 @@ export type SkillUncheckedCreateWithoutSlot7LoadoutsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
@@ -1245,8 +1251,8 @@ export type SkillCreateWithoutSlot8LoadoutsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
@@ -1269,8 +1275,8 @@ export type SkillUncheckedCreateWithoutSlot8LoadoutsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   staminaCost?: number
-  cooldownSeconds?: number
-  jobUnlock?: string | null
+  cooldownTurns?: number
+  levelUnlock?: number | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
@@ -1309,8 +1315,8 @@ export type SkillUpdateWithoutSlot1LoadoutsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot3SkillNestedInput
@@ -1333,8 +1339,8 @@ export type SkillUncheckedUpdateWithoutSlot1LoadoutsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot3SkillNestedInput
@@ -1368,8 +1374,8 @@ export type SkillUpdateWithoutSlot2LoadoutsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot3SkillNestedInput
@@ -1392,8 +1398,8 @@ export type SkillUncheckedUpdateWithoutSlot2LoadoutsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot3SkillNestedInput
@@ -1427,8 +1433,8 @@ export type SkillUpdateWithoutSlot3LoadoutsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
@@ -1451,8 +1457,8 @@ export type SkillUncheckedUpdateWithoutSlot3LoadoutsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
@@ -1486,8 +1492,8 @@ export type SkillUpdateWithoutSlot4LoadoutsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
@@ -1510,8 +1516,8 @@ export type SkillUncheckedUpdateWithoutSlot4LoadoutsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
@@ -1545,8 +1551,8 @@ export type SkillUpdateWithoutSlot5LoadoutsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
@@ -1569,8 +1575,8 @@ export type SkillUncheckedUpdateWithoutSlot5LoadoutsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
@@ -1604,8 +1610,8 @@ export type SkillUpdateWithoutSlot6LoadoutsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
@@ -1628,8 +1634,8 @@ export type SkillUncheckedUpdateWithoutSlot6LoadoutsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
@@ -1663,8 +1669,8 @@ export type SkillUpdateWithoutSlot7LoadoutsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
@@ -1687,8 +1693,8 @@ export type SkillUncheckedUpdateWithoutSlot7LoadoutsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
@@ -1722,8 +1728,8 @@ export type SkillUpdateWithoutSlot8LoadoutsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
@@ -1746,8 +1752,8 @@ export type SkillUncheckedUpdateWithoutSlot8LoadoutsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooldownTurns?: Prisma.IntFieldUpdateOperationsInput | number
+  levelUnlock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
@@ -1873,8 +1879,8 @@ export type SkillSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   createdAt?: boolean
   updatedAt?: boolean
   staminaCost?: boolean
-  cooldownSeconds?: boolean
-  jobUnlock?: boolean
+  cooldownTurns?: boolean
+  levelUnlock?: boolean
   playerSkills?: boolean | Prisma.Skill$playerSkillsArgs<ExtArgs>
   slot1Loadouts?: boolean | Prisma.Skill$slot1LoadoutsArgs<ExtArgs>
   slot2Loadouts?: boolean | Prisma.Skill$slot2LoadoutsArgs<ExtArgs>
@@ -1899,8 +1905,8 @@ export type SkillSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   createdAt?: boolean
   updatedAt?: boolean
   staminaCost?: boolean
-  cooldownSeconds?: boolean
-  jobUnlock?: boolean
+  cooldownTurns?: boolean
+  levelUnlock?: boolean
 }, ExtArgs["result"]["skill"]>
 
 export type SkillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1915,8 +1921,8 @@ export type SkillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   createdAt?: boolean
   updatedAt?: boolean
   staminaCost?: boolean
-  cooldownSeconds?: boolean
-  jobUnlock?: boolean
+  cooldownTurns?: boolean
+  levelUnlock?: boolean
 }, ExtArgs["result"]["skill"]>
 
 export type SkillSelectScalar = {
@@ -1931,11 +1937,11 @@ export type SkillSelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   staminaCost?: boolean
-  cooldownSeconds?: boolean
-  jobUnlock?: boolean
+  cooldownTurns?: boolean
+  levelUnlock?: boolean
 }
 
-export type SkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "staminaCost" | "cooldownSeconds" | "jobUnlock", ExtArgs["result"]["skill"]>
+export type SkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "staminaCost" | "cooldownTurns" | "levelUnlock", ExtArgs["result"]["skill"]>
 export type SkillInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   playerSkills?: boolean | Prisma.Skill$playerSkillsArgs<ExtArgs>
   slot1Loadouts?: boolean | Prisma.Skill$slot1LoadoutsArgs<ExtArgs>
@@ -1976,8 +1982,8 @@ export type $SkillPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     createdAt: Date
     updatedAt: Date
     staminaCost: number
-    cooldownSeconds: number
-    jobUnlock: string | null
+    cooldownTurns: number
+    levelUnlock: number | null
   }, ExtArgs["result"]["skill"]>
   composites: {}
 }
@@ -2421,8 +2427,8 @@ export interface SkillFieldRefs {
   readonly createdAt: Prisma.FieldRef<"Skill", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Skill", 'DateTime'>
   readonly staminaCost: Prisma.FieldRef<"Skill", 'Int'>
-  readonly cooldownSeconds: Prisma.FieldRef<"Skill", 'Int'>
-  readonly jobUnlock: Prisma.FieldRef<"Skill", 'String'>
+  readonly cooldownTurns: Prisma.FieldRef<"Skill", 'Int'>
+  readonly levelUnlock: Prisma.FieldRef<"Skill", 'Int'>
 }
     
 

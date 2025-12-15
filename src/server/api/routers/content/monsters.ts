@@ -62,6 +62,8 @@ export const contentMonstersRouter = createTRPCRouter({
         level: z.number().min(1).default(1),
         hp: z.number().min(1),
         sp: z.number().min(0).default(0),
+        damage: z.number().min(0).default(0),
+        goldReward: z.number().min(0).default(0),
         statsJSON: z
           .string()
           .transform((str, ctx) => {
@@ -88,12 +90,14 @@ export const contentMonstersRouter = createTRPCRouter({
 
       const monster = await ctx.db.monsterTemplate.create({
         data: {
-          name: input.name,
-          level: input.level,
-          hp: input.hp,
-          sp: input.sp,
-          statsJSON: stats,
-          lootTableId: input.lootTableId,
+        name: input.name,
+        level: input.level,
+        hp: input.hp,
+        sp: input.sp,
+        damage: input.damage,
+        goldReward: input.goldReward,
+        statsJSON: stats,
+        lootTableId: input.lootTableId,
         },
       });
 
@@ -109,6 +113,8 @@ export const contentMonstersRouter = createTRPCRouter({
         level: z.number().min(1).optional(),
         hp: z.number().min(1).optional(),
         sp: z.number().min(0).optional(),
+        damage: z.number().min(0).optional(),
+        goldReward: z.number().min(0).optional(),
         statsJSON: z
           .string()
           .transform((str, ctx) => {

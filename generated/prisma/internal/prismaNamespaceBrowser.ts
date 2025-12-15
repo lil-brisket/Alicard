@@ -439,8 +439,8 @@ export const SkillScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   staminaCost: 'staminaCost',
-  cooldownSeconds: 'cooldownSeconds',
-  jobUnlock: 'jobUnlock'
+  cooldownTurns: 'cooldownTurns',
+  levelUnlock: 'levelUnlock'
 } as const
 
 export type SkillScalarFieldEnum = (typeof SkillScalarFieldEnum)[keyof typeof SkillScalarFieldEnum]
@@ -948,10 +948,13 @@ export const ItemTemplateScalarFieldEnum = {
   createdBy: 'createdBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  itemType: 'itemType',
+  equipmentSlot: 'equipmentSlot',
   rarity: 'rarity',
   stackable: 'stackable',
   maxStack: 'maxStack',
   value: 'value',
+  damage: 'damage',
   icon: 'icon',
   isArchived: 'isArchived',
   deletedAt: 'deletedAt'
@@ -973,6 +976,8 @@ export const MonsterTemplateScalarFieldEnum = {
   level: 'level',
   hp: 'hp',
   sp: 'sp',
+  damage: 'damage',
+  goldReward: 'goldReward',
   statsJSON: 'statsJSON',
   lootTableId: 'lootTableId',
   isArchived: 'isArchived',
@@ -995,6 +1000,8 @@ export const QuestTemplateScalarFieldEnum = {
   updatedAt: 'updatedAt',
   stepsJSON: 'stepsJSON',
   rewardsJSON: 'rewardsJSON',
+  coinsReward: 'coinsReward',
+  damageValue: 'damageValue',
   isArchived: 'isArchived',
   deletedAt: 'deletedAt'
 } as const
@@ -1017,6 +1024,8 @@ export const MapZoneScalarFieldEnum = {
   tilesJSON: 'tilesJSON',
   poisJSON: 'poisJSON',
   spawnJSON: 'spawnJSON',
+  coinsReward: 'coinsReward',
+  damageModifier: 'damageModifier',
   isArchived: 'isArchived',
   deletedAt: 'deletedAt'
 } as const

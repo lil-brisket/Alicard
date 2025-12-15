@@ -30,12 +30,16 @@ export type MapZoneAvgAggregateOutputType = {
   version: number | null
   width: number | null
   height: number | null
+  coinsReward: number | null
+  damageModifier: number | null
 }
 
 export type MapZoneSumAggregateOutputType = {
   version: number | null
   width: number | null
   height: number | null
+  coinsReward: number | null
+  damageModifier: number | null
 }
 
 export type MapZoneMinAggregateOutputType = {
@@ -49,6 +53,8 @@ export type MapZoneMinAggregateOutputType = {
   updatedAt: Date | null
   width: number | null
   height: number | null
+  coinsReward: number | null
+  damageModifier: number | null
   isArchived: boolean | null
   deletedAt: Date | null
 }
@@ -64,6 +70,8 @@ export type MapZoneMaxAggregateOutputType = {
   updatedAt: Date | null
   width: number | null
   height: number | null
+  coinsReward: number | null
+  damageModifier: number | null
   isArchived: boolean | null
   deletedAt: Date | null
 }
@@ -83,6 +91,8 @@ export type MapZoneCountAggregateOutputType = {
   tilesJSON: number
   poisJSON: number
   spawnJSON: number
+  coinsReward: number
+  damageModifier: number
   isArchived: number
   deletedAt: number
   _all: number
@@ -93,12 +103,16 @@ export type MapZoneAvgAggregateInputType = {
   version?: true
   width?: true
   height?: true
+  coinsReward?: true
+  damageModifier?: true
 }
 
 export type MapZoneSumAggregateInputType = {
   version?: true
   width?: true
   height?: true
+  coinsReward?: true
+  damageModifier?: true
 }
 
 export type MapZoneMinAggregateInputType = {
@@ -112,6 +126,8 @@ export type MapZoneMinAggregateInputType = {
   updatedAt?: true
   width?: true
   height?: true
+  coinsReward?: true
+  damageModifier?: true
   isArchived?: true
   deletedAt?: true
 }
@@ -127,6 +143,8 @@ export type MapZoneMaxAggregateInputType = {
   updatedAt?: true
   width?: true
   height?: true
+  coinsReward?: true
+  damageModifier?: true
   isArchived?: true
   deletedAt?: true
 }
@@ -146,6 +164,8 @@ export type MapZoneCountAggregateInputType = {
   tilesJSON?: true
   poisJSON?: true
   spawnJSON?: true
+  coinsReward?: true
+  damageModifier?: true
   isArchived?: true
   deletedAt?: true
   _all?: true
@@ -252,6 +272,8 @@ export type MapZoneGroupByOutputType = {
   tilesJSON: runtime.JsonValue
   poisJSON: runtime.JsonValue | null
   spawnJSON: runtime.JsonValue | null
+  coinsReward: number
+  damageModifier: number
   isArchived: boolean
   deletedAt: Date | null
   _count: MapZoneCountAggregateOutputType | null
@@ -294,6 +316,8 @@ export type MapZoneWhereInput = {
   tilesJSON?: Prisma.JsonFilter<"MapZone">
   poisJSON?: Prisma.JsonNullableFilter<"MapZone">
   spawnJSON?: Prisma.JsonNullableFilter<"MapZone">
+  coinsReward?: Prisma.IntFilter<"MapZone"> | number
+  damageModifier?: Prisma.IntFilter<"MapZone"> | number
   isArchived?: Prisma.BoolFilter<"MapZone"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"MapZone"> | Date | string | null
 }
@@ -313,6 +337,8 @@ export type MapZoneOrderByWithRelationInput = {
   tilesJSON?: Prisma.SortOrder
   poisJSON?: Prisma.SortOrderInput | Prisma.SortOrder
   spawnJSON?: Prisma.SortOrderInput | Prisma.SortOrder
+  coinsReward?: Prisma.SortOrder
+  damageModifier?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
 }
@@ -335,6 +361,8 @@ export type MapZoneWhereUniqueInput = Prisma.AtLeast<{
   tilesJSON?: Prisma.JsonFilter<"MapZone">
   poisJSON?: Prisma.JsonNullableFilter<"MapZone">
   spawnJSON?: Prisma.JsonNullableFilter<"MapZone">
+  coinsReward?: Prisma.IntFilter<"MapZone"> | number
+  damageModifier?: Prisma.IntFilter<"MapZone"> | number
   isArchived?: Prisma.BoolFilter<"MapZone"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"MapZone"> | Date | string | null
 }, "id">
@@ -354,6 +382,8 @@ export type MapZoneOrderByWithAggregationInput = {
   tilesJSON?: Prisma.SortOrder
   poisJSON?: Prisma.SortOrderInput | Prisma.SortOrder
   spawnJSON?: Prisma.SortOrderInput | Prisma.SortOrder
+  coinsReward?: Prisma.SortOrder
+  damageModifier?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.MapZoneCountOrderByAggregateInput
@@ -381,6 +411,8 @@ export type MapZoneScalarWhereWithAggregatesInput = {
   tilesJSON?: Prisma.JsonWithAggregatesFilter<"MapZone">
   poisJSON?: Prisma.JsonNullableWithAggregatesFilter<"MapZone">
   spawnJSON?: Prisma.JsonNullableWithAggregatesFilter<"MapZone">
+  coinsReward?: Prisma.IntWithAggregatesFilter<"MapZone"> | number
+  damageModifier?: Prisma.IntWithAggregatesFilter<"MapZone"> | number
   isArchived?: Prisma.BoolWithAggregatesFilter<"MapZone"> | boolean
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"MapZone"> | Date | string | null
 }
@@ -400,6 +432,8 @@ export type MapZoneCreateInput = {
   tilesJSON: Prisma.JsonNullValueInput | runtime.InputJsonValue
   poisJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   spawnJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  coinsReward?: number
+  damageModifier?: number
   isArchived?: boolean
   deletedAt?: Date | string | null
 }
@@ -419,6 +453,8 @@ export type MapZoneUncheckedCreateInput = {
   tilesJSON: Prisma.JsonNullValueInput | runtime.InputJsonValue
   poisJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   spawnJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  coinsReward?: number
+  damageModifier?: number
   isArchived?: boolean
   deletedAt?: Date | string | null
 }
@@ -438,6 +474,8 @@ export type MapZoneUpdateInput = {
   tilesJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   poisJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   spawnJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  coinsReward?: Prisma.IntFieldUpdateOperationsInput | number
+  damageModifier?: Prisma.IntFieldUpdateOperationsInput | number
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -457,6 +495,8 @@ export type MapZoneUncheckedUpdateInput = {
   tilesJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   poisJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   spawnJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  coinsReward?: Prisma.IntFieldUpdateOperationsInput | number
+  damageModifier?: Prisma.IntFieldUpdateOperationsInput | number
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -476,6 +516,8 @@ export type MapZoneCreateManyInput = {
   tilesJSON: Prisma.JsonNullValueInput | runtime.InputJsonValue
   poisJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   spawnJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  coinsReward?: number
+  damageModifier?: number
   isArchived?: boolean
   deletedAt?: Date | string | null
 }
@@ -495,6 +537,8 @@ export type MapZoneUpdateManyMutationInput = {
   tilesJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   poisJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   spawnJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  coinsReward?: Prisma.IntFieldUpdateOperationsInput | number
+  damageModifier?: Prisma.IntFieldUpdateOperationsInput | number
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -514,6 +558,8 @@ export type MapZoneUncheckedUpdateManyInput = {
   tilesJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   poisJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   spawnJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  coinsReward?: Prisma.IntFieldUpdateOperationsInput | number
+  damageModifier?: Prisma.IntFieldUpdateOperationsInput | number
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -533,6 +579,8 @@ export type MapZoneCountOrderByAggregateInput = {
   tilesJSON?: Prisma.SortOrder
   poisJSON?: Prisma.SortOrder
   spawnJSON?: Prisma.SortOrder
+  coinsReward?: Prisma.SortOrder
+  damageModifier?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
 }
@@ -541,6 +589,8 @@ export type MapZoneAvgOrderByAggregateInput = {
   version?: Prisma.SortOrder
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
+  coinsReward?: Prisma.SortOrder
+  damageModifier?: Prisma.SortOrder
 }
 
 export type MapZoneMaxOrderByAggregateInput = {
@@ -554,6 +604,8 @@ export type MapZoneMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
+  coinsReward?: Prisma.SortOrder
+  damageModifier?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
 }
@@ -569,6 +621,8 @@ export type MapZoneMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
+  coinsReward?: Prisma.SortOrder
+  damageModifier?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
 }
@@ -577,6 +631,8 @@ export type MapZoneSumOrderByAggregateInput = {
   version?: Prisma.SortOrder
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
+  coinsReward?: Prisma.SortOrder
+  damageModifier?: Prisma.SortOrder
 }
 
 
@@ -596,6 +652,8 @@ export type MapZoneSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   tilesJSON?: boolean
   poisJSON?: boolean
   spawnJSON?: boolean
+  coinsReward?: boolean
+  damageModifier?: boolean
   isArchived?: boolean
   deletedAt?: boolean
 }, ExtArgs["result"]["mapZone"]>
@@ -615,6 +673,8 @@ export type MapZoneSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   tilesJSON?: boolean
   poisJSON?: boolean
   spawnJSON?: boolean
+  coinsReward?: boolean
+  damageModifier?: boolean
   isArchived?: boolean
   deletedAt?: boolean
 }, ExtArgs["result"]["mapZone"]>
@@ -634,6 +694,8 @@ export type MapZoneSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   tilesJSON?: boolean
   poisJSON?: boolean
   spawnJSON?: boolean
+  coinsReward?: boolean
+  damageModifier?: boolean
   isArchived?: boolean
   deletedAt?: boolean
 }, ExtArgs["result"]["mapZone"]>
@@ -653,11 +715,13 @@ export type MapZoneSelectScalar = {
   tilesJSON?: boolean
   poisJSON?: boolean
   spawnJSON?: boolean
+  coinsReward?: boolean
+  damageModifier?: boolean
   isArchived?: boolean
   deletedAt?: boolean
 }
 
-export type MapZoneOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "width" | "height" | "tilesJSON" | "poisJSON" | "spawnJSON" | "isArchived" | "deletedAt", ExtArgs["result"]["mapZone"]>
+export type MapZoneOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "width" | "height" | "tilesJSON" | "poisJSON" | "spawnJSON" | "coinsReward" | "damageModifier" | "isArchived" | "deletedAt", ExtArgs["result"]["mapZone"]>
 
 export type $MapZonePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MapZone"
@@ -677,6 +741,8 @@ export type $MapZonePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     tilesJSON: runtime.JsonValue
     poisJSON: runtime.JsonValue | null
     spawnJSON: runtime.JsonValue | null
+    coinsReward: number
+    damageModifier: number
     isArchived: boolean
     deletedAt: Date | null
   }, ExtArgs["result"]["mapZone"]>
@@ -1116,6 +1182,8 @@ export interface MapZoneFieldRefs {
   readonly tilesJSON: Prisma.FieldRef<"MapZone", 'Json'>
   readonly poisJSON: Prisma.FieldRef<"MapZone", 'Json'>
   readonly spawnJSON: Prisma.FieldRef<"MapZone", 'Json'>
+  readonly coinsReward: Prisma.FieldRef<"MapZone", 'Int'>
+  readonly damageModifier: Prisma.FieldRef<"MapZone", 'Int'>
   readonly isArchived: Prisma.FieldRef<"MapZone", 'Boolean'>
   readonly deletedAt: Prisma.FieldRef<"MapZone", 'DateTime'>
 }

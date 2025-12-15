@@ -62,6 +62,18 @@ export default async function ContentLayout({
           >
             Maps
           </Link>
+          <Link
+            href="/content/skills"
+            className="border-b-2 border-transparent px-4 py-2 text-sm font-medium text-slate-400 transition hover:border-cyan-500 hover:text-cyan-400"
+          >
+            Skills
+          </Link>
+          <Link
+            href="/content/assign"
+            className="border-b-2 border-transparent px-4 py-2 text-sm font-medium text-slate-400 transition hover:border-cyan-500 hover:text-cyan-400"
+          >
+            Assign to Players
+          </Link>
         </nav>
 
         {children}

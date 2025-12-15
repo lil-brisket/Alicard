@@ -96,6 +96,16 @@ export default function MonsterDetailPage({
               <span className="text-slate-400">SP:</span>{" "}
               <span className="text-slate-300">{monster.sp}</span>
             </div>
+            <div>
+              <span className="text-slate-400">Damage:</span>{" "}
+              <span className="text-slate-300">{monster.damage ?? 0}</span>
+            </div>
+            <div>
+              <span className="text-slate-400">Gold Reward:</span>{" "}
+              <span className="text-slate-300">
+                {monster.goldReward ?? 0} coins
+              </span>
+            </div>
             <div className="mt-4">
               <span className="text-slate-400">Stats:</span>
               <div className="ml-4 mt-2 space-y-1">

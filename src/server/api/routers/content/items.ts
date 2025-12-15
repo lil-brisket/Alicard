@@ -14,6 +14,29 @@ const itemRaritySchema = z.enum([
   "LEGENDARY",
 ]);
 
+const itemTypeSchema = z.enum([
+  "WEAPON",
+  "ARMOR",
+  "ACCESSORY",
+  "CONSUMABLE",
+  "MATERIAL",
+  "QUEST_ITEM",
+  "TOOL",
+  "EQUIPMENT",
+]);
+
+const equipmentSlotSchema = z.enum([
+  "HEAD",
+  "ARMS",
+  "BODY",
+  "LEGS",
+  "FEET",
+  "RING",
+  "NECKLACE",
+  "BELT",
+  "CLOAK",
+]);
+
 const contentStatusSchema = z.enum(["DRAFT", "ACTIVE", "DISABLED"]);
 
 export const contentItemsRouter = createTRPCRouter({
@@ -100,10 +123,13 @@ export const contentItemsRouter = createTRPCRouter({
         description: z.string().optional(),
         tags: z.array(z.string()).optional(),
         status: contentStatusSchema.default("DRAFT"),
+        itemType: itemTypeSchema.optional(),
+        equipmentSlot: equipmentSlotSchema.optional(),
         rarity: itemRaritySchema,
         stackable: z.boolean().default(false),
         maxStack: z.number().min(1).default(1),
         value: z.number().min(0).default(0),
+        damage: z.number().min(0).default(0),
         icon: z.string().optional(),
         cloneFromId: z.string().optional(), // For inheritance/cloning
       })
@@ -133,20 +159,33 @@ export const contentItemsRouter = createTRPCRouter({
         
         baseData = {
           ...baseData,
+          itemType: source.itemType,
+          equipmentSlot: source.equipmentSlot,
           rarity: source.rarity,
           stackable: source.stackable,
           maxStack: source.maxStack,
           value: source.value,
+          damage: source.damage,
           icon: source.icon,
           // Don't copy name, description, tags, status - those should be new
         };
       }
 
-      const item = await ctx.db.itemTemplate.create({
-        data: baseData,
-      });
+      try {
+        const item = await ctx.db.itemTemplate.create({
+          data: baseData,
+        });
 
-      return item;
+        return item;
+      } catch (error: any) {
+        console.error("Error creating item template:", error);
+        console.error("Data being sent:", JSON.stringify(baseData, null, 2));
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: error?.message || "Failed to create item template",
+          cause: error,
+        });
+      }
     }),
 
   // Update item template (requires content.edit permission)
@@ -162,10 +201,13 @@ export const contentItemsRouter = createTRPCRouter({
         description: z.string().optional().nullable(),
         tags: z.array(z.string()).optional(),
         status: contentStatusSchema.optional(),
+        itemType: itemTypeSchema.optional().nullable(),
+        equipmentSlot: equipmentSlotSchema.optional().nullable(),
         rarity: itemRaritySchema.optional(),
         stackable: z.boolean().optional(),
         maxStack: z.number().min(1).optional(),
         value: z.number().min(0).optional(),
+        damage: z.number().min(0).optional(),
         icon: z.string().optional().nullable(),
         affectsExisting: z.boolean().default(false), // Versioning: if false, only affects new items
       })
@@ -336,10 +378,13 @@ export const contentItemsRouter = createTRPCRouter({
           status: "DRAFT",
           version: 1,
           createdBy: ctx.session.user.id,
+          itemType: source.itemType,
+          equipmentSlot: source.equipmentSlot,
           rarity: source.rarity,
           stackable: source.stackable,
           maxStack: source.maxStack,
           value: source.value,
+          damage: source.damage,
           icon: source.icon,
         },
       });

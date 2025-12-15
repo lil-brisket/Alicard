@@ -154,3 +154,86 @@ export async function requireContentPage() {
 
   return user;
 }
+
+/**
+ * Content permission types
+ */
+export type ContentPermission = 
+  | "content.create"
+  | "content.edit"
+  | "content.disable"
+  | "content.delete"
+  | "content.view";
+
+/**
+ * Get all content permissions for a user
+ * Returns a Set of permission strings
+ * Supports both single role field and multi-role assignments
+ */
+export async function getContentPermissions(userId: string): Promise<Set<ContentPermission>> {
+  const user = await db.user.findUnique({
+    where: { id: userId },
+    select: {
+      id: true,
+      role: true,
+      roles: {
+        select: {
+          role: true,
+        },
+      },
+    },
+  });
+
+  if (!user) {
+    return new Set();
+  }
+
+  // Collect all roles (single role + multi-role assignments)
+  const userRoles = [
+    user.role,
+    ...(user.roles?.map((r) => r.role) ?? []),
+  ];
+
+  const permissions = new Set<ContentPermission>();
+
+  // ADMIN has all permissions
+  if (userRoles.includes("ADMIN")) {
+    permissions.add("content.create");
+    permissions.add("content.edit");
+    permissions.add("content.disable");
+    permissions.add("content.delete");
+    permissions.add("content.view");
+    return permissions;
+  }
+
+  // CONTENT role has create, edit, disable, view (but not delete)
+  if (userRoles.includes("CONTENT")) {
+    permissions.add("content.create");
+    permissions.add("content.edit");
+    permissions.add("content.disable");
+    permissions.add("content.view");
+    return permissions;
+  }
+
+  // No content permissions for other roles
+  return permissions;
+}
+
+/**
+ * Check if user has a specific content permission
+ * Throws TRPCError if not authorized
+ * Supports both single role field and multi-role assignments
+ */
+export async function requireContentPermission(
+  userId: string,
+  permission: ContentPermission
+): Promise<void> {
+  const permissions = await getContentPermissions(userId);
+
+  if (!permissions.has(permission)) {
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: `Permission '${permission}' required`,
+    });
+  }
+}

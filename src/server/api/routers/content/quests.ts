@@ -75,6 +75,8 @@ export const contentQuestsRouter = createTRPCRouter({
             z.record(z.string(), z.unknown()),
           ])
           .optional(),
+        coinsReward: z.number().min(0).default(0),
+        damageValue: z.number().min(0).default(0),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -92,9 +94,12 @@ export const contentQuestsRouter = createTRPCRouter({
       const quest = await ctx.db.questTemplate.create({
         data: {
           title: input.title,
+          name: input.title, // Keep name in sync with title
           description: input.description,
           stepsJSON: steps as Prisma.InputJsonValue,
           rewardsJSON: rewards as Prisma.InputJsonValue,
+          coinsReward: input.coinsReward,
+          damageValue: input.damageValue,
         },
       });
 
@@ -133,6 +138,8 @@ export const contentQuestsRouter = createTRPCRouter({
           ])
           .optional()
           .nullable(),
+        coinsReward: z.number().min(0).optional(),
+        damageValue: z.number().min(0).optional(),
       })
     )
     .mutation(async ({ ctx, input }) => {

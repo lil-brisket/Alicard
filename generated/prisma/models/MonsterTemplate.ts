@@ -31,6 +31,8 @@ export type MonsterTemplateAvgAggregateOutputType = {
   level: number | null
   hp: number | null
   sp: number | null
+  damage: number | null
+  goldReward: number | null
 }
 
 export type MonsterTemplateSumAggregateOutputType = {
@@ -38,6 +40,8 @@ export type MonsterTemplateSumAggregateOutputType = {
   level: number | null
   hp: number | null
   sp: number | null
+  damage: number | null
+  goldReward: number | null
 }
 
 export type MonsterTemplateMinAggregateOutputType = {
@@ -52,6 +56,8 @@ export type MonsterTemplateMinAggregateOutputType = {
   level: number | null
   hp: number | null
   sp: number | null
+  damage: number | null
+  goldReward: number | null
   lootTableId: string | null
   isArchived: boolean | null
   deletedAt: Date | null
@@ -69,6 +75,8 @@ export type MonsterTemplateMaxAggregateOutputType = {
   level: number | null
   hp: number | null
   sp: number | null
+  damage: number | null
+  goldReward: number | null
   lootTableId: string | null
   isArchived: boolean | null
   deletedAt: Date | null
@@ -87,6 +95,8 @@ export type MonsterTemplateCountAggregateOutputType = {
   level: number
   hp: number
   sp: number
+  damage: number
+  goldReward: number
   statsJSON: number
   lootTableId: number
   isArchived: number
@@ -100,6 +110,8 @@ export type MonsterTemplateAvgAggregateInputType = {
   level?: true
   hp?: true
   sp?: true
+  damage?: true
+  goldReward?: true
 }
 
 export type MonsterTemplateSumAggregateInputType = {
@@ -107,6 +119,8 @@ export type MonsterTemplateSumAggregateInputType = {
   level?: true
   hp?: true
   sp?: true
+  damage?: true
+  goldReward?: true
 }
 
 export type MonsterTemplateMinAggregateInputType = {
@@ -121,6 +135,8 @@ export type MonsterTemplateMinAggregateInputType = {
   level?: true
   hp?: true
   sp?: true
+  damage?: true
+  goldReward?: true
   lootTableId?: true
   isArchived?: true
   deletedAt?: true
@@ -138,6 +154,8 @@ export type MonsterTemplateMaxAggregateInputType = {
   level?: true
   hp?: true
   sp?: true
+  damage?: true
+  goldReward?: true
   lootTableId?: true
   isArchived?: true
   deletedAt?: true
@@ -156,6 +174,8 @@ export type MonsterTemplateCountAggregateInputType = {
   level?: true
   hp?: true
   sp?: true
+  damage?: true
+  goldReward?: true
   statsJSON?: true
   lootTableId?: true
   isArchived?: true
@@ -262,6 +282,8 @@ export type MonsterTemplateGroupByOutputType = {
   level: number
   hp: number
   sp: number
+  damage: number
+  goldReward: number
   statsJSON: runtime.JsonValue
   lootTableId: string | null
   isArchived: boolean
@@ -304,6 +326,8 @@ export type MonsterTemplateWhereInput = {
   level?: Prisma.IntFilter<"MonsterTemplate"> | number
   hp?: Prisma.IntFilter<"MonsterTemplate"> | number
   sp?: Prisma.IntFilter<"MonsterTemplate"> | number
+  damage?: Prisma.IntFilter<"MonsterTemplate"> | number
+  goldReward?: Prisma.IntFilter<"MonsterTemplate"> | number
   statsJSON?: Prisma.JsonFilter<"MonsterTemplate">
   lootTableId?: Prisma.StringNullableFilter<"MonsterTemplate"> | string | null
   isArchived?: Prisma.BoolFilter<"MonsterTemplate"> | boolean
@@ -323,6 +347,8 @@ export type MonsterTemplateOrderByWithRelationInput = {
   level?: Prisma.SortOrder
   hp?: Prisma.SortOrder
   sp?: Prisma.SortOrder
+  damage?: Prisma.SortOrder
+  goldReward?: Prisma.SortOrder
   statsJSON?: Prisma.SortOrder
   lootTableId?: Prisma.SortOrderInput | Prisma.SortOrder
   isArchived?: Prisma.SortOrder
@@ -345,6 +371,8 @@ export type MonsterTemplateWhereUniqueInput = Prisma.AtLeast<{
   level?: Prisma.IntFilter<"MonsterTemplate"> | number
   hp?: Prisma.IntFilter<"MonsterTemplate"> | number
   sp?: Prisma.IntFilter<"MonsterTemplate"> | number
+  damage?: Prisma.IntFilter<"MonsterTemplate"> | number
+  goldReward?: Prisma.IntFilter<"MonsterTemplate"> | number
   statsJSON?: Prisma.JsonFilter<"MonsterTemplate">
   lootTableId?: Prisma.StringNullableFilter<"MonsterTemplate"> | string | null
   isArchived?: Prisma.BoolFilter<"MonsterTemplate"> | boolean
@@ -364,6 +392,8 @@ export type MonsterTemplateOrderByWithAggregationInput = {
   level?: Prisma.SortOrder
   hp?: Prisma.SortOrder
   sp?: Prisma.SortOrder
+  damage?: Prisma.SortOrder
+  goldReward?: Prisma.SortOrder
   statsJSON?: Prisma.SortOrder
   lootTableId?: Prisma.SortOrderInput | Prisma.SortOrder
   isArchived?: Prisma.SortOrder
@@ -391,6 +421,8 @@ export type MonsterTemplateScalarWhereWithAggregatesInput = {
   level?: Prisma.IntWithAggregatesFilter<"MonsterTemplate"> | number
   hp?: Prisma.IntWithAggregatesFilter<"MonsterTemplate"> | number
   sp?: Prisma.IntWithAggregatesFilter<"MonsterTemplate"> | number
+  damage?: Prisma.IntWithAggregatesFilter<"MonsterTemplate"> | number
+  goldReward?: Prisma.IntWithAggregatesFilter<"MonsterTemplate"> | number
   statsJSON?: Prisma.JsonWithAggregatesFilter<"MonsterTemplate">
   lootTableId?: Prisma.StringNullableWithAggregatesFilter<"MonsterTemplate"> | string | null
   isArchived?: Prisma.BoolWithAggregatesFilter<"MonsterTemplate"> | boolean
@@ -410,6 +442,8 @@ export type MonsterTemplateCreateInput = {
   level?: number
   hp: number
   sp?: number
+  damage?: number
+  goldReward?: number
   statsJSON: Prisma.JsonNullValueInput | runtime.InputJsonValue
   lootTableId?: string | null
   isArchived?: boolean
@@ -429,6 +463,8 @@ export type MonsterTemplateUncheckedCreateInput = {
   level?: number
   hp: number
   sp?: number
+  damage?: number
+  goldReward?: number
   statsJSON: Prisma.JsonNullValueInput | runtime.InputJsonValue
   lootTableId?: string | null
   isArchived?: boolean
@@ -448,6 +484,8 @@ export type MonsterTemplateUpdateInput = {
   level?: Prisma.IntFieldUpdateOperationsInput | number
   hp?: Prisma.IntFieldUpdateOperationsInput | number
   sp?: Prisma.IntFieldUpdateOperationsInput | number
+  damage?: Prisma.IntFieldUpdateOperationsInput | number
+  goldReward?: Prisma.IntFieldUpdateOperationsInput | number
   statsJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   lootTableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -467,6 +505,8 @@ export type MonsterTemplateUncheckedUpdateInput = {
   level?: Prisma.IntFieldUpdateOperationsInput | number
   hp?: Prisma.IntFieldUpdateOperationsInput | number
   sp?: Prisma.IntFieldUpdateOperationsInput | number
+  damage?: Prisma.IntFieldUpdateOperationsInput | number
+  goldReward?: Prisma.IntFieldUpdateOperationsInput | number
   statsJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   lootTableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -486,6 +526,8 @@ export type MonsterTemplateCreateManyInput = {
   level?: number
   hp: number
   sp?: number
+  damage?: number
+  goldReward?: number
   statsJSON: Prisma.JsonNullValueInput | runtime.InputJsonValue
   lootTableId?: string | null
   isArchived?: boolean
@@ -505,6 +547,8 @@ export type MonsterTemplateUpdateManyMutationInput = {
   level?: Prisma.IntFieldUpdateOperationsInput | number
   hp?: Prisma.IntFieldUpdateOperationsInput | number
   sp?: Prisma.IntFieldUpdateOperationsInput | number
+  damage?: Prisma.IntFieldUpdateOperationsInput | number
+  goldReward?: Prisma.IntFieldUpdateOperationsInput | number
   statsJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   lootTableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -524,6 +568,8 @@ export type MonsterTemplateUncheckedUpdateManyInput = {
   level?: Prisma.IntFieldUpdateOperationsInput | number
   hp?: Prisma.IntFieldUpdateOperationsInput | number
   sp?: Prisma.IntFieldUpdateOperationsInput | number
+  damage?: Prisma.IntFieldUpdateOperationsInput | number
+  goldReward?: Prisma.IntFieldUpdateOperationsInput | number
   statsJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   lootTableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -543,6 +589,8 @@ export type MonsterTemplateCountOrderByAggregateInput = {
   level?: Prisma.SortOrder
   hp?: Prisma.SortOrder
   sp?: Prisma.SortOrder
+  damage?: Prisma.SortOrder
+  goldReward?: Prisma.SortOrder
   statsJSON?: Prisma.SortOrder
   lootTableId?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
@@ -554,6 +602,8 @@ export type MonsterTemplateAvgOrderByAggregateInput = {
   level?: Prisma.SortOrder
   hp?: Prisma.SortOrder
   sp?: Prisma.SortOrder
+  damage?: Prisma.SortOrder
+  goldReward?: Prisma.SortOrder
 }
 
 export type MonsterTemplateMaxOrderByAggregateInput = {
@@ -568,6 +618,8 @@ export type MonsterTemplateMaxOrderByAggregateInput = {
   level?: Prisma.SortOrder
   hp?: Prisma.SortOrder
   sp?: Prisma.SortOrder
+  damage?: Prisma.SortOrder
+  goldReward?: Prisma.SortOrder
   lootTableId?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -585,6 +637,8 @@ export type MonsterTemplateMinOrderByAggregateInput = {
   level?: Prisma.SortOrder
   hp?: Prisma.SortOrder
   sp?: Prisma.SortOrder
+  damage?: Prisma.SortOrder
+  goldReward?: Prisma.SortOrder
   lootTableId?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -595,6 +649,8 @@ export type MonsterTemplateSumOrderByAggregateInput = {
   level?: Prisma.SortOrder
   hp?: Prisma.SortOrder
   sp?: Prisma.SortOrder
+  damage?: Prisma.SortOrder
+  goldReward?: Prisma.SortOrder
 }
 
 
@@ -612,6 +668,8 @@ export type MonsterTemplateSelect<ExtArgs extends runtime.Types.Extensions.Inter
   level?: boolean
   hp?: boolean
   sp?: boolean
+  damage?: boolean
+  goldReward?: boolean
   statsJSON?: boolean
   lootTableId?: boolean
   isArchived?: boolean
@@ -631,6 +689,8 @@ export type MonsterTemplateSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   level?: boolean
   hp?: boolean
   sp?: boolean
+  damage?: boolean
+  goldReward?: boolean
   statsJSON?: boolean
   lootTableId?: boolean
   isArchived?: boolean
@@ -650,6 +710,8 @@ export type MonsterTemplateSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   level?: boolean
   hp?: boolean
   sp?: boolean
+  damage?: boolean
+  goldReward?: boolean
   statsJSON?: boolean
   lootTableId?: boolean
   isArchived?: boolean
@@ -669,13 +731,15 @@ export type MonsterTemplateSelectScalar = {
   level?: boolean
   hp?: boolean
   sp?: boolean
+  damage?: boolean
+  goldReward?: boolean
   statsJSON?: boolean
   lootTableId?: boolean
   isArchived?: boolean
   deletedAt?: boolean
 }
 
-export type MonsterTemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "level" | "hp" | "sp" | "statsJSON" | "lootTableId" | "isArchived" | "deletedAt", ExtArgs["result"]["monsterTemplate"]>
+export type MonsterTemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "level" | "hp" | "sp" | "damage" | "goldReward" | "statsJSON" | "lootTableId" | "isArchived" | "deletedAt", ExtArgs["result"]["monsterTemplate"]>
 
 export type $MonsterTemplatePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MonsterTemplate"
@@ -693,6 +757,8 @@ export type $MonsterTemplatePayload<ExtArgs extends runtime.Types.Extensions.Int
     level: number
     hp: number
     sp: number
+    damage: number
+    goldReward: number
     statsJSON: runtime.JsonValue
     lootTableId: string | null
     isArchived: boolean
@@ -1132,6 +1198,8 @@ export interface MonsterTemplateFieldRefs {
   readonly level: Prisma.FieldRef<"MonsterTemplate", 'Int'>
   readonly hp: Prisma.FieldRef<"MonsterTemplate", 'Int'>
   readonly sp: Prisma.FieldRef<"MonsterTemplate", 'Int'>
+  readonly damage: Prisma.FieldRef<"MonsterTemplate", 'Int'>
+  readonly goldReward: Prisma.FieldRef<"MonsterTemplate", 'Int'>
   readonly statsJSON: Prisma.FieldRef<"MonsterTemplate", 'Json'>
   readonly lootTableId: Prisma.FieldRef<"MonsterTemplate", 'String'>
   readonly isArchived: Prisma.FieldRef<"MonsterTemplate", 'Boolean'>

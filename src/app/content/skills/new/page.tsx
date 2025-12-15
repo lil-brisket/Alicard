@@ -5,54 +5,48 @@ import { useRouter } from "next/navigation";
 import { api } from "~/trpc/react";
 import { toast } from "react-hot-toast";
 
-export default function NewItemPage() {
+export default function NewSkillPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
+    key: "",
     name: "",
     description: "",
     tags: [] as string[],
     status: "DRAFT" as "DRAFT" | "ACTIVE" | "DISABLED",
-    itemType: "" as "" | "WEAPON" | "ARMOR" | "ACCESSORY" | "CONSUMABLE" | "MATERIAL" | "QUEST_ITEM" | "TOOL" | "EQUIPMENT",
-    equipmentSlot: "" as "" | "HEAD" | "ARMS" | "BODY" | "LEGS" | "FEET" | "RING" | "NECKLACE" | "BELT" | "CLOAK",
-    rarity: "COMMON" as const,
-    stackable: false,
-    maxStack: 1,
-    value: 0,
-    damage: 0,
-    icon: "",
+    staminaCost: 0,
+    cooldownTurns: 0,
+    levelUnlock: undefined as number | undefined,
     cloneFromId: "",
   });
   
   const [newTag, setNewTag] = useState("");
   
-  const { data: items } = api.content.items.list.useQuery({
+  const { data: skills } = api.content.skills.list.useQuery({
     limit: 100,
   });
 
-  const createItem = api.content.items.create.useMutation({
-    onSuccess: (item) => {
-      toast.success("Item created");
-      router.push(`/content/items/${item.id}`);
+  const createSkill = api.content.skills.create.useMutation({
+    onSuccess: (skill) => {
+      toast.success("Skill created");
+      router.push(`/content/skills/${skill.id}`);
     },
     onError: (error) => {
-      console.error("Create item error:", error);
+      console.error("Create skill error:", error);
       const errorMessage = error.data?.zodError?.fieldErrors 
         ? Object.values(error.data.zodError.fieldErrors).flat().join(", ")
-        : error.message || "Failed to create item. Please check the console for details.";
+        : error.message || "Failed to create skill. Please check the console for details.";
       toast.error(errorMessage);
     },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const { cloneFromId, itemType, equipmentSlot, ...data } = formData;
-    createItem.mutate({
+    const { cloneFromId, ...data } = formData;
+    createSkill.mutate({
       ...data,
-      itemType: itemType || undefined,
-      equipmentSlot: equipmentSlot || undefined,
-      value: Number(data.value) || 0,
-      damage: Number(data.damage) || 0,
-      maxStack: Number(data.maxStack) || 1,
+      staminaCost: Number(data.staminaCost) || 0,
+      cooldownTurns: Number(data.cooldownTurns) || 0,
+      levelUnlock: data.levelUnlock || undefined,
       cloneFromId: cloneFromId || undefined,
     });
   };
@@ -76,9 +70,26 @@ export default function NewItemPage() {
 
   return (
     <div>
-      <h2 className="mb-6 text-xl font-semibold text-cyan-400">Create New Item</h2>
+      <h2 className="mb-6 text-xl font-semibold text-cyan-400">Create New Skill</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-slate-300">
+            Key *
+          </label>
+          <input
+            type="text"
+            required
+            value={formData.key}
+            onChange={(e) => setFormData({ ...formData, key: e.target.value })}
+            className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 font-mono text-slate-100"
+            placeholder="e.g., fire_bolt, heal, slash"
+          />
+          <p className="mt-1 text-xs text-slate-400">
+            Unique identifier (lowercase, underscores). This cannot be changed after creation.
+          </p>
+        </div>
+
         <div>
           <label className="block text-sm font-medium text-slate-300">
             Name *
@@ -128,62 +139,6 @@ export default function NewItemPage() {
 
         <div>
           <label className="block text-sm font-medium text-slate-300">
-            Item Type
-          </label>
-          <select
-            value={formData.itemType}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                itemType: e.target.value as typeof formData.itemType,
-              })
-            }
-            className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
-          >
-            <option value="">None</option>
-            <option value="WEAPON">WEAPON</option>
-            <option value="ARMOR">ARMOR</option>
-            <option value="ACCESSORY">ACCESSORY</option>
-            <option value="CONSUMABLE">CONSUMABLE</option>
-            <option value="MATERIAL">MATERIAL</option>
-            <option value="QUEST_ITEM">QUEST_ITEM</option>
-            <option value="TOOL">TOOL</option>
-            <option value="EQUIPMENT">EQUIPMENT</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-slate-300">
-            Equipment Slot
-          </label>
-          <select
-            value={formData.equipmentSlot}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                equipmentSlot: e.target.value as typeof formData.equipmentSlot,
-              })
-            }
-            className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
-          >
-            <option value="">None</option>
-            <option value="HEAD">HEAD</option>
-            <option value="ARMS">ARMS</option>
-            <option value="BODY">BODY</option>
-            <option value="LEGS">LEGS</option>
-            <option value="FEET">FEET</option>
-            <option value="RING">RING</option>
-            <option value="NECKLACE">NECKLACE</option>
-            <option value="BELT">BELT</option>
-            <option value="CLOAK">CLOAK</option>
-          </select>
-          <p className="mt-1 text-xs text-slate-400">
-            Required for equippable items (weapons, armor, accessories)
-          </p>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-slate-300">
             Tags
           </label>
           <div className="mt-1 flex gap-2">
@@ -197,7 +152,7 @@ export default function NewItemPage() {
                   addTag();
                 }
               }}
-              placeholder="Add tag (e.g., fire, starter, rare)"
+              placeholder="Add tag (e.g., combat, fire, starter)"
               className="flex-1 rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
             />
             <button
@@ -241,85 +196,29 @@ export default function NewItemPage() {
             className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
           >
             <option value="">None - Create New</option>
-            {items?.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.name}
+            {skills?.map((skill) => (
+              <option key={skill.id} value={skill.id}>
+                {skill.name} ({skill.key})
               </option>
             ))}
           </select>
           <p className="mt-1 text-xs text-slate-400">
-            Select an existing item to clone its properties
+            Select an existing skill to clone its properties
           </p>
         </div>
 
         <div>
           <label className="block text-sm font-medium text-slate-300">
-            Rarity *
-          </label>
-          <select
-            value={formData.rarity}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                rarity: e.target.value as typeof formData.rarity,
-              })
-            }
-            className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
-          >
-            <option value="COMMON">COMMON</option>
-            <option value="UNCOMMON">UNCOMMON</option>
-            <option value="RARE">RARE</option>
-            <option value="EPIC">EPIC</option>
-            <option value="LEGENDARY">LEGENDARY</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              checked={formData.stackable}
-              onChange={(e) =>
-                setFormData({ ...formData, stackable: e.target.checked })
-              }
-              className="rounded border-slate-700"
-            />
-            <span className="text-sm text-slate-300">Stackable</span>
-          </label>
-        </div>
-
-        {formData.stackable && (
-          <div>
-            <label className="block text-sm font-medium text-slate-300">
-              Max Stack
-            </label>
-            <input
-              type="number"
-              min={1}
-              value={formData.maxStack}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  maxStack: parseInt(e.target.value) || 1,
-                })
-              }
-              className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
-            />
-          </div>
-        )}
-
-        <div>
-          <label className="block text-sm font-medium text-slate-300">
-            Value (Coins)
+            Stamina Cost
           </label>
           <input
             type="number"
             min={0}
-            value={formData.value}
+            value={formData.staminaCost}
             onChange={(e) =>
               setFormData({
                 ...formData,
-                value: parseInt(e.target.value) || 0,
+                staminaCost: parseInt(e.target.value) || 0,
               })
             }
             className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
@@ -328,46 +227,51 @@ export default function NewItemPage() {
 
         <div>
           <label className="block text-sm font-medium text-slate-300">
-            Damage
+            Cooldown (Turns)
           </label>
           <input
             type="number"
             min={0}
-            value={formData.damage}
+            value={formData.cooldownTurns}
             onChange={(e) =>
               setFormData({
                 ...formData,
-                damage: parseInt(e.target.value) || 0,
+                cooldownTurns: parseInt(e.target.value) || 0,
               })
             }
             className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-slate-300">
+            Level Unlock (Optional)
+          </label>
+          <input
+            type="number"
+            min={1}
+            value={formData.levelUnlock ?? ""}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                levelUnlock: e.target.value ? parseInt(e.target.value) : undefined,
+              })
+            }
+            className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
+            placeholder="e.g., 5, 10, 20"
           />
           <p className="mt-1 text-xs text-slate-400">
-            Damage value for weapons
+            Level required to unlock this skill
           </p>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-slate-300">
-            Icon URL
-          </label>
-          <input
-            type="text"
-            value={formData.icon}
-            onChange={(e) =>
-              setFormData({ ...formData, icon: e.target.value })
-            }
-            className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
-          />
         </div>
 
         <div className="flex gap-4">
           <button
             type="submit"
-            disabled={createItem.isPending}
+            disabled={createSkill.isPending}
             className="rounded-lg bg-cyan-600 px-6 py-2 font-medium text-white transition hover:bg-cyan-700 disabled:opacity-50"
           >
-            {createItem.isPending ? "Creating..." : "Create Item"}
+            {createSkill.isPending ? "Creating..." : "Create Skill"}
           </button>
           <button
             type="button"

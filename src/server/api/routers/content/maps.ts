@@ -88,6 +88,8 @@ export const contentMapsRouter = createTRPCRouter({
             z.record(z.string(), z.unknown()),
           ])
           .optional(),
+        coinsReward: z.number().min(0).default(0),
+        damageModifier: z.number().default(0),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -116,6 +118,8 @@ export const contentMapsRouter = createTRPCRouter({
           tilesJSON: tiles as Prisma.InputJsonValue,
           poisJSON: pois as Prisma.InputJsonValue,
           spawnJSON: spawns as Prisma.InputJsonValue,
+          coinsReward: input.coinsReward,
+          damageModifier: input.damageModifier,
         },
       });
 
@@ -168,6 +172,8 @@ export const contentMapsRouter = createTRPCRouter({
           ])
           .optional()
           .nullable(),
+        coinsReward: z.number().min(0).optional(),
+        damageModifier: z.number().optional(),
       })
     )
     .mutation(async ({ ctx, input }) => {

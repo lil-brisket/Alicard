@@ -108,8 +108,7 @@ export type ItemRarity = (typeof ItemRarity)[keyof typeof ItemRarity]
 
 export const EquipmentSlot = {
   HEAD: 'HEAD',
-  LEFT_ARM: 'LEFT_ARM',
-  RIGHT_ARM: 'RIGHT_ARM',
+  ARMS: 'ARMS',
   BODY: 'BODY',
   LEGS: 'LEGS',
   FEET: 'FEET',

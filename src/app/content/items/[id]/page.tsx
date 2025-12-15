@@ -164,6 +164,62 @@ export default function ItemDetailPage({
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-300">
+                Item Type
+              </label>
+              <select
+                defaultValue={(item as any).itemType ?? ""}
+                onChange={(e) =>
+                  updateItem.mutate({
+                    id,
+                    itemType: e.target.value || null,
+                    affectsExisting,
+                  })
+                }
+                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
+              >
+                <option value="">None</option>
+                <option value="WEAPON">WEAPON</option>
+                <option value="ARMOR">ARMOR</option>
+                <option value="ACCESSORY">ACCESSORY</option>
+                <option value="CONSUMABLE">CONSUMABLE</option>
+                <option value="MATERIAL">MATERIAL</option>
+                <option value="QUEST_ITEM">QUEST_ITEM</option>
+                <option value="TOOL">TOOL</option>
+                <option value="EQUIPMENT">EQUIPMENT</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-300">
+                Equipment Slot
+              </label>
+              <select
+                defaultValue={(item as any).equipmentSlot ?? ""}
+                onChange={(e) =>
+                  updateItem.mutate({
+                    id,
+                    equipmentSlot: e.target.value || null,
+                    affectsExisting,
+                  })
+                }
+                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
+              >
+                <option value="">None</option>
+                <option value="HEAD">HEAD</option>
+                <option value="ARMS">ARMS</option>
+                <option value="BODY">BODY</option>
+                <option value="LEGS">LEGS</option>
+                <option value="FEET">FEET</option>
+                <option value="RING">RING</option>
+                <option value="NECKLACE">NECKLACE</option>
+                <option value="BELT">BELT</option>
+                <option value="CLOAK">CLOAK</option>
+              </select>
+              <p className="mt-1 text-xs text-slate-400">
+                Required for equippable items (weapons, armor, accessories)
+              </p>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-300">
                 Rarity
               </label>
               <select

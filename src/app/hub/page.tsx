@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 
 import { getServerAuthSession } from "~/server/auth";
 import { db } from "~/server/db";
+import { ensurePlayerExists } from "~/server/lib/ensure-player";
 import { HubHeader } from "./_components/hub-header";
 import { ActionGrid } from "./_components/action-grid";
 import { HallOfDeadCard } from "./_components/hall-of-dead-card";
@@ -71,6 +72,15 @@ export default async function HubPage() {
         location: "Town Square",
       },
     });
+  }
+
+  // Ensure Player exists (creates from Character if needed)
+  // This ensures game systems that require Player will work
+  try {
+    await ensurePlayerExists(user.id);
+  } catch (error) {
+    // If Player creation fails, log but don't block the page
+    console.error("Failed to ensure Player exists:", error);
   }
 
   return (

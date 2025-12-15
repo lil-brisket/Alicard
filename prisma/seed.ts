@@ -539,7 +539,7 @@ async function main() {
       name: "Basic Attack",
       description: "A simple melee attack.",
       staminaCost: 5,
-      cooldownSeconds: 0,
+      cooldownTurns: 0,
     },
   });
 
@@ -552,7 +552,7 @@ async function main() {
       name: "Power Strike",
       description: "A powerful attack that deals extra damage.",
       staminaCost: 15,
-      cooldownSeconds: 3,
+      cooldownTurns: 3,
     },
   });
 
@@ -565,7 +565,7 @@ async function main() {
       name: "Heal",
       description: "Restores a small amount of health.",
       staminaCost: 10,
-      cooldownSeconds: 5,
+      cooldownTurns: 5,
     },
   });
 
@@ -578,7 +578,7 @@ async function main() {
       name: "Dodge",
       description: "Increases evasion for a short time.",
       staminaCost: 8,
-      cooldownSeconds: 10,
+      cooldownTurns: 10,
     },
   });
 
@@ -591,7 +591,7 @@ async function main() {
       name: "Shield Bash",
       description: "Bash with your shield, stunning the enemy.",
       staminaCost: 12,
-      cooldownSeconds: 8,
+      cooldownTurns: 8,
     },
   });
 

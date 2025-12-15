@@ -14,6 +14,7 @@ import { ZodError } from "zod";
 import { auth } from "~/server/auth";
 import { db } from "~/server/db";
 import { trackIpHistory, getIpAddress, getUserAgent } from "~/server/lib/ip-history";
+import { ensurePlayerExists } from "~/server/lib/ensure-player";
 
 /**
  * 1. CONTEXT
@@ -324,6 +325,50 @@ export const contentProcedure = t.procedure
         db: ctx.db,
         headers: ctx.headers,
         userRole: user.role,
+      },
+    });
+  });
+
+/**
+ * Player procedure (authenticated user with Player record)
+ *
+ * Requires user to be authenticated and ensures a Player record exists.
+ * If Player doesn't exist, creates one from the user's Character.
+ * This is the procedure to use for game-related operations (battle, bank, etc.)
+ */
+export const playerProcedure = t.procedure
+  .use(timingMiddleware)
+  .use(async ({ ctx, next }) => {
+    if (!ctx.session?.user) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+    
+    // Ensure db is available
+    if (!ctx.db) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Database client is not available",
+      });
+    }
+    
+    // Track IP history (non-blocking)
+    const ipAddress = getIpAddress(ctx.headers);
+    const userAgent = getUserAgent(ctx.headers);
+    trackIpHistory(ctx.session.user.id, ipAddress, userAgent).catch((error) => {
+      // Silently fail - IP history tracking shouldn't break the request
+      console.error("Failed to track IP history:", error);
+    });
+
+    // Ensure Player exists (creates from Character if needed)
+    const player = await ensurePlayerExists(ctx.session.user.id);
+    
+    return next({
+      ctx: {
+        // infers the `session` as non-nullable
+        session: { ...ctx.session, user: ctx.session.user },
+        db: ctx.db,
+        headers: ctx.headers,
+        player, // Add player to context
       },
     });
   });

@@ -53,46 +53,46 @@ enum UserRole {
 }
 
 model User {
-  id                    String              @id @default(cuid())
-  name                  String?
-  email                 String              @unique
-  emailVerified         DateTime?
-  image                 String?
-  password              String
-  gender                String
-  createdAt             DateTime            @default(now())
-  updatedAt             DateTime            @updatedAt
-  username              String              @unique
-  role                  UserRole            @default(PLAYER) // Legacy single role for backward compatibility
+  id                   String                  @id @default(cuid())
+  name                 String?
+  email                String                  @unique
+  emailVerified        DateTime?
+  image                String?
+  password             String
+  gender               String
+  createdAt            DateTime                @default(now())
+  updatedAt            DateTime                @updatedAt
+  username             String                  @unique
+  role                 UserRole                @default(PLAYER) // Legacy single role for backward compatibility
   // Player created data
-  credit                Int                 @default(0) // Player-created credit/currency
-  deletedDates          Json?               // Array of deletion dates for tracking
+  credit               Int                     @default(0) // Player-created credit/currency
+  deletedDates         Json? // Array of deletion dates for tracking
   // Moderation fields
-  isBanned              Boolean             @default(false)
-  bannedUntil           DateTime?
-  banReason             String?
-  isMuted               Boolean             @default(false)
-  mutedUntil            DateTime?
-  muteReason            String?
-  deletedAt             DateTime?           // soft delete
+  isBanned             Boolean                 @default(false)
+  bannedUntil          DateTime?
+  banReason            String?
+  isMuted              Boolean                 @default(false)
+  mutedUntil           DateTime?
+  muteReason           String?
+  deletedAt            DateTime? // soft delete
   // Account-level flags (banned, admin, tester can be added here)
-  accounts              Account[]
-  characters            Character[]
-  player                Player?
-  posts                 Post[]
-  sessions              Session[]
-  profile               PlayerProfile?
+  accounts             Account[]
+  characters           Character[]
+  player               Player?
+  posts                Post[]
+  sessions             Session[]
+  profile              PlayerProfile?
   // Note: Battle moved to playerId - battles are character-specific, not account-level
-  bankTransactionsFrom  BankTransaction[]   @relation("BankTransactionFrom")
-  bankTransactionsTo    BankTransaction[]   @relation("BankTransactionTo")
+  bankTransactionsFrom BankTransaction[]       @relation("BankTransactionFrom")
+  bankTransactionsTo   BankTransaction[]       @relation("BankTransactionTo")
   // Leaderboard stats are account-level aggregations (okay to keep on User)
-  leaderboardStats      PlayerLeaderboardStats?
-  statsPeriods          PlayerStatsPeriod[]
-  adminActions          AdminActionLog[]    @relation("AdminActor")
+  leaderboardStats     PlayerLeaderboardStats?
+  statsPeriods         PlayerStatsPeriod[]
+  adminActions         AdminActionLog[]        @relation("AdminActor")
   // Multi-role support
-  roles                 UserRoleAssignment[]
+  roles                UserRoleAssignment[]
   // IP history tracking
-  ipHistory             UserIpHistory[]
+  ipHistory            UserIpHistory[]
 }
 
 model Character {
@@ -128,7 +128,7 @@ model Position {
   characterId String    @unique
   x           Int
   y           Int
-  zone        String    // Zone name/identifier
+  zone        String // Zone name/identifier
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
@@ -157,7 +157,7 @@ model Player {
   createdAt                  DateTime            @default(now())
   updatedAt                  DateTime            @updatedAt
   bankAccount                BankAccount?
-  battles                    Battle[]           // Character-specific battles
+  battles                    Battle[] // Character-specific battles
   combatLogs                 CombatLog[]
   deathLogs                  DeathLog[]
   equipment                  Equipment?
@@ -235,7 +235,7 @@ model MapTile {
   hasResource  Boolean       @default(false)
   resourceType ResourceType?
   description  String?
-  meta         Json?         // JSON for additional tile metadata
+  meta         Json? // JSON for additional tile metadata
   encounters   Encounter[]
   positions    MapPosition[]
   npcs         NPC[]
@@ -294,44 +294,44 @@ model ShopItem {
 }
 
 model Item {
-  id                   String              @id @default(cuid())
-  key                  String?              @unique
-  name                 String
-  description          String?
-  itemType             ItemType
-  itemRarity           ItemRarity
-  tier                 Int                 @default(1)
-  value                Int
-  stackable            Boolean             @default(false)
-  maxStack             Int                 @default(1)
-  equipmentSlot        EquipmentSlot?
-  vitalityBonus        Int                 @default(0)
-  strengthBonus        Int                 @default(0)
-  speedBonus           Int                 @default(0)
-  dexterityBonus       Int                 @default(0)
-  hpBonus              Int                 @default(0)
-  spBonus              Int                 @default(0)
-  createdAt            DateTime            @default(now())
-  bankVaultItems       BankVaultItem[]
-  equippedAsHead       Equipment[]         @relation("Head")
-  equippedAsLeftArm   Equipment[]         @relation("LeftArm")
-  equippedAsRightArm  Equipment[]         @relation("RightArm")
-  equippedAsBody      Equipment[]         @relation("Body")
-  equippedAsLegs      Equipment[]         @relation("Legs")
-  equippedAsFeet       Equipment[]         @relation("Feet")
-  equippedAsRing1      Equipment[]         @relation("Ring1")
-  equippedAsRing2     Equipment[]         @relation("Ring2")
-  equippedAsRing3      Equipment[]         @relation("Ring3")
-  equippedAsNecklace   Equipment[]         @relation("Necklace")
-  equippedAsBelt       Equipment[]         @relation("Belt")
-  equippedAsCloak      Equipment[]         @relation("Cloak")
-  inventoryItems       InventoryItem[]
-  marketListings       MarketListing[]
-  marketTransactions   MarketTransaction[]
-  shopItems            ShopItem[]
-  recipeOutputs        Recipe[]            @relation("RecipeOutput")
-  recipeInputs         RecipeInput[]       @relation("RecipeInput")
-  nodeYields           NodeYield[]         @relation("NodeYield")
+  id                 String              @id @default(cuid())
+  key                String?             @unique
+  name               String
+  description        String?
+  itemType           ItemType
+  itemRarity         ItemRarity
+  tier               Int                 @default(1)
+  value              Int
+  stackable          Boolean             @default(false)
+  maxStack           Int                 @default(1)
+  equipmentSlot      EquipmentSlot?
+  vitalityBonus      Int                 @default(0)
+  strengthBonus      Int                 @default(0)
+  speedBonus         Int                 @default(0)
+  dexterityBonus     Int                 @default(0)
+  hpBonus            Int                 @default(0)
+  spBonus            Int                 @default(0)
+  createdAt          DateTime            @default(now())
+  bankVaultItems     BankVaultItem[]
+  equippedAsHead     Equipment[]         @relation("Head")
+  equippedAsLeftArm  Equipment[]         @relation("LeftArm")
+  equippedAsRightArm Equipment[]         @relation("RightArm")
+  equippedAsBody     Equipment[]         @relation("Body")
+  equippedAsLegs     Equipment[]         @relation("Legs")
+  equippedAsFeet     Equipment[]         @relation("Feet")
+  equippedAsRing1    Equipment[]         @relation("Ring1")
+  equippedAsRing2    Equipment[]         @relation("Ring2")
+  equippedAsRing3    Equipment[]         @relation("Ring3")
+  equippedAsNecklace Equipment[]         @relation("Necklace")
+  equippedAsBelt     Equipment[]         @relation("Belt")
+  equippedAsCloak    Equipment[]         @relation("Cloak")
+  inventoryItems     InventoryItem[]
+  marketListings     MarketListing[]
+  marketTransactions MarketTransaction[]
+  shopItems          ShopItem[]
+  recipeOutputs      Recipe[]            @relation("RecipeOutput")
+  recipeInputs       RecipeInput[]       @relation("RecipeInput")
+  nodeYields         NodeYield[]         @relation("NodeYield")
 
   @@index([itemType])
   @@index([itemRarity])
@@ -346,42 +346,42 @@ model InventoryItem {
   createdAt DateTime @default(now())
   item      Item     @relation(fields: [itemId], references: [id])
   player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  // Note: Stack safety enforced in application logic (quantity >= 0, quantity <= item.maxStack if stackable)
 
   @@unique([playerId, itemId])
   @@index([playerId])
   @@index([itemId])
-  // Note: Stack safety enforced in application logic (quantity >= 0, quantity <= item.maxStack if stackable)
 }
 
 model Equipment {
-  id            String   @id @default(cuid())
-  playerId      String   @unique
-  headItemId    String?
-  leftArmItemId String?
+  id             String   @id @default(cuid())
+  playerId       String   @unique
+  headItemId     String?
+  leftArmItemId  String?
   rightArmItemId String?
-  bodyItemId    String?
-  legsItemId    String?
-  feetItemId    String?
-  ring1ItemId   String?
-  ring2ItemId   String?
-  ring3ItemId   String?
+  bodyItemId     String?
+  legsItemId     String?
+  feetItemId     String?
+  ring1ItemId    String?
+  ring2ItemId    String?
+  ring3ItemId    String?
   necklaceItemId String?
-  beltItemId    String?
-  cloakItemId   String?
-  updatedAt     DateTime @updatedAt
-  head          Item?    @relation("Head", fields: [headItemId], references: [id])
-  leftArm       Item?    @relation("LeftArm", fields: [leftArmItemId], references: [id])
-  rightArm      Item?    @relation("RightArm", fields: [rightArmItemId], references: [id])
-  body          Item?    @relation("Body", fields: [bodyItemId], references: [id])
-  legs          Item?    @relation("Legs", fields: [legsItemId], references: [id])
-  feet          Item?    @relation("Feet", fields: [feetItemId], references: [id])
-  ring1         Item?    @relation("Ring1", fields: [ring1ItemId], references: [id])
-  ring2         Item?    @relation("Ring2", fields: [ring2ItemId], references: [id])
-  ring3         Item?    @relation("Ring3", fields: [ring3ItemId], references: [id])
-  necklace      Item?    @relation("Necklace", fields: [necklaceItemId], references: [id])
-  belt          Item?    @relation("Belt", fields: [beltItemId], references: [id])
-  cloak         Item?    @relation("Cloak", fields: [cloakItemId], references: [id])
-  player        Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  beltItemId     String?
+  cloakItemId    String?
+  updatedAt      DateTime @updatedAt
+  head           Item?    @relation("Head", fields: [headItemId], references: [id])
+  leftArm        Item?    @relation("LeftArm", fields: [leftArmItemId], references: [id])
+  rightArm       Item?    @relation("RightArm", fields: [rightArmItemId], references: [id])
+  body           Item?    @relation("Body", fields: [bodyItemId], references: [id])
+  legs           Item?    @relation("Legs", fields: [legsItemId], references: [id])
+  feet           Item?    @relation("Feet", fields: [feetItemId], references: [id])
+  ring1          Item?    @relation("Ring1", fields: [ring1ItemId], references: [id])
+  ring2          Item?    @relation("Ring2", fields: [ring2ItemId], references: [id])
+  ring3          Item?    @relation("Ring3", fields: [ring3ItemId], references: [id])
+  necklace       Item?    @relation("Necklace", fields: [necklaceItemId], references: [id])
+  belt           Item?    @relation("Belt", fields: [beltItemId], references: [id])
+  cloak          Item?    @relation("Cloak", fields: [cloakItemId], references: [id])
+  player         Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
 }
 
 model Occupation {
@@ -396,21 +396,21 @@ model Occupation {
 }
 
 model Skill {
-  id            String        @id @default(cuid())
-  key           String        @unique
+  id            String               @id @default(cuid())
+  key           String               @unique
   // Global taxonomy fields
   name          String
   description   String?
-  tags          Json?         // Array of strings: ["combat", "fire", "starter"]
-  status        ContentStatus @default(DRAFT)
-  version       Int           @default(1)
+  tags          Json? // Array of strings: ["combat", "fire", "starter"]
+  status        ContentStatus        @default(DRAFT)
+  version       Int                  @default(1)
   createdBy     String?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
   // Skill-specific fields
-  staminaCost   Int           @default(0)
-  cooldownSeconds Int         @default(0)
-  jobUnlock     String?       // Job key that unlocks this skill
+  staminaCost   Int                  @default(0)
+  cooldownTurns Int                  @default(0) // Cooldown in turns
+  levelUnlock   Int? // Level required to unlock this skill
   playerSkills  PlayerSkill[]
   slot1Loadouts PlayerSkillLoadout[] @relation("Slot1")
   slot2Loadouts PlayerSkillLoadout[] @relation("Slot2")
@@ -427,12 +427,12 @@ model Skill {
 }
 
 model PlayerSkill {
-  id         String   @id @default(cuid())
-  playerId   String
-  skillId    String
-  learnedAt  DateTime @default(now())
-  player     Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  skill      Skill    @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  id        String   @id @default(cuid())
+  playerId  String
+  skillId   String
+  learnedAt DateTime @default(now())
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  skill     Skill    @relation(fields: [skillId], references: [id], onDelete: Cascade)
 
   @@unique([playerId, skillId])
   @@index([playerId])
@@ -440,8 +440,8 @@ model PlayerSkill {
 }
 
 model PlayerSkillLoadout {
-  id         String   @id @default(cuid())
-  playerId   String   @unique
+  id           String   @id @default(cuid())
+  playerId     String   @unique
   slot1SkillId String?
   slot2SkillId String?
   slot3SkillId String?
@@ -450,16 +450,16 @@ model PlayerSkillLoadout {
   slot6SkillId String?
   slot7SkillId String?
   slot8SkillId String?
-  updatedAt  DateTime @updatedAt
-  player     Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  slot1Skill Skill?   @relation("Slot1", fields: [slot1SkillId], references: [id])
-  slot2Skill Skill?   @relation("Slot2", fields: [slot2SkillId], references: [id])
-  slot3Skill Skill?   @relation("Slot3", fields: [slot3SkillId], references: [id])
-  slot4Skill Skill?   @relation("Slot4", fields: [slot4SkillId], references: [id])
-  slot5Skill Skill?   @relation("Slot5", fields: [slot5SkillId], references: [id])
-  slot6Skill Skill?   @relation("Slot6", fields: [slot6SkillId], references: [id])
-  slot7Skill Skill?   @relation("Slot7", fields: [slot7SkillId], references: [id])
-  slot8Skill Skill?   @relation("Slot8", fields: [slot8SkillId], references: [id])
+  updatedAt    DateTime @updatedAt
+  player       Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  slot1Skill   Skill?   @relation("Slot1", fields: [slot1SkillId], references: [id])
+  slot2Skill   Skill?   @relation("Slot2", fields: [slot2SkillId], references: [id])
+  slot3Skill   Skill?   @relation("Slot3", fields: [slot3SkillId], references: [id])
+  slot4Skill   Skill?   @relation("Slot4", fields: [slot4SkillId], references: [id])
+  slot5Skill   Skill?   @relation("Slot5", fields: [slot5SkillId], references: [id])
+  slot6Skill   Skill?   @relation("Slot6", fields: [slot6SkillId], references: [id])
+  slot7Skill   Skill?   @relation("Slot7", fields: [slot7SkillId], references: [id])
+  slot8Skill   Skill?   @relation("Slot8", fields: [slot8SkillId], references: [id])
 
   @@index([playerId])
 }
@@ -497,14 +497,14 @@ model CombatLog {
 }
 
 model DeathLog {
-  id          String   @id @default(cuid())
-  playerId    String   // Character/Player ID (character-specific death tracking)
-  cause       String   // Cause of death (required for permadeath integrity)
-  location    String?  // Location/zone where death occurred
-  locationX   Int?     // X coordinate if applicable
-  locationY   Int?     // Y coordinate if applicable
-  createdAt   DateTime @default(now())
-  player      Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  id        String   @id @default(cuid())
+  playerId  String // Character/Player ID (character-specific death tracking)
+  cause     String // Cause of death (required for permadeath integrity)
+  location  String? // Location/zone where death occurred
+  locationX Int? // X coordinate if applicable
+  locationY Int? // Y coordinate if applicable
+  createdAt DateTime @default(now())
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
 
   @@index([playerId])
   @@index([createdAt])
@@ -570,16 +570,16 @@ model GuildQuest {
 }
 
 model BankAccount {
-  id                  String            @id @default(cuid())
-  playerId            String            @unique
-  balanceCoins        Int               @default(0)
-  lastInterestClaimedAt DateTime?       // When user manually claimed interest
-  lastInterestApplied DateTime?         // When automatic interest was last applied (audit safety)
-  vaultLevel          Int               @default(1)
-  updatedAt           DateTime          @updatedAt
-  player              Player            @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  vaultItems          BankVaultItem[]
-  transactions        BankTransaction[]
+  id                    String            @id @default(cuid())
+  playerId              String            @unique
+  balanceCoins          Int               @default(0)
+  lastInterestClaimedAt DateTime? // When user manually claimed interest
+  lastInterestApplied   DateTime? // When automatic interest was last applied (audit safety)
+  vaultLevel            Int               @default(1)
+  updatedAt             DateTime          @updatedAt
+  player                Player            @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  vaultItems            BankVaultItem[]
+  transactions          BankTransaction[]
 }
 
 model BankVaultItem {
@@ -596,17 +596,17 @@ model BankVaultItem {
 }
 
 model BankTransaction {
-  id        String            @id @default(cuid())
-  type      BankTransactionType
+  id          String              @id @default(cuid())
+  type        BankTransactionType
   amountCoins Int
-  fromUserId String?
-  toUserId   String?
-  note       String?
-  accountId  String?
-  createdAt  DateTime         @default(now())
-  account    BankAccount?      @relation(fields: [accountId], references: [id], onDelete: Cascade)
-  fromUser   User?             @relation("BankTransactionFrom", fields: [fromUserId], references: [id])
-  toUser     User?             @relation("BankTransactionTo", fields: [toUserId], references: [id])
+  fromUserId  String?
+  toUserId    String?
+  note        String?
+  accountId   String?
+  createdAt   DateTime            @default(now())
+  account     BankAccount?        @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  fromUser    User?               @relation("BankTransactionFrom", fields: [fromUserId], references: [id])
+  toUser      User?               @relation("BankTransactionTo", fields: [toUserId], references: [id])
 
   @@index([fromUserId])
   @@index([toUserId])
@@ -741,8 +741,7 @@ enum ItemRarity {
 
 enum EquipmentSlot {
   HEAD
-  LEFT_ARM
-  RIGHT_ARM
+  ARMS
   BODY
   LEGS
   FEET
@@ -789,14 +788,14 @@ enum JobCategory {
 }
 
 model Job {
-  id          String        @id @default(cuid())
-  key         String        @unique
+  id          String          @id @default(cuid())
+  key         String          @unique
   name        String
   description String?
   category    JobCategory
   icon        String?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
   userJobs    UserJob[]
   recipes     Recipe[]
   nodes       GatheringNode[]
@@ -806,16 +805,16 @@ model Job {
 }
 
 model UserJob {
-  id          String   @id @default(cuid())
-  playerId    String
-  jobId       String
-  level       Int      @default(1)
-  xp          Int      @default(0)
-  active      Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  player      Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  job         Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  id        String   @id @default(cuid())
+  playerId  String
+  jobId     String
+  level     Int      @default(1)
+  xp        Int      @default(0)
+  active    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  job       Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
 
   @@unique([playerId, jobId])
   @@index([playerId])
@@ -823,23 +822,23 @@ model UserJob {
 }
 
 model Recipe {
-  id            String        @id @default(cuid())
+  id            String         @id @default(cuid())
   // Global taxonomy fields
   name          String
   description   String?
-  tags          Json?         // Array of strings: ["weapon", "tier1", "starter"]
-  status        ContentStatus @default(DRAFT)
-  version       Int           @default(1)
+  tags          Json? // Array of strings: ["weapon", "tier1", "starter"]
+  status        ContentStatus  @default(DRAFT)
+  version       Int            @default(1)
   createdBy     String?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
   // Recipe-specific fields
   jobId         String
-  difficulty    Int           @default(1)
+  difficulty    Int            @default(1)
   outputItemId  String
-  outputQty     Int           @default(1)
-  job           Job           @relation(fields: [jobId], references: [id], onDelete: Cascade)
-  outputItem    Item          @relation("RecipeOutput", fields: [outputItemId], references: [id])
+  outputQty     Int            @default(1)
+  job           Job            @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  outputItem    Item           @relation("RecipeOutput", fields: [outputItemId], references: [id])
   inputs        RecipeInput[]
   craftAttempts CraftAttempt[]
 
@@ -863,14 +862,14 @@ model RecipeInput {
 }
 
 model CraftAttempt {
-  id         String   @id @default(cuid())
-  playerId   String
-  recipeId   String
-  success    Boolean
-  xpGained   Int
-  createdAt  DateTime @default(now())
-  player     Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  recipe     Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  id        String   @id @default(cuid())
+  playerId  String
+  recipeId  String
+  success   Boolean
+  xpGained  Int
+  createdAt DateTime @default(now())
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
 
   @@index([playerId, createdAt])
   @@index([recipeId, createdAt])
@@ -880,22 +879,22 @@ model CraftAttempt {
 }
 
 model GatheringNode {
-  id          String        @id @default(cuid())
-  key         String        @unique
+  id             String          @id @default(cuid())
+  key            String          @unique
   // Global taxonomy fields
-  name        String
-  description String?
-  tags        Json?         // Array of strings: ["ore", "tier1", "safe"]
-  status      ContentStatus @default(DRAFT)
-  version     Int           @default(1)
-  createdBy   String?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  name           String
+  description    String?
+  tags           Json? // Array of strings: ["ore", "tier1", "safe"]
+  status         ContentStatus   @default(DRAFT)
+  version        Int             @default(1)
+  createdBy      String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
   // Node-specific fields
-  jobId       String
-  dangerTier  Int           @default(1)
-  job         Job           @relation(fields: [jobId], references: [id], onDelete: Cascade)
-  yields      NodeYield[]
+  jobId          String
+  dangerTier     Int             @default(1)
+  job            Job             @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  yields         NodeYield[]
   gatherAttempts GatherAttempt[]
 
   @@index([jobId])
@@ -905,29 +904,29 @@ model GatheringNode {
 }
 
 model NodeYield {
-  id          String        @id @default(cuid())
-  nodeId      String
-  itemId      String
-  minQty      Int           @default(1)
-  maxQty      Int           @default(1)
-  weight      Int           @default(100)
-  createdAt   DateTime      @default(now())
-  node        GatheringNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
-  item        Item          @relation("NodeYield", fields: [itemId], references: [id])
+  id        String        @id @default(cuid())
+  nodeId    String
+  itemId    String
+  minQty    Int           @default(1)
+  maxQty    Int           @default(1)
+  weight    Int           @default(100)
+  createdAt DateTime      @default(now())
+  node      GatheringNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+  item      Item          @relation("NodeYield", fields: [itemId], references: [id])
 
   @@index([nodeId])
   @@index([itemId])
 }
 
 model GatherAttempt {
-  id         String        @id @default(cuid())
-  playerId   String
-  nodeId     String
-  success    Boolean
-  xpGained   Int
-  createdAt  DateTime      @default(now())
-  player     Player        @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  node       GatheringNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+  id        String        @id @default(cuid())
+  playerId  String
+  nodeId    String
+  success   Boolean
+  xpGained  Int
+  createdAt DateTime      @default(now())
+  player    Player        @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  node      GatheringNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
 
   @@index([playerId, createdAt])
   @@index([nodeId, createdAt])
@@ -937,73 +936,73 @@ model GatherAttempt {
 }
 
 model PlayerProfile {
-  id            String           @id @default(cuid())
-  userId        String           @unique
-  createdAt     DateTime         @default(now())
-  updatedAt     DateTime         @updatedAt
-  user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  profileStats  PlayerProfileStats?
-  pvpRecord     PlayerPvpRecord?
-  pveRecord     PlayerPveRecord?
-  social        PlayerSocial?
-  achievements  PlayerAchievement[]
+  id           String              @id @default(cuid())
+  userId       String              @unique
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  user         User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  profileStats PlayerProfileStats?
+  pvpRecord    PlayerPvpRecord?
+  pveRecord    PlayerPveRecord?
+  social       PlayerSocial?
+  achievements PlayerAchievement[]
 
   @@index([userId])
 }
 
 model PlayerProfileStats {
-  id         String        @id @default(cuid())
-  profileId  String        @unique
-  vitality   Int           @default(10)
-  strength   Int           @default(10)
-  speed      Int           @default(10)
-  dexterity  Int           @default(10)
-  updatedAt  DateTime      @updatedAt
-  profile    PlayerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  id        String        @id @default(cuid())
+  profileId String        @unique
+  vitality  Int           @default(10)
+  strength  Int           @default(10)
+  speed     Int           @default(10)
+  dexterity Int           @default(10)
+  updatedAt DateTime      @updatedAt
+  profile   PlayerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 }
 
 model PlayerPvpRecord {
-  id                 String        @id @default(cuid())
-  profileId          String        @unique
-  wins               Int           @default(0)
-  losses             Int           @default(0)
-  pvpWinStreakCurrent Int          @default(0)
-  pvpWinStreakBest    Int          @default(0)
-  updatedAt          DateTime      @updatedAt
-  profile            PlayerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  id                  String        @id @default(cuid())
+  profileId           String        @unique
+  wins                Int           @default(0)
+  losses              Int           @default(0)
+  pvpWinStreakCurrent Int           @default(0)
+  pvpWinStreakBest    Int           @default(0)
+  updatedAt           DateTime      @updatedAt
+  profile             PlayerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 }
 
 model PlayerPveRecord {
-  id           String        @id @default(cuid())
-  profileId    String        @unique
-  totalKills   Int           @default(0)
-  bossesSlain  Int           @default(0)
-  deathsUsed   Int           @default(0)
-  deathsLimit  Int           @default(5)
-  updatedAt    DateTime      @updatedAt
-  profile      PlayerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  id          String        @id @default(cuid())
+  profileId   String        @unique
+  totalKills  Int           @default(0)
+  bossesSlain Int           @default(0)
+  deathsUsed  Int           @default(0)
+  deathsLimit Int           @default(5)
+  updatedAt   DateTime      @updatedAt
+  profile     PlayerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 }
 
 model Achievement {
-  id          String             @id @default(cuid())
-  key         String             @unique
+  id          String              @id @default(cuid())
+  key         String              @unique
   name        String
   description String?
   icon        String?
-  rarity      AchievementRarity @default(COMMON)
-  createdAt   DateTime           @default(now())
+  rarity      AchievementRarity   @default(COMMON)
+  createdAt   DateTime            @default(now())
   players     PlayerAchievement[]
 
   @@index([key])
 }
 
 model PlayerAchievement {
-  id            String       @id @default(cuid())
+  id            String        @id @default(cuid())
   profileId     String
   achievementId String
-  unlockedAt    DateTime     @default(now())
+  unlockedAt    DateTime      @default(now())
   profile       PlayerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  achievement   Achievement  @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+  achievement   Achievement   @relation(fields: [achievementId], references: [id], onDelete: Cascade)
 
   @@unique([profileId, achievementId])
   @@index([profileId])
@@ -1011,18 +1010,18 @@ model PlayerAchievement {
 }
 
 model PlayerSocial {
-  id                String        @id @default(cuid())
-  profileId         String        @unique
-  guildName         String?
-  title             String?
-  tagline           String?
-  commendationsHelpful Int        @default(0)
-  commendationsSkilled Int        @default(0)
-  commendationsStrategic Int      @default(0)
-  friendsCount      Int           @default(0)
-  guildRole         String?
-  updatedAt         DateTime      @updatedAt
-  profile           PlayerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  id                     String        @id @default(cuid())
+  profileId              String        @unique
+  guildName              String?
+  title                  String?
+  tagline                String?
+  commendationsHelpful   Int           @default(0)
+  commendationsSkilled   Int           @default(0)
+  commendationsStrategic Int           @default(0)
+  friendsCount           Int           @default(0)
+  guildRole              String?
+  updatedAt              DateTime      @updatedAt
+  profile                PlayerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 }
 
 enum AchievementRarity {
@@ -1047,39 +1046,39 @@ enum BattleStatus {
 }
 
 model Monster {
-  id          String   @id @default(cuid())
-  key         String   @unique
-  name        String
-  level       Int      @default(1)
-  vitality    Int
-  strength    Int
-  speed       Int
-  dexterity   Int
-  maxHp       Int
-  xpReward    Int      @default(0)
-  goldReward  Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  battles     Battle[]
+  id         String   @id @default(cuid())
+  key        String   @unique
+  name       String
+  level      Int      @default(1)
+  vitality   Int
+  strength   Int
+  speed      Int
+  dexterity  Int
+  maxHp      Int
+  xpReward   Int      @default(0)
+  goldReward Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  battles    Battle[]
 
   @@index([level])
   @@index([key])
 }
 
 model Battle {
-  id          String      @id @default(cuid())
-  playerId    String      // Changed from userId - battles are character-specific, not account-level
-  monsterId   String
-  status      BattleStatus @default(ACTIVE)
-  turnNumber  Int         @default(1)
-  playerHp    Int
-  playerSp    Int
-  monsterHp   Int
-  log         Json        @default("[]")
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  player      Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  monster     Monster     @relation(fields: [monsterId], references: [id])
+  id         String       @id @default(cuid())
+  playerId   String // Changed from userId - battles are character-specific, not account-level
+  monsterId  String
+  status     BattleStatus @default(ACTIVE)
+  turnNumber Int          @default(1)
+  playerHp   Int
+  playerSp   Int
+  monsterHp  Int
+  log        Json         @default("[]")
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  player     Player       @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  monster    Monster      @relation(fields: [monsterId], references: [id])
 
   @@index([playerId])
   @@index([status])
@@ -1087,14 +1086,14 @@ model Battle {
 }
 
 model PlayerLeaderboardStats {
-  userId      String   @id
-  pveKills    Int      @default(0)
-  pvpKills    Int      @default(0)
-  pvpWins     Int      @default(0)
-  pvpLosses   Int      @default(0)
-  jobXpTotal  Int      @default(0)
-  updatedAt   DateTime @updatedAt
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String   @id
+  pveKills   Int      @default(0)
+  pvpKills   Int      @default(0)
+  pvpWins    Int      @default(0)
+  pvpLosses  Int      @default(0)
+  jobXpTotal Int      @default(0)
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([pveKills])
   @@index([pvpKills])
@@ -1104,7 +1103,7 @@ model PlayerLeaderboardStats {
 model PlayerStatsPeriod {
   id          String   @id @default(cuid())
   userId      String
-  periodType  String   // "daily" | "weekly"
+  periodType  String // "daily" | "weekly"
   periodStart DateTime
   pveKills    Int      @default(0)
   pvpKills    Int      @default(0)
@@ -1143,17 +1142,20 @@ model ItemTemplate {
   // Global taxonomy fields
   name        String
   description String?
-  tags        Json?         // Array of strings: ["fire", "starter", "rare"]
+  tags        Json? // Array of strings: ["fire", "starter", "rare"]
   status      ContentStatus @default(DRAFT)
   version     Int           @default(1)
   createdBy   String?
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
   // Item-specific fields
+  itemType    ItemType?
+  equipmentSlot EquipmentSlot?
   rarity      ItemRarity    @default(COMMON)
   stackable   Boolean       @default(false)
   maxStack    Int           @default(1)
   value       Int           @default(0)
+  damage      Int           @default(0) // Damage value for weapons
   icon        String?
   // Legacy fields (kept for backward compatibility)
   isArchived  Boolean       @default(false)
@@ -1170,7 +1172,7 @@ model MonsterTemplate {
   // Global taxonomy fields
   name        String
   description String?
-  tags        Json?         // Array of strings: ["boss", "fire", "rare"]
+  tags        Json? // Array of strings: ["boss", "fire", "rare"]
   status      ContentStatus @default(DRAFT)
   version     Int           @default(1)
   createdBy   String?
@@ -1180,7 +1182,9 @@ model MonsterTemplate {
   level       Int           @default(1)
   hp          Int
   sp          Int           @default(0)
-  statsJSON   Json          // { vitality, strength, speed, dexterity }
+  damage      Int           @default(0) // Base damage the monster deals
+  goldReward  Int           @default(0) // Coins/gold rewarded when defeated
+  statsJSON   Json // { vitality, strength, speed, dexterity }
   lootTableId String?
   // Legacy fields
   isArchived  Boolean       @default(false)
@@ -1195,18 +1199,20 @@ model MonsterTemplate {
 model QuestTemplate {
   id          String        @id @default(cuid())
   // Global taxonomy fields
-  name        String        // Alias for title, kept for consistency
-  title       String        // Primary display name
+  name        String // Alias for title, kept for consistency
+  title       String // Primary display name
   description String?
-  tags        Json?         // Array of strings: ["fetch", "kill", "starter"]
+  tags        Json? // Array of strings: ["fetch", "kill", "starter"]
   status      ContentStatus @default(DRAFT)
   version     Int           @default(1)
   createdBy   String?
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
   // Quest-specific fields
-  stepsJSON   Json          // Array of quest steps
-  rewardsJSON Json?          // Rewards structure: { type: "gold", amount: 100, items: [...] }
+  stepsJSON   Json // Array of quest steps
+  rewardsJSON Json? // Rewards structure: { type: "gold", amount: 100, items: [...] }
+  coinsReward Int           @default(0) // Coins/gold rewarded for completing quest
+  damageValue Int           @default(0) // Damage dealt by quest-related actions (if applicable)
   // Legacy fields
   isArchived  Boolean       @default(false)
   deletedAt   DateTime?
@@ -1217,25 +1223,27 @@ model QuestTemplate {
 }
 
 model MapZone {
-  id          String        @id @default(cuid())
+  id             String        @id @default(cuid())
   // Global taxonomy fields
-  name        String
-  description String?
-  tags        Json?         // Array of strings: ["starter", "dungeon", "safe"]
-  status      ContentStatus @default(DRAFT)
-  version     Int           @default(1)
-  createdBy   String?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  name           String
+  description    String?
+  tags           Json? // Array of strings: ["starter", "dungeon", "safe"]
+  status         ContentStatus @default(DRAFT)
+  version        Int           @default(1)
+  createdBy      String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
   // Map-specific fields
-  width       Int
-  height      Int
-  tilesJSON   Json          // Tile data structure
-  poisJSON    Json?         // Points of interest
-  spawnJSON   Json?         // Spawn data
+  width          Int
+  height         Int
+  tilesJSON      Json // Tile data structure
+  poisJSON       Json? // Points of interest
+  spawnJSON      Json? // Spawn data
+  coinsReward    Int           @default(0) // Base coins available in this map zone
+  damageModifier Int           @default(0) // Damage modifier for this map (environmental hazards, etc.)
   // Legacy fields
-  isArchived  Boolean       @default(false)
-  deletedAt   DateTime?
+  isArchived     Boolean       @default(false)
+  deletedAt      DateTime?
 
   @@index([status])
   @@index([isArchived])
@@ -1244,12 +1252,12 @@ model MapZone {
 
 // Multi-role support: Many-to-many relationship between User and UserRole
 model UserRoleAssignment {
-  id        String   @id @default(cuid())
-  userId    String
-  role      UserRole
+  id         String   @id @default(cuid())
+  userId     String
+  role       UserRole
   assignedAt DateTime @default(now())
-  assignedBy String?  // Admin who assigned the role
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assignedBy String? // Admin who assigned the role
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, role])
   @@index([userId])
