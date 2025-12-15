@@ -3,12 +3,12 @@ import { TRPCError } from "@trpc/server";
 import { Prisma } from "~/server/types/prisma";
 import {
   createTRPCRouter,
-  adminProcedure,
+  contentProcedure,
 } from "~/server/api/trpc";
 
 export const contentQuestsRouter = createTRPCRouter({
   // List all quest templates
-  list: adminProcedure
+  list: contentProcedure
     .input(
       z.object({
         includeArchived: z.boolean().default(false),
@@ -30,7 +30,7 @@ export const contentQuestsRouter = createTRPCRouter({
     }),
 
   // Get quest template by ID
-  get: adminProcedure
+  get: contentProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
       const quest = await ctx.db.questTemplate.findUnique({
@@ -48,7 +48,7 @@ export const contentQuestsRouter = createTRPCRouter({
     }),
 
   // Create new quest template
-  create: adminProcedure
+  create: contentProcedure
     .input(
       z.object({
         title: z.string().min(1, "Title is required"),
@@ -102,7 +102,7 @@ export const contentQuestsRouter = createTRPCRouter({
     }),
 
   // Update quest template
-  update: adminProcedure
+  update: contentProcedure
     .input(
       z.object({
         id: z.string(),
@@ -189,7 +189,7 @@ export const contentQuestsRouter = createTRPCRouter({
     }),
 
   // Archive quest template
-  archive: adminProcedure
+  archive: contentProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const quest = await ctx.db.questTemplate.findUnique({
@@ -215,7 +215,7 @@ export const contentQuestsRouter = createTRPCRouter({
     }),
 
   // Unarchive quest template
-  unarchive: adminProcedure
+  unarchive: contentProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const quest = await ctx.db.questTemplate.findUnique({
@@ -241,7 +241,7 @@ export const contentQuestsRouter = createTRPCRouter({
     }),
 
   // Hard delete
-  delete: adminProcedure
+  delete: contentProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const quest = await ctx.db.questTemplate.findUnique({

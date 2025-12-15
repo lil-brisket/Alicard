@@ -38,12 +38,14 @@ export default async function AdminLayout({
           >
             Users
           </Link>
-          <Link
-            href="/admin/actions"
-            className="border-b-2 border-transparent px-4 py-2 text-sm font-medium text-slate-400 transition hover:border-cyan-500 hover:text-cyan-400"
-          >
-            Action Log
-          </Link>
+          {user.role === "ADMIN" && (
+            <Link
+              href="/admin/actions"
+              className="border-b-2 border-transparent px-4 py-2 text-sm font-medium text-slate-400 transition hover:border-cyan-500 hover:text-cyan-400"
+            >
+              Action Log
+            </Link>
+          )}
         </nav>
 
         {children}

@@ -7,6 +7,60 @@ import {
 } from "~/server/api/trpc";
 
 export const adminUsersRouter = createTRPCRouter({
+  // List users with pagination
+  listUsers: moderatorProcedure
+    .input(
+      z.object({
+        page: z.number().int().min(1).default(1),
+        limit: z.number().int().min(1).max(100).default(15),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const skip = (input.page - 1) * input.limit;
+
+      const [users, total] = await Promise.all([
+        ctx.db.user.findMany({
+          where: {
+            deletedAt: null, // Exclude soft-deleted users
+          },
+          select: {
+            id: true,
+            username: true,
+            email: true,
+            role: true,
+            isBanned: true,
+            bannedUntil: true,
+            isMuted: true,
+            mutedUntil: true,
+            createdAt: true,
+            _count: {
+              select: {
+                characters: true,
+              },
+            },
+          },
+          skip,
+          take: input.limit,
+          orderBy: {
+            createdAt: "desc",
+          },
+        }),
+        ctx.db.user.count({
+          where: {
+            deletedAt: null,
+          },
+        }),
+      ]);
+
+      return {
+        users,
+        total,
+        page: input.page,
+        limit: input.limit,
+        totalPages: Math.ceil(total / input.limit),
+      };
+    }),
+
   // Search users by username, email, or ID
   searchUsers: moderatorProcedure
     .input(
@@ -512,8 +566,8 @@ export const adminUsersRouter = createTRPCRouter({
       return actions;
     }),
 
-  // Get IP history for a user (MODERATOR only)
-  getIpHistory: moderatorProcedure
+  // Get IP history for a user (ADMIN only)
+  getIpHistory: adminProcedure
     .input(
       z.object({
         userId: z.string(),

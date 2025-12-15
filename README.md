@@ -59,7 +59,7 @@ Ensure your PostgreSQL server is running and update `DATABASE_URL` in `.env` wit
 
 ### 4. Run Database Migrations
 
-**⚠️ IMPORTANT: Production Workflow**
+#### ⚠️ IMPORTANT: Production Workflow
 
 This project uses **Prisma Migrations** exclusively. Never use `prisma db push` in production.
 
@@ -132,6 +132,7 @@ The seed script creates the following test accounts for different user roles:
 **⚠️ Security Note:** These are default passwords for development only. Change them immediately in production or before deploying to any public environment.
 
 The seed script also creates:
+
 - Default world map with tiles
 - Base jobs (Blacksmith, Tailor, Alchemist, Cook, Miner, Fisher, Herbalist, Logger)
 - Items and equipment
@@ -143,7 +144,7 @@ The seed script also creates:
 
 ## Database Migration Workflow
 
-**⚠️ CRITICAL: Production-Grade Migration Policy**
+### ⚠️ CRITICAL: Production-Grade Migration Policy
 
 This project enforces a **migration-only workflow**. All database schema changes must go through Prisma migrations.
 
@@ -177,6 +178,22 @@ See [`prisma/MIGRATION_WORKFLOW.md`](./prisma/MIGRATION_WORKFLOW.md) for complet
 - **ALWAYS** use `npm run db:generate` to create migrations
 - **NEVER** use `prisma db push` (disabled in this project)
 - **ALWAYS** run `npm run db:check` before committing schema changes
+
+## Admin Features
+
+### Admin Action Log
+
+The admin action log provides a complete audit trail of all administrative actions performed on user accounts. **Action logs are player-specific** and can be viewed in two ways:
+
+1. **Player-Specific Action Log**: View actions for a specific player by navigating to their user detail page (`/admin/users/[userId]`). The "Recent Admin Actions" section displays all actions performed on that specific player's account.
+
+2. **Global Action Log**: View all admin actions across the system at `/admin/actions` (available to moderators, admins, and content managers).
+
+**Action Log Features:**
+- Tracks all admin actions (user updates, bans, mutes, role changes, etc.)
+- Records the actor (admin who performed the action), target user, action type, reason, and timestamp
+- Player-specific filtering on user detail pages
+- Complete audit trail for compliance and security
 
 ## Tech Stack
 

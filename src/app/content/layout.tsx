@@ -1,13 +1,13 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { requireAdminPage } from "~/server/lib/admin-auth";
+import { requireContentPage } from "~/server/lib/admin-auth";
 
 export default async function ContentLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const user = await requireAdminPage();
+  const user = await requireContentPage();
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">

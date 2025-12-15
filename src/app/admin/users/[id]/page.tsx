@@ -6,6 +6,8 @@ import { api } from "~/trpc/react";
 import { toast } from "react-hot-toast";
 import { UserDetailForm } from "./_components/user-detail-form";
 
+type Tab = "details" | "action-log";
+
 function CharacterCard({ 
   character, 
   userId 
@@ -97,12 +99,13 @@ export default function AdminUserDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
+  const [activeTab, setActiveTab] = useState<Tab>("details");
   const { data: user, isLoading } = api.admin.users.getUserById.useQuery({
     id,
   });
-  const { data: actions } = api.admin.users.listAdminActions.useQuery({
+  const { data: actions, isLoading: isLoadingActions } = api.admin.users.listAdminActions.useQuery({
     targetUserId: id,
-    limit: 20,
+    limit: 100,
   });
   const { data: ipHistory } = api.admin.users.getIpHistory.useQuery({
     userId: id,
@@ -148,111 +151,169 @@ export default function AdminUserDetailPage({
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
-          <h3 className="mb-4 text-lg font-semibold text-cyan-400">
-            Account Details
-          </h3>
-          <UserDetailForm user={user} />
-        </div>
+      {/* Tabs */}
+      <div className="border-b border-slate-800">
+        <nav className="flex space-x-4">
+          <button
+            onClick={() => setActiveTab("details")}
+            className={`border-b-2 px-4 py-2 text-sm font-medium transition ${
+              activeTab === "details"
+                ? "border-cyan-500 text-cyan-400"
+                : "border-transparent text-slate-400 hover:border-slate-600 hover:text-slate-300"
+            }`}
+          >
+            Details
+          </button>
+          <button
+            onClick={() => setActiveTab("action-log")}
+            className={`border-b-2 px-4 py-2 text-sm font-medium transition ${
+              activeTab === "action-log"
+                ? "border-cyan-500 text-cyan-400"
+                : "border-transparent text-slate-400 hover:border-slate-600 hover:text-slate-300"
+            }`}
+          >
+            Action Log
+          </button>
+        </nav>
+      </div>
 
-        <div className="space-y-6">
+      {/* Tab Content */}
+      {activeTab === "details" && (
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
             <h3 className="mb-4 text-lg font-semibold text-cyan-400">
-              Characters ({user.characters.length})
+              Account Details
             </h3>
-            {user.characters.length > 0 ? (
-              <div className="space-y-2">
-                {user.characters.map((char) => (
-                  <CharacterCard key={char.id} character={char} userId={user.id} />
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-slate-400">No characters</p>
-            )}
+            <UserDetailForm user={user} />
           </div>
 
-          <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
-            <h3 className="mb-4 text-lg font-semibold text-cyan-400">
-              Player Data
-            </h3>
-            <div className="space-y-2 text-sm">
-              <div>
-                <span className="text-slate-400">Created:</span>{" "}
-                <span className="text-slate-200">
-                  {new Date(user.createdAt).toLocaleString()}
-                </span>
-              </div>
-              <div>
-                <span className="text-slate-400">Credit:</span>{" "}
-                <span className="text-slate-200">{user.credit ?? 0}</span>
-              </div>
-              {user.deletedAt && (
+          <div className="space-y-6">
+            <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+              <h3 className="mb-4 text-lg font-semibold text-cyan-400">
+                Characters ({user.characters.length})
+              </h3>
+              {user.characters.length > 0 ? (
+                <div className="space-y-2">
+                  {user.characters.map((char) => (
+                    <CharacterCard key={char.id} character={char} userId={user.id} />
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-slate-400">No characters</p>
+              )}
+            </div>
+
+            <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+              <h3 className="mb-4 text-lg font-semibold text-cyan-400">
+                Player Data
+              </h3>
+              <div className="space-y-2 text-sm">
                 <div>
-                  <span className="text-slate-400">Deleted:</span>{" "}
-                  <span className="text-red-400">
-                    {new Date(user.deletedAt).toLocaleString()}
+                  <span className="text-slate-400">Created:</span>{" "}
+                  <span className="text-slate-200">
+                    {new Date(user.createdAt).toLocaleString()}
                   </span>
                 </div>
+                <div>
+                  <span className="text-slate-400">Credit:</span>{" "}
+                  <span className="text-slate-200">{user.credit ?? 0}</span>
+                </div>
+                {user.deletedAt && (
+                  <div>
+                    <span className="text-slate-400">Deleted:</span>{" "}
+                    <span className="text-red-400">
+                      {new Date(user.deletedAt).toLocaleString()}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+              <h3 className="mb-4 text-lg font-semibold text-cyan-400">
+                IP History
+              </h3>
+              {ipHistory && ipHistory.length > 0 ? (
+                <div className="max-h-96 space-y-2 overflow-y-auto">
+                  {ipHistory.map((ip) => (
+                    <div key={ip.id} className="rounded border border-slate-800 bg-slate-800/30 p-3 text-sm">
+                      <div className="font-medium text-slate-200">{ip.ipAddress}</div>
+                      <div className="text-slate-400">
+                        {new Date(ip.createdAt).toLocaleString()}
+                      </div>
+                      {ip.userAgent && (
+                        <div className="mt-1 text-xs text-slate-500">{ip.userAgent}</div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-slate-400">No IP history</p>
               )}
             </div>
           </div>
-
-          <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
-            <h3 className="mb-4 text-lg font-semibold text-cyan-400">
-              IP History
-            </h3>
-            {ipHistory && ipHistory.length > 0 ? (
-              <div className="max-h-96 space-y-2 overflow-y-auto">
-                {ipHistory.map((ip) => (
-                  <div key={ip.id} className="rounded border border-slate-800 bg-slate-800/30 p-3 text-sm">
-                    <div className="font-medium text-slate-200">{ip.ipAddress}</div>
-                    <div className="text-slate-400">
-                      {new Date(ip.createdAt).toLocaleString()}
-                    </div>
-                    {ip.userAgent && (
-                      <div className="mt-1 text-xs text-slate-500">{ip.userAgent}</div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-slate-400">No IP history</p>
-            )}
-          </div>
-
-          <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
-            <h3 className="mb-4 text-lg font-semibold text-cyan-400">
-              Recent Admin Actions
-            </h3>
-            {actions && actions.length > 0 ? (
-              <div className="space-y-2">
-                {actions.map((action) => (
-                  <div
-                    key={action.id}
-                    className="rounded border border-slate-800 bg-slate-800/30 p-3 text-sm"
-                  >
-                    <div className="font-medium text-cyan-400">
-                      {action.action}
-                    </div>
-                    <div className="text-slate-400">
-                      by {action.actor.username} on{" "}
-                      {new Date(action.createdAt).toLocaleString()}
-                    </div>
-                    {action.reason && (
-                      <div className="mt-1 text-slate-500">
-                        Reason: {action.reason}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-slate-400">No actions logged</p>
-            )}
-          </div>
         </div>
-      </div>
+      )}
+
+      {activeTab === "action-log" && (
+        <div>
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold text-cyan-400">Admin Action Log</h3>
+            <p className="mt-1 text-sm text-slate-400">
+              Audit trail of all admin actions for this user
+            </p>
+          </div>
+
+          {isLoadingActions ? (
+            <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-8 text-center">
+              <p className="text-slate-400">Loading actions...</p>
+            </div>
+          ) : actions && actions.length > 0 ? (
+            <div className="overflow-x-auto rounded-lg border border-slate-800 bg-slate-900/50">
+              <table className="w-full">
+                <thead className="bg-slate-800/50">
+                  <tr>
+                    <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
+                      Time
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
+                      Actor
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
+                      Action
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
+                      Reason
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-800">
+                  {actions.map((action) => (
+                    <tr key={action.id} className="hover:bg-slate-800/30">
+                      <td className="px-4 py-3 text-sm text-slate-400">
+                        {new Date(action.createdAt).toLocaleString()}
+                      </td>
+                      <td className="px-4 py-3 text-sm">{action.actor.username}</td>
+                      <td className="px-4 py-3">
+                        <span className="inline-flex rounded-full bg-cyan-500/20 px-2 py-1 text-xs font-medium text-cyan-400">
+                          {action.action}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-sm text-slate-500">
+                        {action.reason || "-"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-8 text-center">
+              <p className="text-slate-400">No actions logged for this user</p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

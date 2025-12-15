@@ -28,6 +28,8 @@ export function ProfileStatsCard({
   hpRegenPerMin: initialHpRegenPerMin = 100,
   spRegenPerMin: initialSpRegenPerMin = 100,
 }: ProfileStatsCardProps) {
+  const utils = api.useUtils();
+  
   // Fetch real-time data
   const { data: player } = api.player.getCurrent.useQuery(undefined, {
     refetchInterval: 5000,
@@ -49,6 +51,10 @@ export function ProfileStatsCard({
   const spRegenPerSecRef = useRef<number>(0);
   const lastHpSyncRef = useRef<number | null>(null);
   const lastSpSyncRef = useRef<number | null>(null);
+  const previousBattleStatusRef = useRef<boolean>(false);
+  const previousServerHpRef = useRef<number | null>(null);
+  const previousServerStaminaRef = useRef<number | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
 
   // Check for active battle (only after we have player/character data to ensure context is ready)
   const { data: activeBattle } = api.battle.getActiveBattle.useQuery(undefined, {
@@ -80,6 +86,23 @@ export function ProfileStatsCard({
     return Math.min(max, base + regenAmount);
   };
 
+  // Detect battle end and immediately refetch data
+  useEffect(() => {
+    const wasInBattle = previousBattleStatusRef.current;
+    const nowInBattle = isInBattle;
+    
+    // Battle just ended - immediately refetch player and character data
+    if (wasInBattle && !nowInBattle) {
+      void utils.player.getCurrent.invalidate();
+      void utils.character.getOrCreateCurrent.invalidate();
+      // Force immediate refetch
+      void utils.player.getCurrent.refetch();
+      void utils.character.getOrCreateCurrent.refetch();
+    }
+    
+    previousBattleStatusRef.current = nowInBattle;
+  }, [isInBattle, utils]);
+
   // Update base values when server data changes
   useEffect(() => {
     if (serverCurrentHp !== null && serverCurrentStamina !== null) {
@@ -87,15 +110,35 @@ export function ProfileStatsCard({
       const hpIsFull = serverCurrentHp >= serverMaxHp;
       const staminaIsFull = serverCurrentStamina >= serverMaxStamina;
 
-      // Check if we need to sync with server (significant difference indicates combat damage or server update)
+      // Check if server values actually changed (prevents unnecessary resets)
+      const serverHpChanged = previousServerHpRef.current === null || 
+                              Math.abs(previousServerHpRef.current - serverCurrentHp) > 0.01;
+      const serverStaminaChanged = previousServerStaminaRef.current === null || 
+                                   Math.abs(previousServerStaminaRef.current - serverCurrentStamina) > 0.01;
+
+      // Check if we need to sync with server
       const currentInterpolatedHp = interpolatedHp ?? baseHpRef.current ?? serverCurrentHp;
       const currentInterpolatedStamina = interpolatedStamina ?? baseStaminaRef.current ?? serverCurrentStamina;
       
       const hpDiff = Math.abs(currentInterpolatedHp - serverCurrentHp);
       const staminaDiff = Math.abs(currentInterpolatedStamina - serverCurrentStamina);
 
-      // Sync base values if server value is significantly different (combat damage) or if not initialized
-      if (baseHpRef.current === null || (hpDiff > 0.1 && serverCurrentHp < currentInterpolatedHp)) {
+      // After battle ends, sync immediately (no threshold check)
+      // During battle or if damage detected, sync immediately
+      // Otherwise, only sync if difference is significant AND server value actually changed (prevents jitter)
+      const battleJustEnded = previousBattleStatusRef.current && !isInBattle;
+      const shouldSyncHp = baseHpRef.current === null || 
+                          battleJustEnded || 
+                          isInBattle ||
+                          (serverHpChanged && hpDiff > 1.0 && serverCurrentHp < currentInterpolatedHp);
+      
+      const shouldSyncStamina = baseStaminaRef.current === null || 
+                                battleJustEnded || 
+                                isInBattle ||
+                                (serverStaminaChanged && staminaDiff > 1.0 && serverCurrentStamina < currentInterpolatedStamina);
+
+      // Sync base values instantly after battle or when needed
+      if (shouldSyncHp) {
         baseHpRef.current = serverCurrentHp;
         lastHpSyncRef.current = Date.now();
         if (hpIsFull) {
@@ -103,11 +146,18 @@ export function ProfileStatsCard({
         } else {
           setInterpolatedHp(serverCurrentHp);
         }
+        previousServerHpRef.current = serverCurrentHp;
+      } else if (serverHpChanged) {
+        // Server value changed but we don't need to sync - just update the ref
+        previousServerHpRef.current = serverCurrentHp;
       }
 
-      if (baseStaminaRef.current === null || (staminaDiff > 0.1 && serverCurrentStamina < currentInterpolatedStamina)) {
+      if (shouldSyncStamina) {
         baseStaminaRef.current = serverCurrentStamina;
         if (!lastSpSyncRef.current) {
+          lastSpSyncRef.current = Date.now();
+        } else if (battleJustEnded || isInBattle) {
+          // Reset sync time after battle for fresh regen calculation
           lastSpSyncRef.current = Date.now();
         }
         if (staminaIsFull) {
@@ -115,6 +165,10 @@ export function ProfileStatsCard({
         } else {
           setInterpolatedStamina(serverCurrentStamina);
         }
+        previousServerStaminaRef.current = serverCurrentStamina;
+      } else if (serverStaminaChanged) {
+        // Server value changed but we don't need to sync - just update the ref
+        previousServerStaminaRef.current = serverCurrentStamina;
       }
 
       // If pools are full, ensure they stay at max
@@ -130,9 +184,9 @@ export function ProfileStatsCard({
       hpRegenPerSecRef.current = hpRegenPerMin / 60;
       spRegenPerSecRef.current = spRegenPerMin / 60;
     }
-  }, [serverCurrentHp, serverCurrentStamina, serverMaxHp, serverMaxStamina, hpRegenPerMin, spRegenPerMin, interpolatedHp, interpolatedStamina]);
+  }, [serverCurrentHp, serverCurrentStamina, serverMaxHp, serverMaxStamina, hpRegenPerMin, spRegenPerMin, interpolatedHp, interpolatedStamina, isInBattle]);
 
-  // Real-time interpolation effect - calculate based on elapsed time
+  // Real-time interpolation effect - calculate based on elapsed time using requestAnimationFrame
   // DISABLED during active battle
   useEffect(() => {
     if (baseHpRef.current === null || baseStaminaRef.current === null || isInBattle) {
@@ -141,10 +195,16 @@ export function ProfileStatsCard({
         setInterpolatedHp(serverCurrentHp);
         setInterpolatedStamina(serverCurrentStamina);
       }
+      // Cancel any pending animation frame
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
+      }
       return;
     }
 
-    const interval = setInterval(() => {
+    // Use requestAnimationFrame for smooth, jitter-free animation
+    const animate = () => {
       if (maxHpRef.current !== null && maxStaminaRef.current !== null && baseHpRef.current !== null && baseStaminaRef.current !== null) {
         // Calculate HP interpolation (only if lastHpSyncRef is set)
         if (lastHpSyncRef.current !== null) {
@@ -168,9 +228,20 @@ export function ProfileStatsCard({
           setInterpolatedStamina(newStamina);
         }
       }
-    }, 100); // Update every 100ms for smooth animation
+      
+      // Continue animation loop
+      animationFrameRef.current = requestAnimationFrame(animate);
+    };
 
-    return () => clearInterval(interval);
+    // Start animation loop
+    animationFrameRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
+      }
+    };
   }, [isInBattle, serverCurrentHp, serverCurrentStamina]);
 
   const stats = [
@@ -216,7 +287,7 @@ export function ProfileStatsCard({
           </div>
           <div className="h-2 overflow-hidden rounded-full bg-slate-700/50">
             <div
-              className="h-full bg-gradient-to-r from-red-500 to-red-600 transition-all duration-100 shadow-[0_0_8px_rgba(239,68,68,0.5)]"
+              className="h-full bg-gradient-to-r from-red-500 to-red-600 transition-all duration-500 ease-linear shadow-[0_0_8px_rgba(239,68,68,0.5)]"
               style={{ width: `${Math.min(100, Math.max(0, hpPercentage))}%` }}
             />
           </div>
@@ -231,7 +302,7 @@ export function ProfileStatsCard({
           </div>
           <div className="h-2 overflow-hidden rounded-full bg-slate-700/50">
             <div
-              className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-100 shadow-[0_0_8px_rgba(34,211,238,0.5)]"
+              className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-500 ease-linear shadow-[0_0_8px_rgba(34,211,238,0.5)]"
               style={{ width: `${Math.min(100, Math.max(0, spPercentage))}%` }}
             />
           </div>

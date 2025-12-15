@@ -3,12 +3,12 @@ import { TRPCError } from "@trpc/server";
 import { Prisma } from "~/server/types/prisma";
 import {
   createTRPCRouter,
-  adminProcedure,
+  contentProcedure,
 } from "~/server/api/trpc";
 
 export const contentMapsRouter = createTRPCRouter({
   // List all map zones
-  list: adminProcedure
+  list: contentProcedure
     .input(
       z.object({
         includeArchived: z.boolean().default(false),
@@ -30,7 +30,7 @@ export const contentMapsRouter = createTRPCRouter({
     }),
 
   // Get map zone by ID
-  get: adminProcedure
+  get: contentProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
       const map = await ctx.db.mapZone.findUnique({
@@ -48,7 +48,7 @@ export const contentMapsRouter = createTRPCRouter({
     }),
 
   // Create new map zone
-  create: adminProcedure
+  create: contentProcedure
     .input(
       z.object({
         name: z.string().min(1, "Name is required"),
@@ -123,7 +123,7 @@ export const contentMapsRouter = createTRPCRouter({
     }),
 
   // Update map zone
-  update: adminProcedure
+  update: contentProcedure
     .input(
       z.object({
         id: z.string(),
@@ -238,7 +238,7 @@ export const contentMapsRouter = createTRPCRouter({
     }),
 
   // Archive map zone
-  archive: adminProcedure
+  archive: contentProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const map = await ctx.db.mapZone.findUnique({
@@ -264,7 +264,7 @@ export const contentMapsRouter = createTRPCRouter({
     }),
 
   // Unarchive map zone
-  unarchive: adminProcedure
+  unarchive: contentProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const map = await ctx.db.mapZone.findUnique({
@@ -290,7 +290,7 @@ export const contentMapsRouter = createTRPCRouter({
     }),
 
   // Hard delete
-  delete: adminProcedure
+  delete: contentProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const map = await ctx.db.mapZone.findUnique({

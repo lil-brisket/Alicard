@@ -14,10 +14,20 @@ export default async function HubPage() {
     redirect("/auth/signin");
   }
 
-  // Fetch user from database
+  // Fetch user from database with roles
   const user = await db.user.findUnique({
     where: { id: session.user.id },
-    select: { id: true, username: true, gender: true, role: true },
+    select: { 
+      id: true, 
+      username: true, 
+      gender: true, 
+      role: true,
+      roles: {
+        select: {
+          role: true,
+        },
+      },
+    },
   });
 
   if (!user) {
@@ -73,10 +83,26 @@ export default async function HubPage() {
 
         <main className="mt-4 flex-1 md:mt-6">
           <section className="space-y-4">
-            {/* Admin Panel (if moderator or admin) */}
-            {(user.role === "MODERATOR" || user.role === "ADMIN") && (
-              <AdminPanelSection role={user.role} />
-            )}
+            {/* Admin Panel (if moderator, admin, or content) */}
+            {(() => {
+              const userRoles = [
+                user.role,
+                ...(user.roles?.map((r) => r.role) ?? []),
+              ];
+              const isModerator = userRoles.includes("MODERATOR");
+              const isAdmin = userRoles.includes("ADMIN");
+              const isContent = userRoles.includes("CONTENT");
+              
+              if (isModerator || isAdmin || isContent) {
+                return (
+                  <AdminPanelSection 
+                    role={isAdmin ? "ADMIN" : isModerator ? "MODERATOR" : "CONTENT"} 
+                    isContent={isContent}
+                  />
+                );
+              }
+              return null;
+            })()}
             {/* actions card */}
             <ActionGrid />
             {/* hall of the dead card */}

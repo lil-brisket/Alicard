@@ -2,7 +2,7 @@ import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import {
   createTRPCRouter,
-  adminProcedure,
+  contentProcedure,
 } from "~/server/api/trpc";
 
 const itemRaritySchema = z.enum([
@@ -15,7 +15,7 @@ const itemRaritySchema = z.enum([
 
 export const contentItemsRouter = createTRPCRouter({
   // List all item templates (non-archived by default)
-  list: adminProcedure
+  list: contentProcedure
     .input(
       z.object({
         includeArchived: z.boolean().default(false),
@@ -37,7 +37,7 @@ export const contentItemsRouter = createTRPCRouter({
     }),
 
   // Get item template by ID
-  get: adminProcedure
+  get: contentProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
       const item = await ctx.db.itemTemplate.findUnique({
@@ -55,7 +55,7 @@ export const contentItemsRouter = createTRPCRouter({
     }),
 
   // Create new item template
-  create: adminProcedure
+  create: contentProcedure
     .input(
       z.object({
         name: z.string().min(1, "Name is required"),
@@ -76,7 +76,7 @@ export const contentItemsRouter = createTRPCRouter({
     }),
 
   // Update item template
-  update: adminProcedure
+  update: contentProcedure
     .input(
       z.object({
         id: z.string(),
@@ -112,7 +112,7 @@ export const contentItemsRouter = createTRPCRouter({
     }),
 
   // Archive item template (soft delete)
-  archive: adminProcedure
+  archive: contentProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const item = await ctx.db.itemTemplate.findUnique({
@@ -138,7 +138,7 @@ export const contentItemsRouter = createTRPCRouter({
     }),
 
   // Unarchive item template
-  unarchive: adminProcedure
+  unarchive: contentProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const item = await ctx.db.itemTemplate.findUnique({
@@ -164,7 +164,7 @@ export const contentItemsRouter = createTRPCRouter({
     }),
 
   // Hard delete (only if safe - no references)
-  delete: adminProcedure
+  delete: contentProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const item = await ctx.db.itemTemplate.findUnique({

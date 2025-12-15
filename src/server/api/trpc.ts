@@ -13,6 +13,7 @@ import { ZodError } from "zod";
 
 import { auth } from "~/server/auth";
 import { db } from "~/server/db";
+import { trackIpHistory, getIpAddress, getUserAgent } from "~/server/lib/ip-history";
 
 /**
  * 1. CONTEXT
@@ -120,7 +121,7 @@ export const publicProcedure = t.procedure.use(timingMiddleware);
  */
 export const protectedProcedure = t.procedure
   .use(timingMiddleware)
-  .use(({ ctx, next }) => {
+  .use(async ({ ctx, next }) => {
     if (!ctx.session?.user) {
       throw new TRPCError({ code: "UNAUTHORIZED" });
     }
@@ -132,6 +133,14 @@ export const protectedProcedure = t.procedure
         message: "Database client is not available",
       });
     }
+    
+    // Track IP history (non-blocking)
+    const ipAddress = getIpAddress(ctx.headers);
+    const userAgent = getUserAgent(ctx.headers);
+    trackIpHistory(ctx.session.user.id, ipAddress, userAgent).catch((error) => {
+      // Silently fail - IP history tracking shouldn't break the request
+      console.error("Failed to track IP history:", error);
+    });
     
     return next({
       ctx: {
@@ -179,6 +188,14 @@ export const moderatorProcedure = t.procedure
       });
     }
 
+    // Track IP history (non-blocking)
+    const ipAddress = getIpAddress(ctx.headers);
+    const userAgent = getUserAgent(ctx.headers);
+    trackIpHistory(ctx.session.user.id, ipAddress, userAgent).catch((error) => {
+      // Silently fail - IP history tracking shouldn't break the request
+      console.error("Failed to track IP history:", error);
+    });
+
     return next({
       ctx: {
         session: { ...ctx.session, user: ctx.session.user },
@@ -224,6 +241,82 @@ export const adminProcedure = t.procedure
         message: "Admin role required",
       });
     }
+
+    // Track IP history (non-blocking)
+    const ipAddress = getIpAddress(ctx.headers);
+    const userAgent = getUserAgent(ctx.headers);
+    trackIpHistory(ctx.session.user.id, ipAddress, userAgent).catch((error) => {
+      // Silently fail - IP history tracking shouldn't break the request
+      console.error("Failed to track IP history:", error);
+    });
+
+    return next({
+      ctx: {
+        session: { ...ctx.session, user: ctx.session.user },
+        db: ctx.db,
+        headers: ctx.headers,
+        userRole: user.role,
+      },
+    });
+  });
+
+/**
+ * Content procedure (ADMIN or CONTENT role required)
+ *
+ * Requires user to be authenticated and have ADMIN or CONTENT role.
+ */
+export const contentProcedure = t.procedure
+  .use(timingMiddleware)
+  .use(async ({ ctx, next }) => {
+    if (!ctx.session?.user) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+
+    if (!ctx.db) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Database client is not available",
+      });
+    }
+
+    // Fetch user from database to check role (including multi-role assignments)
+    const user = await ctx.db.user.findUnique({
+      where: { id: ctx.session.user.id },
+      select: { 
+        id: true, 
+        role: true,
+        roles: {
+          select: {
+            role: true,
+          },
+        },
+      },
+    });
+
+    if (!user) {
+      throw new TRPCError({ code: "UNAUTHORIZED", message: "User not found" });
+    }
+
+    // Check both single role field and multi-role assignments
+    const userRoles = [
+      user.role,
+      ...(user.roles?.map((r) => r.role) ?? []),
+    ];
+
+    if (!userRoles.includes("ADMIN") && !userRoles.includes("CONTENT")) {
+      throw new TRPCError({
+        code: "FORBIDDEN",
+        message: "Admin or Content role required",
+      });
+    }
+
+    // Track IP history (non-blocking)
+    const ipAddress = getIpAddress(ctx.headers);
+    const userAgent = getUserAgent(ctx.headers);
+    trackIpHistory(ctx.session.user.id, ipAddress, userAgent).catch((error) => {
+      // Silently fail - IP history tracking shouldn't break the request
+      console.error("Failed to track IP history:", error);
+    });
 
     return next({
       ctx: {

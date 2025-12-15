@@ -112,3 +112,45 @@ export async function requireAdminPage() {
 
   return user;
 }
+
+/**
+ * Check if user has content role (ADMIN or CONTENT) (for Next.js pages)
+ * Redirects to signin or forbidden page if not authorized
+ * Supports both single role field and multi-role assignments
+ */
+export async function requireContentPage() {
+  const session = await auth();
+  if (!session?.user) {
+    redirect("/auth/signin");
+  }
+
+  const user = await db.user.findUnique({
+    where: { id: session.user.id },
+    select: { 
+      id: true, 
+      role: true, 
+      username: true,
+      roles: {
+        select: {
+          role: true,
+        },
+      },
+    },
+  });
+
+  if (!user) {
+    redirect("/auth/signin");
+  }
+
+  // Check both single role field and multi-role assignments
+  const userRoles = [
+    user.role,
+    ...(user.roles?.map((r) => r.role) ?? []),
+  ];
+
+  if (!userRoles.includes("ADMIN") && !userRoles.includes("CONTENT")) {
+    redirect("/forbidden");
+  }
+
+  return user;
+}
