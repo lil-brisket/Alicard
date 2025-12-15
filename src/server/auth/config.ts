@@ -123,8 +123,24 @@ export const authConfig = {
       return `${baseUrl}/hub`;
     },
     async session({ session, token }) {
-      if (token.sub && session.user) {
-        session.user.id = token.sub;
+      // If token is null (user doesn't exist in DB), invalidate session
+      if (!token || !token.sub) {
+        return null as any;
+      }
+
+      // Verify user still exists in database
+      const dbUser = await db.user.findUnique({
+        where: { id: token.sub as string },
+        select: { id: true },
+      });
+
+      // If user doesn't exist (e.g., after database reset), invalidate session
+      if (!dbUser) {
+        return null as any;
+      }
+
+      if (session.user) {
+        session.user.id = token.sub as string;
       }
       if (token.username && session.user) {
         session.user.username = token.username as string;
@@ -140,6 +156,22 @@ export const authConfig = {
           select: { username: true },
         });
         if (dbUser) {
+          token.username = dbUser.username;
+        }
+      } else if (token.sub) {
+        // On subsequent requests, verify the user still exists in the database
+        // This handles cases where the database was reset but the JWT token is still valid
+        const dbUser = await db.user.findUnique({
+          where: { id: token.sub as string },
+          select: { username: true },
+        });
+        if (!dbUser) {
+          // User doesn't exist anymore, invalidate the token by returning null
+          // This will cause the session callback to also return null
+          return null as any;
+        }
+        // Update username if it changed
+        if (dbUser.username) {
           token.username = dbUser.username;
         }
       }

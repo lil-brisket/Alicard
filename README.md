@@ -110,6 +110,37 @@ npm run dev
 
 The game will be available at [http://localhost:3000](http://localhost:3000)
 
+### 6. Seed Database (Optional)
+
+To populate the database with initial game data including jobs, items, recipes, and test accounts, run:
+
+```bash
+npm run db:seed
+```
+
+**Seeded Test Accounts:**
+
+The seed script creates the following test accounts for different user roles:
+
+| Role | Email | Username | Password |
+|------|-------|----------|----------|
+| Admin | `admin@alicard.com` | `admin` | `admin123` |
+| Moderator | `mod@alicard.com` | `mod` | `mod123` |
+| Content | `content@alicard.com` | `content` | `content123` |
+| Player | `player@alicard.com` | `player` | `player123` |
+
+**⚠️ Security Note:** These are default passwords for development only. Change them immediately in production or before deploying to any public environment.
+
+The seed script also creates:
+- Default world map with tiles
+- Base jobs (Blacksmith, Tailor, Alchemist, Cook, Miner, Fisher, Herbalist, Logger)
+- Items and equipment
+- Recipes and crafting materials
+- Gathering nodes
+- Skills
+- Achievements
+- Monsters
+
 ## Database Migration Workflow
 
 **⚠️ CRITICAL: Production-Grade Migration Policy**

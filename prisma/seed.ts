@@ -1067,6 +1067,42 @@ async function main() {
   });
   console.log("✅ Admin user created:", adminUser.username);
 
+  // Create moderator user
+  console.log("Creating moderator user...");
+  const moderatorPassword = await bcrypt.hash("mod123", 10);
+  const moderatorUser = await prisma.user.upsert({
+    where: { email: "mod@alicard.com" },
+    update: {
+      role: "MODERATOR",
+    },
+    create: {
+      email: "mod@alicard.com",
+      username: "mod",
+      password: moderatorPassword,
+      gender: "OTHER",
+      role: "MODERATOR",
+    },
+  });
+  console.log("✅ Moderator user created:", moderatorUser.username);
+
+  // Create content user
+  console.log("Creating content user...");
+  const contentPassword = await bcrypt.hash("content123", 10);
+  const contentUser = await prisma.user.upsert({
+    where: { email: "content@alicard.com" },
+    update: {
+      role: "CONTENT",
+    },
+    create: {
+      email: "content@alicard.com",
+      username: "content",
+      password: contentPassword,
+      gender: "OTHER",
+      role: "CONTENT",
+    },
+  });
+  console.log("✅ Content user created:", contentUser.username);
+
   // Create regular player user
   console.log("Creating player user...");
   const playerPassword = await bcrypt.hash("player123", 10);

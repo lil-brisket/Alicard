@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import { api } from "~/trpc/react";
 import { toast } from "react-hot-toast";
 import type { RouterOutputs } from "~/trpc/react";
@@ -12,6 +13,7 @@ type UserRole = (typeof ALL_ROLES)[number];
 
 export function UserDetailForm({ user }: { user: User }) {
   const utils = api.useUtils();
+  const { data: session } = useSession();
   const [banReason, setBanReason] = useState("");
   const [banDuration, setBanDuration] = useState<"1h" | "6h" | "12h" | "24h" | "3d" | "7d" | "30d" | "permanent">("24h");
   const [muteReason, setMuteReason] = useState("");
@@ -21,6 +23,13 @@ export function UserDetailForm({ user }: { user: User }) {
     user.roles?.map((r) => r.role as UserRole) ?? [user.role as UserRole]
   );
   const [credit, setCredit] = useState(user.credit ?? 0);
+
+  // Get current user's role to check if they're admin
+  const { data: currentUser } = api.admin.users.getUserById.useQuery(
+    { id: session?.user?.id ?? "" },
+    { enabled: !!session?.user?.id }
+  );
+  const isAdmin = currentUser?.role === "ADMIN" || currentUser?.roles?.some((r) => r.role === "ADMIN");
 
   const updateUser = api.admin.users.updateUser.useMutation({
     onSuccess: () => {
@@ -86,43 +95,45 @@ export function UserDetailForm({ user }: { user: User }) {
 
   return (
     <div className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium text-slate-300">
-          Roles (Admin only) - Multi-select
-        </label>
-        <div className="mt-2 space-y-2">
-          {ALL_ROLES.map((r) => (
-            <label key={r} className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={selectedRoles.includes(r)}
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setSelectedRoles([...selectedRoles, r]);
-                  } else {
-                    setSelectedRoles(selectedRoles.filter((role) => role !== r));
-                  }
-                }}
-                className="rounded border-slate-700 bg-slate-800 text-cyan-600 focus:ring-cyan-500"
-                disabled={updateUser.isPending}
-              />
-              <span className="text-sm text-slate-300">{r}</span>
-            </label>
-          ))}
+      {isAdmin && (
+        <div>
+          <label className="block text-sm font-medium text-slate-300">
+            Roles (Admin only) - Multi-select
+          </label>
+          <div className="mt-2 space-y-2">
+            {ALL_ROLES.map((r) => (
+              <label key={r} className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  checked={selectedRoles.includes(r)}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setSelectedRoles([...selectedRoles, r]);
+                    } else {
+                      setSelectedRoles(selectedRoles.filter((role) => role !== r));
+                    }
+                  }}
+                  className="rounded border-slate-700 bg-slate-800 text-cyan-600 focus:ring-cyan-500"
+                  disabled={updateUser.isPending}
+                />
+                <span className="text-sm text-slate-300">{r}</span>
+              </label>
+            ))}
+          </div>
+          <button
+            onClick={() =>
+              updateUser.mutate({
+                id: user.id,
+                roles: selectedRoles,
+              })
+            }
+            disabled={updateUser.isPending || selectedRoles.length === 0}
+            className="mt-2 rounded-lg bg-cyan-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-cyan-700 disabled:opacity-50"
+          >
+            Update Roles
+          </button>
         </div>
-        <button
-          onClick={() =>
-            updateUser.mutate({
-              id: user.id,
-              roles: selectedRoles,
-            })
-          }
-          disabled={updateUser.isPending || selectedRoles.length === 0}
-          className="mt-2 rounded-lg bg-cyan-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-cyan-700 disabled:opacity-50"
-        >
-          Update Roles
-        </button>
-      </div>
+      )}
 
       <div>
         <label className="block text-sm font-medium text-slate-300">

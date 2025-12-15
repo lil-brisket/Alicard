@@ -104,6 +104,10 @@ export default function AdminUserDetailPage({
     targetUserId: id,
     limit: 20,
   });
+  const { data: ipHistory } = api.admin.users.getIpHistory.useQuery({
+    userId: id,
+    limit: 50,
+  });
 
   if (isLoading) {
     return (
@@ -192,6 +196,29 @@ export default function AdminUserDetailPage({
                 </div>
               )}
             </div>
+          </div>
+
+          <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+            <h3 className="mb-4 text-lg font-semibold text-cyan-400">
+              IP History
+            </h3>
+            {ipHistory && ipHistory.length > 0 ? (
+              <div className="max-h-96 space-y-2 overflow-y-auto">
+                {ipHistory.map((ip) => (
+                  <div key={ip.id} className="rounded border border-slate-800 bg-slate-800/30 p-3 text-sm">
+                    <div className="font-medium text-slate-200">{ip.ipAddress}</div>
+                    <div className="text-slate-400">
+                      {new Date(ip.createdAt).toLocaleString()}
+                    </div>
+                    {ip.userAgent && (
+                      <div className="mt-1 text-xs text-slate-500">{ip.userAgent}</div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-slate-400">No IP history</p>
+            )}
           </div>
 
           <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">

@@ -1,40 +1,20 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import { auth } from "~/server/auth";
-import { db } from "~/server/db";
+import { NextResponse, type NextRequest } from "next/server";
 
-export async function proxy(request: NextRequest) {
-  // Track IP on successful auth routes
-  if (request.nextUrl.pathname.startsWith("/api/auth/callback")) {
-    const session = await auth();
-    if (session?.user?.id) {
-      const ipAddress = 
-        request.headers.get("x-forwarded-for")?.split(",")[0] ||
-        request.headers.get("x-real-ip") ||
-        request.ip ||
-        "unknown";
-      const userAgent = request.headers.get("user-agent") || null;
-
-      // Track IP history (don't await to avoid blocking)
-      db.userIpHistory
-        .create({
-          data: {
-            userId: session.user.id,
-            ipAddress,
-            userAgent,
-          },
-        })
-        .catch((err) => {
-          console.error("Failed to track IP history:", err);
-        });
-    }
-  }
-
+export function proxy(request: NextRequest) {
+  // Proxy logic can be added here as needed
+  // For now, this allows all requests to proceed
   return NextResponse.next();
 }
 
 export const config = {
   matcher: [
-    "/api/auth/:path*",
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (all API routes - auth, trpc, etc.)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    "/((?!api|_next/static|_next/image|favicon.ico).*)",
   ],
 };
