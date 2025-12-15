@@ -190,6 +190,7 @@ The admin action log provides a complete audit trail of all administrative actio
 2. **Global Action Log**: View all admin actions across the system at `/admin/actions` (available to moderators, admins, and content managers).
 
 **Action Log Features:**
+
 - Tracks all admin actions (user updates, bans, mutes, role changes, etc.)
 - Records the actor (admin who performed the action), target user, action type, reason, and timestamp
 - Player-specific filtering on user detail pages
