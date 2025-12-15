@@ -82,7 +82,13 @@ export const adminUsersRouter = createTRPCRouter({
               id: true,
               role: true,
               assignedAt: true,
-              assignedBy: true,
+              assignedById: true,
+              assignedBy: {
+                select: {
+                  id: true,
+                  username: true,
+                },
+              },
             },
           },
           ipHistory: {
@@ -155,7 +161,7 @@ export const adminUsersRouter = createTRPCRouter({
           data: roles.map((r) => ({
             userId: id,
             role: r,
-            assignedBy: ctx.session.user.id,
+            assignedById: ctx.session.user.id,
           })),
         });
       }

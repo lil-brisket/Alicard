@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import { auth } from "~/server/auth";
 import { db } from "~/server/db";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   // Track IP on successful auth routes
   if (request.nextUrl.pathname.startsWith("/api/auth/callback")) {
     const session = await auth();

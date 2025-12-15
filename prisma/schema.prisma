@@ -91,6 +91,7 @@ model User {
   adminActions          AdminActionLog[]    @relation("AdminActor")
   // Multi-role support
   roles                 UserRoleAssignment[]
+  assignedRoles         UserRoleAssignment[] @relation("RoleAssigner")
   // IP history tracking
   ipHistory             UserIpHistory[]
 }
@@ -1175,16 +1176,18 @@ model MapZone {
 
 // Multi-role support: Many-to-many relationship between User and UserRole
 model UserRoleAssignment {
-  id        String   @id @default(cuid())
-  userId    String
-  role      UserRole
-  assignedAt DateTime @default(now())
-  assignedBy String?  // Admin who assigned the role
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id          String   @id @default(cuid())
+  userId      String
+  role        UserRole
+  assignedAt  DateTime @default(now())
+  assignedById String?
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assignedBy  User?    @relation("RoleAssigner", fields: [assignedById], references: [id])
 
   @@unique([userId, role])
   @@index([userId])
   @@index([role])
+  @@index([assignedById])
 }
 
 // IP history tracking for moderation
