@@ -27,12 +27,14 @@ export type AggregateMonsterTemplate = {
 }
 
 export type MonsterTemplateAvgAggregateOutputType = {
+  version: number | null
   level: number | null
   hp: number | null
   sp: number | null
 }
 
 export type MonsterTemplateSumAggregateOutputType = {
+  version: number | null
   level: number | null
   hp: number | null
   sp: number | null
@@ -41,32 +43,47 @@ export type MonsterTemplateSumAggregateOutputType = {
 export type MonsterTemplateMinAggregateOutputType = {
   id: string | null
   name: string | null
+  description: string | null
+  status: $Enums.ContentStatus | null
+  version: number | null
+  createdBy: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
   level: number | null
   hp: number | null
   sp: number | null
   lootTableId: string | null
   isArchived: boolean | null
   deletedAt: Date | null
-  createdAt: Date | null
-  updatedAt: Date | null
 }
 
 export type MonsterTemplateMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  description: string | null
+  status: $Enums.ContentStatus | null
+  version: number | null
+  createdBy: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
   level: number | null
   hp: number | null
   sp: number | null
   lootTableId: string | null
   isArchived: boolean | null
   deletedAt: Date | null
-  createdAt: Date | null
-  updatedAt: Date | null
 }
 
 export type MonsterTemplateCountAggregateOutputType = {
   id: number
   name: number
+  description: number
+  tags: number
+  status: number
+  version: number
+  createdBy: number
+  createdAt: number
+  updatedAt: number
   level: number
   hp: number
   sp: number
@@ -74,19 +91,19 @@ export type MonsterTemplateCountAggregateOutputType = {
   lootTableId: number
   isArchived: number
   deletedAt: number
-  createdAt: number
-  updatedAt: number
   _all: number
 }
 
 
 export type MonsterTemplateAvgAggregateInputType = {
+  version?: true
   level?: true
   hp?: true
   sp?: true
 }
 
 export type MonsterTemplateSumAggregateInputType = {
+  version?: true
   level?: true
   hp?: true
   sp?: true
@@ -95,32 +112,47 @@ export type MonsterTemplateSumAggregateInputType = {
 export type MonsterTemplateMinAggregateInputType = {
   id?: true
   name?: true
+  description?: true
+  status?: true
+  version?: true
+  createdBy?: true
+  createdAt?: true
+  updatedAt?: true
   level?: true
   hp?: true
   sp?: true
   lootTableId?: true
   isArchived?: true
   deletedAt?: true
-  createdAt?: true
-  updatedAt?: true
 }
 
 export type MonsterTemplateMaxAggregateInputType = {
   id?: true
   name?: true
+  description?: true
+  status?: true
+  version?: true
+  createdBy?: true
+  createdAt?: true
+  updatedAt?: true
   level?: true
   hp?: true
   sp?: true
   lootTableId?: true
   isArchived?: true
   deletedAt?: true
-  createdAt?: true
-  updatedAt?: true
 }
 
 export type MonsterTemplateCountAggregateInputType = {
   id?: true
   name?: true
+  description?: true
+  tags?: true
+  status?: true
+  version?: true
+  createdBy?: true
+  createdAt?: true
+  updatedAt?: true
   level?: true
   hp?: true
   sp?: true
@@ -128,8 +160,6 @@ export type MonsterTemplateCountAggregateInputType = {
   lootTableId?: true
   isArchived?: true
   deletedAt?: true
-  createdAt?: true
-  updatedAt?: true
   _all?: true
 }
 
@@ -222,6 +252,13 @@ export type MonsterTemplateGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 export type MonsterTemplateGroupByOutputType = {
   id: string
   name: string
+  description: string | null
+  tags: runtime.JsonValue | null
+  status: $Enums.ContentStatus
+  version: number
+  createdBy: string | null
+  createdAt: Date
+  updatedAt: Date
   level: number
   hp: number
   sp: number
@@ -229,8 +266,6 @@ export type MonsterTemplateGroupByOutputType = {
   lootTableId: string | null
   isArchived: boolean
   deletedAt: Date | null
-  createdAt: Date
-  updatedAt: Date
   _count: MonsterTemplateCountAggregateOutputType | null
   _avg: MonsterTemplateAvgAggregateOutputType | null
   _sum: MonsterTemplateSumAggregateOutputType | null
@@ -259,6 +294,13 @@ export type MonsterTemplateWhereInput = {
   NOT?: Prisma.MonsterTemplateWhereInput | Prisma.MonsterTemplateWhereInput[]
   id?: Prisma.StringFilter<"MonsterTemplate"> | string
   name?: Prisma.StringFilter<"MonsterTemplate"> | string
+  description?: Prisma.StringNullableFilter<"MonsterTemplate"> | string | null
+  tags?: Prisma.JsonNullableFilter<"MonsterTemplate">
+  status?: Prisma.EnumContentStatusFilter<"MonsterTemplate"> | $Enums.ContentStatus
+  version?: Prisma.IntFilter<"MonsterTemplate"> | number
+  createdBy?: Prisma.StringNullableFilter<"MonsterTemplate"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"MonsterTemplate"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"MonsterTemplate"> | Date | string
   level?: Prisma.IntFilter<"MonsterTemplate"> | number
   hp?: Prisma.IntFilter<"MonsterTemplate"> | number
   sp?: Prisma.IntFilter<"MonsterTemplate"> | number
@@ -266,13 +308,18 @@ export type MonsterTemplateWhereInput = {
   lootTableId?: Prisma.StringNullableFilter<"MonsterTemplate"> | string | null
   isArchived?: Prisma.BoolFilter<"MonsterTemplate"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"MonsterTemplate"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"MonsterTemplate"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"MonsterTemplate"> | Date | string
 }
 
 export type MonsterTemplateOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   level?: Prisma.SortOrder
   hp?: Prisma.SortOrder
   sp?: Prisma.SortOrder
@@ -280,8 +327,6 @@ export type MonsterTemplateOrderByWithRelationInput = {
   lootTableId?: Prisma.SortOrderInput | Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type MonsterTemplateWhereUniqueInput = Prisma.AtLeast<{
@@ -290,6 +335,13 @@ export type MonsterTemplateWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.MonsterTemplateWhereInput[]
   NOT?: Prisma.MonsterTemplateWhereInput | Prisma.MonsterTemplateWhereInput[]
   name?: Prisma.StringFilter<"MonsterTemplate"> | string
+  description?: Prisma.StringNullableFilter<"MonsterTemplate"> | string | null
+  tags?: Prisma.JsonNullableFilter<"MonsterTemplate">
+  status?: Prisma.EnumContentStatusFilter<"MonsterTemplate"> | $Enums.ContentStatus
+  version?: Prisma.IntFilter<"MonsterTemplate"> | number
+  createdBy?: Prisma.StringNullableFilter<"MonsterTemplate"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"MonsterTemplate"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"MonsterTemplate"> | Date | string
   level?: Prisma.IntFilter<"MonsterTemplate"> | number
   hp?: Prisma.IntFilter<"MonsterTemplate"> | number
   sp?: Prisma.IntFilter<"MonsterTemplate"> | number
@@ -297,13 +349,18 @@ export type MonsterTemplateWhereUniqueInput = Prisma.AtLeast<{
   lootTableId?: Prisma.StringNullableFilter<"MonsterTemplate"> | string | null
   isArchived?: Prisma.BoolFilter<"MonsterTemplate"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"MonsterTemplate"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"MonsterTemplate"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"MonsterTemplate"> | Date | string
 }, "id">
 
 export type MonsterTemplateOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   level?: Prisma.SortOrder
   hp?: Prisma.SortOrder
   sp?: Prisma.SortOrder
@@ -311,8 +368,6 @@ export type MonsterTemplateOrderByWithAggregationInput = {
   lootTableId?: Prisma.SortOrderInput | Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   _count?: Prisma.MonsterTemplateCountOrderByAggregateInput
   _avg?: Prisma.MonsterTemplateAvgOrderByAggregateInput
   _max?: Prisma.MonsterTemplateMaxOrderByAggregateInput
@@ -326,6 +381,13 @@ export type MonsterTemplateScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MonsterTemplateScalarWhereWithAggregatesInput | Prisma.MonsterTemplateScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"MonsterTemplate"> | string
   name?: Prisma.StringWithAggregatesFilter<"MonsterTemplate"> | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"MonsterTemplate"> | string | null
+  tags?: Prisma.JsonNullableWithAggregatesFilter<"MonsterTemplate">
+  status?: Prisma.EnumContentStatusWithAggregatesFilter<"MonsterTemplate"> | $Enums.ContentStatus
+  version?: Prisma.IntWithAggregatesFilter<"MonsterTemplate"> | number
+  createdBy?: Prisma.StringNullableWithAggregatesFilter<"MonsterTemplate"> | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"MonsterTemplate"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"MonsterTemplate"> | Date | string
   level?: Prisma.IntWithAggregatesFilter<"MonsterTemplate"> | number
   hp?: Prisma.IntWithAggregatesFilter<"MonsterTemplate"> | number
   sp?: Prisma.IntWithAggregatesFilter<"MonsterTemplate"> | number
@@ -333,13 +395,18 @@ export type MonsterTemplateScalarWhereWithAggregatesInput = {
   lootTableId?: Prisma.StringNullableWithAggregatesFilter<"MonsterTemplate"> | string | null
   isArchived?: Prisma.BoolWithAggregatesFilter<"MonsterTemplate"> | boolean
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"MonsterTemplate"> | Date | string | null
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"MonsterTemplate"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"MonsterTemplate"> | Date | string
 }
 
 export type MonsterTemplateCreateInput = {
   id?: string
   name: string
+  description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   level?: number
   hp: number
   sp?: number
@@ -347,13 +414,18 @@ export type MonsterTemplateCreateInput = {
   lootTableId?: string | null
   isArchived?: boolean
   deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type MonsterTemplateUncheckedCreateInput = {
   id?: string
   name: string
+  description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   level?: number
   hp: number
   sp?: number
@@ -361,13 +433,18 @@ export type MonsterTemplateUncheckedCreateInput = {
   lootTableId?: string | null
   isArchived?: boolean
   deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type MonsterTemplateUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   level?: Prisma.IntFieldUpdateOperationsInput | number
   hp?: Prisma.IntFieldUpdateOperationsInput | number
   sp?: Prisma.IntFieldUpdateOperationsInput | number
@@ -375,13 +452,18 @@ export type MonsterTemplateUpdateInput = {
   lootTableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MonsterTemplateUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   level?: Prisma.IntFieldUpdateOperationsInput | number
   hp?: Prisma.IntFieldUpdateOperationsInput | number
   sp?: Prisma.IntFieldUpdateOperationsInput | number
@@ -389,13 +471,18 @@ export type MonsterTemplateUncheckedUpdateInput = {
   lootTableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MonsterTemplateCreateManyInput = {
   id?: string
   name: string
+  description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   level?: number
   hp: number
   sp?: number
@@ -403,13 +490,18 @@ export type MonsterTemplateCreateManyInput = {
   lootTableId?: string | null
   isArchived?: boolean
   deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type MonsterTemplateUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   level?: Prisma.IntFieldUpdateOperationsInput | number
   hp?: Prisma.IntFieldUpdateOperationsInput | number
   sp?: Prisma.IntFieldUpdateOperationsInput | number
@@ -417,13 +509,18 @@ export type MonsterTemplateUpdateManyMutationInput = {
   lootTableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MonsterTemplateUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   level?: Prisma.IntFieldUpdateOperationsInput | number
   hp?: Prisma.IntFieldUpdateOperationsInput | number
   sp?: Prisma.IntFieldUpdateOperationsInput | number
@@ -431,13 +528,18 @@ export type MonsterTemplateUncheckedUpdateManyInput = {
   lootTableId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MonsterTemplateCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   level?: Prisma.SortOrder
   hp?: Prisma.SortOrder
   sp?: Prisma.SortOrder
@@ -445,11 +547,10 @@ export type MonsterTemplateCountOrderByAggregateInput = {
   lootTableId?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type MonsterTemplateAvgOrderByAggregateInput = {
+  version?: Prisma.SortOrder
   level?: Prisma.SortOrder
   hp?: Prisma.SortOrder
   sp?: Prisma.SortOrder
@@ -458,30 +559,39 @@ export type MonsterTemplateAvgOrderByAggregateInput = {
 export type MonsterTemplateMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   level?: Prisma.SortOrder
   hp?: Prisma.SortOrder
   sp?: Prisma.SortOrder
   lootTableId?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type MonsterTemplateMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   level?: Prisma.SortOrder
   hp?: Prisma.SortOrder
   sp?: Prisma.SortOrder
   lootTableId?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type MonsterTemplateSumOrderByAggregateInput = {
+  version?: Prisma.SortOrder
   level?: Prisma.SortOrder
   hp?: Prisma.SortOrder
   sp?: Prisma.SortOrder
@@ -492,6 +602,13 @@ export type MonsterTemplateSumOrderByAggregateInput = {
 export type MonsterTemplateSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   level?: boolean
   hp?: boolean
   sp?: boolean
@@ -499,13 +616,18 @@ export type MonsterTemplateSelect<ExtArgs extends runtime.Types.Extensions.Inter
   lootTableId?: boolean
   isArchived?: boolean
   deletedAt?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["monsterTemplate"]>
 
 export type MonsterTemplateSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   level?: boolean
   hp?: boolean
   sp?: boolean
@@ -513,13 +635,18 @@ export type MonsterTemplateSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   lootTableId?: boolean
   isArchived?: boolean
   deletedAt?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["monsterTemplate"]>
 
 export type MonsterTemplateSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   level?: boolean
   hp?: boolean
   sp?: boolean
@@ -527,13 +654,18 @@ export type MonsterTemplateSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   lootTableId?: boolean
   isArchived?: boolean
   deletedAt?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["monsterTemplate"]>
 
 export type MonsterTemplateSelectScalar = {
   id?: boolean
   name?: boolean
+  description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   level?: boolean
   hp?: boolean
   sp?: boolean
@@ -541,11 +673,9 @@ export type MonsterTemplateSelectScalar = {
   lootTableId?: boolean
   isArchived?: boolean
   deletedAt?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }
 
-export type MonsterTemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "level" | "hp" | "sp" | "statsJSON" | "lootTableId" | "isArchived" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["monsterTemplate"]>
+export type MonsterTemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "level" | "hp" | "sp" | "statsJSON" | "lootTableId" | "isArchived" | "deletedAt", ExtArgs["result"]["monsterTemplate"]>
 
 export type $MonsterTemplatePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MonsterTemplate"
@@ -553,6 +683,13 @@ export type $MonsterTemplatePayload<ExtArgs extends runtime.Types.Extensions.Int
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    description: string | null
+    tags: runtime.JsonValue | null
+    status: $Enums.ContentStatus
+    version: number
+    createdBy: string | null
+    createdAt: Date
+    updatedAt: Date
     level: number
     hp: number
     sp: number
@@ -560,8 +697,6 @@ export type $MonsterTemplatePayload<ExtArgs extends runtime.Types.Extensions.Int
     lootTableId: string | null
     isArchived: boolean
     deletedAt: Date | null
-    createdAt: Date
-    updatedAt: Date
   }, ExtArgs["result"]["monsterTemplate"]>
   composites: {}
 }
@@ -987,6 +1122,13 @@ export interface Prisma__MonsterTemplateClient<T, Null = never, ExtArgs extends 
 export interface MonsterTemplateFieldRefs {
   readonly id: Prisma.FieldRef<"MonsterTemplate", 'String'>
   readonly name: Prisma.FieldRef<"MonsterTemplate", 'String'>
+  readonly description: Prisma.FieldRef<"MonsterTemplate", 'String'>
+  readonly tags: Prisma.FieldRef<"MonsterTemplate", 'Json'>
+  readonly status: Prisma.FieldRef<"MonsterTemplate", 'ContentStatus'>
+  readonly version: Prisma.FieldRef<"MonsterTemplate", 'Int'>
+  readonly createdBy: Prisma.FieldRef<"MonsterTemplate", 'String'>
+  readonly createdAt: Prisma.FieldRef<"MonsterTemplate", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"MonsterTemplate", 'DateTime'>
   readonly level: Prisma.FieldRef<"MonsterTemplate", 'Int'>
   readonly hp: Prisma.FieldRef<"MonsterTemplate", 'Int'>
   readonly sp: Prisma.FieldRef<"MonsterTemplate", 'Int'>
@@ -994,8 +1136,6 @@ export interface MonsterTemplateFieldRefs {
   readonly lootTableId: Prisma.FieldRef<"MonsterTemplate", 'String'>
   readonly isArchived: Prisma.FieldRef<"MonsterTemplate", 'Boolean'>
   readonly deletedAt: Prisma.FieldRef<"MonsterTemplate", 'DateTime'>
-  readonly createdAt: Prisma.FieldRef<"MonsterTemplate", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"MonsterTemplate", 'DateTime'>
 }
     
 

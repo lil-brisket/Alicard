@@ -1,10 +1,12 @@
 "use client";
 
-import { use } from "react";
+import { use, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { api } from "~/trpc/react";
 import { toast } from "react-hot-toast";
+import { ItemPreviewPanel } from "./_components/preview-panel";
+import { PermissionIndicator } from "./_components/permission-indicator";
 
 export default function ItemDetailPage({
   params,
@@ -14,12 +16,25 @@ export default function ItemDetailPage({
   const { id } = use(params);
   const router = useRouter();
   const { data: item, isLoading } = api.content.items.get.useQuery({ id });
+  const { data: references } = api.content.items.getReferences.useQuery({ id });
   const utils = api.useUtils();
 
+  const [affectsExisting, setAffectsExisting] = useState(false);
+  
   const updateItem = api.content.items.update.useMutation({
     onSuccess: () => {
       toast.success("Item updated");
       void utils.content.items.get.invalidate({ id });
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+  
+  const cloneItem = api.content.items.clone.useMutation({
+    onSuccess: (cloned) => {
+      toast.success("Item cloned");
+      router.push(`/content/items/${cloned.id}`);
     },
     onError: (error) => {
       toast.error(error.message);
@@ -93,8 +108,10 @@ export default function ItemDetailPage({
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+      <PermissionIndicator />
+
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <div className="lg:col-span-2 rounded-lg border border-slate-800 bg-slate-900/50 p-6">
           <h3 className="mb-4 text-lg font-semibold text-cyan-400">
             Item Details
           </h3>
@@ -127,6 +144,26 @@ export default function ItemDetailPage({
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-300">
+                Status
+              </label>
+              <select
+                defaultValue={(item as any).status ?? "DRAFT"}
+                onChange={(e) =>
+                  updateItem.mutate({
+                    id,
+                    status: e.target.value as "DRAFT" | "ACTIVE" | "DISABLED",
+                    affectsExisting,
+                  })
+                }
+                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
+              >
+                <option value="DRAFT">DRAFT</option>
+                <option value="ACTIVE">ACTIVE</option>
+                <option value="DISABLED">DISABLED</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-300">
                 Rarity
               </label>
               <select
@@ -135,6 +172,7 @@ export default function ItemDetailPage({
                   updateItem.mutate({
                     id,
                     rarity: e.target.value as typeof item.rarity,
+                    affectsExisting,
                   })
                 }
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
@@ -145,6 +183,22 @@ export default function ItemDetailPage({
                 <option value="EPIC">EPIC</option>
                 <option value="LEGENDARY">LEGENDARY</option>
               </select>
+            </div>
+            <div>
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={affectsExisting}
+                  onChange={(e) => setAffectsExisting(e.target.checked)}
+                  className="rounded border-slate-700"
+                />
+                <span className="text-sm text-slate-300">
+                  Affects existing items (versioning)
+                </span>
+              </label>
+              <p className="mt-1 text-xs text-slate-400">
+                If unchecked, only newly generated items will use new stats
+              </p>
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-300">
@@ -166,9 +220,23 @@ export default function ItemDetailPage({
         </div>
 
         <div className="space-y-6">
+          <ItemPreviewPanel item={item} />
+          
           <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
             <h3 className="mb-4 text-lg font-semibold text-cyan-400">Actions</h3>
             <div className="space-y-3">
+              <button
+                onClick={() => {
+                  const name = prompt("Enter name for cloned item:", `${item.name} (Copy)`);
+                  if (name) {
+                    cloneItem.mutate({ id, name });
+                  }
+                }}
+                disabled={cloneItem.isPending}
+                className="w-full rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 disabled:opacity-50"
+              >
+                Clone Item
+              </button>
               {item.isArchived ? (
                 <button
                   onClick={() => unarchiveItem.mutate({ id })}
@@ -223,14 +291,176 @@ export default function ItemDetailPage({
                 <span className="text-slate-400">Status:</span>{" "}
                 <span
                   className={
-                    item.isArchived ? "text-red-400" : "text-green-400"
+                    (item as any).status === "DISABLED" || item.isArchived
+                      ? "text-red-400"
+                      : (item as any).status === "ACTIVE"
+                        ? "text-green-400"
+                        : "text-yellow-400"
                   }
                 >
-                  {item.isArchived ? "Archived" : "Active"}
+                  {(item as any).status ?? (item.isArchived ? "Archived" : "Active")}
                 </span>
               </div>
+              <div>
+                <span className="text-slate-400">Version:</span>{" "}
+                <span className="text-slate-300">
+                  {(item as any).version ?? 1}
+                </span>
+              </div>
+              {(item as any).tags && (
+                <div>
+                  <span className="text-slate-400">Tags:</span>{" "}
+                  <div className="mt-1 flex flex-wrap gap-1">
+                    {((item as any).tags as string[] | null)?.map((tag) => (
+                      <span
+                        key={tag}
+                        className="inline-flex rounded-full bg-cyan-500/20 px-2 py-0.5 text-xs text-cyan-400"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
+
+          {references && (
+            <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+              <h3 className="mb-4 text-lg font-semibold text-cyan-400">
+                Cross-References
+              </h3>
+              
+              {references.warnings.length > 0 && (
+                <div className="mb-4 space-y-2">
+                  {references.warnings.map((warning, idx) => (
+                    <div
+                      key={idx}
+                      className="rounded-lg bg-yellow-500/20 border border-yellow-500/50 px-3 py-2 text-sm text-yellow-400"
+                    >
+                      ⚠️ {warning.message}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <div className="space-y-4 text-sm">
+                {references.recipesAsInput.length > 0 && (
+                  <div>
+                    <h4 className="mb-2 font-medium text-slate-300">
+                      Used in Recipes ({references.recipesAsInput.length})
+                    </h4>
+                    <div className="space-y-1">
+                      {references.recipesAsInput.map((recipe) => (
+                        <div
+                          key={recipe.id}
+                          className="flex items-center justify-between rounded bg-slate-800/50 px-2 py-1"
+                        >
+                          <span className="text-slate-300">{recipe.name}</span>
+                          <span
+                            className={`text-xs ${
+                              recipe.status === "ACTIVE"
+                                ? "text-green-400"
+                                : recipe.status === "DISABLED"
+                                  ? "text-red-400"
+                                  : "text-yellow-400"
+                            }`}
+                          >
+                            {recipe.status}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {references.recipesAsOutput.length > 0 && (
+                  <div>
+                    <h4 className="mb-2 font-medium text-slate-300">
+                      Crafted by Recipes ({references.recipesAsOutput.length})
+                    </h4>
+                    <div className="space-y-1">
+                      {references.recipesAsOutput.map((recipe) => (
+                        <div
+                          key={recipe.id}
+                          className="flex items-center justify-between rounded bg-slate-800/50 px-2 py-1"
+                        >
+                          <span className="text-slate-300">{recipe.name}</span>
+                          <span
+                            className={`text-xs ${
+                              recipe.status === "ACTIVE"
+                                ? "text-green-400"
+                                : recipe.status === "DISABLED"
+                                  ? "text-red-400"
+                                  : "text-yellow-400"
+                            }`}
+                          >
+                            {recipe.status}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {references.nodes.length > 0 && (
+                  <div>
+                    <h4 className="mb-2 font-medium text-slate-300">
+                      Gathered from Nodes ({references.nodes.length})
+                    </h4>
+                    <div className="space-y-1">
+                      {references.nodes.map((node) => (
+                        <div
+                          key={node.id}
+                          className="flex items-center justify-between rounded bg-slate-800/50 px-2 py-1"
+                        >
+                          <span className="text-slate-300">{node.name}</span>
+                          <span
+                            className={`text-xs ${
+                              node.status === "ACTIVE"
+                                ? "text-green-400"
+                                : node.status === "DISABLED"
+                                  ? "text-red-400"
+                                  : "text-yellow-400"
+                            }`}
+                          >
+                            {node.status}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {references.shopItems.length > 0 && (
+                  <div>
+                    <h4 className="mb-2 font-medium text-slate-300">
+                      Sold by NPCs ({references.shopItems.length})
+                    </h4>
+                    <div className="space-y-1">
+                      {references.shopItems.map((shopItem) => (
+                        <div
+                          key={shopItem.id}
+                          className="rounded bg-slate-800/50 px-2 py-1 text-slate-300"
+                        >
+                          {shopItem.npc.name}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {references.recipesAsInput.length === 0 &&
+                  references.recipesAsOutput.length === 0 &&
+                  references.nodes.length === 0 &&
+                  references.shopItems.length === 0 && (
+                    <p className="text-slate-400">
+                      No cross-references found for this item.
+                    </p>
+                  )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

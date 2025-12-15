@@ -396,16 +396,21 @@ model Occupation {
 }
 
 model Skill {
-  id            String   @id @default(cuid())
-  key           String   @unique
+  id            String        @id @default(cuid())
+  key           String        @unique
+  // Global taxonomy fields
   name          String
   description   String?
-  staminaCost   Int      @default(0)
-  cooldownSeconds Int    @default(0)
-  tags          String?  // JSON array placeholder
-  jobUnlock     String?  // Job key that unlocks this skill
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  tags          Json?         // Array of strings: ["combat", "fire", "starter"]
+  status        ContentStatus @default(DRAFT)
+  version       Int           @default(1)
+  createdBy     String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  // Skill-specific fields
+  staminaCost   Int           @default(0)
+  cooldownSeconds Int         @default(0)
+  jobUnlock     String?       // Job key that unlocks this skill
   playerSkills  PlayerSkill[]
   slot1Loadouts PlayerSkillLoadout[] @relation("Slot1")
   slot2Loadouts PlayerSkillLoadout[] @relation("Slot2")
@@ -417,6 +422,8 @@ model Skill {
   slot8Loadouts PlayerSkillLoadout[] @relation("Slot8")
 
   @@index([key])
+  @@index([status])
+  @@index([createdBy])
 }
 
 model PlayerSkill {
@@ -817,14 +824,20 @@ model UserJob {
 
 model Recipe {
   id            String        @id @default(cuid())
-  jobId         String
+  // Global taxonomy fields
   name          String
   description   String?
+  tags          Json?         // Array of strings: ["weapon", "tier1", "starter"]
+  status        ContentStatus @default(DRAFT)
+  version       Int           @default(1)
+  createdBy     String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  // Recipe-specific fields
+  jobId         String
   difficulty    Int           @default(1)
   outputItemId  String
   outputQty     Int           @default(1)
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
   job           Job           @relation(fields: [jobId], references: [id], onDelete: Cascade)
   outputItem    Item          @relation("RecipeOutput", fields: [outputItemId], references: [id])
   inputs        RecipeInput[]
@@ -832,6 +845,8 @@ model Recipe {
 
   @@index([jobId])
   @@index([outputItemId])
+  @@index([status])
+  @@index([createdBy])
 }
 
 model RecipeInput {
@@ -867,18 +882,26 @@ model CraftAttempt {
 model GatheringNode {
   id          String        @id @default(cuid())
   key         String        @unique
+  // Global taxonomy fields
   name        String
-  jobId       String
-  dangerTier  Int           @default(1)
   description String?
+  tags        Json?         // Array of strings: ["ore", "tier1", "safe"]
+  status      ContentStatus @default(DRAFT)
+  version     Int           @default(1)
+  createdBy   String?
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
+  // Node-specific fields
+  jobId       String
+  dangerTier  Int           @default(1)
   job         Job           @relation(fields: [jobId], references: [id], onDelete: Cascade)
   yields      NodeYield[]
   gatherAttempts GatherAttempt[]
 
   @@index([jobId])
   @@index([key])
+  @@index([status])
+  @@index([createdBy])
 }
 
 model NodeYield {
@@ -1010,6 +1033,12 @@ enum AchievementRarity {
   LEGENDARY
 }
 
+enum ContentStatus {
+  DRAFT
+  ACTIVE
+  DISABLED
+}
+
 enum BattleStatus {
   ACTIVE
   WON
@@ -1108,69 +1137,109 @@ model AdminActionLog {
 }
 
 // Content Templates (Game CMS)
+// Global Content Taxonomy: All templates share common metadata
 model ItemTemplate {
-  id          String      @id @default(cuid())
+  id          String        @id @default(cuid())
+  // Global taxonomy fields
   name        String
   description String?
-  rarity      ItemRarity  @default(COMMON)
-  stackable   Boolean     @default(false)
-  maxStack    Int         @default(1)
-  value       Int         @default(0)
+  tags        Json?         // Array of strings: ["fire", "starter", "rare"]
+  status      ContentStatus @default(DRAFT)
+  version     Int           @default(1)
+  createdBy   String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  // Item-specific fields
+  rarity      ItemRarity    @default(COMMON)
+  stackable   Boolean       @default(false)
+  maxStack    Int           @default(1)
+  value       Int           @default(0)
   icon        String?
-  isArchived  Boolean     @default(false)
+  // Legacy fields (kept for backward compatibility)
+  isArchived  Boolean       @default(false)
   deletedAt   DateTime?
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
 
+  @@index([status])
   @@index([isArchived])
   @@index([rarity])
+  @@index([createdBy])
 }
 
 model MonsterTemplate {
-  id          String   @id @default(cuid())
+  id          String        @id @default(cuid())
+  // Global taxonomy fields
   name        String
-  level       Int      @default(1)
+  description String?
+  tags        Json?         // Array of strings: ["boss", "fire", "rare"]
+  status      ContentStatus @default(DRAFT)
+  version     Int           @default(1)
+  createdBy   String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  // Monster-specific fields
+  level       Int           @default(1)
   hp          Int
-  sp          Int      @default(0)
-  statsJSON   Json     // { vitality, strength, speed, dexterity }
+  sp          Int           @default(0)
+  statsJSON   Json          // { vitality, strength, speed, dexterity }
   lootTableId String?
-  isArchived  Boolean  @default(false)
+  // Legacy fields
+  isArchived  Boolean       @default(false)
   deletedAt   DateTime?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
 
+  @@index([status])
   @@index([isArchived])
   @@index([level])
+  @@index([createdBy])
 }
 
 model QuestTemplate {
-  id          String   @id @default(cuid())
-  title       String
+  id          String        @id @default(cuid())
+  // Global taxonomy fields
+  name        String        // Alias for title, kept for consistency
+  title       String        // Primary display name
   description String?
-  stepsJSON   Json     // Array of quest steps
-  rewardsJSON Json?    // Rewards structure
-  isArchived  Boolean  @default(false)
+  tags        Json?         // Array of strings: ["fetch", "kill", "starter"]
+  status      ContentStatus @default(DRAFT)
+  version     Int           @default(1)
+  createdBy   String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  // Quest-specific fields
+  stepsJSON   Json          // Array of quest steps
+  rewardsJSON Json?          // Rewards structure: { type: "gold", amount: 100, items: [...] }
+  // Legacy fields
+  isArchived  Boolean       @default(false)
   deletedAt   DateTime?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
 
+  @@index([status])
   @@index([isArchived])
+  @@index([createdBy])
 }
 
 model MapZone {
-  id          String   @id @default(cuid())
+  id          String        @id @default(cuid())
+  // Global taxonomy fields
   name        String
+  description String?
+  tags        Json?         // Array of strings: ["starter", "dungeon", "safe"]
+  status      ContentStatus @default(DRAFT)
+  version     Int           @default(1)
+  createdBy   String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  // Map-specific fields
   width       Int
   height      Int
-  tilesJSON   Json     // Tile data structure
-  poisJSON    Json?    // Points of interest
-  spawnJSON   Json?    // Spawn data
-  isArchived  Boolean  @default(false)
+  tilesJSON   Json          // Tile data structure
+  poisJSON    Json?         // Points of interest
+  spawnJSON   Json?         // Spawn data
+  // Legacy fields
+  isArchived  Boolean       @default(false)
   deletedAt   DateTime?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
 
+  @@index([status])
   @@index([isArchived])
+  @@index([createdBy])
 }
 
 // Multi-role support: Many-to-many relationship between User and UserRole

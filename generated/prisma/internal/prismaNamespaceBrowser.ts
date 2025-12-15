@@ -432,12 +432,15 @@ export const SkillScalarFieldEnum = {
   key: 'key',
   name: 'name',
   description: 'description',
+  tags: 'tags',
+  status: 'status',
+  version: 'version',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   staminaCost: 'staminaCost',
   cooldownSeconds: 'cooldownSeconds',
-  tags: 'tags',
-  jobUnlock: 'jobUnlock',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  jobUnlock: 'jobUnlock'
 } as const
 
 export type SkillScalarFieldEnum = (typeof SkillScalarFieldEnum)[keyof typeof SkillScalarFieldEnum]
@@ -684,14 +687,18 @@ export type UserJobScalarFieldEnum = (typeof UserJobScalarFieldEnum)[keyof typeo
 
 export const RecipeScalarFieldEnum = {
   id: 'id',
-  jobId: 'jobId',
   name: 'name',
   description: 'description',
+  tags: 'tags',
+  status: 'status',
+  version: 'version',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  jobId: 'jobId',
   difficulty: 'difficulty',
   outputItemId: 'outputItemId',
-  outputQty: 'outputQty',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  outputQty: 'outputQty'
 } as const
 
 export type RecipeScalarFieldEnum = (typeof RecipeScalarFieldEnum)[keyof typeof RecipeScalarFieldEnum]
@@ -724,11 +731,15 @@ export const GatheringNodeScalarFieldEnum = {
   id: 'id',
   key: 'key',
   name: 'name',
-  jobId: 'jobId',
-  dangerTier: 'dangerTier',
   description: 'description',
+  tags: 'tags',
+  status: 'status',
+  version: 'version',
+  createdBy: 'createdBy',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  jobId: 'jobId',
+  dangerTier: 'dangerTier'
 } as const
 
 export type GatheringNodeScalarFieldEnum = (typeof GatheringNodeScalarFieldEnum)[keyof typeof GatheringNodeScalarFieldEnum]
@@ -931,15 +942,19 @@ export const ItemTemplateScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
+  tags: 'tags',
+  status: 'status',
+  version: 'version',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   rarity: 'rarity',
   stackable: 'stackable',
   maxStack: 'maxStack',
   value: 'value',
   icon: 'icon',
   isArchived: 'isArchived',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  deletedAt: 'deletedAt'
 } as const
 
 export type ItemTemplateScalarFieldEnum = (typeof ItemTemplateScalarFieldEnum)[keyof typeof ItemTemplateScalarFieldEnum]
@@ -948,15 +963,20 @@ export type ItemTemplateScalarFieldEnum = (typeof ItemTemplateScalarFieldEnum)[k
 export const MonsterTemplateScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  description: 'description',
+  tags: 'tags',
+  status: 'status',
+  version: 'version',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   level: 'level',
   hp: 'hp',
   sp: 'sp',
   statsJSON: 'statsJSON',
   lootTableId: 'lootTableId',
   isArchived: 'isArchived',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  deletedAt: 'deletedAt'
 } as const
 
 export type MonsterTemplateScalarFieldEnum = (typeof MonsterTemplateScalarFieldEnum)[keyof typeof MonsterTemplateScalarFieldEnum]
@@ -964,14 +984,19 @@ export type MonsterTemplateScalarFieldEnum = (typeof MonsterTemplateScalarFieldE
 
 export const QuestTemplateScalarFieldEnum = {
   id: 'id',
+  name: 'name',
   title: 'title',
   description: 'description',
+  tags: 'tags',
+  status: 'status',
+  version: 'version',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   stepsJSON: 'stepsJSON',
   rewardsJSON: 'rewardsJSON',
   isArchived: 'isArchived',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  deletedAt: 'deletedAt'
 } as const
 
 export type QuestTemplateScalarFieldEnum = (typeof QuestTemplateScalarFieldEnum)[keyof typeof QuestTemplateScalarFieldEnum]
@@ -980,15 +1005,20 @@ export type QuestTemplateScalarFieldEnum = (typeof QuestTemplateScalarFieldEnum)
 export const MapZoneScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  description: 'description',
+  tags: 'tags',
+  status: 'status',
+  version: 'version',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   width: 'width',
   height: 'height',
   tilesJSON: 'tilesJSON',
   poisJSON: 'poisJSON',
   spawnJSON: 'spawnJSON',
   isArchived: 'isArchived',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  deletedAt: 'deletedAt'
 } as const
 
 export type MapZoneScalarFieldEnum = (typeof MapZoneScalarFieldEnum)[keyof typeof MapZoneScalarFieldEnum]

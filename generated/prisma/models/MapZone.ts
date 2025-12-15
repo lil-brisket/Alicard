@@ -27,11 +27,13 @@ export type AggregateMapZone = {
 }
 
 export type MapZoneAvgAggregateOutputType = {
+  version: number | null
   width: number | null
   height: number | null
 }
 
 export type MapZoneSumAggregateOutputType = {
+  version: number | null
   width: number | null
   height: number | null
 }
@@ -39,28 +41,43 @@ export type MapZoneSumAggregateOutputType = {
 export type MapZoneMinAggregateOutputType = {
   id: string | null
   name: string | null
+  description: string | null
+  status: $Enums.ContentStatus | null
+  version: number | null
+  createdBy: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
   width: number | null
   height: number | null
   isArchived: boolean | null
   deletedAt: Date | null
-  createdAt: Date | null
-  updatedAt: Date | null
 }
 
 export type MapZoneMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  description: string | null
+  status: $Enums.ContentStatus | null
+  version: number | null
+  createdBy: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
   width: number | null
   height: number | null
   isArchived: boolean | null
   deletedAt: Date | null
-  createdAt: Date | null
-  updatedAt: Date | null
 }
 
 export type MapZoneCountAggregateOutputType = {
   id: number
   name: number
+  description: number
+  tags: number
+  status: number
+  version: number
+  createdBy: number
+  createdAt: number
+  updatedAt: number
   width: number
   height: number
   tilesJSON: number
@@ -68,18 +85,18 @@ export type MapZoneCountAggregateOutputType = {
   spawnJSON: number
   isArchived: number
   deletedAt: number
-  createdAt: number
-  updatedAt: number
   _all: number
 }
 
 
 export type MapZoneAvgAggregateInputType = {
+  version?: true
   width?: true
   height?: true
 }
 
 export type MapZoneSumAggregateInputType = {
+  version?: true
   width?: true
   height?: true
 }
@@ -87,28 +104,43 @@ export type MapZoneSumAggregateInputType = {
 export type MapZoneMinAggregateInputType = {
   id?: true
   name?: true
+  description?: true
+  status?: true
+  version?: true
+  createdBy?: true
+  createdAt?: true
+  updatedAt?: true
   width?: true
   height?: true
   isArchived?: true
   deletedAt?: true
-  createdAt?: true
-  updatedAt?: true
 }
 
 export type MapZoneMaxAggregateInputType = {
   id?: true
   name?: true
+  description?: true
+  status?: true
+  version?: true
+  createdBy?: true
+  createdAt?: true
+  updatedAt?: true
   width?: true
   height?: true
   isArchived?: true
   deletedAt?: true
-  createdAt?: true
-  updatedAt?: true
 }
 
 export type MapZoneCountAggregateInputType = {
   id?: true
   name?: true
+  description?: true
+  tags?: true
+  status?: true
+  version?: true
+  createdBy?: true
+  createdAt?: true
+  updatedAt?: true
   width?: true
   height?: true
   tilesJSON?: true
@@ -116,8 +148,6 @@ export type MapZoneCountAggregateInputType = {
   spawnJSON?: true
   isArchived?: true
   deletedAt?: true
-  createdAt?: true
-  updatedAt?: true
   _all?: true
 }
 
@@ -210,6 +240,13 @@ export type MapZoneGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 export type MapZoneGroupByOutputType = {
   id: string
   name: string
+  description: string | null
+  tags: runtime.JsonValue | null
+  status: $Enums.ContentStatus
+  version: number
+  createdBy: string | null
+  createdAt: Date
+  updatedAt: Date
   width: number
   height: number
   tilesJSON: runtime.JsonValue
@@ -217,8 +254,6 @@ export type MapZoneGroupByOutputType = {
   spawnJSON: runtime.JsonValue | null
   isArchived: boolean
   deletedAt: Date | null
-  createdAt: Date
-  updatedAt: Date
   _count: MapZoneCountAggregateOutputType | null
   _avg: MapZoneAvgAggregateOutputType | null
   _sum: MapZoneSumAggregateOutputType | null
@@ -247,6 +282,13 @@ export type MapZoneWhereInput = {
   NOT?: Prisma.MapZoneWhereInput | Prisma.MapZoneWhereInput[]
   id?: Prisma.StringFilter<"MapZone"> | string
   name?: Prisma.StringFilter<"MapZone"> | string
+  description?: Prisma.StringNullableFilter<"MapZone"> | string | null
+  tags?: Prisma.JsonNullableFilter<"MapZone">
+  status?: Prisma.EnumContentStatusFilter<"MapZone"> | $Enums.ContentStatus
+  version?: Prisma.IntFilter<"MapZone"> | number
+  createdBy?: Prisma.StringNullableFilter<"MapZone"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"MapZone"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"MapZone"> | Date | string
   width?: Prisma.IntFilter<"MapZone"> | number
   height?: Prisma.IntFilter<"MapZone"> | number
   tilesJSON?: Prisma.JsonFilter<"MapZone">
@@ -254,13 +296,18 @@ export type MapZoneWhereInput = {
   spawnJSON?: Prisma.JsonNullableFilter<"MapZone">
   isArchived?: Prisma.BoolFilter<"MapZone"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"MapZone"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"MapZone"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"MapZone"> | Date | string
 }
 
 export type MapZoneOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
   tilesJSON?: Prisma.SortOrder
@@ -268,8 +315,6 @@ export type MapZoneOrderByWithRelationInput = {
   spawnJSON?: Prisma.SortOrderInput | Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type MapZoneWhereUniqueInput = Prisma.AtLeast<{
@@ -278,6 +323,13 @@ export type MapZoneWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.MapZoneWhereInput[]
   NOT?: Prisma.MapZoneWhereInput | Prisma.MapZoneWhereInput[]
   name?: Prisma.StringFilter<"MapZone"> | string
+  description?: Prisma.StringNullableFilter<"MapZone"> | string | null
+  tags?: Prisma.JsonNullableFilter<"MapZone">
+  status?: Prisma.EnumContentStatusFilter<"MapZone"> | $Enums.ContentStatus
+  version?: Prisma.IntFilter<"MapZone"> | number
+  createdBy?: Prisma.StringNullableFilter<"MapZone"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"MapZone"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"MapZone"> | Date | string
   width?: Prisma.IntFilter<"MapZone"> | number
   height?: Prisma.IntFilter<"MapZone"> | number
   tilesJSON?: Prisma.JsonFilter<"MapZone">
@@ -285,13 +337,18 @@ export type MapZoneWhereUniqueInput = Prisma.AtLeast<{
   spawnJSON?: Prisma.JsonNullableFilter<"MapZone">
   isArchived?: Prisma.BoolFilter<"MapZone"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"MapZone"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"MapZone"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"MapZone"> | Date | string
 }, "id">
 
 export type MapZoneOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
   tilesJSON?: Prisma.SortOrder
@@ -299,8 +356,6 @@ export type MapZoneOrderByWithAggregationInput = {
   spawnJSON?: Prisma.SortOrderInput | Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   _count?: Prisma.MapZoneCountOrderByAggregateInput
   _avg?: Prisma.MapZoneAvgOrderByAggregateInput
   _max?: Prisma.MapZoneMaxOrderByAggregateInput
@@ -314,6 +369,13 @@ export type MapZoneScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MapZoneScalarWhereWithAggregatesInput | Prisma.MapZoneScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"MapZone"> | string
   name?: Prisma.StringWithAggregatesFilter<"MapZone"> | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"MapZone"> | string | null
+  tags?: Prisma.JsonNullableWithAggregatesFilter<"MapZone">
+  status?: Prisma.EnumContentStatusWithAggregatesFilter<"MapZone"> | $Enums.ContentStatus
+  version?: Prisma.IntWithAggregatesFilter<"MapZone"> | number
+  createdBy?: Prisma.StringNullableWithAggregatesFilter<"MapZone"> | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"MapZone"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"MapZone"> | Date | string
   width?: Prisma.IntWithAggregatesFilter<"MapZone"> | number
   height?: Prisma.IntWithAggregatesFilter<"MapZone"> | number
   tilesJSON?: Prisma.JsonWithAggregatesFilter<"MapZone">
@@ -321,13 +383,18 @@ export type MapZoneScalarWhereWithAggregatesInput = {
   spawnJSON?: Prisma.JsonNullableWithAggregatesFilter<"MapZone">
   isArchived?: Prisma.BoolWithAggregatesFilter<"MapZone"> | boolean
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"MapZone"> | Date | string | null
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"MapZone"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"MapZone"> | Date | string
 }
 
 export type MapZoneCreateInput = {
   id?: string
   name: string
+  description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   width: number
   height: number
   tilesJSON: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -335,13 +402,18 @@ export type MapZoneCreateInput = {
   spawnJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isArchived?: boolean
   deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type MapZoneUncheckedCreateInput = {
   id?: string
   name: string
+  description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   width: number
   height: number
   tilesJSON: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -349,13 +421,18 @@ export type MapZoneUncheckedCreateInput = {
   spawnJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isArchived?: boolean
   deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type MapZoneUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
   height?: Prisma.IntFieldUpdateOperationsInput | number
   tilesJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -363,13 +440,18 @@ export type MapZoneUpdateInput = {
   spawnJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MapZoneUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
   height?: Prisma.IntFieldUpdateOperationsInput | number
   tilesJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -377,13 +459,18 @@ export type MapZoneUncheckedUpdateInput = {
   spawnJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MapZoneCreateManyInput = {
   id?: string
   name: string
+  description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   width: number
   height: number
   tilesJSON: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -391,13 +478,18 @@ export type MapZoneCreateManyInput = {
   spawnJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isArchived?: boolean
   deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type MapZoneUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
   height?: Prisma.IntFieldUpdateOperationsInput | number
   tilesJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -405,13 +497,18 @@ export type MapZoneUpdateManyMutationInput = {
   spawnJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MapZoneUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   width?: Prisma.IntFieldUpdateOperationsInput | number
   height?: Prisma.IntFieldUpdateOperationsInput | number
   tilesJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -419,13 +516,18 @@ export type MapZoneUncheckedUpdateManyInput = {
   spawnJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MapZoneCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
   tilesJSON?: Prisma.SortOrder
@@ -433,11 +535,10 @@ export type MapZoneCountOrderByAggregateInput = {
   spawnJSON?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type MapZoneAvgOrderByAggregateInput = {
+  version?: Prisma.SortOrder
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
 }
@@ -445,26 +546,35 @@ export type MapZoneAvgOrderByAggregateInput = {
 export type MapZoneMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type MapZoneMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type MapZoneSumOrderByAggregateInput = {
+  version?: Prisma.SortOrder
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
 }
@@ -474,6 +584,13 @@ export type MapZoneSumOrderByAggregateInput = {
 export type MapZoneSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   width?: boolean
   height?: boolean
   tilesJSON?: boolean
@@ -481,13 +598,18 @@ export type MapZoneSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   spawnJSON?: boolean
   isArchived?: boolean
   deletedAt?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["mapZone"]>
 
 export type MapZoneSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   width?: boolean
   height?: boolean
   tilesJSON?: boolean
@@ -495,13 +617,18 @@ export type MapZoneSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   spawnJSON?: boolean
   isArchived?: boolean
   deletedAt?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["mapZone"]>
 
 export type MapZoneSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   width?: boolean
   height?: boolean
   tilesJSON?: boolean
@@ -509,13 +636,18 @@ export type MapZoneSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   spawnJSON?: boolean
   isArchived?: boolean
   deletedAt?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["mapZone"]>
 
 export type MapZoneSelectScalar = {
   id?: boolean
   name?: boolean
+  description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   width?: boolean
   height?: boolean
   tilesJSON?: boolean
@@ -523,11 +655,9 @@ export type MapZoneSelectScalar = {
   spawnJSON?: boolean
   isArchived?: boolean
   deletedAt?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }
 
-export type MapZoneOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "width" | "height" | "tilesJSON" | "poisJSON" | "spawnJSON" | "isArchived" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["mapZone"]>
+export type MapZoneOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "width" | "height" | "tilesJSON" | "poisJSON" | "spawnJSON" | "isArchived" | "deletedAt", ExtArgs["result"]["mapZone"]>
 
 export type $MapZonePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MapZone"
@@ -535,6 +665,13 @@ export type $MapZonePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    description: string | null
+    tags: runtime.JsonValue | null
+    status: $Enums.ContentStatus
+    version: number
+    createdBy: string | null
+    createdAt: Date
+    updatedAt: Date
     width: number
     height: number
     tilesJSON: runtime.JsonValue
@@ -542,8 +679,6 @@ export type $MapZonePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     spawnJSON: runtime.JsonValue | null
     isArchived: boolean
     deletedAt: Date | null
-    createdAt: Date
-    updatedAt: Date
   }, ExtArgs["result"]["mapZone"]>
   composites: {}
 }
@@ -969,6 +1104,13 @@ export interface Prisma__MapZoneClient<T, Null = never, ExtArgs extends runtime.
 export interface MapZoneFieldRefs {
   readonly id: Prisma.FieldRef<"MapZone", 'String'>
   readonly name: Prisma.FieldRef<"MapZone", 'String'>
+  readonly description: Prisma.FieldRef<"MapZone", 'String'>
+  readonly tags: Prisma.FieldRef<"MapZone", 'Json'>
+  readonly status: Prisma.FieldRef<"MapZone", 'ContentStatus'>
+  readonly version: Prisma.FieldRef<"MapZone", 'Int'>
+  readonly createdBy: Prisma.FieldRef<"MapZone", 'String'>
+  readonly createdAt: Prisma.FieldRef<"MapZone", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"MapZone", 'DateTime'>
   readonly width: Prisma.FieldRef<"MapZone", 'Int'>
   readonly height: Prisma.FieldRef<"MapZone", 'Int'>
   readonly tilesJSON: Prisma.FieldRef<"MapZone", 'Json'>
@@ -976,8 +1118,6 @@ export interface MapZoneFieldRefs {
   readonly spawnJSON: Prisma.FieldRef<"MapZone", 'Json'>
   readonly isArchived: Prisma.FieldRef<"MapZone", 'Boolean'>
   readonly deletedAt: Prisma.FieldRef<"MapZone", 'DateTime'>
-  readonly createdAt: Prisma.FieldRef<"MapZone", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"MapZone", 'DateTime'>
 }
     
 

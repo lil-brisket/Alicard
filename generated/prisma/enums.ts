@@ -184,6 +184,15 @@ export const AchievementRarity = {
 export type AchievementRarity = (typeof AchievementRarity)[keyof typeof AchievementRarity]
 
 
+export const ContentStatus = {
+  DRAFT: 'DRAFT',
+  ACTIVE: 'ACTIVE',
+  DISABLED: 'DISABLED'
+} as const
+
+export type ContentStatus = (typeof ContentStatus)[keyof typeof ContentStatus]
+
+
 export const BattleStatus = {
   ACTIVE: 'ACTIVE',
   WON: 'WON',

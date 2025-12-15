@@ -20,74 +20,118 @@ export type QuestTemplateModel = runtime.Types.Result.DefaultSelection<Prisma.$Q
 
 export type AggregateQuestTemplate = {
   _count: QuestTemplateCountAggregateOutputType | null
+  _avg: QuestTemplateAvgAggregateOutputType | null
+  _sum: QuestTemplateSumAggregateOutputType | null
   _min: QuestTemplateMinAggregateOutputType | null
   _max: QuestTemplateMaxAggregateOutputType | null
 }
 
+export type QuestTemplateAvgAggregateOutputType = {
+  version: number | null
+}
+
+export type QuestTemplateSumAggregateOutputType = {
+  version: number | null
+}
+
 export type QuestTemplateMinAggregateOutputType = {
   id: string | null
+  name: string | null
   title: string | null
   description: string | null
-  isArchived: boolean | null
-  deletedAt: Date | null
+  status: $Enums.ContentStatus | null
+  version: number | null
+  createdBy: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  isArchived: boolean | null
+  deletedAt: Date | null
 }
 
 export type QuestTemplateMaxAggregateOutputType = {
   id: string | null
+  name: string | null
   title: string | null
   description: string | null
-  isArchived: boolean | null
-  deletedAt: Date | null
+  status: $Enums.ContentStatus | null
+  version: number | null
+  createdBy: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  isArchived: boolean | null
+  deletedAt: Date | null
 }
 
 export type QuestTemplateCountAggregateOutputType = {
   id: number
+  name: number
   title: number
   description: number
+  tags: number
+  status: number
+  version: number
+  createdBy: number
+  createdAt: number
+  updatedAt: number
   stepsJSON: number
   rewardsJSON: number
   isArchived: number
   deletedAt: number
-  createdAt: number
-  updatedAt: number
   _all: number
 }
 
 
+export type QuestTemplateAvgAggregateInputType = {
+  version?: true
+}
+
+export type QuestTemplateSumAggregateInputType = {
+  version?: true
+}
+
 export type QuestTemplateMinAggregateInputType = {
   id?: true
+  name?: true
   title?: true
   description?: true
-  isArchived?: true
-  deletedAt?: true
+  status?: true
+  version?: true
+  createdBy?: true
   createdAt?: true
   updatedAt?: true
+  isArchived?: true
+  deletedAt?: true
 }
 
 export type QuestTemplateMaxAggregateInputType = {
   id?: true
+  name?: true
   title?: true
   description?: true
-  isArchived?: true
-  deletedAt?: true
+  status?: true
+  version?: true
+  createdBy?: true
   createdAt?: true
   updatedAt?: true
+  isArchived?: true
+  deletedAt?: true
 }
 
 export type QuestTemplateCountAggregateInputType = {
   id?: true
+  name?: true
   title?: true
   description?: true
+  tags?: true
+  status?: true
+  version?: true
+  createdBy?: true
+  createdAt?: true
+  updatedAt?: true
   stepsJSON?: true
   rewardsJSON?: true
   isArchived?: true
   deletedAt?: true
-  createdAt?: true
-  updatedAt?: true
   _all?: true
 }
 
@@ -129,6 +173,18 @@ export type QuestTemplateAggregateArgs<ExtArgs extends runtime.Types.Extensions.
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: QuestTemplateAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: QuestTemplateSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: QuestTemplateMinAggregateInputType
@@ -159,21 +215,30 @@ export type QuestTemplateGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   _count?: QuestTemplateCountAggregateInputType | true
+  _avg?: QuestTemplateAvgAggregateInputType
+  _sum?: QuestTemplateSumAggregateInputType
   _min?: QuestTemplateMinAggregateInputType
   _max?: QuestTemplateMaxAggregateInputType
 }
 
 export type QuestTemplateGroupByOutputType = {
   id: string
+  name: string
   title: string
   description: string | null
+  tags: runtime.JsonValue | null
+  status: $Enums.ContentStatus
+  version: number
+  createdBy: string | null
+  createdAt: Date
+  updatedAt: Date
   stepsJSON: runtime.JsonValue
   rewardsJSON: runtime.JsonValue | null
   isArchived: boolean
   deletedAt: Date | null
-  createdAt: Date
-  updatedAt: Date
   _count: QuestTemplateCountAggregateOutputType | null
+  _avg: QuestTemplateAvgAggregateOutputType | null
+  _sum: QuestTemplateSumAggregateOutputType | null
   _min: QuestTemplateMinAggregateOutputType | null
   _max: QuestTemplateMaxAggregateOutputType | null
 }
@@ -198,26 +263,36 @@ export type QuestTemplateWhereInput = {
   OR?: Prisma.QuestTemplateWhereInput[]
   NOT?: Prisma.QuestTemplateWhereInput | Prisma.QuestTemplateWhereInput[]
   id?: Prisma.StringFilter<"QuestTemplate"> | string
+  name?: Prisma.StringFilter<"QuestTemplate"> | string
   title?: Prisma.StringFilter<"QuestTemplate"> | string
   description?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  tags?: Prisma.JsonNullableFilter<"QuestTemplate">
+  status?: Prisma.EnumContentStatusFilter<"QuestTemplate"> | $Enums.ContentStatus
+  version?: Prisma.IntFilter<"QuestTemplate"> | number
+  createdBy?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"QuestTemplate"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"QuestTemplate"> | Date | string
   stepsJSON?: Prisma.JsonFilter<"QuestTemplate">
   rewardsJSON?: Prisma.JsonNullableFilter<"QuestTemplate">
   isArchived?: Prisma.BoolFilter<"QuestTemplate"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"QuestTemplate"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"QuestTemplate"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"QuestTemplate"> | Date | string
 }
 
 export type QuestTemplateOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   stepsJSON?: Prisma.SortOrder
   rewardsJSON?: Prisma.SortOrderInput | Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type QuestTemplateWhereUniqueInput = Prisma.AtLeast<{
@@ -225,29 +300,41 @@ export type QuestTemplateWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.QuestTemplateWhereInput | Prisma.QuestTemplateWhereInput[]
   OR?: Prisma.QuestTemplateWhereInput[]
   NOT?: Prisma.QuestTemplateWhereInput | Prisma.QuestTemplateWhereInput[]
+  name?: Prisma.StringFilter<"QuestTemplate"> | string
   title?: Prisma.StringFilter<"QuestTemplate"> | string
   description?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  tags?: Prisma.JsonNullableFilter<"QuestTemplate">
+  status?: Prisma.EnumContentStatusFilter<"QuestTemplate"> | $Enums.ContentStatus
+  version?: Prisma.IntFilter<"QuestTemplate"> | number
+  createdBy?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"QuestTemplate"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"QuestTemplate"> | Date | string
   stepsJSON?: Prisma.JsonFilter<"QuestTemplate">
   rewardsJSON?: Prisma.JsonNullableFilter<"QuestTemplate">
   isArchived?: Prisma.BoolFilter<"QuestTemplate"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"QuestTemplate"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"QuestTemplate"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"QuestTemplate"> | Date | string
 }, "id">
 
 export type QuestTemplateOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   stepsJSON?: Prisma.SortOrder
   rewardsJSON?: Prisma.SortOrderInput | Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   _count?: Prisma.QuestTemplateCountOrderByAggregateInput
+  _avg?: Prisma.QuestTemplateAvgOrderByAggregateInput
   _max?: Prisma.QuestTemplateMaxOrderByAggregateInput
   _min?: Prisma.QuestTemplateMinOrderByAggregateInput
+  _sum?: Prisma.QuestTemplateSumOrderByAggregateInput
 }
 
 export type QuestTemplateScalarWhereWithAggregatesInput = {
@@ -255,197 +342,283 @@ export type QuestTemplateScalarWhereWithAggregatesInput = {
   OR?: Prisma.QuestTemplateScalarWhereWithAggregatesInput[]
   NOT?: Prisma.QuestTemplateScalarWhereWithAggregatesInput | Prisma.QuestTemplateScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"QuestTemplate"> | string
+  name?: Prisma.StringWithAggregatesFilter<"QuestTemplate"> | string
   title?: Prisma.StringWithAggregatesFilter<"QuestTemplate"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"QuestTemplate"> | string | null
+  tags?: Prisma.JsonNullableWithAggregatesFilter<"QuestTemplate">
+  status?: Prisma.EnumContentStatusWithAggregatesFilter<"QuestTemplate"> | $Enums.ContentStatus
+  version?: Prisma.IntWithAggregatesFilter<"QuestTemplate"> | number
+  createdBy?: Prisma.StringNullableWithAggregatesFilter<"QuestTemplate"> | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"QuestTemplate"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"QuestTemplate"> | Date | string
   stepsJSON?: Prisma.JsonWithAggregatesFilter<"QuestTemplate">
   rewardsJSON?: Prisma.JsonNullableWithAggregatesFilter<"QuestTemplate">
   isArchived?: Prisma.BoolWithAggregatesFilter<"QuestTemplate"> | boolean
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"QuestTemplate"> | Date | string | null
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"QuestTemplate"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"QuestTemplate"> | Date | string
 }
 
 export type QuestTemplateCreateInput = {
   id?: string
+  name: string
   title: string
   description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   stepsJSON: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rewardsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isArchived?: boolean
   deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type QuestTemplateUncheckedCreateInput = {
   id?: string
+  name: string
   title: string
   description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   stepsJSON: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rewardsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isArchived?: boolean
   deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type QuestTemplateUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stepsJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rewardsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type QuestTemplateUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stepsJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rewardsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type QuestTemplateCreateManyInput = {
   id?: string
+  name: string
   title: string
   description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   stepsJSON: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rewardsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isArchived?: boolean
   deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type QuestTemplateUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stepsJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rewardsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type QuestTemplateUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stepsJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rewardsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type QuestTemplateCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   stepsJSON?: Prisma.SortOrder
   rewardsJSON?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+}
+
+export type QuestTemplateAvgOrderByAggregateInput = {
+  version?: Prisma.SortOrder
 }
 
 export type QuestTemplateMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  isArchived?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  isArchived?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type QuestTemplateMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  isArchived?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  isArchived?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
+}
+
+export type QuestTemplateSumOrderByAggregateInput = {
+  version?: Prisma.SortOrder
 }
 
 
 
 export type QuestTemplateSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  name?: boolean
   title?: boolean
   description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   stepsJSON?: boolean
   rewardsJSON?: boolean
   isArchived?: boolean
   deletedAt?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["questTemplate"]>
 
 export type QuestTemplateSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  name?: boolean
   title?: boolean
   description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   stepsJSON?: boolean
   rewardsJSON?: boolean
   isArchived?: boolean
   deletedAt?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["questTemplate"]>
 
 export type QuestTemplateSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  name?: boolean
   title?: boolean
   description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   stepsJSON?: boolean
   rewardsJSON?: boolean
   isArchived?: boolean
   deletedAt?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["questTemplate"]>
 
 export type QuestTemplateSelectScalar = {
   id?: boolean
+  name?: boolean
   title?: boolean
   description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   stepsJSON?: boolean
   rewardsJSON?: boolean
   isArchived?: boolean
   deletedAt?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }
 
-export type QuestTemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "stepsJSON" | "rewardsJSON" | "isArchived" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["questTemplate"]>
+export type QuestTemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "title" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "stepsJSON" | "rewardsJSON" | "isArchived" | "deletedAt", ExtArgs["result"]["questTemplate"]>
 
 export type $QuestTemplatePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "QuestTemplate"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    name: string
     title: string
     description: string | null
+    tags: runtime.JsonValue | null
+    status: $Enums.ContentStatus
+    version: number
+    createdBy: string | null
+    createdAt: Date
+    updatedAt: Date
     stepsJSON: runtime.JsonValue
     rewardsJSON: runtime.JsonValue | null
     isArchived: boolean
     deletedAt: Date | null
-    createdAt: Date
-    updatedAt: Date
   }, ExtArgs["result"]["questTemplate"]>
   composites: {}
 }
@@ -870,14 +1043,19 @@ export interface Prisma__QuestTemplateClient<T, Null = never, ExtArgs extends ru
  */
 export interface QuestTemplateFieldRefs {
   readonly id: Prisma.FieldRef<"QuestTemplate", 'String'>
+  readonly name: Prisma.FieldRef<"QuestTemplate", 'String'>
   readonly title: Prisma.FieldRef<"QuestTemplate", 'String'>
   readonly description: Prisma.FieldRef<"QuestTemplate", 'String'>
+  readonly tags: Prisma.FieldRef<"QuestTemplate", 'Json'>
+  readonly status: Prisma.FieldRef<"QuestTemplate", 'ContentStatus'>
+  readonly version: Prisma.FieldRef<"QuestTemplate", 'Int'>
+  readonly createdBy: Prisma.FieldRef<"QuestTemplate", 'String'>
+  readonly createdAt: Prisma.FieldRef<"QuestTemplate", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"QuestTemplate", 'DateTime'>
   readonly stepsJSON: Prisma.FieldRef<"QuestTemplate", 'Json'>
   readonly rewardsJSON: Prisma.FieldRef<"QuestTemplate", 'Json'>
   readonly isArchived: Prisma.FieldRef<"QuestTemplate", 'Boolean'>
   readonly deletedAt: Prisma.FieldRef<"QuestTemplate", 'DateTime'>
-  readonly createdAt: Prisma.FieldRef<"QuestTemplate", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"QuestTemplate", 'DateTime'>
 }
     
 

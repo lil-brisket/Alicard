@@ -27,11 +27,13 @@ export type AggregateSkill = {
 }
 
 export type SkillAvgAggregateOutputType = {
+  version: number | null
   staminaCost: number | null
   cooldownSeconds: number | null
 }
 
 export type SkillSumAggregateOutputType = {
+  version: number | null
   staminaCost: number | null
   cooldownSeconds: number | null
 }
@@ -41,12 +43,14 @@ export type SkillMinAggregateOutputType = {
   key: string | null
   name: string | null
   description: string | null
-  staminaCost: number | null
-  cooldownSeconds: number | null
-  tags: string | null
-  jobUnlock: string | null
+  status: $Enums.ContentStatus | null
+  version: number | null
+  createdBy: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  staminaCost: number | null
+  cooldownSeconds: number | null
+  jobUnlock: string | null
 }
 
 export type SkillMaxAggregateOutputType = {
@@ -54,12 +58,14 @@ export type SkillMaxAggregateOutputType = {
   key: string | null
   name: string | null
   description: string | null
-  staminaCost: number | null
-  cooldownSeconds: number | null
-  tags: string | null
-  jobUnlock: string | null
+  status: $Enums.ContentStatus | null
+  version: number | null
+  createdBy: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  staminaCost: number | null
+  cooldownSeconds: number | null
+  jobUnlock: string | null
 }
 
 export type SkillCountAggregateOutputType = {
@@ -67,22 +73,27 @@ export type SkillCountAggregateOutputType = {
   key: number
   name: number
   description: number
-  staminaCost: number
-  cooldownSeconds: number
   tags: number
-  jobUnlock: number
+  status: number
+  version: number
+  createdBy: number
   createdAt: number
   updatedAt: number
+  staminaCost: number
+  cooldownSeconds: number
+  jobUnlock: number
   _all: number
 }
 
 
 export type SkillAvgAggregateInputType = {
+  version?: true
   staminaCost?: true
   cooldownSeconds?: true
 }
 
 export type SkillSumAggregateInputType = {
+  version?: true
   staminaCost?: true
   cooldownSeconds?: true
 }
@@ -92,12 +103,14 @@ export type SkillMinAggregateInputType = {
   key?: true
   name?: true
   description?: true
-  staminaCost?: true
-  cooldownSeconds?: true
-  tags?: true
-  jobUnlock?: true
+  status?: true
+  version?: true
+  createdBy?: true
   createdAt?: true
   updatedAt?: true
+  staminaCost?: true
+  cooldownSeconds?: true
+  jobUnlock?: true
 }
 
 export type SkillMaxAggregateInputType = {
@@ -105,12 +118,14 @@ export type SkillMaxAggregateInputType = {
   key?: true
   name?: true
   description?: true
-  staminaCost?: true
-  cooldownSeconds?: true
-  tags?: true
-  jobUnlock?: true
+  status?: true
+  version?: true
+  createdBy?: true
   createdAt?: true
   updatedAt?: true
+  staminaCost?: true
+  cooldownSeconds?: true
+  jobUnlock?: true
 }
 
 export type SkillCountAggregateInputType = {
@@ -118,12 +133,15 @@ export type SkillCountAggregateInputType = {
   key?: true
   name?: true
   description?: true
-  staminaCost?: true
-  cooldownSeconds?: true
   tags?: true
-  jobUnlock?: true
+  status?: true
+  version?: true
+  createdBy?: true
   createdAt?: true
   updatedAt?: true
+  staminaCost?: true
+  cooldownSeconds?: true
+  jobUnlock?: true
   _all?: true
 }
 
@@ -218,12 +236,15 @@ export type SkillGroupByOutputType = {
   key: string
   name: string
   description: string | null
-  staminaCost: number
-  cooldownSeconds: number
-  tags: string | null
-  jobUnlock: string | null
+  tags: runtime.JsonValue | null
+  status: $Enums.ContentStatus
+  version: number
+  createdBy: string | null
   createdAt: Date
   updatedAt: Date
+  staminaCost: number
+  cooldownSeconds: number
+  jobUnlock: string | null
   _count: SkillCountAggregateOutputType | null
   _avg: SkillAvgAggregateOutputType | null
   _sum: SkillSumAggregateOutputType | null
@@ -254,12 +275,15 @@ export type SkillWhereInput = {
   key?: Prisma.StringFilter<"Skill"> | string
   name?: Prisma.StringFilter<"Skill"> | string
   description?: Prisma.StringNullableFilter<"Skill"> | string | null
-  staminaCost?: Prisma.IntFilter<"Skill"> | number
-  cooldownSeconds?: Prisma.IntFilter<"Skill"> | number
-  tags?: Prisma.StringNullableFilter<"Skill"> | string | null
-  jobUnlock?: Prisma.StringNullableFilter<"Skill"> | string | null
+  tags?: Prisma.JsonNullableFilter<"Skill">
+  status?: Prisma.EnumContentStatusFilter<"Skill"> | $Enums.ContentStatus
+  version?: Prisma.IntFilter<"Skill"> | number
+  createdBy?: Prisma.StringNullableFilter<"Skill"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
+  staminaCost?: Prisma.IntFilter<"Skill"> | number
+  cooldownSeconds?: Prisma.IntFilter<"Skill"> | number
+  jobUnlock?: Prisma.StringNullableFilter<"Skill"> | string | null
   playerSkills?: Prisma.PlayerSkillListRelationFilter
   slot1Loadouts?: Prisma.PlayerSkillLoadoutListRelationFilter
   slot2Loadouts?: Prisma.PlayerSkillLoadoutListRelationFilter
@@ -276,12 +300,15 @@ export type SkillOrderByWithRelationInput = {
   key?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  staminaCost?: Prisma.SortOrder
-  cooldownSeconds?: Prisma.SortOrder
   tags?: Prisma.SortOrderInput | Prisma.SortOrder
-  jobUnlock?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  staminaCost?: Prisma.SortOrder
+  cooldownSeconds?: Prisma.SortOrder
+  jobUnlock?: Prisma.SortOrderInput | Prisma.SortOrder
   playerSkills?: Prisma.PlayerSkillOrderByRelationAggregateInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutOrderByRelationAggregateInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutOrderByRelationAggregateInput
@@ -301,12 +328,15 @@ export type SkillWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SkillWhereInput | Prisma.SkillWhereInput[]
   name?: Prisma.StringFilter<"Skill"> | string
   description?: Prisma.StringNullableFilter<"Skill"> | string | null
-  staminaCost?: Prisma.IntFilter<"Skill"> | number
-  cooldownSeconds?: Prisma.IntFilter<"Skill"> | number
-  tags?: Prisma.StringNullableFilter<"Skill"> | string | null
-  jobUnlock?: Prisma.StringNullableFilter<"Skill"> | string | null
+  tags?: Prisma.JsonNullableFilter<"Skill">
+  status?: Prisma.EnumContentStatusFilter<"Skill"> | $Enums.ContentStatus
+  version?: Prisma.IntFilter<"Skill"> | number
+  createdBy?: Prisma.StringNullableFilter<"Skill"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
+  staminaCost?: Prisma.IntFilter<"Skill"> | number
+  cooldownSeconds?: Prisma.IntFilter<"Skill"> | number
+  jobUnlock?: Prisma.StringNullableFilter<"Skill"> | string | null
   playerSkills?: Prisma.PlayerSkillListRelationFilter
   slot1Loadouts?: Prisma.PlayerSkillLoadoutListRelationFilter
   slot2Loadouts?: Prisma.PlayerSkillLoadoutListRelationFilter
@@ -323,12 +353,15 @@ export type SkillOrderByWithAggregationInput = {
   key?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  staminaCost?: Prisma.SortOrder
-  cooldownSeconds?: Prisma.SortOrder
   tags?: Prisma.SortOrderInput | Prisma.SortOrder
-  jobUnlock?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  staminaCost?: Prisma.SortOrder
+  cooldownSeconds?: Prisma.SortOrder
+  jobUnlock?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SkillCountOrderByAggregateInput
   _avg?: Prisma.SkillAvgOrderByAggregateInput
   _max?: Prisma.SkillMaxOrderByAggregateInput
@@ -344,12 +377,15 @@ export type SkillScalarWhereWithAggregatesInput = {
   key?: Prisma.StringWithAggregatesFilter<"Skill"> | string
   name?: Prisma.StringWithAggregatesFilter<"Skill"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Skill"> | string | null
-  staminaCost?: Prisma.IntWithAggregatesFilter<"Skill"> | number
-  cooldownSeconds?: Prisma.IntWithAggregatesFilter<"Skill"> | number
-  tags?: Prisma.StringNullableWithAggregatesFilter<"Skill"> | string | null
-  jobUnlock?: Prisma.StringNullableWithAggregatesFilter<"Skill"> | string | null
+  tags?: Prisma.JsonNullableWithAggregatesFilter<"Skill">
+  status?: Prisma.EnumContentStatusWithAggregatesFilter<"Skill"> | $Enums.ContentStatus
+  version?: Prisma.IntWithAggregatesFilter<"Skill"> | number
+  createdBy?: Prisma.StringNullableWithAggregatesFilter<"Skill"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Skill"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Skill"> | Date | string
+  staminaCost?: Prisma.IntWithAggregatesFilter<"Skill"> | number
+  cooldownSeconds?: Prisma.IntWithAggregatesFilter<"Skill"> | number
+  jobUnlock?: Prisma.StringNullableWithAggregatesFilter<"Skill"> | string | null
 }
 
 export type SkillCreateInput = {
@@ -357,12 +393,15 @@ export type SkillCreateInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
@@ -379,12 +418,15 @@ export type SkillUncheckedCreateInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
@@ -401,12 +443,15 @@ export type SkillUpdateInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
@@ -423,12 +468,15 @@ export type SkillUncheckedUpdateInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
@@ -445,12 +493,15 @@ export type SkillCreateManyInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
 }
 
 export type SkillUpdateManyMutationInput = {
@@ -458,12 +509,15 @@ export type SkillUpdateManyMutationInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SkillUncheckedUpdateManyInput = {
@@ -471,12 +525,15 @@ export type SkillUncheckedUpdateManyInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SkillCountOrderByAggregateInput = {
@@ -484,15 +541,19 @@ export type SkillCountOrderByAggregateInput = {
   key?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  staminaCost?: Prisma.SortOrder
-  cooldownSeconds?: Prisma.SortOrder
   tags?: Prisma.SortOrder
-  jobUnlock?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  staminaCost?: Prisma.SortOrder
+  cooldownSeconds?: Prisma.SortOrder
+  jobUnlock?: Prisma.SortOrder
 }
 
 export type SkillAvgOrderByAggregateInput = {
+  version?: Prisma.SortOrder
   staminaCost?: Prisma.SortOrder
   cooldownSeconds?: Prisma.SortOrder
 }
@@ -502,12 +563,14 @@ export type SkillMaxOrderByAggregateInput = {
   key?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  staminaCost?: Prisma.SortOrder
-  cooldownSeconds?: Prisma.SortOrder
-  tags?: Prisma.SortOrder
-  jobUnlock?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  staminaCost?: Prisma.SortOrder
+  cooldownSeconds?: Prisma.SortOrder
+  jobUnlock?: Prisma.SortOrder
 }
 
 export type SkillMinOrderByAggregateInput = {
@@ -515,15 +578,18 @@ export type SkillMinOrderByAggregateInput = {
   key?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  staminaCost?: Prisma.SortOrder
-  cooldownSeconds?: Prisma.SortOrder
-  tags?: Prisma.SortOrder
-  jobUnlock?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  staminaCost?: Prisma.SortOrder
+  cooldownSeconds?: Prisma.SortOrder
+  jobUnlock?: Prisma.SortOrder
 }
 
 export type SkillSumOrderByAggregateInput = {
+  version?: Prisma.SortOrder
   staminaCost?: Prisma.SortOrder
   cooldownSeconds?: Prisma.SortOrder
 }
@@ -536,6 +602,10 @@ export type SkillScalarRelationFilter = {
 export type SkillNullableScalarRelationFilter = {
   is?: Prisma.SkillWhereInput | null
   isNot?: Prisma.SkillWhereInput | null
+}
+
+export type EnumContentStatusFieldUpdateOperationsInput = {
+  set?: $Enums.ContentStatus
 }
 
 export type SkillCreateNestedOneWithoutPlayerSkillsInput = {
@@ -685,12 +755,15 @@ export type SkillCreateWithoutPlayerSkillsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot3SkillInput
@@ -706,12 +779,15 @@ export type SkillUncheckedCreateWithoutPlayerSkillsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot3SkillInput
@@ -743,12 +819,15 @@ export type SkillUpdateWithoutPlayerSkillsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot3SkillNestedInput
@@ -764,12 +843,15 @@ export type SkillUncheckedUpdateWithoutPlayerSkillsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot3SkillNestedInput
@@ -785,12 +867,15 @@ export type SkillCreateWithoutSlot1LoadoutsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot3SkillInput
@@ -806,12 +891,15 @@ export type SkillUncheckedCreateWithoutSlot1LoadoutsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot3SkillInput
@@ -832,12 +920,15 @@ export type SkillCreateWithoutSlot2LoadoutsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot3SkillInput
@@ -853,12 +944,15 @@ export type SkillUncheckedCreateWithoutSlot2LoadoutsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot3SkillInput
@@ -879,12 +973,15 @@ export type SkillCreateWithoutSlot3LoadoutsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
@@ -900,12 +997,15 @@ export type SkillUncheckedCreateWithoutSlot3LoadoutsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
@@ -926,12 +1026,15 @@ export type SkillCreateWithoutSlot4LoadoutsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
@@ -947,12 +1050,15 @@ export type SkillUncheckedCreateWithoutSlot4LoadoutsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
@@ -973,12 +1079,15 @@ export type SkillCreateWithoutSlot5LoadoutsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
@@ -994,12 +1103,15 @@ export type SkillUncheckedCreateWithoutSlot5LoadoutsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
@@ -1020,12 +1132,15 @@ export type SkillCreateWithoutSlot6LoadoutsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
@@ -1041,12 +1156,15 @@ export type SkillUncheckedCreateWithoutSlot6LoadoutsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
@@ -1067,12 +1185,15 @@ export type SkillCreateWithoutSlot7LoadoutsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
@@ -1088,12 +1209,15 @@ export type SkillUncheckedCreateWithoutSlot7LoadoutsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
@@ -1114,12 +1238,15 @@ export type SkillCreateWithoutSlot8LoadoutsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutCreateNestedManyWithoutSlot2SkillInput
@@ -1135,12 +1262,15 @@ export type SkillUncheckedCreateWithoutSlot8LoadoutsInput = {
   key: string
   name: string
   description?: string | null
-  staminaCost?: number
-  cooldownSeconds?: number
-  tags?: string | null
-  jobUnlock?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  staminaCost?: number
+  cooldownSeconds?: number
+  jobUnlock?: string | null
   playerSkills?: Prisma.PlayerSkillUncheckedCreateNestedManyWithoutSkillInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot1SkillInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedCreateNestedManyWithoutSlot2SkillInput
@@ -1172,12 +1302,15 @@ export type SkillUpdateWithoutSlot1LoadoutsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot3SkillNestedInput
@@ -1193,12 +1326,15 @@ export type SkillUncheckedUpdateWithoutSlot1LoadoutsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot3SkillNestedInput
@@ -1225,12 +1361,15 @@ export type SkillUpdateWithoutSlot2LoadoutsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot3SkillNestedInput
@@ -1246,12 +1385,15 @@ export type SkillUncheckedUpdateWithoutSlot2LoadoutsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot3Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot3SkillNestedInput
@@ -1278,12 +1420,15 @@ export type SkillUpdateWithoutSlot3LoadoutsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
@@ -1299,12 +1444,15 @@ export type SkillUncheckedUpdateWithoutSlot3LoadoutsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
@@ -1331,12 +1479,15 @@ export type SkillUpdateWithoutSlot4LoadoutsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
@@ -1352,12 +1503,15 @@ export type SkillUncheckedUpdateWithoutSlot4LoadoutsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
@@ -1384,12 +1538,15 @@ export type SkillUpdateWithoutSlot5LoadoutsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
@@ -1405,12 +1562,15 @@ export type SkillUncheckedUpdateWithoutSlot5LoadoutsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
@@ -1437,12 +1597,15 @@ export type SkillUpdateWithoutSlot6LoadoutsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
@@ -1458,12 +1621,15 @@ export type SkillUncheckedUpdateWithoutSlot6LoadoutsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
@@ -1490,12 +1656,15 @@ export type SkillUpdateWithoutSlot7LoadoutsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
@@ -1511,12 +1680,15 @@ export type SkillUncheckedUpdateWithoutSlot7LoadoutsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
@@ -1543,12 +1715,15 @@ export type SkillUpdateWithoutSlot8LoadoutsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUpdateManyWithoutSlot2SkillNestedInput
@@ -1564,12 +1739,15 @@ export type SkillUncheckedUpdateWithoutSlot8LoadoutsInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
-  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staminaCost?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  jobUnlock?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerSkillUncheckedUpdateManyWithoutSkillNestedInput
   slot1Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot1SkillNestedInput
   slot2Loadouts?: Prisma.PlayerSkillLoadoutUncheckedUpdateManyWithoutSlot2SkillNestedInput
@@ -1688,12 +1866,15 @@ export type SkillSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   key?: boolean
   name?: boolean
   description?: boolean
-  staminaCost?: boolean
-  cooldownSeconds?: boolean
   tags?: boolean
-  jobUnlock?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  staminaCost?: boolean
+  cooldownSeconds?: boolean
+  jobUnlock?: boolean
   playerSkills?: boolean | Prisma.Skill$playerSkillsArgs<ExtArgs>
   slot1Loadouts?: boolean | Prisma.Skill$slot1LoadoutsArgs<ExtArgs>
   slot2Loadouts?: boolean | Prisma.Skill$slot2LoadoutsArgs<ExtArgs>
@@ -1711,12 +1892,15 @@ export type SkillSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   key?: boolean
   name?: boolean
   description?: boolean
-  staminaCost?: boolean
-  cooldownSeconds?: boolean
   tags?: boolean
-  jobUnlock?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  staminaCost?: boolean
+  cooldownSeconds?: boolean
+  jobUnlock?: boolean
 }, ExtArgs["result"]["skill"]>
 
 export type SkillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1724,12 +1908,15 @@ export type SkillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   key?: boolean
   name?: boolean
   description?: boolean
-  staminaCost?: boolean
-  cooldownSeconds?: boolean
   tags?: boolean
-  jobUnlock?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  staminaCost?: boolean
+  cooldownSeconds?: boolean
+  jobUnlock?: boolean
 }, ExtArgs["result"]["skill"]>
 
 export type SkillSelectScalar = {
@@ -1737,15 +1924,18 @@ export type SkillSelectScalar = {
   key?: boolean
   name?: boolean
   description?: boolean
-  staminaCost?: boolean
-  cooldownSeconds?: boolean
   tags?: boolean
-  jobUnlock?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  staminaCost?: boolean
+  cooldownSeconds?: boolean
+  jobUnlock?: boolean
 }
 
-export type SkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "description" | "staminaCost" | "cooldownSeconds" | "tags" | "jobUnlock" | "createdAt" | "updatedAt", ExtArgs["result"]["skill"]>
+export type SkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "staminaCost" | "cooldownSeconds" | "jobUnlock", ExtArgs["result"]["skill"]>
 export type SkillInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   playerSkills?: boolean | Prisma.Skill$playerSkillsArgs<ExtArgs>
   slot1Loadouts?: boolean | Prisma.Skill$slot1LoadoutsArgs<ExtArgs>
@@ -1779,12 +1969,15 @@ export type $SkillPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     key: string
     name: string
     description: string | null
-    staminaCost: number
-    cooldownSeconds: number
-    tags: string | null
-    jobUnlock: string | null
+    tags: runtime.JsonValue | null
+    status: $Enums.ContentStatus
+    version: number
+    createdBy: string | null
     createdAt: Date
     updatedAt: Date
+    staminaCost: number
+    cooldownSeconds: number
+    jobUnlock: string | null
   }, ExtArgs["result"]["skill"]>
   composites: {}
 }
@@ -2221,12 +2414,15 @@ export interface SkillFieldRefs {
   readonly key: Prisma.FieldRef<"Skill", 'String'>
   readonly name: Prisma.FieldRef<"Skill", 'String'>
   readonly description: Prisma.FieldRef<"Skill", 'String'>
-  readonly staminaCost: Prisma.FieldRef<"Skill", 'Int'>
-  readonly cooldownSeconds: Prisma.FieldRef<"Skill", 'Int'>
-  readonly tags: Prisma.FieldRef<"Skill", 'String'>
-  readonly jobUnlock: Prisma.FieldRef<"Skill", 'String'>
+  readonly tags: Prisma.FieldRef<"Skill", 'Json'>
+  readonly status: Prisma.FieldRef<"Skill", 'ContentStatus'>
+  readonly version: Prisma.FieldRef<"Skill", 'Int'>
+  readonly createdBy: Prisma.FieldRef<"Skill", 'String'>
   readonly createdAt: Prisma.FieldRef<"Skill", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Skill", 'DateTime'>
+  readonly staminaCost: Prisma.FieldRef<"Skill", 'Int'>
+  readonly cooldownSeconds: Prisma.FieldRef<"Skill", 'Int'>
+  readonly jobUnlock: Prisma.FieldRef<"Skill", 'String'>
 }
     
 

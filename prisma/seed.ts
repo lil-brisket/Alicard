@@ -1131,6 +1131,8 @@ async function main() {
       stackable: false,
       maxStack: 1,
       value: 150,
+      status: "ACTIVE",
+      tags: ["weapon", "sword", "tier2"],
     },
   });
 
@@ -1142,6 +1144,8 @@ async function main() {
       stackable: true,
       maxStack: 99,
       value: 25,
+      status: "ACTIVE",
+      tags: ["consumable", "healing", "starter"],
     },
   });
 
@@ -1151,9 +1155,12 @@ async function main() {
   const monsterTemplate1 = await prisma.monsterTemplate.create({
     data: {
       name: "Goblin Warrior",
+      description: "A fierce goblin warrior",
       level: 5,
       hp: 60,
       sp: 20,
+      status: "ACTIVE",
+      tags: ["goblin", "warrior", "tier1"],
       statsJSON: {
         vitality: 8,
         strength: 7,
@@ -1168,8 +1175,11 @@ async function main() {
   // Quest Templates
   const questTemplate1 = await prisma.questTemplate.create({
     data: {
+      name: "Slay the Goblin",
       title: "Slay the Goblin",
       description: "Defeat 5 goblins in the forest",
+      status: "ACTIVE",
+      tags: ["kill", "starter"],
       stepsJSON: [
         { type: "KILL", target: "goblin", count: 5 },
         { type: "RETURN", npc: "quest-giver" },
@@ -1188,8 +1198,11 @@ async function main() {
   const mapZone1 = await prisma.mapZone.create({
     data: {
       name: "Forest Zone",
+      description: "A dense forest filled with danger",
       width: 10,
       height: 10,
+      status: "ACTIVE",
+      tags: ["forest", "starter", "low-danger"],
       tilesJSON: {
         "0,0": { type: "GRASS", zone: "LOW_DANGER" },
         "1,1": { type: "FOREST", zone: "MEDIUM_DANGER" },

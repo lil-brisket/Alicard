@@ -27,10 +27,12 @@ export type AggregateGatheringNode = {
 }
 
 export type GatheringNodeAvgAggregateOutputType = {
+  version: number | null
   dangerTier: number | null
 }
 
 export type GatheringNodeSumAggregateOutputType = {
+  version: number | null
   dangerTier: number | null
 }
 
@@ -38,42 +40,54 @@ export type GatheringNodeMinAggregateOutputType = {
   id: string | null
   key: string | null
   name: string | null
-  jobId: string | null
-  dangerTier: number | null
   description: string | null
+  status: $Enums.ContentStatus | null
+  version: number | null
+  createdBy: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  jobId: string | null
+  dangerTier: number | null
 }
 
 export type GatheringNodeMaxAggregateOutputType = {
   id: string | null
   key: string | null
   name: string | null
-  jobId: string | null
-  dangerTier: number | null
   description: string | null
+  status: $Enums.ContentStatus | null
+  version: number | null
+  createdBy: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  jobId: string | null
+  dangerTier: number | null
 }
 
 export type GatheringNodeCountAggregateOutputType = {
   id: number
   key: number
   name: number
-  jobId: number
-  dangerTier: number
   description: number
+  tags: number
+  status: number
+  version: number
+  createdBy: number
   createdAt: number
   updatedAt: number
+  jobId: number
+  dangerTier: number
   _all: number
 }
 
 
 export type GatheringNodeAvgAggregateInputType = {
+  version?: true
   dangerTier?: true
 }
 
 export type GatheringNodeSumAggregateInputType = {
+  version?: true
   dangerTier?: true
 }
 
@@ -81,33 +95,43 @@ export type GatheringNodeMinAggregateInputType = {
   id?: true
   key?: true
   name?: true
-  jobId?: true
-  dangerTier?: true
   description?: true
+  status?: true
+  version?: true
+  createdBy?: true
   createdAt?: true
   updatedAt?: true
+  jobId?: true
+  dangerTier?: true
 }
 
 export type GatheringNodeMaxAggregateInputType = {
   id?: true
   key?: true
   name?: true
-  jobId?: true
-  dangerTier?: true
   description?: true
+  status?: true
+  version?: true
+  createdBy?: true
   createdAt?: true
   updatedAt?: true
+  jobId?: true
+  dangerTier?: true
 }
 
 export type GatheringNodeCountAggregateInputType = {
   id?: true
   key?: true
   name?: true
-  jobId?: true
-  dangerTier?: true
   description?: true
+  tags?: true
+  status?: true
+  version?: true
+  createdBy?: true
   createdAt?: true
   updatedAt?: true
+  jobId?: true
+  dangerTier?: true
   _all?: true
 }
 
@@ -201,11 +225,15 @@ export type GatheringNodeGroupByOutputType = {
   id: string
   key: string
   name: string
-  jobId: string
-  dangerTier: number
   description: string | null
+  tags: runtime.JsonValue | null
+  status: $Enums.ContentStatus
+  version: number
+  createdBy: string | null
   createdAt: Date
   updatedAt: Date
+  jobId: string
+  dangerTier: number
   _count: GatheringNodeCountAggregateOutputType | null
   _avg: GatheringNodeAvgAggregateOutputType | null
   _sum: GatheringNodeSumAggregateOutputType | null
@@ -235,11 +263,15 @@ export type GatheringNodeWhereInput = {
   id?: Prisma.StringFilter<"GatheringNode"> | string
   key?: Prisma.StringFilter<"GatheringNode"> | string
   name?: Prisma.StringFilter<"GatheringNode"> | string
-  jobId?: Prisma.StringFilter<"GatheringNode"> | string
-  dangerTier?: Prisma.IntFilter<"GatheringNode"> | number
   description?: Prisma.StringNullableFilter<"GatheringNode"> | string | null
+  tags?: Prisma.JsonNullableFilter<"GatheringNode">
+  status?: Prisma.EnumContentStatusFilter<"GatheringNode"> | $Enums.ContentStatus
+  version?: Prisma.IntFilter<"GatheringNode"> | number
+  createdBy?: Prisma.StringNullableFilter<"GatheringNode"> | string | null
   createdAt?: Prisma.DateTimeFilter<"GatheringNode"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"GatheringNode"> | Date | string
+  jobId?: Prisma.StringFilter<"GatheringNode"> | string
+  dangerTier?: Prisma.IntFilter<"GatheringNode"> | number
   job?: Prisma.XOR<Prisma.JobScalarRelationFilter, Prisma.JobWhereInput>
   yields?: Prisma.NodeYieldListRelationFilter
   gatherAttempts?: Prisma.GatherAttemptListRelationFilter
@@ -249,11 +281,15 @@ export type GatheringNodeOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   key?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  jobId?: Prisma.SortOrder
-  dangerTier?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  jobId?: Prisma.SortOrder
+  dangerTier?: Prisma.SortOrder
   job?: Prisma.JobOrderByWithRelationInput
   yields?: Prisma.NodeYieldOrderByRelationAggregateInput
   gatherAttempts?: Prisma.GatherAttemptOrderByRelationAggregateInput
@@ -266,11 +302,15 @@ export type GatheringNodeWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.GatheringNodeWhereInput[]
   NOT?: Prisma.GatheringNodeWhereInput | Prisma.GatheringNodeWhereInput[]
   name?: Prisma.StringFilter<"GatheringNode"> | string
-  jobId?: Prisma.StringFilter<"GatheringNode"> | string
-  dangerTier?: Prisma.IntFilter<"GatheringNode"> | number
   description?: Prisma.StringNullableFilter<"GatheringNode"> | string | null
+  tags?: Prisma.JsonNullableFilter<"GatheringNode">
+  status?: Prisma.EnumContentStatusFilter<"GatheringNode"> | $Enums.ContentStatus
+  version?: Prisma.IntFilter<"GatheringNode"> | number
+  createdBy?: Prisma.StringNullableFilter<"GatheringNode"> | string | null
   createdAt?: Prisma.DateTimeFilter<"GatheringNode"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"GatheringNode"> | Date | string
+  jobId?: Prisma.StringFilter<"GatheringNode"> | string
+  dangerTier?: Prisma.IntFilter<"GatheringNode"> | number
   job?: Prisma.XOR<Prisma.JobScalarRelationFilter, Prisma.JobWhereInput>
   yields?: Prisma.NodeYieldListRelationFilter
   gatherAttempts?: Prisma.GatherAttemptListRelationFilter
@@ -280,11 +320,15 @@ export type GatheringNodeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   key?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  jobId?: Prisma.SortOrder
-  dangerTier?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  jobId?: Prisma.SortOrder
+  dangerTier?: Prisma.SortOrder
   _count?: Prisma.GatheringNodeCountOrderByAggregateInput
   _avg?: Prisma.GatheringNodeAvgOrderByAggregateInput
   _max?: Prisma.GatheringNodeMaxOrderByAggregateInput
@@ -299,21 +343,29 @@ export type GatheringNodeScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"GatheringNode"> | string
   key?: Prisma.StringWithAggregatesFilter<"GatheringNode"> | string
   name?: Prisma.StringWithAggregatesFilter<"GatheringNode"> | string
-  jobId?: Prisma.StringWithAggregatesFilter<"GatheringNode"> | string
-  dangerTier?: Prisma.IntWithAggregatesFilter<"GatheringNode"> | number
   description?: Prisma.StringNullableWithAggregatesFilter<"GatheringNode"> | string | null
+  tags?: Prisma.JsonNullableWithAggregatesFilter<"GatheringNode">
+  status?: Prisma.EnumContentStatusWithAggregatesFilter<"GatheringNode"> | $Enums.ContentStatus
+  version?: Prisma.IntWithAggregatesFilter<"GatheringNode"> | number
+  createdBy?: Prisma.StringNullableWithAggregatesFilter<"GatheringNode"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"GatheringNode"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"GatheringNode"> | Date | string
+  jobId?: Prisma.StringWithAggregatesFilter<"GatheringNode"> | string
+  dangerTier?: Prisma.IntWithAggregatesFilter<"GatheringNode"> | number
 }
 
 export type GatheringNodeCreateInput = {
   id?: string
   key: string
   name: string
-  dangerTier?: number
   description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  dangerTier?: number
   job: Prisma.JobCreateNestedOneWithoutNodesInput
   yields?: Prisma.NodeYieldCreateNestedManyWithoutNodeInput
   gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutNodeInput
@@ -323,11 +375,15 @@ export type GatheringNodeUncheckedCreateInput = {
   id?: string
   key: string
   name: string
-  jobId: string
-  dangerTier?: number
   description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  jobId: string
+  dangerTier?: number
   yields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutNodeInput
   gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutNodeInput
 }
@@ -336,10 +392,14 @@ export type GatheringNodeUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   job?: Prisma.JobUpdateOneRequiredWithoutNodesNestedInput
   yields?: Prisma.NodeYieldUpdateManyWithoutNodeNestedInput
   gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutNodeNestedInput
@@ -349,11 +409,15 @@ export type GatheringNodeUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  jobId?: Prisma.StringFieldUpdateOperationsInput | string
-  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  jobId?: Prisma.StringFieldUpdateOperationsInput | string
+  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   yields?: Prisma.NodeYieldUncheckedUpdateManyWithoutNodeNestedInput
   gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutNodeNestedInput
 }
@@ -362,32 +426,44 @@ export type GatheringNodeCreateManyInput = {
   id?: string
   key: string
   name: string
-  jobId: string
-  dangerTier?: number
   description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  jobId: string
+  dangerTier?: number
 }
 
 export type GatheringNodeUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type GatheringNodeUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  jobId?: Prisma.StringFieldUpdateOperationsInput | string
-  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  jobId?: Prisma.StringFieldUpdateOperationsInput | string
+  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type GatheringNodeListRelationFilter = {
@@ -404,14 +480,19 @@ export type GatheringNodeCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   key?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  jobId?: Prisma.SortOrder
-  dangerTier?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  jobId?: Prisma.SortOrder
+  dangerTier?: Prisma.SortOrder
 }
 
 export type GatheringNodeAvgOrderByAggregateInput = {
+  version?: Prisma.SortOrder
   dangerTier?: Prisma.SortOrder
 }
 
@@ -419,25 +500,32 @@ export type GatheringNodeMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   key?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  jobId?: Prisma.SortOrder
-  dangerTier?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  jobId?: Prisma.SortOrder
+  dangerTier?: Prisma.SortOrder
 }
 
 export type GatheringNodeMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   key?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  jobId?: Prisma.SortOrder
-  dangerTier?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  jobId?: Prisma.SortOrder
+  dangerTier?: Prisma.SortOrder
 }
 
 export type GatheringNodeSumOrderByAggregateInput = {
+  version?: Prisma.SortOrder
   dangerTier?: Prisma.SortOrder
 }
 
@@ -520,10 +608,14 @@ export type GatheringNodeCreateWithoutJobInput = {
   id?: string
   key: string
   name: string
-  dangerTier?: number
   description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  dangerTier?: number
   yields?: Prisma.NodeYieldCreateNestedManyWithoutNodeInput
   gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutNodeInput
 }
@@ -532,10 +624,14 @@ export type GatheringNodeUncheckedCreateWithoutJobInput = {
   id?: string
   key: string
   name: string
-  dangerTier?: number
   description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  dangerTier?: number
   yields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutNodeInput
   gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutNodeInput
 }
@@ -573,21 +669,29 @@ export type GatheringNodeScalarWhereInput = {
   id?: Prisma.StringFilter<"GatheringNode"> | string
   key?: Prisma.StringFilter<"GatheringNode"> | string
   name?: Prisma.StringFilter<"GatheringNode"> | string
-  jobId?: Prisma.StringFilter<"GatheringNode"> | string
-  dangerTier?: Prisma.IntFilter<"GatheringNode"> | number
   description?: Prisma.StringNullableFilter<"GatheringNode"> | string | null
+  tags?: Prisma.JsonNullableFilter<"GatheringNode">
+  status?: Prisma.EnumContentStatusFilter<"GatheringNode"> | $Enums.ContentStatus
+  version?: Prisma.IntFilter<"GatheringNode"> | number
+  createdBy?: Prisma.StringNullableFilter<"GatheringNode"> | string | null
   createdAt?: Prisma.DateTimeFilter<"GatheringNode"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"GatheringNode"> | Date | string
+  jobId?: Prisma.StringFilter<"GatheringNode"> | string
+  dangerTier?: Prisma.IntFilter<"GatheringNode"> | number
 }
 
 export type GatheringNodeCreateWithoutYieldsInput = {
   id?: string
   key: string
   name: string
-  dangerTier?: number
   description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  dangerTier?: number
   job: Prisma.JobCreateNestedOneWithoutNodesInput
   gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutNodeInput
 }
@@ -596,11 +700,15 @@ export type GatheringNodeUncheckedCreateWithoutYieldsInput = {
   id?: string
   key: string
   name: string
-  jobId: string
-  dangerTier?: number
   description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  jobId: string
+  dangerTier?: number
   gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutNodeInput
 }
 
@@ -624,10 +732,14 @@ export type GatheringNodeUpdateWithoutYieldsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   job?: Prisma.JobUpdateOneRequiredWithoutNodesNestedInput
   gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutNodeNestedInput
 }
@@ -636,11 +748,15 @@ export type GatheringNodeUncheckedUpdateWithoutYieldsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  jobId?: Prisma.StringFieldUpdateOperationsInput | string
-  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  jobId?: Prisma.StringFieldUpdateOperationsInput | string
+  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutNodeNestedInput
 }
 
@@ -648,10 +764,14 @@ export type GatheringNodeCreateWithoutGatherAttemptsInput = {
   id?: string
   key: string
   name: string
-  dangerTier?: number
   description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  dangerTier?: number
   job: Prisma.JobCreateNestedOneWithoutNodesInput
   yields?: Prisma.NodeYieldCreateNestedManyWithoutNodeInput
 }
@@ -660,11 +780,15 @@ export type GatheringNodeUncheckedCreateWithoutGatherAttemptsInput = {
   id?: string
   key: string
   name: string
-  jobId: string
-  dangerTier?: number
   description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  jobId: string
+  dangerTier?: number
   yields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutNodeInput
 }
 
@@ -688,10 +812,14 @@ export type GatheringNodeUpdateWithoutGatherAttemptsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   job?: Prisma.JobUpdateOneRequiredWithoutNodesNestedInput
   yields?: Prisma.NodeYieldUpdateManyWithoutNodeNestedInput
 }
@@ -700,11 +828,15 @@ export type GatheringNodeUncheckedUpdateWithoutGatherAttemptsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  jobId?: Prisma.StringFieldUpdateOperationsInput | string
-  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  jobId?: Prisma.StringFieldUpdateOperationsInput | string
+  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   yields?: Prisma.NodeYieldUncheckedUpdateManyWithoutNodeNestedInput
 }
 
@@ -712,20 +844,28 @@ export type GatheringNodeCreateManyJobInput = {
   id?: string
   key: string
   name: string
-  dangerTier?: number
   description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  dangerTier?: number
 }
 
 export type GatheringNodeUpdateWithoutJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   yields?: Prisma.NodeYieldUpdateManyWithoutNodeNestedInput
   gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutNodeNestedInput
 }
@@ -734,10 +874,14 @@ export type GatheringNodeUncheckedUpdateWithoutJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   yields?: Prisma.NodeYieldUncheckedUpdateManyWithoutNodeNestedInput
   gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutNodeNestedInput
 }
@@ -746,10 +890,14 @@ export type GatheringNodeUncheckedUpdateManyWithoutJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   key?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -796,11 +944,15 @@ export type GatheringNodeSelect<ExtArgs extends runtime.Types.Extensions.Interna
   id?: boolean
   key?: boolean
   name?: boolean
-  jobId?: boolean
-  dangerTier?: boolean
   description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  jobId?: boolean
+  dangerTier?: boolean
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
   yields?: boolean | Prisma.GatheringNode$yieldsArgs<ExtArgs>
   gatherAttempts?: boolean | Prisma.GatheringNode$gatherAttemptsArgs<ExtArgs>
@@ -811,11 +963,15 @@ export type GatheringNodeSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   key?: boolean
   name?: boolean
-  jobId?: boolean
-  dangerTier?: boolean
   description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  jobId?: boolean
+  dangerTier?: boolean
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["gatheringNode"]>
 
@@ -823,11 +979,15 @@ export type GatheringNodeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   key?: boolean
   name?: boolean
-  jobId?: boolean
-  dangerTier?: boolean
   description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  jobId?: boolean
+  dangerTier?: boolean
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["gatheringNode"]>
 
@@ -835,14 +995,18 @@ export type GatheringNodeSelectScalar = {
   id?: boolean
   key?: boolean
   name?: boolean
-  jobId?: boolean
-  dangerTier?: boolean
   description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  jobId?: boolean
+  dangerTier?: boolean
 }
 
-export type GatheringNodeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "jobId" | "dangerTier" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["gatheringNode"]>
+export type GatheringNodeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "jobId" | "dangerTier", ExtArgs["result"]["gatheringNode"]>
 export type GatheringNodeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
   yields?: boolean | Prisma.GatheringNode$yieldsArgs<ExtArgs>
@@ -867,11 +1031,15 @@ export type $GatheringNodePayload<ExtArgs extends runtime.Types.Extensions.Inter
     id: string
     key: string
     name: string
-    jobId: string
-    dangerTier: number
     description: string | null
+    tags: runtime.JsonValue | null
+    status: $Enums.ContentStatus
+    version: number
+    createdBy: string | null
     createdAt: Date
     updatedAt: Date
+    jobId: string
+    dangerTier: number
   }, ExtArgs["result"]["gatheringNode"]>
   composites: {}
 }
@@ -1301,11 +1469,15 @@ export interface GatheringNodeFieldRefs {
   readonly id: Prisma.FieldRef<"GatheringNode", 'String'>
   readonly key: Prisma.FieldRef<"GatheringNode", 'String'>
   readonly name: Prisma.FieldRef<"GatheringNode", 'String'>
-  readonly jobId: Prisma.FieldRef<"GatheringNode", 'String'>
-  readonly dangerTier: Prisma.FieldRef<"GatheringNode", 'Int'>
   readonly description: Prisma.FieldRef<"GatheringNode", 'String'>
+  readonly tags: Prisma.FieldRef<"GatheringNode", 'Json'>
+  readonly status: Prisma.FieldRef<"GatheringNode", 'ContentStatus'>
+  readonly version: Prisma.FieldRef<"GatheringNode", 'Int'>
+  readonly createdBy: Prisma.FieldRef<"GatheringNode", 'String'>
   readonly createdAt: Prisma.FieldRef<"GatheringNode", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"GatheringNode", 'DateTime'>
+  readonly jobId: Prisma.FieldRef<"GatheringNode", 'String'>
+  readonly dangerTier: Prisma.FieldRef<"GatheringNode", 'Int'>
 }
     
 

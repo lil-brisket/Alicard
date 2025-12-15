@@ -27,11 +27,13 @@ export type AggregateItemTemplate = {
 }
 
 export type ItemTemplateAvgAggregateOutputType = {
+  version: number | null
   maxStack: number | null
   value: number | null
 }
 
 export type ItemTemplateSumAggregateOutputType = {
+  version: number | null
   maxStack: number | null
   value: number | null
 }
@@ -40,6 +42,11 @@ export type ItemTemplateMinAggregateOutputType = {
   id: string | null
   name: string | null
   description: string | null
+  status: $Enums.ContentStatus | null
+  version: number | null
+  createdBy: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
   rarity: $Enums.ItemRarity | null
   stackable: boolean | null
   maxStack: number | null
@@ -47,14 +54,17 @@ export type ItemTemplateMinAggregateOutputType = {
   icon: string | null
   isArchived: boolean | null
   deletedAt: Date | null
-  createdAt: Date | null
-  updatedAt: Date | null
 }
 
 export type ItemTemplateMaxAggregateOutputType = {
   id: string | null
   name: string | null
   description: string | null
+  status: $Enums.ContentStatus | null
+  version: number | null
+  createdBy: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
   rarity: $Enums.ItemRarity | null
   stackable: boolean | null
   maxStack: number | null
@@ -62,14 +72,18 @@ export type ItemTemplateMaxAggregateOutputType = {
   icon: string | null
   isArchived: boolean | null
   deletedAt: Date | null
-  createdAt: Date | null
-  updatedAt: Date | null
 }
 
 export type ItemTemplateCountAggregateOutputType = {
   id: number
   name: number
   description: number
+  tags: number
+  status: number
+  version: number
+  createdBy: number
+  createdAt: number
+  updatedAt: number
   rarity: number
   stackable: number
   maxStack: number
@@ -77,18 +91,18 @@ export type ItemTemplateCountAggregateOutputType = {
   icon: number
   isArchived: number
   deletedAt: number
-  createdAt: number
-  updatedAt: number
   _all: number
 }
 
 
 export type ItemTemplateAvgAggregateInputType = {
+  version?: true
   maxStack?: true
   value?: true
 }
 
 export type ItemTemplateSumAggregateInputType = {
+  version?: true
   maxStack?: true
   value?: true
 }
@@ -97,6 +111,11 @@ export type ItemTemplateMinAggregateInputType = {
   id?: true
   name?: true
   description?: true
+  status?: true
+  version?: true
+  createdBy?: true
+  createdAt?: true
+  updatedAt?: true
   rarity?: true
   stackable?: true
   maxStack?: true
@@ -104,14 +123,17 @@ export type ItemTemplateMinAggregateInputType = {
   icon?: true
   isArchived?: true
   deletedAt?: true
-  createdAt?: true
-  updatedAt?: true
 }
 
 export type ItemTemplateMaxAggregateInputType = {
   id?: true
   name?: true
   description?: true
+  status?: true
+  version?: true
+  createdBy?: true
+  createdAt?: true
+  updatedAt?: true
   rarity?: true
   stackable?: true
   maxStack?: true
@@ -119,14 +141,18 @@ export type ItemTemplateMaxAggregateInputType = {
   icon?: true
   isArchived?: true
   deletedAt?: true
-  createdAt?: true
-  updatedAt?: true
 }
 
 export type ItemTemplateCountAggregateInputType = {
   id?: true
   name?: true
   description?: true
+  tags?: true
+  status?: true
+  version?: true
+  createdBy?: true
+  createdAt?: true
+  updatedAt?: true
   rarity?: true
   stackable?: true
   maxStack?: true
@@ -134,8 +160,6 @@ export type ItemTemplateCountAggregateInputType = {
   icon?: true
   isArchived?: true
   deletedAt?: true
-  createdAt?: true
-  updatedAt?: true
   _all?: true
 }
 
@@ -229,6 +253,12 @@ export type ItemTemplateGroupByOutputType = {
   id: string
   name: string
   description: string | null
+  tags: runtime.JsonValue | null
+  status: $Enums.ContentStatus
+  version: number
+  createdBy: string | null
+  createdAt: Date
+  updatedAt: Date
   rarity: $Enums.ItemRarity
   stackable: boolean
   maxStack: number
@@ -236,8 +266,6 @@ export type ItemTemplateGroupByOutputType = {
   icon: string | null
   isArchived: boolean
   deletedAt: Date | null
-  createdAt: Date
-  updatedAt: Date
   _count: ItemTemplateCountAggregateOutputType | null
   _avg: ItemTemplateAvgAggregateOutputType | null
   _sum: ItemTemplateSumAggregateOutputType | null
@@ -267,6 +295,12 @@ export type ItemTemplateWhereInput = {
   id?: Prisma.StringFilter<"ItemTemplate"> | string
   name?: Prisma.StringFilter<"ItemTemplate"> | string
   description?: Prisma.StringNullableFilter<"ItemTemplate"> | string | null
+  tags?: Prisma.JsonNullableFilter<"ItemTemplate">
+  status?: Prisma.EnumContentStatusFilter<"ItemTemplate"> | $Enums.ContentStatus
+  version?: Prisma.IntFilter<"ItemTemplate"> | number
+  createdBy?: Prisma.StringNullableFilter<"ItemTemplate"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"ItemTemplate"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"ItemTemplate"> | Date | string
   rarity?: Prisma.EnumItemRarityFilter<"ItemTemplate"> | $Enums.ItemRarity
   stackable?: Prisma.BoolFilter<"ItemTemplate"> | boolean
   maxStack?: Prisma.IntFilter<"ItemTemplate"> | number
@@ -274,14 +308,18 @@ export type ItemTemplateWhereInput = {
   icon?: Prisma.StringNullableFilter<"ItemTemplate"> | string | null
   isArchived?: Prisma.BoolFilter<"ItemTemplate"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"ItemTemplate"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"ItemTemplate"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"ItemTemplate"> | Date | string
 }
 
 export type ItemTemplateOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   rarity?: Prisma.SortOrder
   stackable?: Prisma.SortOrder
   maxStack?: Prisma.SortOrder
@@ -289,8 +327,6 @@ export type ItemTemplateOrderByWithRelationInput = {
   icon?: Prisma.SortOrderInput | Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type ItemTemplateWhereUniqueInput = Prisma.AtLeast<{
@@ -300,6 +336,12 @@ export type ItemTemplateWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ItemTemplateWhereInput | Prisma.ItemTemplateWhereInput[]
   name?: Prisma.StringFilter<"ItemTemplate"> | string
   description?: Prisma.StringNullableFilter<"ItemTemplate"> | string | null
+  tags?: Prisma.JsonNullableFilter<"ItemTemplate">
+  status?: Prisma.EnumContentStatusFilter<"ItemTemplate"> | $Enums.ContentStatus
+  version?: Prisma.IntFilter<"ItemTemplate"> | number
+  createdBy?: Prisma.StringNullableFilter<"ItemTemplate"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"ItemTemplate"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"ItemTemplate"> | Date | string
   rarity?: Prisma.EnumItemRarityFilter<"ItemTemplate"> | $Enums.ItemRarity
   stackable?: Prisma.BoolFilter<"ItemTemplate"> | boolean
   maxStack?: Prisma.IntFilter<"ItemTemplate"> | number
@@ -307,14 +349,18 @@ export type ItemTemplateWhereUniqueInput = Prisma.AtLeast<{
   icon?: Prisma.StringNullableFilter<"ItemTemplate"> | string | null
   isArchived?: Prisma.BoolFilter<"ItemTemplate"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"ItemTemplate"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"ItemTemplate"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"ItemTemplate"> | Date | string
 }, "id">
 
 export type ItemTemplateOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   rarity?: Prisma.SortOrder
   stackable?: Prisma.SortOrder
   maxStack?: Prisma.SortOrder
@@ -322,8 +368,6 @@ export type ItemTemplateOrderByWithAggregationInput = {
   icon?: Prisma.SortOrderInput | Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   _count?: Prisma.ItemTemplateCountOrderByAggregateInput
   _avg?: Prisma.ItemTemplateAvgOrderByAggregateInput
   _max?: Prisma.ItemTemplateMaxOrderByAggregateInput
@@ -338,6 +382,12 @@ export type ItemTemplateScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"ItemTemplate"> | string
   name?: Prisma.StringWithAggregatesFilter<"ItemTemplate"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"ItemTemplate"> | string | null
+  tags?: Prisma.JsonNullableWithAggregatesFilter<"ItemTemplate">
+  status?: Prisma.EnumContentStatusWithAggregatesFilter<"ItemTemplate"> | $Enums.ContentStatus
+  version?: Prisma.IntWithAggregatesFilter<"ItemTemplate"> | number
+  createdBy?: Prisma.StringNullableWithAggregatesFilter<"ItemTemplate"> | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"ItemTemplate"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ItemTemplate"> | Date | string
   rarity?: Prisma.EnumItemRarityWithAggregatesFilter<"ItemTemplate"> | $Enums.ItemRarity
   stackable?: Prisma.BoolWithAggregatesFilter<"ItemTemplate"> | boolean
   maxStack?: Prisma.IntWithAggregatesFilter<"ItemTemplate"> | number
@@ -345,14 +395,18 @@ export type ItemTemplateScalarWhereWithAggregatesInput = {
   icon?: Prisma.StringNullableWithAggregatesFilter<"ItemTemplate"> | string | null
   isArchived?: Prisma.BoolWithAggregatesFilter<"ItemTemplate"> | boolean
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ItemTemplate"> | Date | string | null
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"ItemTemplate"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ItemTemplate"> | Date | string
 }
 
 export type ItemTemplateCreateInput = {
   id?: string
   name: string
   description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   rarity?: $Enums.ItemRarity
   stackable?: boolean
   maxStack?: number
@@ -360,14 +414,18 @@ export type ItemTemplateCreateInput = {
   icon?: string | null
   isArchived?: boolean
   deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type ItemTemplateUncheckedCreateInput = {
   id?: string
   name: string
   description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   rarity?: $Enums.ItemRarity
   stackable?: boolean
   maxStack?: number
@@ -375,14 +433,18 @@ export type ItemTemplateUncheckedCreateInput = {
   icon?: string | null
   isArchived?: boolean
   deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type ItemTemplateUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
   stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxStack?: Prisma.IntFieldUpdateOperationsInput | number
@@ -390,14 +452,18 @@ export type ItemTemplateUpdateInput = {
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ItemTemplateUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
   stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxStack?: Prisma.IntFieldUpdateOperationsInput | number
@@ -405,14 +471,18 @@ export type ItemTemplateUncheckedUpdateInput = {
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ItemTemplateCreateManyInput = {
   id?: string
   name: string
   description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   rarity?: $Enums.ItemRarity
   stackable?: boolean
   maxStack?: number
@@ -420,14 +490,18 @@ export type ItemTemplateCreateManyInput = {
   icon?: string | null
   isArchived?: boolean
   deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type ItemTemplateUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
   stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxStack?: Prisma.IntFieldUpdateOperationsInput | number
@@ -435,14 +509,18 @@ export type ItemTemplateUpdateManyMutationInput = {
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ItemTemplateUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
   stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   maxStack?: Prisma.IntFieldUpdateOperationsInput | number
@@ -450,14 +528,18 @@ export type ItemTemplateUncheckedUpdateManyInput = {
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ItemTemplateCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   rarity?: Prisma.SortOrder
   stackable?: Prisma.SortOrder
   maxStack?: Prisma.SortOrder
@@ -465,11 +547,10 @@ export type ItemTemplateCountOrderByAggregateInput = {
   icon?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type ItemTemplateAvgOrderByAggregateInput = {
+  version?: Prisma.SortOrder
   maxStack?: Prisma.SortOrder
   value?: Prisma.SortOrder
 }
@@ -478,6 +559,11 @@ export type ItemTemplateMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   rarity?: Prisma.SortOrder
   stackable?: Prisma.SortOrder
   maxStack?: Prisma.SortOrder
@@ -485,14 +571,17 @@ export type ItemTemplateMaxOrderByAggregateInput = {
   icon?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type ItemTemplateMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   rarity?: Prisma.SortOrder
   stackable?: Prisma.SortOrder
   maxStack?: Prisma.SortOrder
@@ -500,11 +589,10 @@ export type ItemTemplateMinOrderByAggregateInput = {
   icon?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type ItemTemplateSumOrderByAggregateInput = {
+  version?: Prisma.SortOrder
   maxStack?: Prisma.SortOrder
   value?: Prisma.SortOrder
 }
@@ -515,6 +603,12 @@ export type ItemTemplateSelect<ExtArgs extends runtime.Types.Extensions.Internal
   id?: boolean
   name?: boolean
   description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   rarity?: boolean
   stackable?: boolean
   maxStack?: boolean
@@ -522,14 +616,18 @@ export type ItemTemplateSelect<ExtArgs extends runtime.Types.Extensions.Internal
   icon?: boolean
   isArchived?: boolean
   deletedAt?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["itemTemplate"]>
 
 export type ItemTemplateSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   rarity?: boolean
   stackable?: boolean
   maxStack?: boolean
@@ -537,14 +635,18 @@ export type ItemTemplateSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   icon?: boolean
   isArchived?: boolean
   deletedAt?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["itemTemplate"]>
 
 export type ItemTemplateSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   rarity?: boolean
   stackable?: boolean
   maxStack?: boolean
@@ -552,14 +654,18 @@ export type ItemTemplateSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   icon?: boolean
   isArchived?: boolean
   deletedAt?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["itemTemplate"]>
 
 export type ItemTemplateSelectScalar = {
   id?: boolean
   name?: boolean
   description?: boolean
+  tags?: boolean
+  status?: boolean
+  version?: boolean
+  createdBy?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   rarity?: boolean
   stackable?: boolean
   maxStack?: boolean
@@ -567,11 +673,9 @@ export type ItemTemplateSelectScalar = {
   icon?: boolean
   isArchived?: boolean
   deletedAt?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }
 
-export type ItemTemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "rarity" | "stackable" | "maxStack" | "value" | "icon" | "isArchived" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["itemTemplate"]>
+export type ItemTemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "rarity" | "stackable" | "maxStack" | "value" | "icon" | "isArchived" | "deletedAt", ExtArgs["result"]["itemTemplate"]>
 
 export type $ItemTemplatePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ItemTemplate"
@@ -580,6 +684,12 @@ export type $ItemTemplatePayload<ExtArgs extends runtime.Types.Extensions.Intern
     id: string
     name: string
     description: string | null
+    tags: runtime.JsonValue | null
+    status: $Enums.ContentStatus
+    version: number
+    createdBy: string | null
+    createdAt: Date
+    updatedAt: Date
     rarity: $Enums.ItemRarity
     stackable: boolean
     maxStack: number
@@ -587,8 +697,6 @@ export type $ItemTemplatePayload<ExtArgs extends runtime.Types.Extensions.Intern
     icon: string | null
     isArchived: boolean
     deletedAt: Date | null
-    createdAt: Date
-    updatedAt: Date
   }, ExtArgs["result"]["itemTemplate"]>
   composites: {}
 }
@@ -1015,6 +1123,12 @@ export interface ItemTemplateFieldRefs {
   readonly id: Prisma.FieldRef<"ItemTemplate", 'String'>
   readonly name: Prisma.FieldRef<"ItemTemplate", 'String'>
   readonly description: Prisma.FieldRef<"ItemTemplate", 'String'>
+  readonly tags: Prisma.FieldRef<"ItemTemplate", 'Json'>
+  readonly status: Prisma.FieldRef<"ItemTemplate", 'ContentStatus'>
+  readonly version: Prisma.FieldRef<"ItemTemplate", 'Int'>
+  readonly createdBy: Prisma.FieldRef<"ItemTemplate", 'String'>
+  readonly createdAt: Prisma.FieldRef<"ItemTemplate", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"ItemTemplate", 'DateTime'>
   readonly rarity: Prisma.FieldRef<"ItemTemplate", 'ItemRarity'>
   readonly stackable: Prisma.FieldRef<"ItemTemplate", 'Boolean'>
   readonly maxStack: Prisma.FieldRef<"ItemTemplate", 'Int'>
@@ -1022,8 +1136,6 @@ export interface ItemTemplateFieldRefs {
   readonly icon: Prisma.FieldRef<"ItemTemplate", 'String'>
   readonly isArchived: Prisma.FieldRef<"ItemTemplate", 'Boolean'>
   readonly deletedAt: Prisma.FieldRef<"ItemTemplate", 'DateTime'>
-  readonly createdAt: Prisma.FieldRef<"ItemTemplate", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"ItemTemplate", 'DateTime'>
 }
     
 
