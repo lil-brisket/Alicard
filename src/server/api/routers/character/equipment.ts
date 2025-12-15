@@ -36,6 +36,37 @@ const slotToFieldMap = {
   CLOAK: "cloakItemId",
 } as const;
 
+// Helper function to infer equipmentSlot from itemType if missing
+// This provides backward compatibility for items created without equipmentSlot
+type ItemWithType = {
+  itemType: "WEAPON" | "ARMOR" | "ACCESSORY" | "CONSUMABLE" | "MATERIAL" | "QUEST_ITEM" | "TOOL" | "EQUIPMENT";
+  equipmentSlot: "HEAD" | "ARMS" | "BODY" | "LEGS" | "FEET" | "RING" | "NECKLACE" | "BELT" | "CLOAK" | null;
+};
+
+const getEffectiveEquipmentSlot = (item: ItemWithType): string | null => {
+  // If equipmentSlot is already set, use it
+  if (item.equipmentSlot) {
+    return item.equipmentSlot;
+  }
+  
+  // Infer from itemType for backward compatibility
+  switch (item.itemType) {
+    case "WEAPON":
+      return "ARMS";
+    case "ARMOR":
+      // ARMOR could be BODY, HEAD, LEGS, or FEET - default to BODY
+      return "BODY";
+    case "ACCESSORY":
+      // ACCESSORY could be RING, NECKLACE, BELT, or CLOAK - default to RING
+      return "RING";
+    case "EQUIPMENT":
+      // EQUIPMENT is generic, default to BODY
+      return "BODY";
+    default:
+      return null;
+  }
+};
+
 export const equipmentRouter = createTRPCRouter({
   // Get current equipment loadout with items and stat bonuses
   getLoadout: protectedProcedure.query(async ({ ctx }) => {
@@ -75,8 +106,7 @@ export const equipmentRouter = createTRPCRouter({
         data: { playerId: player.id },
         include: {
           head: true,
-          leftArm: true,
-          rightArm: true,
+          arms: true,
           body: true,
           legs: true,
           feet: true,
@@ -165,22 +195,42 @@ export const equipmentRouter = createTRPCRouter({
         ],
       });
 
-      // Filter to EQUIPMENT type items
-      let equippable = inventoryItems.filter(
-        (invItem) => invItem.item.itemType === "EQUIPMENT"
-      );
+      // Filter to equippable item types (WEAPON, ARMOR, ACCESSORY, EQUIPMENT)
+      // Items must have an equipmentSlot (either set or inferred) to be equippable
+      let equippable = inventoryItems.filter((invItem) => {
+        const itemType = invItem.item.itemType;
+        const isEquippableType = 
+          itemType === "WEAPON" || 
+          itemType === "ARMOR" || 
+          itemType === "ACCESSORY" || 
+          itemType === "EQUIPMENT";
+        
+        if (!isEquippableType) return false;
+        
+        // Check if item has an effective equipmentSlot (either set or inferred)
+        const effectiveSlot = getEffectiveEquipmentSlot(invItem.item);
+        return effectiveSlot !== null;
+      });
 
       // If slot is specified, filter to items that match that slot
       if (input?.slot) {
         if (input.slot === "RING1" || input.slot === "RING2" || input.slot === "RING3") {
           // Ring slots accept items with equipmentSlot: "RING"
-          equippable = equippable.filter(
-            (invItem) => invItem.item.equipmentSlot === "RING"
-          );
+          equippable = equippable.filter((invItem) => {
+            const effectiveSlot = getEffectiveEquipmentSlot(invItem.item);
+            return effectiveSlot === "RING";
+          });
+        } else if (input.slot === "LEFT_ARM" || input.slot === "RIGHT_ARM") {
+          // Both arm slots accept items with equipmentSlot: "ARMS"
+          equippable = equippable.filter((invItem) => {
+            const effectiveSlot = getEffectiveEquipmentSlot(invItem.item);
+            return effectiveSlot === "ARMS";
+          });
         } else {
-          equippable = equippable.filter(
-            (invItem) => invItem.item.equipmentSlot === input.slot
-          );
+          equippable = equippable.filter((invItem) => {
+            const effectiveSlot = getEffectiveEquipmentSlot(invItem.item);
+            return effectiveSlot === input.slot;
+          });
         }
       }
 
@@ -235,25 +285,49 @@ export const equipmentRouter = createTRPCRouter({
         });
       }
 
-      // Validate item type
-      if (inventoryItem.item.itemType !== "EQUIPMENT") {
+      // Validate item type (must be equippable)
+      const isEquippableType = 
+        inventoryItem.item.itemType === "WEAPON" ||
+        inventoryItem.item.itemType === "ARMOR" ||
+        inventoryItem.item.itemType === "ACCESSORY" ||
+        inventoryItem.item.itemType === "EQUIPMENT";
+      
+      if (!isEquippableType) {
         throw new TRPCError({
           code: "BAD_REQUEST",
-          message: "Item is not equipment",
+          message: "Item is not equippable",
+        });
+      }
+
+      // Get effective equipment slot (inferred if missing)
+      const effectiveSlot = getEffectiveEquipmentSlot(inventoryItem.item);
+      
+      if (!effectiveSlot) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Item does not have an equipment slot",
         });
       }
 
       // Validate slot match
       if (input.toSlot === "RING1" || input.toSlot === "RING2" || input.toSlot === "RING3") {
         // Ring slots accept items with equipmentSlot: "RING"
-        if (inventoryItem.item.equipmentSlot !== "RING") {
+        if (effectiveSlot !== "RING") {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: "Item slot does not match",
+          });
+        }
+      } else if (input.toSlot === "LEFT_ARM" || input.toSlot === "RIGHT_ARM") {
+        // Both arm slots accept items with equipmentSlot: "ARMS"
+        if (effectiveSlot !== "ARMS") {
           throw new TRPCError({
             code: "BAD_REQUEST",
             message: "Item slot does not match",
           });
         }
       } else {
-        if (inventoryItem.item.equipmentSlot !== input.toSlot) {
+        if (effectiveSlot !== input.toSlot) {
           throw new TRPCError({
             code: "BAD_REQUEST",
             message: "Item slot does not match",
