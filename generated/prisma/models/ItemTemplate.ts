@@ -99,6 +99,7 @@ export type ItemTemplateCountAggregateOutputType = {
   maxStack: number
   value: number
   damage: number
+  statsJSON: number
   icon: number
   isArchived: number
   deletedAt: number
@@ -179,6 +180,7 @@ export type ItemTemplateCountAggregateInputType = {
   maxStack?: true
   value?: true
   damage?: true
+  statsJSON?: true
   icon?: true
   isArchived?: true
   deletedAt?: true
@@ -288,6 +290,7 @@ export type ItemTemplateGroupByOutputType = {
   maxStack: number
   value: number
   damage: number
+  statsJSON: runtime.JsonValue | null
   icon: string | null
   isArchived: boolean
   deletedAt: Date | null
@@ -333,6 +336,7 @@ export type ItemTemplateWhereInput = {
   maxStack?: Prisma.IntFilter<"ItemTemplate"> | number
   value?: Prisma.IntFilter<"ItemTemplate"> | number
   damage?: Prisma.IntFilter<"ItemTemplate"> | number
+  statsJSON?: Prisma.JsonNullableFilter<"ItemTemplate">
   icon?: Prisma.StringNullableFilter<"ItemTemplate"> | string | null
   isArchived?: Prisma.BoolFilter<"ItemTemplate"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"ItemTemplate"> | Date | string | null
@@ -355,6 +359,7 @@ export type ItemTemplateOrderByWithRelationInput = {
   maxStack?: Prisma.SortOrder
   value?: Prisma.SortOrder
   damage?: Prisma.SortOrder
+  statsJSON?: Prisma.SortOrderInput | Prisma.SortOrder
   icon?: Prisma.SortOrderInput | Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -380,6 +385,7 @@ export type ItemTemplateWhereUniqueInput = Prisma.AtLeast<{
   maxStack?: Prisma.IntFilter<"ItemTemplate"> | number
   value?: Prisma.IntFilter<"ItemTemplate"> | number
   damage?: Prisma.IntFilter<"ItemTemplate"> | number
+  statsJSON?: Prisma.JsonNullableFilter<"ItemTemplate">
   icon?: Prisma.StringNullableFilter<"ItemTemplate"> | string | null
   isArchived?: Prisma.BoolFilter<"ItemTemplate"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"ItemTemplate"> | Date | string | null
@@ -402,6 +408,7 @@ export type ItemTemplateOrderByWithAggregationInput = {
   maxStack?: Prisma.SortOrder
   value?: Prisma.SortOrder
   damage?: Prisma.SortOrder
+  statsJSON?: Prisma.SortOrderInput | Prisma.SortOrder
   icon?: Prisma.SortOrderInput | Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -432,6 +439,7 @@ export type ItemTemplateScalarWhereWithAggregatesInput = {
   maxStack?: Prisma.IntWithAggregatesFilter<"ItemTemplate"> | number
   value?: Prisma.IntWithAggregatesFilter<"ItemTemplate"> | number
   damage?: Prisma.IntWithAggregatesFilter<"ItemTemplate"> | number
+  statsJSON?: Prisma.JsonNullableWithAggregatesFilter<"ItemTemplate">
   icon?: Prisma.StringNullableWithAggregatesFilter<"ItemTemplate"> | string | null
   isArchived?: Prisma.BoolWithAggregatesFilter<"ItemTemplate"> | boolean
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ItemTemplate"> | Date | string | null
@@ -454,6 +462,7 @@ export type ItemTemplateCreateInput = {
   maxStack?: number
   value?: number
   damage?: number
+  statsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   icon?: string | null
   isArchived?: boolean
   deletedAt?: Date | string | null
@@ -476,6 +485,7 @@ export type ItemTemplateUncheckedCreateInput = {
   maxStack?: number
   value?: number
   damage?: number
+  statsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   icon?: string | null
   isArchived?: boolean
   deletedAt?: Date | string | null
@@ -498,6 +508,7 @@ export type ItemTemplateUpdateInput = {
   maxStack?: Prisma.IntFieldUpdateOperationsInput | number
   value?: Prisma.IntFieldUpdateOperationsInput | number
   damage?: Prisma.IntFieldUpdateOperationsInput | number
+  statsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -520,6 +531,7 @@ export type ItemTemplateUncheckedUpdateInput = {
   maxStack?: Prisma.IntFieldUpdateOperationsInput | number
   value?: Prisma.IntFieldUpdateOperationsInput | number
   damage?: Prisma.IntFieldUpdateOperationsInput | number
+  statsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -542,6 +554,7 @@ export type ItemTemplateCreateManyInput = {
   maxStack?: number
   value?: number
   damage?: number
+  statsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   icon?: string | null
   isArchived?: boolean
   deletedAt?: Date | string | null
@@ -564,6 +577,7 @@ export type ItemTemplateUpdateManyMutationInput = {
   maxStack?: Prisma.IntFieldUpdateOperationsInput | number
   value?: Prisma.IntFieldUpdateOperationsInput | number
   damage?: Prisma.IntFieldUpdateOperationsInput | number
+  statsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -586,6 +600,7 @@ export type ItemTemplateUncheckedUpdateManyInput = {
   maxStack?: Prisma.IntFieldUpdateOperationsInput | number
   value?: Prisma.IntFieldUpdateOperationsInput | number
   damage?: Prisma.IntFieldUpdateOperationsInput | number
+  statsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -608,6 +623,7 @@ export type ItemTemplateCountOrderByAggregateInput = {
   maxStack?: Prisma.SortOrder
   value?: Prisma.SortOrder
   damage?: Prisma.SortOrder
+  statsJSON?: Prisma.SortOrder
   icon?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -692,6 +708,7 @@ export type ItemTemplateSelect<ExtArgs extends runtime.Types.Extensions.Internal
   maxStack?: boolean
   value?: boolean
   damage?: boolean
+  statsJSON?: boolean
   icon?: boolean
   isArchived?: boolean
   deletedAt?: boolean
@@ -714,6 +731,7 @@ export type ItemTemplateSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   maxStack?: boolean
   value?: boolean
   damage?: boolean
+  statsJSON?: boolean
   icon?: boolean
   isArchived?: boolean
   deletedAt?: boolean
@@ -736,6 +754,7 @@ export type ItemTemplateSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   maxStack?: boolean
   value?: boolean
   damage?: boolean
+  statsJSON?: boolean
   icon?: boolean
   isArchived?: boolean
   deletedAt?: boolean
@@ -758,12 +777,13 @@ export type ItemTemplateSelectScalar = {
   maxStack?: boolean
   value?: boolean
   damage?: boolean
+  statsJSON?: boolean
   icon?: boolean
   isArchived?: boolean
   deletedAt?: boolean
 }
 
-export type ItemTemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "itemType" | "equipmentSlot" | "rarity" | "stackable" | "maxStack" | "value" | "damage" | "icon" | "isArchived" | "deletedAt", ExtArgs["result"]["itemTemplate"]>
+export type ItemTemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "itemType" | "equipmentSlot" | "rarity" | "stackable" | "maxStack" | "value" | "damage" | "statsJSON" | "icon" | "isArchived" | "deletedAt", ExtArgs["result"]["itemTemplate"]>
 
 export type $ItemTemplatePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ItemTemplate"
@@ -785,6 +805,7 @@ export type $ItemTemplatePayload<ExtArgs extends runtime.Types.Extensions.Intern
     maxStack: number
     value: number
     damage: number
+    statsJSON: runtime.JsonValue | null
     icon: string | null
     isArchived: boolean
     deletedAt: Date | null
@@ -1227,6 +1248,7 @@ export interface ItemTemplateFieldRefs {
   readonly maxStack: Prisma.FieldRef<"ItemTemplate", 'Int'>
   readonly value: Prisma.FieldRef<"ItemTemplate", 'Int'>
   readonly damage: Prisma.FieldRef<"ItemTemplate", 'Int'>
+  readonly statsJSON: Prisma.FieldRef<"ItemTemplate", 'Json'>
   readonly icon: Prisma.FieldRef<"ItemTemplate", 'String'>
   readonly isArchived: Prisma.FieldRef<"ItemTemplate", 'Boolean'>
   readonly deletedAt: Prisma.FieldRef<"ItemTemplate", 'DateTime'>

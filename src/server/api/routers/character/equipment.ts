@@ -127,6 +127,7 @@ export const equipmentRouter = createTRPCRouter({
           dexterity: 0,
           hp: 0,
           sp: 0,
+          defense: 0,
         },
       };
     }
@@ -155,8 +156,9 @@ export const equipmentRouter = createTRPCRouter({
         dexterity: acc.dexterity + (item?.dexterityBonus ?? 0),
         hp: acc.hp + (item?.hpBonus ?? 0),
         sp: acc.sp + (item?.spBonus ?? 0),
+        defense: acc.defense + (item?.defenseBonus ?? 0),
       }),
-      { vitality: 0, strength: 0, speed: 0, dexterity: 0, hp: 0, sp: 0 }
+      { vitality: 0, strength: 0, speed: 0, dexterity: 0, hp: 0, sp: 0, defense: 0 }
     );
 
     return {

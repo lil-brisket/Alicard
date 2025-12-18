@@ -376,6 +376,7 @@ export const ItemScalarFieldEnum = {
   dexterityBonus: 'dexterityBonus',
   hpBonus: 'hpBonus',
   spBonus: 'spBonus',
+  defenseBonus: 'defenseBonus',
   createdAt: 'createdAt'
 } as const
 
@@ -955,6 +956,7 @@ export const ItemTemplateScalarFieldEnum = {
   maxStack: 'maxStack',
   value: 'value',
   damage: 'damage',
+  statsJSON: 'statsJSON',
   icon: 'icon',
   isArchived: 'isArchived',
   deletedAt: 'deletedAt'

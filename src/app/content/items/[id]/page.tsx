@@ -1,12 +1,22 @@
 "use client";
 
-import { use, useState } from "react";
+import { use, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { api } from "~/trpc/react";
 import { toast } from "react-hot-toast";
 import { ItemPreviewPanel } from "./_components/preview-panel";
 import { PermissionIndicator } from "./_components/permission-indicator";
+
+interface ItemStats {
+  vitality?: number;
+  strength?: number;
+  speed?: number;
+  dexterity?: number;
+  hp?: number;
+  sp?: number;
+  defense?: number;
+}
 
 export default function ItemDetailPage({
   params,
@@ -20,6 +30,13 @@ export default function ItemDetailPage({
   const utils = api.useUtils();
 
   const [affectsExisting, setAffectsExisting] = useState(false);
+  const [stats, setStats] = useState<ItemStats>({});
+  
+  useEffect(() => {
+    if (item?.statsJSON) {
+      setStats(item.statsJSON as ItemStats);
+    }
+  }, [item?.statsJSON]);
   
   const updateItem = api.content.items.update.useMutation({
     onSuccess: () => {
@@ -271,6 +288,43 @@ export default function ItemDetailPage({
                 }
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
               />
+            </div>
+
+            {/* Item Stats Section */}
+            <div className="border-t border-slate-700 pt-4">
+              <h4 className="mb-3 text-sm font-semibold text-cyan-400">Item Stats</h4>
+              <p className="mb-3 text-xs text-slate-400">
+                Stats bonuses applied when this item is equipped
+              </p>
+              <div className="grid grid-cols-2 gap-3">
+                {(["vitality", "strength", "speed", "dexterity", "hp", "sp", "defense"] as const).map((stat) => (
+                  <div key={stat}>
+                    <label className="block text-xs font-medium text-slate-400 capitalize">
+                      {stat}
+                    </label>
+                    <input
+                      type="number"
+                      value={stats[stat] ?? ""}
+                      onChange={(e) => {
+                        const value = e.target.value === "" ? undefined : parseInt(e.target.value);
+                        setStats((prev) => ({ ...prev, [stat]: value }));
+                      }}
+                      onBlur={() => {
+                        const cleanedStats = Object.fromEntries(
+                          Object.entries(stats).filter(([, v]) => v !== undefined && v !== 0)
+                        );
+                        updateItem.mutate({
+                          id,
+                          statsJSON: Object.keys(cleanedStats).length > 0 ? cleanedStats : null,
+                          affectsExisting,
+                        });
+                      }}
+                      placeholder="0"
+                      className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-2 py-1.5 text-sm text-slate-100"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

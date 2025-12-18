@@ -39,6 +39,16 @@ const equipmentSlotSchema = z.enum([
 
 const contentStatusSchema = z.enum(["DRAFT", "ACTIVE", "DISABLED"]);
 
+const itemStatsSchema = z.object({
+  vitality: z.number().optional(),
+  strength: z.number().optional(),
+  speed: z.number().optional(),
+  dexterity: z.number().optional(),
+  hp: z.number().optional(),
+  sp: z.number().optional(),
+  defense: z.number().optional(),
+}).optional();
+
 export const contentItemsRouter = createTRPCRouter({
   // List all item templates with filtering
   list: contentProcedure
@@ -130,6 +140,7 @@ export const contentItemsRouter = createTRPCRouter({
         maxStack: z.number().min(1).default(1),
         value: z.number().min(0).default(0),
         damage: z.number().min(0).default(0),
+        statsJSON: itemStatsSchema,
         icon: z.string().optional(),
         cloneFromId: z.string().optional(), // For inheritance/cloning
       })
@@ -166,6 +177,7 @@ export const contentItemsRouter = createTRPCRouter({
           maxStack: source.maxStack,
           value: source.value,
           damage: source.damage,
+          statsJSON: source.statsJSON,
           icon: source.icon,
           // Don't copy name, description, tags, status - those should be new
         };
@@ -208,6 +220,7 @@ export const contentItemsRouter = createTRPCRouter({
         maxStack: z.number().min(1).optional(),
         value: z.number().min(0).optional(),
         damage: z.number().min(0).optional(),
+        statsJSON: itemStatsSchema.nullable(),
         icon: z.string().optional().nullable(),
         affectsExisting: z.boolean().default(false), // Versioning: if false, only affects new items
       })
@@ -385,6 +398,7 @@ export const contentItemsRouter = createTRPCRouter({
           maxStack: source.maxStack,
           value: source.value,
           damage: source.damage,
+          statsJSON: source.statsJSON,
           icon: source.icon,
         },
       });

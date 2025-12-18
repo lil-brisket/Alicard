@@ -311,6 +311,7 @@ model Item {
   dexterityBonus     Int                 @default(0)
   hpBonus            Int                 @default(0)
   spBonus            Int                 @default(0)
+  defenseBonus       Int                 @default(0)
   createdAt          DateTime            @default(now())
   bankVaultItems     BankVaultItem[]
   equippedAsHead     Equipment[]         @relation("Head")
@@ -1156,6 +1157,7 @@ model ItemTemplate {
   maxStack    Int           @default(1)
   value       Int           @default(0)
   damage      Int           @default(0) // Damage value for weapons
+  statsJSON   Json?         // Item stats: { vitality, strength, speed, dexterity, hp, sp, defense }
   icon        String?
   // Legacy fields (kept for backward compatibility)
   isArchived  Boolean       @default(false)

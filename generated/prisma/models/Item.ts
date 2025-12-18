@@ -36,6 +36,7 @@ export type ItemAvgAggregateOutputType = {
   dexterityBonus: number | null
   hpBonus: number | null
   spBonus: number | null
+  defenseBonus: number | null
 }
 
 export type ItemSumAggregateOutputType = {
@@ -48,6 +49,7 @@ export type ItemSumAggregateOutputType = {
   dexterityBonus: number | null
   hpBonus: number | null
   spBonus: number | null
+  defenseBonus: number | null
 }
 
 export type ItemMinAggregateOutputType = {
@@ -68,6 +70,7 @@ export type ItemMinAggregateOutputType = {
   dexterityBonus: number | null
   hpBonus: number | null
   spBonus: number | null
+  defenseBonus: number | null
   createdAt: Date | null
 }
 
@@ -89,6 +92,7 @@ export type ItemMaxAggregateOutputType = {
   dexterityBonus: number | null
   hpBonus: number | null
   spBonus: number | null
+  defenseBonus: number | null
   createdAt: Date | null
 }
 
@@ -110,6 +114,7 @@ export type ItemCountAggregateOutputType = {
   dexterityBonus: number
   hpBonus: number
   spBonus: number
+  defenseBonus: number
   createdAt: number
   _all: number
 }
@@ -125,6 +130,7 @@ export type ItemAvgAggregateInputType = {
   dexterityBonus?: true
   hpBonus?: true
   spBonus?: true
+  defenseBonus?: true
 }
 
 export type ItemSumAggregateInputType = {
@@ -137,6 +143,7 @@ export type ItemSumAggregateInputType = {
   dexterityBonus?: true
   hpBonus?: true
   spBonus?: true
+  defenseBonus?: true
 }
 
 export type ItemMinAggregateInputType = {
@@ -157,6 +164,7 @@ export type ItemMinAggregateInputType = {
   dexterityBonus?: true
   hpBonus?: true
   spBonus?: true
+  defenseBonus?: true
   createdAt?: true
 }
 
@@ -178,6 +186,7 @@ export type ItemMaxAggregateInputType = {
   dexterityBonus?: true
   hpBonus?: true
   spBonus?: true
+  defenseBonus?: true
   createdAt?: true
 }
 
@@ -199,6 +208,7 @@ export type ItemCountAggregateInputType = {
   dexterityBonus?: true
   hpBonus?: true
   spBonus?: true
+  defenseBonus?: true
   createdAt?: true
   _all?: true
 }
@@ -307,6 +317,7 @@ export type ItemGroupByOutputType = {
   dexterityBonus: number
   hpBonus: number
   spBonus: number
+  defenseBonus: number
   createdAt: Date
   _count: ItemCountAggregateOutputType | null
   _avg: ItemAvgAggregateOutputType | null
@@ -351,6 +362,7 @@ export type ItemWhereInput = {
   dexterityBonus?: Prisma.IntFilter<"Item"> | number
   hpBonus?: Prisma.IntFilter<"Item"> | number
   spBonus?: Prisma.IntFilter<"Item"> | number
+  defenseBonus?: Prisma.IntFilter<"Item"> | number
   createdAt?: Prisma.DateTimeFilter<"Item"> | Date | string
   bankVaultItems?: Prisma.BankVaultItemListRelationFilter
   equippedAsHead?: Prisma.EquipmentListRelationFilter
@@ -392,6 +404,7 @@ export type ItemOrderByWithRelationInput = {
   dexterityBonus?: Prisma.SortOrder
   hpBonus?: Prisma.SortOrder
   spBonus?: Prisma.SortOrder
+  defenseBonus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   bankVaultItems?: Prisma.BankVaultItemOrderByRelationAggregateInput
   equippedAsHead?: Prisma.EquipmentOrderByRelationAggregateInput
@@ -436,6 +449,7 @@ export type ItemWhereUniqueInput = Prisma.AtLeast<{
   dexterityBonus?: Prisma.IntFilter<"Item"> | number
   hpBonus?: Prisma.IntFilter<"Item"> | number
   spBonus?: Prisma.IntFilter<"Item"> | number
+  defenseBonus?: Prisma.IntFilter<"Item"> | number
   createdAt?: Prisma.DateTimeFilter<"Item"> | Date | string
   bankVaultItems?: Prisma.BankVaultItemListRelationFilter
   equippedAsHead?: Prisma.EquipmentListRelationFilter
@@ -477,6 +491,7 @@ export type ItemOrderByWithAggregationInput = {
   dexterityBonus?: Prisma.SortOrder
   hpBonus?: Prisma.SortOrder
   spBonus?: Prisma.SortOrder
+  defenseBonus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ItemCountOrderByAggregateInput
   _avg?: Prisma.ItemAvgOrderByAggregateInput
@@ -506,6 +521,7 @@ export type ItemScalarWhereWithAggregatesInput = {
   dexterityBonus?: Prisma.IntWithAggregatesFilter<"Item"> | number
   hpBonus?: Prisma.IntWithAggregatesFilter<"Item"> | number
   spBonus?: Prisma.IntWithAggregatesFilter<"Item"> | number
+  defenseBonus?: Prisma.IntWithAggregatesFilter<"Item"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Item"> | Date | string
 }
 
@@ -527,6 +543,7 @@ export type ItemCreateInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -568,6 +585,7 @@ export type ItemUncheckedCreateInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -609,6 +627,7 @@ export type ItemUpdateInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -650,6 +669,7 @@ export type ItemUncheckedUpdateInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -691,6 +711,7 @@ export type ItemCreateManyInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
 }
 
@@ -712,6 +733,7 @@ export type ItemUpdateManyMutationInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -733,6 +755,7 @@ export type ItemUncheckedUpdateManyInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -759,6 +782,7 @@ export type ItemCountOrderByAggregateInput = {
   dexterityBonus?: Prisma.SortOrder
   hpBonus?: Prisma.SortOrder
   spBonus?: Prisma.SortOrder
+  defenseBonus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -772,6 +796,7 @@ export type ItemAvgOrderByAggregateInput = {
   dexterityBonus?: Prisma.SortOrder
   hpBonus?: Prisma.SortOrder
   spBonus?: Prisma.SortOrder
+  defenseBonus?: Prisma.SortOrder
 }
 
 export type ItemMaxOrderByAggregateInput = {
@@ -792,6 +817,7 @@ export type ItemMaxOrderByAggregateInput = {
   dexterityBonus?: Prisma.SortOrder
   hpBonus?: Prisma.SortOrder
   spBonus?: Prisma.SortOrder
+  defenseBonus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -813,6 +839,7 @@ export type ItemMinOrderByAggregateInput = {
   dexterityBonus?: Prisma.SortOrder
   hpBonus?: Prisma.SortOrder
   spBonus?: Prisma.SortOrder
+  defenseBonus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -826,6 +853,7 @@ export type ItemSumOrderByAggregateInput = {
   dexterityBonus?: Prisma.SortOrder
   hpBonus?: Prisma.SortOrder
   spBonus?: Prisma.SortOrder
+  defenseBonus?: Prisma.SortOrder
 }
 
 export type ItemNullableScalarRelationFilter = {
@@ -1167,6 +1195,7 @@ export type ItemCreateWithoutShopItemsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -1207,6 +1236,7 @@ export type ItemUncheckedCreateWithoutShopItemsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -1263,6 +1293,7 @@ export type ItemUpdateWithoutShopItemsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -1303,6 +1334,7 @@ export type ItemUncheckedUpdateWithoutShopItemsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -1343,6 +1375,7 @@ export type ItemCreateWithoutInventoryItemsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -1383,6 +1416,7 @@ export type ItemUncheckedCreateWithoutInventoryItemsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -1439,6 +1473,7 @@ export type ItemUpdateWithoutInventoryItemsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -1479,6 +1514,7 @@ export type ItemUncheckedUpdateWithoutInventoryItemsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -1519,6 +1555,7 @@ export type ItemCreateWithoutEquippedAsHeadInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsLeftArm?: Prisma.EquipmentCreateNestedManyWithoutLeftArmInput
@@ -1559,6 +1596,7 @@ export type ItemUncheckedCreateWithoutEquippedAsHeadInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsLeftArm?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLeftArmInput
@@ -1604,6 +1642,7 @@ export type ItemCreateWithoutEquippedAsLeftArmInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -1644,6 +1683,7 @@ export type ItemUncheckedCreateWithoutEquippedAsLeftArmInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -1689,6 +1729,7 @@ export type ItemCreateWithoutEquippedAsRightArmInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -1729,6 +1770,7 @@ export type ItemUncheckedCreateWithoutEquippedAsRightArmInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -1774,6 +1816,7 @@ export type ItemCreateWithoutEquippedAsBodyInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -1814,6 +1857,7 @@ export type ItemUncheckedCreateWithoutEquippedAsBodyInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -1859,6 +1903,7 @@ export type ItemCreateWithoutEquippedAsLegsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -1899,6 +1944,7 @@ export type ItemUncheckedCreateWithoutEquippedAsLegsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -1944,6 +1990,7 @@ export type ItemCreateWithoutEquippedAsFeetInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -1984,6 +2031,7 @@ export type ItemUncheckedCreateWithoutEquippedAsFeetInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -2029,6 +2077,7 @@ export type ItemCreateWithoutEquippedAsRing1Input = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -2069,6 +2118,7 @@ export type ItemUncheckedCreateWithoutEquippedAsRing1Input = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -2114,6 +2164,7 @@ export type ItemCreateWithoutEquippedAsRing2Input = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -2154,6 +2205,7 @@ export type ItemUncheckedCreateWithoutEquippedAsRing2Input = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -2199,6 +2251,7 @@ export type ItemCreateWithoutEquippedAsRing3Input = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -2239,6 +2292,7 @@ export type ItemUncheckedCreateWithoutEquippedAsRing3Input = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -2284,6 +2338,7 @@ export type ItemCreateWithoutEquippedAsNecklaceInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -2324,6 +2379,7 @@ export type ItemUncheckedCreateWithoutEquippedAsNecklaceInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -2369,6 +2425,7 @@ export type ItemCreateWithoutEquippedAsBeltInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -2409,6 +2466,7 @@ export type ItemUncheckedCreateWithoutEquippedAsBeltInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -2454,6 +2512,7 @@ export type ItemCreateWithoutEquippedAsCloakInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -2494,6 +2553,7 @@ export type ItemUncheckedCreateWithoutEquippedAsCloakInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -2550,6 +2610,7 @@ export type ItemUpdateWithoutEquippedAsHeadInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsLeftArm?: Prisma.EquipmentUpdateManyWithoutLeftArmNestedInput
@@ -2590,6 +2651,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsHeadInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsLeftArm?: Prisma.EquipmentUncheckedUpdateManyWithoutLeftArmNestedInput
@@ -2641,6 +2703,7 @@ export type ItemUpdateWithoutEquippedAsLeftArmInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -2681,6 +2744,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsLeftArmInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -2732,6 +2796,7 @@ export type ItemUpdateWithoutEquippedAsRightArmInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -2772,6 +2837,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsRightArmInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -2823,6 +2889,7 @@ export type ItemUpdateWithoutEquippedAsBodyInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -2863,6 +2930,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsBodyInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -2914,6 +2982,7 @@ export type ItemUpdateWithoutEquippedAsLegsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -2954,6 +3023,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsLegsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3005,6 +3075,7 @@ export type ItemUpdateWithoutEquippedAsFeetInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3045,6 +3116,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsFeetInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3096,6 +3168,7 @@ export type ItemUpdateWithoutEquippedAsRing1Input = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3136,6 +3209,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsRing1Input = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3187,6 +3261,7 @@ export type ItemUpdateWithoutEquippedAsRing2Input = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3227,6 +3302,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsRing2Input = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3278,6 +3354,7 @@ export type ItemUpdateWithoutEquippedAsRing3Input = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3318,6 +3395,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsRing3Input = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3369,6 +3447,7 @@ export type ItemUpdateWithoutEquippedAsNecklaceInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3409,6 +3488,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsNecklaceInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3460,6 +3540,7 @@ export type ItemUpdateWithoutEquippedAsBeltInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3500,6 +3581,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsBeltInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3551,6 +3633,7 @@ export type ItemUpdateWithoutEquippedAsCloakInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3591,6 +3674,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsCloakInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3631,6 +3715,7 @@ export type ItemCreateWithoutBankVaultItemsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
   equippedAsLeftArm?: Prisma.EquipmentCreateNestedManyWithoutLeftArmInput
@@ -3671,6 +3756,7 @@ export type ItemUncheckedCreateWithoutBankVaultItemsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
   equippedAsLeftArm?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLeftArmInput
@@ -3727,6 +3813,7 @@ export type ItemUpdateWithoutBankVaultItemsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
   equippedAsLeftArm?: Prisma.EquipmentUpdateManyWithoutLeftArmNestedInput
@@ -3767,6 +3854,7 @@ export type ItemUncheckedUpdateWithoutBankVaultItemsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
   equippedAsLeftArm?: Prisma.EquipmentUncheckedUpdateManyWithoutLeftArmNestedInput
@@ -3807,6 +3895,7 @@ export type ItemCreateWithoutMarketListingsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -3847,6 +3936,7 @@ export type ItemUncheckedCreateWithoutMarketListingsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -3903,6 +3993,7 @@ export type ItemUpdateWithoutMarketListingsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3943,6 +4034,7 @@ export type ItemUncheckedUpdateWithoutMarketListingsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3983,6 +4075,7 @@ export type ItemCreateWithoutMarketTransactionsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -4023,6 +4116,7 @@ export type ItemUncheckedCreateWithoutMarketTransactionsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -4079,6 +4173,7 @@ export type ItemUpdateWithoutMarketTransactionsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -4119,6 +4214,7 @@ export type ItemUncheckedUpdateWithoutMarketTransactionsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -4159,6 +4255,7 @@ export type ItemCreateWithoutRecipeOutputsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -4199,6 +4296,7 @@ export type ItemUncheckedCreateWithoutRecipeOutputsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -4255,6 +4353,7 @@ export type ItemUpdateWithoutRecipeOutputsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -4295,6 +4394,7 @@ export type ItemUncheckedUpdateWithoutRecipeOutputsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -4335,6 +4435,7 @@ export type ItemCreateWithoutRecipeInputsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -4375,6 +4476,7 @@ export type ItemUncheckedCreateWithoutRecipeInputsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -4431,6 +4533,7 @@ export type ItemUpdateWithoutRecipeInputsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -4471,6 +4574,7 @@ export type ItemUncheckedUpdateWithoutRecipeInputsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -4511,6 +4615,7 @@ export type ItemCreateWithoutNodeYieldsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -4551,6 +4656,7 @@ export type ItemUncheckedCreateWithoutNodeYieldsInput = {
   dexterityBonus?: number
   hpBonus?: number
   spBonus?: number
+  defenseBonus?: number
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -4607,6 +4713,7 @@ export type ItemUpdateWithoutNodeYieldsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -4647,6 +4754,7 @@ export type ItemUncheckedUpdateWithoutNodeYieldsInput = {
   dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -4889,6 +4997,7 @@ export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   dexterityBonus?: boolean
   hpBonus?: boolean
   spBonus?: boolean
+  defenseBonus?: boolean
   createdAt?: boolean
   bankVaultItems?: boolean | Prisma.Item$bankVaultItemsArgs<ExtArgs>
   equippedAsHead?: boolean | Prisma.Item$equippedAsHeadArgs<ExtArgs>
@@ -4931,6 +5040,7 @@ export type ItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   dexterityBonus?: boolean
   hpBonus?: boolean
   spBonus?: boolean
+  defenseBonus?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["item"]>
 
@@ -4952,6 +5062,7 @@ export type ItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   dexterityBonus?: boolean
   hpBonus?: boolean
   spBonus?: boolean
+  defenseBonus?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["item"]>
 
@@ -4973,10 +5084,11 @@ export type ItemSelectScalar = {
   dexterityBonus?: boolean
   hpBonus?: boolean
   spBonus?: boolean
+  defenseBonus?: boolean
   createdAt?: boolean
 }
 
-export type ItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "description" | "itemType" | "itemRarity" | "tier" | "value" | "stackable" | "maxStack" | "equipmentSlot" | "vitalityBonus" | "strengthBonus" | "speedBonus" | "dexterityBonus" | "hpBonus" | "spBonus" | "createdAt", ExtArgs["result"]["item"]>
+export type ItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "description" | "itemType" | "itemRarity" | "tier" | "value" | "stackable" | "maxStack" | "equipmentSlot" | "vitalityBonus" | "strengthBonus" | "speedBonus" | "dexterityBonus" | "hpBonus" | "spBonus" | "defenseBonus" | "createdAt", ExtArgs["result"]["item"]>
 export type ItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   bankVaultItems?: boolean | Prisma.Item$bankVaultItemsArgs<ExtArgs>
   equippedAsHead?: boolean | Prisma.Item$equippedAsHeadArgs<ExtArgs>
@@ -5045,6 +5157,7 @@ export type $ItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     dexterityBonus: number
     hpBonus: number
     spBonus: number
+    defenseBonus: number
     createdAt: Date
   }, ExtArgs["result"]["item"]>
   composites: {}
@@ -5506,6 +5619,7 @@ export interface ItemFieldRefs {
   readonly dexterityBonus: Prisma.FieldRef<"Item", 'Int'>
   readonly hpBonus: Prisma.FieldRef<"Item", 'Int'>
   readonly spBonus: Prisma.FieldRef<"Item", 'Int'>
+  readonly defenseBonus: Prisma.FieldRef<"Item", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Item", 'DateTime'>
 }
     

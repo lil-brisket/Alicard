@@ -124,6 +124,17 @@ export const contentPlayerAssignmentRouter = createTRPCRouter({
       if (!item) {
         // Create Item instance from template
         // Map ItemTemplate fields to Item fields
+        // Extract stats from template's statsJSON
+        const stats = (template.statsJSON as {
+          vitality?: number;
+          strength?: number;
+          speed?: number;
+          dexterity?: number;
+          hp?: number;
+          sp?: number;
+          defense?: number;
+        } | null) ?? {};
+
         item = await ctx.db.item.create({
           data: {
             key: itemKey,
@@ -136,12 +147,13 @@ export const contentPlayerAssignmentRouter = createTRPCRouter({
             stackable: template.stackable,
             maxStack: template.maxStack,
             equipmentSlot: template.equipmentSlot, // Copy equipment slot from template
-            vitalityBonus: 0,
-            strengthBonus: 0,
-            speedBonus: 0,
-            dexterityBonus: 0,
-            hpBonus: 0,
-            spBonus: 0,
+            vitalityBonus: stats.vitality ?? 0,
+            strengthBonus: stats.strength ?? 0,
+            speedBonus: stats.speed ?? 0,
+            dexterityBonus: stats.dexterity ?? 0,
+            hpBonus: stats.hp ?? 0,
+            spBonus: stats.sp ?? 0,
+            defenseBonus: stats.defense ?? 0,
           },
         });
       }
