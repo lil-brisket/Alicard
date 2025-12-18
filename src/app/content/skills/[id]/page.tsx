@@ -1,11 +1,20 @@
 "use client";
 
-import { use, useState } from "react";
+import { use, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { api } from "~/trpc/react";
 import { toast } from "react-hot-toast";
 import { PermissionIndicator } from "./_components/permission-indicator";
+
+interface FormState {
+  name: string;
+  description: string;
+  status: "DRAFT" | "ACTIVE" | "DISABLED";
+  staminaCost: number;
+  cooldownTurns: number;
+  levelUnlock: number | null;
+}
 
 export default function SkillDetailPage({
   params,
@@ -18,16 +27,58 @@ export default function SkillDetailPage({
   const utils = api.useUtils();
 
   const [affectsExisting, setAffectsExisting] = useState(false);
+  const [hasChanges, setHasChanges] = useState(false);
+  const [form, setForm] = useState<FormState>({
+    name: "",
+    description: "",
+    status: "DRAFT",
+    staminaCost: 0,
+    cooldownTurns: 0,
+    levelUnlock: null,
+  });
+
+  useEffect(() => {
+    if (skill) {
+      setForm({
+        name: skill.name,
+        description: skill.description ?? "",
+        status: skill.status,
+        staminaCost: skill.staminaCost,
+        cooldownTurns: skill.cooldownTurns,
+        levelUnlock: skill.levelUnlock,
+      });
+      setHasChanges(false);
+    }
+  }, [skill]);
+
+  const updateField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
+    setForm((prev) => ({ ...prev, [key]: value }));
+    setHasChanges(true);
+  };
   
   const updateSkill = api.content.skills.update.useMutation({
     onSuccess: () => {
-      toast.success("Skill updated");
+      toast.success("Skill saved");
+      setHasChanges(false);
       void utils.content.skills.get.invalidate({ id });
     },
     onError: (error) => {
       toast.error(error.message);
     },
   });
+
+  const handleSave = () => {
+    updateSkill.mutate({
+      id,
+      name: form.name,
+      description: form.description || null,
+      status: form.status,
+      staminaCost: form.staminaCost,
+      cooldownTurns: form.cooldownTurns,
+      levelUnlock: form.levelUnlock,
+      affectsExisting,
+    });
+  };
   
   const cloneSkill = api.content.skills.clone.useMutation({
     onSuccess: (cloned) => {
@@ -124,10 +175,8 @@ export default function SkillDetailPage({
               </label>
               <input
                 type="text"
-                defaultValue={skill.name}
-                onBlur={(e) =>
-                  updateSkill.mutate({ id, name: e.target.value })
-                }
+                value={form.name}
+                onChange={(e) => updateField("name", e.target.value)}
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
               />
             </div>
@@ -138,9 +187,6 @@ export default function SkillDetailPage({
               <input
                 type="text"
                 defaultValue={skill.key}
-                onBlur={(e) =>
-                  updateSkill.mutate({ id, key: e.target.value })
-                }
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 font-mono text-slate-100"
                 disabled
               />
@@ -153,10 +199,8 @@ export default function SkillDetailPage({
                 Description
               </label>
               <textarea
-                defaultValue={skill.description || ""}
-                onBlur={(e) =>
-                  updateSkill.mutate({ id, description: e.target.value || null })
-                }
+                value={form.description}
+                onChange={(e) => updateField("description", e.target.value)}
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
                 rows={3}
               />
@@ -166,14 +210,8 @@ export default function SkillDetailPage({
                 Status
               </label>
               <select
-                defaultValue={skill.status}
-                onChange={(e) =>
-                  updateSkill.mutate({
-                    id,
-                    status: e.target.value as "DRAFT" | "ACTIVE" | "DISABLED",
-                    affectsExisting,
-                  })
-                }
+                value={form.status}
+                onChange={(e) => updateField("status", e.target.value as FormState["status"])}
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
               >
                 <option value="DRAFT">DRAFT</option>
@@ -188,14 +226,8 @@ export default function SkillDetailPage({
               <input
                 type="number"
                 min={0}
-                defaultValue={skill.staminaCost}
-                onBlur={(e) =>
-                  updateSkill.mutate({
-                    id,
-                    staminaCost: parseInt(e.target.value) || 0,
-                    affectsExisting,
-                  })
-                }
+                value={form.staminaCost}
+                onChange={(e) => updateField("staminaCost", parseInt(e.target.value) || 0)}
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
               />
             </div>
@@ -206,14 +238,8 @@ export default function SkillDetailPage({
               <input
                 type="number"
                 min={0}
-                defaultValue={skill.cooldownTurns}
-                onBlur={(e) =>
-                  updateSkill.mutate({
-                    id,
-                    cooldownTurns: parseInt(e.target.value) || 0,
-                    affectsExisting,
-                  })
-                }
+                value={form.cooldownTurns}
+                onChange={(e) => updateField("cooldownTurns", parseInt(e.target.value) || 0)}
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
               />
             </div>
@@ -224,14 +250,8 @@ export default function SkillDetailPage({
               <input
                 type="number"
                 min={1}
-                defaultValue={skill.levelUnlock ?? ""}
-                onBlur={(e) =>
-                  updateSkill.mutate({
-                    id,
-                    levelUnlock: e.target.value ? parseInt(e.target.value) : null,
-                    affectsExisting,
-                  })
-                }
+                value={form.levelUnlock ?? ""}
+                onChange={(e) => updateField("levelUnlock", e.target.value ? parseInt(e.target.value) : null)}
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
                 placeholder="e.g., 5, 10, 20"
               />
@@ -251,6 +271,17 @@ export default function SkillDetailPage({
               <p className="mt-1 text-xs text-slate-400">
                 If unchecked, only newly assigned skills will use new stats
               </p>
+            </div>
+
+            {/* Save Button */}
+            <div className="border-t border-slate-700 pt-4">
+              <button
+                onClick={handleSave}
+                disabled={!hasChanges || updateSkill.isPending}
+                className="w-full rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {updateSkill.isPending ? "Saving..." : hasChanges ? "Save Changes" : "No Changes"}
+              </button>
             </div>
           </div>
         </div>

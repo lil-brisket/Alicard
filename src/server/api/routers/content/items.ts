@@ -242,12 +242,18 @@ export const contentItemsRouter = createTRPCRouter({
       // If not affecting existing items, increment version
       const versionIncrement = affectsExisting ? 0 : 1;
       
+      // Handle statsJSON null properly for Prisma
+      const dataToUpdate = {
+        ...updateData,
+        version: item.version + versionIncrement,
+      };
+      if (updateData.statsJSON === null) {
+        (dataToUpdate as any).statsJSON = { set: null };
+      }
+      
       const updatedItem = await ctx.db.itemTemplate.update({
         where: { id },
-        data: {
-          ...updateData,
-          version: item.version + versionIncrement,
-        },
+        data: dataToUpdate as any,
       });
 
       return updatedItem;

@@ -18,6 +18,17 @@ interface ItemStats {
   defense?: number;
 }
 
+interface FormState {
+  name: string;
+  description: string;
+  status: "DRAFT" | "ACTIVE" | "DISABLED";
+  itemType: string;
+  equipmentSlot: string;
+  rarity: string;
+  value: number;
+  stats: ItemStats;
+}
+
 export default function ItemDetailPage({
   params,
 }: {
@@ -30,23 +41,67 @@ export default function ItemDetailPage({
   const utils = api.useUtils();
 
   const [affectsExisting, setAffectsExisting] = useState(false);
-  const [stats, setStats] = useState<ItemStats>({});
+  const [hasChanges, setHasChanges] = useState(false);
+  const [form, setForm] = useState<FormState>({
+    name: "",
+    description: "",
+    status: "DRAFT",
+    itemType: "",
+    equipmentSlot: "",
+    rarity: "COMMON",
+    value: 0,
+    stats: {},
+  });
   
   useEffect(() => {
-    if (item?.statsJSON) {
-      setStats(item.statsJSON as ItemStats);
+    if (item) {
+      setForm({
+        name: item.name,
+        description: item.description ?? "",
+        status: (item as any).status ?? "DRAFT",
+        itemType: (item as any).itemType ?? "",
+        equipmentSlot: (item as any).equipmentSlot ?? "",
+        rarity: item.rarity,
+        value: item.value,
+        stats: (item.statsJSON as ItemStats) ?? {},
+      });
+      setHasChanges(false);
     }
-  }, [item?.statsJSON]);
+  }, [item]);
+
+  const updateField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
+    setForm((prev) => ({ ...prev, [key]: value }));
+    setHasChanges(true);
+  };
   
   const updateItem = api.content.items.update.useMutation({
     onSuccess: () => {
-      toast.success("Item updated");
+      toast.success("Item saved");
+      setHasChanges(false);
       void utils.content.items.get.invalidate({ id });
     },
     onError: (error) => {
       toast.error(error.message);
     },
   });
+
+  const handleSave = () => {
+    const cleanedStats = Object.fromEntries(
+      Object.entries(form.stats).filter(([, v]) => v !== undefined && v !== 0)
+    );
+    updateItem.mutate({
+      id,
+      name: form.name,
+      description: form.description || null,
+      status: form.status,
+      itemType: (form.itemType || undefined) as any,
+      equipmentSlot: (form.equipmentSlot || undefined) as any,
+      rarity: form.rarity as any,
+      value: form.value,
+      statsJSON: Object.keys(cleanedStats).length > 0 ? cleanedStats : undefined,
+      affectsExisting,
+    });
+  };
   
   const cloneItem = api.content.items.clone.useMutation({
     onSuccess: (cloned) => {
@@ -139,10 +194,8 @@ export default function ItemDetailPage({
               </label>
               <input
                 type="text"
-                defaultValue={item.name}
-                onBlur={(e) =>
-                  updateItem.mutate({ id, name: e.target.value })
-                }
+                value={form.name}
+                onChange={(e) => updateField("name", e.target.value)}
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
               />
             </div>
@@ -151,10 +204,8 @@ export default function ItemDetailPage({
                 Description
               </label>
               <textarea
-                defaultValue={item.description || ""}
-                onBlur={(e) =>
-                  updateItem.mutate({ id, description: e.target.value || null })
-                }
+                value={form.description}
+                onChange={(e) => updateField("description", e.target.value)}
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
                 rows={3}
               />
@@ -164,14 +215,8 @@ export default function ItemDetailPage({
                 Status
               </label>
               <select
-                defaultValue={(item as any).status ?? "DRAFT"}
-                onChange={(e) =>
-                  updateItem.mutate({
-                    id,
-                    status: e.target.value as "DRAFT" | "ACTIVE" | "DISABLED",
-                    affectsExisting,
-                  })
-                }
+                value={form.status}
+                onChange={(e) => updateField("status", e.target.value as FormState["status"])}
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
               >
                 <option value="DRAFT">DRAFT</option>
@@ -184,14 +229,8 @@ export default function ItemDetailPage({
                 Item Type
               </label>
               <select
-                defaultValue={(item as any).itemType ?? ""}
-                onChange={(e) =>
-                  updateItem.mutate({
-                    id,
-                    itemType: e.target.value || null,
-                    affectsExisting,
-                  })
-                }
+                value={form.itemType}
+                onChange={(e) => updateField("itemType", e.target.value)}
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
               >
                 <option value="">None</option>
@@ -210,14 +249,8 @@ export default function ItemDetailPage({
                 Equipment Slot
               </label>
               <select
-                defaultValue={(item as any).equipmentSlot ?? ""}
-                onChange={(e) =>
-                  updateItem.mutate({
-                    id,
-                    equipmentSlot: e.target.value || null,
-                    affectsExisting,
-                  })
-                }
+                value={form.equipmentSlot}
+                onChange={(e) => updateField("equipmentSlot", e.target.value)}
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
               >
                 <option value="">None</option>
@@ -240,14 +273,8 @@ export default function ItemDetailPage({
                 Rarity
               </label>
               <select
-                defaultValue={item.rarity}
-                onChange={(e) =>
-                  updateItem.mutate({
-                    id,
-                    rarity: e.target.value as typeof item.rarity,
-                    affectsExisting,
-                  })
-                }
+                value={form.rarity}
+                onChange={(e) => updateField("rarity", e.target.value)}
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
               >
                 <option value="COMMON">COMMON</option>
@@ -279,13 +306,8 @@ export default function ItemDetailPage({
               </label>
               <input
                 type="number"
-                defaultValue={item.value}
-                onBlur={(e) =>
-                  updateItem.mutate({
-                    id,
-                    value: parseInt(e.target.value) || 0,
-                  })
-                }
+                value={form.value}
+                onChange={(e) => updateField("value", parseInt(e.target.value) || 0)}
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
               />
             </div>
@@ -304,20 +326,10 @@ export default function ItemDetailPage({
                     </label>
                     <input
                       type="number"
-                      value={stats[stat] ?? ""}
+                      value={form.stats[stat] ?? ""}
                       onChange={(e) => {
                         const value = e.target.value === "" ? undefined : parseInt(e.target.value);
-                        setStats((prev) => ({ ...prev, [stat]: value }));
-                      }}
-                      onBlur={() => {
-                        const cleanedStats = Object.fromEntries(
-                          Object.entries(stats).filter(([, v]) => v !== undefined && v !== 0)
-                        );
-                        updateItem.mutate({
-                          id,
-                          statsJSON: Object.keys(cleanedStats).length > 0 ? cleanedStats : null,
-                          affectsExisting,
-                        });
+                        updateField("stats", { ...form.stats, [stat]: value });
                       }}
                       placeholder="0"
                       className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-2 py-1.5 text-sm text-slate-100"
@@ -325,6 +337,17 @@ export default function ItemDetailPage({
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* Save Button */}
+            <div className="border-t border-slate-700 pt-4">
+              <button
+                onClick={handleSave}
+                disabled={!hasChanges || updateItem.isPending}
+                className="w-full rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {updateItem.isPending ? "Saving..." : hasChanges ? "Save Changes" : "No Changes"}
+              </button>
             </div>
           </div>
         </div>
