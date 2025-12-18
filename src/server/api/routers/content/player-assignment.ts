@@ -121,32 +121,53 @@ export const contentPlayerAssignmentRouter = createTRPCRouter({
         where: { key: itemKey },
       });
 
+      // Extract stats from template's statsJSON
+      const stats = (template.statsJSON as {
+        vitality?: number;
+        strength?: number;
+        speed?: number;
+        dexterity?: number;
+        hp?: number;
+        sp?: number;
+        defense?: number;
+      } | null) ?? {};
+
       if (!item) {
         // Create Item instance from template
-        // Map ItemTemplate fields to Item fields
-        // Extract stats from template's statsJSON
-        const stats = (template.statsJSON as {
-          vitality?: number;
-          strength?: number;
-          speed?: number;
-          dexterity?: number;
-          hp?: number;
-          sp?: number;
-          defense?: number;
-        } | null) ?? {};
-
         item = await ctx.db.item.create({
           data: {
             key: itemKey,
             name: template.name,
             description: template.description,
-            itemType: template.itemType ?? "CONSUMABLE", // Use itemType from template
+            itemType: template.itemType ?? "CONSUMABLE",
             itemRarity: template.rarity,
-            tier: 1, // Default tier
+            tier: 1,
             value: template.value,
             stackable: template.stackable,
             maxStack: template.maxStack,
-            equipmentSlot: template.equipmentSlot, // Copy equipment slot from template
+            equipmentSlot: template.equipmentSlot,
+            vitalityBonus: stats.vitality ?? 0,
+            strengthBonus: stats.strength ?? 0,
+            speedBonus: stats.speed ?? 0,
+            dexterityBonus: stats.dexterity ?? 0,
+            hpBonus: stats.hp ?? 0,
+            spBonus: stats.sp ?? 0,
+            defenseBonus: stats.defense ?? 0,
+          },
+        });
+      } else {
+        // Update existing item with latest template data (sync stats)
+        item = await ctx.db.item.update({
+          where: { id: item.id },
+          data: {
+            name: template.name,
+            description: template.description,
+            itemType: template.itemType ?? "CONSUMABLE",
+            itemRarity: template.rarity,
+            value: template.value,
+            stackable: template.stackable,
+            maxStack: template.maxStack,
+            equipmentSlot: template.equipmentSlot,
             vitalityBonus: stats.vitality ?? 0,
             strengthBonus: stats.strength ?? 0,
             speedBonus: stats.speed ?? 0,

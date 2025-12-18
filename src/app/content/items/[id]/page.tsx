@@ -143,6 +143,19 @@ export default function ItemDetailPage({
     },
   });
 
+  const syncItem = api.content.items.syncItem.useMutation({
+    onSuccess: (result) => {
+      if (result.synced) {
+        toast.success("Item synced to all players");
+      } else {
+        toast.error(result.message);
+      }
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
   if (isLoading) {
     return (
       <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-8 text-center">
@@ -358,6 +371,16 @@ export default function ItemDetailPage({
           <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
             <h3 className="mb-4 text-lg font-semibold text-cyan-400">Actions</h3>
             <div className="space-y-3">
+              <button
+                onClick={() => syncItem.mutate({ id })}
+                disabled={syncItem.isPending}
+                className="w-full rounded-lg bg-purple-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-purple-700 disabled:opacity-50"
+              >
+                {syncItem.isPending ? "Syncing..." : "Sync to Players"}
+              </button>
+              <p className="text-xs text-slate-400 -mt-2">
+                Updates existing items in player inventories with current stats
+              </p>
               <button
                 onClick={() => {
                   const name = prompt("Enter name for cloned item:", `${item.name} (Copy)`);

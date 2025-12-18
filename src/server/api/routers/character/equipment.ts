@@ -106,7 +106,8 @@ export const equipmentRouter = createTRPCRouter({
         data: { playerId: player.id },
         include: {
           head: true,
-          arms: true,
+          leftArm: true,
+          rightArm: true,
           body: true,
           legs: true,
           feet: true,

@@ -116,7 +116,7 @@ export default function EquipmentPage() {
         {totalStats && (
           <div className="mb-6 rounded-xl border border-slate-800 bg-slate-950/60 p-4">
             <h2 className="mb-3 text-lg font-semibold text-cyan-400">Total Equipment Bonuses</h2>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-6">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 md:grid-cols-7">
               <div>
                 <span className="text-xs text-slate-400">Vitality</span>
                 <p className="text-lg font-semibold text-green-400">+{totalStats.vitality}</p>
@@ -140,6 +140,10 @@ export default function EquipmentPage() {
               <div>
                 <span className="text-xs text-slate-400">SP</span>
                 <p className="text-lg font-semibold text-purple-400">+{totalStats.sp}</p>
+              </div>
+              <div>
+                <span className="text-xs text-slate-400">Defense</span>
+                <p className="text-lg font-semibold text-cyan-400">+{totalStats.defense}</p>
               </div>
             </div>
           </div>
@@ -197,6 +201,21 @@ export default function EquipmentPage() {
                           {item.dexterityBonus > 0 && (
                             <span className="rounded bg-blue-500/20 px-1.5 py-0.5 text-xs text-blue-400">
                               DEX +{item.dexterityBonus}
+                            </span>
+                          )}
+                          {item.hpBonus > 0 && (
+                            <span className="rounded bg-pink-500/20 px-1.5 py-0.5 text-xs text-pink-400">
+                              HP +{item.hpBonus}
+                            </span>
+                          )}
+                          {item.spBonus > 0 && (
+                            <span className="rounded bg-purple-500/20 px-1.5 py-0.5 text-xs text-purple-400">
+                              SP +{item.spBonus}
+                            </span>
+                          )}
+                          {item.defenseBonus > 0 && (
+                            <span className="rounded bg-cyan-500/20 px-1.5 py-0.5 text-xs text-cyan-400">
+                              DEF +{item.defenseBonus}
                             </span>
                           )}
                         </div>
@@ -270,6 +289,21 @@ export default function EquipmentPage() {
                                 {group.item.dexterityBonus > 0 && (
                                   <span className="rounded bg-blue-500/20 px-1.5 py-0.5 text-xs text-blue-400">
                                     DEX +{group.item.dexterityBonus}
+                                  </span>
+                                )}
+                                {group.item.hpBonus > 0 && (
+                                  <span className="rounded bg-pink-500/20 px-1.5 py-0.5 text-xs text-pink-400">
+                                    HP +{group.item.hpBonus}
+                                  </span>
+                                )}
+                                {group.item.spBonus > 0 && (
+                                  <span className="rounded bg-purple-500/20 px-1.5 py-0.5 text-xs text-purple-400">
+                                    SP +{group.item.spBonus}
+                                  </span>
+                                )}
+                                {group.item.defenseBonus > 0 && (
+                                  <span className="rounded bg-cyan-500/20 px-1.5 py-0.5 text-xs text-cyan-400">
+                                    DEF +{group.item.defenseBonus}
                                   </span>
                                 )}
                               </div>

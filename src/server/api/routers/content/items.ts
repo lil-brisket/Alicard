@@ -580,4 +580,62 @@ export const contentItemsRouter = createTRPCRouter({
         ],
       };
     }),
+
+  // Sync runtime Item with template (updates existing Item to match template stats)
+  syncItem: contentProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const template = await ctx.db.itemTemplate.findUnique({
+        where: { id: input.id },
+      });
+
+      if (!template) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Item template not found",
+        });
+      }
+
+      const itemKey = `template_${template.id}`;
+      const existingItem = await ctx.db.item.findUnique({
+        where: { key: itemKey },
+      });
+
+      if (!existingItem) {
+        return { synced: false, message: "No runtime item exists for this template" };
+      }
+
+      const stats = (template.statsJSON as {
+        vitality?: number;
+        strength?: number;
+        speed?: number;
+        dexterity?: number;
+        hp?: number;
+        sp?: number;
+        defense?: number;
+      } | null) ?? {};
+
+      await ctx.db.item.update({
+        where: { id: existingItem.id },
+        data: {
+          name: template.name,
+          description: template.description,
+          itemType: template.itemType ?? "CONSUMABLE",
+          itemRarity: template.rarity,
+          value: template.value,
+          stackable: template.stackable,
+          maxStack: template.maxStack,
+          equipmentSlot: template.equipmentSlot,
+          vitalityBonus: stats.vitality ?? 0,
+          strengthBonus: stats.strength ?? 0,
+          speedBonus: stats.speed ?? 0,
+          dexterityBonus: stats.dexterity ?? 0,
+          hpBonus: stats.hp ?? 0,
+          spBonus: stats.sp ?? 0,
+          defenseBonus: stats.defense ?? 0,
+        },
+      });
+
+      return { synced: true, message: "Item synced successfully" };
+    }),
 });
