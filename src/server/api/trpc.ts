@@ -154,180 +154,104 @@ export const protectedProcedure = t.procedure
   });
 
 /**
+ * Helper to fetch user with all roles (single role + multi-role assignments)
+ */
+async function getUserWithRoles(db: typeof import("~/server/db").db, userId: string) {
+  const user = await db.user.findUnique({
+    where: { id: userId },
+    select: { 
+      id: true, 
+      role: true,
+      roles: {
+        select: { role: true },
+      },
+    },
+  });
+
+  if (!user) {
+    throw new TRPCError({ code: "UNAUTHORIZED", message: "User not found" });
+  }
+
+  // Combine single role field and multi-role assignments
+  const allRoles = new Set([
+    user.role,
+    ...(user.roles?.map((r) => r.role) ?? []),
+  ]);
+
+  return { user, allRoles };
+}
+
+/**
  * Moderator procedure (MODERATOR or ADMIN role required)
  *
- * Requires user to be authenticated and have MODERATOR or ADMIN role.
+ * Builds on protectedProcedure (auth + db + IP tracking already done).
  */
-export const moderatorProcedure = t.procedure
-  .use(timingMiddleware)
-  .use(async ({ ctx, next }) => {
-    if (!ctx.session?.user) {
-      throw new TRPCError({ code: "UNAUTHORIZED" });
-    }
+export const moderatorProcedure = protectedProcedure.use(async ({ ctx, next }) => {
+  const { user, allRoles } = await getUserWithRoles(ctx.db, ctx.session.user.id);
 
-    if (!ctx.db) {
-      throw new TRPCError({
-        code: "INTERNAL_SERVER_ERROR",
-        message: "Database client is not available",
-      });
-    }
-
-    // Fetch user from database to check role
-    const user = await ctx.db.user.findUnique({
-      where: { id: ctx.session.user.id },
-      select: { id: true, role: true },
+  if (!allRoles.has("MODERATOR") && !allRoles.has("ADMIN")) {
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "Moderator or Admin role required",
     });
+  }
 
-    if (!user) {
-      throw new TRPCError({ code: "UNAUTHORIZED", message: "User not found" });
-    }
-
-    if (user.role !== "MODERATOR" && user.role !== "ADMIN") {
-      throw new TRPCError({
-        code: "FORBIDDEN",
-        message: "Moderator or Admin role required",
-      });
-    }
-
-    // Track IP history (non-blocking)
-    const ipAddress = getIpAddress(ctx.headers);
-    const userAgent = getUserAgent(ctx.headers);
-    trackIpHistory(ctx.session.user.id, ipAddress, userAgent).catch((error) => {
-      // Silently fail - IP history tracking shouldn't break the request
-      console.error("Failed to track IP history:", error);
-    });
-
-    return next({
-      ctx: {
-        session: { ...ctx.session, user: ctx.session.user },
-        db: ctx.db,
-        headers: ctx.headers,
-        userRole: user.role,
-      },
-    });
+  return next({
+    ctx: {
+      ...ctx,
+      userRole: user.role,
+      userRoles: allRoles,
+    },
   });
+});
 
 /**
  * Admin procedure (ADMIN role required)
  *
- * Requires user to be authenticated and have ADMIN role.
+ * Builds on protectedProcedure (auth + db + IP tracking already done).
  */
-export const adminProcedure = t.procedure
-  .use(timingMiddleware)
-  .use(async ({ ctx, next }) => {
-    if (!ctx.session?.user) {
-      throw new TRPCError({ code: "UNAUTHORIZED" });
-    }
+export const adminProcedure = protectedProcedure.use(async ({ ctx, next }) => {
+  const { user, allRoles } = await getUserWithRoles(ctx.db, ctx.session.user.id);
 
-    if (!ctx.db) {
-      throw new TRPCError({
-        code: "INTERNAL_SERVER_ERROR",
-        message: "Database client is not available",
-      });
-    }
-
-    // Fetch user from database to check role
-    const user = await ctx.db.user.findUnique({
-      where: { id: ctx.session.user.id },
-      select: { id: true, role: true },
+  if (!allRoles.has("ADMIN")) {
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "Admin role required",
     });
+  }
 
-    if (!user) {
-      throw new TRPCError({ code: "UNAUTHORIZED", message: "User not found" });
-    }
-
-    if (user.role !== "ADMIN") {
-      throw new TRPCError({
-        code: "FORBIDDEN",
-        message: "Admin role required",
-      });
-    }
-
-    // Track IP history (non-blocking)
-    const ipAddress = getIpAddress(ctx.headers);
-    const userAgent = getUserAgent(ctx.headers);
-    trackIpHistory(ctx.session.user.id, ipAddress, userAgent).catch((error) => {
-      // Silently fail - IP history tracking shouldn't break the request
-      console.error("Failed to track IP history:", error);
-    });
-
-    return next({
-      ctx: {
-        session: { ...ctx.session, user: ctx.session.user },
-        db: ctx.db,
-        headers: ctx.headers,
-        userRole: user.role,
-      },
-    });
+  return next({
+    ctx: {
+      ...ctx,
+      userRole: user.role,
+      userRoles: allRoles,
+    },
   });
+});
 
 /**
  * Content procedure (ADMIN or CONTENT role required)
  *
- * Requires user to be authenticated and have ADMIN or CONTENT role.
+ * Builds on protectedProcedure (auth + db + IP tracking already done).
  */
-export const contentProcedure = t.procedure
-  .use(timingMiddleware)
-  .use(async ({ ctx, next }) => {
-    if (!ctx.session?.user) {
-      throw new TRPCError({ code: "UNAUTHORIZED" });
-    }
+export const contentProcedure = protectedProcedure.use(async ({ ctx, next }) => {
+  const { user, allRoles } = await getUserWithRoles(ctx.db, ctx.session.user.id);
 
-    if (!ctx.db) {
-      throw new TRPCError({
-        code: "INTERNAL_SERVER_ERROR",
-        message: "Database client is not available",
-      });
-    }
-
-    // Fetch user from database to check role (including multi-role assignments)
-    const user = await ctx.db.user.findUnique({
-      where: { id: ctx.session.user.id },
-      select: { 
-        id: true, 
-        role: true,
-        roles: {
-          select: {
-            role: true,
-          },
-        },
-      },
+  if (!allRoles.has("ADMIN") && !allRoles.has("CONTENT")) {
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "Admin or Content role required",
     });
+  }
 
-    if (!user) {
-      throw new TRPCError({ code: "UNAUTHORIZED", message: "User not found" });
-    }
-
-    // Check both single role field and multi-role assignments
-    const userRoles = [
-      user.role,
-      ...(user.roles?.map((r) => r.role) ?? []),
-    ];
-
-    if (!userRoles.includes("ADMIN") && !userRoles.includes("CONTENT")) {
-      throw new TRPCError({
-        code: "FORBIDDEN",
-        message: "Admin or Content role required",
-      });
-    }
-
-    // Track IP history (non-blocking)
-    const ipAddress = getIpAddress(ctx.headers);
-    const userAgent = getUserAgent(ctx.headers);
-    trackIpHistory(ctx.session.user.id, ipAddress, userAgent).catch((error) => {
-      // Silently fail - IP history tracking shouldn't break the request
-      console.error("Failed to track IP history:", error);
-    });
-
-    return next({
-      ctx: {
-        session: { ...ctx.session, user: ctx.session.user },
-        db: ctx.db,
-        headers: ctx.headers,
-        userRole: user.role,
-      },
-    });
+  return next({
+    ctx: {
+      ...ctx,
+      userRole: user.role,
+      userRoles: allRoles,
+    },
   });
+});
 
 /**
  * Player procedure (authenticated user with Player record)

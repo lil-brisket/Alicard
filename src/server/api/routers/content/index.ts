@@ -20,7 +20,6 @@ export const contentRouter = createTRPCRouter({
     get: contentProcedure.query(async ({ ctx }) => {
       const permissions = await getContentPermissions(ctx.session.user.id);
       return {
-        has: (permission: string) => permissions.has(permission as any),
         permissions: Array.from(permissions),
       };
     }),
