@@ -5,10 +5,7 @@ import {
   protectedProcedure,
   publicProcedure,
 } from "~/server/api/trpc";
-import {
-  addSkillXp,
-  getSkillXpProgress,
-} from "~/server/lib/skill-utils";
+import { addXp } from "~/server/lib/job-utils";
 
 /**
  * Melvor Idle-inspired skill training system router
@@ -29,6 +26,7 @@ export const skillTrainingRouter = createTRPCRouter({
         .object({
           category: z.enum(["GATHERING", "PROCESSING", "COMBAT", "UTILITY"]).optional(),
           status: z.enum(["DRAFT", "ACTIVE", "DISABLED"]).optional(),
+          jobId: z.string().optional(),
         })
         .optional()
     )
@@ -37,12 +35,14 @@ export const skillTrainingRouter = createTRPCRouter({
         where: {
           ...(input?.category && { category: input.category }),
           ...(input?.status && { status: input.status }),
+          ...(input?.jobId && { jobId: input.jobId }),
         },
         orderBy: [
           { category: "asc" },
           { name: "asc" },
         ],
         include: {
+          job: true,
           actions: {
             where: {
               status: "ACTIVE", // Only show active actions by default
@@ -62,22 +62,33 @@ export const skillTrainingRouter = createTRPCRouter({
     }),
 
   // Get player's training skills (create missing ones on first access)
-  getMySkills: protectedProcedure.query(async ({ ctx }) => {
-    const player = await ctx.db.player.findUnique({
-      where: { userId: ctx.session.user.id },
-    });
-
-    if (!player) {
-      throw new TRPCError({
-        code: "NOT_FOUND",
-        message: "Player not found",
+  getMySkills: protectedProcedure
+    .input(
+      z
+        .object({
+          jobId: z.string().optional(),
+        })
+        .optional()
+    )
+    .query(async ({ ctx, input }) => {
+      const player = await ctx.db.player.findUnique({
+        where: { userId: ctx.session.user.id },
       });
-    }
 
-    // Get all active skills
-    const allSkills = await ctx.db.trainingSkill.findMany({
-      where: { status: "ACTIVE" },
-    });
+      if (!player) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Player not found",
+        });
+      }
+
+      // Get all active skills (optionally filtered by job)
+      const allSkills = await ctx.db.trainingSkill.findMany({
+        where: {
+          status: "ACTIVE",
+          ...(input?.jobId && { jobId: input.jobId }),
+        },
+      });
 
     // Get player's existing skills
     const playerSkills = await ctx.db.playerTrainingSkill.findMany({
@@ -105,50 +116,35 @@ export const skillTrainingRouter = createTRPCRouter({
       });
     }
 
-    // Fetch all player skills with full skill details
-    const allPlayerSkills = await ctx.db.playerTrainingSkill.findMany({
-      where: { playerId: player.id },
-      include: {
-        skill: {
-          include: {
-            actions: {
-              where: { status: "ACTIVE" },
-              orderBy: { requiredLevel: "asc" },
-              include: {
-                inputItems: {
-                  include: { item: true },
-                },
-                outputItems: {
-                  include: { item: true },
+      // Fetch all player skills with full skill details
+      const allPlayerSkills = await ctx.db.playerTrainingSkill.findMany({
+        where: { playerId: player.id },
+        include: {
+          skill: {
+            include: {
+              job: true,
+              actions: {
+                where: { status: "ACTIVE" },
+                orderBy: { requiredLevel: "asc" },
+                include: {
+                  inputItems: {
+                    include: { item: true },
+                  },
+                  outputItems: {
+                    include: { item: true },
+                  },
                 },
               },
             },
           },
         },
-      },
-    });
+      });
 
-    // Calculate XP progress for each skill
-    return allPlayerSkills.map((ps) => {
-      const progress = getSkillXpProgress(
-        ps.level,
-        ps.xp,
-        100, // baseXP
-        ps.skill.xpCurveBase
-      );
-
-      return {
-        ...ps,
-        progress,
-        // Filter actions by required level
-        availableActions: ps.skill.actions.filter(
-          (action) => ps.level >= action.requiredLevel
-        ),
-        lockedActions: ps.skill.actions.filter(
-          (action) => ps.level < action.requiredLevel
-        ),
-      };
-    });
+    // Return skills without XP tracking (skills are just organizational now)
+    return allPlayerSkills.map((ps) => ({
+      ...ps,
+      progress: { current: 0, needed: 0, progressPct: 0 }, // Placeholder, not used
+    }));
   }),
 
   // Get specific skill details
@@ -158,6 +154,7 @@ export const skillTrainingRouter = createTRPCRouter({
       const skill = await ctx.db.trainingSkill.findUnique({
         where: { id: input.skillId },
         include: {
+          job: true,
           actions: {
             where: { status: "ACTIVE" },
             orderBy: { requiredLevel: "asc" },
@@ -181,6 +178,34 @@ export const skillTrainingRouter = createTRPCRouter({
       }
 
       return skill;
+    }),
+
+  // Get training skills for a specific job
+  getSkillsByJob: publicProcedure
+    .input(z.object({ jobId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      return await ctx.db.trainingSkill.findMany({
+        where: {
+          jobId: input.jobId,
+          status: "ACTIVE",
+        },
+        include: {
+          job: true,
+          actions: {
+            where: { status: "ACTIVE" },
+            orderBy: { requiredLevel: "asc" },
+            include: {
+              inputItems: {
+                include: { item: true },
+              },
+              outputItems: {
+                include: { item: true },
+              },
+            },
+          },
+        },
+        orderBy: { name: "asc" },
+      });
     }),
 
   // Start a training action (locks player into action loop)
@@ -233,7 +258,26 @@ export const skillTrainingRouter = createTRPCRouter({
         });
       }
 
-      // Get player's skill level
+      // Check job level requirement (skills are just organizational, job level is what matters)
+      if (action.skill.jobId) {
+        const userJob = await ctx.db.userJob.findUnique({
+          where: {
+            playerId_jobId: {
+              playerId: player.id,
+              jobId: action.skill.jobId,
+            },
+          },
+        });
+
+        if (!userJob || userJob.level < action.requiredLevel) {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: `Requires job level ${action.requiredLevel}`,
+          });
+        }
+      }
+
+      // Ensure player has the skill record (for organizational purposes)
       const playerSkill = await ctx.db.playerTrainingSkill.findUnique({
         where: {
           playerId_skillId: {
@@ -243,10 +287,15 @@ export const skillTrainingRouter = createTRPCRouter({
         },
       });
 
-      if (!playerSkill || playerSkill.level < action.requiredLevel) {
-        throw new TRPCError({
-          code: "FORBIDDEN",
-          message: `Requires ${action.skill.name} level ${action.requiredLevel}`,
+      if (!playerSkill) {
+        // Create skill record if missing
+        await ctx.db.playerTrainingSkill.create({
+          data: {
+            playerId: player.id,
+            skillId: action.skillId,
+            level: 1,
+            xp: 0,
+          },
         });
       }
 
@@ -338,10 +387,13 @@ export const skillTrainingRouter = createTRPCRouter({
     };
   }),
 
-  // Get current active action status
+  // Get current active action status (automatically processes offline completions)
   getActiveAction: protectedProcedure.query(async ({ ctx }) => {
     const player = await ctx.db.player.findUnique({
       where: { userId: ctx.session.user.id },
+      include: {
+        stats: true,
+      },
     });
 
     if (!player) {
@@ -351,7 +403,7 @@ export const skillTrainingRouter = createTRPCRouter({
       });
     }
 
-    const activeAction = await ctx.db.playerActiveAction.findUnique({
+    let activeAction = await ctx.db.playerActiveAction.findUnique({
       where: { playerId: player.id },
       include: {
         action: {
@@ -373,6 +425,193 @@ export const skillTrainingRouter = createTRPCRouter({
     }
 
     const now = new Date();
+    
+    // Process all offline completions (continue training while away)
+    // This allows training to continue even when the player is offline
+    // Safety limit: process max 1000 actions at once to prevent infinite loops or excessive processing
+    let processedCount = 0;
+    const maxOfflineActions = 1000;
+    
+    while (activeAction.nextCompletionAt <= now && processedCount < maxOfflineActions) {
+      processedCount++;
+      // Check if action can succeed (success rate roll)
+      const success =
+        activeAction.action.successRate >= 1.0 ||
+        Math.random() < activeAction.action.successRate;
+
+      // Get player skill for XP calculation
+      const playerSkill = await ctx.db.playerTrainingSkill.findUnique({
+        where: {
+          playerId_skillId: {
+            playerId: player.id,
+            skillId: activeAction.action.skillId,
+          },
+        },
+      });
+
+      if (!playerSkill) {
+        // Skill not found, stop action
+        await ctx.db.playerActiveAction.delete({
+          where: { id: activeAction.id },
+        });
+        return null;
+      }
+
+      if (success) {
+        // Consume input items
+        let hasEnoughItems = true;
+        for (const inputItem of activeAction.action.inputItems) {
+          const inventoryItem = await ctx.db.inventoryItem.findUnique({
+            where: {
+              playerId_itemId: {
+                playerId: player.id,
+                itemId: inputItem.itemId,
+              },
+            },
+          });
+
+          if (!inventoryItem || inventoryItem.quantity < inputItem.quantity) {
+            // Not enough items - stop action
+            await ctx.db.playerActiveAction.delete({
+              where: { id: activeAction.id },
+            });
+            return null;
+          }
+
+          // Remove items
+          if (inventoryItem.quantity === inputItem.quantity) {
+            await ctx.db.inventoryItem.delete({
+              where: { id: inventoryItem.id },
+            });
+          } else {
+            await ctx.db.inventoryItem.update({
+              where: { id: inventoryItem.id },
+              data: { quantity: inventoryItem.quantity - inputItem.quantity },
+            });
+          }
+        }
+
+        // Grant XP to job (primary progression system)
+        const xpGained = activeAction.action.xpReward;
+        if (activeAction.action.skill.jobId) {
+          const userJob = await ctx.db.userJob.findUnique({
+            where: {
+              playerId_jobId: {
+                playerId: player.id,
+                jobId: activeAction.action.skill.jobId,
+              },
+            },
+          });
+
+          if (userJob) {
+            const jobXpResult = addXp(userJob.level, userJob.xp, xpGained, 10);
+            await ctx.db.userJob.update({
+              where: { id: userJob.id },
+              data: {
+                level: jobXpResult.newLevel,
+                xp: jobXpResult.newXp,
+              },
+            });
+          }
+        }
+
+        // Grant output items
+        for (const outputItem of activeAction.action.outputItems) {
+          const quantity =
+            outputItem.minQuantity +
+            Math.floor(
+              Math.random() * (outputItem.maxQuantity - outputItem.minQuantity + 1)
+            );
+
+          if (quantity > 0) {
+            const existingItem = await ctx.db.inventoryItem.findUnique({
+              where: {
+                playerId_itemId: {
+                  playerId: player.id,
+                  itemId: outputItem.itemId,
+                },
+              },
+            });
+
+            if (existingItem) {
+              await ctx.db.inventoryItem.update({
+                where: { id: existingItem.id },
+                data: {
+                  quantity: existingItem.quantity + quantity,
+                },
+              });
+            } else {
+              await ctx.db.inventoryItem.create({
+                data: {
+                  playerId: player.id,
+                  itemId: outputItem.itemId,
+                  quantity,
+                },
+              });
+            }
+          }
+        }
+
+        // Log the action
+        await ctx.db.skillActionLog.create({
+          data: {
+            playerId: player.id,
+            actionId: activeAction.action.id,
+            skillId: activeAction.action.skillId,
+            success: true,
+            xpGained,
+          },
+        });
+      } else {
+        // Log failed action
+        await ctx.db.skillActionLog.create({
+          data: {
+            playerId: player.id,
+            actionId: activeAction.action.id,
+            skillId: activeAction.action.skillId,
+            success: false,
+            xpGained: 0,
+          },
+        });
+      }
+
+      // Update active action for next completion
+      const nextCompletionAt = new Date(
+        activeAction.nextCompletionAt.getTime() + activeAction.action.actionTimeSeconds * 1000
+      );
+
+      await ctx.db.playerActiveAction.update({
+        where: { id: activeAction.id },
+        data: {
+          nextCompletionAt,
+          actionsCompleted: activeAction.actionsCompleted + 1,
+          updatedAt: now,
+        },
+      });
+
+      // Refetch to get updated action
+      activeAction = await ctx.db.playerActiveAction.findUnique({
+        where: { playerId: player.id },
+        include: {
+          action: {
+            include: {
+              skill: true,
+              inputItems: {
+                include: { item: true },
+              },
+              outputItems: {
+                include: { item: true },
+              },
+            },
+          },
+        },
+      });
+
+      if (!activeAction) {
+        return null;
+      }
+    }
+
     const timeUntilCompletion =
       activeAction.nextCompletionAt.getTime() - now.getTime();
     const isReady = timeUntilCompletion <= 0;
@@ -532,24 +771,31 @@ export const skillTrainingRouter = createTRPCRouter({
         }
       }
 
-      // Grant XP
+      // Grant XP to job (primary progression system)
       xpGained = activeAction.action.xpReward;
-      const xpResult = addSkillXp(
-        playerSkill.level,
-        playerSkill.xp,
-        xpGained,
-        activeAction.action.skill.maxLevel,
-        100, // baseXP
-        activeAction.action.skill.xpCurveBase
-      );
+      let jobLeveledUp = false;
+      if (success && activeAction.action.skill.jobId) {
+        const userJob = await ctx.db.userJob.findUnique({
+          where: {
+            playerId_jobId: {
+              playerId: player.id,
+              jobId: activeAction.action.skill.jobId,
+            },
+          },
+        });
 
-      await ctx.db.playerTrainingSkill.update({
-        where: { id: playerSkill.id },
-        data: {
-          level: xpResult.newLevel,
-          xp: xpResult.newXp,
-        },
-      });
+        if (userJob) {
+          const jobXpResult = addXp(userJob.level, userJob.xp, xpGained, 10);
+          jobLeveledUp = jobXpResult.leveledUp;
+          await ctx.db.userJob.update({
+            where: { id: userJob.id },
+            data: {
+              level: jobXpResult.newLevel,
+              xp: jobXpResult.newXp,
+            },
+          });
+        }
+      }
 
       // Grant output items
       for (const outputItem of activeAction.action.outputItems) {
@@ -623,30 +869,14 @@ export const skillTrainingRouter = createTRPCRouter({
       },
     });
 
-    // Get updated skill level
-    const updatedSkill = await ctx.db.playerTrainingSkill.findUnique({
-      where: { id: playerSkill.id },
-    });
-
     return {
       success,
       xpGained,
       itemsConsumed,
       itemsGained,
-      leveledUp: success && xpGained > 0
-        ? addSkillXp(
-            playerSkill.level,
-            playerSkill.xp,
-            xpGained,
-            activeAction.action.skill.maxLevel,
-            100,
-            activeAction.action.skill.xpCurveBase
-          ).leveledUp
-        : false,
+      leveledUp: jobLeveledUp,
       nextCompletionAt,
       actionsCompleted: activeAction.actionsCompleted + 1,
-      skillLevel: updatedSkill?.level ?? playerSkill.level,
-      skillXp: updatedSkill?.xp ?? playerSkill.xp,
     };
   }),
 });
