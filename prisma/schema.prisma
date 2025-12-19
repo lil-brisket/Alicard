@@ -805,6 +805,7 @@ model Job {
   userJobs    UserJob[]
   recipes     Recipe[]
   nodes       GatheringNode[]
+  trainingSkills TrainingSkill[]
 
   @@index([category])
   @@index([key])
@@ -1313,6 +1314,9 @@ model TrainingSkill {
   maxLevel     Int                   @default(99) // Melvor-style cap (or scalable)
   xpCurveBase  Float                 @default(1.15) // Exponential curve base (Melvor uses ~1.15)
   icon         String?
+  // Job relationship (optional - skills can be job-specific or general)
+  jobId        String?
+  job          Job?                  @relation(fields: [jobId], references: [id], onDelete: SetNull)
   // Relations
   actions      SkillAction[]
   playerSkills PlayerTrainingSkill[]
@@ -1321,6 +1325,7 @@ model TrainingSkill {
   @@index([status])
   @@index([category])
   @@index([createdBy])
+  @@index([jobId])
 }
 
 // Skill Action - Repeatable task that trains a skill (e.g., "Mine Iron", "Cook Meat")

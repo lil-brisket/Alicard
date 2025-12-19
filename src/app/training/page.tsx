@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { api } from "~/trpc/react";
 import toast from "react-hot-toast";
@@ -15,11 +16,23 @@ import toast from "react-hot-toast";
  * - Monitor active action progress
  * - View skill levels and XP progress
  */
-export default function TrainingPage() {
+function TrainingPageContent() {
   const [autoCompleteInterval, setAutoCompleteInterval] = useState<NodeJS.Timeout | null>(null);
+  const searchParams = useSearchParams();
+  const jobId = searchParams.get("jobId");
 
   const utils = api.useUtils();
-  const { data: mySkills, isLoading: skillsLoading } = api.skillTraining.getMySkills.useQuery();
+  const { data: mySkills, isLoading: skillsLoading } = api.skillTraining.getMySkills.useQuery(
+    jobId ? { jobId } : undefined,
+    {
+      refetchInterval: 2000, // Refetch every 2 seconds for real-time progress
+    }
+  );
+  
+  const { data: job } = api.jobs.listJobs.useQuery(undefined, {
+    enabled: !!jobId,
+    select: (jobs) => jobs.find((j) => j.id === jobId),
+  });
   const { data: activeAction, isLoading: actionLoading } = api.skillTraining.getActiveAction.useQuery(
     undefined,
     {
@@ -112,11 +125,36 @@ export default function TrainingPage() {
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto max-w-7xl p-4 md:p-8">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-cyan-400">Skill Training</h1>
-          <p className="mt-2 text-slate-400">
-            Train skills by performing repeatable actions. Actions run automatically until you stop
-            or run out of resources.
-          </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-cyan-400">
+                {job ? `${job.name} Training` : "Skill Training"}
+              </h1>
+              <p className="mt-2 text-slate-400">
+                {job
+                  ? `Train ${job.name.toLowerCase()} skills by performing repeatable actions.`
+                  : "Train skills by performing repeatable actions. Actions run automatically until you stop or run out of resources."}
+              </p>
+            </div>
+            {job && (
+              <Link
+                href="/hub/jobs"
+                className="rounded bg-slate-700/50 px-4 py-2 text-sm text-slate-300 transition hover:bg-slate-700"
+              >
+                View All Jobs
+              </Link>
+            )}
+          </div>
+          {job && (
+            <div className="mt-4">
+              <Link
+                href="/training"
+                className="text-sm text-cyan-400 hover:text-cyan-300 transition"
+              >
+                ← View all training skills
+              </Link>
+            </div>
+          )}
         </div>
 
         {/* Active Action Status */}
@@ -166,14 +204,6 @@ export default function TrainingPage() {
                     />
                   </div>
                 </>
-              )}
-              {activeAction.action.staminaCost > 0 && (
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-300">Stamina Cost:</span>
-                  <span className="font-semibold text-blue-400">
-                    {activeAction.action.staminaCost} SP
-                  </span>
-                </div>
               )}
               {activeAction.action.inputItems.length > 0 && (
                 <div>
@@ -289,11 +319,6 @@ export default function TrainingPage() {
                                   <span className="rounded bg-green-500/20 px-2 py-1 text-green-400">
                                     +{action.xpReward} XP
                                   </span>
-                                  {action.staminaCost > 0 && (
-                                    <span className="rounded bg-purple-500/20 px-2 py-1 text-purple-400">
-                                      {action.staminaCost} SP
-                                    </span>
-                                  )}
                                   {action.successRate < 1.0 && (
                                     <span className="rounded bg-yellow-500/20 px-2 py-1 text-yellow-400">
                                       {(action.successRate * 100).toFixed(0)}% success
@@ -398,7 +423,15 @@ export default function TrainingPage() {
           )}
         </div>
 
-        <div className="mt-8">
+        <div className="mt-8 flex gap-4">
+          {job && (
+            <Link
+              href={`/hub/jobs/${job.key}`}
+              className="inline-block rounded-xl bg-cyan-500/20 px-6 py-3 text-cyan-400 transition hover:bg-cyan-500/30"
+            >
+              Back to {job.name}
+            </Link>
+          )}
           <Link
             href="/hub"
             className="inline-block rounded-xl bg-cyan-500/20 px-6 py-3 text-cyan-400 transition hover:bg-cyan-500/30"
@@ -408,5 +441,20 @@ export default function TrainingPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function TrainingPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-slate-950 text-slate-100">
+        <div className="mx-auto max-w-7xl p-4 md:p-8">
+          <h1 className="text-2xl font-bold text-cyan-400">Skill Training</h1>
+          <p className="mt-2 text-slate-400">Loading...</p>
+        </div>
+      </div>
+    }>
+      <TrainingPageContent />
+    </Suspense>
   );
 }

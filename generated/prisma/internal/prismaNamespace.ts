@@ -6483,7 +6483,8 @@ export const TrainingSkillScalarFieldEnum = {
   category: 'category',
   maxLevel: 'maxLevel',
   xpCurveBase: 'xpCurveBase',
-  icon: 'icon'
+  icon: 'icon',
+  jobId: 'jobId'
 } as const
 
 export type TrainingSkillScalarFieldEnum = (typeof TrainingSkillScalarFieldEnum)[keyof typeof TrainingSkillScalarFieldEnum]

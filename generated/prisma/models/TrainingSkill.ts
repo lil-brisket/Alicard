@@ -52,6 +52,7 @@ export type TrainingSkillMinAggregateOutputType = {
   maxLevel: number | null
   xpCurveBase: number | null
   icon: string | null
+  jobId: string | null
 }
 
 export type TrainingSkillMaxAggregateOutputType = {
@@ -68,6 +69,7 @@ export type TrainingSkillMaxAggregateOutputType = {
   maxLevel: number | null
   xpCurveBase: number | null
   icon: string | null
+  jobId: string | null
 }
 
 export type TrainingSkillCountAggregateOutputType = {
@@ -85,6 +87,7 @@ export type TrainingSkillCountAggregateOutputType = {
   maxLevel: number
   xpCurveBase: number
   icon: number
+  jobId: number
   _all: number
 }
 
@@ -115,6 +118,7 @@ export type TrainingSkillMinAggregateInputType = {
   maxLevel?: true
   xpCurveBase?: true
   icon?: true
+  jobId?: true
 }
 
 export type TrainingSkillMaxAggregateInputType = {
@@ -131,6 +135,7 @@ export type TrainingSkillMaxAggregateInputType = {
   maxLevel?: true
   xpCurveBase?: true
   icon?: true
+  jobId?: true
 }
 
 export type TrainingSkillCountAggregateInputType = {
@@ -148,6 +153,7 @@ export type TrainingSkillCountAggregateInputType = {
   maxLevel?: true
   xpCurveBase?: true
   icon?: true
+  jobId?: true
   _all?: true
 }
 
@@ -252,6 +258,7 @@ export type TrainingSkillGroupByOutputType = {
   maxLevel: number
   xpCurveBase: number
   icon: string | null
+  jobId: string | null
   _count: TrainingSkillCountAggregateOutputType | null
   _avg: TrainingSkillAvgAggregateOutputType | null
   _sum: TrainingSkillSumAggregateOutputType | null
@@ -292,6 +299,8 @@ export type TrainingSkillWhereInput = {
   maxLevel?: Prisma.IntFilter<"TrainingSkill"> | number
   xpCurveBase?: Prisma.FloatFilter<"TrainingSkill"> | number
   icon?: Prisma.StringNullableFilter<"TrainingSkill"> | string | null
+  jobId?: Prisma.StringNullableFilter<"TrainingSkill"> | string | null
+  job?: Prisma.XOR<Prisma.JobNullableScalarRelationFilter, Prisma.JobWhereInput> | null
   actions?: Prisma.SkillActionListRelationFilter
   playerSkills?: Prisma.PlayerTrainingSkillListRelationFilter
 }
@@ -311,6 +320,8 @@ export type TrainingSkillOrderByWithRelationInput = {
   maxLevel?: Prisma.SortOrder
   xpCurveBase?: Prisma.SortOrder
   icon?: Prisma.SortOrderInput | Prisma.SortOrder
+  jobId?: Prisma.SortOrderInput | Prisma.SortOrder
+  job?: Prisma.JobOrderByWithRelationInput
   actions?: Prisma.SkillActionOrderByRelationAggregateInput
   playerSkills?: Prisma.PlayerTrainingSkillOrderByRelationAggregateInput
 }
@@ -333,6 +344,8 @@ export type TrainingSkillWhereUniqueInput = Prisma.AtLeast<{
   maxLevel?: Prisma.IntFilter<"TrainingSkill"> | number
   xpCurveBase?: Prisma.FloatFilter<"TrainingSkill"> | number
   icon?: Prisma.StringNullableFilter<"TrainingSkill"> | string | null
+  jobId?: Prisma.StringNullableFilter<"TrainingSkill"> | string | null
+  job?: Prisma.XOR<Prisma.JobNullableScalarRelationFilter, Prisma.JobWhereInput> | null
   actions?: Prisma.SkillActionListRelationFilter
   playerSkills?: Prisma.PlayerTrainingSkillListRelationFilter
 }, "id" | "key">
@@ -352,6 +365,7 @@ export type TrainingSkillOrderByWithAggregationInput = {
   maxLevel?: Prisma.SortOrder
   xpCurveBase?: Prisma.SortOrder
   icon?: Prisma.SortOrderInput | Prisma.SortOrder
+  jobId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.TrainingSkillCountOrderByAggregateInput
   _avg?: Prisma.TrainingSkillAvgOrderByAggregateInput
   _max?: Prisma.TrainingSkillMaxOrderByAggregateInput
@@ -377,6 +391,7 @@ export type TrainingSkillScalarWhereWithAggregatesInput = {
   maxLevel?: Prisma.IntWithAggregatesFilter<"TrainingSkill"> | number
   xpCurveBase?: Prisma.FloatWithAggregatesFilter<"TrainingSkill"> | number
   icon?: Prisma.StringNullableWithAggregatesFilter<"TrainingSkill"> | string | null
+  jobId?: Prisma.StringNullableWithAggregatesFilter<"TrainingSkill"> | string | null
 }
 
 export type TrainingSkillCreateInput = {
@@ -394,6 +409,7 @@ export type TrainingSkillCreateInput = {
   maxLevel?: number
   xpCurveBase?: number
   icon?: string | null
+  job?: Prisma.JobCreateNestedOneWithoutTrainingSkillsInput
   actions?: Prisma.SkillActionCreateNestedManyWithoutSkillInput
   playerSkills?: Prisma.PlayerTrainingSkillCreateNestedManyWithoutSkillInput
 }
@@ -413,6 +429,7 @@ export type TrainingSkillUncheckedCreateInput = {
   maxLevel?: number
   xpCurveBase?: number
   icon?: string | null
+  jobId?: string | null
   actions?: Prisma.SkillActionUncheckedCreateNestedManyWithoutSkillInput
   playerSkills?: Prisma.PlayerTrainingSkillUncheckedCreateNestedManyWithoutSkillInput
 }
@@ -432,6 +449,7 @@ export type TrainingSkillUpdateInput = {
   maxLevel?: Prisma.IntFieldUpdateOperationsInput | number
   xpCurveBase?: Prisma.FloatFieldUpdateOperationsInput | number
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  job?: Prisma.JobUpdateOneWithoutTrainingSkillsNestedInput
   actions?: Prisma.SkillActionUpdateManyWithoutSkillNestedInput
   playerSkills?: Prisma.PlayerTrainingSkillUpdateManyWithoutSkillNestedInput
 }
@@ -451,6 +469,7 @@ export type TrainingSkillUncheckedUpdateInput = {
   maxLevel?: Prisma.IntFieldUpdateOperationsInput | number
   xpCurveBase?: Prisma.FloatFieldUpdateOperationsInput | number
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actions?: Prisma.SkillActionUncheckedUpdateManyWithoutSkillNestedInput
   playerSkills?: Prisma.PlayerTrainingSkillUncheckedUpdateManyWithoutSkillNestedInput
 }
@@ -470,6 +489,7 @@ export type TrainingSkillCreateManyInput = {
   maxLevel?: number
   xpCurveBase?: number
   icon?: string | null
+  jobId?: string | null
 }
 
 export type TrainingSkillUpdateManyMutationInput = {
@@ -504,6 +524,17 @@ export type TrainingSkillUncheckedUpdateManyInput = {
   maxLevel?: Prisma.IntFieldUpdateOperationsInput | number
   xpCurveBase?: Prisma.FloatFieldUpdateOperationsInput | number
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type TrainingSkillListRelationFilter = {
+  every?: Prisma.TrainingSkillWhereInput
+  some?: Prisma.TrainingSkillWhereInput
+  none?: Prisma.TrainingSkillWhereInput
+}
+
+export type TrainingSkillOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type TrainingSkillCountOrderByAggregateInput = {
@@ -521,6 +552,7 @@ export type TrainingSkillCountOrderByAggregateInput = {
   maxLevel?: Prisma.SortOrder
   xpCurveBase?: Prisma.SortOrder
   icon?: Prisma.SortOrder
+  jobId?: Prisma.SortOrder
 }
 
 export type TrainingSkillAvgOrderByAggregateInput = {
@@ -543,6 +575,7 @@ export type TrainingSkillMaxOrderByAggregateInput = {
   maxLevel?: Prisma.SortOrder
   xpCurveBase?: Prisma.SortOrder
   icon?: Prisma.SortOrder
+  jobId?: Prisma.SortOrder
 }
 
 export type TrainingSkillMinOrderByAggregateInput = {
@@ -559,6 +592,7 @@ export type TrainingSkillMinOrderByAggregateInput = {
   maxLevel?: Prisma.SortOrder
   xpCurveBase?: Prisma.SortOrder
   icon?: Prisma.SortOrder
+  jobId?: Prisma.SortOrder
 }
 
 export type TrainingSkillSumOrderByAggregateInput = {
@@ -570,6 +604,48 @@ export type TrainingSkillSumOrderByAggregateInput = {
 export type TrainingSkillScalarRelationFilter = {
   is?: Prisma.TrainingSkillWhereInput
   isNot?: Prisma.TrainingSkillWhereInput
+}
+
+export type TrainingSkillCreateNestedManyWithoutJobInput = {
+  create?: Prisma.XOR<Prisma.TrainingSkillCreateWithoutJobInput, Prisma.TrainingSkillUncheckedCreateWithoutJobInput> | Prisma.TrainingSkillCreateWithoutJobInput[] | Prisma.TrainingSkillUncheckedCreateWithoutJobInput[]
+  connectOrCreate?: Prisma.TrainingSkillCreateOrConnectWithoutJobInput | Prisma.TrainingSkillCreateOrConnectWithoutJobInput[]
+  createMany?: Prisma.TrainingSkillCreateManyJobInputEnvelope
+  connect?: Prisma.TrainingSkillWhereUniqueInput | Prisma.TrainingSkillWhereUniqueInput[]
+}
+
+export type TrainingSkillUncheckedCreateNestedManyWithoutJobInput = {
+  create?: Prisma.XOR<Prisma.TrainingSkillCreateWithoutJobInput, Prisma.TrainingSkillUncheckedCreateWithoutJobInput> | Prisma.TrainingSkillCreateWithoutJobInput[] | Prisma.TrainingSkillUncheckedCreateWithoutJobInput[]
+  connectOrCreate?: Prisma.TrainingSkillCreateOrConnectWithoutJobInput | Prisma.TrainingSkillCreateOrConnectWithoutJobInput[]
+  createMany?: Prisma.TrainingSkillCreateManyJobInputEnvelope
+  connect?: Prisma.TrainingSkillWhereUniqueInput | Prisma.TrainingSkillWhereUniqueInput[]
+}
+
+export type TrainingSkillUpdateManyWithoutJobNestedInput = {
+  create?: Prisma.XOR<Prisma.TrainingSkillCreateWithoutJobInput, Prisma.TrainingSkillUncheckedCreateWithoutJobInput> | Prisma.TrainingSkillCreateWithoutJobInput[] | Prisma.TrainingSkillUncheckedCreateWithoutJobInput[]
+  connectOrCreate?: Prisma.TrainingSkillCreateOrConnectWithoutJobInput | Prisma.TrainingSkillCreateOrConnectWithoutJobInput[]
+  upsert?: Prisma.TrainingSkillUpsertWithWhereUniqueWithoutJobInput | Prisma.TrainingSkillUpsertWithWhereUniqueWithoutJobInput[]
+  createMany?: Prisma.TrainingSkillCreateManyJobInputEnvelope
+  set?: Prisma.TrainingSkillWhereUniqueInput | Prisma.TrainingSkillWhereUniqueInput[]
+  disconnect?: Prisma.TrainingSkillWhereUniqueInput | Prisma.TrainingSkillWhereUniqueInput[]
+  delete?: Prisma.TrainingSkillWhereUniqueInput | Prisma.TrainingSkillWhereUniqueInput[]
+  connect?: Prisma.TrainingSkillWhereUniqueInput | Prisma.TrainingSkillWhereUniqueInput[]
+  update?: Prisma.TrainingSkillUpdateWithWhereUniqueWithoutJobInput | Prisma.TrainingSkillUpdateWithWhereUniqueWithoutJobInput[]
+  updateMany?: Prisma.TrainingSkillUpdateManyWithWhereWithoutJobInput | Prisma.TrainingSkillUpdateManyWithWhereWithoutJobInput[]
+  deleteMany?: Prisma.TrainingSkillScalarWhereInput | Prisma.TrainingSkillScalarWhereInput[]
+}
+
+export type TrainingSkillUncheckedUpdateManyWithoutJobNestedInput = {
+  create?: Prisma.XOR<Prisma.TrainingSkillCreateWithoutJobInput, Prisma.TrainingSkillUncheckedCreateWithoutJobInput> | Prisma.TrainingSkillCreateWithoutJobInput[] | Prisma.TrainingSkillUncheckedCreateWithoutJobInput[]
+  connectOrCreate?: Prisma.TrainingSkillCreateOrConnectWithoutJobInput | Prisma.TrainingSkillCreateOrConnectWithoutJobInput[]
+  upsert?: Prisma.TrainingSkillUpsertWithWhereUniqueWithoutJobInput | Prisma.TrainingSkillUpsertWithWhereUniqueWithoutJobInput[]
+  createMany?: Prisma.TrainingSkillCreateManyJobInputEnvelope
+  set?: Prisma.TrainingSkillWhereUniqueInput | Prisma.TrainingSkillWhereUniqueInput[]
+  disconnect?: Prisma.TrainingSkillWhereUniqueInput | Prisma.TrainingSkillWhereUniqueInput[]
+  delete?: Prisma.TrainingSkillWhereUniqueInput | Prisma.TrainingSkillWhereUniqueInput[]
+  connect?: Prisma.TrainingSkillWhereUniqueInput | Prisma.TrainingSkillWhereUniqueInput[]
+  update?: Prisma.TrainingSkillUpdateWithWhereUniqueWithoutJobInput | Prisma.TrainingSkillUpdateWithWhereUniqueWithoutJobInput[]
+  updateMany?: Prisma.TrainingSkillUpdateManyWithWhereWithoutJobInput | Prisma.TrainingSkillUpdateManyWithWhereWithoutJobInput[]
+  deleteMany?: Prisma.TrainingSkillScalarWhereInput | Prisma.TrainingSkillScalarWhereInput[]
 }
 
 export type EnumSkillCategoryFieldUpdateOperationsInput = {
@@ -612,6 +688,91 @@ export type TrainingSkillUpdateOneRequiredWithoutPlayerSkillsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TrainingSkillUpdateToOneWithWhereWithoutPlayerSkillsInput, Prisma.TrainingSkillUpdateWithoutPlayerSkillsInput>, Prisma.TrainingSkillUncheckedUpdateWithoutPlayerSkillsInput>
 }
 
+export type TrainingSkillCreateWithoutJobInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  category: $Enums.SkillCategory
+  maxLevel?: number
+  xpCurveBase?: number
+  icon?: string | null
+  actions?: Prisma.SkillActionCreateNestedManyWithoutSkillInput
+  playerSkills?: Prisma.PlayerTrainingSkillCreateNestedManyWithoutSkillInput
+}
+
+export type TrainingSkillUncheckedCreateWithoutJobInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  category: $Enums.SkillCategory
+  maxLevel?: number
+  xpCurveBase?: number
+  icon?: string | null
+  actions?: Prisma.SkillActionUncheckedCreateNestedManyWithoutSkillInput
+  playerSkills?: Prisma.PlayerTrainingSkillUncheckedCreateNestedManyWithoutSkillInput
+}
+
+export type TrainingSkillCreateOrConnectWithoutJobInput = {
+  where: Prisma.TrainingSkillWhereUniqueInput
+  create: Prisma.XOR<Prisma.TrainingSkillCreateWithoutJobInput, Prisma.TrainingSkillUncheckedCreateWithoutJobInput>
+}
+
+export type TrainingSkillCreateManyJobInputEnvelope = {
+  data: Prisma.TrainingSkillCreateManyJobInput | Prisma.TrainingSkillCreateManyJobInput[]
+  skipDuplicates?: boolean
+}
+
+export type TrainingSkillUpsertWithWhereUniqueWithoutJobInput = {
+  where: Prisma.TrainingSkillWhereUniqueInput
+  update: Prisma.XOR<Prisma.TrainingSkillUpdateWithoutJobInput, Prisma.TrainingSkillUncheckedUpdateWithoutJobInput>
+  create: Prisma.XOR<Prisma.TrainingSkillCreateWithoutJobInput, Prisma.TrainingSkillUncheckedCreateWithoutJobInput>
+}
+
+export type TrainingSkillUpdateWithWhereUniqueWithoutJobInput = {
+  where: Prisma.TrainingSkillWhereUniqueInput
+  data: Prisma.XOR<Prisma.TrainingSkillUpdateWithoutJobInput, Prisma.TrainingSkillUncheckedUpdateWithoutJobInput>
+}
+
+export type TrainingSkillUpdateManyWithWhereWithoutJobInput = {
+  where: Prisma.TrainingSkillScalarWhereInput
+  data: Prisma.XOR<Prisma.TrainingSkillUpdateManyMutationInput, Prisma.TrainingSkillUncheckedUpdateManyWithoutJobInput>
+}
+
+export type TrainingSkillScalarWhereInput = {
+  AND?: Prisma.TrainingSkillScalarWhereInput | Prisma.TrainingSkillScalarWhereInput[]
+  OR?: Prisma.TrainingSkillScalarWhereInput[]
+  NOT?: Prisma.TrainingSkillScalarWhereInput | Prisma.TrainingSkillScalarWhereInput[]
+  id?: Prisma.StringFilter<"TrainingSkill"> | string
+  key?: Prisma.StringFilter<"TrainingSkill"> | string
+  name?: Prisma.StringFilter<"TrainingSkill"> | string
+  description?: Prisma.StringNullableFilter<"TrainingSkill"> | string | null
+  tags?: Prisma.JsonNullableFilter<"TrainingSkill">
+  status?: Prisma.EnumContentStatusFilter<"TrainingSkill"> | $Enums.ContentStatus
+  version?: Prisma.IntFilter<"TrainingSkill"> | number
+  createdBy?: Prisma.StringNullableFilter<"TrainingSkill"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"TrainingSkill"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"TrainingSkill"> | Date | string
+  category?: Prisma.EnumSkillCategoryFilter<"TrainingSkill"> | $Enums.SkillCategory
+  maxLevel?: Prisma.IntFilter<"TrainingSkill"> | number
+  xpCurveBase?: Prisma.FloatFilter<"TrainingSkill"> | number
+  icon?: Prisma.StringNullableFilter<"TrainingSkill"> | string | null
+  jobId?: Prisma.StringNullableFilter<"TrainingSkill"> | string | null
+}
+
 export type TrainingSkillCreateWithoutActionsInput = {
   id?: string
   key: string
@@ -627,6 +788,7 @@ export type TrainingSkillCreateWithoutActionsInput = {
   maxLevel?: number
   xpCurveBase?: number
   icon?: string | null
+  job?: Prisma.JobCreateNestedOneWithoutTrainingSkillsInput
   playerSkills?: Prisma.PlayerTrainingSkillCreateNestedManyWithoutSkillInput
 }
 
@@ -645,6 +807,7 @@ export type TrainingSkillUncheckedCreateWithoutActionsInput = {
   maxLevel?: number
   xpCurveBase?: number
   icon?: string | null
+  jobId?: string | null
   playerSkills?: Prisma.PlayerTrainingSkillUncheckedCreateNestedManyWithoutSkillInput
 }
 
@@ -679,6 +842,7 @@ export type TrainingSkillUpdateWithoutActionsInput = {
   maxLevel?: Prisma.IntFieldUpdateOperationsInput | number
   xpCurveBase?: Prisma.FloatFieldUpdateOperationsInput | number
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  job?: Prisma.JobUpdateOneWithoutTrainingSkillsNestedInput
   playerSkills?: Prisma.PlayerTrainingSkillUpdateManyWithoutSkillNestedInput
 }
 
@@ -697,6 +861,7 @@ export type TrainingSkillUncheckedUpdateWithoutActionsInput = {
   maxLevel?: Prisma.IntFieldUpdateOperationsInput | number
   xpCurveBase?: Prisma.FloatFieldUpdateOperationsInput | number
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   playerSkills?: Prisma.PlayerTrainingSkillUncheckedUpdateManyWithoutSkillNestedInput
 }
 
@@ -715,6 +880,7 @@ export type TrainingSkillCreateWithoutPlayerSkillsInput = {
   maxLevel?: number
   xpCurveBase?: number
   icon?: string | null
+  job?: Prisma.JobCreateNestedOneWithoutTrainingSkillsInput
   actions?: Prisma.SkillActionCreateNestedManyWithoutSkillInput
 }
 
@@ -733,6 +899,7 @@ export type TrainingSkillUncheckedCreateWithoutPlayerSkillsInput = {
   maxLevel?: number
   xpCurveBase?: number
   icon?: string | null
+  jobId?: string | null
   actions?: Prisma.SkillActionUncheckedCreateNestedManyWithoutSkillInput
 }
 
@@ -767,6 +934,7 @@ export type TrainingSkillUpdateWithoutPlayerSkillsInput = {
   maxLevel?: Prisma.IntFieldUpdateOperationsInput | number
   xpCurveBase?: Prisma.FloatFieldUpdateOperationsInput | number
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  job?: Prisma.JobUpdateOneWithoutTrainingSkillsNestedInput
   actions?: Prisma.SkillActionUpdateManyWithoutSkillNestedInput
 }
 
@@ -785,7 +953,80 @@ export type TrainingSkillUncheckedUpdateWithoutPlayerSkillsInput = {
   maxLevel?: Prisma.IntFieldUpdateOperationsInput | number
   xpCurveBase?: Prisma.FloatFieldUpdateOperationsInput | number
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actions?: Prisma.SkillActionUncheckedUpdateManyWithoutSkillNestedInput
+}
+
+export type TrainingSkillCreateManyJobInput = {
+  id?: string
+  key: string
+  name: string
+  description?: string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ContentStatus
+  version?: number
+  createdBy?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  category: $Enums.SkillCategory
+  maxLevel?: number
+  xpCurveBase?: number
+  icon?: string | null
+}
+
+export type TrainingSkillUpdateWithoutJobInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.EnumSkillCategoryFieldUpdateOperationsInput | $Enums.SkillCategory
+  maxLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  xpCurveBase?: Prisma.FloatFieldUpdateOperationsInput | number
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actions?: Prisma.SkillActionUpdateManyWithoutSkillNestedInput
+  playerSkills?: Prisma.PlayerTrainingSkillUpdateManyWithoutSkillNestedInput
+}
+
+export type TrainingSkillUncheckedUpdateWithoutJobInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.EnumSkillCategoryFieldUpdateOperationsInput | $Enums.SkillCategory
+  maxLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  xpCurveBase?: Prisma.FloatFieldUpdateOperationsInput | number
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actions?: Prisma.SkillActionUncheckedUpdateManyWithoutSkillNestedInput
+  playerSkills?: Prisma.PlayerTrainingSkillUncheckedUpdateManyWithoutSkillNestedInput
+}
+
+export type TrainingSkillUncheckedUpdateManyWithoutJobInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.EnumSkillCategoryFieldUpdateOperationsInput | $Enums.SkillCategory
+  maxLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  xpCurveBase?: Prisma.FloatFieldUpdateOperationsInput | number
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -843,6 +1084,8 @@ export type TrainingSkillSelect<ExtArgs extends runtime.Types.Extensions.Interna
   maxLevel?: boolean
   xpCurveBase?: boolean
   icon?: boolean
+  jobId?: boolean
+  job?: boolean | Prisma.TrainingSkill$jobArgs<ExtArgs>
   actions?: boolean | Prisma.TrainingSkill$actionsArgs<ExtArgs>
   playerSkills?: boolean | Prisma.TrainingSkill$playerSkillsArgs<ExtArgs>
   _count?: boolean | Prisma.TrainingSkillCountOutputTypeDefaultArgs<ExtArgs>
@@ -863,6 +1106,8 @@ export type TrainingSkillSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   maxLevel?: boolean
   xpCurveBase?: boolean
   icon?: boolean
+  jobId?: boolean
+  job?: boolean | Prisma.TrainingSkill$jobArgs<ExtArgs>
 }, ExtArgs["result"]["trainingSkill"]>
 
 export type TrainingSkillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -880,6 +1125,8 @@ export type TrainingSkillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   maxLevel?: boolean
   xpCurveBase?: boolean
   icon?: boolean
+  jobId?: boolean
+  job?: boolean | Prisma.TrainingSkill$jobArgs<ExtArgs>
 }, ExtArgs["result"]["trainingSkill"]>
 
 export type TrainingSkillSelectScalar = {
@@ -897,20 +1144,27 @@ export type TrainingSkillSelectScalar = {
   maxLevel?: boolean
   xpCurveBase?: boolean
   icon?: boolean
+  jobId?: boolean
 }
 
-export type TrainingSkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "category" | "maxLevel" | "xpCurveBase" | "icon", ExtArgs["result"]["trainingSkill"]>
+export type TrainingSkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "category" | "maxLevel" | "xpCurveBase" | "icon" | "jobId", ExtArgs["result"]["trainingSkill"]>
 export type TrainingSkillInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  job?: boolean | Prisma.TrainingSkill$jobArgs<ExtArgs>
   actions?: boolean | Prisma.TrainingSkill$actionsArgs<ExtArgs>
   playerSkills?: boolean | Prisma.TrainingSkill$playerSkillsArgs<ExtArgs>
   _count?: boolean | Prisma.TrainingSkillCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type TrainingSkillIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type TrainingSkillIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type TrainingSkillIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  job?: boolean | Prisma.TrainingSkill$jobArgs<ExtArgs>
+}
+export type TrainingSkillIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  job?: boolean | Prisma.TrainingSkill$jobArgs<ExtArgs>
+}
 
 export type $TrainingSkillPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "TrainingSkill"
   objects: {
+    job: Prisma.$JobPayload<ExtArgs> | null
     actions: Prisma.$SkillActionPayload<ExtArgs>[]
     playerSkills: Prisma.$PlayerTrainingSkillPayload<ExtArgs>[]
   }
@@ -929,6 +1183,7 @@ export type $TrainingSkillPayload<ExtArgs extends runtime.Types.Extensions.Inter
     maxLevel: number
     xpCurveBase: number
     icon: string | null
+    jobId: string | null
   }, ExtArgs["result"]["trainingSkill"]>
   composites: {}
 }
@@ -1323,6 +1578,7 @@ readonly fields: TrainingSkillFieldRefs;
  */
 export interface Prisma__TrainingSkillClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  job<T extends Prisma.TrainingSkill$jobArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrainingSkill$jobArgs<ExtArgs>>): Prisma.Prisma__JobClient<runtime.Types.Result.GetResult<Prisma.$JobPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   actions<T extends Prisma.TrainingSkill$actionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrainingSkill$actionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SkillActionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   playerSkills<T extends Prisma.TrainingSkill$playerSkillsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrainingSkill$playerSkillsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlayerTrainingSkillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1368,6 +1624,7 @@ export interface TrainingSkillFieldRefs {
   readonly maxLevel: Prisma.FieldRef<"TrainingSkill", 'Int'>
   readonly xpCurveBase: Prisma.FieldRef<"TrainingSkill", 'Float'>
   readonly icon: Prisma.FieldRef<"TrainingSkill", 'String'>
+  readonly jobId: Prisma.FieldRef<"TrainingSkill", 'String'>
 }
     
 
@@ -1617,6 +1874,10 @@ export type TrainingSkillCreateManyAndReturnArgs<ExtArgs extends runtime.Types.E
    */
   data: Prisma.TrainingSkillCreateManyInput | Prisma.TrainingSkillCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TrainingSkillIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1687,6 +1948,10 @@ export type TrainingSkillUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.E
    * Limit how many TrainingSkills to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TrainingSkillIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1753,6 +2018,25 @@ export type TrainingSkillDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many TrainingSkills to delete.
    */
   limit?: number
+}
+
+/**
+ * TrainingSkill.job
+ */
+export type TrainingSkill$jobArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Job
+   */
+  select?: Prisma.JobSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Job
+   */
+  omit?: Prisma.JobOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JobInclude<ExtArgs> | null
+  where?: Prisma.JobWhereInput
 }
 
 /**

@@ -1253,7 +1253,7 @@ async function main() {
       actionTimeSeconds: 3,
       xpReward: 10,
       successRate: 1.0,
-      staminaCost: 5,
+      staminaCost: 0,
       status: "ACTIVE",
       tags: ["tier1", "starter"],
     },
@@ -1268,6 +1268,38 @@ async function main() {
       itemId: ironOre.id,
       minQuantity: 1,
       maxQuantity: 2,
+      weight: 100,
+    },
+  });
+
+  // Mining action: Mine Copper Ore
+  const mineCopperOreAction = await prisma.skillAction.upsert({
+    where: { key: "mine-copper-ore" },
+    update: {},
+    create: {
+      key: "mine-copper-ore",
+      name: "Mine Copper Ore",
+      description: "Extract copper ore from a mining node.",
+      skillId: miningSkill.id,
+      requiredLevel: 1,
+      actionTimeSeconds: 3,
+      xpReward: 8,
+      successRate: 1.0,
+      staminaCost: 0,
+      status: "ACTIVE",
+      tags: ["tier1", "starter"],
+    },
+  });
+
+  await prisma.skillActionOutput.upsert({
+    where: { id: `${mineCopperOreAction.id}-copper-ore` },
+    update: {},
+    create: {
+      id: `${mineCopperOreAction.id}-copper-ore`,
+      actionId: mineCopperOreAction.id,
+      itemId: copperOre.id,
+      minQuantity: 1,
+      maxQuantity: 3,
       weight: 100,
     },
   });
@@ -1302,7 +1334,7 @@ async function main() {
       actionTimeSeconds: 4,
       xpReward: 12,
       successRate: 0.9,
-      staminaCost: 3,
+      staminaCost: 0,
       status: "ACTIVE",
       tags: ["tier1", "starter"],
     },
@@ -1351,7 +1383,7 @@ async function main() {
       actionTimeSeconds: 2,
       xpReward: 8,
       successRate: 1.0,
-      staminaCost: 2,
+      staminaCost: 0,
       status: "ACTIVE",
       tags: ["tier1", "starter"],
     },
@@ -1400,7 +1432,7 @@ async function main() {
       actionTimeSeconds: 3,
       xpReward: 9,
       successRate: 1.0,
-      staminaCost: 4,
+      staminaCost: 0,
       status: "ACTIVE",
       tags: ["tier1", "starter"],
     },
@@ -1449,7 +1481,7 @@ async function main() {
       actionTimeSeconds: 5,
       xpReward: 15,
       successRate: 1.0,
-      staminaCost: 8,
+      staminaCost: 0,
       status: "ACTIVE",
       tags: ["tier1", "starter"],
     },
@@ -1473,6 +1505,186 @@ async function main() {
       id: `${smeltIronBarAction.id}-iron-bar`,
       actionId: smeltIronBarAction.id,
       itemId: ironBar.id,
+      minQuantity: 1,
+      maxQuantity: 1,
+      weight: 100,
+    },
+  });
+
+  // Tailoring skill
+  const tailoringSkill = await prisma.trainingSkill.upsert({
+    where: { key: "tailoring" },
+    update: {},
+    create: {
+      key: "tailoring",
+      name: "Tailoring",
+      description: "Craft clothing and fabric-based equipment.",
+      category: "PROCESSING",
+      status: "ACTIVE",
+      maxLevel: 99,
+      xpCurveBase: 1.15,
+      jobId: tailorJob.id,
+      tags: ["processing", "starter"],
+    },
+  });
+
+  // Tailoring action: Craft Cloth Shirt
+  const craftClothShirtAction = await prisma.skillAction.upsert({
+    where: { key: "craft-cloth-shirt" },
+    update: {},
+    create: {
+      key: "craft-cloth-shirt",
+      name: "Craft Cloth Shirt",
+      description: "Craft a basic cloth shirt from fabric.",
+      skillId: tailoringSkill.id,
+      requiredLevel: 1,
+      actionTimeSeconds: 4,
+      xpReward: 12,
+      successRate: 1.0,
+      staminaCost: 0,
+      status: "ACTIVE",
+      tags: ["tier1", "starter"],
+    },
+  });
+
+  await prisma.skillActionInput.upsert({
+    where: { id: `${craftClothShirtAction.id}-cloth` },
+    update: {},
+    create: {
+      id: `${craftClothShirtAction.id}-cloth`,
+      actionId: craftClothShirtAction.id,
+      itemId: cloth.id,
+      quantity: 3,
+    },
+  });
+
+  await prisma.skillActionOutput.upsert({
+    where: { id: `${craftClothShirtAction.id}-cloth-shirt` },
+    update: {},
+    create: {
+      id: `${craftClothShirtAction.id}-cloth-shirt`,
+      actionId: craftClothShirtAction.id,
+      itemId: clothShirt.id,
+      minQuantity: 1,
+      maxQuantity: 1,
+      weight: 100,
+    },
+  });
+
+  // Alchemy skill
+  const alchemySkill = await prisma.trainingSkill.upsert({
+    where: { key: "alchemy" },
+    update: {},
+    create: {
+      key: "alchemy",
+      name: "Alchemy",
+      description: "Create potions and magical consumables.",
+      category: "PROCESSING",
+      status: "ACTIVE",
+      maxLevel: 99,
+      xpCurveBase: 1.15,
+      jobId: alchemistJob.id,
+      tags: ["processing", "starter"],
+    },
+  });
+
+  // Alchemy action: Brew Health Potion
+  const brewHealthPotionAction = await prisma.skillAction.upsert({
+    where: { key: "brew-health-potion" },
+    update: {},
+    create: {
+      key: "brew-health-potion",
+      name: "Brew Health Potion",
+      description: "Brew a health potion from herbs.",
+      skillId: alchemySkill.id,
+      requiredLevel: 1,
+      actionTimeSeconds: 5,
+      xpReward: 15,
+      successRate: 1.0,
+      staminaCost: 0,
+      status: "ACTIVE",
+      tags: ["tier1", "starter"],
+    },
+  });
+
+  await prisma.skillActionInput.upsert({
+    where: { id: `${brewHealthPotionAction.id}-herb` },
+    update: {},
+    create: {
+      id: `${brewHealthPotionAction.id}-herb`,
+      actionId: brewHealthPotionAction.id,
+      itemId: herb.id,
+      quantity: 2,
+    },
+  });
+
+  await prisma.skillActionOutput.upsert({
+    where: { id: `${brewHealthPotionAction.id}-health-potion` },
+    update: {},
+    create: {
+      id: `${brewHealthPotionAction.id}-health-potion`,
+      actionId: brewHealthPotionAction.id,
+      itemId: healthPotion.id,
+      minQuantity: 1,
+      maxQuantity: 1,
+      weight: 100,
+    },
+  });
+
+  // Cooking skill
+  const cookingSkill = await prisma.trainingSkill.upsert({
+    where: { key: "cooking" },
+    update: {},
+    create: {
+      key: "cooking",
+      name: "Cooking",
+      description: "Prepare food items that restore health and stamina.",
+      category: "PROCESSING",
+      status: "ACTIVE",
+      maxLevel: 99,
+      xpCurveBase: 1.15,
+      jobId: cookJob.id,
+      tags: ["processing", "starter"],
+    },
+  });
+
+  // Cooking action: Cook Fish
+  const cookFishAction = await prisma.skillAction.upsert({
+    where: { key: "cook-fish" },
+    update: {},
+    create: {
+      key: "cook-fish",
+      name: "Cook Fish",
+      description: "Cook a fresh fish into a meal.",
+      skillId: cookingSkill.id,
+      requiredLevel: 1,
+      actionTimeSeconds: 3,
+      xpReward: 10,
+      successRate: 1.0,
+      staminaCost: 0,
+      status: "ACTIVE",
+      tags: ["tier1", "starter"],
+    },
+  });
+
+  await prisma.skillActionInput.upsert({
+    where: { id: `${cookFishAction.id}-fish` },
+    update: {},
+    create: {
+      id: `${cookFishAction.id}-fish`,
+      actionId: cookFishAction.id,
+      itemId: fish.id,
+      quantity: 1,
+    },
+  });
+
+  await prisma.skillActionOutput.upsert({
+    where: { id: `${cookFishAction.id}-cooked-fish` },
+    update: {},
+    create: {
+      id: `${cookFishAction.id}-cooked-fish`,
+      actionId: cookFishAction.id,
+      itemId: cookedFish.id,
       minQuantity: 1,
       maxQuantity: 1,
       weight: 100,
