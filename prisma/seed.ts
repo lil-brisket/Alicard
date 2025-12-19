@@ -422,7 +422,7 @@ async function main() {
       value: 60,
       stackable: false,
       maxStack: 1,
-      equipmentSlot: "LEFT_ARM",
+      equipmentSlot: "ARMS",
       strengthBonus: 3,
       dexterityBonus: 1,
     },
@@ -442,7 +442,7 @@ async function main() {
       value: 55,
       stackable: false,
       maxStack: 1,
-      equipmentSlot: "RIGHT_ARM",
+      equipmentSlot: "ARMS",
       vitalityBonus: 2,
       hpBonus: 10,
     },
@@ -1219,6 +1219,267 @@ async function main() {
   });
 
   console.log("✅ Map zone created");
+
+  // Create training skills
+  console.log("Creating training skills...");
+
+  // Mining skill
+  const miningSkill = await prisma.trainingSkill.upsert({
+    where: { key: "mining" },
+    update: {},
+    create: {
+      key: "mining",
+      name: "Mining",
+      description: "Extract ores and minerals from the earth.",
+      category: "GATHERING",
+      status: "ACTIVE",
+      maxLevel: 99,
+      xpCurveBase: 1.15,
+      jobId: minerJob.id,
+      tags: ["gathering", "starter"],
+    },
+  });
+
+  // Mining action: Mine Iron Ore
+  const mineIronOreAction = await prisma.skillAction.upsert({
+    where: { key: "mine-iron-ore" },
+    update: {},
+    create: {
+      key: "mine-iron-ore",
+      name: "Mine Iron Ore",
+      description: "Extract iron ore from a mining node.",
+      skillId: miningSkill.id,
+      requiredLevel: 1,
+      actionTimeSeconds: 3,
+      xpReward: 10,
+      successRate: 1.0,
+      staminaCost: 5,
+      status: "ACTIVE",
+      tags: ["tier1", "starter"],
+    },
+  });
+
+  await prisma.skillActionOutput.upsert({
+    where: { id: `${mineIronOreAction.id}-iron-ore` },
+    update: {},
+    create: {
+      id: `${mineIronOreAction.id}-iron-ore`,
+      actionId: mineIronOreAction.id,
+      itemId: ironOre.id,
+      minQuantity: 1,
+      maxQuantity: 2,
+      weight: 100,
+    },
+  });
+
+  // Fishing skill
+  const fishingSkill = await prisma.trainingSkill.upsert({
+    where: { key: "fishing" },
+    update: {},
+    create: {
+      key: "fishing",
+      name: "Fishing",
+      description: "Catch fish from bodies of water.",
+      category: "GATHERING",
+      status: "ACTIVE",
+      maxLevel: 99,
+      xpCurveBase: 1.15,
+      jobId: fisherJob.id,
+      tags: ["gathering", "starter"],
+    },
+  });
+
+  // Fishing action: Catch Fish
+  const catchFishAction = await prisma.skillAction.upsert({
+    where: { key: "catch-fish" },
+    update: {},
+    create: {
+      key: "catch-fish",
+      name: "Catch Fish",
+      description: "Cast your line and catch a fish.",
+      skillId: fishingSkill.id,
+      requiredLevel: 1,
+      actionTimeSeconds: 4,
+      xpReward: 12,
+      successRate: 0.9,
+      staminaCost: 3,
+      status: "ACTIVE",
+      tags: ["tier1", "starter"],
+    },
+  });
+
+  await prisma.skillActionOutput.upsert({
+    where: { id: `${catchFishAction.id}-fish` },
+    update: {},
+    create: {
+      id: `${catchFishAction.id}-fish`,
+      actionId: catchFishAction.id,
+      itemId: fish.id,
+      minQuantity: 1,
+      maxQuantity: 2,
+      weight: 100,
+    },
+  });
+
+  // Herbalism skill
+  const herbalismSkill = await prisma.trainingSkill.upsert({
+    where: { key: "herbalism" },
+    update: {},
+    create: {
+      key: "herbalism",
+      name: "Herbalism",
+      description: "Gather herbs and plants from nature.",
+      category: "GATHERING",
+      status: "ACTIVE",
+      maxLevel: 99,
+      xpCurveBase: 1.15,
+      jobId: herbalistJob.id,
+      tags: ["gathering", "starter"],
+    },
+  });
+
+  // Herbalism action: Gather Herbs
+  const gatherHerbsAction = await prisma.skillAction.upsert({
+    where: { key: "gather-herbs" },
+    update: {},
+    create: {
+      key: "gather-herbs",
+      name: "Gather Herbs",
+      description: "Collect medicinal herbs from a patch.",
+      skillId: herbalismSkill.id,
+      requiredLevel: 1,
+      actionTimeSeconds: 2,
+      xpReward: 8,
+      successRate: 1.0,
+      staminaCost: 2,
+      status: "ACTIVE",
+      tags: ["tier1", "starter"],
+    },
+  });
+
+  await prisma.skillActionOutput.upsert({
+    where: { id: `${gatherHerbsAction.id}-herb` },
+    update: {},
+    create: {
+      id: `${gatherHerbsAction.id}-herb`,
+      actionId: gatherHerbsAction.id,
+      itemId: herb.id,
+      minQuantity: 1,
+      maxQuantity: 3,
+      weight: 100,
+    },
+  });
+
+  // Logging skill
+  const loggingSkill = await prisma.trainingSkill.upsert({
+    where: { key: "logging" },
+    update: {},
+    create: {
+      key: "logging",
+      name: "Logging",
+      description: "Harvest wood from trees.",
+      category: "GATHERING",
+      status: "ACTIVE",
+      maxLevel: 99,
+      xpCurveBase: 1.15,
+      jobId: loggerJob.id,
+      tags: ["gathering", "starter"],
+    },
+  });
+
+  // Logging action: Chop Wood
+  const chopWoodAction = await prisma.skillAction.upsert({
+    where: { key: "chop-wood" },
+    update: {},
+    create: {
+      key: "chop-wood",
+      name: "Chop Wood",
+      description: "Harvest wood from a tree.",
+      skillId: loggingSkill.id,
+      requiredLevel: 1,
+      actionTimeSeconds: 3,
+      xpReward: 9,
+      successRate: 1.0,
+      staminaCost: 4,
+      status: "ACTIVE",
+      tags: ["tier1", "starter"],
+    },
+  });
+
+  await prisma.skillActionOutput.upsert({
+    where: { id: `${chopWoodAction.id}-wood` },
+    update: {},
+    create: {
+      id: `${chopWoodAction.id}-wood`,
+      actionId: chopWoodAction.id,
+      itemId: wood.id,
+      minQuantity: 1,
+      maxQuantity: 2,
+      weight: 100,
+    },
+  });
+
+  // Smithing skill (processing)
+  const smithingSkill = await prisma.trainingSkill.upsert({
+    where: { key: "smithing" },
+    update: {},
+    create: {
+      key: "smithing",
+      name: "Smithing",
+      description: "Forge weapons and armor from metal.",
+      category: "PROCESSING",
+      status: "ACTIVE",
+      maxLevel: 99,
+      xpCurveBase: 1.15,
+      jobId: blacksmithJob.id,
+      tags: ["processing", "starter"],
+    },
+  });
+
+  // Smithing action: Smelt Iron Bar
+  const smeltIronBarAction = await prisma.skillAction.upsert({
+    where: { key: "smelt-iron-bar" },
+    update: {},
+    create: {
+      key: "smelt-iron-bar",
+      name: "Smelt Iron Bar",
+      description: "Smelt iron ore into a refined iron bar.",
+      skillId: smithingSkill.id,
+      requiredLevel: 1,
+      actionTimeSeconds: 5,
+      xpReward: 15,
+      successRate: 1.0,
+      staminaCost: 8,
+      status: "ACTIVE",
+      tags: ["tier1", "starter"],
+    },
+  });
+
+  await prisma.skillActionInput.upsert({
+    where: { id: `${smeltIronBarAction.id}-iron-ore` },
+    update: {},
+    create: {
+      id: `${smeltIronBarAction.id}-iron-ore`,
+      actionId: smeltIronBarAction.id,
+      itemId: ironOre.id,
+      quantity: 2,
+    },
+  });
+
+  await prisma.skillActionOutput.upsert({
+    where: { id: `${smeltIronBarAction.id}-iron-bar` },
+    update: {},
+    create: {
+      id: `${smeltIronBarAction.id}-iron-bar`,
+      actionId: smeltIronBarAction.id,
+      itemId: ironBar.id,
+      minQuantity: 1,
+      maxQuantity: 1,
+      weight: 100,
+    },
+  });
+
+  console.log("✅ Training skills created");
 
   console.log("✅ Seed completed!");
 }
