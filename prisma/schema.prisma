@@ -146,16 +146,16 @@ model VerificationToken {
 }
 
 model Player {
-  id                         String              @id @default(cuid())
-  userId                     String              @unique
-  characterName              String              @unique
-  level                      Int                 @default(1)
-  experience                 Int                 @default(0)
-  gold                       Int                 @default(0)
-  deathCount                 Int                 @default(0)
-  isDeleted                  Boolean             @default(false)
-  createdAt                  DateTime            @default(now())
-  updatedAt                  DateTime            @updatedAt
+  id                         String                @id @default(cuid())
+  userId                     String                @unique
+  characterName              String                @unique
+  level                      Int                   @default(1)
+  experience                 Int                   @default(0)
+  gold                       Int                   @default(0)
+  deathCount                 Int                   @default(0)
+  isDeleted                  Boolean               @default(false)
+  createdAt                  DateTime              @default(now())
+  updatedAt                  DateTime              @updatedAt
   bankAccount                BankAccount?
   battles                    Battle[] // Character-specific battles
   combatLogs                 CombatLog[]
@@ -165,16 +165,19 @@ model Player {
   inventory                  InventoryItem[]
   position                   MapPosition?
   marketListings             MarketListing[]
-  marketTransactionsAsBuyer  MarketTransaction[] @relation("Buyer")
-  marketTransactionsAsSeller MarketTransaction[] @relation("Seller")
+  marketTransactionsAsBuyer  MarketTransaction[]   @relation("Buyer")
+  marketTransactionsAsSeller MarketTransaction[]   @relation("Seller")
   occupation                 Occupation?
-  user                       User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user                       User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
   skills                     PlayerSkill[]
   skillLoadout               PlayerSkillLoadout?
   stats                      PlayerStats?
   userJobs                   UserJob[]
   craftAttempts              CraftAttempt[]
   gatherAttempts             GatherAttempt[]
+  trainingSkills             PlayerTrainingSkill[]
+  activeTrainingAction       PlayerActiveAction?
+  skillActionLogs            SkillActionLog[]
 
   @@index([characterName])
   @@index([userId])
@@ -333,6 +336,8 @@ model Item {
   recipeOutputs      Recipe[]            @relation("RecipeOutput")
   recipeInputs       RecipeInput[]       @relation("RecipeInput")
   nodeYields         NodeYield[]         @relation("NodeYield")
+  skillActionInputs  SkillActionInput[]  @relation("SkillActionInput")
+  skillActionOutputs SkillActionOutput[] @relation("SkillActionOutput")
 
   @@index([itemType])
   @@index([itemRarity])
@@ -1139,29 +1144,29 @@ model AdminActionLog {
 // Content Templates (Game CMS)
 // Global Content Taxonomy: All templates share common metadata
 model ItemTemplate {
-  id          String        @id @default(cuid())
+  id            String         @id @default(cuid())
   // Global taxonomy fields
-  name        String
-  description String?
-  tags        Json? // Array of strings: ["fire", "starter", "rare"]
-  status      ContentStatus @default(DRAFT)
-  version     Int           @default(1)
-  createdBy   String?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  name          String
+  description   String?
+  tags          Json? // Array of strings: ["fire", "starter", "rare"]
+  status        ContentStatus  @default(DRAFT)
+  version       Int            @default(1)
+  createdBy     String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
   // Item-specific fields
-  itemType    ItemType?
+  itemType      ItemType?
   equipmentSlot EquipmentSlot?
-  rarity      ItemRarity    @default(COMMON)
-  stackable   Boolean       @default(false)
-  maxStack    Int           @default(1)
-  value       Int           @default(0)
-  damage      Int           @default(0) // Damage value for weapons
-  statsJSON   Json?         // Item stats: { vitality, strength, speed, dexterity, hp, sp, defense }
-  icon        String?
+  rarity        ItemRarity     @default(COMMON)
+  stackable     Boolean        @default(false)
+  maxStack      Int            @default(1)
+  value         Int            @default(0)
+  damage        Int            @default(0) // Damage value for weapons
+  statsJSON     Json? // Item stats: { vitality, strength, speed, dexterity, hp, sp, defense }
+  icon          String?
   // Legacy fields (kept for backward compatibility)
-  isArchived  Boolean       @default(false)
-  deletedAt   DateTime?
+  isArchived    Boolean        @default(false)
+  deletedAt     DateTime?
 
   @@index([status])
   @@index([isArchived])
@@ -1277,4 +1282,168 @@ model UserIpHistory {
 
   @@index([userId, createdAt])
   @@index([ipAddress])
+}
+
+// ============================================
+// Melvor-Inspired Skill Training System
+// ============================================
+
+enum SkillCategory {
+  GATHERING
+  PROCESSING
+  COMBAT
+  UTILITY
+}
+
+// Training Skill (e.g., Mining, Cooking, Crafting, Alchemy)
+model TrainingSkill {
+  id           String                @id @default(cuid())
+  key          String                @unique
+  // Global taxonomy fields
+  name         String
+  description  String?
+  tags         Json? // Array of strings: ["gathering", "starter"]
+  status       ContentStatus         @default(DRAFT)
+  version      Int                   @default(1)
+  createdBy    String?
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+  // Skill-specific fields
+  category     SkillCategory
+  maxLevel     Int                   @default(99) // Melvor-style cap (or scalable)
+  xpCurveBase  Float                 @default(1.15) // Exponential curve base (Melvor uses ~1.15)
+  icon         String?
+  // Relations
+  actions      SkillAction[]
+  playerSkills PlayerTrainingSkill[]
+
+  @@index([key])
+  @@index([status])
+  @@index([category])
+  @@index([createdBy])
+}
+
+// Skill Action - Repeatable task that trains a skill (e.g., "Mine Iron", "Cook Meat")
+model SkillAction {
+  id                   String               @id @default(cuid())
+  key                  String               @unique
+  // Global taxonomy fields
+  name                 String
+  description          String?
+  tags                 Json? // Array of strings: ["tier1", "starter"]
+  status               ContentStatus        @default(DRAFT)
+  version              Int                  @default(1)
+  createdBy            String?
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+  // Action-specific fields
+  skillId              String
+  requiredLevel        Int                  @default(1) // Minimum skill level to unlock
+  actionTimeSeconds    Int                  @default(3) // Time per action in seconds (Melvor-style)
+  xpReward             Int                  @default(10) // XP granted per action completion
+  successRate          Float                @default(1.0) // 0.0 to 1.0, default 100% success
+  staminaCost          Int                  @default(0) // Optional stamina cost per action
+  unlockConditionsJSON Json? // Additional unlock conditions (e.g., {"questId": "quest_1"})
+  bonusEffectsJSON     Json? // Optional bonuses (e.g., {"speedModifier": 0.1})
+  // Relations
+  skill                TrainingSkill        @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  inputItems           SkillActionInput[]
+  outputItems          SkillActionOutput[]
+  activePlayers        PlayerActiveAction[]
+  logs                 SkillActionLog[]
+
+  @@index([skillId])
+  @@index([requiredLevel])
+  @@index([status])
+  @@index([key])
+  @@index([createdBy])
+}
+
+// Input items required for an action
+model SkillActionInput {
+  id        String      @id @default(cuid())
+  actionId  String
+  itemId    String
+  quantity  Int         @default(1)
+  createdAt DateTime    @default(now())
+  action    SkillAction @relation(fields: [actionId], references: [id], onDelete: Cascade)
+  item      Item        @relation("SkillActionInput", fields: [itemId], references: [id])
+
+  @@index([actionId])
+  @@index([itemId])
+}
+
+// Output items granted by an action
+model SkillActionOutput {
+  id          String      @id @default(cuid())
+  actionId    String
+  itemId      String
+  minQuantity Int         @default(1)
+  maxQuantity Int         @default(1)
+  weight      Int         @default(100) // Weight for random selection (if multiple outputs)
+  createdAt   DateTime    @default(now())
+  action      SkillAction @relation(fields: [actionId], references: [id], onDelete: Cascade)
+  item        Item        @relation("SkillActionOutput", fields: [itemId], references: [id])
+
+  @@index([actionId])
+  @@index([itemId])
+}
+
+// Player's progression in a training skill
+model PlayerTrainingSkill {
+  id        String        @id @default(cuid())
+  playerId  String
+  skillId   String
+  level     Int           @default(1)
+  xp        Int           @default(0) // Total XP accumulated (Melvor-style)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  player    Player        @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  skill     TrainingSkill @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@unique([playerId, skillId])
+  @@index([playerId])
+  @@index([skillId])
+  @@index([playerId, level])
+}
+
+// Currently active training action (one per player)
+model PlayerActiveAction {
+  id               String      @id @default(cuid())
+  playerId         String      @unique
+  actionId         String
+  startedAt        DateTime    @default(now())
+  nextCompletionAt DateTime // When the next action completion should occur
+  actionsCompleted Int         @default(0) // Counter for completed actions in this session
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  player           Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  action           SkillAction @relation(fields: [actionId], references: [id], onDelete: Cascade)
+
+  @@index([playerId])
+  @@index([actionId])
+  @@index([nextCompletionAt])
+}
+
+// Log of completed skill actions (for analytics, leaderboards, perma-death tracking)
+model SkillActionLog {
+  id                String      @id @default(cuid())
+  playerId          String
+  actionId          String
+  skillId           String
+  success           Boolean     @default(true)
+  xpGained          Int         @default(0)
+  itemsConsumedJSON Json? // Array of {itemId, quantity}
+  itemsGainedJSON   Json? // Array of {itemId, quantity}
+  createdAt         DateTime    @default(now())
+  player            Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  action            SkillAction @relation(fields: [actionId], references: [id], onDelete: Cascade)
+
+  @@index([playerId, createdAt])
+  @@index([actionId, createdAt])
+  @@index([skillId, createdAt])
+  @@index([playerId])
+  @@index([actionId])
+  @@index([skillId])
+  @@index([createdAt])
 }

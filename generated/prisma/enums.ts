@@ -200,3 +200,13 @@ export const BattleStatus = {
 } as const
 
 export type BattleStatus = (typeof BattleStatus)[keyof typeof BattleStatus]
+
+
+export const SkillCategory = {
+  GATHERING: 'GATHERING',
+  PROCESSING: 'PROCESSING',
+  COMBAT: 'COMBAT',
+  UTILITY: 'UTILITY'
+} as const
+
+export type SkillCategory = (typeof SkillCategory)[keyof typeof SkillCategory]

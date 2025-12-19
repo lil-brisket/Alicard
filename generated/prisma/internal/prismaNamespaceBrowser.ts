@@ -111,7 +111,14 @@ export const ModelName = {
   QuestTemplate: 'QuestTemplate',
   MapZone: 'MapZone',
   UserRoleAssignment: 'UserRoleAssignment',
-  UserIpHistory: 'UserIpHistory'
+  UserIpHistory: 'UserIpHistory',
+  TrainingSkill: 'TrainingSkill',
+  SkillAction: 'SkillAction',
+  SkillActionInput: 'SkillActionInput',
+  SkillActionOutput: 'SkillActionOutput',
+  PlayerTrainingSkill: 'PlayerTrainingSkill',
+  PlayerActiveAction: 'PlayerActiveAction',
+  SkillActionLog: 'SkillActionLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1055,6 +1062,116 @@ export const UserIpHistoryScalarFieldEnum = {
 } as const
 
 export type UserIpHistoryScalarFieldEnum = (typeof UserIpHistoryScalarFieldEnum)[keyof typeof UserIpHistoryScalarFieldEnum]
+
+
+export const TrainingSkillScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  description: 'description',
+  tags: 'tags',
+  status: 'status',
+  version: 'version',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  category: 'category',
+  maxLevel: 'maxLevel',
+  xpCurveBase: 'xpCurveBase',
+  icon: 'icon'
+} as const
+
+export type TrainingSkillScalarFieldEnum = (typeof TrainingSkillScalarFieldEnum)[keyof typeof TrainingSkillScalarFieldEnum]
+
+
+export const SkillActionScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  description: 'description',
+  tags: 'tags',
+  status: 'status',
+  version: 'version',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  skillId: 'skillId',
+  requiredLevel: 'requiredLevel',
+  actionTimeSeconds: 'actionTimeSeconds',
+  xpReward: 'xpReward',
+  successRate: 'successRate',
+  staminaCost: 'staminaCost',
+  unlockConditionsJSON: 'unlockConditionsJSON',
+  bonusEffectsJSON: 'bonusEffectsJSON'
+} as const
+
+export type SkillActionScalarFieldEnum = (typeof SkillActionScalarFieldEnum)[keyof typeof SkillActionScalarFieldEnum]
+
+
+export const SkillActionInputScalarFieldEnum = {
+  id: 'id',
+  actionId: 'actionId',
+  itemId: 'itemId',
+  quantity: 'quantity',
+  createdAt: 'createdAt'
+} as const
+
+export type SkillActionInputScalarFieldEnum = (typeof SkillActionInputScalarFieldEnum)[keyof typeof SkillActionInputScalarFieldEnum]
+
+
+export const SkillActionOutputScalarFieldEnum = {
+  id: 'id',
+  actionId: 'actionId',
+  itemId: 'itemId',
+  minQuantity: 'minQuantity',
+  maxQuantity: 'maxQuantity',
+  weight: 'weight',
+  createdAt: 'createdAt'
+} as const
+
+export type SkillActionOutputScalarFieldEnum = (typeof SkillActionOutputScalarFieldEnum)[keyof typeof SkillActionOutputScalarFieldEnum]
+
+
+export const PlayerTrainingSkillScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  skillId: 'skillId',
+  level: 'level',
+  xp: 'xp',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlayerTrainingSkillScalarFieldEnum = (typeof PlayerTrainingSkillScalarFieldEnum)[keyof typeof PlayerTrainingSkillScalarFieldEnum]
+
+
+export const PlayerActiveActionScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  actionId: 'actionId',
+  startedAt: 'startedAt',
+  nextCompletionAt: 'nextCompletionAt',
+  actionsCompleted: 'actionsCompleted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlayerActiveActionScalarFieldEnum = (typeof PlayerActiveActionScalarFieldEnum)[keyof typeof PlayerActiveActionScalarFieldEnum]
+
+
+export const SkillActionLogScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  actionId: 'actionId',
+  skillId: 'skillId',
+  success: 'success',
+  xpGained: 'xpGained',
+  itemsConsumedJSON: 'itemsConsumedJSON',
+  itemsGainedJSON: 'itemsGainedJSON',
+  createdAt: 'createdAt'
+} as const
+
+export type SkillActionLogScalarFieldEnum = (typeof SkillActionLogScalarFieldEnum)[keyof typeof SkillActionLogScalarFieldEnum]
 
 
 export const SortOrder = {

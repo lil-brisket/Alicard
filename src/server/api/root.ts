@@ -25,6 +25,7 @@ import { usersRouter } from "~/server/api/routers/users";
 import { leaderboardsRouter } from "~/server/api/routers/leaderboards";
 import { adminRouter } from "~/server/api/routers/admin";
 import { contentRouter } from "~/server/api/routers/content";
+import { skillTrainingRouter } from "~/server/api/routers/skill-training";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -57,6 +58,7 @@ export const appRouter = createTRPCRouter({
   world: worldRouter,
   admin: adminRouter,
   content: contentRouter,
+  skillTraining: skillTrainingRouter,
 });
 
 // export type definition of API

@@ -344,3 +344,38 @@ export type UserRoleAssignment = Prisma.UserRoleAssignmentModel
  * 
  */
 export type UserIpHistory = Prisma.UserIpHistoryModel
+/**
+ * Model TrainingSkill
+ * 
+ */
+export type TrainingSkill = Prisma.TrainingSkillModel
+/**
+ * Model SkillAction
+ * 
+ */
+export type SkillAction = Prisma.SkillActionModel
+/**
+ * Model SkillActionInput
+ * 
+ */
+export type SkillActionInput = Prisma.SkillActionInputModel
+/**
+ * Model SkillActionOutput
+ * 
+ */
+export type SkillActionOutput = Prisma.SkillActionOutputModel
+/**
+ * Model PlayerTrainingSkill
+ * 
+ */
+export type PlayerTrainingSkill = Prisma.PlayerTrainingSkillModel
+/**
+ * Model PlayerActiveAction
+ * 
+ */
+export type PlayerActiveAction = Prisma.PlayerActiveActionModel
+/**
+ * Model SkillActionLog
+ * 
+ */
+export type SkillActionLog = Prisma.SkillActionLogModel

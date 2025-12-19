@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.1.0
- * Query Engine version: ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba
+ * Prisma Client JS version: 7.2.0
+ * Query Engine version: 0c8ef2ce45c83248ab3df073180d5eda9e8be7a3
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.1.0",
-  engine: "ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba"
+  client: "7.2.0",
+  engine: "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3"
 }
 
 /**
@@ -444,7 +444,14 @@ export const ModelName = {
   QuestTemplate: 'QuestTemplate',
   MapZone: 'MapZone',
   UserRoleAssignment: 'UserRoleAssignment',
-  UserIpHistory: 'UserIpHistory'
+  UserIpHistory: 'UserIpHistory',
+  TrainingSkill: 'TrainingSkill',
+  SkillAction: 'SkillAction',
+  SkillActionInput: 'SkillActionInput',
+  SkillActionOutput: 'SkillActionOutput',
+  PlayerTrainingSkill: 'PlayerTrainingSkill',
+  PlayerActiveAction: 'PlayerActiveAction',
+  SkillActionLog: 'SkillActionLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -460,7 +467,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "post" | "account" | "session" | "user" | "character" | "position" | "verificationToken" | "player" | "playerStats" | "world" | "mapTile" | "mapPosition" | "nPC" | "shopItem" | "item" | "inventoryItem" | "equipment" | "occupation" | "skill" | "playerSkill" | "playerSkillLoadout" | "encounter" | "combatLog" | "deathLog" | "deathRecord" | "guild" | "guildMember" | "guildBank" | "guildQuest" | "bankAccount" | "bankVaultItem" | "bankTransaction" | "marketListing" | "marketTransaction" | "quest" | "job" | "userJob" | "recipe" | "recipeInput" | "craftAttempt" | "gatheringNode" | "nodeYield" | "gatherAttempt" | "playerProfile" | "playerProfileStats" | "playerPvpRecord" | "playerPveRecord" | "achievement" | "playerAchievement" | "playerSocial" | "monster" | "battle" | "playerLeaderboardStats" | "playerStatsPeriod" | "adminActionLog" | "itemTemplate" | "monsterTemplate" | "questTemplate" | "mapZone" | "userRoleAssignment" | "userIpHistory"
+    modelProps: "post" | "account" | "session" | "user" | "character" | "position" | "verificationToken" | "player" | "playerStats" | "world" | "mapTile" | "mapPosition" | "nPC" | "shopItem" | "item" | "inventoryItem" | "equipment" | "occupation" | "skill" | "playerSkill" | "playerSkillLoadout" | "encounter" | "combatLog" | "deathLog" | "deathRecord" | "guild" | "guildMember" | "guildBank" | "guildQuest" | "bankAccount" | "bankVaultItem" | "bankTransaction" | "marketListing" | "marketTransaction" | "quest" | "job" | "userJob" | "recipe" | "recipeInput" | "craftAttempt" | "gatheringNode" | "nodeYield" | "gatherAttempt" | "playerProfile" | "playerProfileStats" | "playerPvpRecord" | "playerPveRecord" | "achievement" | "playerAchievement" | "playerSocial" | "monster" | "battle" | "playerLeaderboardStats" | "playerStatsPeriod" | "adminActionLog" | "itemTemplate" | "monsterTemplate" | "questTemplate" | "mapZone" | "userRoleAssignment" | "userIpHistory" | "trainingSkill" | "skillAction" | "skillActionInput" | "skillActionOutput" | "playerTrainingSkill" | "playerActiveAction" | "skillActionLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4978,6 +4985,524 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    TrainingSkill: {
+      payload: Prisma.$TrainingSkillPayload<ExtArgs>
+      fields: Prisma.TrainingSkillFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TrainingSkillFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrainingSkillPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TrainingSkillFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrainingSkillPayload>
+        }
+        findFirst: {
+          args: Prisma.TrainingSkillFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrainingSkillPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TrainingSkillFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrainingSkillPayload>
+        }
+        findMany: {
+          args: Prisma.TrainingSkillFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrainingSkillPayload>[]
+        }
+        create: {
+          args: Prisma.TrainingSkillCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrainingSkillPayload>
+        }
+        createMany: {
+          args: Prisma.TrainingSkillCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TrainingSkillCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrainingSkillPayload>[]
+        }
+        delete: {
+          args: Prisma.TrainingSkillDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrainingSkillPayload>
+        }
+        update: {
+          args: Prisma.TrainingSkillUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrainingSkillPayload>
+        }
+        deleteMany: {
+          args: Prisma.TrainingSkillDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TrainingSkillUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TrainingSkillUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrainingSkillPayload>[]
+        }
+        upsert: {
+          args: Prisma.TrainingSkillUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrainingSkillPayload>
+        }
+        aggregate: {
+          args: Prisma.TrainingSkillAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTrainingSkill>
+        }
+        groupBy: {
+          args: Prisma.TrainingSkillGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TrainingSkillGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TrainingSkillCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TrainingSkillCountAggregateOutputType> | number
+        }
+      }
+    }
+    SkillAction: {
+      payload: Prisma.$SkillActionPayload<ExtArgs>
+      fields: Prisma.SkillActionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SkillActionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SkillActionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionPayload>
+        }
+        findFirst: {
+          args: Prisma.SkillActionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SkillActionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionPayload>
+        }
+        findMany: {
+          args: Prisma.SkillActionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionPayload>[]
+        }
+        create: {
+          args: Prisma.SkillActionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionPayload>
+        }
+        createMany: {
+          args: Prisma.SkillActionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SkillActionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionPayload>[]
+        }
+        delete: {
+          args: Prisma.SkillActionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionPayload>
+        }
+        update: {
+          args: Prisma.SkillActionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionPayload>
+        }
+        deleteMany: {
+          args: Prisma.SkillActionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SkillActionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SkillActionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionPayload>[]
+        }
+        upsert: {
+          args: Prisma.SkillActionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionPayload>
+        }
+        aggregate: {
+          args: Prisma.SkillActionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSkillAction>
+        }
+        groupBy: {
+          args: Prisma.SkillActionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SkillActionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SkillActionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SkillActionCountAggregateOutputType> | number
+        }
+      }
+    }
+    SkillActionInput: {
+      payload: Prisma.$SkillActionInputPayload<ExtArgs>
+      fields: Prisma.SkillActionInputFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SkillActionInputFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionInputPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SkillActionInputFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionInputPayload>
+        }
+        findFirst: {
+          args: Prisma.SkillActionInputFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionInputPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SkillActionInputFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionInputPayload>
+        }
+        findMany: {
+          args: Prisma.SkillActionInputFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionInputPayload>[]
+        }
+        create: {
+          args: Prisma.SkillActionInputCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionInputPayload>
+        }
+        createMany: {
+          args: Prisma.SkillActionInputCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SkillActionInputCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionInputPayload>[]
+        }
+        delete: {
+          args: Prisma.SkillActionInputDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionInputPayload>
+        }
+        update: {
+          args: Prisma.SkillActionInputUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionInputPayload>
+        }
+        deleteMany: {
+          args: Prisma.SkillActionInputDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SkillActionInputUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SkillActionInputUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionInputPayload>[]
+        }
+        upsert: {
+          args: Prisma.SkillActionInputUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionInputPayload>
+        }
+        aggregate: {
+          args: Prisma.SkillActionInputAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSkillActionInput>
+        }
+        groupBy: {
+          args: Prisma.SkillActionInputGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SkillActionInputGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SkillActionInputCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SkillActionInputCountAggregateOutputType> | number
+        }
+      }
+    }
+    SkillActionOutput: {
+      payload: Prisma.$SkillActionOutputPayload<ExtArgs>
+      fields: Prisma.SkillActionOutputFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SkillActionOutputFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionOutputPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SkillActionOutputFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionOutputPayload>
+        }
+        findFirst: {
+          args: Prisma.SkillActionOutputFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionOutputPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SkillActionOutputFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionOutputPayload>
+        }
+        findMany: {
+          args: Prisma.SkillActionOutputFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionOutputPayload>[]
+        }
+        create: {
+          args: Prisma.SkillActionOutputCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionOutputPayload>
+        }
+        createMany: {
+          args: Prisma.SkillActionOutputCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SkillActionOutputCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionOutputPayload>[]
+        }
+        delete: {
+          args: Prisma.SkillActionOutputDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionOutputPayload>
+        }
+        update: {
+          args: Prisma.SkillActionOutputUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionOutputPayload>
+        }
+        deleteMany: {
+          args: Prisma.SkillActionOutputDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SkillActionOutputUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SkillActionOutputUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionOutputPayload>[]
+        }
+        upsert: {
+          args: Prisma.SkillActionOutputUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionOutputPayload>
+        }
+        aggregate: {
+          args: Prisma.SkillActionOutputAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSkillActionOutput>
+        }
+        groupBy: {
+          args: Prisma.SkillActionOutputGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SkillActionOutputGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SkillActionOutputCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SkillActionOutputCountAggregateOutputType> | number
+        }
+      }
+    }
+    PlayerTrainingSkill: {
+      payload: Prisma.$PlayerTrainingSkillPayload<ExtArgs>
+      fields: Prisma.PlayerTrainingSkillFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PlayerTrainingSkillFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTrainingSkillPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PlayerTrainingSkillFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTrainingSkillPayload>
+        }
+        findFirst: {
+          args: Prisma.PlayerTrainingSkillFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTrainingSkillPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PlayerTrainingSkillFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTrainingSkillPayload>
+        }
+        findMany: {
+          args: Prisma.PlayerTrainingSkillFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTrainingSkillPayload>[]
+        }
+        create: {
+          args: Prisma.PlayerTrainingSkillCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTrainingSkillPayload>
+        }
+        createMany: {
+          args: Prisma.PlayerTrainingSkillCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PlayerTrainingSkillCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTrainingSkillPayload>[]
+        }
+        delete: {
+          args: Prisma.PlayerTrainingSkillDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTrainingSkillPayload>
+        }
+        update: {
+          args: Prisma.PlayerTrainingSkillUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTrainingSkillPayload>
+        }
+        deleteMany: {
+          args: Prisma.PlayerTrainingSkillDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PlayerTrainingSkillUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PlayerTrainingSkillUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTrainingSkillPayload>[]
+        }
+        upsert: {
+          args: Prisma.PlayerTrainingSkillUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerTrainingSkillPayload>
+        }
+        aggregate: {
+          args: Prisma.PlayerTrainingSkillAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePlayerTrainingSkill>
+        }
+        groupBy: {
+          args: Prisma.PlayerTrainingSkillGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlayerTrainingSkillGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PlayerTrainingSkillCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlayerTrainingSkillCountAggregateOutputType> | number
+        }
+      }
+    }
+    PlayerActiveAction: {
+      payload: Prisma.$PlayerActiveActionPayload<ExtArgs>
+      fields: Prisma.PlayerActiveActionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PlayerActiveActionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerActiveActionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PlayerActiveActionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerActiveActionPayload>
+        }
+        findFirst: {
+          args: Prisma.PlayerActiveActionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerActiveActionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PlayerActiveActionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerActiveActionPayload>
+        }
+        findMany: {
+          args: Prisma.PlayerActiveActionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerActiveActionPayload>[]
+        }
+        create: {
+          args: Prisma.PlayerActiveActionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerActiveActionPayload>
+        }
+        createMany: {
+          args: Prisma.PlayerActiveActionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PlayerActiveActionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerActiveActionPayload>[]
+        }
+        delete: {
+          args: Prisma.PlayerActiveActionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerActiveActionPayload>
+        }
+        update: {
+          args: Prisma.PlayerActiveActionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerActiveActionPayload>
+        }
+        deleteMany: {
+          args: Prisma.PlayerActiveActionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PlayerActiveActionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PlayerActiveActionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerActiveActionPayload>[]
+        }
+        upsert: {
+          args: Prisma.PlayerActiveActionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlayerActiveActionPayload>
+        }
+        aggregate: {
+          args: Prisma.PlayerActiveActionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePlayerActiveAction>
+        }
+        groupBy: {
+          args: Prisma.PlayerActiveActionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlayerActiveActionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PlayerActiveActionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlayerActiveActionCountAggregateOutputType> | number
+        }
+      }
+    }
+    SkillActionLog: {
+      payload: Prisma.$SkillActionLogPayload<ExtArgs>
+      fields: Prisma.SkillActionLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SkillActionLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SkillActionLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionLogPayload>
+        }
+        findFirst: {
+          args: Prisma.SkillActionLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SkillActionLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionLogPayload>
+        }
+        findMany: {
+          args: Prisma.SkillActionLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionLogPayload>[]
+        }
+        create: {
+          args: Prisma.SkillActionLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionLogPayload>
+        }
+        createMany: {
+          args: Prisma.SkillActionLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SkillActionLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionLogPayload>[]
+        }
+        delete: {
+          args: Prisma.SkillActionLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionLogPayload>
+        }
+        update: {
+          args: Prisma.SkillActionLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.SkillActionLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SkillActionLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SkillActionLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.SkillActionLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkillActionLogPayload>
+        }
+        aggregate: {
+          args: Prisma.SkillActionLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSkillActionLog>
+        }
+        groupBy: {
+          args: Prisma.SkillActionLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SkillActionLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SkillActionLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SkillActionLogCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -5944,6 +6469,116 @@ export const UserIpHistoryScalarFieldEnum = {
 export type UserIpHistoryScalarFieldEnum = (typeof UserIpHistoryScalarFieldEnum)[keyof typeof UserIpHistoryScalarFieldEnum]
 
 
+export const TrainingSkillScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  description: 'description',
+  tags: 'tags',
+  status: 'status',
+  version: 'version',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  category: 'category',
+  maxLevel: 'maxLevel',
+  xpCurveBase: 'xpCurveBase',
+  icon: 'icon'
+} as const
+
+export type TrainingSkillScalarFieldEnum = (typeof TrainingSkillScalarFieldEnum)[keyof typeof TrainingSkillScalarFieldEnum]
+
+
+export const SkillActionScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  description: 'description',
+  tags: 'tags',
+  status: 'status',
+  version: 'version',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  skillId: 'skillId',
+  requiredLevel: 'requiredLevel',
+  actionTimeSeconds: 'actionTimeSeconds',
+  xpReward: 'xpReward',
+  successRate: 'successRate',
+  staminaCost: 'staminaCost',
+  unlockConditionsJSON: 'unlockConditionsJSON',
+  bonusEffectsJSON: 'bonusEffectsJSON'
+} as const
+
+export type SkillActionScalarFieldEnum = (typeof SkillActionScalarFieldEnum)[keyof typeof SkillActionScalarFieldEnum]
+
+
+export const SkillActionInputScalarFieldEnum = {
+  id: 'id',
+  actionId: 'actionId',
+  itemId: 'itemId',
+  quantity: 'quantity',
+  createdAt: 'createdAt'
+} as const
+
+export type SkillActionInputScalarFieldEnum = (typeof SkillActionInputScalarFieldEnum)[keyof typeof SkillActionInputScalarFieldEnum]
+
+
+export const SkillActionOutputScalarFieldEnum = {
+  id: 'id',
+  actionId: 'actionId',
+  itemId: 'itemId',
+  minQuantity: 'minQuantity',
+  maxQuantity: 'maxQuantity',
+  weight: 'weight',
+  createdAt: 'createdAt'
+} as const
+
+export type SkillActionOutputScalarFieldEnum = (typeof SkillActionOutputScalarFieldEnum)[keyof typeof SkillActionOutputScalarFieldEnum]
+
+
+export const PlayerTrainingSkillScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  skillId: 'skillId',
+  level: 'level',
+  xp: 'xp',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlayerTrainingSkillScalarFieldEnum = (typeof PlayerTrainingSkillScalarFieldEnum)[keyof typeof PlayerTrainingSkillScalarFieldEnum]
+
+
+export const PlayerActiveActionScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  actionId: 'actionId',
+  startedAt: 'startedAt',
+  nextCompletionAt: 'nextCompletionAt',
+  actionsCompleted: 'actionsCompleted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlayerActiveActionScalarFieldEnum = (typeof PlayerActiveActionScalarFieldEnum)[keyof typeof PlayerActiveActionScalarFieldEnum]
+
+
+export const SkillActionLogScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  actionId: 'actionId',
+  skillId: 'skillId',
+  success: 'success',
+  xpGained: 'xpGained',
+  itemsConsumedJSON: 'itemsConsumedJSON',
+  itemsGainedJSON: 'itemsGainedJSON',
+  createdAt: 'createdAt'
+} as const
+
+export type SkillActionLogScalarFieldEnum = (typeof SkillActionLogScalarFieldEnum)[keyof typeof SkillActionLogScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -6300,6 +6935,20 @@ export type ListEnumBattleStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
 
 
 /**
+ * Reference to a field of type 'SkillCategory'
+ */
+export type EnumSkillCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SkillCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'SkillCategory[]'
+ */
+export type ListEnumSkillCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SkillCategory[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -6468,6 +7117,13 @@ export type GlobalOmitConfig = {
   mapZone?: Prisma.MapZoneOmit
   userRoleAssignment?: Prisma.UserRoleAssignmentOmit
   userIpHistory?: Prisma.UserIpHistoryOmit
+  trainingSkill?: Prisma.TrainingSkillOmit
+  skillAction?: Prisma.SkillActionOmit
+  skillActionInput?: Prisma.SkillActionInputOmit
+  skillActionOutput?: Prisma.SkillActionOutputOmit
+  playerTrainingSkill?: Prisma.PlayerTrainingSkillOmit
+  playerActiveAction?: Prisma.PlayerActiveActionOmit
+  skillActionLog?: Prisma.SkillActionLogOmit
 }
 
 /* Types for Logging */
