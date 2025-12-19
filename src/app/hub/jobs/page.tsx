@@ -7,18 +7,13 @@ import { ProgressBar } from "./_components/progress-bar";
 
 export default function JobsPage() {
   const { data: jobs, isLoading: jobsLoading, error: jobsError } = api.jobs.listJobs.useQuery();
-  const { data: myJobs, isLoading: myJobsLoading, error: myJobsError, refetch: refetchMyJobs } = api.jobs.getMyJobs.useQuery();
-  const utils = api.useUtils();
-
-  const addXpMutation = api.jobs.addJobXp.useMutation({
-    onSuccess: async () => {
-      await refetchMyJobs();
-      void utils.jobs.getMyJobs.invalidate();
-    },
-    onError: (error) => {
-      console.error("Failed to add XP:", error);
-    },
-  });
+  const { data: myJobs, isLoading: myJobsLoading, error: myJobsError } = api.jobs.getMyJobs.useQuery();
+  const { data: activeAction } = api.skillTraining.getActiveAction.useQuery(
+    undefined,
+    {
+      refetchInterval: 2000, // Refetch every 2 seconds for real-time updates
+    }
+  );
 
   if (jobsLoading || myJobsLoading) {
     return (
@@ -48,13 +43,16 @@ export default function JobsPage() {
   }
 
   const myJobsMap = new Map(myJobs?.map((uj) => [uj.jobId, uj]) ?? []);
+  
+  // Determine which job is currently being trained (if any)
+  const activeJobId = activeAction?.action?.skill?.jobId;
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto max-w-5xl p-4 md:p-8">
         <h1 className="text-2xl font-bold text-cyan-400">Jobs & Professions</h1>
         <p className="mt-2 text-slate-400">
-          Manage your crafting and gathering professions
+          Choose a job to view available actions, training skills, and gathering nodes
         </p>
 
         <div className="mt-6 space-y-4">
@@ -67,23 +65,11 @@ export default function JobsPage() {
                     current: userJob.xpInLevel ?? 0,
                     needed: userJob.xpToNext ?? 100,
                   },
+                  isTraining: activeJobId === job.id,
                 }
               : null;
             return (
-              <div key={job.id} className="space-y-2">
-                <JobCard job={job} userJob={transformedUserJob} />
-                <div className="ml-4 flex items-center gap-2">
-                  <button
-                    onClick={() => {
-                      addXpMutation.mutate({ jobId: job.id, xp: 10 });
-                    }}
-                    disabled={addXpMutation.isPending}
-                    className="rounded bg-cyan-500/20 px-3 py-1 text-xs text-cyan-400 transition hover:bg-cyan-500/30 disabled:opacity-50"
-                  >
-                    {addXpMutation.isPending ? "Training..." : "Train +10 XP"}
-                  </button>
-                </div>
-              </div>
+              <JobCard key={job.id} job={job} userJob={transformedUserJob} />
             );
           })}
         </div>

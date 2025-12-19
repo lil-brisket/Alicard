@@ -20,6 +20,7 @@ type JobCardProps = {
       needed: number;
     };
     active: boolean;
+    isTraining?: boolean;
   } | null;
   basePath?: string;
 };
@@ -29,11 +30,16 @@ export function JobCard({ job, userJob, basePath = "/hub/jobs" }: JobCardProps) 
   const xp = userJob?.totalXp ?? 0;
   const progress = userJob?.progress ?? { current: 0, needed: 100 };
   const isActive = userJob?.active ?? false;
+  const isTraining = userJob?.isTraining ?? false;
 
   return (
     <Link
       href={`${basePath}/${job.key}`}
-      className="group block rounded-xl border border-slate-800 bg-slate-950/60 p-4 transition hover:border-cyan-500/70 hover:bg-slate-900/80"
+      className={`group block rounded-xl border p-4 transition ${
+        isTraining
+          ? "border-cyan-500/50 bg-cyan-500/10 hover:border-cyan-500/70 hover:bg-cyan-500/15"
+          : "border-slate-800 bg-slate-950/60 hover:border-cyan-500/70 hover:bg-slate-900/80"
+      }`}
     >
       <div className="flex items-start justify-between">
         <div className="flex-1">
@@ -41,7 +47,12 @@ export function JobCard({ job, userJob, basePath = "/hub/jobs" }: JobCardProps) 
             <h3 className="text-base font-semibold text-slate-100 group-hover:text-cyan-300">
               {job.name}
             </h3>
-            {isActive && (
+            {isTraining && (
+              <span className="rounded bg-cyan-500/20 px-2 py-0.5 text-xs font-semibold text-cyan-400 animate-pulse">
+                Training
+              </span>
+            )}
+            {isActive && !isTraining && (
               <span className="rounded bg-emerald-500/20 px-2 py-0.5 text-xs text-emerald-400">
                 Active
               </span>
