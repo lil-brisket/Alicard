@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { AuthSessionProvider } from "./_components/session-provider";
+import { ConditionalAppShell } from "~/components/layout/ConditionalAppShell";
 
 export const metadata: Metadata = {
   title: "Alicard – SAO-inspired Turn-Based Tower MMO",
@@ -27,7 +28,9 @@ export default function RootLayout({
       <body className="bg-black text-slate-100 antialiased">
         <TRPCReactProvider>
           <AuthSessionProvider>
-            {children}
+            <ConditionalAppShell>
+              {children}
+            </ConditionalAppShell>
             <Toaster position="top-right" />
           </AuthSessionProvider>
         </TRPCReactProvider>
