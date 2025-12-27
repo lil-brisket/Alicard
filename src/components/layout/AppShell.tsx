@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { MobileBottomTabs } from "./MobileBottomTabs";
 import { DesktopSidebar } from "./AppSidebar";
 import { DesktopPlayerPanel } from "./PlayerPanel";
+import { MobileSidebar } from "./MobileSidebar";
+import { MobilePlayerPanel } from "./MobilePlayerPanel";
 import { Button } from "~/components/ui/button";
 import { Menu, X, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -53,8 +55,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }, [playerPanelOpen, isMounted]);
 
   return (
-    <div className="min-h-screen">
-      {/* Header with toggle buttons */}
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden">
+      {/* Desktop Header with toggle buttons */}
       <header className="sticky top-0 z-40 hidden h-14 items-center justify-between gap-3 border-b bg-black px-4 md:flex">
         <div className="flex items-center gap-3">
           <Button
@@ -79,11 +81,20 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </Button>
       </header>
 
-      <div className="flex min-h-screen">
+      {/* Mobile Header with menu buttons */}
+      <header className="sticky top-0 z-40 flex h-14 items-center justify-between gap-2 border-b border-slate-800 bg-black px-3 md:hidden w-full max-w-full">
+        <div className="flex items-center gap-2 min-w-0">
+          <MobileSidebar />
+          <div className="font-semibold text-slate-100 truncate">Alicard</div>
+        </div>
+        <MobilePlayerPanel />
+      </header>
+
+      <div className="flex min-h-screen w-full max-w-full">
         <DesktopSidebar isOpen={sidebarOpen} />
 
-        {/* IMPORTANT: pb-24 to clear the bottom tabs */}
-        <main className="min-w-0 flex-1 p-4 pb-24 md:p-6">
+        {/* IMPORTANT: pb-24 to clear the bottom tabs on mobile */}
+        <main className="min-w-0 flex-1 p-4 pb-24 md:p-6 w-full max-w-full overflow-x-hidden">
           {children}
         </main>
 

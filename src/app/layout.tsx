@@ -25,7 +25,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${geist.variable}`}>
-      <body className="bg-black text-slate-100 antialiased">
+      <body className="bg-black text-slate-100 antialiased w-full max-w-full overflow-x-hidden">
         <TRPCReactProvider>
           <AuthSessionProvider>
             <ConditionalAppShell>

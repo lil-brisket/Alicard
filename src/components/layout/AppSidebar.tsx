@@ -27,7 +27,7 @@ function NavSection({
           const active = pathname === item.href || pathname.startsWith(item.href + "/");
 
           const base =
-            "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm transition";
+            "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm transition min-h-[44px] active:bg-muted/80";
           const activeCls = active
             ? "bg-muted font-semibold"
             : "hover:bg-muted/60";
@@ -112,7 +112,7 @@ function JobsSection() {
             <Link
               key={job.id}
               href={`/jobs/${job.key}`}
-              className={`flex w-full items-center justify-between gap-2 rounded-md border border-border px-3 py-2 text-sm transition ${
+              className={`flex w-full items-center justify-between gap-2 rounded-md border border-border px-3 py-2 text-sm transition min-h-[44px] active:bg-muted/80 ${
                 active
                   ? "bg-muted font-semibold"
                   : "hover:bg-muted/60"
@@ -185,7 +185,7 @@ export function SidebarContent() {
       <NavSection title="Links" items={HUB_NAV} variant="link" />
 
       <div className="mt-auto text-xs text-muted-foreground">
-        Tip: on mobile, use the menu button.
+        Tap outside to close on mobile.
       </div>
     </div>
   );

@@ -8,12 +8,12 @@ export default function LandingPage() {
   const { data: session } = useSession();
 
   return (
-    <main className="min-h-screen bg-black text-slate-50 flex flex-col">
-      <section className="flex flex-col items-center justify-center py-24 px-4">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center">
+    <main className="min-h-screen bg-black text-slate-50 flex flex-col w-full max-w-full overflow-x-hidden">
+      <section className="flex flex-col items-center justify-center py-24 px-4 w-full max-w-full">
+        <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center w-full px-4">
           Alicard
         </h1>
-        <p className="text-slate-300 mb-8 text-center max-w-xl">
+        <p className="text-slate-300 mb-8 text-center max-w-xl w-full px-4">
           Turn-based MMO with perma-death. Five deaths and your account is gone.
         </p>
 
