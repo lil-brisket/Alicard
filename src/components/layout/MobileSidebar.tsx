@@ -1,13 +1,27 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { SidebarContent } from "./AppSidebar";
 import { Button } from "~/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
 import { Menu } from "lucide-react";
 
 export function MobileSidebar() {
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const prevPathnameRef = useRef(pathname);
+
+  // Close sidebar when pathname changes
+  useEffect(() => {
+    if (prevPathnameRef.current !== pathname) {
+      setOpen(false);
+      prevPathnameRef.current = pathname;
+    }
+  }, [pathname]);
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button 
           variant="outline" 
@@ -19,7 +33,7 @@ export function MobileSidebar() {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="w-64 border-r p-0">
-        <SidebarContent />
+        <SidebarContent onLinkClick={() => setOpen(false)} />
       </SheetContent>
     </Sheet>
   );

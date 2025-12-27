@@ -26,12 +26,6 @@ export default async function ProfilePage() {
         <div className="mx-auto max-w-5xl p-4 md:p-8">
           <div className="mb-4 flex items-center justify-between">
             <h1 className="text-2xl font-bold text-cyan-400">My Profile</h1>
-            <Link
-              href="/hub"
-              className="inline-block rounded-xl bg-cyan-500/20 px-6 py-3 text-cyan-400 transition hover:bg-cyan-500/30"
-            >
-              Return to Hub
-            </Link>
           </div>
           <div className="rounded-xl border border-red-500/20 bg-red-950/30 p-8 text-center">
             <h2 className="text-xl font-semibold text-red-400">Profile Not Found</h2>
@@ -99,12 +93,6 @@ export default async function ProfilePage() {
       <div className="mx-auto flex min-h-screen max-w-5xl flex-col gap-4 p-4 md:p-8">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-cyan-400">My Profile</h1>
-          <Link
-            href="/hub"
-            className="inline-block rounded-xl bg-cyan-500/20 px-6 py-3 text-cyan-400 transition hover:bg-cyan-500/30"
-          >
-            Return to Hub
-          </Link>
         </div>
 
         <main className="mt-4 grid flex-1 grid-cols-1 gap-4 md:mt-6 md:grid-cols-12">

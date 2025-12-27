@@ -8,12 +8,6 @@ export default function ForbiddenPage() {
         <p className="mt-4 text-slate-400">
           You don't have permission to access this page.
         </p>
-        <Link
-          href="/hub"
-          className="mt-6 inline-block rounded-lg bg-cyan-600 px-6 py-3 text-white transition hover:bg-cyan-700"
-        >
-          Return to Hub
-        </Link>
       </div>
     </div>
   );

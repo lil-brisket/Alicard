@@ -49,12 +49,6 @@ export default function JobDetailPage({ params }: Props) {
               <span>←</span>
               <span>Back to Jobs</span>
             </Link>
-            <Link
-              href="/hub"
-              className="inline-block rounded-xl bg-cyan-500/20 px-6 py-3 text-cyan-400 transition hover:bg-cyan-500/30"
-            >
-              Return to Hub
-            </Link>
           </div>
           <div className="mt-4 rounded bg-red-500/20 border border-red-500/50 p-4">
             <p className="text-red-400 font-semibold">Job not found</p>
@@ -74,12 +68,6 @@ export default function JobDetailPage({ params }: Props) {
           >
             <span>←</span>
             <span>Back to Jobs</span>
-          </Link>
-          <Link
-            href="/hub"
-            className="inline-block rounded-xl bg-cyan-500/20 px-6 py-3 text-cyan-400 transition hover:bg-cyan-500/30"
-          >
-            Return to Hub
           </Link>
         </div>
         

@@ -41,12 +41,6 @@ export default async function ProfileUsernamePage({
           <h1 className="text-2xl font-bold text-cyan-400">
             {profile.user.name ?? profile.user.username}&apos;s Profile
           </h1>
-          <Link
-            href="/hub"
-            className="inline-block rounded-xl bg-cyan-500/20 px-6 py-3 text-cyan-400 transition hover:bg-cyan-500/30"
-          >
-            Return to Hub
-          </Link>
         </div>
 
         <main className="mt-4 grid flex-1 grid-cols-1 gap-4 md:mt-6 md:grid-cols-12">

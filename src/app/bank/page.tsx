@@ -181,12 +181,6 @@ export default function BankPage() {
               Manage your finances and transfer coins
             </p>
           </div>
-          <Link
-            href="/hub"
-            className="rounded-xl bg-cyan-500/20 px-6 py-3 text-cyan-400 transition hover:bg-cyan-500/30"
-          >
-            Return to Hub
-          </Link>
         </div>
 
         {/* Balances */}

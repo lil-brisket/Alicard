@@ -191,12 +191,6 @@ export default function CombatPage() {
                 >
                   Refresh
                 </button>
-                <Link
-                  href="/hub"
-                  className="flex-1 rounded-xl bg-slate-500/20 px-6 py-3 text-center font-semibold text-slate-300 transition hover:bg-slate-500/30 active:bg-slate-500/40 min-h-[44px] inline-flex items-center justify-center"
-                >
-                  Return to Hub
-                </Link>
               </div>
             )}
           </div>
@@ -276,14 +270,6 @@ export default function CombatPage() {
           )}
         </div>
 
-        <div className="mt-8">
-          <Link
-            href="/hub"
-            className="inline-block rounded-xl bg-slate-500/20 px-6 py-3 text-slate-300 transition hover:bg-slate-500/30"
-          >
-            Return to Hub
-          </Link>
-        </div>
       </div>
     </div>
   );

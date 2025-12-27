@@ -91,7 +91,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </header>
 
       <div className="flex min-h-screen w-full max-w-full">
-        <DesktopSidebar isOpen={sidebarOpen} />
+        <DesktopSidebar isOpen={sidebarOpen} onLinkClick={() => setSidebarOpen(false)} />
 
         {/* IMPORTANT: pb-24 to clear the bottom tabs on mobile */}
         <main className="min-w-0 flex-1 p-4 pb-24 md:p-6 w-full max-w-full overflow-x-hidden">

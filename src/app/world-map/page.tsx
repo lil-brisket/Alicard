@@ -31,12 +31,6 @@ export default function WorldMapPage() {
               Explore the world and discover new areas
             </p>
           </div>
-          <Link
-            href="/hub"
-            className="inline-block rounded-lg bg-cyan-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-cyan-700 active:bg-cyan-800"
-          >
-            Return to Hub
-          </Link>
         </div>
 
         <div className="mb-4 rounded-xl border border-slate-800 bg-slate-900/60 p-4">
@@ -47,14 +41,6 @@ export default function WorldMapPage() {
           <MovementControls />
         </div>
 
-        <div className="flex justify-center">
-          <Link
-            href="/hub"
-            className="rounded-lg bg-cyan-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-cyan-700 active:bg-cyan-800"
-          >
-            Return to Hub
-          </Link>
-        </div>
       </div>
     </div>
   );

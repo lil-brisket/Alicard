@@ -84,14 +84,13 @@ export default async function HubPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto flex min-h-screen max-w-5xl flex-col gap-4 p-4 md:p-8">
-        <HubHeader
-          characterName={character.name}
-          level={character.level}
-        />
+    <div className="mx-auto flex min-h-screen max-w-5xl flex-col gap-4 p-4 md:p-8">
+      <HubHeader
+        characterName={character.name}
+        level={character.level}
+      />
 
-        <main className="mt-4 flex-1 md:mt-6">
+      <main className="mt-4 flex-1 md:mt-6">
           <section className="space-y-4">
             {/* Admin Panel (if moderator, admin, or content) */}
             {(() => {
@@ -119,7 +118,6 @@ export default async function HubPage() {
             <HallOfDeadCard />
           </section>
         </main>
-      </div>
     </div>
   );
 }

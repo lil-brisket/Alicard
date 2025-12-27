@@ -9,12 +9,18 @@ function NavSection({
   title,
   items,
   variant = "link",
+  onLinkClick,
 }: {
   title: string;
   items: NavItem[];
   variant?: "link" | "button";
+  onLinkClick?: () => void;
 }) {
   const pathname = usePathname();
+
+  const handleClick = () => {
+    onLinkClick?.();
+  };
 
   return (
     <div className="space-y-2">
@@ -38,6 +44,7 @@ function NavSection({
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={handleClick}
                 className={`${base} ${activeCls} border border-border`}
               >
                 {item.label}
@@ -47,7 +54,7 @@ function NavSection({
 
           // Regular links
           return (
-            <Link key={item.href} href={item.href} className={`${base} ${activeCls}`}>
+            <Link key={item.href} href={item.href} onClick={handleClick} className={`${base} ${activeCls}`}>
               {item.label}
             </Link>
           );
@@ -57,12 +64,16 @@ function NavSection({
   );
 }
 
-function JobsSection() {
+function JobsSection({ onLinkClick }: { onLinkClick?: () => void }) {
   const pathname = usePathname();
   const { data: jobs, isLoading: jobsLoading } = api.jobs.listJobs.useQuery();
   const { data: myJobs, isLoading: myJobsLoading } = api.jobs.getMyJobs.useQuery();
 
   const isLoading = jobsLoading || myJobsLoading;
+
+  const handleClick = () => {
+    onLinkClick?.();
+  };
 
   if (isLoading) {
     return (
@@ -112,6 +123,7 @@ function JobsSection() {
             <Link
               key={job.id}
               href={`/jobs/${job.key}`}
+              onClick={handleClick}
               className={`flex w-full items-center justify-between gap-2 rounded-md border border-border px-3 py-2 text-sm transition min-h-[44px] active:bg-muted/80 ${
                 active
                   ? "bg-muted font-semibold"
@@ -175,14 +187,14 @@ function PlayerStatsSection() {
   );
 }
 
-export function SidebarContent() {
+export function SidebarContent({ onLinkClick }: { onLinkClick?: () => void }) {
   return (
     <div className="flex h-full flex-col gap-6 overflow-y-auto p-4">
       <div className="text-lg font-bold">Alicard</div>
 
       <PlayerStatsSection />
-      <JobsSection />
-      <NavSection title="Links" items={HUB_NAV} variant="link" />
+      <JobsSection onLinkClick={onLinkClick} />
+      <NavSection title="Links" items={HUB_NAV} variant="link" onLinkClick={onLinkClick} />
 
       <div className="mt-auto text-xs text-muted-foreground">
         Tap outside to close on mobile.
@@ -191,7 +203,7 @@ export function SidebarContent() {
   );
 }
 
-export function DesktopSidebar({ isOpen }: { isOpen: boolean }) {
+export function DesktopSidebar({ isOpen, onLinkClick }: { isOpen: boolean; onLinkClick?: () => void }) {
   return (
     <aside
       className={`hidden shrink-0 border-r transition-all duration-300 md:block ${
@@ -201,7 +213,7 @@ export function DesktopSidebar({ isOpen }: { isOpen: boolean }) {
     >
       {isOpen && (
         <div className="h-full w-64">
-          <SidebarContent />
+          <SidebarContent onLinkClick={onLinkClick} />
         </div>
       )}
     </aside>

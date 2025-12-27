@@ -432,12 +432,6 @@ function TrainingPageContent() {
               Back to {job.name}
             </Link>
           )}
-          <Link
-            href="/hub"
-            className="inline-block rounded-xl bg-cyan-500/20 px-6 py-3 text-cyan-400 transition hover:bg-cyan-500/30"
-          >
-            Return to Hub
-          </Link>
         </div>
       </div>
     </div>
