@@ -210,7 +210,7 @@ export function RegisterForm() {
         <button
           type="submit"
           disabled={isLoading || !agreeToRules || !agreeToPermaDeath || !username || !gender}
-          className="rounded-lg bg-[hsl(280,100%,70%)] px-4 py-2 font-semibold text-white transition hover:bg-[hsl(280,100%,65%)] disabled:opacity-50"
+          className="rounded-lg bg-[hsl(280,100%,70%)] px-4 py-2 font-semibold text-white transition hover:bg-[hsl(280,100%,65%)] active:bg-[hsl(280,100%,60%)] disabled:opacity-50 min-h-[44px]"
         >
           {isLoading ? "Creating account..." : "Sign Up"}
         </button>

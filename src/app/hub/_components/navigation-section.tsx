@@ -33,7 +33,7 @@ export function NavigationSection() {
           <Link
             key={link.href}
             href={link.href}
-            className="rounded-lg bg-[hsl(280,100%,70%)] px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-[hsl(280,100%,65%)]"
+            className="rounded-lg bg-[hsl(280,100%,70%)] px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-[hsl(280,100%,65%)] active:bg-[hsl(280,100%,60%)] min-h-[44px] flex items-center justify-center"
           >
             {link.label}
           </Link>
@@ -42,7 +42,7 @@ export function NavigationSection() {
       <div className="border-t border-white/20 pt-4">
         <button
           onClick={handleLogout}
-          className="w-full rounded-lg bg-red-600/20 px-6 py-3 font-semibold text-red-300 transition hover:bg-red-600/30"
+          className="w-full rounded-lg bg-red-600/20 px-6 py-3 font-semibold text-red-300 transition hover:bg-red-600/30 active:bg-red-600/40 min-h-[44px]"
         >
           Logout
         </button>

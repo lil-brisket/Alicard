@@ -169,7 +169,7 @@ export function HubContent() {
         <div className="flex flex-wrap gap-3">
           <Link
             href="/world"
-            className="rounded-lg bg-[hsl(280,100%,70%)] px-4 py-2 font-semibold text-white transition hover:bg-[hsl(280,100%,65%)]"
+            className="rounded-lg bg-[hsl(280,100%,70%)] px-4 py-2 font-semibold text-white transition hover:bg-[hsl(280,100%,65%)] active:bg-[hsl(280,100%,60%)] min-h-[44px] inline-flex items-center justify-center"
           >
             Enter the Tower
           </Link>

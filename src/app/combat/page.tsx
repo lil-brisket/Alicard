@@ -164,7 +164,7 @@ export default function CombatPage() {
                     attack.mutate({ battleId: activeBattle.id });
                   }}
                   disabled={attack.isPending}
-                  className="flex-1 rounded-xl bg-red-500/20 px-6 py-3 font-semibold text-red-400 transition hover:bg-red-500/30 disabled:opacity-50"
+                  className="flex-1 rounded-xl bg-red-500/20 px-6 py-3 font-semibold text-red-400 transition hover:bg-red-500/30 active:bg-red-500/40 disabled:opacity-50 min-h-[44px]"
                 >
                   {attack.isPending ? "Attacking..." : "Attack"}
                 </button>
@@ -173,7 +173,7 @@ export default function CombatPage() {
                     flee.mutate({ battleId: activeBattle.id });
                   }}
                   disabled={flee.isPending}
-                  className="flex-1 rounded-xl bg-yellow-500/20 px-6 py-3 font-semibold text-yellow-400 transition hover:bg-yellow-500/30 disabled:opacity-50"
+                  className="flex-1 rounded-xl bg-yellow-500/20 px-6 py-3 font-semibold text-yellow-400 transition hover:bg-yellow-500/30 active:bg-yellow-500/40 disabled:opacity-50 min-h-[44px]"
                 >
                   {flee.isPending ? "Fleeing..." : "Flee"}
                 </button>
@@ -187,13 +187,13 @@ export default function CombatPage() {
                   onClick={() => {
                     utils.battle.getActiveBattle.invalidate();
                   }}
-                  className="flex-1 rounded-xl bg-cyan-500/20 px-6 py-3 font-semibold text-cyan-400 transition hover:bg-cyan-500/30"
+                  className="flex-1 rounded-xl bg-cyan-500/20 px-6 py-3 font-semibold text-cyan-400 transition hover:bg-cyan-500/30 active:bg-cyan-500/40 min-h-[44px]"
                 >
                   Refresh
                 </button>
                 <Link
                   href="/hub"
-                  className="flex-1 rounded-xl bg-slate-500/20 px-6 py-3 text-center font-semibold text-slate-300 transition hover:bg-slate-500/30"
+                  className="flex-1 rounded-xl bg-slate-500/20 px-6 py-3 text-center font-semibold text-slate-300 transition hover:bg-slate-500/30 active:bg-slate-500/40 min-h-[44px] inline-flex items-center justify-center"
                 >
                   Return to Hub
                 </Link>
@@ -266,7 +266,7 @@ export default function CombatPage() {
                       );
                     }}
                     disabled={startBattle.isPending}
-                    className="mt-4 w-full rounded-xl bg-cyan-500/20 px-4 py-2 font-semibold text-cyan-400 transition hover:bg-cyan-500/30 disabled:opacity-50"
+                    className="mt-4 w-full rounded-xl bg-cyan-500/20 px-4 py-2 font-semibold text-cyan-400 transition hover:bg-cyan-500/30 active:bg-cyan-500/40 disabled:opacity-50 min-h-[44px]"
                   >
                     {startBattle.isPending ? "Starting..." : "Start Battle"}
                   </button>

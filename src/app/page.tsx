@@ -20,14 +20,14 @@ export default function LandingPage() {
         {session ? (
           <Link
             href="/hub"
-            className="rounded-xl px-6 py-3 text-lg font-semibold bg-slate-100 text-black"
+            className="rounded-xl px-6 py-3 text-lg font-semibold bg-slate-100 text-black transition hover:bg-slate-200 active:bg-slate-300 min-h-[44px] inline-flex items-center justify-center"
           >
             Enter the Tower
           </Link>
         ) : (
           <button
             onClick={() => void signIn(undefined, { callbackUrl: "/hub" })}
-            className="rounded-xl px-6 py-3 text-lg font-semibold bg-slate-100 text-black"
+            className="rounded-xl px-6 py-3 text-lg font-semibold bg-slate-100 text-black transition hover:bg-slate-200 active:bg-slate-300 min-h-[44px]"
           >
             Play Now
           </button>
