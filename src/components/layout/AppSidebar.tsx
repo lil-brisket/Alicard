@@ -189,7 +189,7 @@ function PlayerStatsSection() {
 
 export function SidebarContent({ onLinkClick }: { onLinkClick?: () => void }) {
   return (
-    <div className="flex h-full flex-col gap-6 overflow-y-auto p-4">
+    <div className="flex h-full flex-col gap-6 overflow-y-auto p-4 pb-8">
       <div className="text-lg font-bold">Alicard</div>
 
       <PlayerStatsSection />
