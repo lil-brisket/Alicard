@@ -194,7 +194,6 @@ export function SidebarContent({ onLinkClick }: { onLinkClick?: () => void }) {
 
       <PlayerStatsSection />
       <JobsSection onLinkClick={onLinkClick} />
-      <NavSection title="Links" items={HUB_NAV} variant="link" onLinkClick={onLinkClick} />
 
       <div className="mt-auto text-xs text-muted-foreground">
         Tap outside to close on mobile.

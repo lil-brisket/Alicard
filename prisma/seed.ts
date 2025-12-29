@@ -167,6 +167,12 @@ async function main() {
       category: "CRAFT" as const,
     },
     {
+      key: "crafting",
+      name: "Crafting",
+      description: "General crafting profession for creating various items.",
+      category: "CRAFT" as const,
+    },
+    {
       key: "miner",
       name: "Miner",
       description: "Extract ores and minerals from mining nodes.",

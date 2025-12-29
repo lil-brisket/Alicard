@@ -12,10 +12,10 @@ type Tab = {
 const TABS: Tab[] = [
   { label: "Home", href: "/hub" },
   { label: "Equipment", href: "/equipment" },
-  { label: "Skills", href: "/skills" },
   { label: "World", href: "/world" },
-  { label: "Combat", href: "/combat" },
-  { label: "Profile", href: "/profile" },
+  { label: "Guild", href: "/guilds" },
+  { label: "Chat", href: "/chat" },
+  { label: "Settings", href: "/settings" },
 ];
 
 export function MobileBottomTabs() {
