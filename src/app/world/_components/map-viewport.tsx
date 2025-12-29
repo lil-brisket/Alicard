@@ -1,75 +1,85 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { api } from "~/trpc/react";
 import { type ViewportTile } from "~/lib/types/world-map";
+
+type Dir = "N" | "S" | "E" | "W" | "NE" | "NW" | "SE" | "SW";
 
 function tileClass(t: ViewportTile["type"]) {
   switch (t) {
     case "grass":
-      return "bg-emerald-600";
+      return "bg-emerald-500";
     case "forest":
-      return "bg-emerald-800";
+      return "bg-emerald-900";
     case "water":
       return "bg-sky-600";
     case "road":
-      return "bg-amber-700";
+      return "bg-amber-600";
     case "town":
-      return "bg-slate-500";
+      return "bg-slate-400";
     case "mountain":
-      return "bg-stone-600";
+      return "bg-stone-700";
     case "fog":
       return "bg-slate-900";
   }
 }
 
+function dirToDelta(dir: Dir) {
+  switch (dir) {
+    case "N":
+      return { dx: 0, dy: -1 };
+    case "S":
+      return { dx: 0, dy: 1 };
+    case "E":
+      return { dx: 1, dy: 0 };
+    case "W":
+      return { dx: -1, dy: 0 };
+    case "NE":
+      return { dx: 1, dy: -1 };
+    case "NW":
+      return { dx: -1, dy: -1 };
+    case "SE":
+      return { dx: 1, dy: 1 };
+    case "SW":
+      return { dx: -1, dy: 1 };
+  }
+}
+
 export function MapViewport() {
   const utils = api.useUtils();
-  const [heldDirection, setHeldDirection] = useState<
-    "N" | "S" | "E" | "W" | "NE" | "NW" | "SE" | "SW" | null
-  >(null);
-  const [pressedKeys, setPressedKeys] = useState<Set<string>>(new Set());
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  
-  // Get the default world ID (you may want to make this configurable)
+
+  // Default world ID (make configurable later)
   const worldId = "default-world";
-  
+
   const { data: viewport, isLoading, error } = api.world.getViewport.useQuery({
     mapId: worldId,
   });
 
-  const moveMutation = api.world.move.useMutation({
-    onSuccess: (newViewport) => {
-      // Update the viewport with the server response
-      utils.world.getViewport.setData({ mapId: worldId }, newViewport);
-      // Also invalidate to ensure fresh data on next load
-      void utils.world.getViewport.invalidate({ mapId: worldId });
-    },
-  });
+  // Local display copy (lets us animate immediately without waiting for network)
+  const [displayViewport, setDisplayViewport] = useState<typeof viewport | null>(null);
 
-  const handleMove = useCallback(
-    (dir: "N" | "S" | "E" | "W" | "NE" | "NW" | "SE" | "SW") => {
-      if (moveMutation.isPending) return;
-      moveMutation.mutate({ dir });
-    },
-    [moveMutation]
-  );
+  useEffect(() => {
+    if (viewport) setDisplayViewport(viewport);
+  }, [viewport]);
 
-  // Get direction from pressed keys (supports diagonal movement)
-  const getDirectionFromKeys = useCallback((): "N" | "S" | "E" | "W" | "NE" | "NW" | "SE" | "SW" | null => {
-    const keys = Array.from(pressedKeys);
-    const hasW = keys.includes("w") || keys.includes("ArrowUp");
-    const hasS = keys.includes("s") || keys.includes("ArrowDown");
-    const hasA = keys.includes("a") || keys.includes("ArrowLeft");
-    const hasD = keys.includes("d") || keys.includes("ArrowRight");
+  // ---- Input state (normalized to WASD + arrows) ----
+  const [heldDirection, setHeldDirection] = useState<Dir | null>(null);
+  const [pressedKeys, setPressedKeys] = useState<Set<"w" | "a" | "s" | "d">>(new Set());
 
-    // Diagonal movements (check combinations first)
+  const getDirectionFromKeys = useCallback((): Dir | null => {
+    const hasW = pressedKeys.has("w");
+    const hasS = pressedKeys.has("s");
+    const hasA = pressedKeys.has("a");
+    const hasD = pressedKeys.has("d");
+
+    // Diagonals first
     if (hasW && hasD) return "NE";
     if (hasW && hasA) return "NW";
     if (hasS && hasD) return "SE";
     if (hasS && hasA) return "SW";
 
-    // Cardinal movements
+    // Cardinals
     if (hasW) return "N";
     if (hasS) return "S";
     if (hasA) return "W";
@@ -78,122 +88,205 @@ export function MapViewport() {
     return null;
   }, [pressedKeys]);
 
-  // Handle keyboard events for WASD and arrow keys
+  // ---- Movement loop state (prevents interval stutter) ----
+  const activeDirRef = useRef<Dir | null>(null);
+  const nextMoveAtRef = useRef<number>(0);
+  const rafRef = useRef<number | null>(null);
+
+  // One-move queue to reduce stalls while holding direction
+  const inFlightRef = useRef(false);
+  const queuedDirRef = useRef<Dir | null>(null);
+  const touchHandledRef = useRef(false);
+
+  const MOVE_EVERY_MS = 60; // Very fast movement cadence
+
+  // Keep the active direction ref updated without triggering loop recreation
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      const key = e.key.toLowerCase();
-      const validKeys = ["w", "a", "s", "d", "arrowup", "arrowdown", "arrowleft", "arrowright"];
+    const keyboardDir = getDirectionFromKeys();
+    activeDirRef.current = keyboardDir ?? heldDirection;
+  }, [heldDirection, pressedKeys, getDirectionFromKeys]);
 
-      if (validKeys.includes(key)) {
-        e.preventDefault();
-        setPressedKeys((prev) => {
-          const next = new Set(prev);
-          // Normalize arrow keys and WASD
-          if (e.key === "ArrowUp" || key === "w") {
-            next.add("w");
-            next.add("ArrowUp");
-          }
-          if (e.key === "ArrowDown" || key === "s") {
-            next.add("s");
-            next.add("ArrowDown");
-          }
-          if (e.key === "ArrowLeft" || key === "a") {
-            next.add("a");
-            next.add("ArrowLeft");
-          }
-          if (e.key === "ArrowRight" || key === "d") {
-            next.add("d");
-            next.add("ArrowRight");
-          }
-          return next;
-        });
-      }
+  // Keyboard listeners (normalized)
+  useEffect(() => {
+    const onDown = (e: KeyboardEvent) => {
+      const key = e.key;
+
+      const mapKey = () => {
+        if (key === "w" || key === "W" || key === "ArrowUp") return "w";
+        if (key === "s" || key === "S" || key === "ArrowDown") return "s";
+        if (key === "a" || key === "A" || key === "ArrowLeft") return "a";
+        if (key === "d" || key === "D" || key === "ArrowRight") return "d";
+        return null;
+      };
+
+      const k = mapKey();
+      if (!k) return;
+
+      e.preventDefault();
+      setPressedKeys((prev) => {
+        if (prev.has(k)) return prev;
+        const next = new Set(prev);
+        next.add(k);
+        return next;
+      });
     };
 
-    const handleKeyUp = (e: KeyboardEvent) => {
-      const key = e.key.toLowerCase();
-      const validKeys = ["w", "a", "s", "d", "arrowup", "arrowdown", "arrowleft", "arrowright"];
+    const onUp = (e: KeyboardEvent) => {
+      const key = e.key;
 
-      if (validKeys.includes(key)) {
-        e.preventDefault();
-        setPressedKeys((prev) => {
-          const next = new Set(prev);
-          // Remove both arrow key and WASD equivalent
-          if (e.key === "ArrowUp" || key === "w") {
-            next.delete("w");
-            next.delete("ArrowUp");
-          }
-          if (e.key === "ArrowDown" || key === "s") {
-            next.delete("s");
-            next.delete("ArrowDown");
-          }
-          if (e.key === "ArrowLeft" || key === "a") {
-            next.delete("a");
-            next.delete("ArrowLeft");
-          }
-          if (e.key === "ArrowRight" || key === "d") {
-            next.delete("d");
-            next.delete("ArrowRight");
-          }
-          return next;
-        });
-      }
+      const mapKey = () => {
+        if (key === "w" || key === "W" || key === "ArrowUp") return "w";
+        if (key === "s" || key === "S" || key === "ArrowDown") return "s";
+        if (key === "a" || key === "A" || key === "ArrowLeft") return "a";
+        if (key === "d" || key === "D" || key === "ArrowRight") return "d";
+        return null;
+      };
+
+      const k = mapKey();
+      if (!k) return;
+
+      e.preventDefault();
+      setPressedKeys((prev) => {
+        if (!prev.has(k)) return prev;
+        const next = new Set(prev);
+        next.delete(k);
+        return next;
+      });
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keyup", handleKeyUp);
-
+    window.addEventListener("keydown", onDown, { passive: false });
+    window.addEventListener("keyup", onUp, { passive: false });
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
+      window.removeEventListener("keydown", onDown);
+      window.removeEventListener("keyup", onUp);
     };
   }, []);
 
-  // Handle continuous movement (from keyboard or buttons)
+  // Helper to shift tiles optimistically
+  const shiftTiles = useCallback((tiles: ViewportTile[], dir: Dir): ViewportTile[] => {
+    const { dx, dy } = dirToDelta(dir);
+    return tiles.map((t) => ({
+      ...t,
+      x: t.x - dx,
+      y: t.y - dy,
+    }));
+  }, []);
+
+  // Mutation with reconciliation — NO invalidate-on-success
+  const moveMutation = api.world.move.useMutation({
+    onMutate: async () => {
+      // Cancel any outgoing viewport fetch; we want smooth UX
+      await utils.world.getViewport.cancel({ mapId: worldId });
+
+      // Provide rollback data if needed (inFlightRef already set in handleMove)
+      const previous = utils.world.getViewport.getData({ mapId: worldId });
+      return { previous };
+    },
+    onError: (_err, _vars, ctx) => {
+      // Rollback to previous viewport (if we have it)
+      if (ctx?.previous) {
+        utils.world.getViewport.setData({ mapId: worldId }, ctx.previous);
+        setDisplayViewport(ctx.previous);
+      }
+      // Ensure we stop any queued movement on error
+      queuedDirRef.current = null;
+      inFlightRef.current = false;
+    },
+    onSuccess: (newViewport) => {
+      // Replace with authoritative viewport
+      utils.world.getViewport.setData({ mapId: worldId }, newViewport);
+      setDisplayViewport(newViewport);
+
+      // Allow next move
+      inFlightRef.current = false;
+    },
+  });
+
+  const handleMove = useCallback(
+    (dir: Dir) => {
+      // If server request is in flight, queue ONE move (reduces "stall" feel)
+      if (inFlightRef.current || moveMutation.isPending) {
+        queuedDirRef.current = dir;
+        return;
+      }
+      // Set in-flight BEFORE mutation to prevent double moves
+      inFlightRef.current = true;
+      
+      // Optimistically update display immediately for instant feedback
+      const previous = utils.world.getViewport.getData({ mapId: worldId });
+      if (previous) {
+        const optimisticViewport = {
+          ...previous,
+          tiles: shiftTiles(previous.tiles, dir),
+        };
+        setDisplayViewport(optimisticViewport);
+        utils.world.getViewport.setData({ mapId: worldId }, optimisticViewport);
+      }
+      
+      moveMutation.mutate({ dir });
+    },
+    [moveMutation, shiftTiles, utils, worldId]
+  );
+
+  // Single RAF loop (no intervals, no teardown stutter)
   useEffect(() => {
-    // Keyboard keys take priority over button holds
-    const keyboardDirection = getDirectionFromKeys();
-    const activeDirection = keyboardDirection ?? heldDirection;
+    const tick = () => {
+      const now = performance.now();
 
-    if (activeDirection && !moveMutation.isPending) {
-      // Initial move
-      handleMove(activeDirection);
-
-      // Set up interval for continuous movement
-      intervalRef.current = setInterval(() => {
-        const currentKeyboardDirection = getDirectionFromKeys();
-        const currentActiveDirection = currentKeyboardDirection ?? heldDirection;
-        if (currentActiveDirection && !moveMutation.isPending) {
-          handleMove(currentActiveDirection);
-        }
-      }, 200); // Move every 200ms while active
-    } else {
-      // Clear interval when no direction is active
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
+      // If we just completed a move and have a queued direction, fire it immediately
+      if (!inFlightRef.current && queuedDirRef.current) {
+        const q = queuedDirRef.current;
+        queuedDirRef.current = null;
+        nextMoveAtRef.current = now + MOVE_EVERY_MS;
+        handleMove(q);
+        rafRef.current = requestAnimationFrame(tick);
+        return;
       }
-    }
 
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+      const dir = activeDirRef.current;
+
+      // Only attempt a new move if:
+      // - a direction is held
+      // - not already in flight (double-check to prevent race conditions)
+      // - timing gate passed (or first move - no gate)
+      if (dir && !inFlightRef.current && !moveMutation.isPending && now >= nextMoveAtRef.current) {
+        nextMoveAtRef.current = now + MOVE_EVERY_MS;
+        handleMove(dir);
       }
+
+      rafRef.current = requestAnimationFrame(tick);
     };
-  }, [pressedKeys, heldDirection, moveMutation.isPending, handleMove, getDirectionFromKeys]);
 
-  const handleButtonDown = (dir: "N" | "S" | "E" | "W" | "NE" | "NW" | "SE" | "SW") => {
-    setHeldDirection(dir);
-  };
+    // Initialize timing gate to allow immediate first move
+    nextMoveAtRef.current = 0;
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    };
+  }, [handleMove]);
 
-  const handleButtonUp = () => {
-    setHeldDirection(null);
-  };
+  // Button handlers (single move per press, queue if in flight)
+  const handleButtonClick = useCallback(
+    (dir: Dir) => {
+      // If already in flight, queue the move
+      if (inFlightRef.current || moveMutation.isPending) {
+        queuedDirRef.current = dir;
+        return;
+      }
+      // Otherwise move immediately
+      handleMove(dir);
+    },
+    [handleMove, moveMutation]
+  );
 
-  // Find player position from viewport
-  const playerTile = viewport?.tiles.find((t) => t.isPlayer);
-  const playerX = playerTile?.x ?? 0;
-  const playerY = playerTile?.y ?? 0;
+  // Use displayViewport for rendering (falls back to query data)
+  const vp = displayViewport ?? viewport;
+
+  const playerPos = useMemo(() => {
+    const pt = vp?.tiles.find((t) => t.isPlayer);
+    return { x: pt?.x ?? 0, y: pt?.y ?? 0 };
+  }, [vp?.tiles]);
 
   if (isLoading) {
     return (
@@ -207,14 +300,14 @@ export function MapViewport() {
     return (
       <div className="flex min-h-[320px] items-center justify-center sm:min-h-[520px]">
         <div className="text-center">
-          <p className="text-red-400 mb-2">Error loading map</p>
+          <p className="mb-2 text-red-400">Error loading map</p>
           <p className="text-sm text-slate-400">{error.message}</p>
         </div>
       </div>
     );
   }
 
-  if (!viewport) {
+  if (!vp) {
     return (
       <div className="flex min-h-[320px] items-center justify-center sm:min-h-[520px]">
         <p className="text-slate-400">No map data available</p>
@@ -224,38 +317,39 @@ export function MapViewport() {
 
   return (
     <div className="w-full">
-      {/* Coordinates display */}
+      {/* Coordinates */}
       <div className="mx-auto mb-2 w-full max-w-[520px] text-center">
         <div className="inline-block rounded-lg border border-white/10 bg-white/5 px-4 py-2">
           <span className="text-sm font-semibold text-slate-300">
-            Position: <span className="text-cyan-400">{playerX}, {playerY}</span>
+            Position: <span className="text-cyan-400">{playerPos.x}, {playerPos.y}</span>
           </span>
         </div>
       </div>
 
       {/* Map frame */}
       <div className="mx-auto w-full max-w-[520px] rounded-2xl border border-white/10 bg-white/5 p-2 shadow-xl sm:p-3">
-        <div className="grid aspect-square w-full select-none grid-cols-7 gap-0.5 sm:gap-1">
-          {viewport.tiles.map((t) => (
-            <div
-              key={`${t.x},${t.y}`}
-              className={[
-                "relative rounded-sm transition-transform duration-150 ease-out sm:rounded-md",
-                tileClass(t.type),
-                t.type === "fog" ? "opacity-90" : "opacity-100",
-              ].join(" ")}
-            >
-              {/* Optional: subtle texture */}
-              <div className="absolute inset-0 rounded-sm bg-white/5 sm:rounded-md" />
+        <div className="aspect-square w-full overflow-hidden rounded-xl">
+          <div className="grid h-full w-full select-none grid-cols-7 gap-0.5 sm:gap-1">
+            {vp.tiles.map((t) => (
+              <div
+                key={`${t.x},${t.y}`}
+                className={[
+                  "relative rounded-sm sm:rounded-md",
+                  "transition-transform duration-150 ease-out md:hover:scale-[1.04]",
+                  tileClass(t.type),
+                  t.type === "fog" ? "opacity-90" : "opacity-100",
+                ].join(" ")}
+              >
+                <div className="absolute inset-0 rounded-sm bg-white/5 sm:rounded-md" />
 
-              {/* Player marker */}
-              {t.isPlayer && (
-                <div className="absolute inset-0 grid place-items-center">
-                  <div className="h-2 w-2 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.6)] sm:h-3 sm:w-3 sm:shadow-[0_0_14px_rgba(255,255,255,0.6)]" />
-                </div>
-              )}
-            </div>
-          ))}
+                {t.isPlayer && (
+                  <div className="absolute inset-0 grid place-items-center">
+                    <div className="h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.85)] sm:h-3 sm:w-3" />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -263,100 +357,236 @@ export function MapViewport() {
       <div className="mx-auto mt-4 w-full max-w-[520px] rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4">
         <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
           {/* Top row */}
-          <button
-            className="min-h-[44px] rounded-xl bg-sky-700/80 px-2 py-2 text-xs font-semibold hover:bg-sky-700 active:bg-sky-800 disabled:opacity-50 disabled:cursor-not-allowed sm:px-3 sm:text-sm"
-            onMouseDown={() => handleButtonDown("NW")}
-            onMouseUp={handleButtonUp}
-            onMouseLeave={handleButtonUp}
-            onTouchStart={() => handleButtonDown("NW")}
-            onTouchEnd={handleButtonUp}
-            disabled={moveMutation.isPending}
+          <div
+            role="button"
+            tabIndex={0}
+            className="min-h-[44px] rounded-lg bg-white/5 px-2 py-2 text-xs text-slate-300 cursor-pointer select-none touch-manipulation sm:px-3 sm:text-sm"
+            style={{ 
+              WebkitTapHighlightColor: 'transparent',
+              touchAction: 'manipulation',
+            }}
+            onClick={() => {
+              if (!touchHandledRef.current) {
+                handleButtonClick("NW");
+              }
+              touchHandledRef.current = false;
+            }}
+            onTouchStart={(e) => {
+              touchHandledRef.current = true;
+              handleButtonClick("NW");
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleButtonClick("NW");
+              }
+            }}
           >
             NW
-          </button>
-          <button
-            className="min-h-[44px] rounded-xl bg-sky-600/80 px-2 py-2 text-xs font-semibold hover:bg-sky-600 active:bg-sky-700 disabled:opacity-50 disabled:cursor-not-allowed sm:px-3 sm:text-sm md:text-base"
-            onMouseDown={() => handleButtonDown("N")}
-            onMouseUp={handleButtonUp}
-            onMouseLeave={handleButtonUp}
-            onTouchStart={() => handleButtonDown("N")}
-            onTouchEnd={handleButtonUp}
-            disabled={moveMutation.isPending}
+          </div>
+          <div
+            role="button"
+            tabIndex={0}
+            className="min-h-[44px] rounded-lg bg-white/5 px-2 py-2 text-xs text-slate-300 cursor-pointer select-none touch-manipulation sm:px-3 sm:text-sm md:text-base"
+            style={{ 
+              WebkitTapHighlightColor: 'transparent',
+              touchAction: 'manipulation',
+            }}
+            onClick={() => {
+              if (!touchHandledRef.current) {
+                handleButtonClick("N");
+              }
+              touchHandledRef.current = false;
+            }}
+            onTouchStart={(e) => {
+              touchHandledRef.current = true;
+              handleButtonClick("N");
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleButtonClick("N");
+              }
+            }}
           >
             North
-          </button>
-          <button
-            className="min-h-[44px] rounded-xl bg-sky-700/80 px-2 py-2 text-xs font-semibold hover:bg-sky-700 active:bg-sky-800 disabled:opacity-50 disabled:cursor-not-allowed sm:px-3 sm:text-sm"
-            onMouseDown={() => handleButtonDown("NE")}
-            onMouseUp={handleButtonUp}
-            onMouseLeave={handleButtonUp}
-            onTouchStart={() => handleButtonDown("NE")}
-            onTouchEnd={handleButtonUp}
-            disabled={moveMutation.isPending}
+          </div>
+          <div
+            role="button"
+            tabIndex={0}
+            className="min-h-[44px] rounded-lg bg-white/5 px-2 py-2 text-xs text-slate-300 cursor-pointer select-none touch-manipulation sm:px-3 sm:text-sm"
+            style={{ 
+              WebkitTapHighlightColor: 'transparent',
+              touchAction: 'manipulation',
+            }}
+            onClick={() => {
+              if (!touchHandledRef.current) {
+                handleButtonClick("NE");
+              }
+              touchHandledRef.current = false;
+            }}
+            onTouchStart={(e) => {
+              touchHandledRef.current = true;
+              handleButtonClick("NE");
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleButtonClick("NE");
+              }
+            }}
           >
             NE
-          </button>
+          </div>
+
           {/* Middle row */}
-          <button
-            className="min-h-[44px] rounded-xl bg-sky-600/80 px-2 py-2 text-xs font-semibold hover:bg-sky-600 active:bg-sky-700 disabled:opacity-50 disabled:cursor-not-allowed sm:px-3 sm:text-sm md:text-base"
-            onMouseDown={() => handleButtonDown("W")}
-            onMouseUp={handleButtonUp}
-            onMouseLeave={handleButtonUp}
-            onTouchStart={() => handleButtonDown("W")}
-            onTouchEnd={handleButtonUp}
-            disabled={moveMutation.isPending}
+          <div
+            role="button"
+            tabIndex={0}
+            className="min-h-[44px] rounded-lg bg-white/5 px-2 py-2 text-xs text-slate-300 cursor-pointer select-none touch-manipulation sm:px-3 sm:text-sm md:text-base"
+            style={{ 
+              WebkitTapHighlightColor: 'transparent',
+              touchAction: 'manipulation',
+            }}
+            onClick={() => {
+              if (!touchHandledRef.current) {
+                handleButtonClick("W");
+              }
+              touchHandledRef.current = false;
+            }}
+            onTouchStart={(e) => {
+              touchHandledRef.current = true;
+              handleButtonClick("W");
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleButtonClick("W");
+              }
+            }}
           >
             West
-          </button>
+          </div>
           <div />
-          <button
-            className="min-h-[44px] rounded-xl bg-sky-600/80 px-2 py-2 text-xs font-semibold hover:bg-sky-600 active:bg-sky-700 disabled:opacity-50 disabled:cursor-not-allowed sm:px-3 sm:text-sm md:text-base"
-            onMouseDown={() => handleButtonDown("E")}
-            onMouseUp={handleButtonUp}
-            onMouseLeave={handleButtonUp}
-            onTouchStart={() => handleButtonDown("E")}
-            onTouchEnd={handleButtonUp}
-            disabled={moveMutation.isPending}
+          <div
+            role="button"
+            tabIndex={0}
+            className="min-h-[44px] rounded-lg bg-white/5 px-2 py-2 text-xs text-slate-300 cursor-pointer select-none touch-manipulation sm:px-3 sm:text-sm md:text-base"
+            style={{ 
+              WebkitTapHighlightColor: 'transparent',
+              touchAction: 'manipulation',
+            }}
+            onClick={() => {
+              if (!touchHandledRef.current) {
+                handleButtonClick("E");
+              }
+              touchHandledRef.current = false;
+            }}
+            onTouchStart={(e) => {
+              touchHandledRef.current = true;
+              handleButtonClick("E");
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleButtonClick("E");
+              }
+            }}
           >
             East
-          </button>
+          </div>
+
           {/* Bottom row */}
-          <button
-            className="min-h-[44px] rounded-xl bg-sky-700/80 px-2 py-2 text-xs font-semibold hover:bg-sky-700 active:bg-sky-800 disabled:opacity-50 disabled:cursor-not-allowed sm:px-3 sm:text-sm"
-            onMouseDown={() => handleButtonDown("SW")}
-            onMouseUp={handleButtonUp}
-            onMouseLeave={handleButtonUp}
-            onTouchStart={() => handleButtonDown("SW")}
-            onTouchEnd={handleButtonUp}
-            disabled={moveMutation.isPending}
+          <div
+            role="button"
+            tabIndex={0}
+            className="min-h-[44px] rounded-lg bg-white/5 px-2 py-2 text-xs text-slate-300 cursor-pointer select-none touch-manipulation sm:px-3 sm:text-sm"
+            style={{ 
+              WebkitTapHighlightColor: 'transparent',
+              touchAction: 'manipulation',
+            }}
+            onClick={() => {
+              if (!touchHandledRef.current) {
+                handleButtonClick("SW");
+              }
+              touchHandledRef.current = false;
+            }}
+            onTouchStart={(e) => {
+              touchHandledRef.current = true;
+              handleButtonClick("SW");
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleButtonClick("SW");
+              }
+            }}
           >
             SW
-          </button>
-          <button
-            className="min-h-[44px] rounded-xl bg-sky-600/80 px-2 py-2 text-xs font-semibold hover:bg-sky-600 active:bg-sky-700 disabled:opacity-50 disabled:cursor-not-allowed sm:px-3 sm:text-sm md:text-base"
-            onMouseDown={() => handleButtonDown("S")}
-            onMouseUp={handleButtonUp}
-            onMouseLeave={handleButtonUp}
-            onTouchStart={() => handleButtonDown("S")}
-            onTouchEnd={handleButtonUp}
-            disabled={moveMutation.isPending}
+          </div>
+          <div
+            role="button"
+            tabIndex={0}
+            className="min-h-[44px] rounded-lg bg-white/5 px-2 py-2 text-xs text-slate-300 cursor-pointer select-none touch-manipulation sm:px-3 sm:text-sm md:text-base"
+            style={{ 
+              WebkitTapHighlightColor: 'transparent',
+              touchAction: 'manipulation',
+            }}
+            onClick={() => {
+              if (!touchHandledRef.current) {
+                handleButtonClick("S");
+              }
+              touchHandledRef.current = false;
+            }}
+            onTouchStart={(e) => {
+              touchHandledRef.current = true;
+              handleButtonClick("S");
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleButtonClick("S");
+              }
+            }}
           >
             South
-          </button>
-          <button
-            className="min-h-[44px] rounded-xl bg-sky-700/80 px-2 py-2 text-xs font-semibold hover:bg-sky-700 active:bg-sky-800 disabled:opacity-50 disabled:cursor-not-allowed sm:px-3 sm:text-sm"
-            onMouseDown={() => handleButtonDown("SE")}
-            onMouseUp={handleButtonUp}
-            onMouseLeave={handleButtonUp}
-            onTouchStart={() => handleButtonDown("SE")}
-            onTouchEnd={handleButtonUp}
-            disabled={moveMutation.isPending}
+          </div>
+          <div
+            role="button"
+            tabIndex={0}
+            className="min-h-[44px] rounded-lg bg-white/5 px-2 py-2 text-xs text-slate-300 cursor-pointer select-none touch-manipulation sm:px-3 sm:text-sm"
+            style={{ 
+              WebkitTapHighlightColor: 'transparent',
+              touchAction: 'manipulation',
+            }}
+            onClick={() => {
+              if (!touchHandledRef.current) {
+                handleButtonClick("SE");
+              }
+              touchHandledRef.current = false;
+            }}
+            onTouchStart={(e) => {
+              touchHandledRef.current = true;
+              handleButtonClick("SE");
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleButtonClick("SE");
+              }
+            }}
           >
             SE
-          </button>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
+      </div>
+    </div>
+  );
+}
+
+}
