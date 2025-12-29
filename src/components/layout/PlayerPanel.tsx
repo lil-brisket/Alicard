@@ -292,13 +292,13 @@ export function PlayerPanelContent() {
     <div className="flex h-full flex-col gap-4 p-4">
       {/* Header with square avatar */}
       <div className="flex flex-col items-center gap-3">
-        <div className="relative h-24 w-24 overflow-hidden rounded-lg border-2 border-slate-700">
+        <div className="relative h-48 w-48 overflow-hidden rounded-lg border-2 border-slate-700">
           <Image
             src={avatarUrl}
             alt={`${character.name} avatar`}
             fill
             className="object-cover"
-            sizes="96px"
+            sizes="192px"
           />
         </div>
         <div className="text-center">

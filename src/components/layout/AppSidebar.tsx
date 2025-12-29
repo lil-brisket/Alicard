@@ -206,12 +206,12 @@ export function DesktopSidebar({ isOpen, onLinkClick }: { isOpen: boolean; onLin
   return (
     <aside
       className={`hidden shrink-0 border-r transition-all duration-300 md:block ${
-        isOpen ? "w-64" : "w-0 border-r-0"
+        isOpen ? "w-72" : "w-0 border-r-0"
       }`}
       style={{ height: "calc(100vh - 3.5rem)" }}
     >
       {isOpen && (
-        <div className="h-full w-64">
+        <div className="h-full w-72">
           <SidebarContent onLinkClick={onLinkClick} />
         </div>
       )}
