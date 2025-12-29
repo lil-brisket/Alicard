@@ -97,8 +97,9 @@ export function MapViewport() {
   const inFlightRef = useRef(false);
   const queuedDirRef = useRef<Dir | null>(null);
   const touchHandledRef = useRef(false);
+  const handleMoveRef = useRef<((dir: Dir) => void) | null>(null);
 
-  const MOVE_EVERY_MS = 60; // Very fast movement cadence
+  const MOVE_EVERY_MS = 30; // Ultra-fast movement cadence
 
   // Keep the active direction ref updated without triggering loop recreation
   useEffect(() => {
@@ -123,12 +124,45 @@ export function MapViewport() {
       if (!k) return;
 
       e.preventDefault();
+      
+      // Check if this is a new key press (not already held)
+      const isNewKey = !pressedKeys.has(k);
+      
       setPressedKeys((prev) => {
         if (prev.has(k)) return prev;
         const next = new Set(prev);
         next.add(k);
         return next;
       });
+
+      // If it's a new key press and we're not in flight, trigger immediate movement
+      if (isNewKey && !inFlightRef.current && handleMoveRef.current) {
+        const keyboardDir = (() => {
+          const hasW = k === "w" || pressedKeys.has("w");
+          const hasS = k === "s" || pressedKeys.has("s");
+          const hasA = k === "a" || pressedKeys.has("a");
+          const hasD = k === "d" || pressedKeys.has("d");
+
+          // Diagonals first
+          if (hasW && hasD) return "NE";
+          if (hasW && hasA) return "NW";
+          if (hasS && hasD) return "SE";
+          if (hasS && hasA) return "SW";
+
+          // Cardinals
+          if (hasW) return "N";
+          if (hasS) return "S";
+          if (hasA) return "W";
+          if (hasD) return "E";
+
+          return null;
+        })();
+
+        if (keyboardDir) {
+          nextMoveAtRef.current = performance.now() + MOVE_EVERY_MS;
+          handleMoveRef.current(keyboardDir);
+        }
+      }
     };
 
     const onUp = (e: KeyboardEvent) => {
@@ -228,6 +262,11 @@ export function MapViewport() {
     [moveMutation, shiftTiles, utils, worldId]
   );
 
+  // Keep handleMove ref updated for immediate keyboard response
+  useEffect(() => {
+    handleMoveRef.current = handleMove;
+  }, [handleMove]);
+
   // Single RAF loop (no intervals, no teardown stutter)
   useEffect(() => {
     const tick = () => {
@@ -274,7 +313,9 @@ export function MapViewport() {
         queuedDirRef.current = dir;
         return;
       }
-      // Otherwise move immediately
+      // Bypass timing gate for immediate button response
+      nextMoveAtRef.current = performance.now();
+      // Move immediately
       handleMove(dir);
     },
     [handleMove, moveMutation]
@@ -582,11 +623,4 @@ export function MapViewport() {
       </div>
     </div>
   );
-}
-
-      </div>
-    </div>
-  );
-}
-
 }
