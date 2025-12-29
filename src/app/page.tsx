@@ -8,8 +8,8 @@ export default function LandingPage() {
   const { data: session } = useSession();
 
   return (
-    <main className="min-h-screen bg-black text-slate-50 flex flex-col w-full max-w-full overflow-x-hidden">
-      <section className="flex flex-col items-center justify-center min-h-screen px-4 w-full max-w-full">
+    <main className="min-h-dvh bg-black text-slate-50 flex flex-col w-full overflow-x-hidden">
+      <section className="flex flex-col items-center justify-center min-h-dvh px-4 w-full">
         <div className="flex flex-col items-center justify-center text-center space-y-6">
           <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent animate-pulse">
             Alicard

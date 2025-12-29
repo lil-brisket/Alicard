@@ -2,16 +2,14 @@
 
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
-import { MapGrid } from "../world-map/_components/map-grid";
-import { MovementControls } from "../world-map/_components/movement-controls";
+import { MapViewport } from "./_components/map-viewport";
 
 export default function WorldPage() {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-950 text-slate-100">
+      <div className="flex min-h-dvh items-center justify-center bg-slate-950 text-slate-100">
         <p>Loading...</p>
       </div>
     );
@@ -22,24 +20,18 @@ export default function WorldPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-7xl p-4 md:p-8">
-        <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div className="min-h-dvh bg-slate-950 text-slate-100">
+      <div className="mx-auto max-w-7xl p-3 sm:p-4 md:p-8">
+        <div className="mb-3 flex flex-col gap-2 sm:mb-4 sm:gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="mb-2 text-2xl font-bold text-cyan-400">World Map</h1>
-            <p className="text-slate-400">
+            <h1 className="mb-1 text-xl font-bold text-cyan-400 sm:mb-2 sm:text-2xl">World Map</h1>
+            <p className="text-sm text-slate-400 sm:text-base">
               Explore the world and discover new areas
             </p>
           </div>
         </div>
 
-        <div className="mb-4 rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-          <MapGrid />
-        </div>
-
-        <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-          <MovementControls />
-        </div>
+        <MapViewport />
       </div>
     </div>
   );

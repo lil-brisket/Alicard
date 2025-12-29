@@ -55,7 +55,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }, [playerPanelOpen, isMounted]);
 
   return (
-    <div className="min-h-screen w-full max-w-full overflow-x-hidden">
+    <div className="min-h-dvh w-full overflow-x-hidden">
       {/* Desktop Header with toggle buttons */}
       <header className="sticky top-0 z-40 hidden h-14 items-center justify-between gap-3 border-b bg-black px-4 md:flex">
         <div className="flex items-center gap-3">
