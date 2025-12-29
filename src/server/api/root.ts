@@ -27,6 +27,7 @@ import { adminRouter } from "~/server/api/routers/admin";
 import { contentRouter } from "~/server/api/routers/content";
 import { skillTrainingRouter } from "~/server/api/routers/skill-training";
 import { settingsRouter } from "~/server/api/routers/settings";
+import { chatRouter } from "~/server/api/routers/chat";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -61,6 +62,7 @@ export const appRouter = createTRPCRouter({
   content: contentRouter,
   skillTraining: skillTrainingRouter,
   settings: settingsRouter,
+  chat: chatRouter,
 });
 
 // export type definition of API

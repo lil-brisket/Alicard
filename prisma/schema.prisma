@@ -93,6 +93,9 @@ model User {
   roles                UserRoleAssignment[]
   // IP history tracking
   ipHistory            UserIpHistory[]
+  // Chat
+  chatMessages         ChatMessage[]
+  chatReactions       ChatReaction[]
 }
 
 model Character {
@@ -1453,4 +1456,41 @@ model SkillActionLog {
   @@index([actionId])
   @@index([skillId])
   @@index([createdAt])
+}
+
+// ============================================
+// Global Chat System
+// ============================================
+
+model ChatMessage {
+  id             String        @id @default(cuid())
+  userId         String
+  room           String        @default("global")
+  content        String // Sanitized HTML content
+  parentMessageId String? // For replies
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parentMessage  ChatMessage?  @relation("MessageReplies", fields: [parentMessageId], references: [id], onDelete: Cascade)
+  replies        ChatMessage[] @relation("MessageReplies")
+  reactions      ChatReaction[]
+
+  @@index([room, createdAt])
+  @@index([userId])
+  @@index([createdAt])
+  @@index([parentMessageId])
+}
+
+model ChatReaction {
+  id        String      @id @default(cuid())
+  messageId String
+  userId    String
+  emoji     String
+  createdAt DateTime    @default(now())
+  message   ChatMessage @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([messageId, userId, emoji])
+  @@index([messageId])
+  @@index([userId])
 }

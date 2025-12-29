@@ -1,31 +1,34 @@
 import { redirect } from "next/navigation";
 import { getServerAuthSession } from "~/server/auth";
+import { GlobalChat } from "~/components/chat/GlobalChat";
+import { PreventPageScroll } from "./_components/prevent-page-scroll";
 
 export default async function ChatPage() {
   const session = await getServerAuthSession();
 
-  if (!session?.user) {
-    redirect("/auth/signin");
-  }
+  // Public users can read messages, but we'll still show the page
+  // Authentication is handled in the component for sending messages
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-5xl p-4 md:p-8">
-        <h1 className="text-2xl font-bold text-cyan-400">Chat</h1>
-        <p className="mt-2 text-slate-400">
-          Global, guild, and local chat
-        </p>
+    <>
+      <PreventPageScroll />
+      <div className="fixed inset-0 flex flex-col overflow-hidden bg-slate-950 text-slate-100 md:overflow-hidden">
+        <div className="flex h-full w-full flex-col overflow-hidden p-1 md:p-2 lg:p-3">
+          {/* Header - Compact */}
+          <div className="flex-shrink-0 border-b border-slate-800 bg-slate-950 p-1.5 md:border-0 md:bg-transparent md:p-0 md:pb-1">
+            <h1 className="text-lg font-bold text-cyan-400 md:text-xl">Global Chat</h1>
+            <p className="mt-0.5 text-xs text-slate-400 md:mt-1 md:text-sm">
+              Real-time global chat with emoji reactions
+            </p>
+          </div>
 
-        <div className="mt-6 rounded-xl border border-slate-800 bg-slate-950/60 p-8 text-center">
-          <h2 className="text-xl font-semibold text-slate-100">
-            Coming Soon
-          </h2>
-          <p className="mt-2 text-slate-400">
-            Chat system is under construction. Check back soon!
-          </p>
+          {/* Chat Container - Takes full width, only messages scroll */}
+          <div className="flex min-h-0 flex-1 overflow-hidden pt-1.5 pb-20 md:mt-2 md:pb-0 md:pt-0">
+            <GlobalChat />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
