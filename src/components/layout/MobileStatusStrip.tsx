@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useState, useEffect } from "react";
 import { api } from "~/trpc/react";
 
 export function MobileStatusStrip() {
@@ -11,6 +12,16 @@ export function MobileStatusStrip() {
     refetchInterval: 5000,
     retry: false,
   });
+  const { data: settings } = api.settings.getSettings.useQuery(undefined, {
+    refetchInterval: 10000, // Refetch every 10 seconds to catch avatar updates
+  });
+
+  const [avatarError, setAvatarError] = useState(false);
+
+  // Reset avatar error when settings change
+  useEffect(() => {
+    setAvatarError(false);
+  }, [settings?.avatar]);
 
   const isLoading = characterLoading || playerLoading;
 
@@ -19,8 +30,8 @@ export function MobileStatusStrip() {
   const sp = player?.stats ? { current: player.stats.currentSP, max: player.stats.maxSP } : { current: 0, max: 0 };
   const coins = player?.gold ?? 0;
 
-  // Get avatar URL (use character silhouette as fallback)
-  const avatarUrl = "/character-silhouette.png";
+  // Get avatar URL from settings, fallback to silhouette
+  const avatarUrl = (settings?.avatar && !avatarError) ? settings.avatar : "/character-silhouette.png";
 
   return (
     <div className="lg:hidden border-b border-slate-800 bg-black px-3 py-2">
@@ -32,6 +43,10 @@ export function MobileStatusStrip() {
             fill
             className="object-cover"
             sizes="40px"
+            onError={() => {
+              // Fallback to silhouette if avatar URL fails to load
+              setAvatarError(true);
+            }}
           />
         </div>
 

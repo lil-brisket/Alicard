@@ -252,16 +252,17 @@ model MapTile {
 }
 
 model MapPosition {
-  id        String   @id @default(cuid())
-  playerId  String   @unique
-  worldId   String
-  tileX     Int
-  tileY     Int
-  tileId    Int?
-  updatedAt DateTime @updatedAt
-  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  tile      MapTile? @relation(fields: [tileId], references: [id])
-  world     World    @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  id             String   @id @default(cuid())
+  playerId       String   @unique
+  worldId        String
+  tileX          Int
+  tileY          Int
+  tileId         Int?
+  discoveredTiles Json? // boolean[] for discovered tiles (length = width * height)
+  updatedAt      DateTime @updatedAt
+  player         Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  tile           MapTile? @relation(fields: [tileId], references: [id])
+  world          World    @relation(fields: [worldId], references: [id], onDelete: Cascade)
 
   @@index([tileX, tileY])
   @@index([worldId])
@@ -1022,6 +1023,7 @@ model PlayerSocial {
   guildName              String?
   title                  String?
   tagline                String?
+  journal                String? // BBCode journal for public profile display
   commendationsHelpful   Int           @default(0)
   commendationsSkilled   Int           @default(0)
   commendationsStrategic Int           @default(0)

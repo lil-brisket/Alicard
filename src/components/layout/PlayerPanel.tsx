@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { api } from "~/trpc/react";
 import { useEffect, useRef, useState } from "react";
 
@@ -47,11 +48,15 @@ export function PlayerPanelContent() {
     refetchInterval: 5000,
     retry: false,
   });
+  const { data: settings } = api.settings.getSettings.useQuery(undefined, {
+    refetchInterval: 10000, // Refetch every 10 seconds to catch avatar updates
+  });
   const { data: activeAction, isLoading: actionLoading } = api.skillTraining.getActiveAction.useQuery();
 
   // Real-time interpolation state
   const [interpolatedHp, setInterpolatedHp] = useState<number | null>(null);
   const [interpolatedStamina, setInterpolatedStamina] = useState<number | null>(null);
+  const [avatarError, setAvatarError] = useState(false);
   const baseHpRef = useRef<number | null>(null);
   const baseStaminaRef = useRef<number | null>(null);
   const maxHpRef = useRef<number | null>(null);
@@ -73,40 +78,10 @@ export function PlayerPanelContent() {
   });
   const isInBattle = activeBattle?.status === "ACTIVE";
 
-  const isLoading = characterLoading || playerLoading;
-
-  if (isLoading) {
-    return (
-      <div className="flex h-full items-center justify-center p-4">
-        <div className="text-sm text-muted-foreground">Loading...</div>
-      </div>
-    );
-  }
-
-  if (!character || !player) {
-    return (
-      <div className="flex h-full items-center justify-center p-4">
-        <div className="text-sm text-muted-foreground">Unable to load player data</div>
-      </div>
-    );
-  }
-
-  const stats = player.stats;
-  if (!stats) {
-    return (
-      <div className="flex h-full items-center justify-center p-4">
-        <div className="text-sm text-muted-foreground">Player stats not found</div>
-      </div>
-    );
-  }
-
-  // Use PlayerStats for HP/SP (with regen applied) if available, otherwise fall back to Character
-  const serverCurrentHp = stats.currentHP ?? character.currentHp;
-  const serverMaxHp = stats.maxHP ?? character.maxHp;
-  const serverCurrentStamina = stats.currentSP ?? character.currentStamina;
-  const serverMaxStamina = stats.maxSP ?? character.maxStamina;
-  const hpRegenPerMin = stats.hpRegenPerMin ?? 100;
-  const spRegenPerMin = stats.spRegenPerMin ?? 100;
+  // Reset avatar error when settings change (must be before early returns)
+  useEffect(() => {
+    setAvatarError(false);
+  }, [settings?.avatar]);
 
   // Calculate interpolated value based on elapsed time from base
   const calculateInterpolatedValue = (
@@ -122,7 +97,16 @@ export function PlayerPanelContent() {
     return Math.min(max, base + regenAmount);
   };
 
-  // Detect battle end and immediately refetch data
+  // Compute derived values (safe to compute even if data is missing)
+  const stats = player?.stats;
+  const serverCurrentHp = stats?.currentHP ?? character?.currentHp ?? 0;
+  const serverMaxHp = stats?.maxHP ?? character?.maxHp ?? 100;
+  const serverCurrentStamina = stats?.currentSP ?? character?.currentStamina ?? 0;
+  const serverMaxStamina = stats?.maxSP ?? character?.maxStamina ?? 50;
+  const hpRegenPerMin = stats?.hpRegenPerMin ?? 100;
+  const spRegenPerMin = stats?.spRegenPerMin ?? 100;
+
+  // Detect battle end and immediately refetch data (must be before early returns)
   useEffect(() => {
     const wasInBattle = previousBattleStatusRef.current;
     const nowInBattle = isInBattle;
@@ -137,9 +121,9 @@ export function PlayerPanelContent() {
     previousBattleStatusRef.current = nowInBattle;
   }, [isInBattle, utils]);
 
-  // Update base values when server data changes
+  // Update base values when server data changes (must be before early returns)
   useEffect(() => {
-    if (serverCurrentHp !== null && serverCurrentStamina !== null) {
+    if (serverCurrentHp !== null && serverCurrentStamina !== null && player && character && stats) {
       const hpIsFull = serverCurrentHp >= serverMaxHp;
       const staminaIsFull = serverCurrentStamina >= serverMaxStamina;
 
@@ -207,12 +191,12 @@ export function PlayerPanelContent() {
       hpRegenPerSecRef.current = hpRegenPerMin / 60;
       spRegenPerSecRef.current = spRegenPerMin / 60;
     }
-  }, [serverCurrentHp, serverCurrentStamina, serverMaxHp, serverMaxStamina, hpRegenPerMin, spRegenPerMin, interpolatedHp, interpolatedStamina, isInBattle]);
+  }, [serverCurrentHp, serverCurrentStamina, serverMaxHp, serverMaxStamina, hpRegenPerMin, spRegenPerMin, interpolatedHp, interpolatedStamina, isInBattle, player, character, stats]);
 
-  // Real-time interpolation effect
+  // Real-time interpolation effect (must be before early returns)
   useEffect(() => {
     if (baseHpRef.current === null || baseStaminaRef.current === null || isInBattle) {
-      if (isInBattle) {
+      if (isInBattle && serverCurrentHp !== null && serverCurrentStamina !== null) {
         setInterpolatedHp(serverCurrentHp);
         setInterpolatedStamina(serverCurrentStamina);
       }
@@ -259,6 +243,32 @@ export function PlayerPanelContent() {
     };
   }, [isInBattle, serverCurrentHp, serverCurrentStamina]);
 
+  const isLoading = characterLoading || playerLoading;
+
+  if (isLoading) {
+    return (
+      <div className="flex h-full items-center justify-center p-4">
+        <div className="text-sm text-muted-foreground">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!character || !player) {
+    return (
+      <div className="flex h-full items-center justify-center p-4">
+        <div className="text-sm text-muted-foreground">Unable to load player data</div>
+      </div>
+    );
+  }
+
+  if (!stats) {
+    return (
+      <div className="flex h-full items-center justify-center p-4">
+        <div className="text-sm text-muted-foreground">Player stats not found</div>
+      </div>
+    );
+  }
+
   // Get training info
   let trainingInfo: { label: string; progress: number } = {
     label: "Not training",
@@ -279,8 +289,8 @@ export function PlayerPanelContent() {
     };
   }
 
-  // Get avatar URL
-  const avatarUrl = "/character-silhouette.png";
+  // Get avatar URL from settings, fallback to silhouette
+  const avatarUrl = (settings?.avatar && !avatarError) ? settings.avatar : "/character-silhouette.png";
 
   // Use interpolated values if available, otherwise fall back to server values
   const currentHP = interpolatedHp !== null ? interpolatedHp : serverCurrentHp;
@@ -292,15 +302,22 @@ export function PlayerPanelContent() {
     <div className="flex h-full flex-col gap-4 p-4">
       {/* Header with square avatar */}
       <div className="flex flex-col items-center gap-3">
-        <div className="relative h-48 w-48 overflow-hidden rounded-lg border-2 border-slate-700">
+        <Link 
+          href="/profile" 
+          className="relative h-48 w-48 overflow-hidden rounded-lg border-2 border-slate-700 transition-all hover:border-cyan-500 hover:shadow-lg hover:shadow-cyan-500/50 active:scale-95 cursor-pointer"
+        >
           <Image
             src={avatarUrl}
             alt={`${character.name} avatar`}
             fill
             className="object-cover"
             sizes="192px"
+            onError={() => {
+              // Fallback to silhouette if avatar URL fails to load
+              setAvatarError(true);
+            }}
           />
-        </div>
+        </Link>
         <div className="text-center">
           <div className="text-sm font-semibold">{character.name}</div>
           <div className="text-xs text-muted-foreground">Lv. {character.level}</div>
