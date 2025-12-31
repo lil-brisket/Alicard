@@ -96,6 +96,9 @@ model User {
   // Chat
   chatMessages         ChatMessage[]
   chatReactions       ChatReaction[]
+  chatMentions         ChatMention[]       @relation("MentionedUser")
+  chatMentionsBy       ChatMention[]       @relation("MentionedBy")
+  notifications       Notification[]
 }
 
 model Character {
@@ -1468,17 +1471,22 @@ model ChatMessage {
   room           String        @default("global")
   content        String // Sanitized HTML content
   parentMessageId String? // For replies
+  deletedAt      DateTime? // Soft delete for expired messages
+  expiresAt      DateTime? // Auto-delete after 4 hours
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
   user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   parentMessage  ChatMessage?  @relation("MessageReplies", fields: [parentMessageId], references: [id], onDelete: Cascade)
   replies        ChatMessage[] @relation("MessageReplies")
   reactions      ChatReaction[]
+  mentions       ChatMention[]
 
   @@index([room, createdAt])
   @@index([userId])
   @@index([createdAt])
   @@index([parentMessageId])
+  @@index([expiresAt])
+  @@index([deletedAt])
 }
 
 model ChatReaction {
@@ -1493,4 +1501,36 @@ model ChatReaction {
   @@unique([messageId, userId, emoji])
   @@index([messageId])
   @@index([userId])
+}
+
+model ChatMention {
+  id              String      @id @default(cuid())
+  messageId       String
+  mentionedUserId String
+  mentionedByUserId String
+  createdAt       DateTime    @default(now())
+  message         ChatMessage @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  mentionedUser   User        @relation("MentionedUser", fields: [mentionedUserId], references: [id], onDelete: Cascade)
+  mentionedByUser User        @relation("MentionedBy", fields: [mentionedByUserId], references: [id], onDelete: Cascade)
+
+  @@index([messageId])
+  @@index([mentionedUserId])
+  @@index([mentionedByUserId])
+}
+
+enum NotificationType {
+  MENTION
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  type      NotificationType
+  dataJson  Json // Flexible JSON data for different notification types
+  readAt    DateTime?
+  createdAt DateTime         @default(now())
+  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, readAt])
+  @@index([createdAt])
 }

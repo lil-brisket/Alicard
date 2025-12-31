@@ -16,6 +16,7 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:cleanup": "tsx prisma/pre-migration-cleanup.ts",
     "db:studio": "prisma studio",
+    "expire:chat": "tsx scripts/expire-chat-messages.ts",
     "dev": "node server.js",
     "dev:next": "next dev --turbo",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
@@ -45,6 +46,8 @@
     "react-dom": "^19.2.3",
     "react-hot-toast": "^2.6.0",
     "server-only": "^0.0.1",
+    "socket.io": "^4.8.3",
+    "socket.io-client": "^4.8.3",
     "superjson": "^2.2.1",
     "zod": "^4.2.1"
   },

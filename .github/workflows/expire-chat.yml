@@ -1,0 +1,19 @@
+name: Expire Chat Messages
+
+on:
+  schedule:
+    # Run every hour at minute 0
+    - cron: '0 * * * *'
+  workflow_dispatch: # Allow manual trigger from GitHub UI
+
+jobs:
+  expire:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Expire API
+        run: |
+          curl -X POST "${{ secrets.APP_URL }}/api/chat/expire" \
+            -H "Authorization: Bearer ${{ secrets.CRON_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -f || exit 1
+

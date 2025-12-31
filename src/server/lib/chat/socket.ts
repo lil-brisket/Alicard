@@ -32,3 +32,23 @@ export function emitChatReactions(room: string, data: { messageId: string; react
   }
 }
 
+/**
+ * Emit mention notification to a specific user
+ */
+export function emitMentionNotification(userId: string, notification: unknown): void {
+  const io = getSocketIO();
+  if (io) {
+    io.to(`user:${userId}`).emit("notify:mention", notification);
+  }
+}
+
+/**
+ * Emit chat deletion event to a room
+ */
+export function emitChatDeleted(room: string, messageId: string): void {
+  const io = getSocketIO();
+  if (io) {
+    io.to(room).emit("chat:deleted", { messageId });
+  }
+}
+

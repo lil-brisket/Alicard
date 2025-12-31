@@ -34,6 +34,9 @@ AUTH_SECRET="your-secret-key-here" # Generate with: openssl rand -base64 32
 # AUTH_GITHUB_SECRET=""
 # AUTH_DISCORD_ID=""
 # AUTH_DISCORD_SECRET=""
+
+# Chat Expiration Cron (for production)
+# CRON_API_KEY="your-secure-api-key-here" # Generate with: openssl rand -base64 32
 ```
 
 ### 3. Set Up Database
@@ -170,6 +173,7 @@ See [`prisma/MIGRATION_WORKFLOW.md`](./prisma/MIGRATION_WORKFLOW.md) for complet
 - `npm run db:cleanup` - Clean up duplicate records before migration (if needed)
 - `npm run db:seed` - Seed the database with initial game data
 - `npm run db:studio` - Open Prisma Studio (database GUI)
+- `npm run expire:chat` - Manually expire old chat messages (for testing)
 - `npm run lint` - Run ESLint
 - `npm run typecheck` - Run TypeScript type checking
 
@@ -210,6 +214,29 @@ To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the fo
 
 - [Documentation](https://create.t3.gg/)
 - [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available)
+
+## Chat Message Expiration
+
+Chat messages are automatically marked for expiration 4 hours after creation. To enable automatic expiration, set up a cron job to call the expiration endpoint.
+
+**Quick Setup:**
+
+1. Generate an API key:
+   ```bash
+   openssl rand -base64 32
+   ```
+
+2. Add to `.env`:
+   ```env
+   CRON_API_KEY="your-generated-api-key"
+   ```
+
+3. Set up a cron job (see [docs/CHAT_CRON_SETUP.md](./docs/CHAT_CRON_SETUP.md) for detailed instructions):
+   - **Vercel**: Use Vercel Cron (see docs)
+   - **GitHub Actions**: Set up workflow (see docs)
+   - **Self-hosted**: Use system cron or in-process cron
+
+For detailed setup instructions, see [docs/CHAT_CRON_SETUP.md](./docs/CHAT_CRON_SETUP.md).
 
 ## Deployment
 

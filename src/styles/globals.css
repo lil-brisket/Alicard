@@ -145,6 +145,52 @@
       max-width: 28rem;
     }
   }
+
+  /* Fog-of-war reveal animation */
+  @keyframes fogReveal {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .fog-reveal-animation {
+    animation: fogReveal 0.6s ease-out forwards;
+  }
+
+  /* Map movement snap animation for smooth transitions */
+  @keyframes mapMove {
+    0% {
+      opacity: 0.95;
+      transform: scale(0.98);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .map-move-animation {
+    animation: mapMove 150ms ease-out;
+  }
+
+  /* Improve touch interactions on mobile */
+  @media (max-width: 768px) {
+    /* Prevent text selection during touch interactions */
+    .map-viewport-container {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    /* Better touch target sizing */
+    button[class*="min-h-[44px]"] {
+      min-height: 48px;
+      min-width: 48px;
+    }
+  }
 }
 
 @theme {
@@ -173,4 +219,11 @@
   --color-ring: hsl(var(--ring) / <alpha-value>);
   
   --radius: 0.5rem;
+}
+
+/* Chat mention styling */
+.mention {
+  @apply inline-flex items-center rounded-md bg-cyan-600/20 px-1.5 py-0.5 text-sm font-semibold text-cyan-300 transition-colors;
+  @apply hover:bg-cyan-600/30 active:bg-cyan-600/40;
+  cursor: pointer;
 }

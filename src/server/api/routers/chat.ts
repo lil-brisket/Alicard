@@ -7,6 +7,7 @@ import {
 } from "~/server/api/trpc";
 import { sanitizeChatHtml } from "~/server/lib/chat/sanitize";
 import { emitChatMessage, emitChatReactions } from "~/server/lib/chat/socket";
+import { parseMentions, wrapMentionsInHtml } from "~/server/lib/chat/parse-mentions";
 
 const MAX_MESSAGE_LENGTH = 2000;
 const DEFAULT_ROOM = "global";
@@ -29,6 +30,11 @@ export const chatRouter = createTRPCRouter({
         where: {
           room: input.room,
           parentMessageId: null, // Only get top-level messages
+          deletedAt: null, // Exclude deleted messages
+          OR: [
+            { expiresAt: null }, // Messages without expiration
+            { expiresAt: { gt: new Date() } }, // Messages not yet expired
+          ],
         },
         take: input.limit + 1,
         cursor: input.cursor ? { id: input.cursor } : undefined,
@@ -199,16 +205,52 @@ export const chatRouter = createTRPCRouter({
         }
       }
 
-      // Sanitize HTML content
+      // Parse mentions before sanitization
+      const mentionedUsernames = parseMentions(input.content);
+      
+      // Look up mentioned users (case-insensitive)
+      const mentionedUsers = mentionedUsernames.length > 0
+        ? await ctx.db.user.findMany({
+            where: {
+              username: {
+                in: mentionedUsernames.map((u) => u.toLowerCase()),
+                mode: "insensitive",
+              },
+              deletedAt: null, // Don't mention deleted users
+            },
+            select: {
+              id: true,
+              username: true,
+            },
+          })
+        : [];
+
+      // Create map of lowercase username -> original username for HTML wrapping
+      const validUsernameMap = new Map<string, string>();
+      for (const user of mentionedUsers) {
+        if (user.username) {
+          validUsernameMap.set(user.username.toLowerCase(), user.username);
+        }
+      }
+
+      // Sanitize HTML content first
       const sanitizedContent = sanitizeChatHtml(input.content);
+      
+      // Wrap valid mentions in HTML spans
+      const contentWithMentions = wrapMentionsInHtml(sanitizedContent, validUsernameMap);
+
+      // Calculate expiration time (4 hours from now)
+      const expiresAt = new Date();
+      expiresAt.setHours(expiresAt.getHours() + 4);
 
       // Create message
       const message = await ctx.db.chatMessage.create({
         data: {
           userId: ctx.session.user.id,
           room: input.room,
-          content: sanitizedContent,
+          content: contentWithMentions,
           parentMessageId: input.parentMessageId,
+          expiresAt,
         },
         include: {
           user: {
@@ -221,6 +263,41 @@ export const chatRouter = createTRPCRouter({
           reactions: true,
         },
       });
+
+      // Create mention records and notifications
+      const mentionResults = await Promise.all(
+        mentionedUsers
+          .filter((user) => user.id !== ctx.session.user.id) // Don't notify self
+          .map(async (user) => {
+            // Create ChatMention record
+            await ctx.db.chatMention.create({
+              data: {
+                messageId: message.id,
+                mentionedUserId: user.id,
+                mentionedByUserId: ctx.session.user.id,
+              },
+            });
+
+            // Create Notification record
+            const notification = await ctx.db.notification.create({
+              data: {
+                userId: user.id,
+                type: "MENTION",
+                dataJson: {
+                  messageId: message.id,
+                  room: input.room,
+                  mentionedBy: {
+                    id: ctx.session.user.id,
+                    username: ctx.session.user.username ?? "Unknown",
+                  },
+                  content: message.content.substring(0, 100), // Preview
+                },
+              },
+            });
+
+            return { userId: user.id, notification };
+          })
+      );
 
       // Emit socket event to all clients in the room
       const messageData = {
@@ -236,6 +313,17 @@ export const chatRouter = createTRPCRouter({
       };
       emitChatMessage(input.room, messageData);
 
+      // Emit mention notifications to mentioned users
+      const { emitMentionNotification } = await import("~/server/lib/chat/socket");
+      for (const { userId, notification } of mentionResults) {
+        emitMentionNotification(userId, {
+          id: notification.id,
+          type: notification.type,
+          dataJson: notification.dataJson,
+          createdAt: notification.createdAt,
+        });
+      }
+
       return messageData;
     }),
 
@@ -248,6 +336,7 @@ export const chatRouter = createTRPCRouter({
       z.object({
         messageId: z.string().cuid(),
         emoji: z.string().min(1).max(10), // Reasonable emoji length
+        room: z.string().optional(), // Optional room for scoping
       }),
     )
     .mutation(async ({ ctx, input }) => {

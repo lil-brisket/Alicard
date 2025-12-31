@@ -39,6 +39,11 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+    // API key for cron jobs and internal services
+    CRON_API_KEY:
+      process.env.NODE_ENV === "production"
+        ? z.string().min(32) // Require at least 32 characters in production
+        : z.string().optional(),
   },
 
   /**
@@ -64,6 +69,7 @@ export const env = createEnv({
     AUTH_DISCORD_SECRET: process.env.AUTH_DISCORD_SECRET,
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
+    CRON_API_KEY: process.env.CRON_API_KEY,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

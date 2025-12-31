@@ -35,7 +35,7 @@ app.prepare().then(() => {
 
   // Initialize Socket.IO
   const io = new Server(httpServer, {
-    path: "/api/socket",
+    path: "/api/socketio",
     addTrailingSlash: false,
     cors: {
       origin: dev ? "*" : process.env.NEXT_PUBLIC_APP_URL || "*",
@@ -46,17 +46,35 @@ app.prepare().then(() => {
   });
 
   io.on("connection", (socket) => {
-    // Join the global room
-    socket.join("global");
+    // Handle room joins (for chat rooms: global, guild:<id>, party:<id>)
+    socket.on("join", (room: string) => {
+      if (typeof room === "string" && room.length > 0) {
+        socket.join(room);
+      }
+    });
+
+    // Handle room leaves
+    socket.on("leave", (room: string) => {
+      if (typeof room === "string" && room.length > 0) {
+        socket.leave(room);
+      }
+    });
 
     socket.on("disconnect", () => {
-      // User disconnected
+      // User disconnected - rooms are automatically cleaned up
     });
   });
 
   // Store io instance globally for use in API routes
   // @ts-ignore - global.io is set for Socket.IO access
   global.io = io;
+
+  // Optional: Enable in-process cron job for chat message expiration
+  // Uncomment the following lines to enable (requires node-cron package)
+  // if (process.env.ENABLE_CHAT_EXPIRE_CRON === "true") {
+  //   const { startChatExpireCron } = await import("./src/server/lib/cron/chat-expire.js");
+  //   startChatExpireCron(); // Runs every hour by default
+  // }
 
   httpServer
     .once("error", (err) => {
@@ -65,7 +83,7 @@ app.prepare().then(() => {
     })
     .listen(port, () => {
       console.log(`> Ready on http://${hostname}:${port}`);
-      console.log(`> Socket.IO ready on ws://${hostname}:${port}/api/socket`);
+      console.log(`> Socket.IO ready on ws://${hostname}:${port}/api/socketio`);
     });
 });
 
