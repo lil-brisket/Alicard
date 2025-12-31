@@ -4,6 +4,8 @@ import { useState } from "react";
 import { api } from "~/trpc/react";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { SectionCard } from "~/components/ui/section-card";
+import { ListRow } from "~/components/ui/list-row";
 
 export default function SkillsPage() {
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
@@ -99,20 +101,15 @@ export default function SkillsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-7xl p-4 md:p-8">
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-cyan-400">Skills</h1>
-          <p className="mt-2 text-slate-400">Manage your skill loadout</p>
-        </div>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold text-cyan-400">Skills</h1>
+        <p className="mt-1 text-sm text-slate-400">Manage your skill loadout</p>
+      </div>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {/* Left: Skill Loadout (8 slots) */}
-          <div className="space-y-3">
-            <h2 className="text-xl font-semibold text-cyan-400">Skill Loadout</h2>
-            
-            {/* Skill Slots Grid */}
-            <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {/* Left: Skill Loadout (8 slots) */}
+        <SectionCard title="Skill Loadout">
               <h3 className="mb-3 text-sm font-semibold text-slate-400">Action Bar (8 Slots)</h3>
               <div className="grid grid-cols-4 gap-3">
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((slotIndex) => {
@@ -265,11 +262,10 @@ export default function SkillsPage() {
                   );
                 })}
               </div>
-            </div>
-          </div>
+        </SectionCard>
 
-          {/* Right: Learned Skills */}
-          <div className="space-y-4">
+        {/* Right: Learned Skills */}
+        <div className="space-y-4">
             <div className="flex items-start gap-2">
               <div className="flex-1">
                 {selectedSlot ? (
@@ -306,19 +302,17 @@ export default function SkillsPage() {
                   />
                 </div>
                 {filteredSkills.length > 0 ? (
-                  <div className="max-h-[600px] space-y-2 overflow-y-auto">
-                    {filteredSkills.map((playerSkill) => {
-                      const skill = playerSkill.skill;
-                      const isEquipped = isSkillEquipped(skill.id);
-                      return (
-                        <div
-                          key={skill.id}
-                          className={`rounded-xl border border-slate-800 bg-slate-950/60 p-4 ${
-                            isEquipped
-                              ? "border-yellow-500/50 bg-yellow-500/5"
-                              : ""
-                          }`}
-                        >
+                  <SectionCard>
+                    <div className="max-h-[600px] space-y-3 overflow-y-auto">
+                      {filteredSkills.map((playerSkill) => {
+                        const skill = playerSkill.skill;
+                        const isEquipped = isSkillEquipped(skill.id);
+                        return (
+                          <ListRow
+                            key={skill.id}
+                            interactive
+                            className={isEquipped ? "border-yellow-500/50 bg-yellow-500/5" : ""}
+                          >
                           <div className="flex items-start justify-between">
                             <div className="flex-1">
                               <div className="flex items-center gap-2">
@@ -373,21 +367,21 @@ export default function SkillsPage() {
                               )}
                               {isEquipped ? "Equipped" : equipMutation.isPending ? "Equipping..." : "Equip"}
                             </button>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
+                          </ListRow>
+                        );
+                      })}
+                    </div>
+                  </SectionCard>
                 ) : (
-                  <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-8 text-center">
-                    <p className="text-slate-400">
+                  <SectionCard>
+                    <p className="text-center text-slate-400">
                       {searchQuery ? "No skills found matching your search" : "No learned skills available"}
                     </p>
-                  </div>
+                  </SectionCard>
                 )}
               </>
             ) : (
-              <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-6 text-center">
+              <SectionCard>
                 <p className="mb-4 text-slate-400">Pick a slot to view available skills.</p>
                 <div className="space-y-2 text-left text-sm text-slate-500">
                   <div className="flex items-center gap-2">
@@ -403,11 +397,9 @@ export default function SkillsPage() {
                     <span>Swap anytime</span>
                   </div>
                 </div>
-              </div>
+              </SectionCard>
             )}
-          </div>
         </div>
-
       </div>
     </div>
   );

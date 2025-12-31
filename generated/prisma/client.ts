@@ -379,3 +379,13 @@ export type PlayerActiveAction = Prisma.PlayerActiveActionModel
  * 
  */
 export type SkillActionLog = Prisma.SkillActionLogModel
+/**
+ * Model ChatMessage
+ * 
+ */
+export type ChatMessage = Prisma.ChatMessageModel
+/**
+ * Model ChatReaction
+ * 
+ */
+export type ChatReaction = Prisma.ChatReactionModel

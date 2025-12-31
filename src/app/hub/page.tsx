@@ -83,41 +83,38 @@ export default async function HubPage() {
     console.error("Failed to ensure Player exists:", error);
   }
 
+  const adminPanel = (() => {
+    const userRoles = [
+      user.role,
+      ...(user.roles?.map((r) => r.role) ?? []),
+    ];
+    const isModerator = userRoles.includes("MODERATOR");
+    const isAdmin = userRoles.includes("ADMIN");
+    const isContent = userRoles.includes("CONTENT");
+    
+    if (isModerator || isAdmin || isContent) {
+      return (
+        <AdminPanelSection 
+          role={isAdmin ? "ADMIN" : isModerator ? "MODERATOR" : "CONTENT"} 
+          isContent={isContent}
+        />
+      );
+    }
+    return null;
+  })();
+
   return (
-    <div className="mx-auto flex min-h-screen max-w-5xl flex-col gap-4 p-4 md:p-8">
+    <div className="flex flex-col gap-4 md:gap-6">
       <HubHeader
         characterName={character.name}
         level={character.level}
       />
 
-      <main className="mt-4 flex-1 md:mt-6">
-          <section className="space-y-4">
-            {/* Admin Panel (if moderator, admin, or content) */}
-            {(() => {
-              const userRoles = [
-                user.role,
-                ...(user.roles?.map((r) => r.role) ?? []),
-              ];
-              const isModerator = userRoles.includes("MODERATOR");
-              const isAdmin = userRoles.includes("ADMIN");
-              const isContent = userRoles.includes("CONTENT");
-              
-              if (isModerator || isAdmin || isContent) {
-                return (
-                  <AdminPanelSection 
-                    role={isAdmin ? "ADMIN" : isModerator ? "MODERATOR" : "CONTENT"} 
-                    isContent={isContent}
-                  />
-                );
-              }
-              return null;
-            })()}
-            {/* actions card */}
-            <ActionGrid />
-            {/* hall of the dead card */}
-            <HallOfDeadCard />
-          </section>
-        </main>
+      <section className="space-y-4 md:space-y-6">
+        {adminPanel}
+        <ActionGrid />
+        <HallOfDeadCard />
+      </section>
     </div>
   );
 }

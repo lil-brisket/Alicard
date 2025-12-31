@@ -46,6 +46,7 @@ export type PlayerSocialMinAggregateOutputType = {
   guildName: string | null
   title: string | null
   tagline: string | null
+  journal: string | null
   commendationsHelpful: number | null
   commendationsSkilled: number | null
   commendationsStrategic: number | null
@@ -60,6 +61,7 @@ export type PlayerSocialMaxAggregateOutputType = {
   guildName: string | null
   title: string | null
   tagline: string | null
+  journal: string | null
   commendationsHelpful: number | null
   commendationsSkilled: number | null
   commendationsStrategic: number | null
@@ -74,6 +76,7 @@ export type PlayerSocialCountAggregateOutputType = {
   guildName: number
   title: number
   tagline: number
+  journal: number
   commendationsHelpful: number
   commendationsSkilled: number
   commendationsStrategic: number
@@ -104,6 +107,7 @@ export type PlayerSocialMinAggregateInputType = {
   guildName?: true
   title?: true
   tagline?: true
+  journal?: true
   commendationsHelpful?: true
   commendationsSkilled?: true
   commendationsStrategic?: true
@@ -118,6 +122,7 @@ export type PlayerSocialMaxAggregateInputType = {
   guildName?: true
   title?: true
   tagline?: true
+  journal?: true
   commendationsHelpful?: true
   commendationsSkilled?: true
   commendationsStrategic?: true
@@ -132,6 +137,7 @@ export type PlayerSocialCountAggregateInputType = {
   guildName?: true
   title?: true
   tagline?: true
+  journal?: true
   commendationsHelpful?: true
   commendationsSkilled?: true
   commendationsStrategic?: true
@@ -233,6 +239,7 @@ export type PlayerSocialGroupByOutputType = {
   guildName: string | null
   title: string | null
   tagline: string | null
+  journal: string | null
   commendationsHelpful: number
   commendationsSkilled: number
   commendationsStrategic: number
@@ -270,6 +277,7 @@ export type PlayerSocialWhereInput = {
   guildName?: Prisma.StringNullableFilter<"PlayerSocial"> | string | null
   title?: Prisma.StringNullableFilter<"PlayerSocial"> | string | null
   tagline?: Prisma.StringNullableFilter<"PlayerSocial"> | string | null
+  journal?: Prisma.StringNullableFilter<"PlayerSocial"> | string | null
   commendationsHelpful?: Prisma.IntFilter<"PlayerSocial"> | number
   commendationsSkilled?: Prisma.IntFilter<"PlayerSocial"> | number
   commendationsStrategic?: Prisma.IntFilter<"PlayerSocial"> | number
@@ -285,6 +293,7 @@ export type PlayerSocialOrderByWithRelationInput = {
   guildName?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrderInput | Prisma.SortOrder
   tagline?: Prisma.SortOrderInput | Prisma.SortOrder
+  journal?: Prisma.SortOrderInput | Prisma.SortOrder
   commendationsHelpful?: Prisma.SortOrder
   commendationsSkilled?: Prisma.SortOrder
   commendationsStrategic?: Prisma.SortOrder
@@ -303,6 +312,7 @@ export type PlayerSocialWhereUniqueInput = Prisma.AtLeast<{
   guildName?: Prisma.StringNullableFilter<"PlayerSocial"> | string | null
   title?: Prisma.StringNullableFilter<"PlayerSocial"> | string | null
   tagline?: Prisma.StringNullableFilter<"PlayerSocial"> | string | null
+  journal?: Prisma.StringNullableFilter<"PlayerSocial"> | string | null
   commendationsHelpful?: Prisma.IntFilter<"PlayerSocial"> | number
   commendationsSkilled?: Prisma.IntFilter<"PlayerSocial"> | number
   commendationsStrategic?: Prisma.IntFilter<"PlayerSocial"> | number
@@ -318,6 +328,7 @@ export type PlayerSocialOrderByWithAggregationInput = {
   guildName?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrderInput | Prisma.SortOrder
   tagline?: Prisma.SortOrderInput | Prisma.SortOrder
+  journal?: Prisma.SortOrderInput | Prisma.SortOrder
   commendationsHelpful?: Prisma.SortOrder
   commendationsSkilled?: Prisma.SortOrder
   commendationsStrategic?: Prisma.SortOrder
@@ -340,6 +351,7 @@ export type PlayerSocialScalarWhereWithAggregatesInput = {
   guildName?: Prisma.StringNullableWithAggregatesFilter<"PlayerSocial"> | string | null
   title?: Prisma.StringNullableWithAggregatesFilter<"PlayerSocial"> | string | null
   tagline?: Prisma.StringNullableWithAggregatesFilter<"PlayerSocial"> | string | null
+  journal?: Prisma.StringNullableWithAggregatesFilter<"PlayerSocial"> | string | null
   commendationsHelpful?: Prisma.IntWithAggregatesFilter<"PlayerSocial"> | number
   commendationsSkilled?: Prisma.IntWithAggregatesFilter<"PlayerSocial"> | number
   commendationsStrategic?: Prisma.IntWithAggregatesFilter<"PlayerSocial"> | number
@@ -353,6 +365,7 @@ export type PlayerSocialCreateInput = {
   guildName?: string | null
   title?: string | null
   tagline?: string | null
+  journal?: string | null
   commendationsHelpful?: number
   commendationsSkilled?: number
   commendationsStrategic?: number
@@ -368,6 +381,7 @@ export type PlayerSocialUncheckedCreateInput = {
   guildName?: string | null
   title?: string | null
   tagline?: string | null
+  journal?: string | null
   commendationsHelpful?: number
   commendationsSkilled?: number
   commendationsStrategic?: number
@@ -381,6 +395,7 @@ export type PlayerSocialUpdateInput = {
   guildName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commendationsHelpful?: Prisma.IntFieldUpdateOperationsInput | number
   commendationsSkilled?: Prisma.IntFieldUpdateOperationsInput | number
   commendationsStrategic?: Prisma.IntFieldUpdateOperationsInput | number
@@ -396,6 +411,7 @@ export type PlayerSocialUncheckedUpdateInput = {
   guildName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commendationsHelpful?: Prisma.IntFieldUpdateOperationsInput | number
   commendationsSkilled?: Prisma.IntFieldUpdateOperationsInput | number
   commendationsStrategic?: Prisma.IntFieldUpdateOperationsInput | number
@@ -410,6 +426,7 @@ export type PlayerSocialCreateManyInput = {
   guildName?: string | null
   title?: string | null
   tagline?: string | null
+  journal?: string | null
   commendationsHelpful?: number
   commendationsSkilled?: number
   commendationsStrategic?: number
@@ -423,6 +440,7 @@ export type PlayerSocialUpdateManyMutationInput = {
   guildName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commendationsHelpful?: Prisma.IntFieldUpdateOperationsInput | number
   commendationsSkilled?: Prisma.IntFieldUpdateOperationsInput | number
   commendationsStrategic?: Prisma.IntFieldUpdateOperationsInput | number
@@ -437,6 +455,7 @@ export type PlayerSocialUncheckedUpdateManyInput = {
   guildName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commendationsHelpful?: Prisma.IntFieldUpdateOperationsInput | number
   commendationsSkilled?: Prisma.IntFieldUpdateOperationsInput | number
   commendationsStrategic?: Prisma.IntFieldUpdateOperationsInput | number
@@ -456,6 +475,7 @@ export type PlayerSocialCountOrderByAggregateInput = {
   guildName?: Prisma.SortOrder
   title?: Prisma.SortOrder
   tagline?: Prisma.SortOrder
+  journal?: Prisma.SortOrder
   commendationsHelpful?: Prisma.SortOrder
   commendationsSkilled?: Prisma.SortOrder
   commendationsStrategic?: Prisma.SortOrder
@@ -477,6 +497,7 @@ export type PlayerSocialMaxOrderByAggregateInput = {
   guildName?: Prisma.SortOrder
   title?: Prisma.SortOrder
   tagline?: Prisma.SortOrder
+  journal?: Prisma.SortOrder
   commendationsHelpful?: Prisma.SortOrder
   commendationsSkilled?: Prisma.SortOrder
   commendationsStrategic?: Prisma.SortOrder
@@ -491,6 +512,7 @@ export type PlayerSocialMinOrderByAggregateInput = {
   guildName?: Prisma.SortOrder
   title?: Prisma.SortOrder
   tagline?: Prisma.SortOrder
+  journal?: Prisma.SortOrder
   commendationsHelpful?: Prisma.SortOrder
   commendationsSkilled?: Prisma.SortOrder
   commendationsStrategic?: Prisma.SortOrder
@@ -543,6 +565,7 @@ export type PlayerSocialCreateWithoutProfileInput = {
   guildName?: string | null
   title?: string | null
   tagline?: string | null
+  journal?: string | null
   commendationsHelpful?: number
   commendationsSkilled?: number
   commendationsStrategic?: number
@@ -556,6 +579,7 @@ export type PlayerSocialUncheckedCreateWithoutProfileInput = {
   guildName?: string | null
   title?: string | null
   tagline?: string | null
+  journal?: string | null
   commendationsHelpful?: number
   commendationsSkilled?: number
   commendationsStrategic?: number
@@ -585,6 +609,7 @@ export type PlayerSocialUpdateWithoutProfileInput = {
   guildName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commendationsHelpful?: Prisma.IntFieldUpdateOperationsInput | number
   commendationsSkilled?: Prisma.IntFieldUpdateOperationsInput | number
   commendationsStrategic?: Prisma.IntFieldUpdateOperationsInput | number
@@ -598,6 +623,7 @@ export type PlayerSocialUncheckedUpdateWithoutProfileInput = {
   guildName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commendationsHelpful?: Prisma.IntFieldUpdateOperationsInput | number
   commendationsSkilled?: Prisma.IntFieldUpdateOperationsInput | number
   commendationsStrategic?: Prisma.IntFieldUpdateOperationsInput | number
@@ -614,6 +640,7 @@ export type PlayerSocialSelect<ExtArgs extends runtime.Types.Extensions.Internal
   guildName?: boolean
   title?: boolean
   tagline?: boolean
+  journal?: boolean
   commendationsHelpful?: boolean
   commendationsSkilled?: boolean
   commendationsStrategic?: boolean
@@ -629,6 +656,7 @@ export type PlayerSocialSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   guildName?: boolean
   title?: boolean
   tagline?: boolean
+  journal?: boolean
   commendationsHelpful?: boolean
   commendationsSkilled?: boolean
   commendationsStrategic?: boolean
@@ -644,6 +672,7 @@ export type PlayerSocialSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   guildName?: boolean
   title?: boolean
   tagline?: boolean
+  journal?: boolean
   commendationsHelpful?: boolean
   commendationsSkilled?: boolean
   commendationsStrategic?: boolean
@@ -659,6 +688,7 @@ export type PlayerSocialSelectScalar = {
   guildName?: boolean
   title?: boolean
   tagline?: boolean
+  journal?: boolean
   commendationsHelpful?: boolean
   commendationsSkilled?: boolean
   commendationsStrategic?: boolean
@@ -667,7 +697,7 @@ export type PlayerSocialSelectScalar = {
   updatedAt?: boolean
 }
 
-export type PlayerSocialOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profileId" | "guildName" | "title" | "tagline" | "commendationsHelpful" | "commendationsSkilled" | "commendationsStrategic" | "friendsCount" | "guildRole" | "updatedAt", ExtArgs["result"]["playerSocial"]>
+export type PlayerSocialOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "profileId" | "guildName" | "title" | "tagline" | "journal" | "commendationsHelpful" | "commendationsSkilled" | "commendationsStrategic" | "friendsCount" | "guildRole" | "updatedAt", ExtArgs["result"]["playerSocial"]>
 export type PlayerSocialInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   profile?: boolean | Prisma.PlayerProfileDefaultArgs<ExtArgs>
 }
@@ -689,6 +719,7 @@ export type $PlayerSocialPayload<ExtArgs extends runtime.Types.Extensions.Intern
     guildName: string | null
     title: string | null
     tagline: string | null
+    journal: string | null
     commendationsHelpful: number
     commendationsSkilled: number
     commendationsStrategic: number
@@ -1124,6 +1155,7 @@ export interface PlayerSocialFieldRefs {
   readonly guildName: Prisma.FieldRef<"PlayerSocial", 'String'>
   readonly title: Prisma.FieldRef<"PlayerSocial", 'String'>
   readonly tagline: Prisma.FieldRef<"PlayerSocial", 'String'>
+  readonly journal: Prisma.FieldRef<"PlayerSocial", 'String'>
   readonly commendationsHelpful: Prisma.FieldRef<"PlayerSocial", 'Int'>
   readonly commendationsSkilled: Prisma.FieldRef<"PlayerSocial", 'Int'>
   readonly commendationsStrategic: Prisma.FieldRef<"PlayerSocial", 'Int'>

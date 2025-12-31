@@ -26,10 +26,10 @@ const actionLinks: ActionLink[] = [
 
 export function ActionGrid() {
   return (
-    <div className="rounded-xl border border-cyan-500/20 bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-6 shadow-lg shadow-cyan-500/10 backdrop-blur-sm">
-      <h2 className="mb-4 text-lg font-bold text-cyan-400">Quick Actions</h2>
+    <div className="rounded-xl border border-slate-700/50 bg-slate-900/60 p-4 shadow-black/30 backdrop-blur-sm md:p-6">
+      <h2 className="mb-3 text-sm font-semibold text-cyan-400 tracking-wide uppercase md:mb-4">Quick Actions</h2>
 
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4 md:gap-3">
         {actionLinks.map((link) => (
           <HubTile
             key={link.href}

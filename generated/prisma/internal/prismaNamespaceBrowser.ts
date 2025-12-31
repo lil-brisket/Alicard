@@ -118,7 +118,9 @@ export const ModelName = {
   SkillActionOutput: 'SkillActionOutput',
   PlayerTrainingSkill: 'PlayerTrainingSkill',
   PlayerActiveAction: 'PlayerActiveAction',
-  SkillActionLog: 'SkillActionLog'
+  SkillActionLog: 'SkillActionLog',
+  ChatMessage: 'ChatMessage',
+  ChatReaction: 'ChatReaction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -333,6 +335,7 @@ export const MapPositionScalarFieldEnum = {
   tileX: 'tileX',
   tileY: 'tileY',
   tileId: 'tileId',
+  discoveredTiles: 'discoveredTiles',
   updatedAt: 'updatedAt'
 } as const
 
@@ -856,6 +859,7 @@ export const PlayerSocialScalarFieldEnum = {
   guildName: 'guildName',
   title: 'title',
   tagline: 'tagline',
+  journal: 'journal',
   commendationsHelpful: 'commendationsHelpful',
   commendationsSkilled: 'commendationsSkilled',
   commendationsStrategic: 'commendationsStrategic',
@@ -1173,6 +1177,30 @@ export const SkillActionLogScalarFieldEnum = {
 } as const
 
 export type SkillActionLogScalarFieldEnum = (typeof SkillActionLogScalarFieldEnum)[keyof typeof SkillActionLogScalarFieldEnum]
+
+
+export const ChatMessageScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  room: 'room',
+  content: 'content',
+  parentMessageId: 'parentMessageId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChatMessageScalarFieldEnum = (typeof ChatMessageScalarFieldEnum)[keyof typeof ChatMessageScalarFieldEnum]
+
+
+export const ChatReactionScalarFieldEnum = {
+  id: 'id',
+  messageId: 'messageId',
+  userId: 'userId',
+  emoji: 'emoji',
+  createdAt: 'createdAt'
+} as const
+
+export type ChatReactionScalarFieldEnum = (typeof ChatReactionScalarFieldEnum)[keyof typeof ChatReactionScalarFieldEnum]
 
 
 export const SortOrder = {

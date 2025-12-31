@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
     JSON.stringify({ 
       status: "ok", 
       message: "Socket.IO server should be initialized via custom server or separate process",
-      endpoint: "/api/socket",
+      endpoint: "/api/socketio",
     }),
     {
       status: 200,

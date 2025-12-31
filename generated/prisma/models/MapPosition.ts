@@ -65,6 +65,7 @@ export type MapPositionCountAggregateOutputType = {
   tileX: number
   tileY: number
   tileId: number
+  discoveredTiles: number
   updatedAt: number
   _all: number
 }
@@ -109,6 +110,7 @@ export type MapPositionCountAggregateInputType = {
   tileX?: true
   tileY?: true
   tileId?: true
+  discoveredTiles?: true
   updatedAt?: true
   _all?: true
 }
@@ -206,6 +208,7 @@ export type MapPositionGroupByOutputType = {
   tileX: number
   tileY: number
   tileId: number | null
+  discoveredTiles: runtime.JsonValue | null
   updatedAt: Date
   _count: MapPositionCountAggregateOutputType | null
   _avg: MapPositionAvgAggregateOutputType | null
@@ -239,6 +242,7 @@ export type MapPositionWhereInput = {
   tileX?: Prisma.IntFilter<"MapPosition"> | number
   tileY?: Prisma.IntFilter<"MapPosition"> | number
   tileId?: Prisma.IntNullableFilter<"MapPosition"> | number | null
+  discoveredTiles?: Prisma.JsonNullableFilter<"MapPosition">
   updatedAt?: Prisma.DateTimeFilter<"MapPosition"> | Date | string
   player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
   tile?: Prisma.XOR<Prisma.MapTileNullableScalarRelationFilter, Prisma.MapTileWhereInput> | null
@@ -252,6 +256,7 @@ export type MapPositionOrderByWithRelationInput = {
   tileX?: Prisma.SortOrder
   tileY?: Prisma.SortOrder
   tileId?: Prisma.SortOrderInput | Prisma.SortOrder
+  discoveredTiles?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   player?: Prisma.PlayerOrderByWithRelationInput
   tile?: Prisma.MapTileOrderByWithRelationInput
@@ -268,6 +273,7 @@ export type MapPositionWhereUniqueInput = Prisma.AtLeast<{
   tileX?: Prisma.IntFilter<"MapPosition"> | number
   tileY?: Prisma.IntFilter<"MapPosition"> | number
   tileId?: Prisma.IntNullableFilter<"MapPosition"> | number | null
+  discoveredTiles?: Prisma.JsonNullableFilter<"MapPosition">
   updatedAt?: Prisma.DateTimeFilter<"MapPosition"> | Date | string
   player?: Prisma.XOR<Prisma.PlayerScalarRelationFilter, Prisma.PlayerWhereInput>
   tile?: Prisma.XOR<Prisma.MapTileNullableScalarRelationFilter, Prisma.MapTileWhereInput> | null
@@ -281,6 +287,7 @@ export type MapPositionOrderByWithAggregationInput = {
   tileX?: Prisma.SortOrder
   tileY?: Prisma.SortOrder
   tileId?: Prisma.SortOrderInput | Prisma.SortOrder
+  discoveredTiles?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.MapPositionCountOrderByAggregateInput
   _avg?: Prisma.MapPositionAvgOrderByAggregateInput
@@ -299,6 +306,7 @@ export type MapPositionScalarWhereWithAggregatesInput = {
   tileX?: Prisma.IntWithAggregatesFilter<"MapPosition"> | number
   tileY?: Prisma.IntWithAggregatesFilter<"MapPosition"> | number
   tileId?: Prisma.IntNullableWithAggregatesFilter<"MapPosition"> | number | null
+  discoveredTiles?: Prisma.JsonNullableWithAggregatesFilter<"MapPosition">
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"MapPosition"> | Date | string
 }
 
@@ -306,6 +314,7 @@ export type MapPositionCreateInput = {
   id?: string
   tileX: number
   tileY: number
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Date | string
   player: Prisma.PlayerCreateNestedOneWithoutPositionInput
   tile?: Prisma.MapTileCreateNestedOneWithoutPositionsInput
@@ -319,6 +328,7 @@ export type MapPositionUncheckedCreateInput = {
   tileX: number
   tileY: number
   tileId?: number | null
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Date | string
 }
 
@@ -326,6 +336,7 @@ export type MapPositionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tileX?: Prisma.IntFieldUpdateOperationsInput | number
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   player?: Prisma.PlayerUpdateOneRequiredWithoutPositionNestedInput
   tile?: Prisma.MapTileUpdateOneWithoutPositionsNestedInput
@@ -339,6 +350,7 @@ export type MapPositionUncheckedUpdateInput = {
   tileX?: Prisma.IntFieldUpdateOperationsInput | number
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
   tileId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -349,6 +361,7 @@ export type MapPositionCreateManyInput = {
   tileX: number
   tileY: number
   tileId?: number | null
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Date | string
 }
 
@@ -356,6 +369,7 @@ export type MapPositionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tileX?: Prisma.IntFieldUpdateOperationsInput | number
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -366,6 +380,7 @@ export type MapPositionUncheckedUpdateManyInput = {
   tileX?: Prisma.IntFieldUpdateOperationsInput | number
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
   tileId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -391,6 +406,7 @@ export type MapPositionCountOrderByAggregateInput = {
   tileX?: Prisma.SortOrder
   tileY?: Prisma.SortOrder
   tileId?: Prisma.SortOrder
+  discoveredTiles?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -546,6 +562,7 @@ export type MapPositionCreateWithoutPlayerInput = {
   id?: string
   tileX: number
   tileY: number
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Date | string
   tile?: Prisma.MapTileCreateNestedOneWithoutPositionsInput
   world: Prisma.WorldCreateNestedOneWithoutPositionsInput
@@ -557,6 +574,7 @@ export type MapPositionUncheckedCreateWithoutPlayerInput = {
   tileX: number
   tileY: number
   tileId?: number | null
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Date | string
 }
 
@@ -580,6 +598,7 @@ export type MapPositionUpdateWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tileX?: Prisma.IntFieldUpdateOperationsInput | number
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tile?: Prisma.MapTileUpdateOneWithoutPositionsNestedInput
   world?: Prisma.WorldUpdateOneRequiredWithoutPositionsNestedInput
@@ -591,6 +610,7 @@ export type MapPositionUncheckedUpdateWithoutPlayerInput = {
   tileX?: Prisma.IntFieldUpdateOperationsInput | number
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
   tileId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -598,6 +618,7 @@ export type MapPositionCreateWithoutWorldInput = {
   id?: string
   tileX: number
   tileY: number
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Date | string
   player: Prisma.PlayerCreateNestedOneWithoutPositionInput
   tile?: Prisma.MapTileCreateNestedOneWithoutPositionsInput
@@ -609,6 +630,7 @@ export type MapPositionUncheckedCreateWithoutWorldInput = {
   tileX: number
   tileY: number
   tileId?: number | null
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Date | string
 }
 
@@ -648,6 +670,7 @@ export type MapPositionScalarWhereInput = {
   tileX?: Prisma.IntFilter<"MapPosition"> | number
   tileY?: Prisma.IntFilter<"MapPosition"> | number
   tileId?: Prisma.IntNullableFilter<"MapPosition"> | number | null
+  discoveredTiles?: Prisma.JsonNullableFilter<"MapPosition">
   updatedAt?: Prisma.DateTimeFilter<"MapPosition"> | Date | string
 }
 
@@ -655,6 +678,7 @@ export type MapPositionCreateWithoutTileInput = {
   id?: string
   tileX: number
   tileY: number
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Date | string
   player: Prisma.PlayerCreateNestedOneWithoutPositionInput
   world: Prisma.WorldCreateNestedOneWithoutPositionsInput
@@ -666,6 +690,7 @@ export type MapPositionUncheckedCreateWithoutTileInput = {
   worldId: string
   tileX: number
   tileY: number
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Date | string
 }
 
@@ -701,6 +726,7 @@ export type MapPositionCreateManyWorldInput = {
   tileX: number
   tileY: number
   tileId?: number | null
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Date | string
 }
 
@@ -708,6 +734,7 @@ export type MapPositionUpdateWithoutWorldInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tileX?: Prisma.IntFieldUpdateOperationsInput | number
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   player?: Prisma.PlayerUpdateOneRequiredWithoutPositionNestedInput
   tile?: Prisma.MapTileUpdateOneWithoutPositionsNestedInput
@@ -719,6 +746,7 @@ export type MapPositionUncheckedUpdateWithoutWorldInput = {
   tileX?: Prisma.IntFieldUpdateOperationsInput | number
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
   tileId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -728,6 +756,7 @@ export type MapPositionUncheckedUpdateManyWithoutWorldInput = {
   tileX?: Prisma.IntFieldUpdateOperationsInput | number
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
   tileId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -737,6 +766,7 @@ export type MapPositionCreateManyTileInput = {
   worldId: string
   tileX: number
   tileY: number
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Date | string
 }
 
@@ -744,6 +774,7 @@ export type MapPositionUpdateWithoutTileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tileX?: Prisma.IntFieldUpdateOperationsInput | number
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   player?: Prisma.PlayerUpdateOneRequiredWithoutPositionNestedInput
   world?: Prisma.WorldUpdateOneRequiredWithoutPositionsNestedInput
@@ -755,6 +786,7 @@ export type MapPositionUncheckedUpdateWithoutTileInput = {
   worldId?: Prisma.StringFieldUpdateOperationsInput | string
   tileX?: Prisma.IntFieldUpdateOperationsInput | number
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -764,6 +796,7 @@ export type MapPositionUncheckedUpdateManyWithoutTileInput = {
   worldId?: Prisma.StringFieldUpdateOperationsInput | string
   tileX?: Prisma.IntFieldUpdateOperationsInput | number
   tileY?: Prisma.IntFieldUpdateOperationsInput | number
+  discoveredTiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -776,6 +809,7 @@ export type MapPositionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   tileX?: boolean
   tileY?: boolean
   tileId?: boolean
+  discoveredTiles?: boolean
   updatedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   tile?: boolean | Prisma.MapPosition$tileArgs<ExtArgs>
@@ -789,6 +823,7 @@ export type MapPositionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   tileX?: boolean
   tileY?: boolean
   tileId?: boolean
+  discoveredTiles?: boolean
   updatedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   tile?: boolean | Prisma.MapPosition$tileArgs<ExtArgs>
@@ -802,6 +837,7 @@ export type MapPositionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   tileX?: boolean
   tileY?: boolean
   tileId?: boolean
+  discoveredTiles?: boolean
   updatedAt?: boolean
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   tile?: boolean | Prisma.MapPosition$tileArgs<ExtArgs>
@@ -815,10 +851,11 @@ export type MapPositionSelectScalar = {
   tileX?: boolean
   tileY?: boolean
   tileId?: boolean
+  discoveredTiles?: boolean
   updatedAt?: boolean
 }
 
-export type MapPositionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "worldId" | "tileX" | "tileY" | "tileId" | "updatedAt", ExtArgs["result"]["mapPosition"]>
+export type MapPositionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "worldId" | "tileX" | "tileY" | "tileId" | "discoveredTiles" | "updatedAt", ExtArgs["result"]["mapPosition"]>
 export type MapPositionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   player?: boolean | Prisma.PlayerDefaultArgs<ExtArgs>
   tile?: boolean | Prisma.MapPosition$tileArgs<ExtArgs>
@@ -849,6 +886,7 @@ export type $MapPositionPayload<ExtArgs extends runtime.Types.Extensions.Interna
     tileX: number
     tileY: number
     tileId: number | null
+    discoveredTiles: runtime.JsonValue | null
     updatedAt: Date
   }, ExtArgs["result"]["mapPosition"]>
   composites: {}
@@ -1282,6 +1320,7 @@ export interface MapPositionFieldRefs {
   readonly tileX: Prisma.FieldRef<"MapPosition", 'Int'>
   readonly tileY: Prisma.FieldRef<"MapPosition", 'Int'>
   readonly tileId: Prisma.FieldRef<"MapPosition", 'Int'>
+  readonly discoveredTiles: Prisma.FieldRef<"MapPosition", 'Json'>
   readonly updatedAt: Prisma.FieldRef<"MapPosition", 'DateTime'>
 }
     

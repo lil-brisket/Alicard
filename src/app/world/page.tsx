@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { MapViewport } from "./_components/map-viewport";
+import { SectionCard } from "~/components/ui/section-card";
 
 export default function WorldPage() {
   const { data: session, status } = useSession();
@@ -20,19 +21,19 @@ export default function WorldPage() {
   }
 
   return (
-    <div className="min-h-dvh bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-7xl p-3 sm:p-4 md:p-8">
-        <div className="mb-3 flex flex-col gap-2 sm:mb-4 sm:gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1 className="mb-1 text-xl font-bold text-cyan-400 sm:mb-2 sm:text-2xl">World Map</h1>
-            <p className="text-sm text-slate-400 sm:text-base">
-              Explore the world and discover new areas
-            </p>
-          </div>
-        </div>
-
-        <MapViewport />
+    <div className="space-y-4 md:space-y-6">
+      <div>
+        <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">
+          World Map
+        </h1>
+        <p className="mt-1 text-sm text-slate-400">
+          Explore the world and discover new areas
+        </p>
       </div>
+
+      <SectionCard>
+        <MapViewport />
+      </SectionCard>
     </div>
   );
 }

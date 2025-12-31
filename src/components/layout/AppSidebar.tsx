@@ -189,8 +189,8 @@ function PlayerStatsSection() {
 
 export function SidebarContent({ onLinkClick }: { onLinkClick?: () => void }) {
   return (
-    <div className="flex h-full flex-col gap-6 overflow-y-auto p-4 pb-8">
-      <div className="text-lg font-bold">Alicard</div>
+    <div className="flex h-full flex-col gap-6 overflow-y-auto p-4 pb-8 text-slate-300">
+      <div className="text-lg font-bold text-slate-200">Alicard</div>
 
       <PlayerStatsSection />
       <JobsSection onLinkClick={onLinkClick} />
@@ -205,13 +205,13 @@ export function SidebarContent({ onLinkClick }: { onLinkClick?: () => void }) {
 export function DesktopSidebar({ isOpen, onLinkClick }: { isOpen: boolean; onLinkClick?: () => void }) {
   return (
     <aside
-      className={`hidden shrink-0 border-r transition-all duration-300 md:block ${
-        isOpen ? "w-72" : "w-0 border-r-0"
+      className={`hidden shrink-0 border-r border-slate-800/30 bg-slate-950/40 transition-all duration-300 md:block ${
+        isOpen ? "w-64" : "w-0 border-r-0"
       }`}
       style={{ height: "calc(100vh - 3.5rem)" }}
     >
       {isOpen && (
-        <div className="h-full w-72">
+        <div className="h-full w-64">
           <SidebarContent onLinkClick={onLinkClick} />
         </div>
       )}

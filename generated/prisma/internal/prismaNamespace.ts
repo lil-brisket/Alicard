@@ -451,7 +451,9 @@ export const ModelName = {
   SkillActionOutput: 'SkillActionOutput',
   PlayerTrainingSkill: 'PlayerTrainingSkill',
   PlayerActiveAction: 'PlayerActiveAction',
-  SkillActionLog: 'SkillActionLog'
+  SkillActionLog: 'SkillActionLog',
+  ChatMessage: 'ChatMessage',
+  ChatReaction: 'ChatReaction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -467,7 +469,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "post" | "account" | "session" | "user" | "character" | "position" | "verificationToken" | "player" | "playerStats" | "world" | "mapTile" | "mapPosition" | "nPC" | "shopItem" | "item" | "inventoryItem" | "equipment" | "occupation" | "skill" | "playerSkill" | "playerSkillLoadout" | "encounter" | "combatLog" | "deathLog" | "deathRecord" | "guild" | "guildMember" | "guildBank" | "guildQuest" | "bankAccount" | "bankVaultItem" | "bankTransaction" | "marketListing" | "marketTransaction" | "quest" | "job" | "userJob" | "recipe" | "recipeInput" | "craftAttempt" | "gatheringNode" | "nodeYield" | "gatherAttempt" | "playerProfile" | "playerProfileStats" | "playerPvpRecord" | "playerPveRecord" | "achievement" | "playerAchievement" | "playerSocial" | "monster" | "battle" | "playerLeaderboardStats" | "playerStatsPeriod" | "adminActionLog" | "itemTemplate" | "monsterTemplate" | "questTemplate" | "mapZone" | "userRoleAssignment" | "userIpHistory" | "trainingSkill" | "skillAction" | "skillActionInput" | "skillActionOutput" | "playerTrainingSkill" | "playerActiveAction" | "skillActionLog"
+    modelProps: "post" | "account" | "session" | "user" | "character" | "position" | "verificationToken" | "player" | "playerStats" | "world" | "mapTile" | "mapPosition" | "nPC" | "shopItem" | "item" | "inventoryItem" | "equipment" | "occupation" | "skill" | "playerSkill" | "playerSkillLoadout" | "encounter" | "combatLog" | "deathLog" | "deathRecord" | "guild" | "guildMember" | "guildBank" | "guildQuest" | "bankAccount" | "bankVaultItem" | "bankTransaction" | "marketListing" | "marketTransaction" | "quest" | "job" | "userJob" | "recipe" | "recipeInput" | "craftAttempt" | "gatheringNode" | "nodeYield" | "gatherAttempt" | "playerProfile" | "playerProfileStats" | "playerPvpRecord" | "playerPveRecord" | "achievement" | "playerAchievement" | "playerSocial" | "monster" | "battle" | "playerLeaderboardStats" | "playerStatsPeriod" | "adminActionLog" | "itemTemplate" | "monsterTemplate" | "questTemplate" | "mapZone" | "userRoleAssignment" | "userIpHistory" | "trainingSkill" | "skillAction" | "skillActionInput" | "skillActionOutput" | "playerTrainingSkill" | "playerActiveAction" | "skillActionLog" | "chatMessage" | "chatReaction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5503,6 +5505,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ChatMessage: {
+      payload: Prisma.$ChatMessagePayload<ExtArgs>
+      fields: Prisma.ChatMessageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChatMessageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChatMessageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessagePayload>
+        }
+        findFirst: {
+          args: Prisma.ChatMessageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChatMessageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessagePayload>
+        }
+        findMany: {
+          args: Prisma.ChatMessageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessagePayload>[]
+        }
+        create: {
+          args: Prisma.ChatMessageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessagePayload>
+        }
+        createMany: {
+          args: Prisma.ChatMessageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ChatMessageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessagePayload>[]
+        }
+        delete: {
+          args: Prisma.ChatMessageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessagePayload>
+        }
+        update: {
+          args: Prisma.ChatMessageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessagePayload>
+        }
+        deleteMany: {
+          args: Prisma.ChatMessageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChatMessageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ChatMessageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessagePayload>[]
+        }
+        upsert: {
+          args: Prisma.ChatMessageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessagePayload>
+        }
+        aggregate: {
+          args: Prisma.ChatMessageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChatMessage>
+        }
+        groupBy: {
+          args: Prisma.ChatMessageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChatMessageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChatMessageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChatMessageCountAggregateOutputType> | number
+        }
+      }
+    }
+    ChatReaction: {
+      payload: Prisma.$ChatReactionPayload<ExtArgs>
+      fields: Prisma.ChatReactionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChatReactionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatReactionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChatReactionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatReactionPayload>
+        }
+        findFirst: {
+          args: Prisma.ChatReactionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatReactionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChatReactionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatReactionPayload>
+        }
+        findMany: {
+          args: Prisma.ChatReactionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatReactionPayload>[]
+        }
+        create: {
+          args: Prisma.ChatReactionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatReactionPayload>
+        }
+        createMany: {
+          args: Prisma.ChatReactionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ChatReactionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatReactionPayload>[]
+        }
+        delete: {
+          args: Prisma.ChatReactionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatReactionPayload>
+        }
+        update: {
+          args: Prisma.ChatReactionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatReactionPayload>
+        }
+        deleteMany: {
+          args: Prisma.ChatReactionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChatReactionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ChatReactionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatReactionPayload>[]
+        }
+        upsert: {
+          args: Prisma.ChatReactionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatReactionPayload>
+        }
+        aggregate: {
+          args: Prisma.ChatReactionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChatReaction>
+        }
+        groupBy: {
+          args: Prisma.ChatReactionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChatReactionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChatReactionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChatReactionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -5738,6 +5888,7 @@ export const MapPositionScalarFieldEnum = {
   tileX: 'tileX',
   tileY: 'tileY',
   tileId: 'tileId',
+  discoveredTiles: 'discoveredTiles',
   updatedAt: 'updatedAt'
 } as const
 
@@ -6261,6 +6412,7 @@ export const PlayerSocialScalarFieldEnum = {
   guildName: 'guildName',
   title: 'title',
   tagline: 'tagline',
+  journal: 'journal',
   commendationsHelpful: 'commendationsHelpful',
   commendationsSkilled: 'commendationsSkilled',
   commendationsStrategic: 'commendationsStrategic',
@@ -6578,6 +6730,30 @@ export const SkillActionLogScalarFieldEnum = {
 } as const
 
 export type SkillActionLogScalarFieldEnum = (typeof SkillActionLogScalarFieldEnum)[keyof typeof SkillActionLogScalarFieldEnum]
+
+
+export const ChatMessageScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  room: 'room',
+  content: 'content',
+  parentMessageId: 'parentMessageId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChatMessageScalarFieldEnum = (typeof ChatMessageScalarFieldEnum)[keyof typeof ChatMessageScalarFieldEnum]
+
+
+export const ChatReactionScalarFieldEnum = {
+  id: 'id',
+  messageId: 'messageId',
+  userId: 'userId',
+  emoji: 'emoji',
+  createdAt: 'createdAt'
+} as const
+
+export type ChatReactionScalarFieldEnum = (typeof ChatReactionScalarFieldEnum)[keyof typeof ChatReactionScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -7125,6 +7301,8 @@ export type GlobalOmitConfig = {
   playerTrainingSkill?: Prisma.PlayerTrainingSkillOmit
   playerActiveAction?: Prisma.PlayerActiveActionOmit
   skillActionLog?: Prisma.SkillActionLogOmit
+  chatMessage?: Prisma.ChatMessageOmit
+  chatReaction?: Prisma.ChatReactionOmit
 }
 
 /* Types for Logging */

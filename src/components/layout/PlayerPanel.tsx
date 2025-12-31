@@ -304,14 +304,14 @@ export function PlayerPanelContent() {
       <div className="flex flex-col items-center gap-3">
         <Link 
           href="/profile" 
-          className="relative h-48 w-48 overflow-hidden rounded-lg border-2 border-slate-700 transition-all hover:border-cyan-500 hover:shadow-lg hover:shadow-cyan-500/50 active:scale-95 cursor-pointer"
+          className="relative h-40 w-40 overflow-hidden rounded-lg border-2 border-slate-700 transition-all hover:border-cyan-500 hover:shadow-lg hover:shadow-cyan-500/50 active:scale-95 cursor-pointer"
         >
           <Image
             src={avatarUrl}
             alt={`${character.name} avatar`}
             fill
             className="object-cover"
-            sizes="192px"
+            sizes="160px"
             onError={() => {
               // Fallback to silhouette if avatar URL fails to load
               setAvatarError(true);
@@ -325,7 +325,7 @@ export function PlayerPanelContent() {
       </div>
 
       {/* Pools - moved above money */}
-      <div className="rounded-lg border border-slate-700/50 bg-slate-800/30 p-3 space-y-3">
+      <div className="rounded-lg border border-cyan-500/30 bg-slate-800/40 p-3 space-y-3">
         <div className="text-sm font-semibold">Pools</div>
         <Bar label="HP" current={currentHP} max={maxHP} color="red" />
         <Bar label="SP" current={currentSP} max={maxSP} color="blue" />
@@ -358,7 +358,7 @@ export function PlayerPanelContent() {
 
         <div className="h-2 w-full rounded bg-muted">
           <div
-            className="h-2 rounded bg-foreground"
+            className="h-2 rounded bg-cyan-400"
             style={{ width: `${trainingInfo.progress * 100}%` }}
           />
         </div>
@@ -370,7 +370,7 @@ export function PlayerPanelContent() {
         )}
       </div>
 
-      <div className="mt-auto text-xs text-muted-foreground text-center">
+      <div className="mt-auto text-[10px] opacity-60 text-muted-foreground text-center">
         Tip: Keep this panel "read-only" + quick actions later (heal, eat, claim bank interest).
       </div>
     </div>
@@ -383,7 +383,7 @@ export function DesktopPlayerPanel({ isOpen = true }: { isOpen?: boolean }) {
   }
 
   return (
-    <aside className="hidden w-72 shrink-0 border-l lg:block">
+    <aside className="hidden w-72 shrink-0 border-l border-slate-800/30 bg-slate-950/40 lg:block">
       {/* sticky so it stays visible while scrolling */}
       <div className="sticky top-0 h-screen">
         <PlayerPanelContent />

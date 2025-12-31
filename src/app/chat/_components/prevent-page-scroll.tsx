@@ -18,22 +18,27 @@ export function PreventPageScroll() {
     const originalWidth = document.body.style.width;
     const originalHeight = document.body.style.height;
 
-    // On mobile, just prevent overflow to allow keyboard access
-    // On desktop, use position fixed for better containment
-    if (isMobile) {
-      document.body.style.overflow = "hidden";
-      document.body.style.position = "relative";
-    } else {
-      document.body.style.overflow = "hidden";
-      document.body.style.position = "fixed";
-      document.body.style.width = "100%";
-      document.body.style.height = "100%";
-    }
+    // Prevent all scrolling on the page - only chat messages should scroll
+    document.body.style.overflow = "hidden";
+    document.body.style.overflowX = "hidden";
+    document.body.style.overflowY = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.width = "100%";
+    document.body.style.height = "100%";
+    document.body.style.top = "0";
+    document.body.style.left = "0";
 
     // Also prevent html scroll
     const html = document.documentElement;
     const originalHtmlOverflow = html.style.overflow;
+    const originalHtmlOverflowX = html.style.overflowX;
+    const originalHtmlOverflowY = html.style.overflowY;
+    const originalBodyOverflowY = document.body.style.overflowY;
+    const originalBodyTop = document.body.style.top;
+    const originalBodyLeft = document.body.style.left;
     html.style.overflow = "hidden";
+    html.style.overflowX = "hidden";
+    html.style.overflowY = "hidden";
 
     return () => {
       // Restore original styles when component unmounts
@@ -41,7 +46,13 @@ export function PreventPageScroll() {
       document.body.style.position = originalPosition;
       document.body.style.width = originalWidth;
       document.body.style.height = originalHeight;
+      document.body.style.overflowX = "";
+      document.body.style.overflowY = originalBodyOverflowY;
+      document.body.style.top = originalBodyTop;
+      document.body.style.left = originalBodyLeft;
       html.style.overflow = originalHtmlOverflow;
+      html.style.overflowX = originalHtmlOverflowX;
+      html.style.overflowY = originalHtmlOverflowY;
     };
   }, []);
 

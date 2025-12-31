@@ -55,9 +55,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }, [playerPanelOpen, isMounted]);
 
   return (
-    <div className="min-h-dvh w-full overflow-x-hidden">
+    <div className="min-h-dvh w-full overflow-x-hidden bg-gradient-to-b from-black via-black to-slate-950">
       {/* Desktop Header with toggle buttons */}
-      <header className="sticky top-0 z-40 hidden h-14 items-center justify-between gap-3 border-b bg-black px-4 md:flex">
+      <header className="sticky top-0 z-40 hidden h-14 items-center justify-between gap-3 border-b border-slate-800 bg-black/80 backdrop-blur px-4 md:flex">
         <div className="flex items-center gap-3">
           <Button
             variant="outline"
@@ -82,7 +82,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </header>
 
       {/* Mobile Header with menu buttons */}
-      <header className="sticky top-0 z-40 flex h-14 items-center justify-between gap-2 border-b border-slate-800 bg-black px-3 md:hidden w-full max-w-full">
+      <header className="sticky top-0 z-40 flex h-14 items-center justify-between gap-2 border-b border-slate-800 bg-black/80 backdrop-blur px-3 md:hidden w-full max-w-full">
         <div className="flex items-center gap-2 min-w-0">
           <MobileSidebar />
           <div className="font-semibold text-slate-100 truncate">Alicard</div>
@@ -93,9 +93,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="flex min-h-screen w-full max-w-full">
         <DesktopSidebar isOpen={sidebarOpen} onLinkClick={() => setSidebarOpen(false)} />
 
-        {/* IMPORTANT: pb-24 to clear the bottom tabs on mobile */}
-        <main className="min-w-0 flex-1 p-4 pb-24 md:p-6 w-full max-w-full overflow-x-hidden">
-          {children}
+        {/* IMPORTANT: pb-16 to clear the condensed bottom tabs on mobile */}
+        <main className="min-w-0 flex-1 pb-16 md:pb-0 overflow-x-hidden">
+          <div className="mx-auto w-full max-w-6xl px-4 md:px-6 py-4 md:py-6">
+            {children}
+          </div>
         </main>
 
         <DesktopPlayerPanel isOpen={playerPanelOpen} />
