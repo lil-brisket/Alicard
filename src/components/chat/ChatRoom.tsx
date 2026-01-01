@@ -222,7 +222,7 @@ export function ChatRoom({ room, title }: ChatRoomProps) {
   return (
     <div className="flex h-full w-full flex-col overflow-hidden rounded-lg border border-slate-800 bg-slate-950/60 md:rounded-xl max-w-full max-h-full">
       {/* Header */}
-      <div className="flex flex-shrink-0 items-center justify-between border-b border-slate-800 p-1.5 md:p-4">
+      <div className="flex flex-shrink-0 items-center justify-between border-b border-slate-800 p-1.5 md:p-4 pl-12 md:pl-16 pr-12 md:pr-16">
         <h2 className="text-sm font-semibold text-cyan-400 md:text-lg">{title}</h2>
         {unreadMentions > 0 && (
           <span className="flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-xs font-semibold text-white">

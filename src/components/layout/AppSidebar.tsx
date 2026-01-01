@@ -202,13 +202,13 @@ export function SidebarContent({ onLinkClick }: { onLinkClick?: () => void }) {
   );
 }
 
-export function DesktopSidebar({ isOpen, onLinkClick }: { isOpen: boolean; onLinkClick?: () => void }) {
+export function DesktopSidebar({ isOpen, onLinkClick, isChatPage = false }: { isOpen: boolean; onLinkClick?: () => void; isChatPage?: boolean }) {
   return (
     <aside
       className={`hidden shrink-0 border-r border-slate-800/30 bg-slate-950/40 transition-all duration-300 md:block ${
         isOpen ? "w-64" : "w-0 border-r-0"
       }`}
-      style={{ height: "calc(100vh - 3.5rem)" }}
+      style={{ height: isChatPage ? "100vh" : "calc(100vh - 3.5rem)" }}
     >
       {isOpen && (
         <div className="h-full w-64">

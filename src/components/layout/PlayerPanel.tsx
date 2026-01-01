@@ -377,13 +377,13 @@ export function PlayerPanelContent() {
   );
 }
 
-export function DesktopPlayerPanel({ isOpen = true }: { isOpen?: boolean }) {
+export function DesktopPlayerPanel({ isOpen = true, isChatPage = false }: { isOpen?: boolean; isChatPage?: boolean }) {
   if (!isOpen) {
     return null;
   }
 
   return (
-    <aside className="hidden w-72 shrink-0 border-l border-slate-800/30 bg-slate-950/40 lg:block">
+    <aside className={`hidden w-72 shrink-0 border-l border-slate-800/30 bg-slate-950/40 ${isChatPage ? 'md:block' : 'lg:block'}`}>
       {/* sticky so it stays visible while scrolling */}
       <div className="sticky top-0 h-screen">
         <PlayerPanelContent />

@@ -47,14 +47,14 @@ app.prepare().then(() => {
 
   io.on("connection", (socket) => {
     // Handle room joins (for chat rooms: global, guild:<id>, party:<id>)
-    socket.on("join", (room: string) => {
+    socket.on("join", (room) => {
       if (typeof room === "string" && room.length > 0) {
         socket.join(room);
       }
     });
 
     // Handle room leaves
-    socket.on("leave", (room: string) => {
+    socket.on("leave", (room) => {
       if (typeof room === "string" && room.length > 0) {
         socket.leave(room);
       }
