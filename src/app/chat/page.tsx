@@ -12,7 +12,7 @@ export default async function ChatPage() {
   return (
     <>
       <PreventPageScroll />
-      <div className="flex h-full w-full flex-col overflow-hidden bg-slate-950 text-slate-100 max-w-full">
+      <div className="flex h-full w-full flex-col overflow-hidden bg-slate-950 text-slate-100 max-w-full pb-[calc(2.5rem+env(safe-area-inset-bottom))] md:pb-0">
         <div className="flex h-full w-full flex-col overflow-hidden p-0 md:p-2 lg:p-3 max-w-full">
           {/* Chat Container - Takes full width, only messages scroll */}
           <div className="flex min-h-0 flex-1 overflow-hidden max-w-full">

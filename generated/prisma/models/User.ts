@@ -347,6 +347,9 @@ export type UserWhereInput = {
   ipHistory?: Prisma.UserIpHistoryListRelationFilter
   chatMessages?: Prisma.ChatMessageListRelationFilter
   chatReactions?: Prisma.ChatReactionListRelationFilter
+  chatMentions?: Prisma.ChatMentionListRelationFilter
+  chatMentionsBy?: Prisma.ChatMentionListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -385,6 +388,9 @@ export type UserOrderByWithRelationInput = {
   ipHistory?: Prisma.UserIpHistoryOrderByRelationAggregateInput
   chatMessages?: Prisma.ChatMessageOrderByRelationAggregateInput
   chatReactions?: Prisma.ChatReactionOrderByRelationAggregateInput
+  chatMentions?: Prisma.ChatMentionOrderByRelationAggregateInput
+  chatMentionsBy?: Prisma.ChatMentionOrderByRelationAggregateInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -426,6 +432,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   ipHistory?: Prisma.UserIpHistoryListRelationFilter
   chatMessages?: Prisma.ChatMessageListRelationFilter
   chatReactions?: Prisma.ChatReactionListRelationFilter
+  chatMentions?: Prisma.ChatMentionListRelationFilter
+  chatMentionsBy?: Prisma.ChatMentionListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }, "id" | "email" | "username">
 
 export type UserOrderByWithAggregationInput = {
@@ -518,6 +527,9 @@ export type UserCreateInput = {
   ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -556,6 +568,9 @@ export type UserUncheckedCreateInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -594,6 +609,9 @@ export type UserUpdateInput = {
   ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -632,6 +650,9 @@ export type UserUncheckedUpdateInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1014,6 +1035,48 @@ export type UserUpdateOneRequiredWithoutChatReactionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutChatReactionsInput, Prisma.UserUpdateWithoutChatReactionsInput>, Prisma.UserUncheckedUpdateWithoutChatReactionsInput>
 }
 
+export type UserCreateNestedOneWithoutChatMentionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutChatMentionsInput, Prisma.UserUncheckedCreateWithoutChatMentionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutChatMentionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutChatMentionsByInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutChatMentionsByInput, Prisma.UserUncheckedCreateWithoutChatMentionsByInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutChatMentionsByInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutChatMentionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutChatMentionsInput, Prisma.UserUncheckedCreateWithoutChatMentionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutChatMentionsInput
+  upsert?: Prisma.UserUpsertWithoutChatMentionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutChatMentionsInput, Prisma.UserUpdateWithoutChatMentionsInput>, Prisma.UserUncheckedUpdateWithoutChatMentionsInput>
+}
+
+export type UserUpdateOneRequiredWithoutChatMentionsByNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutChatMentionsByInput, Prisma.UserUncheckedCreateWithoutChatMentionsByInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutChatMentionsByInput
+  upsert?: Prisma.UserUpsertWithoutChatMentionsByInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutChatMentionsByInput, Prisma.UserUpdateWithoutChatMentionsByInput>, Prisma.UserUncheckedUpdateWithoutChatMentionsByInput>
+}
+
+export type UserCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.UserUpsertWithoutNotificationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsInput, Prisma.UserUpdateWithoutNotificationsInput>, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+}
+
 export type UserCreateWithoutPostsInput = {
   id?: string
   name?: string | null
@@ -1049,6 +1112,9 @@ export type UserCreateWithoutPostsInput = {
   ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPostsInput = {
@@ -1086,6 +1152,9 @@ export type UserUncheckedCreateWithoutPostsInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPostsInput = {
@@ -1139,6 +1208,9 @@ export type UserUpdateWithoutPostsInput = {
   ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostsInput = {
@@ -1176,6 +1248,9 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -1213,6 +1288,9 @@ export type UserCreateWithoutAccountsInput = {
   ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -1250,6 +1328,9 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -1303,6 +1384,9 @@ export type UserUpdateWithoutAccountsInput = {
   ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -1340,6 +1424,9 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -1377,6 +1464,9 @@ export type UserCreateWithoutSessionsInput = {
   ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1414,6 +1504,9 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1467,6 +1560,9 @@ export type UserUpdateWithoutSessionsInput = {
   ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1504,6 +1600,9 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCharactersInput = {
@@ -1541,6 +1640,9 @@ export type UserCreateWithoutCharactersInput = {
   ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCharactersInput = {
@@ -1578,6 +1680,9 @@ export type UserUncheckedCreateWithoutCharactersInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCharactersInput = {
@@ -1631,6 +1736,9 @@ export type UserUpdateWithoutCharactersInput = {
   ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCharactersInput = {
@@ -1668,6 +1776,9 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPlayerInput = {
@@ -1705,6 +1816,9 @@ export type UserCreateWithoutPlayerInput = {
   ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPlayerInput = {
@@ -1742,6 +1856,9 @@ export type UserUncheckedCreateWithoutPlayerInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPlayerInput = {
@@ -1795,6 +1912,9 @@ export type UserUpdateWithoutPlayerInput = {
   ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPlayerInput = {
@@ -1832,6 +1952,9 @@ export type UserUncheckedUpdateWithoutPlayerInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBankTransactionsFromInput = {
@@ -1869,6 +1992,9 @@ export type UserCreateWithoutBankTransactionsFromInput = {
   ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBankTransactionsFromInput = {
@@ -1906,6 +2032,9 @@ export type UserUncheckedCreateWithoutBankTransactionsFromInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBankTransactionsFromInput = {
@@ -1948,6 +2077,9 @@ export type UserCreateWithoutBankTransactionsToInput = {
   ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBankTransactionsToInput = {
@@ -1985,6 +2117,9 @@ export type UserUncheckedCreateWithoutBankTransactionsToInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBankTransactionsToInput = {
@@ -2038,6 +2173,9 @@ export type UserUpdateWithoutBankTransactionsFromInput = {
   ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBankTransactionsFromInput = {
@@ -2075,6 +2213,9 @@ export type UserUncheckedUpdateWithoutBankTransactionsFromInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutBankTransactionsToInput = {
@@ -2123,6 +2264,9 @@ export type UserUpdateWithoutBankTransactionsToInput = {
   ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBankTransactionsToInput = {
@@ -2160,6 +2304,9 @@ export type UserUncheckedUpdateWithoutBankTransactionsToInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProfileInput = {
@@ -2197,6 +2344,9 @@ export type UserCreateWithoutProfileInput = {
   ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProfileInput = {
@@ -2234,6 +2384,9 @@ export type UserUncheckedCreateWithoutProfileInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProfileInput = {
@@ -2287,6 +2440,9 @@ export type UserUpdateWithoutProfileInput = {
   ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfileInput = {
@@ -2324,6 +2480,9 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutLeaderboardStatsInput = {
@@ -2361,6 +2520,9 @@ export type UserCreateWithoutLeaderboardStatsInput = {
   ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutLeaderboardStatsInput = {
@@ -2398,6 +2560,9 @@ export type UserUncheckedCreateWithoutLeaderboardStatsInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutLeaderboardStatsInput = {
@@ -2451,6 +2616,9 @@ export type UserUpdateWithoutLeaderboardStatsInput = {
   ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLeaderboardStatsInput = {
@@ -2488,6 +2656,9 @@ export type UserUncheckedUpdateWithoutLeaderboardStatsInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutStatsPeriodsInput = {
@@ -2525,6 +2696,9 @@ export type UserCreateWithoutStatsPeriodsInput = {
   ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStatsPeriodsInput = {
@@ -2562,6 +2736,9 @@ export type UserUncheckedCreateWithoutStatsPeriodsInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStatsPeriodsInput = {
@@ -2615,6 +2792,9 @@ export type UserUpdateWithoutStatsPeriodsInput = {
   ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStatsPeriodsInput = {
@@ -2652,6 +2832,9 @@ export type UserUncheckedUpdateWithoutStatsPeriodsInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAdminActionsInput = {
@@ -2689,6 +2872,9 @@ export type UserCreateWithoutAdminActionsInput = {
   ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAdminActionsInput = {
@@ -2726,6 +2912,9 @@ export type UserUncheckedCreateWithoutAdminActionsInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAdminActionsInput = {
@@ -2779,6 +2968,9 @@ export type UserUpdateWithoutAdminActionsInput = {
   ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAdminActionsInput = {
@@ -2816,6 +3008,9 @@ export type UserUncheckedUpdateWithoutAdminActionsInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRolesInput = {
@@ -2853,6 +3048,9 @@ export type UserCreateWithoutRolesInput = {
   ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRolesInput = {
@@ -2890,6 +3088,9 @@ export type UserUncheckedCreateWithoutRolesInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRolesInput = {
@@ -2943,6 +3144,9 @@ export type UserUpdateWithoutRolesInput = {
   ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRolesInput = {
@@ -2980,6 +3184,9 @@ export type UserUncheckedUpdateWithoutRolesInput = {
   ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutIpHistoryInput = {
@@ -3017,6 +3224,9 @@ export type UserCreateWithoutIpHistoryInput = {
   roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutIpHistoryInput = {
@@ -3054,6 +3264,9 @@ export type UserUncheckedCreateWithoutIpHistoryInput = {
   roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutIpHistoryInput = {
@@ -3107,6 +3320,9 @@ export type UserUpdateWithoutIpHistoryInput = {
   roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutIpHistoryInput = {
@@ -3144,6 +3360,9 @@ export type UserUncheckedUpdateWithoutIpHistoryInput = {
   roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutChatMessagesInput = {
@@ -3181,6 +3400,9 @@ export type UserCreateWithoutChatMessagesInput = {
   roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
   ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutChatMessagesInput = {
@@ -3218,6 +3440,9 @@ export type UserUncheckedCreateWithoutChatMessagesInput = {
   roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
   ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
   chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutChatMessagesInput = {
@@ -3271,6 +3496,9 @@ export type UserUpdateWithoutChatMessagesInput = {
   roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
   ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChatMessagesInput = {
@@ -3308,6 +3536,9 @@ export type UserUncheckedUpdateWithoutChatMessagesInput = {
   roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
   ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
   chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutChatReactionsInput = {
@@ -3345,6 +3576,9 @@ export type UserCreateWithoutChatReactionsInput = {
   roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
   ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutChatReactionsInput = {
@@ -3382,6 +3616,9 @@ export type UserUncheckedCreateWithoutChatReactionsInput = {
   roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
   ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutChatReactionsInput = {
@@ -3435,6 +3672,9 @@ export type UserUpdateWithoutChatReactionsInput = {
   roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
   ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChatReactionsInput = {
@@ -3472,6 +3712,537 @@ export type UserUncheckedUpdateWithoutChatReactionsInput = {
   roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
   ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutChatMentionsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: boolean
+  bannedUntil?: Date | string | null
+  banReason?: string | null
+  isMuted?: boolean
+  mutedUntil?: Date | string | null
+  muteReason?: string | null
+  deletedAt?: Date | string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
+  adminActions?: Prisma.AdminActionLogCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
+  chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
+  chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutChatMentionsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: boolean
+  bannedUntil?: Date | string | null
+  banReason?: string | null
+  isMuted?: boolean
+  mutedUntil?: Date | string | null
+  muteReason?: string | null
+  deletedAt?: Date | string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterUncheckedCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerUncheckedCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
+  adminActions?: Prisma.AdminActionLogUncheckedCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
+  chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
+  chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutChatMentionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutChatMentionsInput, Prisma.UserUncheckedCreateWithoutChatMentionsInput>
+}
+
+export type UserCreateWithoutChatMentionsByInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: boolean
+  bannedUntil?: Date | string | null
+  banReason?: string | null
+  isMuted?: boolean
+  mutedUntil?: Date | string | null
+  muteReason?: string | null
+  deletedAt?: Date | string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
+  adminActions?: Prisma.AdminActionLogCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
+  chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
+  chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutChatMentionsByInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: boolean
+  bannedUntil?: Date | string | null
+  banReason?: string | null
+  isMuted?: boolean
+  mutedUntil?: Date | string | null
+  muteReason?: string | null
+  deletedAt?: Date | string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterUncheckedCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerUncheckedCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
+  adminActions?: Prisma.AdminActionLogUncheckedCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
+  chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
+  chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutChatMentionsByInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutChatMentionsByInput, Prisma.UserUncheckedCreateWithoutChatMentionsByInput>
+}
+
+export type UserUpsertWithoutChatMentionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutChatMentionsInput, Prisma.UserUncheckedUpdateWithoutChatMentionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutChatMentionsInput, Prisma.UserUncheckedCreateWithoutChatMentionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutChatMentionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutChatMentionsInput, Prisma.UserUncheckedUpdateWithoutChatMentionsInput>
+}
+
+export type UserUpdateWithoutChatMentionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMuted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mutedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  muteReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
+  adminActions?: Prisma.AdminActionLogUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
+  chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
+  chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutChatMentionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMuted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mutedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  muteReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUncheckedUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUncheckedUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
+  adminActions?: Prisma.AdminActionLogUncheckedUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
+  chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
+  chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutChatMentionsByInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutChatMentionsByInput, Prisma.UserUncheckedUpdateWithoutChatMentionsByInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutChatMentionsByInput, Prisma.UserUncheckedCreateWithoutChatMentionsByInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutChatMentionsByInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutChatMentionsByInput, Prisma.UserUncheckedUpdateWithoutChatMentionsByInput>
+}
+
+export type UserUpdateWithoutChatMentionsByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMuted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mutedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  muteReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
+  adminActions?: Prisma.AdminActionLogUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
+  chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
+  chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutChatMentionsByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMuted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mutedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  muteReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUncheckedUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUncheckedUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
+  adminActions?: Prisma.AdminActionLogUncheckedUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
+  chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
+  chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutNotificationsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: boolean
+  bannedUntil?: Date | string | null
+  banReason?: string | null
+  isMuted?: boolean
+  mutedUntil?: Date | string | null
+  muteReason?: string | null
+  deletedAt?: Date | string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileCreateNestedOneWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodCreateNestedManyWithoutUserInput
+  adminActions?: Prisma.AdminActionLogCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryCreateNestedManyWithoutUserInput
+  chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
+  chatReactions?: Prisma.ChatReactionCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionCreateNestedManyWithoutMentionedByUserInput
+}
+
+export type UserUncheckedCreateWithoutNotificationsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password: string
+  gender: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  username: string
+  role?: $Enums.UserRole
+  credit?: number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: boolean
+  bannedUntil?: Date | string | null
+  banReason?: string | null
+  isMuted?: boolean
+  mutedUntil?: Date | string | null
+  muteReason?: string | null
+  deletedAt?: Date | string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterUncheckedCreateNestedManyWithoutUserInput
+  player?: Prisma.PlayerUncheckedCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutCreatedByInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.PlayerProfileUncheckedCreateNestedOneWithoutUserInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutFromUserInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutToUserInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedCreateNestedOneWithoutUserInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedCreateNestedManyWithoutUserInput
+  adminActions?: Prisma.AdminActionLogUncheckedCreateNestedManyWithoutActorInput
+  roles?: Prisma.UserRoleAssignmentUncheckedCreateNestedManyWithoutUserInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedCreateNestedManyWithoutUserInput
+  chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
+  chatReactions?: Prisma.ChatReactionUncheckedCreateNestedManyWithoutUserInput
+  chatMentions?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedCreateNestedManyWithoutMentionedByUserInput
+}
+
+export type UserCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+}
+
+export type UserUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type UserUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMuted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mutedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  muteReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUpdateOneWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUpdateManyWithoutUserNestedInput
+  adminActions?: Prisma.AdminActionLogUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUpdateManyWithoutUserNestedInput
+  chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
+  chatReactions?: Prisma.ChatReactionUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUpdateManyWithoutMentionedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  credit?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bannedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isMuted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mutedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  muteReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUncheckedUpdateManyWithoutUserNestedInput
+  player?: Prisma.PlayerUncheckedUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutCreatedByNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.PlayerProfileUncheckedUpdateOneWithoutUserNestedInput
+  bankTransactionsFrom?: Prisma.BankTransactionUncheckedUpdateManyWithoutFromUserNestedInput
+  bankTransactionsTo?: Prisma.BankTransactionUncheckedUpdateManyWithoutToUserNestedInput
+  leaderboardStats?: Prisma.PlayerLeaderboardStatsUncheckedUpdateOneWithoutUserNestedInput
+  statsPeriods?: Prisma.PlayerStatsPeriodUncheckedUpdateManyWithoutUserNestedInput
+  adminActions?: Prisma.AdminActionLogUncheckedUpdateManyWithoutActorNestedInput
+  roles?: Prisma.UserRoleAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  ipHistory?: Prisma.UserIpHistoryUncheckedUpdateManyWithoutUserNestedInput
+  chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
+  chatReactions?: Prisma.ChatReactionUncheckedUpdateManyWithoutUserNestedInput
+  chatMentions?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  chatMentionsBy?: Prisma.ChatMentionUncheckedUpdateManyWithoutMentionedByUserNestedInput
 }
 
 
@@ -3492,6 +4263,9 @@ export type UserCountOutputType = {
   ipHistory: number
   chatMessages: number
   chatReactions: number
+  chatMentions: number
+  chatMentionsBy: number
+  notifications: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3507,6 +4281,9 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   ipHistory?: boolean | UserCountOutputTypeCountIpHistoryArgs
   chatMessages?: boolean | UserCountOutputTypeCountChatMessagesArgs
   chatReactions?: boolean | UserCountOutputTypeCountChatReactionsArgs
+  chatMentions?: boolean | UserCountOutputTypeCountChatMentionsArgs
+  chatMentionsBy?: boolean | UserCountOutputTypeCountChatMentionsByArgs
+  notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
 }
 
 /**
@@ -3603,6 +4380,27 @@ export type UserCountOutputTypeCountChatReactionsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.ChatReactionWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountChatMentionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChatMentionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountChatMentionsByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChatMentionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3640,6 +4438,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   ipHistory?: boolean | Prisma.User$ipHistoryArgs<ExtArgs>
   chatMessages?: boolean | Prisma.User$chatMessagesArgs<ExtArgs>
   chatReactions?: boolean | Prisma.User$chatReactionsArgs<ExtArgs>
+  chatMentions?: boolean | Prisma.User$chatMentionsArgs<ExtArgs>
+  chatMentionsBy?: boolean | Prisma.User$chatMentionsByArgs<ExtArgs>
+  notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3729,6 +4530,9 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   ipHistory?: boolean | Prisma.User$ipHistoryArgs<ExtArgs>
   chatMessages?: boolean | Prisma.User$chatMessagesArgs<ExtArgs>
   chatReactions?: boolean | Prisma.User$chatReactionsArgs<ExtArgs>
+  chatMentions?: boolean | Prisma.User$chatMentionsArgs<ExtArgs>
+  chatMentionsBy?: boolean | Prisma.User$chatMentionsByArgs<ExtArgs>
+  notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -3752,6 +4556,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     ipHistory: Prisma.$UserIpHistoryPayload<ExtArgs>[]
     chatMessages: Prisma.$ChatMessagePayload<ExtArgs>[]
     chatReactions: Prisma.$ChatReactionPayload<ExtArgs>[]
+    chatMentions: Prisma.$ChatMentionPayload<ExtArgs>[]
+    chatMentionsBy: Prisma.$ChatMentionPayload<ExtArgs>[]
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4183,6 +4990,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   ipHistory<T extends Prisma.User$ipHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ipHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserIpHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chatMessages<T extends Prisma.User$chatMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$chatMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chatReactions<T extends Prisma.User$chatReactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$chatReactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  chatMentions<T extends Prisma.User$chatMentionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$chatMentionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatMentionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  chatMentionsBy<T extends Prisma.User$chatMentionsByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$chatMentionsByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatMentionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4962,6 +5772,78 @@ export type User$chatReactionsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.ChatReactionScalarFieldEnum | Prisma.ChatReactionScalarFieldEnum[]
+}
+
+/**
+ * User.chatMentions
+ */
+export type User$chatMentionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ChatMention
+   */
+  select?: Prisma.ChatMentionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ChatMention
+   */
+  omit?: Prisma.ChatMentionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChatMentionInclude<ExtArgs> | null
+  where?: Prisma.ChatMentionWhereInput
+  orderBy?: Prisma.ChatMentionOrderByWithRelationInput | Prisma.ChatMentionOrderByWithRelationInput[]
+  cursor?: Prisma.ChatMentionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChatMentionScalarFieldEnum | Prisma.ChatMentionScalarFieldEnum[]
+}
+
+/**
+ * User.chatMentionsBy
+ */
+export type User$chatMentionsByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ChatMention
+   */
+  select?: Prisma.ChatMentionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ChatMention
+   */
+  omit?: Prisma.ChatMentionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChatMentionInclude<ExtArgs> | null
+  where?: Prisma.ChatMentionWhereInput
+  orderBy?: Prisma.ChatMentionOrderByWithRelationInput | Prisma.ChatMentionOrderByWithRelationInput[]
+  cursor?: Prisma.ChatMentionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChatMentionScalarFieldEnum | Prisma.ChatMentionScalarFieldEnum[]
+}
+
+/**
+ * User.notifications
+ */
+export type User$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
 }
 
 /**

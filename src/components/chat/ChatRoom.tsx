@@ -222,19 +222,21 @@ export function ChatRoom({ room, title }: ChatRoomProps) {
   return (
     <div className="flex h-full w-full flex-col overflow-hidden rounded-lg border border-slate-800 bg-slate-950/60 md:rounded-xl max-w-full max-h-full">
       {/* Header */}
-      <div className="flex flex-shrink-0 items-center justify-between border-b border-slate-800 p-1.5 md:p-4 pl-12 md:pl-16 pr-12 md:pr-16">
-        <h2 className="text-sm font-semibold text-cyan-400 md:text-lg">{title}</h2>
-        {unreadMentions > 0 && (
-          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-xs font-semibold text-white">
-            {unreadMentions > 9 ? "9+" : unreadMentions}
-          </span>
-        )}
+      <div className="flex flex-shrink-0 items-center justify-between border-b border-slate-800 p-1.5 md:p-4 px-3 md:px-4">
+        <div className="flex items-center gap-2 min-w-0">
+          <h2 className="text-sm font-semibold text-cyan-400 md:text-lg truncate">{title}</h2>
+          {unreadMentions > 0 && (
+            <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-red-600 text-xs font-semibold text-white">
+              {unreadMentions > 9 ? "9+" : unreadMentions}
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Messages - Only this area scrolls */}
       <div
         ref={messagesContainerRef}
-        className="flex-1 overflow-y-auto overflow-x-hidden p-2 pb-2 md:p-4 md:pb-8 max-w-full"
+        className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden p-2 pb-2 md:p-4 md:pb-8 max-w-full"
         onScroll={onScroll}
       >
         {isLoadingMessages ? (
@@ -327,7 +329,7 @@ export function ChatRoom({ room, title }: ChatRoomProps) {
                           setReplyingTo(message);
                           inputRef.current?.focus();
                         }}
-                        className="mt-1.5 text-xs text-slate-400 hover:text-cyan-400 md:text-sm"
+                        className="mt-1.5 min-h-[44px] px-2 py-1.5 text-xs text-slate-400 active:text-cyan-400 md:text-sm md:min-h-0 md:px-0 md:py-0 md:hover:text-cyan-400"
                       >
                         Reply
                       </button>
@@ -392,7 +394,7 @@ export function ChatRoom({ room, title }: ChatRoomProps) {
                                         <button
                                           key={emoji}
                                           onClick={() => handleReaction(reply.id, emoji)}
-                                          className="flex min-h-[32px] min-w-[32px] items-center justify-center rounded px-1 text-xs transition-colors active:bg-slate-800 md:hover:bg-slate-800"
+                                          className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded px-1 text-xs transition-colors active:bg-slate-800 md:min-h-[32px] md:min-w-[32px] md:hover:bg-slate-800"
                                           title={`Add ${emoji} reaction`}
                                         >
                                           {emoji}
@@ -447,7 +449,7 @@ export function ChatRoom({ room, title }: ChatRoomProps) {
       </div>
 
       {/* Input - Fixed at bottom, above mobile nav */}
-      <div className="flex-shrink-0 border-t border-slate-800 bg-slate-950 p-2 pb-2 md:bg-slate-950/60 md:pb-8 md:p-4 max-w-full">
+      <div className="flex-shrink-0 border-t border-slate-800 bg-slate-950 p-2 pb-[calc(2.5rem+env(safe-area-inset-bottom))] md:bg-slate-950/60 md:pb-8 md:p-4 max-w-full">
         {error && (
           <div className="mb-1 rounded-lg border border-red-500/30 bg-red-900/20 p-1.5 text-[10px] text-red-300 md:mb-2 md:p-2 md:text-sm">
             {error}
@@ -476,7 +478,7 @@ export function ChatRoom({ room, title }: ChatRoomProps) {
               </div>
               <button
                 onClick={() => setReplyingTo(null)}
-                className="flex-shrink-0 text-cyan-400 hover:text-cyan-300 active:text-cyan-200"
+                className="flex-shrink-0 min-h-[44px] min-w-[44px] flex items-center justify-center text-cyan-400 active:text-cyan-200 md:min-h-0 md:min-w-0 md:hover:text-cyan-300"
                 aria-label="Cancel reply"
               >
                 ✕
@@ -518,7 +520,7 @@ export function ChatRoom({ room, title }: ChatRoomProps) {
           <button
             onClick={handleSend}
             disabled={!input.trim() || !isAuthenticated || !isConnected || sendMessage.isPending}
-            className="flex min-h-[36px] min-w-[50px] items-center justify-center rounded-lg bg-cyan-600 px-3 py-1.5 text-xs font-semibold text-white transition-colors active:bg-cyan-700 disabled:cursor-not-allowed disabled:opacity-50 md:min-h-[auto] md:min-w-[auto] md:px-6 md:py-2 md:text-sm md:hover:bg-cyan-700"
+            className="flex min-h-[44px] min-w-[60px] items-center justify-center rounded-lg bg-cyan-600 px-3 py-1.5 text-xs font-semibold text-white transition-colors active:bg-cyan-700 disabled:cursor-not-allowed disabled:opacity-50 md:min-h-[auto] md:min-w-[auto] md:px-6 md:py-2 md:text-sm md:hover:bg-cyan-700"
           >
             {sendMessage.isPending ? "Sending..." : "Send"}
           </button>

@@ -367,3 +367,13 @@ export type ChatMessage = Prisma.ChatMessageModel
  * 
  */
 export type ChatReaction = Prisma.ChatReactionModel
+/**
+ * Model ChatMention
+ * 
+ */
+export type ChatMention = Prisma.ChatMentionModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel

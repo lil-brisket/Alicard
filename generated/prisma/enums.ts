@@ -210,3 +210,10 @@ export const SkillCategory = {
 } as const
 
 export type SkillCategory = (typeof SkillCategory)[keyof typeof SkillCategory]
+
+
+export const NotificationType = {
+  MENTION: 'MENTION'
+} as const
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]

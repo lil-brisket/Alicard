@@ -10,7 +10,7 @@ export default function WorldPage() {
 
   if (status === "loading") {
     return (
-      <div className="flex min-h-dvh items-center justify-center bg-slate-950 text-slate-100">
+      <div>
         <p>Loading...</p>
       </div>
     );

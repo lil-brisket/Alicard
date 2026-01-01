@@ -44,11 +44,9 @@ export default function SkillsPage() {
 
   if (learnedLoading || loadoutLoading) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-7xl p-4 md:p-8">
-          <h1 className="text-2xl font-bold text-cyan-400">Skills</h1>
-          <p className="mt-2 text-slate-400">Loading...</p>
-        </div>
+      <div>
+        <h1 className="text-2xl font-bold text-cyan-400">Skills</h1>
+        <p className="mt-2 text-slate-400">Loading...</p>
       </div>
     );
   }
