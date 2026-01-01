@@ -1150,6 +1150,21 @@ model AdminActionLog {
   @@index([actorId, createdAt])
 }
 
+// Audit & Event Logging
+model AuditEvent {
+  id                String   @id @default(cuid())
+  actorUserId       String?
+  actorCharacterId  String?
+  type              String
+  payloadJson       Json
+  createdAt         DateTime @default(now())
+
+  @@index([actorUserId, createdAt])
+  @@index([actorCharacterId, createdAt])
+  @@index([type, createdAt])
+  @@index([createdAt])
+}
+
 // Content Templates (Game CMS)
 // Global Content Taxonomy: All templates share common metadata
 model ItemTemplate {
