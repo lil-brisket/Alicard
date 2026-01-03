@@ -5,6 +5,7 @@ import {
   moderatorProcedure,
   adminProcedure,
 } from "~/server/api/trpc";
+import { logAuditEvent, getIpAddress, getUserAgent } from "~/server/lib/audit";
 
 export const adminUsersRouter = createTRPCRouter({
   // List users with pagination
@@ -335,18 +336,20 @@ export const adminUsersRouter = createTRPCRouter({
         },
       });
 
-      // Log admin action
-      await ctx.db.adminActionLog.create({
-        data: {
-          actorId: ctx.session.user.id,
-          targetUserId: input.id,
-          action: "BAN_USER",
-          reason: input.reason,
-          metadata: {
-            duration: input.duration,
-            bannedUntil,
-          },
+      // Log audit event
+      await logAuditEvent(ctx.db, {
+        actorUserId: ctx.session.user.id,
+        targetUserId: input.id,
+        targetEntityType: "User",
+        targetEntityId: input.id,
+        action: "USER_BANNED",
+        reason: input.reason,
+        payloadJson: {
+          duration: input.duration,
+          bannedUntil: bannedUntil?.toISOString() ?? null,
         },
+        ipAddress: getIpAddress(ctx.headers),
+        userAgent: getUserAgent(ctx.headers),
       });
 
       return updatedUser;
@@ -376,14 +379,17 @@ export const adminUsersRouter = createTRPCRouter({
         },
       });
 
-      // Log admin action
-      await ctx.db.adminActionLog.create({
-        data: {
-          actorId: ctx.session.user.id,
-          targetUserId: input.id,
-          action: "UNBAN_USER",
-          reason: "User unbanned",
-        },
+      // Log audit event
+      await logAuditEvent(ctx.db, {
+        actorUserId: ctx.session.user.id,
+        targetUserId: input.id,
+        targetEntityType: "User",
+        targetEntityId: input.id,
+        action: "USER_UNBANNED",
+        reason: "User unbanned",
+        payloadJson: {},
+        ipAddress: getIpAddress(ctx.headers),
+        userAgent: getUserAgent(ctx.headers),
       });
 
       return updatedUser;
@@ -438,18 +444,20 @@ export const adminUsersRouter = createTRPCRouter({
         },
       });
 
-      // Log admin action
-      await ctx.db.adminActionLog.create({
-        data: {
-          actorId: ctx.session.user.id,
-          targetUserId: input.id,
-          action: "MUTE_USER",
-          reason: input.reason,
-          metadata: {
-            duration: input.duration,
-            mutedUntil,
-          },
+      // Log audit event
+      await logAuditEvent(ctx.db, {
+        actorUserId: ctx.session.user.id,
+        targetUserId: input.id,
+        targetEntityType: "User",
+        targetEntityId: input.id,
+        action: "USER_MUTED",
+        reason: input.reason,
+        payloadJson: {
+          duration: input.duration,
+          mutedUntil: mutedUntil?.toISOString() ?? null,
         },
+        ipAddress: getIpAddress(ctx.headers),
+        userAgent: getUserAgent(ctx.headers),
       });
 
       return updatedUser;
@@ -479,14 +487,17 @@ export const adminUsersRouter = createTRPCRouter({
         },
       });
 
-      // Log admin action
-      await ctx.db.adminActionLog.create({
-        data: {
-          actorId: ctx.session.user.id,
-          targetUserId: input.id,
-          action: "UNMUTE_USER",
-          reason: "User unmuted",
-        },
+      // Log audit event
+      await logAuditEvent(ctx.db, {
+        actorUserId: ctx.session.user.id,
+        targetUserId: input.id,
+        targetEntityType: "User",
+        targetEntityId: input.id,
+        action: "USER_UNMUTED",
+        reason: "User unmuted",
+        payloadJson: {},
+        ipAddress: getIpAddress(ctx.headers),
+        userAgent: getUserAgent(ctx.headers),
       });
 
       return updatedUser;
@@ -586,5 +597,185 @@ export const adminUsersRouter = createTRPCRouter({
       });
 
       return ipHistory;
+    }),
+
+  // Set user role (ADMIN only) - replaces all roles
+  setRole: adminProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+        role: z.enum(["PLAYER", "MODERATOR", "ADMIN", "CONTENT"]),
+        reason: z.string().min(3, "Reason must be at least 3 characters").max(200, "Reason must be at most 200 characters"),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const user = await ctx.db.user.findUnique({
+        where: { id: input.userId },
+        include: { roles: true },
+      });
+
+      if (!user) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "User not found",
+        });
+      }
+
+      // Delete all existing role assignments
+      await ctx.db.userRoleAssignment.deleteMany({
+        where: { userId: input.userId },
+      });
+
+      // Create new role assignment
+      await ctx.db.userRoleAssignment.create({
+        data: {
+          userId: input.userId,
+          role: input.role,
+          assignedBy: ctx.session.user.id,
+        },
+      });
+
+      // Update legacy role field
+      await ctx.db.user.update({
+        where: { id: input.userId },
+        data: { role: input.role },
+      });
+
+      // Log audit event
+      await logAuditEvent(ctx.db, {
+        actorUserId: ctx.session.user.id,
+        targetUserId: input.userId,
+        targetEntityType: "User",
+        targetEntityId: input.userId,
+        action: "ROLE_SET",
+        reason: input.reason,
+        payloadJson: {
+          oldRoles: user.roles.map((r) => r.role),
+          newRole: input.role,
+        },
+        ipAddress: getIpAddress(ctx.headers),
+        userAgent: getUserAgent(ctx.headers),
+      });
+
+      return { success: true };
+    }),
+
+  // Grant role to user (ADMIN only) - adds role without removing others
+  grantRole: adminProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+        role: z.enum(["PLAYER", "MODERATOR", "ADMIN", "CONTENT"]),
+        reason: z.string().min(3, "Reason must be at least 3 characters").max(200, "Reason must be at most 200 characters"),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const user = await ctx.db.user.findUnique({
+        where: { id: input.userId },
+        include: { roles: true },
+      });
+
+      if (!user) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "User not found",
+        });
+      }
+
+      // Check if role already exists
+      const hasRole = user.roles.some((r) => r.role === input.role);
+      if (hasRole) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "User already has this role",
+        });
+      }
+
+      // Create new role assignment
+      await ctx.db.userRoleAssignment.create({
+        data: {
+          userId: input.userId,
+          role: input.role,
+          assignedBy: ctx.session.user.id,
+        },
+      });
+
+      // Log audit event
+      await logAuditEvent(ctx.db, {
+        actorUserId: ctx.session.user.id,
+        targetUserId: input.userId,
+        targetEntityType: "User",
+        targetEntityId: input.userId,
+        action: "ROLE_GRANTED",
+        reason: input.reason,
+        payloadJson: {
+          grantedRole: input.role,
+          existingRoles: user.roles.map((r) => r.role),
+        },
+        ipAddress: getIpAddress(ctx.headers),
+        userAgent: getUserAgent(ctx.headers),
+      });
+
+      return { success: true };
+    }),
+
+  // Revoke role from user (ADMIN only)
+  revokeRole: adminProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+        role: z.enum(["PLAYER", "MODERATOR", "ADMIN", "CONTENT"]),
+        reason: z.string().min(3, "Reason must be at least 3 characters").max(200, "Reason must be at most 200 characters"),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const user = await ctx.db.user.findUnique({
+        where: { id: input.userId },
+        include: { roles: true },
+      });
+
+      if (!user) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "User not found",
+        });
+      }
+
+      // Check if role exists
+      const roleAssignment = user.roles.find((r) => r.role === input.role);
+      if (!roleAssignment) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "User does not have this role",
+        });
+      }
+
+      // Delete role assignment
+      await ctx.db.userRoleAssignment.delete({
+        where: {
+          userId_role: {
+            userId: input.userId,
+            role: input.role,
+          },
+        },
+      });
+
+      // Log audit event
+      await logAuditEvent(ctx.db, {
+        actorUserId: ctx.session.user.id,
+        targetUserId: input.userId,
+        targetEntityType: "User",
+        targetEntityId: input.userId,
+        action: "ROLE_REVOKED",
+        reason: input.reason,
+        payloadJson: {
+          revokedRole: input.role,
+          remainingRoles: user.roles.filter((r) => r.role !== input.role).map((r) => r.role),
+        },
+        ipAddress: getIpAddress(ctx.headers),
+        userAgent: getUserAgent(ctx.headers),
+      });
+
+      return { success: true };
     }),
 });

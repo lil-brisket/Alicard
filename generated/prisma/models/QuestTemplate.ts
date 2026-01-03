@@ -27,131 +27,117 @@ export type AggregateQuestTemplate = {
 }
 
 export type QuestTemplateAvgAggregateOutputType = {
-  version: number | null
-  coinsReward: number | null
-  damageValue: number | null
+  recommendedMinLevel: number | null
 }
 
 export type QuestTemplateSumAggregateOutputType = {
-  version: number | null
-  coinsReward: number | null
-  damageValue: number | null
+  recommendedMinLevel: number | null
 }
 
 export type QuestTemplateMinAggregateOutputType = {
   id: string | null
-  name: string | null
-  title: string | null
-  description: string | null
-  status: $Enums.ContentStatus | null
-  version: number | null
-  createdBy: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  coinsReward: number | null
-  damageValue: number | null
-  isArchived: boolean | null
-  deletedAt: Date | null
+  name: string | null
+  slug: string | null
+  description: string | null
+  status: $Enums.ContentStatus | null
+  repeatability: $Enums.QuestRepeatability | null
+  recommendedMinLevel: number | null
+  occupationType: string | null
+  prerequisiteQuestId: string | null
+  startTriggerType: string | null
+  startTriggerRefId: string | null
 }
 
 export type QuestTemplateMaxAggregateOutputType = {
   id: string | null
-  name: string | null
-  title: string | null
-  description: string | null
-  status: $Enums.ContentStatus | null
-  version: number | null
-  createdBy: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  coinsReward: number | null
-  damageValue: number | null
-  isArchived: boolean | null
-  deletedAt: Date | null
+  name: string | null
+  slug: string | null
+  description: string | null
+  status: $Enums.ContentStatus | null
+  repeatability: $Enums.QuestRepeatability | null
+  recommendedMinLevel: number | null
+  occupationType: string | null
+  prerequisiteQuestId: string | null
+  startTriggerType: string | null
+  startTriggerRefId: string | null
 }
 
 export type QuestTemplateCountAggregateOutputType = {
   id: number
-  name: number
-  title: number
-  description: number
-  tags: number
-  status: number
-  version: number
-  createdBy: number
   createdAt: number
   updatedAt: number
-  stepsJSON: number
-  rewardsJSON: number
-  coinsReward: number
-  damageValue: number
-  isArchived: number
-  deletedAt: number
+  name: number
+  slug: number
+  description: number
+  status: number
+  repeatability: number
+  recommendedMinLevel: number
+  occupationType: number
+  prerequisiteQuestId: number
+  startTriggerType: number
+  startTriggerRefId: number
   _all: number
 }
 
 
 export type QuestTemplateAvgAggregateInputType = {
-  version?: true
-  coinsReward?: true
-  damageValue?: true
+  recommendedMinLevel?: true
 }
 
 export type QuestTemplateSumAggregateInputType = {
-  version?: true
-  coinsReward?: true
-  damageValue?: true
+  recommendedMinLevel?: true
 }
 
 export type QuestTemplateMinAggregateInputType = {
   id?: true
-  name?: true
-  title?: true
-  description?: true
-  status?: true
-  version?: true
-  createdBy?: true
   createdAt?: true
   updatedAt?: true
-  coinsReward?: true
-  damageValue?: true
-  isArchived?: true
-  deletedAt?: true
+  name?: true
+  slug?: true
+  description?: true
+  status?: true
+  repeatability?: true
+  recommendedMinLevel?: true
+  occupationType?: true
+  prerequisiteQuestId?: true
+  startTriggerType?: true
+  startTriggerRefId?: true
 }
 
 export type QuestTemplateMaxAggregateInputType = {
   id?: true
-  name?: true
-  title?: true
-  description?: true
-  status?: true
-  version?: true
-  createdBy?: true
   createdAt?: true
   updatedAt?: true
-  coinsReward?: true
-  damageValue?: true
-  isArchived?: true
-  deletedAt?: true
+  name?: true
+  slug?: true
+  description?: true
+  status?: true
+  repeatability?: true
+  recommendedMinLevel?: true
+  occupationType?: true
+  prerequisiteQuestId?: true
+  startTriggerType?: true
+  startTriggerRefId?: true
 }
 
 export type QuestTemplateCountAggregateInputType = {
   id?: true
-  name?: true
-  title?: true
-  description?: true
-  tags?: true
-  status?: true
-  version?: true
-  createdBy?: true
   createdAt?: true
   updatedAt?: true
-  stepsJSON?: true
-  rewardsJSON?: true
-  coinsReward?: true
-  damageValue?: true
-  isArchived?: true
-  deletedAt?: true
+  name?: true
+  slug?: true
+  description?: true
+  status?: true
+  repeatability?: true
+  recommendedMinLevel?: true
+  occupationType?: true
+  prerequisiteQuestId?: true
+  startTriggerType?: true
+  startTriggerRefId?: true
   _all?: true
 }
 
@@ -243,21 +229,18 @@ export type QuestTemplateGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 
 export type QuestTemplateGroupByOutputType = {
   id: string
-  name: string
-  title: string
-  description: string | null
-  tags: runtime.JsonValue | null
-  status: $Enums.ContentStatus
-  version: number
-  createdBy: string | null
   createdAt: Date
   updatedAt: Date
-  stepsJSON: runtime.JsonValue
-  rewardsJSON: runtime.JsonValue | null
-  coinsReward: number
-  damageValue: number
-  isArchived: boolean
-  deletedAt: Date | null
+  name: string
+  slug: string
+  description: string | null
+  status: $Enums.ContentStatus
+  repeatability: $Enums.QuestRepeatability
+  recommendedMinLevel: number | null
+  occupationType: string | null
+  prerequisiteQuestId: string | null
+  startTriggerType: string | null
+  startTriggerRefId: string | null
   _count: QuestTemplateCountAggregateOutputType | null
   _avg: QuestTemplateAvgAggregateOutputType | null
   _sum: QuestTemplateSumAggregateOutputType | null
@@ -285,81 +268,81 @@ export type QuestTemplateWhereInput = {
   OR?: Prisma.QuestTemplateWhereInput[]
   NOT?: Prisma.QuestTemplateWhereInput | Prisma.QuestTemplateWhereInput[]
   id?: Prisma.StringFilter<"QuestTemplate"> | string
-  name?: Prisma.StringFilter<"QuestTemplate"> | string
-  title?: Prisma.StringFilter<"QuestTemplate"> | string
-  description?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
-  tags?: Prisma.JsonNullableFilter<"QuestTemplate">
-  status?: Prisma.EnumContentStatusFilter<"QuestTemplate"> | $Enums.ContentStatus
-  version?: Prisma.IntFilter<"QuestTemplate"> | number
-  createdBy?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
   createdAt?: Prisma.DateTimeFilter<"QuestTemplate"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"QuestTemplate"> | Date | string
-  stepsJSON?: Prisma.JsonFilter<"QuestTemplate">
-  rewardsJSON?: Prisma.JsonNullableFilter<"QuestTemplate">
-  coinsReward?: Prisma.IntFilter<"QuestTemplate"> | number
-  damageValue?: Prisma.IntFilter<"QuestTemplate"> | number
-  isArchived?: Prisma.BoolFilter<"QuestTemplate"> | boolean
-  deletedAt?: Prisma.DateTimeNullableFilter<"QuestTemplate"> | Date | string | null
+  name?: Prisma.StringFilter<"QuestTemplate"> | string
+  slug?: Prisma.StringFilter<"QuestTemplate"> | string
+  description?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  status?: Prisma.EnumContentStatusFilter<"QuestTemplate"> | $Enums.ContentStatus
+  repeatability?: Prisma.EnumQuestRepeatabilityFilter<"QuestTemplate"> | $Enums.QuestRepeatability
+  recommendedMinLevel?: Prisma.IntNullableFilter<"QuestTemplate"> | number | null
+  occupationType?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  prerequisiteQuestId?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  startTriggerType?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  startTriggerRefId?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  prerequisiteQuest?: Prisma.XOR<Prisma.QuestTemplateNullableScalarRelationFilter, Prisma.QuestTemplateWhereInput> | null
+  prerequisiteFor?: Prisma.QuestTemplateListRelationFilter
+  steps?: Prisma.QuestStepListRelationFilter
+  rewards?: Prisma.QuestRewardListRelationFilter
 }
 
 export type QuestTemplateOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
-  tags?: Prisma.SortOrderInput | Prisma.SortOrder
-  status?: Prisma.SortOrder
-  version?: Prisma.SortOrder
-  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  stepsJSON?: Prisma.SortOrder
-  rewardsJSON?: Prisma.SortOrderInput | Prisma.SortOrder
-  coinsReward?: Prisma.SortOrder
-  damageValue?: Prisma.SortOrder
-  isArchived?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  repeatability?: Prisma.SortOrder
+  recommendedMinLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  occupationType?: Prisma.SortOrderInput | Prisma.SortOrder
+  prerequisiteQuestId?: Prisma.SortOrderInput | Prisma.SortOrder
+  startTriggerType?: Prisma.SortOrderInput | Prisma.SortOrder
+  startTriggerRefId?: Prisma.SortOrderInput | Prisma.SortOrder
+  prerequisiteQuest?: Prisma.QuestTemplateOrderByWithRelationInput
+  prerequisiteFor?: Prisma.QuestTemplateOrderByRelationAggregateInput
+  steps?: Prisma.QuestStepOrderByRelationAggregateInput
+  rewards?: Prisma.QuestRewardOrderByRelationAggregateInput
 }
 
 export type QuestTemplateWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  slug?: string
   AND?: Prisma.QuestTemplateWhereInput | Prisma.QuestTemplateWhereInput[]
   OR?: Prisma.QuestTemplateWhereInput[]
   NOT?: Prisma.QuestTemplateWhereInput | Prisma.QuestTemplateWhereInput[]
-  name?: Prisma.StringFilter<"QuestTemplate"> | string
-  title?: Prisma.StringFilter<"QuestTemplate"> | string
-  description?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
-  tags?: Prisma.JsonNullableFilter<"QuestTemplate">
-  status?: Prisma.EnumContentStatusFilter<"QuestTemplate"> | $Enums.ContentStatus
-  version?: Prisma.IntFilter<"QuestTemplate"> | number
-  createdBy?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
   createdAt?: Prisma.DateTimeFilter<"QuestTemplate"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"QuestTemplate"> | Date | string
-  stepsJSON?: Prisma.JsonFilter<"QuestTemplate">
-  rewardsJSON?: Prisma.JsonNullableFilter<"QuestTemplate">
-  coinsReward?: Prisma.IntFilter<"QuestTemplate"> | number
-  damageValue?: Prisma.IntFilter<"QuestTemplate"> | number
-  isArchived?: Prisma.BoolFilter<"QuestTemplate"> | boolean
-  deletedAt?: Prisma.DateTimeNullableFilter<"QuestTemplate"> | Date | string | null
-}, "id">
+  name?: Prisma.StringFilter<"QuestTemplate"> | string
+  description?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  status?: Prisma.EnumContentStatusFilter<"QuestTemplate"> | $Enums.ContentStatus
+  repeatability?: Prisma.EnumQuestRepeatabilityFilter<"QuestTemplate"> | $Enums.QuestRepeatability
+  recommendedMinLevel?: Prisma.IntNullableFilter<"QuestTemplate"> | number | null
+  occupationType?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  prerequisiteQuestId?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  startTriggerType?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  startTriggerRefId?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  prerequisiteQuest?: Prisma.XOR<Prisma.QuestTemplateNullableScalarRelationFilter, Prisma.QuestTemplateWhereInput> | null
+  prerequisiteFor?: Prisma.QuestTemplateListRelationFilter
+  steps?: Prisma.QuestStepListRelationFilter
+  rewards?: Prisma.QuestRewardListRelationFilter
+}, "id" | "slug">
 
 export type QuestTemplateOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
-  tags?: Prisma.SortOrderInput | Prisma.SortOrder
-  status?: Prisma.SortOrder
-  version?: Prisma.SortOrder
-  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  stepsJSON?: Prisma.SortOrder
-  rewardsJSON?: Prisma.SortOrderInput | Prisma.SortOrder
-  coinsReward?: Prisma.SortOrder
-  damageValue?: Prisma.SortOrder
-  isArchived?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  repeatability?: Prisma.SortOrder
+  recommendedMinLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  occupationType?: Prisma.SortOrderInput | Prisma.SortOrder
+  prerequisiteQuestId?: Prisma.SortOrderInput | Prisma.SortOrder
+  startTriggerType?: Prisma.SortOrderInput | Prisma.SortOrder
+  startTriggerRefId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.QuestTemplateCountOrderByAggregateInput
   _avg?: Prisma.QuestTemplateAvgOrderByAggregateInput
   _max?: Prisma.QuestTemplateMaxOrderByAggregateInput
@@ -372,319 +355,877 @@ export type QuestTemplateScalarWhereWithAggregatesInput = {
   OR?: Prisma.QuestTemplateScalarWhereWithAggregatesInput[]
   NOT?: Prisma.QuestTemplateScalarWhereWithAggregatesInput | Prisma.QuestTemplateScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"QuestTemplate"> | string
-  name?: Prisma.StringWithAggregatesFilter<"QuestTemplate"> | string
-  title?: Prisma.StringWithAggregatesFilter<"QuestTemplate"> | string
-  description?: Prisma.StringNullableWithAggregatesFilter<"QuestTemplate"> | string | null
-  tags?: Prisma.JsonNullableWithAggregatesFilter<"QuestTemplate">
-  status?: Prisma.EnumContentStatusWithAggregatesFilter<"QuestTemplate"> | $Enums.ContentStatus
-  version?: Prisma.IntWithAggregatesFilter<"QuestTemplate"> | number
-  createdBy?: Prisma.StringNullableWithAggregatesFilter<"QuestTemplate"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"QuestTemplate"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"QuestTemplate"> | Date | string
-  stepsJSON?: Prisma.JsonWithAggregatesFilter<"QuestTemplate">
-  rewardsJSON?: Prisma.JsonNullableWithAggregatesFilter<"QuestTemplate">
-  coinsReward?: Prisma.IntWithAggregatesFilter<"QuestTemplate"> | number
-  damageValue?: Prisma.IntWithAggregatesFilter<"QuestTemplate"> | number
-  isArchived?: Prisma.BoolWithAggregatesFilter<"QuestTemplate"> | boolean
-  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"QuestTemplate"> | Date | string | null
+  name?: Prisma.StringWithAggregatesFilter<"QuestTemplate"> | string
+  slug?: Prisma.StringWithAggregatesFilter<"QuestTemplate"> | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"QuestTemplate"> | string | null
+  status?: Prisma.EnumContentStatusWithAggregatesFilter<"QuestTemplate"> | $Enums.ContentStatus
+  repeatability?: Prisma.EnumQuestRepeatabilityWithAggregatesFilter<"QuestTemplate"> | $Enums.QuestRepeatability
+  recommendedMinLevel?: Prisma.IntNullableWithAggregatesFilter<"QuestTemplate"> | number | null
+  occupationType?: Prisma.StringNullableWithAggregatesFilter<"QuestTemplate"> | string | null
+  prerequisiteQuestId?: Prisma.StringNullableWithAggregatesFilter<"QuestTemplate"> | string | null
+  startTriggerType?: Prisma.StringNullableWithAggregatesFilter<"QuestTemplate"> | string | null
+  startTriggerRefId?: Prisma.StringNullableWithAggregatesFilter<"QuestTemplate"> | string | null
 }
 
 export type QuestTemplateCreateInput = {
   id?: string
-  name: string
-  title: string
-  description?: string | null
-  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  status?: $Enums.ContentStatus
-  version?: number
-  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  stepsJSON: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rewardsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  coinsReward?: number
-  damageValue?: number
-  isArchived?: boolean
-  deletedAt?: Date | string | null
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.ContentStatus
+  repeatability?: $Enums.QuestRepeatability
+  recommendedMinLevel?: number | null
+  occupationType?: string | null
+  startTriggerType?: string | null
+  startTriggerRefId?: string | null
+  prerequisiteQuest?: Prisma.QuestTemplateCreateNestedOneWithoutPrerequisiteForInput
+  prerequisiteFor?: Prisma.QuestTemplateCreateNestedManyWithoutPrerequisiteQuestInput
+  steps?: Prisma.QuestStepCreateNestedManyWithoutQuestInput
+  rewards?: Prisma.QuestRewardCreateNestedManyWithoutQuestInput
 }
 
 export type QuestTemplateUncheckedCreateInput = {
   id?: string
-  name: string
-  title: string
-  description?: string | null
-  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  status?: $Enums.ContentStatus
-  version?: number
-  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  stepsJSON: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rewardsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  coinsReward?: number
-  damageValue?: number
-  isArchived?: boolean
-  deletedAt?: Date | string | null
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.ContentStatus
+  repeatability?: $Enums.QuestRepeatability
+  recommendedMinLevel?: number | null
+  occupationType?: string | null
+  prerequisiteQuestId?: string | null
+  startTriggerType?: string | null
+  startTriggerRefId?: string | null
+  prerequisiteFor?: Prisma.QuestTemplateUncheckedCreateNestedManyWithoutPrerequisiteQuestInput
+  steps?: Prisma.QuestStepUncheckedCreateNestedManyWithoutQuestInput
+  rewards?: Prisma.QuestRewardUncheckedCreateNestedManyWithoutQuestInput
 }
 
 export type QuestTemplateUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
-  version?: Prisma.IntFieldUpdateOperationsInput | number
-  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  stepsJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rewardsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  coinsReward?: Prisma.IntFieldUpdateOperationsInput | number
-  damageValue?: Prisma.IntFieldUpdateOperationsInput | number
-  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  repeatability?: Prisma.EnumQuestRepeatabilityFieldUpdateOperationsInput | $Enums.QuestRepeatability
+  recommendedMinLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  occupationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerRefId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prerequisiteQuest?: Prisma.QuestTemplateUpdateOneWithoutPrerequisiteForNestedInput
+  prerequisiteFor?: Prisma.QuestTemplateUpdateManyWithoutPrerequisiteQuestNestedInput
+  steps?: Prisma.QuestStepUpdateManyWithoutQuestNestedInput
+  rewards?: Prisma.QuestRewardUpdateManyWithoutQuestNestedInput
 }
 
 export type QuestTemplateUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
-  version?: Prisma.IntFieldUpdateOperationsInput | number
-  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  stepsJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rewardsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  coinsReward?: Prisma.IntFieldUpdateOperationsInput | number
-  damageValue?: Prisma.IntFieldUpdateOperationsInput | number
-  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  repeatability?: Prisma.EnumQuestRepeatabilityFieldUpdateOperationsInput | $Enums.QuestRepeatability
+  recommendedMinLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  occupationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prerequisiteQuestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerRefId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prerequisiteFor?: Prisma.QuestTemplateUncheckedUpdateManyWithoutPrerequisiteQuestNestedInput
+  steps?: Prisma.QuestStepUncheckedUpdateManyWithoutQuestNestedInput
+  rewards?: Prisma.QuestRewardUncheckedUpdateManyWithoutQuestNestedInput
 }
 
 export type QuestTemplateCreateManyInput = {
   id?: string
-  name: string
-  title: string
-  description?: string | null
-  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  status?: $Enums.ContentStatus
-  version?: number
-  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  stepsJSON: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rewardsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  coinsReward?: number
-  damageValue?: number
-  isArchived?: boolean
-  deletedAt?: Date | string | null
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.ContentStatus
+  repeatability?: $Enums.QuestRepeatability
+  recommendedMinLevel?: number | null
+  occupationType?: string | null
+  prerequisiteQuestId?: string | null
+  startTriggerType?: string | null
+  startTriggerRefId?: string | null
 }
 
 export type QuestTemplateUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
-  version?: Prisma.IntFieldUpdateOperationsInput | number
-  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  stepsJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rewardsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  coinsReward?: Prisma.IntFieldUpdateOperationsInput | number
-  damageValue?: Prisma.IntFieldUpdateOperationsInput | number
-  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  repeatability?: Prisma.EnumQuestRepeatabilityFieldUpdateOperationsInput | $Enums.QuestRepeatability
+  recommendedMinLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  occupationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerRefId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type QuestTemplateUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
-  version?: Prisma.IntFieldUpdateOperationsInput | number
-  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  stepsJSON?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rewardsJSON?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  coinsReward?: Prisma.IntFieldUpdateOperationsInput | number
-  damageValue?: Prisma.IntFieldUpdateOperationsInput | number
-  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  repeatability?: Prisma.EnumQuestRepeatabilityFieldUpdateOperationsInput | $Enums.QuestRepeatability
+  recommendedMinLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  occupationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prerequisiteQuestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerRefId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type QuestTemplateNullableScalarRelationFilter = {
+  is?: Prisma.QuestTemplateWhereInput | null
+  isNot?: Prisma.QuestTemplateWhereInput | null
+}
+
+export type QuestTemplateListRelationFilter = {
+  every?: Prisma.QuestTemplateWhereInput
+  some?: Prisma.QuestTemplateWhereInput
+  none?: Prisma.QuestTemplateWhereInput
+}
+
+export type QuestTemplateOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type QuestTemplateCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  tags?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  version?: Prisma.SortOrder
-  createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  stepsJSON?: Prisma.SortOrder
-  rewardsJSON?: Prisma.SortOrder
-  coinsReward?: Prisma.SortOrder
-  damageValue?: Prisma.SortOrder
-  isArchived?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  repeatability?: Prisma.SortOrder
+  recommendedMinLevel?: Prisma.SortOrder
+  occupationType?: Prisma.SortOrder
+  prerequisiteQuestId?: Prisma.SortOrder
+  startTriggerType?: Prisma.SortOrder
+  startTriggerRefId?: Prisma.SortOrder
 }
 
 export type QuestTemplateAvgOrderByAggregateInput = {
-  version?: Prisma.SortOrder
-  coinsReward?: Prisma.SortOrder
-  damageValue?: Prisma.SortOrder
+  recommendedMinLevel?: Prisma.SortOrder
 }
 
 export type QuestTemplateMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  version?: Prisma.SortOrder
-  createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  coinsReward?: Prisma.SortOrder
-  damageValue?: Prisma.SortOrder
-  isArchived?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  repeatability?: Prisma.SortOrder
+  recommendedMinLevel?: Prisma.SortOrder
+  occupationType?: Prisma.SortOrder
+  prerequisiteQuestId?: Prisma.SortOrder
+  startTriggerType?: Prisma.SortOrder
+  startTriggerRefId?: Prisma.SortOrder
 }
 
 export type QuestTemplateMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  version?: Prisma.SortOrder
-  createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  coinsReward?: Prisma.SortOrder
-  damageValue?: Prisma.SortOrder
-  isArchived?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  repeatability?: Prisma.SortOrder
+  recommendedMinLevel?: Prisma.SortOrder
+  occupationType?: Prisma.SortOrder
+  prerequisiteQuestId?: Prisma.SortOrder
+  startTriggerType?: Prisma.SortOrder
+  startTriggerRefId?: Prisma.SortOrder
 }
 
 export type QuestTemplateSumOrderByAggregateInput = {
-  version?: Prisma.SortOrder
-  coinsReward?: Prisma.SortOrder
-  damageValue?: Prisma.SortOrder
+  recommendedMinLevel?: Prisma.SortOrder
 }
 
+export type QuestTemplateScalarRelationFilter = {
+  is?: Prisma.QuestTemplateWhereInput
+  isNot?: Prisma.QuestTemplateWhereInput
+}
+
+export type QuestTemplateCreateNestedOneWithoutPrerequisiteForInput = {
+  create?: Prisma.XOR<Prisma.QuestTemplateCreateWithoutPrerequisiteForInput, Prisma.QuestTemplateUncheckedCreateWithoutPrerequisiteForInput>
+  connectOrCreate?: Prisma.QuestTemplateCreateOrConnectWithoutPrerequisiteForInput
+  connect?: Prisma.QuestTemplateWhereUniqueInput
+}
+
+export type QuestTemplateCreateNestedManyWithoutPrerequisiteQuestInput = {
+  create?: Prisma.XOR<Prisma.QuestTemplateCreateWithoutPrerequisiteQuestInput, Prisma.QuestTemplateUncheckedCreateWithoutPrerequisiteQuestInput> | Prisma.QuestTemplateCreateWithoutPrerequisiteQuestInput[] | Prisma.QuestTemplateUncheckedCreateWithoutPrerequisiteQuestInput[]
+  connectOrCreate?: Prisma.QuestTemplateCreateOrConnectWithoutPrerequisiteQuestInput | Prisma.QuestTemplateCreateOrConnectWithoutPrerequisiteQuestInput[]
+  createMany?: Prisma.QuestTemplateCreateManyPrerequisiteQuestInputEnvelope
+  connect?: Prisma.QuestTemplateWhereUniqueInput | Prisma.QuestTemplateWhereUniqueInput[]
+}
+
+export type QuestTemplateUncheckedCreateNestedManyWithoutPrerequisiteQuestInput = {
+  create?: Prisma.XOR<Prisma.QuestTemplateCreateWithoutPrerequisiteQuestInput, Prisma.QuestTemplateUncheckedCreateWithoutPrerequisiteQuestInput> | Prisma.QuestTemplateCreateWithoutPrerequisiteQuestInput[] | Prisma.QuestTemplateUncheckedCreateWithoutPrerequisiteQuestInput[]
+  connectOrCreate?: Prisma.QuestTemplateCreateOrConnectWithoutPrerequisiteQuestInput | Prisma.QuestTemplateCreateOrConnectWithoutPrerequisiteQuestInput[]
+  createMany?: Prisma.QuestTemplateCreateManyPrerequisiteQuestInputEnvelope
+  connect?: Prisma.QuestTemplateWhereUniqueInput | Prisma.QuestTemplateWhereUniqueInput[]
+}
+
+export type EnumQuestRepeatabilityFieldUpdateOperationsInput = {
+  set?: $Enums.QuestRepeatability
+}
+
+export type QuestTemplateUpdateOneWithoutPrerequisiteForNestedInput = {
+  create?: Prisma.XOR<Prisma.QuestTemplateCreateWithoutPrerequisiteForInput, Prisma.QuestTemplateUncheckedCreateWithoutPrerequisiteForInput>
+  connectOrCreate?: Prisma.QuestTemplateCreateOrConnectWithoutPrerequisiteForInput
+  upsert?: Prisma.QuestTemplateUpsertWithoutPrerequisiteForInput
+  disconnect?: Prisma.QuestTemplateWhereInput | boolean
+  delete?: Prisma.QuestTemplateWhereInput | boolean
+  connect?: Prisma.QuestTemplateWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.QuestTemplateUpdateToOneWithWhereWithoutPrerequisiteForInput, Prisma.QuestTemplateUpdateWithoutPrerequisiteForInput>, Prisma.QuestTemplateUncheckedUpdateWithoutPrerequisiteForInput>
+}
+
+export type QuestTemplateUpdateManyWithoutPrerequisiteQuestNestedInput = {
+  create?: Prisma.XOR<Prisma.QuestTemplateCreateWithoutPrerequisiteQuestInput, Prisma.QuestTemplateUncheckedCreateWithoutPrerequisiteQuestInput> | Prisma.QuestTemplateCreateWithoutPrerequisiteQuestInput[] | Prisma.QuestTemplateUncheckedCreateWithoutPrerequisiteQuestInput[]
+  connectOrCreate?: Prisma.QuestTemplateCreateOrConnectWithoutPrerequisiteQuestInput | Prisma.QuestTemplateCreateOrConnectWithoutPrerequisiteQuestInput[]
+  upsert?: Prisma.QuestTemplateUpsertWithWhereUniqueWithoutPrerequisiteQuestInput | Prisma.QuestTemplateUpsertWithWhereUniqueWithoutPrerequisiteQuestInput[]
+  createMany?: Prisma.QuestTemplateCreateManyPrerequisiteQuestInputEnvelope
+  set?: Prisma.QuestTemplateWhereUniqueInput | Prisma.QuestTemplateWhereUniqueInput[]
+  disconnect?: Prisma.QuestTemplateWhereUniqueInput | Prisma.QuestTemplateWhereUniqueInput[]
+  delete?: Prisma.QuestTemplateWhereUniqueInput | Prisma.QuestTemplateWhereUniqueInput[]
+  connect?: Prisma.QuestTemplateWhereUniqueInput | Prisma.QuestTemplateWhereUniqueInput[]
+  update?: Prisma.QuestTemplateUpdateWithWhereUniqueWithoutPrerequisiteQuestInput | Prisma.QuestTemplateUpdateWithWhereUniqueWithoutPrerequisiteQuestInput[]
+  updateMany?: Prisma.QuestTemplateUpdateManyWithWhereWithoutPrerequisiteQuestInput | Prisma.QuestTemplateUpdateManyWithWhereWithoutPrerequisiteQuestInput[]
+  deleteMany?: Prisma.QuestTemplateScalarWhereInput | Prisma.QuestTemplateScalarWhereInput[]
+}
+
+export type QuestTemplateUncheckedUpdateManyWithoutPrerequisiteQuestNestedInput = {
+  create?: Prisma.XOR<Prisma.QuestTemplateCreateWithoutPrerequisiteQuestInput, Prisma.QuestTemplateUncheckedCreateWithoutPrerequisiteQuestInput> | Prisma.QuestTemplateCreateWithoutPrerequisiteQuestInput[] | Prisma.QuestTemplateUncheckedCreateWithoutPrerequisiteQuestInput[]
+  connectOrCreate?: Prisma.QuestTemplateCreateOrConnectWithoutPrerequisiteQuestInput | Prisma.QuestTemplateCreateOrConnectWithoutPrerequisiteQuestInput[]
+  upsert?: Prisma.QuestTemplateUpsertWithWhereUniqueWithoutPrerequisiteQuestInput | Prisma.QuestTemplateUpsertWithWhereUniqueWithoutPrerequisiteQuestInput[]
+  createMany?: Prisma.QuestTemplateCreateManyPrerequisiteQuestInputEnvelope
+  set?: Prisma.QuestTemplateWhereUniqueInput | Prisma.QuestTemplateWhereUniqueInput[]
+  disconnect?: Prisma.QuestTemplateWhereUniqueInput | Prisma.QuestTemplateWhereUniqueInput[]
+  delete?: Prisma.QuestTemplateWhereUniqueInput | Prisma.QuestTemplateWhereUniqueInput[]
+  connect?: Prisma.QuestTemplateWhereUniqueInput | Prisma.QuestTemplateWhereUniqueInput[]
+  update?: Prisma.QuestTemplateUpdateWithWhereUniqueWithoutPrerequisiteQuestInput | Prisma.QuestTemplateUpdateWithWhereUniqueWithoutPrerequisiteQuestInput[]
+  updateMany?: Prisma.QuestTemplateUpdateManyWithWhereWithoutPrerequisiteQuestInput | Prisma.QuestTemplateUpdateManyWithWhereWithoutPrerequisiteQuestInput[]
+  deleteMany?: Prisma.QuestTemplateScalarWhereInput | Prisma.QuestTemplateScalarWhereInput[]
+}
+
+export type QuestTemplateCreateNestedOneWithoutStepsInput = {
+  create?: Prisma.XOR<Prisma.QuestTemplateCreateWithoutStepsInput, Prisma.QuestTemplateUncheckedCreateWithoutStepsInput>
+  connectOrCreate?: Prisma.QuestTemplateCreateOrConnectWithoutStepsInput
+  connect?: Prisma.QuestTemplateWhereUniqueInput
+}
+
+export type QuestTemplateUpdateOneRequiredWithoutStepsNestedInput = {
+  create?: Prisma.XOR<Prisma.QuestTemplateCreateWithoutStepsInput, Prisma.QuestTemplateUncheckedCreateWithoutStepsInput>
+  connectOrCreate?: Prisma.QuestTemplateCreateOrConnectWithoutStepsInput
+  upsert?: Prisma.QuestTemplateUpsertWithoutStepsInput
+  connect?: Prisma.QuestTemplateWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.QuestTemplateUpdateToOneWithWhereWithoutStepsInput, Prisma.QuestTemplateUpdateWithoutStepsInput>, Prisma.QuestTemplateUncheckedUpdateWithoutStepsInput>
+}
+
+export type QuestTemplateCreateNestedOneWithoutRewardsInput = {
+  create?: Prisma.XOR<Prisma.QuestTemplateCreateWithoutRewardsInput, Prisma.QuestTemplateUncheckedCreateWithoutRewardsInput>
+  connectOrCreate?: Prisma.QuestTemplateCreateOrConnectWithoutRewardsInput
+  connect?: Prisma.QuestTemplateWhereUniqueInput
+}
+
+export type QuestTemplateUpdateOneRequiredWithoutRewardsNestedInput = {
+  create?: Prisma.XOR<Prisma.QuestTemplateCreateWithoutRewardsInput, Prisma.QuestTemplateUncheckedCreateWithoutRewardsInput>
+  connectOrCreate?: Prisma.QuestTemplateCreateOrConnectWithoutRewardsInput
+  upsert?: Prisma.QuestTemplateUpsertWithoutRewardsInput
+  connect?: Prisma.QuestTemplateWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.QuestTemplateUpdateToOneWithWhereWithoutRewardsInput, Prisma.QuestTemplateUpdateWithoutRewardsInput>, Prisma.QuestTemplateUncheckedUpdateWithoutRewardsInput>
+}
+
+export type QuestTemplateCreateWithoutPrerequisiteForInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.ContentStatus
+  repeatability?: $Enums.QuestRepeatability
+  recommendedMinLevel?: number | null
+  occupationType?: string | null
+  startTriggerType?: string | null
+  startTriggerRefId?: string | null
+  prerequisiteQuest?: Prisma.QuestTemplateCreateNestedOneWithoutPrerequisiteForInput
+  steps?: Prisma.QuestStepCreateNestedManyWithoutQuestInput
+  rewards?: Prisma.QuestRewardCreateNestedManyWithoutQuestInput
+}
+
+export type QuestTemplateUncheckedCreateWithoutPrerequisiteForInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.ContentStatus
+  repeatability?: $Enums.QuestRepeatability
+  recommendedMinLevel?: number | null
+  occupationType?: string | null
+  prerequisiteQuestId?: string | null
+  startTriggerType?: string | null
+  startTriggerRefId?: string | null
+  steps?: Prisma.QuestStepUncheckedCreateNestedManyWithoutQuestInput
+  rewards?: Prisma.QuestRewardUncheckedCreateNestedManyWithoutQuestInput
+}
+
+export type QuestTemplateCreateOrConnectWithoutPrerequisiteForInput = {
+  where: Prisma.QuestTemplateWhereUniqueInput
+  create: Prisma.XOR<Prisma.QuestTemplateCreateWithoutPrerequisiteForInput, Prisma.QuestTemplateUncheckedCreateWithoutPrerequisiteForInput>
+}
+
+export type QuestTemplateCreateWithoutPrerequisiteQuestInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.ContentStatus
+  repeatability?: $Enums.QuestRepeatability
+  recommendedMinLevel?: number | null
+  occupationType?: string | null
+  startTriggerType?: string | null
+  startTriggerRefId?: string | null
+  prerequisiteFor?: Prisma.QuestTemplateCreateNestedManyWithoutPrerequisiteQuestInput
+  steps?: Prisma.QuestStepCreateNestedManyWithoutQuestInput
+  rewards?: Prisma.QuestRewardCreateNestedManyWithoutQuestInput
+}
+
+export type QuestTemplateUncheckedCreateWithoutPrerequisiteQuestInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.ContentStatus
+  repeatability?: $Enums.QuestRepeatability
+  recommendedMinLevel?: number | null
+  occupationType?: string | null
+  startTriggerType?: string | null
+  startTriggerRefId?: string | null
+  prerequisiteFor?: Prisma.QuestTemplateUncheckedCreateNestedManyWithoutPrerequisiteQuestInput
+  steps?: Prisma.QuestStepUncheckedCreateNestedManyWithoutQuestInput
+  rewards?: Prisma.QuestRewardUncheckedCreateNestedManyWithoutQuestInput
+}
+
+export type QuestTemplateCreateOrConnectWithoutPrerequisiteQuestInput = {
+  where: Prisma.QuestTemplateWhereUniqueInput
+  create: Prisma.XOR<Prisma.QuestTemplateCreateWithoutPrerequisiteQuestInput, Prisma.QuestTemplateUncheckedCreateWithoutPrerequisiteQuestInput>
+}
+
+export type QuestTemplateCreateManyPrerequisiteQuestInputEnvelope = {
+  data: Prisma.QuestTemplateCreateManyPrerequisiteQuestInput | Prisma.QuestTemplateCreateManyPrerequisiteQuestInput[]
+  skipDuplicates?: boolean
+}
+
+export type QuestTemplateUpsertWithoutPrerequisiteForInput = {
+  update: Prisma.XOR<Prisma.QuestTemplateUpdateWithoutPrerequisiteForInput, Prisma.QuestTemplateUncheckedUpdateWithoutPrerequisiteForInput>
+  create: Prisma.XOR<Prisma.QuestTemplateCreateWithoutPrerequisiteForInput, Prisma.QuestTemplateUncheckedCreateWithoutPrerequisiteForInput>
+  where?: Prisma.QuestTemplateWhereInput
+}
+
+export type QuestTemplateUpdateToOneWithWhereWithoutPrerequisiteForInput = {
+  where?: Prisma.QuestTemplateWhereInput
+  data: Prisma.XOR<Prisma.QuestTemplateUpdateWithoutPrerequisiteForInput, Prisma.QuestTemplateUncheckedUpdateWithoutPrerequisiteForInput>
+}
+
+export type QuestTemplateUpdateWithoutPrerequisiteForInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  repeatability?: Prisma.EnumQuestRepeatabilityFieldUpdateOperationsInput | $Enums.QuestRepeatability
+  recommendedMinLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  occupationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerRefId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prerequisiteQuest?: Prisma.QuestTemplateUpdateOneWithoutPrerequisiteForNestedInput
+  steps?: Prisma.QuestStepUpdateManyWithoutQuestNestedInput
+  rewards?: Prisma.QuestRewardUpdateManyWithoutQuestNestedInput
+}
+
+export type QuestTemplateUncheckedUpdateWithoutPrerequisiteForInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  repeatability?: Prisma.EnumQuestRepeatabilityFieldUpdateOperationsInput | $Enums.QuestRepeatability
+  recommendedMinLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  occupationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prerequisiteQuestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerRefId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  steps?: Prisma.QuestStepUncheckedUpdateManyWithoutQuestNestedInput
+  rewards?: Prisma.QuestRewardUncheckedUpdateManyWithoutQuestNestedInput
+}
+
+export type QuestTemplateUpsertWithWhereUniqueWithoutPrerequisiteQuestInput = {
+  where: Prisma.QuestTemplateWhereUniqueInput
+  update: Prisma.XOR<Prisma.QuestTemplateUpdateWithoutPrerequisiteQuestInput, Prisma.QuestTemplateUncheckedUpdateWithoutPrerequisiteQuestInput>
+  create: Prisma.XOR<Prisma.QuestTemplateCreateWithoutPrerequisiteQuestInput, Prisma.QuestTemplateUncheckedCreateWithoutPrerequisiteQuestInput>
+}
+
+export type QuestTemplateUpdateWithWhereUniqueWithoutPrerequisiteQuestInput = {
+  where: Prisma.QuestTemplateWhereUniqueInput
+  data: Prisma.XOR<Prisma.QuestTemplateUpdateWithoutPrerequisiteQuestInput, Prisma.QuestTemplateUncheckedUpdateWithoutPrerequisiteQuestInput>
+}
+
+export type QuestTemplateUpdateManyWithWhereWithoutPrerequisiteQuestInput = {
+  where: Prisma.QuestTemplateScalarWhereInput
+  data: Prisma.XOR<Prisma.QuestTemplateUpdateManyMutationInput, Prisma.QuestTemplateUncheckedUpdateManyWithoutPrerequisiteQuestInput>
+}
+
+export type QuestTemplateScalarWhereInput = {
+  AND?: Prisma.QuestTemplateScalarWhereInput | Prisma.QuestTemplateScalarWhereInput[]
+  OR?: Prisma.QuestTemplateScalarWhereInput[]
+  NOT?: Prisma.QuestTemplateScalarWhereInput | Prisma.QuestTemplateScalarWhereInput[]
+  id?: Prisma.StringFilter<"QuestTemplate"> | string
+  createdAt?: Prisma.DateTimeFilter<"QuestTemplate"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"QuestTemplate"> | Date | string
+  name?: Prisma.StringFilter<"QuestTemplate"> | string
+  slug?: Prisma.StringFilter<"QuestTemplate"> | string
+  description?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  status?: Prisma.EnumContentStatusFilter<"QuestTemplate"> | $Enums.ContentStatus
+  repeatability?: Prisma.EnumQuestRepeatabilityFilter<"QuestTemplate"> | $Enums.QuestRepeatability
+  recommendedMinLevel?: Prisma.IntNullableFilter<"QuestTemplate"> | number | null
+  occupationType?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  prerequisiteQuestId?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  startTriggerType?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+  startTriggerRefId?: Prisma.StringNullableFilter<"QuestTemplate"> | string | null
+}
+
+export type QuestTemplateCreateWithoutStepsInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.ContentStatus
+  repeatability?: $Enums.QuestRepeatability
+  recommendedMinLevel?: number | null
+  occupationType?: string | null
+  startTriggerType?: string | null
+  startTriggerRefId?: string | null
+  prerequisiteQuest?: Prisma.QuestTemplateCreateNestedOneWithoutPrerequisiteForInput
+  prerequisiteFor?: Prisma.QuestTemplateCreateNestedManyWithoutPrerequisiteQuestInput
+  rewards?: Prisma.QuestRewardCreateNestedManyWithoutQuestInput
+}
+
+export type QuestTemplateUncheckedCreateWithoutStepsInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.ContentStatus
+  repeatability?: $Enums.QuestRepeatability
+  recommendedMinLevel?: number | null
+  occupationType?: string | null
+  prerequisiteQuestId?: string | null
+  startTriggerType?: string | null
+  startTriggerRefId?: string | null
+  prerequisiteFor?: Prisma.QuestTemplateUncheckedCreateNestedManyWithoutPrerequisiteQuestInput
+  rewards?: Prisma.QuestRewardUncheckedCreateNestedManyWithoutQuestInput
+}
+
+export type QuestTemplateCreateOrConnectWithoutStepsInput = {
+  where: Prisma.QuestTemplateWhereUniqueInput
+  create: Prisma.XOR<Prisma.QuestTemplateCreateWithoutStepsInput, Prisma.QuestTemplateUncheckedCreateWithoutStepsInput>
+}
+
+export type QuestTemplateUpsertWithoutStepsInput = {
+  update: Prisma.XOR<Prisma.QuestTemplateUpdateWithoutStepsInput, Prisma.QuestTemplateUncheckedUpdateWithoutStepsInput>
+  create: Prisma.XOR<Prisma.QuestTemplateCreateWithoutStepsInput, Prisma.QuestTemplateUncheckedCreateWithoutStepsInput>
+  where?: Prisma.QuestTemplateWhereInput
+}
+
+export type QuestTemplateUpdateToOneWithWhereWithoutStepsInput = {
+  where?: Prisma.QuestTemplateWhereInput
+  data: Prisma.XOR<Prisma.QuestTemplateUpdateWithoutStepsInput, Prisma.QuestTemplateUncheckedUpdateWithoutStepsInput>
+}
+
+export type QuestTemplateUpdateWithoutStepsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  repeatability?: Prisma.EnumQuestRepeatabilityFieldUpdateOperationsInput | $Enums.QuestRepeatability
+  recommendedMinLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  occupationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerRefId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prerequisiteQuest?: Prisma.QuestTemplateUpdateOneWithoutPrerequisiteForNestedInput
+  prerequisiteFor?: Prisma.QuestTemplateUpdateManyWithoutPrerequisiteQuestNestedInput
+  rewards?: Prisma.QuestRewardUpdateManyWithoutQuestNestedInput
+}
+
+export type QuestTemplateUncheckedUpdateWithoutStepsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  repeatability?: Prisma.EnumQuestRepeatabilityFieldUpdateOperationsInput | $Enums.QuestRepeatability
+  recommendedMinLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  occupationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prerequisiteQuestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerRefId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prerequisiteFor?: Prisma.QuestTemplateUncheckedUpdateManyWithoutPrerequisiteQuestNestedInput
+  rewards?: Prisma.QuestRewardUncheckedUpdateManyWithoutQuestNestedInput
+}
+
+export type QuestTemplateCreateWithoutRewardsInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.ContentStatus
+  repeatability?: $Enums.QuestRepeatability
+  recommendedMinLevel?: number | null
+  occupationType?: string | null
+  startTriggerType?: string | null
+  startTriggerRefId?: string | null
+  prerequisiteQuest?: Prisma.QuestTemplateCreateNestedOneWithoutPrerequisiteForInput
+  prerequisiteFor?: Prisma.QuestTemplateCreateNestedManyWithoutPrerequisiteQuestInput
+  steps?: Prisma.QuestStepCreateNestedManyWithoutQuestInput
+}
+
+export type QuestTemplateUncheckedCreateWithoutRewardsInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.ContentStatus
+  repeatability?: $Enums.QuestRepeatability
+  recommendedMinLevel?: number | null
+  occupationType?: string | null
+  prerequisiteQuestId?: string | null
+  startTriggerType?: string | null
+  startTriggerRefId?: string | null
+  prerequisiteFor?: Prisma.QuestTemplateUncheckedCreateNestedManyWithoutPrerequisiteQuestInput
+  steps?: Prisma.QuestStepUncheckedCreateNestedManyWithoutQuestInput
+}
+
+export type QuestTemplateCreateOrConnectWithoutRewardsInput = {
+  where: Prisma.QuestTemplateWhereUniqueInput
+  create: Prisma.XOR<Prisma.QuestTemplateCreateWithoutRewardsInput, Prisma.QuestTemplateUncheckedCreateWithoutRewardsInput>
+}
+
+export type QuestTemplateUpsertWithoutRewardsInput = {
+  update: Prisma.XOR<Prisma.QuestTemplateUpdateWithoutRewardsInput, Prisma.QuestTemplateUncheckedUpdateWithoutRewardsInput>
+  create: Prisma.XOR<Prisma.QuestTemplateCreateWithoutRewardsInput, Prisma.QuestTemplateUncheckedCreateWithoutRewardsInput>
+  where?: Prisma.QuestTemplateWhereInput
+}
+
+export type QuestTemplateUpdateToOneWithWhereWithoutRewardsInput = {
+  where?: Prisma.QuestTemplateWhereInput
+  data: Prisma.XOR<Prisma.QuestTemplateUpdateWithoutRewardsInput, Prisma.QuestTemplateUncheckedUpdateWithoutRewardsInput>
+}
+
+export type QuestTemplateUpdateWithoutRewardsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  repeatability?: Prisma.EnumQuestRepeatabilityFieldUpdateOperationsInput | $Enums.QuestRepeatability
+  recommendedMinLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  occupationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerRefId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prerequisiteQuest?: Prisma.QuestTemplateUpdateOneWithoutPrerequisiteForNestedInput
+  prerequisiteFor?: Prisma.QuestTemplateUpdateManyWithoutPrerequisiteQuestNestedInput
+  steps?: Prisma.QuestStepUpdateManyWithoutQuestNestedInput
+}
+
+export type QuestTemplateUncheckedUpdateWithoutRewardsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  repeatability?: Prisma.EnumQuestRepeatabilityFieldUpdateOperationsInput | $Enums.QuestRepeatability
+  recommendedMinLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  occupationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prerequisiteQuestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerRefId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prerequisiteFor?: Prisma.QuestTemplateUncheckedUpdateManyWithoutPrerequisiteQuestNestedInput
+  steps?: Prisma.QuestStepUncheckedUpdateManyWithoutQuestNestedInput
+}
+
+export type QuestTemplateCreateManyPrerequisiteQuestInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.ContentStatus
+  repeatability?: $Enums.QuestRepeatability
+  recommendedMinLevel?: number | null
+  occupationType?: string | null
+  startTriggerType?: string | null
+  startTriggerRefId?: string | null
+}
+
+export type QuestTemplateUpdateWithoutPrerequisiteQuestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  repeatability?: Prisma.EnumQuestRepeatabilityFieldUpdateOperationsInput | $Enums.QuestRepeatability
+  recommendedMinLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  occupationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerRefId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prerequisiteFor?: Prisma.QuestTemplateUpdateManyWithoutPrerequisiteQuestNestedInput
+  steps?: Prisma.QuestStepUpdateManyWithoutQuestNestedInput
+  rewards?: Prisma.QuestRewardUpdateManyWithoutQuestNestedInput
+}
+
+export type QuestTemplateUncheckedUpdateWithoutPrerequisiteQuestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  repeatability?: Prisma.EnumQuestRepeatabilityFieldUpdateOperationsInput | $Enums.QuestRepeatability
+  recommendedMinLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  occupationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerRefId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prerequisiteFor?: Prisma.QuestTemplateUncheckedUpdateManyWithoutPrerequisiteQuestNestedInput
+  steps?: Prisma.QuestStepUncheckedUpdateManyWithoutQuestNestedInput
+  rewards?: Prisma.QuestRewardUncheckedUpdateManyWithoutQuestNestedInput
+}
+
+export type QuestTemplateUncheckedUpdateManyWithoutPrerequisiteQuestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumContentStatusFieldUpdateOperationsInput | $Enums.ContentStatus
+  repeatability?: Prisma.EnumQuestRepeatabilityFieldUpdateOperationsInput | $Enums.QuestRepeatability
+  recommendedMinLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  occupationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startTriggerRefId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+
+/**
+ * Count Type QuestTemplateCountOutputType
+ */
+
+export type QuestTemplateCountOutputType = {
+  prerequisiteFor: number
+  steps: number
+  rewards: number
+}
+
+export type QuestTemplateCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  prerequisiteFor?: boolean | QuestTemplateCountOutputTypeCountPrerequisiteForArgs
+  steps?: boolean | QuestTemplateCountOutputTypeCountStepsArgs
+  rewards?: boolean | QuestTemplateCountOutputTypeCountRewardsArgs
+}
+
+/**
+ * QuestTemplateCountOutputType without action
+ */
+export type QuestTemplateCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the QuestTemplateCountOutputType
+   */
+  select?: Prisma.QuestTemplateCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * QuestTemplateCountOutputType without action
+ */
+export type QuestTemplateCountOutputTypeCountPrerequisiteForArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.QuestTemplateWhereInput
+}
+
+/**
+ * QuestTemplateCountOutputType without action
+ */
+export type QuestTemplateCountOutputTypeCountStepsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.QuestStepWhereInput
+}
+
+/**
+ * QuestTemplateCountOutputType without action
+ */
+export type QuestTemplateCountOutputTypeCountRewardsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.QuestRewardWhereInput
+}
 
 
 export type QuestTemplateSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  title?: boolean
-  description?: boolean
-  tags?: boolean
-  status?: boolean
-  version?: boolean
-  createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  stepsJSON?: boolean
-  rewardsJSON?: boolean
-  coinsReward?: boolean
-  damageValue?: boolean
-  isArchived?: boolean
-  deletedAt?: boolean
+  name?: boolean
+  slug?: boolean
+  description?: boolean
+  status?: boolean
+  repeatability?: boolean
+  recommendedMinLevel?: boolean
+  occupationType?: boolean
+  prerequisiteQuestId?: boolean
+  startTriggerType?: boolean
+  startTriggerRefId?: boolean
+  prerequisiteQuest?: boolean | Prisma.QuestTemplate$prerequisiteQuestArgs<ExtArgs>
+  prerequisiteFor?: boolean | Prisma.QuestTemplate$prerequisiteForArgs<ExtArgs>
+  steps?: boolean | Prisma.QuestTemplate$stepsArgs<ExtArgs>
+  rewards?: boolean | Prisma.QuestTemplate$rewardsArgs<ExtArgs>
+  _count?: boolean | Prisma.QuestTemplateCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["questTemplate"]>
 
 export type QuestTemplateSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  title?: boolean
-  description?: boolean
-  tags?: boolean
-  status?: boolean
-  version?: boolean
-  createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  stepsJSON?: boolean
-  rewardsJSON?: boolean
-  coinsReward?: boolean
-  damageValue?: boolean
-  isArchived?: boolean
-  deletedAt?: boolean
+  name?: boolean
+  slug?: boolean
+  description?: boolean
+  status?: boolean
+  repeatability?: boolean
+  recommendedMinLevel?: boolean
+  occupationType?: boolean
+  prerequisiteQuestId?: boolean
+  startTriggerType?: boolean
+  startTriggerRefId?: boolean
+  prerequisiteQuest?: boolean | Prisma.QuestTemplate$prerequisiteQuestArgs<ExtArgs>
 }, ExtArgs["result"]["questTemplate"]>
 
 export type QuestTemplateSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  title?: boolean
-  description?: boolean
-  tags?: boolean
-  status?: boolean
-  version?: boolean
-  createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  stepsJSON?: boolean
-  rewardsJSON?: boolean
-  coinsReward?: boolean
-  damageValue?: boolean
-  isArchived?: boolean
-  deletedAt?: boolean
+  name?: boolean
+  slug?: boolean
+  description?: boolean
+  status?: boolean
+  repeatability?: boolean
+  recommendedMinLevel?: boolean
+  occupationType?: boolean
+  prerequisiteQuestId?: boolean
+  startTriggerType?: boolean
+  startTriggerRefId?: boolean
+  prerequisiteQuest?: boolean | Prisma.QuestTemplate$prerequisiteQuestArgs<ExtArgs>
 }, ExtArgs["result"]["questTemplate"]>
 
 export type QuestTemplateSelectScalar = {
   id?: boolean
-  name?: boolean
-  title?: boolean
-  description?: boolean
-  tags?: boolean
-  status?: boolean
-  version?: boolean
-  createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  stepsJSON?: boolean
-  rewardsJSON?: boolean
-  coinsReward?: boolean
-  damageValue?: boolean
-  isArchived?: boolean
-  deletedAt?: boolean
+  name?: boolean
+  slug?: boolean
+  description?: boolean
+  status?: boolean
+  repeatability?: boolean
+  recommendedMinLevel?: boolean
+  occupationType?: boolean
+  prerequisiteQuestId?: boolean
+  startTriggerType?: boolean
+  startTriggerRefId?: boolean
 }
 
-export type QuestTemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "title" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "stepsJSON" | "rewardsJSON" | "coinsReward" | "damageValue" | "isArchived" | "deletedAt", ExtArgs["result"]["questTemplate"]>
+export type QuestTemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "name" | "slug" | "description" | "status" | "repeatability" | "recommendedMinLevel" | "occupationType" | "prerequisiteQuestId" | "startTriggerType" | "startTriggerRefId", ExtArgs["result"]["questTemplate"]>
+export type QuestTemplateInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  prerequisiteQuest?: boolean | Prisma.QuestTemplate$prerequisiteQuestArgs<ExtArgs>
+  prerequisiteFor?: boolean | Prisma.QuestTemplate$prerequisiteForArgs<ExtArgs>
+  steps?: boolean | Prisma.QuestTemplate$stepsArgs<ExtArgs>
+  rewards?: boolean | Prisma.QuestTemplate$rewardsArgs<ExtArgs>
+  _count?: boolean | Prisma.QuestTemplateCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type QuestTemplateIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  prerequisiteQuest?: boolean | Prisma.QuestTemplate$prerequisiteQuestArgs<ExtArgs>
+}
+export type QuestTemplateIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  prerequisiteQuest?: boolean | Prisma.QuestTemplate$prerequisiteQuestArgs<ExtArgs>
+}
 
 export type $QuestTemplatePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "QuestTemplate"
-  objects: {}
+  objects: {
+    prerequisiteQuest: Prisma.$QuestTemplatePayload<ExtArgs> | null
+    prerequisiteFor: Prisma.$QuestTemplatePayload<ExtArgs>[]
+    steps: Prisma.$QuestStepPayload<ExtArgs>[]
+    rewards: Prisma.$QuestRewardPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    name: string
-    title: string
-    description: string | null
-    tags: runtime.JsonValue | null
-    status: $Enums.ContentStatus
-    version: number
-    createdBy: string | null
     createdAt: Date
     updatedAt: Date
-    stepsJSON: runtime.JsonValue
-    rewardsJSON: runtime.JsonValue | null
-    coinsReward: number
-    damageValue: number
-    isArchived: boolean
-    deletedAt: Date | null
+    name: string
+    slug: string
+    description: string | null
+    status: $Enums.ContentStatus
+    repeatability: $Enums.QuestRepeatability
+    recommendedMinLevel: number | null
+    occupationType: string | null
+    prerequisiteQuestId: string | null
+    startTriggerType: string | null
+    startTriggerRefId: string | null
   }, ExtArgs["result"]["questTemplate"]>
   composites: {}
 }
@@ -1079,6 +1620,10 @@ readonly fields: QuestTemplateFieldRefs;
  */
 export interface Prisma__QuestTemplateClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  prerequisiteQuest<T extends Prisma.QuestTemplate$prerequisiteQuestArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.QuestTemplate$prerequisiteQuestArgs<ExtArgs>>): Prisma.Prisma__QuestTemplateClient<runtime.Types.Result.GetResult<Prisma.$QuestTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  prerequisiteFor<T extends Prisma.QuestTemplate$prerequisiteForArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.QuestTemplate$prerequisiteForArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuestTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  steps<T extends Prisma.QuestTemplate$stepsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.QuestTemplate$stepsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuestStepPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  rewards<T extends Prisma.QuestTemplate$rewardsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.QuestTemplate$rewardsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuestRewardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1109,21 +1654,18 @@ export interface Prisma__QuestTemplateClient<T, Null = never, ExtArgs extends ru
  */
 export interface QuestTemplateFieldRefs {
   readonly id: Prisma.FieldRef<"QuestTemplate", 'String'>
-  readonly name: Prisma.FieldRef<"QuestTemplate", 'String'>
-  readonly title: Prisma.FieldRef<"QuestTemplate", 'String'>
-  readonly description: Prisma.FieldRef<"QuestTemplate", 'String'>
-  readonly tags: Prisma.FieldRef<"QuestTemplate", 'Json'>
-  readonly status: Prisma.FieldRef<"QuestTemplate", 'ContentStatus'>
-  readonly version: Prisma.FieldRef<"QuestTemplate", 'Int'>
-  readonly createdBy: Prisma.FieldRef<"QuestTemplate", 'String'>
   readonly createdAt: Prisma.FieldRef<"QuestTemplate", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"QuestTemplate", 'DateTime'>
-  readonly stepsJSON: Prisma.FieldRef<"QuestTemplate", 'Json'>
-  readonly rewardsJSON: Prisma.FieldRef<"QuestTemplate", 'Json'>
-  readonly coinsReward: Prisma.FieldRef<"QuestTemplate", 'Int'>
-  readonly damageValue: Prisma.FieldRef<"QuestTemplate", 'Int'>
-  readonly isArchived: Prisma.FieldRef<"QuestTemplate", 'Boolean'>
-  readonly deletedAt: Prisma.FieldRef<"QuestTemplate", 'DateTime'>
+  readonly name: Prisma.FieldRef<"QuestTemplate", 'String'>
+  readonly slug: Prisma.FieldRef<"QuestTemplate", 'String'>
+  readonly description: Prisma.FieldRef<"QuestTemplate", 'String'>
+  readonly status: Prisma.FieldRef<"QuestTemplate", 'ContentStatus'>
+  readonly repeatability: Prisma.FieldRef<"QuestTemplate", 'QuestRepeatability'>
+  readonly recommendedMinLevel: Prisma.FieldRef<"QuestTemplate", 'Int'>
+  readonly occupationType: Prisma.FieldRef<"QuestTemplate", 'String'>
+  readonly prerequisiteQuestId: Prisma.FieldRef<"QuestTemplate", 'String'>
+  readonly startTriggerType: Prisma.FieldRef<"QuestTemplate", 'String'>
+  readonly startTriggerRefId: Prisma.FieldRef<"QuestTemplate", 'String'>
 }
     
 
@@ -1140,6 +1682,10 @@ export type QuestTemplateFindUniqueArgs<ExtArgs extends runtime.Types.Extensions
    * Omit specific fields from the QuestTemplate
    */
   omit?: Prisma.QuestTemplateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestTemplateInclude<ExtArgs> | null
   /**
    * Filter, which QuestTemplate to fetch.
    */
@@ -1159,6 +1705,10 @@ export type QuestTemplateFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Ext
    */
   omit?: Prisma.QuestTemplateOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestTemplateInclude<ExtArgs> | null
+  /**
    * Filter, which QuestTemplate to fetch.
    */
   where: Prisma.QuestTemplateWhereUniqueInput
@@ -1176,6 +1726,10 @@ export type QuestTemplateFindFirstArgs<ExtArgs extends runtime.Types.Extensions.
    * Omit specific fields from the QuestTemplate
    */
   omit?: Prisma.QuestTemplateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestTemplateInclude<ExtArgs> | null
   /**
    * Filter, which QuestTemplate to fetch.
    */
@@ -1225,6 +1779,10 @@ export type QuestTemplateFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Exte
    */
   omit?: Prisma.QuestTemplateOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestTemplateInclude<ExtArgs> | null
+  /**
    * Filter, which QuestTemplate to fetch.
    */
   where?: Prisma.QuestTemplateWhereInput
@@ -1273,6 +1831,10 @@ export type QuestTemplateFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.QuestTemplateOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestTemplateInclude<ExtArgs> | null
+  /**
    * Filter, which QuestTemplates to fetch.
    */
   where?: Prisma.QuestTemplateWhereInput
@@ -1316,6 +1878,10 @@ export type QuestTemplateCreateArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   omit?: Prisma.QuestTemplateOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestTemplateInclude<ExtArgs> | null
+  /**
    * The data needed to create a QuestTemplate.
    */
   data: Prisma.XOR<Prisma.QuestTemplateCreateInput, Prisma.QuestTemplateUncheckedCreateInput>
@@ -1349,6 +1915,10 @@ export type QuestTemplateCreateManyAndReturnArgs<ExtArgs extends runtime.Types.E
    */
   data: Prisma.QuestTemplateCreateManyInput | Prisma.QuestTemplateCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestTemplateIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1363,6 +1933,10 @@ export type QuestTemplateUpdateArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the QuestTemplate
    */
   omit?: Prisma.QuestTemplateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestTemplateInclude<ExtArgs> | null
   /**
    * The data needed to update a QuestTemplate.
    */
@@ -1415,6 +1989,10 @@ export type QuestTemplateUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.E
    * Limit how many QuestTemplates to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestTemplateIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1429,6 +2007,10 @@ export type QuestTemplateUpsertArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the QuestTemplate
    */
   omit?: Prisma.QuestTemplateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestTemplateInclude<ExtArgs> | null
   /**
    * The filter to search for the QuestTemplate to update in case it exists.
    */
@@ -1456,6 +2038,10 @@ export type QuestTemplateDeleteArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   omit?: Prisma.QuestTemplateOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestTemplateInclude<ExtArgs> | null
+  /**
    * Filter which QuestTemplate to delete.
    */
   where: Prisma.QuestTemplateWhereUniqueInput
@@ -1476,6 +2062,97 @@ export type QuestTemplateDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
+ * QuestTemplate.prerequisiteQuest
+ */
+export type QuestTemplate$prerequisiteQuestArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the QuestTemplate
+   */
+  select?: Prisma.QuestTemplateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the QuestTemplate
+   */
+  omit?: Prisma.QuestTemplateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestTemplateInclude<ExtArgs> | null
+  where?: Prisma.QuestTemplateWhereInput
+}
+
+/**
+ * QuestTemplate.prerequisiteFor
+ */
+export type QuestTemplate$prerequisiteForArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the QuestTemplate
+   */
+  select?: Prisma.QuestTemplateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the QuestTemplate
+   */
+  omit?: Prisma.QuestTemplateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestTemplateInclude<ExtArgs> | null
+  where?: Prisma.QuestTemplateWhereInput
+  orderBy?: Prisma.QuestTemplateOrderByWithRelationInput | Prisma.QuestTemplateOrderByWithRelationInput[]
+  cursor?: Prisma.QuestTemplateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.QuestTemplateScalarFieldEnum | Prisma.QuestTemplateScalarFieldEnum[]
+}
+
+/**
+ * QuestTemplate.steps
+ */
+export type QuestTemplate$stepsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the QuestStep
+   */
+  select?: Prisma.QuestStepSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the QuestStep
+   */
+  omit?: Prisma.QuestStepOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestStepInclude<ExtArgs> | null
+  where?: Prisma.QuestStepWhereInput
+  orderBy?: Prisma.QuestStepOrderByWithRelationInput | Prisma.QuestStepOrderByWithRelationInput[]
+  cursor?: Prisma.QuestStepWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.QuestStepScalarFieldEnum | Prisma.QuestStepScalarFieldEnum[]
+}
+
+/**
+ * QuestTemplate.rewards
+ */
+export type QuestTemplate$rewardsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the QuestReward
+   */
+  select?: Prisma.QuestRewardSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the QuestReward
+   */
+  omit?: Prisma.QuestRewardOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestRewardInclude<ExtArgs> | null
+  where?: Prisma.QuestRewardWhereInput
+  orderBy?: Prisma.QuestRewardOrderByWithRelationInput | Prisma.QuestRewardOrderByWithRelationInput[]
+  cursor?: Prisma.QuestRewardWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.QuestRewardScalarFieldEnum | Prisma.QuestRewardScalarFieldEnum[]
+}
+
+/**
  * QuestTemplate without action
  */
 export type QuestTemplateDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1487,4 +2164,8 @@ export type QuestTemplateDefaultArgs<ExtArgs extends runtime.Types.Extensions.In
    * Omit specific fields from the QuestTemplate
    */
   omit?: Prisma.QuestTemplateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestTemplateInclude<ExtArgs> | null
 }

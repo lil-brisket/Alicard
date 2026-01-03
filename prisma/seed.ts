@@ -542,6 +542,7 @@ async function main() {
     create: {
       id: "basic-attack",
       key: "basic-attack",
+      slug: "basic-attack",
       name: "Basic Attack",
       description: "A simple melee attack.",
       staminaCost: 5,
@@ -555,6 +556,7 @@ async function main() {
     create: {
       id: "power-strike",
       key: "power-strike",
+      slug: "power-strike",
       name: "Power Strike",
       description: "A powerful attack that deals extra damage.",
       staminaCost: 15,
@@ -568,6 +570,7 @@ async function main() {
     create: {
       id: "heal",
       key: "heal",
+      slug: "heal",
       name: "Heal",
       description: "Restores a small amount of health.",
       staminaCost: 10,
@@ -581,6 +584,7 @@ async function main() {
     create: {
       id: "dodge",
       key: "dodge",
+      slug: "dodge",
       name: "Dodge",
       description: "Increases evasion for a short time.",
       staminaCost: 8,
@@ -594,6 +598,7 @@ async function main() {
     create: {
       id: "shield-bash",
       key: "shield-bash",
+      slug: "shield-bash",
       name: "Shield Bash",
       description: "Bash with your shield, stunning the enemy.",
       staminaCost: 12,
@@ -1179,22 +1184,14 @@ async function main() {
   console.log("✅ Monster template created");
 
   // Quest Templates
-  const questTemplate1 = await prisma.questTemplate.create({
-    data: {
+  const questTemplate1 = await prisma.questTemplate.upsert({
+    where: { slug: "slay-the-goblin" },
+    update: {},
+    create: {
       name: "Slay the Goblin",
-      title: "Slay the Goblin",
+      slug: "slay-the-goblin",
       description: "Defeat 5 goblins in the forest",
       status: "ACTIVE",
-      tags: ["kill", "starter"],
-      stepsJSON: [
-        { type: "KILL", target: "goblin", count: 5 },
-        { type: "RETURN", npc: "quest-giver" },
-      ],
-      rewardsJSON: {
-        gold: 100,
-        xp: 200,
-        items: [{ id: "health-potion", qty: 3 }],
-      },
     },
   });
 
@@ -1698,6 +1695,85 @@ async function main() {
   });
 
   console.log("✅ Training skills created");
+
+  // Create versioned map system sample data
+  console.log("Creating versioned map system sample data...");
+
+  const starterPlainsMap = await prisma.mapDefinition.upsert({
+    where: { slug: "starter-plains" },
+    update: {},
+    create: {
+      name: "Starter Plains",
+      slug: "starter-plains",
+      description: "A peaceful starting area for new adventurers",
+      biome: "Plains",
+      recommendedMinLevel: 1,
+      recommendedMaxLevel: 5,
+      dangerRating: 1,
+    },
+  });
+
+  // Create draft version 1 (25x25)
+  let mapVersion1 = await prisma.mapVersion.findFirst({
+    where: {
+      mapId: starterPlainsMap.id,
+      versionNumber: 1,
+    },
+  });
+
+  if (!mapVersion1) {
+    mapVersion1 = await prisma.mapVersion.create({
+      data: {
+        mapId: starterPlainsMap.id,
+        versionNumber: 1,
+        status: "DRAFT",
+        width: 25,
+        height: 25,
+        changeNotes: "Initial draft version",
+      },
+    });
+  }
+
+  // Generate tiles for all cells (25x25 = 625 tiles)
+  const mapTiles: Array<{
+    mapVersionId: string;
+    x: number;
+    y: number;
+    tileType: "GROUND";
+    overlay: "NONE";
+    isWalkable: boolean;
+    movementCost: number;
+    safeZone: boolean;
+    fogDiscoverable: boolean;
+  }> = [];
+
+  for (let y = 0; y < 25; y++) {
+    for (let x = 0; x < 25; x++) {
+      mapTiles.push({
+        mapVersionId: mapVersion1.id,
+        x,
+        y,
+        tileType: "GROUND",
+        overlay: "NONE",
+        isWalkable: true,
+        movementCost: 1,
+        safeZone: x >= 10 && x <= 14 && y >= 10 && y <= 14, // Center 5x5 is safe
+        fogDiscoverable: true,
+      });
+    }
+  }
+
+  // Batch create tiles
+  const mapTileChunkSize = 100;
+  for (let i = 0; i < mapTiles.length; i += mapTileChunkSize) {
+    const chunk = mapTiles.slice(i, i + mapTileChunkSize);
+    await prisma.mapVersionTile.createMany({
+      data: chunk,
+      skipDuplicates: true,
+    });
+  }
+
+  console.log(`✅ Created ${mapTiles.length} tiles for Starter Plains map`);
 
   console.log("✅ Seed completed!");
 }

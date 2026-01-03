@@ -40,7 +40,12 @@ export const TileType = {
   SHRINE: 'SHRINE',
   ROAD: 'ROAD',
   PLAIN: 'PLAIN',
-  WATER: 'WATER'
+  WATER: 'WATER',
+  GROUND: 'GROUND',
+  WALL: 'WALL',
+  DOOR: 'DOOR',
+  PORTAL: 'PORTAL',
+  POI: 'POI'
 } as const
 
 export type TileType = (typeof TileType)[keyof typeof TileType]
@@ -164,6 +169,41 @@ export const QuestType = {
 export type QuestType = (typeof QuestType)[keyof typeof QuestType]
 
 
+export const QuestRepeatability = {
+  ONCE: 'ONCE',
+  DAILY: 'DAILY',
+  WEEKLY: 'WEEKLY',
+  REPEATABLE: 'REPEATABLE'
+} as const
+
+export type QuestRepeatability = (typeof QuestRepeatability)[keyof typeof QuestRepeatability]
+
+
+export const QuestStepType = {
+  KILL_ENEMY: 'KILL_ENEMY',
+  GATHER_ITEM: 'GATHER_ITEM',
+  CRAFT_ITEM: 'CRAFT_ITEM',
+  VISIT_LOCATION: 'VISIT_LOCATION',
+  DELIVER_ITEM: 'DELIVER_ITEM',
+  TALK_TO_NPC: 'TALK_TO_NPC',
+  INTERACT_NODE: 'INTERACT_NODE'
+} as const
+
+export type QuestStepType = (typeof QuestStepType)[keyof typeof QuestStepType]
+
+
+export const QuestRewardType = {
+  XP_CHARACTER: 'XP_CHARACTER',
+  XP_OCCUPATION: 'XP_OCCUPATION',
+  ITEM: 'ITEM',
+  GOLD: 'GOLD',
+  RECIPE_UNLOCK: 'RECIPE_UNLOCK',
+  SKILL_UNLOCK: 'SKILL_UNLOCK'
+} as const
+
+export type QuestRewardType = (typeof QuestRewardType)[keyof typeof QuestRewardType]
+
+
 export const JobCategory = {
   CRAFT: 'CRAFT',
   GATHER: 'GATHER'
@@ -186,10 +226,94 @@ export type AchievementRarity = (typeof AchievementRarity)[keyof typeof Achievem
 export const ContentStatus = {
   DRAFT: 'DRAFT',
   ACTIVE: 'ACTIVE',
-  DISABLED: 'DISABLED'
+  DISABLED: 'DISABLED',
+  PUBLISHED: 'PUBLISHED',
+  ARCHIVED: 'ARCHIVED'
 } as const
 
 export type ContentStatus = (typeof ContentStatus)[keyof typeof ContentStatus]
+
+
+export const TileOverlay = {
+  NONE: 'NONE',
+  SAFEZONE: 'SAFEZONE',
+  DANGER: 'DANGER',
+  TOWN: 'TOWN',
+  DUNGEON: 'DUNGEON',
+  RESOURCE_RICH: 'RESOURCE_RICH'
+} as const
+
+export type TileOverlay = (typeof TileOverlay)[keyof typeof TileOverlay]
+
+
+export const POIType = {
+  NPC: 'NPC',
+  SHOP: 'SHOP',
+  BANK: 'BANK',
+  GUILD_HALL: 'GUILD_HALL',
+  PORTAL: 'PORTAL',
+  SHRINE: 'SHRINE',
+  QUEST_BOARD: 'QUEST_BOARD'
+} as const
+
+export type POIType = (typeof POIType)[keyof typeof POIType]
+
+
+export const SkillType = {
+  ATTACK: 'ATTACK',
+  BUFF: 'BUFF',
+  HEAL: 'HEAL',
+  UTILITY: 'UTILITY',
+  DEBUFF: 'DEBUFF'
+} as const
+
+export type SkillType = (typeof SkillType)[keyof typeof SkillType]
+
+
+export const DamageType = {
+  PHYSICAL: 'PHYSICAL',
+  MAGIC: 'MAGIC',
+  TRUE: 'TRUE'
+} as const
+
+export type DamageType = (typeof DamageType)[keyof typeof DamageType]
+
+
+export const SkillTargeting = {
+  SINGLE: 'SINGLE',
+  MULTI: 'MULTI',
+  AOE: 'AOE'
+} as const
+
+export type SkillTargeting = (typeof SkillTargeting)[keyof typeof SkillTargeting]
+
+
+export const StatType = {
+  VITALITY: 'VITALITY',
+  STRENGTH: 'STRENGTH',
+  SPEED: 'SPEED',
+  DEXTERITY: 'DEXTERITY'
+} as const
+
+export type StatType = (typeof StatType)[keyof typeof StatType]
+
+
+export const SkillEffectType = {
+  DAMAGE: 'DAMAGE',
+  HEAL: 'HEAL',
+  BUFF_STAT: 'BUFF_STAT',
+  DEBUFF_STAT: 'DEBUFF_STAT',
+  DOT: 'DOT',
+  HOT: 'HOT',
+  STUN: 'STUN',
+  SILENCE: 'SILENCE',
+  TAUNT: 'TAUNT',
+  SHIELD: 'SHIELD',
+  CLEANSE: 'CLEANSE',
+  DISPEL: 'DISPEL'
+} as const
+
+export type SkillEffectType = (typeof SkillEffectType)[keyof typeof SkillEffectType]
 
 
 export const BattleStatus = {

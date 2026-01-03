@@ -3,21 +3,55 @@
 import { useState } from "react";
 import Link from "next/link";
 import { api } from "~/trpc/react";
+import { toast } from "react-hot-toast";
 
 export default function ContentMapsPage() {
   const [includeArchived, setIncludeArchived] = useState(false);
-  const { data: maps, isLoading } = api.content.maps.list.useQuery({
+  const [search, setSearch] = useState("");
+  const { data: maps, isLoading, refetch } = api.content.maps.list.useQuery({
     includeArchived,
+    search: search || undefined,
     limit: 100,
   });
 
+  const archiveMutation = api.content.maps.archive.useMutation({
+    onSuccess: () => {
+      toast.success("Map archive status updated");
+      void refetch();
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const cloneMutation = api.content.maps.clone.useMutation({
+    onSuccess: () => {
+      toast.success("Map cloned");
+      void refetch();
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const handleArchive = (map: { id: string; isArchived: boolean }) => {
+    archiveMutation.mutate({
+      id: map.id,
+      isArchived: !map.isArchived,
+    });
+  };
+
+  const handleClone = (map: { id: string; name: string }) => {
+    cloneMutation.mutate({ id: map.id });
+  };
+
   return (
-    <div>
-      <div className="mb-6 flex items-center justify-between">
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-semibold text-cyan-400">Map Zones</h2>
+          <h2 className="text-xl font-semibold text-cyan-400">Map Definitions</h2>
           <p className="mt-1 text-sm text-slate-400">
-            Manage game map zones
+            Manage versioned game maps with publishable snapshots
           </p>
         </div>
         <Link
@@ -28,7 +62,16 @@ export default function ContentMapsPage() {
         </Link>
       </div>
 
-      <div className="mb-4">
+      <div className="flex gap-4">
+        <div className="flex-1">
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search maps by name or slug..."
+            className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-100"
+          />
+        </div>
         <label className="flex items-center gap-2">
           <input
             type="checkbox"
@@ -53,10 +96,19 @@ export default function ContentMapsPage() {
                   Name
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
-                  Size
+                  Slug
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
-                  Status
+                  Biome
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
+                  Danger
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
+                  Published
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
+                  Updated
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
                   Actions
@@ -67,27 +119,50 @@ export default function ContentMapsPage() {
               {maps.map((map) => (
                 <tr key={map.id} className="hover:bg-slate-800/30">
                   <td className="px-4 py-3 font-medium">{map.name}</td>
-                  <td className="px-4 py-3 text-sm text-slate-400">
-                    {map.width} × {map.height}
+                  <td className="px-4 py-3 text-sm text-slate-400 font-mono">
+                    {map.slug}
                   </td>
-                  <td className="px-4 py-3">
-                    {map.isArchived ? (
-                      <span className="inline-flex rounded-full bg-red-500/20 px-2 py-1 text-xs text-red-400">
-                        Archived
+                  <td className="px-4 py-3 text-sm text-slate-400">
+                    {map.biome ?? "-"}
+                  </td>
+                  <td className="px-4 py-3 text-sm text-slate-400">
+                    {map.dangerRating}
+                  </td>
+                  <td className="px-4 py-3 text-sm">
+                    {map.publishedVersion ? (
+                      <span className="inline-flex rounded-full bg-green-500/20 px-2 py-1 text-xs text-green-400">
+                        v{map.publishedVersion}
                       </span>
                     ) : (
-                      <span className="inline-flex rounded-full bg-green-500/20 px-2 py-1 text-xs text-green-400">
-                        Active
-                      </span>
+                      <span className="text-slate-500">-</span>
                     )}
                   </td>
+                  <td className="px-4 py-3 text-sm text-slate-400">
+                    {new Date(map.updatedAt).toLocaleDateString()}
+                  </td>
                   <td className="px-4 py-3">
-                    <Link
-                      href={`/content/maps/${map.id}`}
-                      className="text-sm text-cyan-400 hover:text-cyan-300"
-                    >
-                      Edit
-                    </Link>
+                    <div className="flex gap-2">
+                      <Link
+                        href={`/content/maps/${map.id}`}
+                        className="text-sm text-cyan-400 hover:text-cyan-300"
+                      >
+                        Open
+                      </Link>
+                      <button
+                        onClick={() => handleClone(map)}
+                        className="text-sm text-purple-400 hover:text-purple-300"
+                        disabled={cloneMutation.isPending}
+                      >
+                        Clone
+                      </button>
+                      <button
+                        onClick={() => handleArchive(map)}
+                        className="text-sm text-yellow-400 hover:text-yellow-300"
+                        disabled={archiveMutation.isPending}
+                      >
+                        {map.isArchived ? "Unarchive" : "Archive"}
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}

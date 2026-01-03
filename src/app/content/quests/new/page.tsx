@@ -8,12 +8,16 @@ import { toast } from "react-hot-toast";
 export default function NewQuestPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    title: "",
+    name: "",
+    slug: "",
     description: "",
-    coinsReward: 0,
-    damageValue: 0,
-    stepsJSON: "[]",
-    rewardsJSON: "",
+    status: "DRAFT" as "DRAFT" | "ACTIVE" | "DISABLED" | "PUBLISHED" | "ARCHIVED",
+    repeatability: "ONCE" as "ONCE" | "DAILY" | "WEEKLY" | "REPEATABLE",
+    recommendedMinLevel: null as number | null,
+    occupationType: "",
+    prerequisiteQuestId: null as string | null,
+    startTriggerType: "",
+    startTriggerRefId: "",
   });
 
   const createQuest = api.content.quests.create.useMutation({
@@ -28,56 +32,55 @@ export default function NewQuestPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const steps = JSON.parse(formData.stepsJSON);
-      const rewards = formData.rewardsJSON
-        ? JSON.parse(formData.rewardsJSON)
-        : undefined;
-
-      createQuest.mutate({
-        title: formData.title,
-        description: formData.description || undefined,
-        stepsJSON: steps,
-        rewardsJSON: rewards,
-        coinsReward: formData.coinsReward,
-        damageValue: formData.damageValue,
-      });
-    } catch (error) {
-      toast.error("Invalid JSON format");
-    }
+    createQuest.mutate({
+      name: formData.name,
+      slug: formData.slug || undefined, // Auto-generated if not provided
+      description: formData.description || null,
+      status: formData.status,
+      repeatability: formData.repeatability,
+      recommendedMinLevel: formData.recommendedMinLevel,
+      occupationType: formData.occupationType || null,
+      prerequisiteQuestId: formData.prerequisiteQuestId,
+      startTriggerType: formData.startTriggerType || null,
+      startTriggerRefId: formData.startTriggerRefId || null,
+    });
   };
 
   return (
     <div>
-      <h2 className="mb-6 text-xl font-semibold text-cyan-400">
-        Create New Quest
-      </h2>
+      <h2 className="mb-6 text-xl font-semibold text-cyan-400">Create New Quest</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300">
-            Title *
-          </label>
+          <label className="block text-sm font-medium text-slate-300">Name *</label>
           <input
             type="text"
             required
-            value={formData.title}
-            onChange={(e) =>
-              setFormData({ ...formData, title: e.target.value })
-            }
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300">
-            Description
-          </label>
+          <label className="block text-sm font-medium text-slate-300">Slug (Optional)</label>
+          <input
+            type="text"
+            value={formData.slug}
+            onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+            className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 font-mono text-slate-100"
+            placeholder="Auto-generated from name if not provided"
+          />
+          <p className="mt-1 text-xs text-slate-400">
+            URL-friendly identifier (lower-kebab-case). Auto-generated from name if not provided.
+          </p>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-slate-300">Description</label>
           <textarea
             value={formData.description}
-            onChange={(e) =>
-              setFormData({ ...formData, description: e.target.value })
-            }
+            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
             rows={3}
           />
@@ -85,83 +88,72 @@ export default function NewQuestPage() {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-300">
-              Coins Reward
-            </label>
-            <input
-              type="number"
-              min={0}
-              value={formData.coinsReward}
+            <label className="block text-sm font-medium text-slate-300">Status</label>
+            <select
+              value={formData.status}
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  coinsReward: parseInt(e.target.value) || 0,
+                  status: e.target.value as typeof formData.status,
                 })
               }
               className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
-            />
-            <p className="mt-1 text-xs text-slate-400">
-              Coins rewarded for completing this quest
-            </p>
+            >
+              <option value="DRAFT">Draft</option>
+              <option value="PUBLISHED">Published</option>
+              <option value="ARCHIVED">Archived</option>
+              <option value="ACTIVE">Active</option>
+              <option value="DISABLED">Disabled</option>
+            </select>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300">
-              Damage Value
-            </label>
-            <input
-              type="number"
-              min={0}
-              value={formData.damageValue}
+            <label className="block text-sm font-medium text-slate-300">Repeatability</label>
+            <select
+              value={formData.repeatability}
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  damageValue: parseInt(e.target.value) || 0,
+                  repeatability: e.target.value as typeof formData.repeatability,
+                })
+              }
+              className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
+            >
+              <option value="ONCE">Once</option>
+              <option value="DAILY">Daily</option>
+              <option value="WEEKLY">Weekly</option>
+              <option value="REPEATABLE">Repeatable</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-300">Recommended Min Level</label>
+            <input
+              type="number"
+              min={1}
+              value={formData.recommendedMinLevel ?? ""}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  recommendedMinLevel: e.target.value ? parseInt(e.target.value) : null,
                 })
               }
               className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
             />
-            <p className="mt-1 text-xs text-slate-400">
-              Damage dealt by quest-related actions (if applicable)
-            </p>
           </div>
-        </div>
 
-        <div>
-          <label className="block text-sm font-medium text-slate-300">
-            Steps (JSON) *
-          </label>
-          <textarea
-            required
-            value={formData.stepsJSON}
-            onChange={(e) =>
-              setFormData({ ...formData, stepsJSON: e.target.value })
-            }
-            className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 font-mono text-sm text-slate-100"
-            rows={6}
-            placeholder='[{"type": "kill", "target": "goblin", "count": 5}]'
-          />
-          <p className="mt-1 text-xs text-slate-400">
-            JSON array of quest steps
-          </p>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-slate-300">
-            Rewards (JSON - Optional)
-          </label>
-          <textarea
-            value={formData.rewardsJSON}
-            onChange={(e) =>
-              setFormData({ ...formData, rewardsJSON: e.target.value })
-            }
-            className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 font-mono text-sm text-slate-100"
-            rows={4}
-            placeholder='{"items": [{"id": "item1", "quantity": 1}]}'
-          />
-          <p className="mt-1 text-xs text-slate-400">
-            JSON object with additional rewards (optional)
-          </p>
+          <div>
+            <label className="block text-sm font-medium text-slate-300">Occupation Type</label>
+            <input
+              type="text"
+              value={formData.occupationType}
+              onChange={(e) => setFormData({ ...formData, occupationType: e.target.value })}
+              className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
+              placeholder="e.g., BLACKSMITH, MINER"
+            />
+          </div>
         </div>
 
         <div className="flex gap-4">

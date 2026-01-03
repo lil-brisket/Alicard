@@ -652,14 +652,6 @@ export type EnumSkillCategoryFieldUpdateOperationsInput = {
   set?: $Enums.SkillCategory
 }
 
-export type FloatFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type TrainingSkillCreateNestedOneWithoutActionsInput = {
   create?: Prisma.XOR<Prisma.TrainingSkillCreateWithoutActionsInput, Prisma.TrainingSkillUncheckedCreateWithoutActionsInput>
   connectOrCreate?: Prisma.TrainingSkillCreateOrConnectWithoutActionsInput

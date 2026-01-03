@@ -386,6 +386,7 @@ export type ItemWhereInput = {
   nodeYields?: Prisma.NodeYieldListRelationFilter
   skillActionInputs?: Prisma.SkillActionInputListRelationFilter
   skillActionOutputs?: Prisma.SkillActionOutputListRelationFilter
+  dropTableEntries?: Prisma.DropTableEntryListRelationFilter
 }
 
 export type ItemOrderByWithRelationInput = {
@@ -430,6 +431,7 @@ export type ItemOrderByWithRelationInput = {
   nodeYields?: Prisma.NodeYieldOrderByRelationAggregateInput
   skillActionInputs?: Prisma.SkillActionInputOrderByRelationAggregateInput
   skillActionOutputs?: Prisma.SkillActionOutputOrderByRelationAggregateInput
+  dropTableEntries?: Prisma.DropTableEntryOrderByRelationAggregateInput
 }
 
 export type ItemWhereUniqueInput = Prisma.AtLeast<{
@@ -477,6 +479,7 @@ export type ItemWhereUniqueInput = Prisma.AtLeast<{
   nodeYields?: Prisma.NodeYieldListRelationFilter
   skillActionInputs?: Prisma.SkillActionInputListRelationFilter
   skillActionOutputs?: Prisma.SkillActionOutputListRelationFilter
+  dropTableEntries?: Prisma.DropTableEntryListRelationFilter
 }, "id" | "key">
 
 export type ItemOrderByWithAggregationInput = {
@@ -573,6 +576,7 @@ export type ItemCreateInput = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateInput = {
@@ -617,6 +621,7 @@ export type ItemUncheckedCreateInput = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemUpdateInput = {
@@ -661,6 +666,7 @@ export type ItemUpdateInput = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateInput = {
@@ -705,6 +711,7 @@ export type ItemUncheckedUpdateInput = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateManyInput = {
@@ -1219,6 +1226,20 @@ export type ItemUpdateOneRequiredWithoutSkillActionOutputsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutSkillActionOutputsInput, Prisma.ItemUpdateWithoutSkillActionOutputsInput>, Prisma.ItemUncheckedUpdateWithoutSkillActionOutputsInput>
 }
 
+export type ItemCreateNestedOneWithoutDropTableEntriesInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutDropTableEntriesInput, Prisma.ItemUncheckedCreateWithoutDropTableEntriesInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutDropTableEntriesInput
+  connect?: Prisma.ItemWhereUniqueInput
+}
+
+export type ItemUpdateOneRequiredWithoutDropTableEntriesNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutDropTableEntriesInput, Prisma.ItemUncheckedCreateWithoutDropTableEntriesInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutDropTableEntriesInput
+  upsert?: Prisma.ItemUpsertWithoutDropTableEntriesInput
+  connect?: Prisma.ItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutDropTableEntriesInput, Prisma.ItemUpdateWithoutDropTableEntriesInput>, Prisma.ItemUncheckedUpdateWithoutDropTableEntriesInput>
+}
+
 export type ItemCreateWithoutShopItemsInput = {
   id?: string
   key?: string | null
@@ -1260,6 +1281,7 @@ export type ItemCreateWithoutShopItemsInput = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutShopItemsInput = {
@@ -1303,6 +1325,7 @@ export type ItemUncheckedCreateWithoutShopItemsInput = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutShopItemsInput = {
@@ -1362,6 +1385,7 @@ export type ItemUpdateWithoutShopItemsInput = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutShopItemsInput = {
@@ -1405,6 +1429,7 @@ export type ItemUncheckedUpdateWithoutShopItemsInput = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutInventoryItemsInput = {
@@ -1448,6 +1473,7 @@ export type ItemCreateWithoutInventoryItemsInput = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutInventoryItemsInput = {
@@ -1491,6 +1517,7 @@ export type ItemUncheckedCreateWithoutInventoryItemsInput = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutInventoryItemsInput = {
@@ -1550,6 +1577,7 @@ export type ItemUpdateWithoutInventoryItemsInput = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutInventoryItemsInput = {
@@ -1593,6 +1621,7 @@ export type ItemUncheckedUpdateWithoutInventoryItemsInput = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutEquippedAsHeadInput = {
@@ -1636,6 +1665,7 @@ export type ItemCreateWithoutEquippedAsHeadInput = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsHeadInput = {
@@ -1679,6 +1709,7 @@ export type ItemUncheckedCreateWithoutEquippedAsHeadInput = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsHeadInput = {
@@ -1727,6 +1758,7 @@ export type ItemCreateWithoutEquippedAsLeftArmInput = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsLeftArmInput = {
@@ -1770,6 +1802,7 @@ export type ItemUncheckedCreateWithoutEquippedAsLeftArmInput = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsLeftArmInput = {
@@ -1818,6 +1851,7 @@ export type ItemCreateWithoutEquippedAsRightArmInput = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsRightArmInput = {
@@ -1861,6 +1895,7 @@ export type ItemUncheckedCreateWithoutEquippedAsRightArmInput = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsRightArmInput = {
@@ -1909,6 +1944,7 @@ export type ItemCreateWithoutEquippedAsBodyInput = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsBodyInput = {
@@ -1952,6 +1988,7 @@ export type ItemUncheckedCreateWithoutEquippedAsBodyInput = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsBodyInput = {
@@ -2000,6 +2037,7 @@ export type ItemCreateWithoutEquippedAsLegsInput = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsLegsInput = {
@@ -2043,6 +2081,7 @@ export type ItemUncheckedCreateWithoutEquippedAsLegsInput = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsLegsInput = {
@@ -2091,6 +2130,7 @@ export type ItemCreateWithoutEquippedAsFeetInput = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsFeetInput = {
@@ -2134,6 +2174,7 @@ export type ItemUncheckedCreateWithoutEquippedAsFeetInput = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsFeetInput = {
@@ -2182,6 +2223,7 @@ export type ItemCreateWithoutEquippedAsRing1Input = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsRing1Input = {
@@ -2225,6 +2267,7 @@ export type ItemUncheckedCreateWithoutEquippedAsRing1Input = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsRing1Input = {
@@ -2273,6 +2316,7 @@ export type ItemCreateWithoutEquippedAsRing2Input = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsRing2Input = {
@@ -2316,6 +2360,7 @@ export type ItemUncheckedCreateWithoutEquippedAsRing2Input = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsRing2Input = {
@@ -2364,6 +2409,7 @@ export type ItemCreateWithoutEquippedAsRing3Input = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsRing3Input = {
@@ -2407,6 +2453,7 @@ export type ItemUncheckedCreateWithoutEquippedAsRing3Input = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsRing3Input = {
@@ -2455,6 +2502,7 @@ export type ItemCreateWithoutEquippedAsNecklaceInput = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsNecklaceInput = {
@@ -2498,6 +2546,7 @@ export type ItemUncheckedCreateWithoutEquippedAsNecklaceInput = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsNecklaceInput = {
@@ -2546,6 +2595,7 @@ export type ItemCreateWithoutEquippedAsBeltInput = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsBeltInput = {
@@ -2589,6 +2639,7 @@ export type ItemUncheckedCreateWithoutEquippedAsBeltInput = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsBeltInput = {
@@ -2637,6 +2688,7 @@ export type ItemCreateWithoutEquippedAsCloakInput = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutEquippedAsCloakInput = {
@@ -2680,6 +2732,7 @@ export type ItemUncheckedCreateWithoutEquippedAsCloakInput = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutEquippedAsCloakInput = {
@@ -2739,6 +2792,7 @@ export type ItemUpdateWithoutEquippedAsHeadInput = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsHeadInput = {
@@ -2782,6 +2836,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsHeadInput = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsLeftArmInput = {
@@ -2836,6 +2891,7 @@ export type ItemUpdateWithoutEquippedAsLeftArmInput = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsLeftArmInput = {
@@ -2879,6 +2935,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsLeftArmInput = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsRightArmInput = {
@@ -2933,6 +2990,7 @@ export type ItemUpdateWithoutEquippedAsRightArmInput = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsRightArmInput = {
@@ -2976,6 +3034,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsRightArmInput = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsBodyInput = {
@@ -3030,6 +3089,7 @@ export type ItemUpdateWithoutEquippedAsBodyInput = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsBodyInput = {
@@ -3073,6 +3133,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsBodyInput = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsLegsInput = {
@@ -3127,6 +3188,7 @@ export type ItemUpdateWithoutEquippedAsLegsInput = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsLegsInput = {
@@ -3170,6 +3232,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsLegsInput = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsFeetInput = {
@@ -3224,6 +3287,7 @@ export type ItemUpdateWithoutEquippedAsFeetInput = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsFeetInput = {
@@ -3267,6 +3331,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsFeetInput = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsRing1Input = {
@@ -3321,6 +3386,7 @@ export type ItemUpdateWithoutEquippedAsRing1Input = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsRing1Input = {
@@ -3364,6 +3430,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsRing1Input = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsRing2Input = {
@@ -3418,6 +3485,7 @@ export type ItemUpdateWithoutEquippedAsRing2Input = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsRing2Input = {
@@ -3461,6 +3529,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsRing2Input = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsRing3Input = {
@@ -3515,6 +3584,7 @@ export type ItemUpdateWithoutEquippedAsRing3Input = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsRing3Input = {
@@ -3558,6 +3628,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsRing3Input = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsNecklaceInput = {
@@ -3612,6 +3683,7 @@ export type ItemUpdateWithoutEquippedAsNecklaceInput = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsNecklaceInput = {
@@ -3655,6 +3727,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsNecklaceInput = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsBeltInput = {
@@ -3709,6 +3782,7 @@ export type ItemUpdateWithoutEquippedAsBeltInput = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsBeltInput = {
@@ -3752,6 +3826,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsBeltInput = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUpsertWithoutEquippedAsCloakInput = {
@@ -3806,6 +3881,7 @@ export type ItemUpdateWithoutEquippedAsCloakInput = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutEquippedAsCloakInput = {
@@ -3849,6 +3925,7 @@ export type ItemUncheckedUpdateWithoutEquippedAsCloakInput = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutBankVaultItemsInput = {
@@ -3892,6 +3969,7 @@ export type ItemCreateWithoutBankVaultItemsInput = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutBankVaultItemsInput = {
@@ -3935,6 +4013,7 @@ export type ItemUncheckedCreateWithoutBankVaultItemsInput = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutBankVaultItemsInput = {
@@ -3994,6 +4073,7 @@ export type ItemUpdateWithoutBankVaultItemsInput = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutBankVaultItemsInput = {
@@ -4037,6 +4117,7 @@ export type ItemUncheckedUpdateWithoutBankVaultItemsInput = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutMarketListingsInput = {
@@ -4080,6 +4161,7 @@ export type ItemCreateWithoutMarketListingsInput = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutMarketListingsInput = {
@@ -4123,6 +4205,7 @@ export type ItemUncheckedCreateWithoutMarketListingsInput = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutMarketListingsInput = {
@@ -4182,6 +4265,7 @@ export type ItemUpdateWithoutMarketListingsInput = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutMarketListingsInput = {
@@ -4225,6 +4309,7 @@ export type ItemUncheckedUpdateWithoutMarketListingsInput = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutMarketTransactionsInput = {
@@ -4268,6 +4353,7 @@ export type ItemCreateWithoutMarketTransactionsInput = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutMarketTransactionsInput = {
@@ -4311,6 +4397,7 @@ export type ItemUncheckedCreateWithoutMarketTransactionsInput = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutMarketTransactionsInput = {
@@ -4370,6 +4457,7 @@ export type ItemUpdateWithoutMarketTransactionsInput = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutMarketTransactionsInput = {
@@ -4413,6 +4501,7 @@ export type ItemUncheckedUpdateWithoutMarketTransactionsInput = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutRecipeOutputsInput = {
@@ -4456,6 +4545,7 @@ export type ItemCreateWithoutRecipeOutputsInput = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutRecipeOutputsInput = {
@@ -4499,6 +4589,7 @@ export type ItemUncheckedCreateWithoutRecipeOutputsInput = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutRecipeOutputsInput = {
@@ -4558,6 +4649,7 @@ export type ItemUpdateWithoutRecipeOutputsInput = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutRecipeOutputsInput = {
@@ -4601,6 +4693,7 @@ export type ItemUncheckedUpdateWithoutRecipeOutputsInput = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutRecipeInputsInput = {
@@ -4644,6 +4737,7 @@ export type ItemCreateWithoutRecipeInputsInput = {
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutRecipeInputsInput = {
@@ -4687,6 +4781,7 @@ export type ItemUncheckedCreateWithoutRecipeInputsInput = {
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutRecipeInputsInput = {
@@ -4746,6 +4841,7 @@ export type ItemUpdateWithoutRecipeInputsInput = {
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutRecipeInputsInput = {
@@ -4789,6 +4885,7 @@ export type ItemUncheckedUpdateWithoutRecipeInputsInput = {
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutNodeYieldsInput = {
@@ -4832,6 +4929,7 @@ export type ItemCreateWithoutNodeYieldsInput = {
   recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutNodeYieldsInput = {
@@ -4875,6 +4973,7 @@ export type ItemUncheckedCreateWithoutNodeYieldsInput = {
   recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutNodeYieldsInput = {
@@ -4934,6 +5033,7 @@ export type ItemUpdateWithoutNodeYieldsInput = {
   recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutNodeYieldsInput = {
@@ -4977,6 +5077,7 @@ export type ItemUncheckedUpdateWithoutNodeYieldsInput = {
   recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutSkillActionInputsInput = {
@@ -5020,6 +5121,7 @@ export type ItemCreateWithoutSkillActionInputsInput = {
   recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutSkillActionInputsInput = {
@@ -5063,6 +5165,7 @@ export type ItemUncheckedCreateWithoutSkillActionInputsInput = {
   recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutSkillActionInputsInput = {
@@ -5122,6 +5225,7 @@ export type ItemUpdateWithoutSkillActionInputsInput = {
   recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutSkillActionInputsInput = {
@@ -5165,6 +5269,7 @@ export type ItemUncheckedUpdateWithoutSkillActionInputsInput = {
   recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutSkillActionOutputsInput = {
@@ -5208,6 +5313,7 @@ export type ItemCreateWithoutSkillActionOutputsInput = {
   recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
   nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutSkillActionOutputsInput = {
@@ -5251,6 +5357,7 @@ export type ItemUncheckedCreateWithoutSkillActionOutputsInput = {
   recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
   nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutSkillActionOutputsInput = {
@@ -5310,6 +5417,7 @@ export type ItemUpdateWithoutSkillActionOutputsInput = {
   recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
   nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutSkillActionOutputsInput = {
@@ -5353,6 +5461,199 @@ export type ItemUncheckedUpdateWithoutSkillActionOutputsInput = {
   recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
   nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
   skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
+  dropTableEntries?: Prisma.DropTableEntryUncheckedUpdateManyWithoutItemNestedInput
+}
+
+export type ItemCreateWithoutDropTableEntriesInput = {
+  id?: string
+  key?: string | null
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  defenseBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
+  equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
+  equippedAsLeftArm?: Prisma.EquipmentCreateNestedManyWithoutLeftArmInput
+  equippedAsRightArm?: Prisma.EquipmentCreateNestedManyWithoutRightArmInput
+  equippedAsBody?: Prisma.EquipmentCreateNestedManyWithoutBodyInput
+  equippedAsLegs?: Prisma.EquipmentCreateNestedManyWithoutLegsInput
+  equippedAsFeet?: Prisma.EquipmentCreateNestedManyWithoutFeetInput
+  equippedAsRing1?: Prisma.EquipmentCreateNestedManyWithoutRing1Input
+  equippedAsRing2?: Prisma.EquipmentCreateNestedManyWithoutRing2Input
+  equippedAsRing3?: Prisma.EquipmentCreateNestedManyWithoutRing3Input
+  equippedAsNecklace?: Prisma.EquipmentCreateNestedManyWithoutNecklaceInput
+  equippedAsBelt?: Prisma.EquipmentCreateNestedManyWithoutBeltInput
+  equippedAsCloak?: Prisma.EquipmentCreateNestedManyWithoutCloakInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldCreateNestedManyWithoutItemInput
+  skillActionInputs?: Prisma.SkillActionInputCreateNestedManyWithoutItemInput
+  skillActionOutputs?: Prisma.SkillActionOutputCreateNestedManyWithoutItemInput
+}
+
+export type ItemUncheckedCreateWithoutDropTableEntriesInput = {
+  id?: string
+  key?: string | null
+  name: string
+  description?: string | null
+  itemType: $Enums.ItemType
+  itemRarity: $Enums.ItemRarity
+  tier?: number
+  value: number
+  stackable?: boolean
+  maxStack?: number
+  equipmentSlot?: $Enums.EquipmentSlot | null
+  vitalityBonus?: number
+  strengthBonus?: number
+  speedBonus?: number
+  dexterityBonus?: number
+  hpBonus?: number
+  spBonus?: number
+  defenseBonus?: number
+  createdAt?: Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
+  equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
+  equippedAsLeftArm?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLeftArmInput
+  equippedAsRightArm?: Prisma.EquipmentUncheckedCreateNestedManyWithoutRightArmInput
+  equippedAsBody?: Prisma.EquipmentUncheckedCreateNestedManyWithoutBodyInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLegsInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedCreateNestedManyWithoutFeetInput
+  equippedAsRing1?: Prisma.EquipmentUncheckedCreateNestedManyWithoutRing1Input
+  equippedAsRing2?: Prisma.EquipmentUncheckedCreateNestedManyWithoutRing2Input
+  equippedAsRing3?: Prisma.EquipmentUncheckedCreateNestedManyWithoutRing3Input
+  equippedAsNecklace?: Prisma.EquipmentUncheckedCreateNestedManyWithoutNecklaceInput
+  equippedAsBelt?: Prisma.EquipmentUncheckedCreateNestedManyWithoutBeltInput
+  equippedAsCloak?: Prisma.EquipmentUncheckedCreateNestedManyWithoutCloakInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutItemInput
+  marketListings?: Prisma.MarketListingUncheckedCreateNestedManyWithoutItemInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedCreateNestedManyWithoutItemInput
+  shopItems?: Prisma.ShopItemUncheckedCreateNestedManyWithoutItemInput
+  recipeOutputs?: Prisma.RecipeUncheckedCreateNestedManyWithoutOutputItemInput
+  recipeInputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutItemInput
+  nodeYields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutItemInput
+  skillActionInputs?: Prisma.SkillActionInputUncheckedCreateNestedManyWithoutItemInput
+  skillActionOutputs?: Prisma.SkillActionOutputUncheckedCreateNestedManyWithoutItemInput
+}
+
+export type ItemCreateOrConnectWithoutDropTableEntriesInput = {
+  where: Prisma.ItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.ItemCreateWithoutDropTableEntriesInput, Prisma.ItemUncheckedCreateWithoutDropTableEntriesInput>
+}
+
+export type ItemUpsertWithoutDropTableEntriesInput = {
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutDropTableEntriesInput, Prisma.ItemUncheckedUpdateWithoutDropTableEntriesInput>
+  create: Prisma.XOR<Prisma.ItemCreateWithoutDropTableEntriesInput, Prisma.ItemUncheckedCreateWithoutDropTableEntriesInput>
+  where?: Prisma.ItemWhereInput
+}
+
+export type ItemUpdateToOneWithWhereWithoutDropTableEntriesInput = {
+  where?: Prisma.ItemWhereInput
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutDropTableEntriesInput, Prisma.ItemUncheckedUpdateWithoutDropTableEntriesInput>
+}
+
+export type ItemUpdateWithoutDropTableEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
+  equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
+  equippedAsLeftArm?: Prisma.EquipmentUpdateManyWithoutLeftArmNestedInput
+  equippedAsRightArm?: Prisma.EquipmentUpdateManyWithoutRightArmNestedInput
+  equippedAsBody?: Prisma.EquipmentUpdateManyWithoutBodyNestedInput
+  equippedAsLegs?: Prisma.EquipmentUpdateManyWithoutLegsNestedInput
+  equippedAsFeet?: Prisma.EquipmentUpdateManyWithoutFeetNestedInput
+  equippedAsRing1?: Prisma.EquipmentUpdateManyWithoutRing1NestedInput
+  equippedAsRing2?: Prisma.EquipmentUpdateManyWithoutRing2NestedInput
+  equippedAsRing3?: Prisma.EquipmentUpdateManyWithoutRing3NestedInput
+  equippedAsNecklace?: Prisma.EquipmentUpdateManyWithoutNecklaceNestedInput
+  equippedAsBelt?: Prisma.EquipmentUpdateManyWithoutBeltNestedInput
+  equippedAsCloak?: Prisma.EquipmentUpdateManyWithoutCloakNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUpdateManyWithoutItemNestedInput
+  skillActionInputs?: Prisma.SkillActionInputUpdateManyWithoutItemNestedInput
+  skillActionOutputs?: Prisma.SkillActionOutputUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUncheckedUpdateWithoutDropTableEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  itemType?: Prisma.EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+  itemRarity?: Prisma.EnumItemRarityFieldUpdateOperationsInput | $Enums.ItemRarity
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  stackable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxStack?: Prisma.IntFieldUpdateOperationsInput | number
+  equipmentSlot?: Prisma.NullableEnumEquipmentSlotFieldUpdateOperationsInput | $Enums.EquipmentSlot | null
+  vitalityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  strengthBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  speedBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  dexterityBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  spBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
+  equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
+  equippedAsLeftArm?: Prisma.EquipmentUncheckedUpdateManyWithoutLeftArmNestedInput
+  equippedAsRightArm?: Prisma.EquipmentUncheckedUpdateManyWithoutRightArmNestedInput
+  equippedAsBody?: Prisma.EquipmentUncheckedUpdateManyWithoutBodyNestedInput
+  equippedAsLegs?: Prisma.EquipmentUncheckedUpdateManyWithoutLegsNestedInput
+  equippedAsFeet?: Prisma.EquipmentUncheckedUpdateManyWithoutFeetNestedInput
+  equippedAsRing1?: Prisma.EquipmentUncheckedUpdateManyWithoutRing1NestedInput
+  equippedAsRing2?: Prisma.EquipmentUncheckedUpdateManyWithoutRing2NestedInput
+  equippedAsRing3?: Prisma.EquipmentUncheckedUpdateManyWithoutRing3NestedInput
+  equippedAsNecklace?: Prisma.EquipmentUncheckedUpdateManyWithoutNecklaceNestedInput
+  equippedAsBelt?: Prisma.EquipmentUncheckedUpdateManyWithoutBeltNestedInput
+  equippedAsCloak?: Prisma.EquipmentUncheckedUpdateManyWithoutCloakNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutItemNestedInput
+  marketListings?: Prisma.MarketListingUncheckedUpdateManyWithoutItemNestedInput
+  marketTransactions?: Prisma.MarketTransactionUncheckedUpdateManyWithoutItemNestedInput
+  shopItems?: Prisma.ShopItemUncheckedUpdateManyWithoutItemNestedInput
+  recipeOutputs?: Prisma.RecipeUncheckedUpdateManyWithoutOutputItemNestedInput
+  recipeInputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutItemNestedInput
+  nodeYields?: Prisma.NodeYieldUncheckedUpdateManyWithoutItemNestedInput
+  skillActionInputs?: Prisma.SkillActionInputUncheckedUpdateManyWithoutItemNestedInput
+  skillActionOutputs?: Prisma.SkillActionOutputUncheckedUpdateManyWithoutItemNestedInput
 }
 
 
@@ -5383,6 +5684,7 @@ export type ItemCountOutputType = {
   nodeYields: number
   skillActionInputs: number
   skillActionOutputs: number
+  dropTableEntries: number
 }
 
 export type ItemCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5408,6 +5710,7 @@ export type ItemCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   nodeYields?: boolean | ItemCountOutputTypeCountNodeYieldsArgs
   skillActionInputs?: boolean | ItemCountOutputTypeCountSkillActionInputsArgs
   skillActionOutputs?: boolean | ItemCountOutputTypeCountSkillActionOutputsArgs
+  dropTableEntries?: boolean | ItemCountOutputTypeCountDropTableEntriesArgs
 }
 
 /**
@@ -5574,6 +5877,13 @@ export type ItemCountOutputTypeCountSkillActionOutputsArgs<ExtArgs extends runti
   where?: Prisma.SkillActionOutputWhereInput
 }
 
+/**
+ * ItemCountOutputType without action
+ */
+export type ItemCountOutputTypeCountDropTableEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DropTableEntryWhereInput
+}
+
 
 export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -5617,6 +5927,7 @@ export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   nodeYields?: boolean | Prisma.Item$nodeYieldsArgs<ExtArgs>
   skillActionInputs?: boolean | Prisma.Item$skillActionInputsArgs<ExtArgs>
   skillActionOutputs?: boolean | Prisma.Item$skillActionOutputsArgs<ExtArgs>
+  dropTableEntries?: boolean | Prisma.Item$dropTableEntriesArgs<ExtArgs>
   _count?: boolean | Prisma.ItemCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["item"]>
 
@@ -5710,6 +6021,7 @@ export type ItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   nodeYields?: boolean | Prisma.Item$nodeYieldsArgs<ExtArgs>
   skillActionInputs?: boolean | Prisma.Item$skillActionInputsArgs<ExtArgs>
   skillActionOutputs?: boolean | Prisma.Item$skillActionOutputsArgs<ExtArgs>
+  dropTableEntries?: boolean | Prisma.Item$dropTableEntriesArgs<ExtArgs>
   _count?: boolean | Prisma.ItemCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ItemIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -5740,6 +6052,7 @@ export type $ItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     nodeYields: Prisma.$NodeYieldPayload<ExtArgs>[]
     skillActionInputs: Prisma.$SkillActionInputPayload<ExtArgs>[]
     skillActionOutputs: Prisma.$SkillActionOutputPayload<ExtArgs>[]
+    dropTableEntries: Prisma.$DropTableEntryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -6177,6 +6490,7 @@ export interface Prisma__ItemClient<T, Null = never, ExtArgs extends runtime.Typ
   nodeYields<T extends Prisma.Item$nodeYieldsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$nodeYieldsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NodeYieldPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   skillActionInputs<T extends Prisma.Item$skillActionInputsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$skillActionInputsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SkillActionInputPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   skillActionOutputs<T extends Prisma.Item$skillActionOutputsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$skillActionOutputsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SkillActionOutputPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  dropTableEntries<T extends Prisma.Item$dropTableEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$dropTableEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DropTableEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7138,6 +7452,30 @@ export type Item$skillActionOutputsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.SkillActionOutputScalarFieldEnum | Prisma.SkillActionOutputScalarFieldEnum[]
+}
+
+/**
+ * Item.dropTableEntries
+ */
+export type Item$dropTableEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DropTableEntry
+   */
+  select?: Prisma.DropTableEntrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DropTableEntry
+   */
+  omit?: Prisma.DropTableEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DropTableEntryInclude<ExtArgs> | null
+  where?: Prisma.DropTableEntryWhereInput
+  orderBy?: Prisma.DropTableEntryOrderByWithRelationInput | Prisma.DropTableEntryOrderByWithRelationInput[]
+  cursor?: Prisma.DropTableEntryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DropTableEntryScalarFieldEnum | Prisma.DropTableEntryScalarFieldEnum[]
 }
 
 /**

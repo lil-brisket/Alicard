@@ -135,6 +135,11 @@ export type Occupation = Prisma.OccupationModel
  */
 export type Skill = Prisma.SkillModel
 /**
+ * Model SkillEffect
+ * 
+ */
+export type SkillEffect = Prisma.SkillEffectModel
+/**
  * Model PlayerSkill
  * 
  */
@@ -315,6 +320,11 @@ export type PlayerStatsPeriod = Prisma.PlayerStatsPeriodModel
  */
 export type AdminActionLog = Prisma.AdminActionLogModel
 /**
+ * Model AuditEvent
+ * 
+ */
+export type AuditEvent = Prisma.AuditEventModel
+/**
  * Model ItemTemplate
  * 
  */
@@ -329,6 +339,16 @@ export type MonsterTemplate = Prisma.MonsterTemplateModel
  * 
  */
 export type QuestTemplate = Prisma.QuestTemplateModel
+/**
+ * Model QuestStep
+ * 
+ */
+export type QuestStep = Prisma.QuestStepModel
+/**
+ * Model QuestReward
+ * 
+ */
+export type QuestReward = Prisma.QuestRewardModel
 /**
  * Model MapZone
  * 
@@ -399,3 +419,63 @@ export type ChatMention = Prisma.ChatMentionModel
  * 
  */
 export type Notification = Prisma.NotificationModel
+/**
+ * Model EnemyTemplate
+ * 
+ */
+export type EnemyTemplate = Prisma.EnemyTemplateModel
+/**
+ * Model DropTable
+ * 
+ */
+export type DropTable = Prisma.DropTableModel
+/**
+ * Model DropTableEntry
+ * 
+ */
+export type DropTableEntry = Prisma.DropTableEntryModel
+/**
+ * Model EncounterDefinition
+ * 
+ */
+export type EncounterDefinition = Prisma.EncounterDefinitionModel
+/**
+ * Model EncounterEnemy
+ * 
+ */
+export type EncounterEnemy = Prisma.EncounterEnemyModel
+/**
+ * Model ResourceNodeDefinition
+ * 
+ */
+export type ResourceNodeDefinition = Prisma.ResourceNodeDefinitionModel
+/**
+ * Model QuestTrigger
+ * 
+ */
+export type QuestTrigger = Prisma.QuestTriggerModel
+/**
+ * Model MapDefinition
+ * 
+ */
+export type MapDefinition = Prisma.MapDefinitionModel
+/**
+ * Model MapVersion
+ * 
+ */
+export type MapVersion = Prisma.MapVersionModel
+/**
+ * Model MapVersionTile
+ * 
+ */
+export type MapVersionTile = Prisma.MapVersionTileModel
+/**
+ * Model MapZoneVersion
+ * 
+ */
+export type MapZoneVersion = Prisma.MapZoneVersionModel
+/**
+ * Model MapPOI
+ * 
+ */
+export type MapPOI = Prisma.MapPOIModel

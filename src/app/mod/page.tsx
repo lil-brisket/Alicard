@@ -3,49 +3,51 @@
 import { useState } from "react";
 import { api } from "~/trpc/react";
 import { toast } from "react-hot-toast";
-import Link from "next/link";
+import { PanelLayout } from "~/components/panels/panel-layout";
+import { useDebounce } from "~/hooks/use-debounce";
+import { ConfirmDialog } from "~/components/ui/confirm-dialog";
+import type { RouterOutputs } from "~/trpc/react";
+
+type User = RouterOutputs["admin"]["users"]["getUserById"];
+
+const modNavItems = [
+  { label: "User Search", href: "/mod" },
+];
 
 export default function ModPanelPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
+  const debouncedQuery = useDebounce(searchQuery, 300);
 
   const { data: users, isLoading } = api.admin.users.searchUsers.useQuery(
     {
-      query: searchQuery,
+      query: debouncedQuery,
       limit: 20,
     },
     {
-      enabled: searchQuery.length > 0,
+      enabled: debouncedQuery.length > 0,
     }
   );
 
   return (
-    <div className="min-h-screen bg-slate-950 p-6 text-slate-100">
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-6 flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-cyan-400">Mod Panel</h1>
-          <Link
-            href="/hub"
-            className="rounded-lg bg-slate-800 px-4 py-2 text-sm text-slate-300 transition hover:bg-slate-700"
-          >
-            Back to Hub
-          </Link>
-        </div>
-
-        <div className="mb-6">
-          <input
-            type="text"
-            placeholder="Search users by username, email, or ID..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-2 text-slate-100 placeholder:text-slate-500"
-          />
-        </div>
-
+    <PanelLayout
+      title="Mod Panel"
+      navItems={modNavItems}
+      searchSlot={
+        <input
+          type="text"
+          placeholder="Search users by username, email, or ID..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full max-w-md rounded-lg border border-slate-700 bg-slate-800 px-4 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-cyan-500 focus:outline-none"
+        />
+      }
+    >
+      <div className="space-y-6">
         {isLoading && <p className="text-slate-400">Searching...</p>}
 
         {users && users.length > 0 && (
-          <div className="mb-6 grid gap-4">
+          <div className="grid gap-4">
             {users.map((user) => (
               <button
                 key={user.id}
@@ -62,17 +64,28 @@ export default function ModPanelPage() {
           </div>
         )}
 
+        {debouncedQuery.length === 0 && (
+          <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-8 text-center">
+            <p className="text-slate-400">Enter a search query to find users</p>
+          </div>
+        )}
+
         {selectedUserId && (
           <ModUserDetail userId={selectedUserId} onClose={() => setSelectedUserId(null)} />
         )}
       </div>
-    </div>
+    </PanelLayout>
   );
 }
 
 function ModUserDetail({ userId, onClose }: { userId: string; onClose: () => void }) {
   const { data: user, isLoading } = api.admin.users.getUserById.useQuery({ id: userId });
   const { data: ipHistory } = api.admin.users.getIpHistory.useQuery({ userId, limit: 50 });
+  // Note: Using AdminActionLog for now, can be migrated to AuditEvent later
+  const { data: auditEvents } = api.admin.users.listAdminActions.useQuery({
+    targetUserId: userId,
+    limit: 50,
+  });
 
   if (isLoading) {
     return (
@@ -146,7 +159,7 @@ function ModUserDetail({ userId, onClose }: { userId: string; onClose: () => voi
           <div className="rounded-lg border border-slate-800 bg-slate-800/30 p-4">
             <h3 className="mb-2 text-sm font-semibold text-cyan-400">IP History</h3>
             {ipHistory && ipHistory.length > 0 ? (
-              <div className="max-h-96 space-y-2 overflow-y-auto">
+              <div className="max-h-48 space-y-2 overflow-y-auto">
                 {ipHistory.map((ip) => (
                   <div key={ip.id} className="rounded bg-slate-900/50 p-2 text-xs">
                     <div className="font-medium text-slate-200">{ip.ipAddress}</div>
@@ -163,24 +176,75 @@ function ModUserDetail({ userId, onClose }: { userId: string; onClose: () => voi
               <p className="text-sm text-slate-400">No IP history</p>
             )}
           </div>
+
+          <div className="rounded-lg border border-slate-800 bg-slate-800/30 p-4">
+            <h3 className="mb-2 text-sm font-semibold text-cyan-400">Moderation History</h3>
+            {auditEvents && auditEvents.length > 0 ? (
+              <div className="max-h-48 space-y-2 overflow-y-auto">
+                {auditEvents.map((event) => (
+                  <div key={event.id} className="rounded bg-slate-900/50 p-2 text-xs">
+                    <div className="font-medium text-slate-200">{event.action}</div>
+                    <div className="text-slate-400">
+                      {event.actor.username} - {new Date(event.createdAt).toLocaleString()}
+                    </div>
+                    {event.reason && (
+                      <div className="mt-1 text-slate-500">{event.reason}</div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-slate-400">No moderation history</p>
+            )}
+          </div>
+
+          <div className="rounded-lg border border-slate-800 bg-slate-800/30 p-4">
+            <h3 className="mb-2 text-sm font-semibold text-cyan-400">Context Links</h3>
+            <div className="space-y-2">
+              <button
+                disabled
+                className="w-full rounded-lg bg-slate-800 px-4 py-2 text-sm text-slate-500 transition disabled:cursor-not-allowed"
+              >
+                Chat Logs (TODO)
+              </button>
+              <button
+                disabled
+                className="w-full rounded-lg bg-slate-800 px-4 py-2 text-sm text-slate-500 transition disabled:cursor-not-allowed"
+              >
+                Combat Logs (TODO)
+              </button>
+              <button
+                disabled
+                className="w-full rounded-lg bg-slate-800 px-4 py-2 text-sm text-slate-500 transition disabled:cursor-not-allowed"
+              >
+                Trade History (TODO)
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-function ModBanMuteSection({ user }: { user: any }) {
+function ModBanMuteSection({ user }: { user: User }) {
   const utils = api.useUtils();
   const [banReason, setBanReason] = useState("");
   const [banDuration, setBanDuration] = useState<"1h" | "6h" | "12h" | "24h" | "3d" | "7d" | "30d" | "permanent">("24h");
   const [muteReason, setMuteReason] = useState("");
   const [muteDuration, setMuteDuration] = useState<"15m" | "30m" | "1h" | "6h" | "12h" | "24h" | "3d" | "7d" | "permanent">("1h");
+  const [showBanConfirm, setShowBanConfirm] = useState(false);
+  const [showUnbanConfirm, setShowUnbanConfirm] = useState(false);
+  const [showMuteConfirm, setShowMuteConfirm] = useState(false);
+  const [showUnmuteConfirm, setShowUnmuteConfirm] = useState(false);
 
   const banUser = api.admin.users.banUser.useMutation({
     onSuccess: () => {
       toast.success("User banned");
       void utils.admin.users.getUserById.invalidate({ id: user.id });
+      void utils.admin.users.listAdminActions.invalidate({ targetUserId: user.id });
       setBanReason("");
+      setShowBanConfirm(false);
     },
     onError: (error) => {
       toast.error(error.message);
@@ -191,6 +255,8 @@ function ModBanMuteSection({ user }: { user: any }) {
     onSuccess: () => {
       toast.success("User unbanned");
       void utils.admin.users.getUserById.invalidate({ id: user.id });
+      void utils.admin.users.listAdminActions.invalidate({ targetUserId: user.id });
+      setShowUnbanConfirm(false);
     },
     onError: (error) => {
       toast.error(error.message);
@@ -201,7 +267,9 @@ function ModBanMuteSection({ user }: { user: any }) {
     onSuccess: () => {
       toast.success("User muted");
       void utils.admin.users.getUserById.invalidate({ id: user.id });
+      void utils.admin.users.listAdminActions.invalidate({ targetUserId: user.id });
       setMuteReason("");
+      setShowMuteConfirm(false);
     },
     onError: (error) => {
       toast.error(error.message);
@@ -212,6 +280,8 @@ function ModBanMuteSection({ user }: { user: any }) {
     onSuccess: () => {
       toast.success("User unmuted");
       void utils.admin.users.getUserById.invalidate({ id: user.id });
+      void utils.admin.users.listAdminActions.invalidate({ targetUserId: user.id });
+      setShowUnmuteConfirm(false);
     },
     onError: (error) => {
       toast.error(error.message);
@@ -228,7 +298,7 @@ function ModBanMuteSection({ user }: { user: any }) {
               Banned until: {user.bannedUntil ? new Date(user.bannedUntil).toLocaleString() : "Permanent"}
             </p>
             <button
-              onClick={() => unbanUser.mutate({ id: user.id })}
+              onClick={() => setShowUnbanConfirm(true)}
               disabled={unbanUser.isPending}
               className="w-full rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700 disabled:opacity-50"
             >
@@ -239,7 +309,7 @@ function ModBanMuteSection({ user }: { user: any }) {
           <div className="space-y-2">
             <input
               type="text"
-              placeholder="Ban reason..."
+              placeholder="Ban reason (required, 3-200 chars)..."
               value={banReason}
               onChange={(e) => setBanReason(e.target.value)}
               className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-100"
@@ -259,14 +329,14 @@ function ModBanMuteSection({ user }: { user: any }) {
               <option value="permanent">Permanent</option>
             </select>
             <button
-              onClick={() =>
-                banUser.mutate({
-                  id: user.id,
-                  reason: banReason,
-                  duration: banDuration,
-                })
-              }
-              disabled={banUser.isPending || !banReason}
+              onClick={() => {
+                if (banReason.length >= 3 && banReason.length <= 200) {
+                  setShowBanConfirm(true);
+                } else {
+                  toast.error("Reason must be between 3 and 200 characters");
+                }
+              }}
+              disabled={banUser.isPending || banReason.length < 3 || banReason.length > 200}
               className="w-full rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-700 disabled:opacity-50"
             >
               Ban User
@@ -283,7 +353,7 @@ function ModBanMuteSection({ user }: { user: any }) {
               Muted until: {user.mutedUntil ? new Date(user.mutedUntil).toLocaleString() : "Permanent"}
             </p>
             <button
-              onClick={() => unmuteUser.mutate({ id: user.id })}
+              onClick={() => setShowUnmuteConfirm(true)}
               disabled={unmuteUser.isPending}
               className="w-full rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700 disabled:opacity-50"
             >
@@ -294,7 +364,7 @@ function ModBanMuteSection({ user }: { user: any }) {
           <div className="space-y-2">
             <input
               type="text"
-              placeholder="Mute reason..."
+              placeholder="Mute reason (required, 3-200 chars)..."
               value={muteReason}
               onChange={(e) => setMuteReason(e.target.value)}
               className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-100"
@@ -315,14 +385,14 @@ function ModBanMuteSection({ user }: { user: any }) {
               <option value="permanent">Permanent</option>
             </select>
             <button
-              onClick={() =>
-                muteUser.mutate({
-                  id: user.id,
-                  reason: muteReason,
-                  duration: muteDuration,
-                })
-              }
-              disabled={muteUser.isPending || !muteReason}
+              onClick={() => {
+                if (muteReason.length >= 3 && muteReason.length <= 200) {
+                  setShowMuteConfirm(true);
+                } else {
+                  toast.error("Reason must be between 3 and 200 characters");
+                }
+              }}
+              disabled={muteUser.isPending || muteReason.length < 3 || muteReason.length > 200}
               className="w-full rounded-lg bg-yellow-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-yellow-700 disabled:opacity-50"
             >
               Mute User
@@ -330,6 +400,44 @@ function ModBanMuteSection({ user }: { user: any }) {
           </div>
         )}
       </div>
+
+      <ConfirmDialog
+        open={showBanConfirm}
+        onClose={() => setShowBanConfirm(false)}
+        onConfirm={() => banUser.mutate({ id: user.id, reason: banReason, duration: banDuration })}
+        title="Ban User"
+        description={`Are you sure you want to ban ${user.username}?`}
+        confirmText="Ban"
+        variant="danger"
+      />
+
+      <ConfirmDialog
+        open={showUnbanConfirm}
+        onClose={() => setShowUnbanConfirm(false)}
+        onConfirm={() => unbanUser.mutate({ id: user.id })}
+        title="Unban User"
+        description={`Are you sure you want to unban ${user.username}?`}
+        confirmText="Unban"
+      />
+
+      <ConfirmDialog
+        open={showMuteConfirm}
+        onClose={() => setShowMuteConfirm(false)}
+        onConfirm={() => muteUser.mutate({ id: user.id, reason: muteReason, duration: muteDuration })}
+        title="Mute User"
+        description={`Are you sure you want to mute ${user.username}?`}
+        confirmText="Mute"
+        variant="danger"
+      />
+
+      <ConfirmDialog
+        open={showUnmuteConfirm}
+        onClose={() => setShowUnmuteConfirm(false)}
+        onConfirm={() => unmuteUser.mutate({ id: user.id })}
+        title="Unmute User"
+        description={`Are you sure you want to unmute ${user.username}?`}
+        confirmText="Unmute"
+      />
     </div>
   );
 }

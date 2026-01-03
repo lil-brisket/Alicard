@@ -95,10 +95,10 @@ model User {
   ipHistory            UserIpHistory[]
   // Chat
   chatMessages         ChatMessage[]
-  chatReactions       ChatReaction[]
-  chatMentions         ChatMention[]       @relation("MentionedUser")
-  chatMentionsBy       ChatMention[]       @relation("MentionedBy")
-  notifications       Notification[]
+  chatReactions        ChatReaction[]
+  chatMentions         ChatMention[]           @relation("MentionedUser")
+  chatMentionsBy       ChatMention[]           @relation("MentionedBy")
+  notifications        Notification[]
 }
 
 model Character {
@@ -258,17 +258,17 @@ model MapTile {
 }
 
 model MapPosition {
-  id             String   @id @default(cuid())
-  playerId       String   @unique
-  worldId        String
-  tileX          Int
-  tileY          Int
-  tileId         Int?
+  id              String   @id @default(cuid())
+  playerId        String   @unique
+  worldId         String
+  tileX           Int
+  tileY           Int
+  tileId          Int?
   discoveredTiles Json? // boolean[] for discovered tiles (length = width * height)
-  updatedAt      DateTime @updatedAt
-  player         Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  tile           MapTile? @relation(fields: [tileId], references: [id])
-  world          World    @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  updatedAt       DateTime @updatedAt
+  player          Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  tile            MapTile? @relation(fields: [tileId], references: [id])
+  world           World    @relation(fields: [worldId], references: [id], onDelete: Cascade)
 
   @@index([tileX, tileY])
   @@index([worldId])
@@ -345,6 +345,7 @@ model Item {
   nodeYields         NodeYield[]         @relation("NodeYield")
   skillActionInputs  SkillActionInput[]  @relation("SkillActionInput")
   skillActionOutputs SkillActionOutput[] @relation("SkillActionOutput")
+  dropTableEntries   DropTableEntry[]
 
   @@index([itemType])
   @@index([itemRarity])
@@ -411,6 +412,7 @@ model Occupation {
 model Skill {
   id            String               @id @default(cuid())
   key           String               @unique
+  slug          String               @unique
   // Global taxonomy fields
   name          String
   description   String?
@@ -420,10 +422,26 @@ model Skill {
   createdBy     String?
   createdAt     DateTime             @default(now())
   updatedAt     DateTime             @updatedAt
+  // Legacy archive field
+  isArchived    Boolean              @default(false)
   // Skill-specific fields
   staminaCost   Int                  @default(0)
   cooldownTurns Int                  @default(0) // Cooldown in turns
+  castTimeTurns Int                  @default(0) // Cast time in turns
   levelUnlock   Int? // Level required to unlock this skill
+  // Categorization
+  skillType     SkillType            @default(ATTACK)
+  damageType    DamageType? // Required for ATTACK skills
+  // Cost/Pacing
+  hits          Int                  @default(1)
+  targeting     SkillTargeting       @default(SINGLE)
+  maxTargets    Int? // Required when targeting != SINGLE
+  // Damage Definition
+  basePower     Int? // Required when skillType=ATTACK or has damage effects
+  scalingStat   StatType? // Stat that scales damage
+  scalingRatio  Float                @default(1.0)
+  flatBonus     Int                  @default(0)
+  // Relations
   playerSkills  PlayerSkill[]
   slot1Loadouts PlayerSkillLoadout[] @relation("Slot1")
   slot2Loadouts PlayerSkillLoadout[] @relation("Slot2")
@@ -433,10 +451,35 @@ model Skill {
   slot6Loadouts PlayerSkillLoadout[] @relation("Slot6")
   slot7Loadouts PlayerSkillLoadout[] @relation("Slot7")
   slot8Loadouts PlayerSkillLoadout[] @relation("Slot8")
+  effects       SkillEffect[]
 
   @@index([key])
+  @@index([slug])
   @@index([status])
+  @@index([isArchived])
+  @@index([skillType])
   @@index([createdBy])
+}
+
+model SkillEffect {
+  id                String          @id @default(cuid())
+  skillId           String
+  type              SkillEffectType
+  stat              StatType? // Required for BUFF_STAT/DEBUFF_STAT
+  value             Int // Meaning depends on type
+  ratio             Float? // Scaling component (optional)
+  durationTurns     Int             @default(0) // 0 means instantaneous
+  chance            Float           @default(1.0) // 0-1
+  tickIntervalTurns Int             @default(1) // For DOT/HOT
+  maxStacks         Int             @default(1)
+  note              String? // Designer notes
+  ordering          Int             @default(0) // Execution/display order
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  skill             Skill           @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@index([skillId, ordering])
+  @@index([skillId])
 }
 
 model PlayerSkill {
@@ -705,6 +748,12 @@ enum TileType {
   ROAD
   PLAIN
   WATER
+  // New versioned map tile types
+  GROUND
+  WALL
+  DOOR
+  PORTAL
+  POI
 }
 
 enum ZoneType {
@@ -795,23 +844,49 @@ enum QuestType {
   CRAFT
 }
 
+enum QuestRepeatability {
+  ONCE
+  DAILY
+  WEEKLY
+  REPEATABLE
+}
+
+enum QuestStepType {
+  KILL_ENEMY
+  GATHER_ITEM
+  CRAFT_ITEM
+  VISIT_LOCATION
+  DELIVER_ITEM
+  TALK_TO_NPC
+  INTERACT_NODE
+}
+
+enum QuestRewardType {
+  XP_CHARACTER
+  XP_OCCUPATION
+  ITEM
+  GOLD
+  RECIPE_UNLOCK
+  SKILL_UNLOCK
+}
+
 enum JobCategory {
   CRAFT
   GATHER
 }
 
 model Job {
-  id          String          @id @default(cuid())
-  key         String          @unique
-  name        String
-  description String?
-  category    JobCategory
-  icon        String?
-  createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @updatedAt
-  userJobs    UserJob[]
-  recipes     Recipe[]
-  nodes       GatheringNode[]
+  id             String          @id @default(cuid())
+  key            String          @unique
+  name           String
+  description    String?
+  category       JobCategory
+  icon           String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  userJobs       UserJob[]
+  recipes        Recipe[]
+  nodes          GatheringNode[]
   trainingSkills TrainingSkill[]
 
   @@index([category])
@@ -1051,6 +1126,69 @@ enum ContentStatus {
   DRAFT
   ACTIVE
   DISABLED
+  PUBLISHED
+  ARCHIVED
+}
+
+enum TileOverlay {
+  NONE
+  SAFEZONE
+  DANGER
+  TOWN
+  DUNGEON
+  RESOURCE_RICH
+}
+
+enum POIType {
+  NPC
+  SHOP
+  BANK
+  GUILD_HALL
+  PORTAL
+  SHRINE
+  QUEST_BOARD
+}
+
+enum SkillType {
+  ATTACK
+  BUFF
+  HEAL
+  UTILITY
+  DEBUFF
+}
+
+enum DamageType {
+  PHYSICAL
+  MAGIC
+  TRUE
+}
+
+enum SkillTargeting {
+  SINGLE
+  MULTI
+  AOE
+}
+
+enum StatType {
+  VITALITY
+  STRENGTH
+  SPEED
+  DEXTERITY
+}
+
+enum SkillEffectType {
+  DAMAGE
+  HEAL
+  BUFF_STAT
+  DEBUFF_STAT
+  DOT
+  HOT
+  STUN
+  SILENCE
+  TAUNT
+  SHIELD
+  CLEANSE
+  DISPEL
 }
 
 enum BattleStatus {
@@ -1152,17 +1290,23 @@ model AdminActionLog {
 
 // Audit & Event Logging
 model AuditEvent {
-  id                String   @id @default(cuid())
-  actorUserId       String?
-  actorCharacterId  String?
-  type              String
-  payloadJson       Json
-  createdAt         DateTime @default(now())
+  id               String   @id @default(cuid())
+  createdAt        DateTime @default(now())
+  actorUserId      String?
+  actorCharacterId String?
+  targetUserId     String?
+  targetEntityType String? // e.g. "User", "EnemyTemplate", "DropTable"
+  targetEntityId   String?
+  action           String // e.g. "USER_BANNED", "ROLE_GRANTED", "CONTENT_UPDATED"
+  reason           String?
+  payloadJson      Json
+  ipAddress        String?
+  userAgent        String?
 
-  @@index([actorUserId, createdAt])
-  @@index([actorCharacterId, createdAt])
-  @@index([type, createdAt])
   @@index([createdAt])
+  @@index([actorUserId, createdAt])
+  @@index([targetUserId, createdAt])
+  @@index([targetEntityType, targetEntityId])
 }
 
 // Content Templates (Game CMS)
@@ -1228,29 +1372,67 @@ model MonsterTemplate {
 }
 
 model QuestTemplate {
-  id          String        @id @default(cuid())
-  // Global taxonomy fields
-  name        String // Alias for title, kept for consistency
-  title       String // Primary display name
-  description String?
-  tags        Json? // Array of strings: ["fetch", "kill", "starter"]
-  status      ContentStatus @default(DRAFT)
-  version     Int           @default(1)
-  createdBy   String?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  // Quest-specific fields
-  stepsJSON   Json // Array of quest steps
-  rewardsJSON Json? // Rewards structure: { type: "gold", amount: 100, items: [...] }
-  coinsReward Int           @default(0) // Coins/gold rewarded for completing quest
-  damageValue Int           @default(0) // Damage dealt by quest-related actions (if applicable)
-  // Legacy fields
-  isArchived  Boolean       @default(false)
-  deletedAt   DateTime?
+  id                  String             @id @default(cuid())
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+  // Identity fields
+  name                String
+  slug                String             @unique
+  description         String?
+  // Status and workflow
+  status              ContentStatus      @default(DRAFT)
+  // Quest configuration
+  repeatability       QuestRepeatability @default(ONCE)
+  recommendedMinLevel Int?
+  occupationType      String? // Optional: reference to occupation type
+  prerequisiteQuestId String?
+  prerequisiteQuest   QuestTemplate?     @relation("QuestPrerequisites", fields: [prerequisiteQuestId], references: [id], onDelete: SetNull)
+  prerequisiteFor     QuestTemplate[]    @relation("QuestPrerequisites")
+  // Start trigger (optional)
+  startTriggerType    String? // MANUAL | ON_ENTER_TILE | ON_INTERACT_POI
+  startTriggerRefId   String? // tileId/poiId etc
+  // Relations
+  steps               QuestStep[]
+  rewards             QuestReward[]
 
+  @@index([slug])
   @@index([status])
-  @@index([isArchived])
-  @@index([createdBy])
+  @@index([repeatability])
+  @@index([prerequisiteQuestId])
+  @@index([createdAt])
+}
+
+model QuestStep {
+  id             String        @id @default(cuid())
+  questId        String
+  quest          QuestTemplate @relation(fields: [questId], references: [id], onDelete: Cascade)
+  ordering       Int // Step order (1-based, must be contiguous)
+  type           QuestStepType
+  title          String? // Short label for the step
+  description    String? // Player-facing description
+  targetRefType  String? // EnemyTemplate | Item | MapTile | NPC | ResourceNode etc.
+  targetRefId    String? // ID of the target entity
+  quantity       Int           @default(1) // Required quantity (e.g., kill 10, gather 5)
+  conditionsJson Json? // Future: time windows, must be in map zone, etc.
+  isOptional     Boolean       @default(false)
+
+  @@unique([questId, ordering])
+  @@index([questId])
+  @@index([type])
+}
+
+model QuestReward {
+  id          String          @id @default(cuid())
+  questId     String
+  quest       QuestTemplate   @relation(fields: [questId], references: [id], onDelete: Cascade)
+  type        QuestRewardType
+  refId       String? // Item ID, Recipe ID, Skill ID, etc. (depending on type)
+  amount      Int             @default(0) // XP amount, gold amount, item quantity
+  probability Float           @default(1.0) // 0.0-1.0, for random rewards
+  notes       String? // Designer notes
+
+  @@index([questId])
+  @@index([type])
 }
 
 model MapZone {
@@ -1481,20 +1663,20 @@ model SkillActionLog {
 // ============================================
 
 model ChatMessage {
-  id             String        @id @default(cuid())
-  userId         String
-  room           String        @default("global")
-  content        String // Sanitized HTML content
+  id              String         @id @default(cuid())
+  userId          String
+  room            String         @default("global")
+  content         String // Sanitized HTML content
   parentMessageId String? // For replies
-  deletedAt      DateTime? // Soft delete for expired messages
-  expiresAt      DateTime? // Auto-delete after 4 hours
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  parentMessage  ChatMessage?  @relation("MessageReplies", fields: [parentMessageId], references: [id], onDelete: Cascade)
-  replies        ChatMessage[] @relation("MessageReplies")
-  reactions      ChatReaction[]
-  mentions       ChatMention[]
+  deletedAt       DateTime? // Soft delete for expired messages
+  expiresAt       DateTime? // Auto-delete after 4 hours
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parentMessage   ChatMessage?   @relation("MessageReplies", fields: [parentMessageId], references: [id], onDelete: Cascade)
+  replies         ChatMessage[]  @relation("MessageReplies")
+  reactions       ChatReaction[]
+  mentions        ChatMention[]
 
   @@index([room, createdAt])
   @@index([userId])
@@ -1519,14 +1701,14 @@ model ChatReaction {
 }
 
 model ChatMention {
-  id              String      @id @default(cuid())
-  messageId       String
-  mentionedUserId String
+  id                String      @id @default(cuid())
+  messageId         String
+  mentionedUserId   String
   mentionedByUserId String
-  createdAt       DateTime    @default(now())
-  message         ChatMessage @relation(fields: [messageId], references: [id], onDelete: Cascade)
-  mentionedUser   User        @relation("MentionedUser", fields: [mentionedUserId], references: [id], onDelete: Cascade)
-  mentionedByUser User        @relation("MentionedBy", fields: [mentionedByUserId], references: [id], onDelete: Cascade)
+  createdAt         DateTime    @default(now())
+  message           ChatMessage @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  mentionedUser     User        @relation("MentionedUser", fields: [mentionedUserId], references: [id], onDelete: Cascade)
+  mentionedByUser   User        @relation("MentionedBy", fields: [mentionedByUserId], references: [id], onDelete: Cascade)
 
   @@index([messageId])
   @@index([mentionedUserId])
@@ -1544,8 +1726,234 @@ model Notification {
   dataJson  Json // Flexible JSON data for different notification types
   readAt    DateTime?
   createdAt DateTime         @default(now())
-  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, readAt])
   @@index([createdAt])
+}
+
+// Content Panel Models (EnemyTemplate, DropTable, EncounterDefinition)
+model EnemyTemplate {
+  id          String           @id @default(cuid())
+  name        String
+  slug        String           @unique
+  level       Int              @default(1)
+  maxHp       Int
+  attack      Int              @default(0)
+  defense     Int              @default(0)
+  xpReward    Int              @default(0)
+  goldReward  Int              @default(0)
+  dropTableId String?
+  isArchived  Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  dropTable   DropTable?       @relation(fields: [dropTableId], references: [id], onDelete: SetNull)
+  encounters  EncounterEnemy[]
+
+  @@index([slug])
+  @@index([isArchived])
+}
+
+model DropTable {
+  id         String           @id @default(cuid())
+  name       String
+  slug       String           @unique
+  isArchived Boolean          @default(false)
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+  entries    DropTableEntry[]
+  enemies    EnemyTemplate[]
+
+  @@index([slug])
+  @@index([isArchived])
+}
+
+model DropTableEntry {
+  id          String    @id @default(cuid())
+  dropTableId String
+  itemId      String
+  weight      Int       @default(100)
+  minQty      Int       @default(1)
+  maxQty      Int       @default(1)
+  createdAt   DateTime  @default(now())
+  dropTable   DropTable @relation(fields: [dropTableId], references: [id], onDelete: Cascade)
+  item        Item      @relation(fields: [itemId], references: [id])
+
+  @@index([dropTableId])
+  @@index([itemId])
+}
+
+model EncounterDefinition {
+  id         String           @id @default(cuid())
+  name       String
+  slug       String           @unique
+  status     ContentStatus    @default(DRAFT)
+  zoneId     String?
+  isArchived Boolean          @default(false)
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+  enemies    EncounterEnemy[]
+  mapTiles   MapVersionTile[]
+
+  @@index([slug])
+  @@index([isArchived])
+  @@index([status])
+}
+
+model EncounterEnemy {
+  id              String              @id @default(cuid())
+  encounterId     String
+  enemyTemplateId String
+  weight          Int                 @default(100)
+  createdAt       DateTime            @default(now())
+  encounter       EncounterDefinition @relation(fields: [encounterId], references: [id], onDelete: Cascade)
+  enemyTemplate   EnemyTemplate       @relation(fields: [enemyTemplateId], references: [id], onDelete: Cascade)
+
+  @@index([encounterId])
+  @@index([enemyTemplateId])
+}
+
+// Stub models for versioned map system references
+model ResourceNodeDefinition {
+  id         String           @id @default(cuid())
+  slug       String           @unique
+  name       String
+  status     ContentStatus    @default(DRAFT)
+  isArchived Boolean          @default(false)
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+  mapTiles   MapVersionTile[]
+
+  @@index([slug])
+  @@index([status])
+  @@index([isArchived])
+}
+
+model QuestTrigger {
+  id         String           @id @default(cuid())
+  slug       String           @unique
+  name       String
+  status     ContentStatus    @default(DRAFT)
+  isArchived Boolean          @default(false)
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+  mapTiles   MapVersionTile[]
+
+  @@index([slug])
+  @@index([status])
+  @@index([isArchived])
+}
+
+// Versioned Map System Models
+model MapDefinition {
+  id                  String       @id @default(cuid())
+  name                String
+  slug                String       @unique
+  description         String?
+  biome               String?
+  recommendedMinLevel Int?
+  recommendedMaxLevel Int?
+  dangerRating        Int          @default(1)
+  isArchived          Boolean      @default(false)
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+  versions            MapVersion[]
+
+  @@index([slug])
+  @@index([isArchived])
+}
+
+model MapVersion {
+  id              String           @id @default(cuid())
+  mapId           String
+  versionNumber   Int
+  status          ContentStatus    @default(DRAFT)
+  width           Int
+  height          Int
+  changeNotes     String?
+  publishedAt     DateTime?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  map             MapDefinition    @relation(fields: [mapId], references: [id], onDelete: Cascade)
+  tiles           MapVersionTile[]
+  zones           MapZoneVersion[]
+  pois            MapPOI[]
+  poiDestinations MapPOI[]         @relation("MapPOIDestination")
+
+  @@unique([mapId, versionNumber])
+  @@index([mapId])
+  @@index([status])
+  @@index([mapId, status])
+}
+
+model MapVersionTile {
+  id                    String                  @id @default(cuid())
+  mapVersionId          String
+  x                     Int
+  y                     Int
+  tileType              TileType                @default(PLAIN)
+  overlay               TileOverlay             @default(NONE)
+  isWalkable            Boolean                 @default(true)
+  movementCost          Int                     @default(1)
+  safeZone              Boolean                 @default(false)
+  fogDiscoverable       Boolean                 @default(true)
+  encounterDefinitionId String?
+  resourceNodeId        String?
+  questTriggerId        String?
+  notes                 String?
+  tagsJson              Json?
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  mapVersion            MapVersion              @relation(fields: [mapVersionId], references: [id], onDelete: Cascade)
+  encounterDefinition   EncounterDefinition?    @relation(fields: [encounterDefinitionId], references: [id], onDelete: SetNull)
+  resourceNode          ResourceNodeDefinition? @relation(fields: [resourceNodeId], references: [id], onDelete: SetNull)
+  questTrigger          QuestTrigger?           @relation(fields: [questTriggerId], references: [id], onDelete: SetNull)
+
+  @@unique([mapVersionId, x, y])
+  @@index([mapVersionId])
+  @@index([tileType])
+  @@index([overlay])
+}
+
+model MapZoneVersion {
+  id                           String     @id @default(cuid())
+  mapVersionId                 String
+  name                         String
+  slug                         String
+  minX                         Int
+  minY                         Int
+  maxX                         Int
+  maxY                         Int
+  recommendedMinLevel          Int?
+  recommendedMaxLevel          Int?
+  dangerRating                 Int?
+  defaultEncounterDefinitionId String?
+  defaultResourceNodeId        String?
+  createdAt                    DateTime   @default(now())
+  updatedAt                    DateTime   @updatedAt
+  mapVersion                   MapVersion @relation(fields: [mapVersionId], references: [id], onDelete: Cascade)
+
+  @@index([mapVersionId])
+  @@index([mapVersionId, slug])
+}
+
+model MapPOI {
+  id                      String      @id @default(cuid())
+  mapVersionId            String
+  type                    POIType
+  name                    String
+  x                       Int
+  y                       Int
+  icon                    String?
+  destinationMapVersionId String?
+  destinationX            Int?
+  destinationY            Int?
+  notes                   String?
+  createdAt               DateTime    @default(now())
+  updatedAt               DateTime    @updatedAt
+  mapVersion              MapVersion  @relation(fields: [mapVersionId], references: [id], onDelete: Cascade)
+  destinationMapVersion   MapVersion? @relation("MapPOIDestination", fields: [destinationMapVersionId], references: [id], onDelete: SetNull)
+
+  @@index([mapVersionId])
+  @@index([mapVersionId, x, y])
 }

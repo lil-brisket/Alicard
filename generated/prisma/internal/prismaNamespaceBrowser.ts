@@ -70,6 +70,7 @@ export const ModelName = {
   Equipment: 'Equipment',
   Occupation: 'Occupation',
   Skill: 'Skill',
+  SkillEffect: 'SkillEffect',
   PlayerSkill: 'PlayerSkill',
   PlayerSkillLoadout: 'PlayerSkillLoadout',
   Encounter: 'Encounter',
@@ -106,9 +107,12 @@ export const ModelName = {
   PlayerLeaderboardStats: 'PlayerLeaderboardStats',
   PlayerStatsPeriod: 'PlayerStatsPeriod',
   AdminActionLog: 'AdminActionLog',
+  AuditEvent: 'AuditEvent',
   ItemTemplate: 'ItemTemplate',
   MonsterTemplate: 'MonsterTemplate',
   QuestTemplate: 'QuestTemplate',
+  QuestStep: 'QuestStep',
+  QuestReward: 'QuestReward',
   MapZone: 'MapZone',
   UserRoleAssignment: 'UserRoleAssignment',
   UserIpHistory: 'UserIpHistory',
@@ -122,7 +126,19 @@ export const ModelName = {
   ChatMessage: 'ChatMessage',
   ChatReaction: 'ChatReaction',
   ChatMention: 'ChatMention',
-  Notification: 'Notification'
+  Notification: 'Notification',
+  EnemyTemplate: 'EnemyTemplate',
+  DropTable: 'DropTable',
+  DropTableEntry: 'DropTableEntry',
+  EncounterDefinition: 'EncounterDefinition',
+  EncounterEnemy: 'EncounterEnemy',
+  ResourceNodeDefinition: 'ResourceNodeDefinition',
+  QuestTrigger: 'QuestTrigger',
+  MapDefinition: 'MapDefinition',
+  MapVersion: 'MapVersion',
+  MapVersionTile: 'MapVersionTile',
+  MapZoneVersion: 'MapZoneVersion',
+  MapPOI: 'MapPOI'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -443,6 +459,7 @@ export type OccupationScalarFieldEnum = (typeof OccupationScalarFieldEnum)[keyof
 export const SkillScalarFieldEnum = {
   id: 'id',
   key: 'key',
+  slug: 'slug',
   name: 'name',
   description: 'description',
   tags: 'tags',
@@ -451,12 +468,43 @@ export const SkillScalarFieldEnum = {
   createdBy: 'createdBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  isArchived: 'isArchived',
   staminaCost: 'staminaCost',
   cooldownTurns: 'cooldownTurns',
-  levelUnlock: 'levelUnlock'
+  castTimeTurns: 'castTimeTurns',
+  levelUnlock: 'levelUnlock',
+  skillType: 'skillType',
+  damageType: 'damageType',
+  hits: 'hits',
+  targeting: 'targeting',
+  maxTargets: 'maxTargets',
+  basePower: 'basePower',
+  scalingStat: 'scalingStat',
+  scalingRatio: 'scalingRatio',
+  flatBonus: 'flatBonus'
 } as const
 
 export type SkillScalarFieldEnum = (typeof SkillScalarFieldEnum)[keyof typeof SkillScalarFieldEnum]
+
+
+export const SkillEffectScalarFieldEnum = {
+  id: 'id',
+  skillId: 'skillId',
+  type: 'type',
+  stat: 'stat',
+  value: 'value',
+  ratio: 'ratio',
+  durationTurns: 'durationTurns',
+  chance: 'chance',
+  tickIntervalTurns: 'tickIntervalTurns',
+  maxStacks: 'maxStacks',
+  note: 'note',
+  ordering: 'ordering',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SkillEffectScalarFieldEnum = (typeof SkillEffectScalarFieldEnum)[keyof typeof SkillEffectScalarFieldEnum]
 
 
 export const PlayerSkillScalarFieldEnum = {
@@ -952,6 +1000,24 @@ export const AdminActionLogScalarFieldEnum = {
 export type AdminActionLogScalarFieldEnum = (typeof AdminActionLogScalarFieldEnum)[keyof typeof AdminActionLogScalarFieldEnum]
 
 
+export const AuditEventScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  actorUserId: 'actorUserId',
+  actorCharacterId: 'actorCharacterId',
+  targetUserId: 'targetUserId',
+  targetEntityType: 'targetEntityType',
+  targetEntityId: 'targetEntityId',
+  action: 'action',
+  reason: 'reason',
+  payloadJson: 'payloadJson',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent'
+} as const
+
+export type AuditEventScalarFieldEnum = (typeof AuditEventScalarFieldEnum)[keyof typeof AuditEventScalarFieldEnum]
+
+
 export const ItemTemplateScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -1004,24 +1070,51 @@ export type MonsterTemplateScalarFieldEnum = (typeof MonsterTemplateScalarFieldE
 
 export const QuestTemplateScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  title: 'title',
-  description: 'description',
-  tags: 'tags',
-  status: 'status',
-  version: 'version',
-  createdBy: 'createdBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  stepsJSON: 'stepsJSON',
-  rewardsJSON: 'rewardsJSON',
-  coinsReward: 'coinsReward',
-  damageValue: 'damageValue',
-  isArchived: 'isArchived',
-  deletedAt: 'deletedAt'
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  status: 'status',
+  repeatability: 'repeatability',
+  recommendedMinLevel: 'recommendedMinLevel',
+  occupationType: 'occupationType',
+  prerequisiteQuestId: 'prerequisiteQuestId',
+  startTriggerType: 'startTriggerType',
+  startTriggerRefId: 'startTriggerRefId'
 } as const
 
 export type QuestTemplateScalarFieldEnum = (typeof QuestTemplateScalarFieldEnum)[keyof typeof QuestTemplateScalarFieldEnum]
+
+
+export const QuestStepScalarFieldEnum = {
+  id: 'id',
+  questId: 'questId',
+  ordering: 'ordering',
+  type: 'type',
+  title: 'title',
+  description: 'description',
+  targetRefType: 'targetRefType',
+  targetRefId: 'targetRefId',
+  quantity: 'quantity',
+  conditionsJson: 'conditionsJson',
+  isOptional: 'isOptional'
+} as const
+
+export type QuestStepScalarFieldEnum = (typeof QuestStepScalarFieldEnum)[keyof typeof QuestStepScalarFieldEnum]
+
+
+export const QuestRewardScalarFieldEnum = {
+  id: 'id',
+  questId: 'questId',
+  type: 'type',
+  refId: 'refId',
+  amount: 'amount',
+  probability: 'probability',
+  notes: 'notes'
+} as const
+
+export type QuestRewardScalarFieldEnum = (typeof QuestRewardScalarFieldEnum)[keyof typeof QuestRewardScalarFieldEnum]
 
 
 export const MapZoneScalarFieldEnum = {
@@ -1228,6 +1321,197 @@ export const NotificationScalarFieldEnum = {
 } as const
 
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const EnemyTemplateScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  level: 'level',
+  maxHp: 'maxHp',
+  attack: 'attack',
+  defense: 'defense',
+  xpReward: 'xpReward',
+  goldReward: 'goldReward',
+  dropTableId: 'dropTableId',
+  isArchived: 'isArchived',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EnemyTemplateScalarFieldEnum = (typeof EnemyTemplateScalarFieldEnum)[keyof typeof EnemyTemplateScalarFieldEnum]
+
+
+export const DropTableScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  isArchived: 'isArchived',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DropTableScalarFieldEnum = (typeof DropTableScalarFieldEnum)[keyof typeof DropTableScalarFieldEnum]
+
+
+export const DropTableEntryScalarFieldEnum = {
+  id: 'id',
+  dropTableId: 'dropTableId',
+  itemId: 'itemId',
+  weight: 'weight',
+  minQty: 'minQty',
+  maxQty: 'maxQty',
+  createdAt: 'createdAt'
+} as const
+
+export type DropTableEntryScalarFieldEnum = (typeof DropTableEntryScalarFieldEnum)[keyof typeof DropTableEntryScalarFieldEnum]
+
+
+export const EncounterDefinitionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  status: 'status',
+  zoneId: 'zoneId',
+  isArchived: 'isArchived',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EncounterDefinitionScalarFieldEnum = (typeof EncounterDefinitionScalarFieldEnum)[keyof typeof EncounterDefinitionScalarFieldEnum]
+
+
+export const EncounterEnemyScalarFieldEnum = {
+  id: 'id',
+  encounterId: 'encounterId',
+  enemyTemplateId: 'enemyTemplateId',
+  weight: 'weight',
+  createdAt: 'createdAt'
+} as const
+
+export type EncounterEnemyScalarFieldEnum = (typeof EncounterEnemyScalarFieldEnum)[keyof typeof EncounterEnemyScalarFieldEnum]
+
+
+export const ResourceNodeDefinitionScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  name: 'name',
+  status: 'status',
+  isArchived: 'isArchived',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResourceNodeDefinitionScalarFieldEnum = (typeof ResourceNodeDefinitionScalarFieldEnum)[keyof typeof ResourceNodeDefinitionScalarFieldEnum]
+
+
+export const QuestTriggerScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  name: 'name',
+  status: 'status',
+  isArchived: 'isArchived',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type QuestTriggerScalarFieldEnum = (typeof QuestTriggerScalarFieldEnum)[keyof typeof QuestTriggerScalarFieldEnum]
+
+
+export const MapDefinitionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  biome: 'biome',
+  recommendedMinLevel: 'recommendedMinLevel',
+  recommendedMaxLevel: 'recommendedMaxLevel',
+  dangerRating: 'dangerRating',
+  isArchived: 'isArchived',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MapDefinitionScalarFieldEnum = (typeof MapDefinitionScalarFieldEnum)[keyof typeof MapDefinitionScalarFieldEnum]
+
+
+export const MapVersionScalarFieldEnum = {
+  id: 'id',
+  mapId: 'mapId',
+  versionNumber: 'versionNumber',
+  status: 'status',
+  width: 'width',
+  height: 'height',
+  changeNotes: 'changeNotes',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MapVersionScalarFieldEnum = (typeof MapVersionScalarFieldEnum)[keyof typeof MapVersionScalarFieldEnum]
+
+
+export const MapVersionTileScalarFieldEnum = {
+  id: 'id',
+  mapVersionId: 'mapVersionId',
+  x: 'x',
+  y: 'y',
+  tileType: 'tileType',
+  overlay: 'overlay',
+  isWalkable: 'isWalkable',
+  movementCost: 'movementCost',
+  safeZone: 'safeZone',
+  fogDiscoverable: 'fogDiscoverable',
+  encounterDefinitionId: 'encounterDefinitionId',
+  resourceNodeId: 'resourceNodeId',
+  questTriggerId: 'questTriggerId',
+  notes: 'notes',
+  tagsJson: 'tagsJson',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MapVersionTileScalarFieldEnum = (typeof MapVersionTileScalarFieldEnum)[keyof typeof MapVersionTileScalarFieldEnum]
+
+
+export const MapZoneVersionScalarFieldEnum = {
+  id: 'id',
+  mapVersionId: 'mapVersionId',
+  name: 'name',
+  slug: 'slug',
+  minX: 'minX',
+  minY: 'minY',
+  maxX: 'maxX',
+  maxY: 'maxY',
+  recommendedMinLevel: 'recommendedMinLevel',
+  recommendedMaxLevel: 'recommendedMaxLevel',
+  dangerRating: 'dangerRating',
+  defaultEncounterDefinitionId: 'defaultEncounterDefinitionId',
+  defaultResourceNodeId: 'defaultResourceNodeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MapZoneVersionScalarFieldEnum = (typeof MapZoneVersionScalarFieldEnum)[keyof typeof MapZoneVersionScalarFieldEnum]
+
+
+export const MapPOIScalarFieldEnum = {
+  id: 'id',
+  mapVersionId: 'mapVersionId',
+  type: 'type',
+  name: 'name',
+  x: 'x',
+  y: 'y',
+  icon: 'icon',
+  destinationMapVersionId: 'destinationMapVersionId',
+  destinationX: 'destinationX',
+  destinationY: 'destinationY',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MapPOIScalarFieldEnum = (typeof MapPOIScalarFieldEnum)[keyof typeof MapPOIScalarFieldEnum]
 
 
 export const SortOrder = {
