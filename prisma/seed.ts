@@ -754,6 +754,436 @@ async function main() {
     },
   });
 
+  // Logger wood items - Tier 1
+  const saplingWood = await prisma.item.upsert({
+    where: { id: "sapling-wood" },
+    update: {},
+    create: {
+      id: "sapling-wood",
+      key: "sapling-wood",
+      name: "Sapling Wood",
+      description: "Young wood from saplings.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 3,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const pineLogs = await prisma.item.upsert({
+    where: { id: "pine-logs" },
+    update: {},
+    create: {
+      id: "pine-logs",
+      key: "pine-logs",
+      name: "Pine Logs",
+      description: "Logs from pine trees.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 4,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const birchLogs = await prisma.item.upsert({
+    where: { id: "birch-logs" },
+    update: {},
+    create: {
+      id: "birch-logs",
+      key: "birch-logs",
+      name: "Birch Logs",
+      description: "Logs from birch trees.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 5,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const cedarLogs = await prisma.item.upsert({
+    where: { id: "cedar-logs" },
+    update: {},
+    create: {
+      id: "cedar-logs",
+      key: "cedar-logs",
+      name: "Cedar Logs",
+      description: "Logs from cedar trees.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 6,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const oakLogs = await prisma.item.upsert({
+    where: { id: "oak-logs" },
+    update: {},
+    create: {
+      id: "oak-logs",
+      key: "oak-logs",
+      name: "Oak Logs",
+      description: "Logs from oak trees.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 7,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  // Logger wood items - Tier 2
+  const mapleLogs = await prisma.item.upsert({
+    where: { id: "maple-logs" },
+    update: {},
+    create: {
+      id: "maple-logs",
+      key: "maple-logs",
+      name: "Maple Logs",
+      description: "Logs from maple trees.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 12,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const ashLogs = await prisma.item.upsert({
+    where: { id: "ash-logs" },
+    update: {},
+    create: {
+      id: "ash-logs",
+      key: "ash-logs",
+      name: "Ash Logs",
+      description: "Logs from ash trees.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 15,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const ironbarkLogs = await prisma.item.upsert({
+    where: { id: "ironbark-logs" },
+    update: {},
+    create: {
+      id: "ironbark-logs",
+      key: "ironbark-logs",
+      name: "Ironbark Logs",
+      description: "Hard logs from ironbark trees.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 18,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const redwoodLogs = await prisma.item.upsert({
+    where: { id: "redwood-logs" },
+    update: {},
+    create: {
+      id: "redwood-logs",
+      key: "redwood-logs",
+      name: "Redwood Logs",
+      description: "Logs from redwood trees.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 20,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const spruceLogs = await prisma.item.upsert({
+    where: { id: "spruce-logs" },
+    update: {},
+    create: {
+      id: "spruce-logs",
+      key: "spruce-logs",
+      name: "Spruce Logs",
+      description: "Logs from spruce trees.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 22,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  // Logger wood items - Tier 3
+  const heartwood = await prisma.item.upsert({
+    where: { id: "heartwood" },
+    update: {},
+    create: {
+      id: "heartwood",
+      key: "heartwood",
+      name: "Heartwood",
+      description: "Dense heartwood from ancient oaks.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 35,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const blackwoodLogs = await prisma.item.upsert({
+    where: { id: "blackwood-logs" },
+    update: {},
+    create: {
+      id: "blackwood-logs",
+      key: "blackwood-logs",
+      name: "Blackwood Logs",
+      description: "Dark logs from blackwood trees.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 40,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const deepforestTimber = await prisma.item.upsert({
+    where: { id: "deepforest-timber" },
+    update: {},
+    create: {
+      id: "deepforest-timber",
+      key: "deepforest-timber",
+      name: "Deepforest Timber",
+      description: "Timber from the deepest forests.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 45,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const stormCedar = await prisma.item.upsert({
+    where: { id: "storm-cedar" },
+    update: {},
+    create: {
+      id: "storm-cedar",
+      key: "storm-cedar",
+      name: "Storm Cedar",
+      description: "Cedar weathered by storms.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 48,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const firResinwood = await prisma.item.upsert({
+    where: { id: "fir-resinwood" },
+    update: {},
+    create: {
+      id: "fir-resinwood",
+      key: "fir-resinwood",
+      name: "Fir Resinwood",
+      description: "Resinous wood from giant firs.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 50,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  // Logger wood items - Tier 4
+  const ironwoodTimber = await prisma.item.upsert({
+    where: { id: "ironwood-timber" },
+    update: {},
+    create: {
+      id: "ironwood-timber",
+      key: "ironwood-timber",
+      name: "Ironwood Timber",
+      description: "Extremely hard timber from ironwood trees.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 75,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const elderRedwoodTimber = await prisma.item.upsert({
+    where: { id: "elder-redwood-timber" },
+    update: {},
+    create: {
+      id: "elder-redwood-timber",
+      key: "elder-redwood-timber",
+      name: "Elder Redwood Timber",
+      description: "Timber from ancient redwood trees.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 85,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const ghostbark = await prisma.item.upsert({
+    where: { id: "ghostbark" },
+    update: {},
+    create: {
+      id: "ghostbark",
+      key: "ghostbark",
+      name: "Ghostbark",
+      description: "Ethereal bark from ghostly trees.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 95,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const thornwood = await prisma.item.upsert({
+    where: { id: "thornwood" },
+    update: {},
+    create: {
+      id: "thornwood",
+      key: "thornwood",
+      name: "Thornwood",
+      description: "Wood from thorny brambletrees.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 105,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const tempestPine = await prisma.item.upsert({
+    where: { id: "tempest-pine" },
+    update: {},
+    create: {
+      id: "tempest-pine",
+      key: "tempest-pine",
+      name: "Tempest Pine",
+      description: "Pine wood from tempest-swept highlands.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 115,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  // Logger wood items - Tier 5
+  const moonSequoiaTimber = await prisma.item.upsert({
+    where: { id: "moon-sequoia-timber" },
+    update: {},
+    create: {
+      id: "moon-sequoia-timber",
+      key: "moon-sequoia-timber",
+      name: "Moon Sequoia Timber",
+      description: "Timber from moon-touched sequoias.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 180,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const mangroveCorewood = await prisma.item.upsert({
+    where: { id: "mangrove-corewood" },
+    update: {},
+    create: {
+      id: "mangrove-corewood",
+      key: "mangrove-corewood",
+      name: "Mangrove Corewood",
+      description: "Corewood from sunken mangrove titans.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 210,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const crystalYewWood = await prisma.item.upsert({
+    where: { id: "crystal-yew-wood" },
+    update: {},
+    create: {
+      id: "crystal-yew-wood",
+      key: "crystal-yew-wood",
+      name: "Crystal Yew Wood",
+      description: "Crystalline wood from crystalheart yews.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 240,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const worldAshTimber = await prisma.item.upsert({
+    where: { id: "world-ash-timber" },
+    update: {},
+    create: {
+      id: "world-ash-timber",
+      key: "world-ash-timber",
+      name: "World-Ash Timber",
+      description: "Timber from the World-Ash Branchspire.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 270,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const mythicRootwood = await prisma.item.upsert({
+    where: { id: "mythic-rootwood" },
+    update: {},
+    create: {
+      id: "mythic-rootwood",
+      key: "mythic-rootwood",
+      name: "Mythic Rootwood",
+      description: "Legendary wood from the Mythic Rootwood Monolith.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 300,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
   // Crafted items
   const ironBar = await prisma.item.upsert({
     where: { id: "iron-bar" },
@@ -2407,26 +2837,730 @@ async function main() {
     },
   });
 
-  // Logger nodes
-  const tree = await prisma.gatheringNode.upsert({
-    where: { key: "tree-1" },
+  // Logger nodes - Tier 1 (levels 1-20)
+  const saplingGrove = await prisma.gatheringNode.upsert({
+    where: { key: "sapling-grove" },
     update: {},
     create: {
-      key: "tree-1",
-      name: "Tree",
-      description: "A mature tree ready for harvesting.",
+      key: "sapling-grove",
+      name: "Sapling Grove",
+      description: "A grove of young saplings ready for harvesting.",
       jobId: loggerJob.id,
-      dangerTier: 1,
+      dangerTier: 0,
+      tier: 1,
+      requiredJobLevel: 1,
+      gatherTimeSeconds: 25,
+      xpReward: 12,
     },
   });
 
   await prisma.nodeYield.upsert({
-    where: { id: `${tree.id}-wood` },
+    where: { id: `${saplingGrove.id}-sapling-wood` },
     update: {},
     create: {
-      id: `${tree.id}-wood`,
-      nodeId: tree.id,
-      itemId: wood.id,
+      id: `${saplingGrove.id}-sapling-wood`,
+      nodeId: saplingGrove.id,
+      itemId: saplingWood.id,
+      minQty: 1,
+      maxQty: 2,
+      weight: 100,
+    },
+  });
+
+  const pineStand = await prisma.gatheringNode.upsert({
+    where: { key: "pine-stand" },
+    update: {},
+    create: {
+      key: "pine-stand",
+      name: "Pine Stand",
+      description: "A stand of pine trees.",
+      jobId: loggerJob.id,
+      dangerTier: 0,
+      tier: 1,
+      requiredJobLevel: 5,
+      gatherTimeSeconds: 30,
+      xpReward: 15,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${pineStand.id}-pine-logs` },
+    update: {},
+    create: {
+      id: `${pineStand.id}-pine-logs`,
+      nodeId: pineStand.id,
+      itemId: pineLogs.id,
+      minQty: 1,
+      maxQty: 3,
+      weight: 100,
+    },
+  });
+
+  const birchCopse = await prisma.gatheringNode.upsert({
+    where: { key: "birch-copse" },
+    update: {},
+    create: {
+      key: "birch-copse",
+      name: "Birch Copse",
+      description: "A small grove of birch trees.",
+      jobId: loggerJob.id,
+      dangerTier: 0,
+      tier: 1,
+      requiredJobLevel: 10,
+      gatherTimeSeconds: 35,
+      xpReward: 18,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${birchCopse.id}-birch-logs` },
+    update: {},
+    create: {
+      id: `${birchCopse.id}-birch-logs`,
+      nodeId: birchCopse.id,
+      itemId: birchLogs.id,
+      minQty: 2,
+      maxQty: 4,
+      weight: 100,
+    },
+  });
+
+  const cedarThicket = await prisma.gatheringNode.upsert({
+    where: { key: "cedar-thicket" },
+    update: {},
+    create: {
+      key: "cedar-thicket",
+      name: "Cedar Thicket",
+      description: "A dense thicket of cedar trees.",
+      jobId: loggerJob.id,
+      dangerTier: 1,
+      tier: 1,
+      requiredJobLevel: 15,
+      gatherTimeSeconds: 40,
+      xpReward: 22,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${cedarThicket.id}-cedar-logs` },
+    update: {},
+    create: {
+      id: `${cedarThicket.id}-cedar-logs`,
+      nodeId: cedarThicket.id,
+      itemId: cedarLogs.id,
+      minQty: 2,
+      maxQty: 4,
+      weight: 100,
+    },
+  });
+
+  const oakCluster = await prisma.gatheringNode.upsert({
+    where: { key: "oak-cluster" },
+    update: {},
+    create: {
+      key: "oak-cluster",
+      name: "Oak Cluster",
+      description: "A cluster of mature oak trees.",
+      jobId: loggerJob.id,
+      dangerTier: 1,
+      tier: 1,
+      requiredJobLevel: 20,
+      gatherTimeSeconds: 45,
+      xpReward: 25,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${oakCluster.id}-oak-logs` },
+    update: {},
+    create: {
+      id: `${oakCluster.id}-oak-logs`,
+      nodeId: oakCluster.id,
+      itemId: oakLogs.id,
+      minQty: 2,
+      maxQty: 4,
+      weight: 100,
+    },
+  });
+
+  // Logger nodes - Tier 2 (levels 21-40)
+  const mapleRise = await prisma.gatheringNode.upsert({
+    where: { key: "maple-rise" },
+    update: {},
+    create: {
+      key: "maple-rise",
+      name: "Maple Rise",
+      description: "A rise covered in maple trees.",
+      jobId: loggerJob.id,
+      dangerTier: 1,
+      tier: 2,
+      requiredJobLevel: 25,
+      gatherTimeSeconds: 75,
+      xpReward: 35,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${mapleRise.id}-maple-logs` },
+    update: {},
+    create: {
+      id: `${mapleRise.id}-maple-logs`,
+      nodeId: mapleRise.id,
+      itemId: mapleLogs.id,
+      minQty: 1,
+      maxQty: 3,
+      weight: 100,
+    },
+  });
+
+  const ashwoodLine = await prisma.gatheringNode.upsert({
+    where: { key: "ashwood-line" },
+    update: {},
+    create: {
+      key: "ashwood-line",
+      name: "Ashwood Line",
+      description: "A line of ashwood trees.",
+      jobId: loggerJob.id,
+      dangerTier: 1,
+      tier: 2,
+      requiredJobLevel: 30,
+      gatherTimeSeconds: 90,
+      xpReward: 42,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${ashwoodLine.id}-ash-logs` },
+    update: {},
+    create: {
+      id: `${ashwoodLine.id}-ash-logs`,
+      nodeId: ashwoodLine.id,
+      itemId: ashLogs.id,
+      minQty: 1,
+      maxQty: 4,
+      weight: 100,
+    },
+  });
+
+  const ironbarkTrunks = await prisma.gatheringNode.upsert({
+    where: { key: "ironbark-trunks" },
+    update: {},
+    create: {
+      key: "ironbark-trunks",
+      name: "Ironbark Trunks",
+      description: "Massive trunks of ironbark trees.",
+      jobId: loggerJob.id,
+      dangerTier: 2,
+      tier: 2,
+      requiredJobLevel: 35,
+      gatherTimeSeconds: 105,
+      xpReward: 50,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${ironbarkTrunks.id}-ironbark-logs` },
+    update: {},
+    create: {
+      id: `${ironbarkTrunks.id}-ironbark-logs`,
+      nodeId: ironbarkTrunks.id,
+      itemId: ironbarkLogs.id,
+      minQty: 2,
+      maxQty: 5,
+      weight: 100,
+    },
+  });
+
+  const redwoodEdge = await prisma.gatheringNode.upsert({
+    where: { key: "redwood-edge" },
+    update: {},
+    create: {
+      key: "redwood-edge",
+      name: "Redwood Edge",
+      description: "The edge of a redwood forest.",
+      jobId: loggerJob.id,
+      dangerTier: 2,
+      tier: 2,
+      requiredJobLevel: 38,
+      gatherTimeSeconds: 115,
+      xpReward: 55,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${redwoodEdge.id}-redwood-logs` },
+    update: {},
+    create: {
+      id: `${redwoodEdge.id}-redwood-logs`,
+      nodeId: redwoodEdge.id,
+      itemId: redwoodLogs.id,
+      minQty: 2,
+      maxQty: 5,
+      weight: 100,
+    },
+  });
+
+  const spruceRidge = await prisma.gatheringNode.upsert({
+    where: { key: "spruce-ridge" },
+    update: {},
+    create: {
+      key: "spruce-ridge",
+      name: "Spruce Ridge",
+      description: "A ridge covered in spruce trees.",
+      jobId: loggerJob.id,
+      dangerTier: 2,
+      tier: 2,
+      requiredJobLevel: 40,
+      gatherTimeSeconds: 120,
+      xpReward: 60,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${spruceRidge.id}-spruce-logs` },
+    update: {},
+    create: {
+      id: `${spruceRidge.id}-spruce-logs`,
+      nodeId: spruceRidge.id,
+      itemId: spruceLogs.id,
+      minQty: 2,
+      maxQty: 5,
+      weight: 100,
+    },
+  });
+
+  // Logger nodes - Tier 3 (levels 41-60)
+  const heartwoodOaks = await prisma.gatheringNode.upsert({
+    where: { key: "heartwood-oaks" },
+    update: {},
+    create: {
+      key: "heartwood-oaks",
+      name: "Heartwood Oaks",
+      description: "Ancient oaks with dense heartwood.",
+      jobId: loggerJob.id,
+      dangerTier: 2,
+      tier: 3,
+      requiredJobLevel: 45,
+      gatherTimeSeconds: 150,
+      xpReward: 80,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${heartwoodOaks.id}-heartwood` },
+    update: {},
+    create: {
+      id: `${heartwoodOaks.id}-heartwood`,
+      nodeId: heartwoodOaks.id,
+      itemId: heartwood.id,
+      minQty: 1,
+      maxQty: 4,
+      weight: 100,
+    },
+  });
+
+  const blackwoodPines = await prisma.gatheringNode.upsert({
+    where: { key: "blackwood-pines" },
+    update: {},
+    create: {
+      key: "blackwood-pines",
+      name: "Blackwood Pines",
+      description: "Dark pines with blackwood cores.",
+      jobId: loggerJob.id,
+      dangerTier: 3,
+      tier: 3,
+      requiredJobLevel: 50,
+      gatherTimeSeconds: 180,
+      xpReward: 95,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${blackwoodPines.id}-blackwood-logs` },
+    update: {},
+    create: {
+      id: `${blackwoodPines.id}-blackwood-logs`,
+      nodeId: blackwoodPines.id,
+      itemId: blackwoodLogs.id,
+      minQty: 1,
+      maxQty: 5,
+      weight: 100,
+    },
+  });
+
+  const deepforestTimberline = await prisma.gatheringNode.upsert({
+    where: { key: "deepforest-timberline" },
+    update: {},
+    create: {
+      key: "deepforest-timberline",
+      name: "Deepforest Timberline",
+      description: "The timberline of the deepest forests.",
+      jobId: loggerJob.id,
+      dangerTier: 3,
+      tier: 3,
+      requiredJobLevel: 55,
+      gatherTimeSeconds: 210,
+      xpReward: 110,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${deepforestTimberline.id}-deepforest-timber` },
+    update: {},
+    create: {
+      id: `${deepforestTimberline.id}-deepforest-timber`,
+      nodeId: deepforestTimberline.id,
+      itemId: deepforestTimber.id,
+      minQty: 1,
+      maxQty: 6,
+      weight: 100,
+    },
+  });
+
+  const stormSplitCedar = await prisma.gatheringNode.upsert({
+    where: { key: "storm-split-cedar" },
+    update: {},
+    create: {
+      key: "storm-split-cedar",
+      name: "Storm-Split Cedar",
+      description: "Cedar trees split by storms.",
+      jobId: loggerJob.id,
+      dangerTier: 3,
+      tier: 3,
+      requiredJobLevel: 58,
+      gatherTimeSeconds: 225,
+      xpReward: 115,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${stormSplitCedar.id}-storm-cedar` },
+    update: {},
+    create: {
+      id: `${stormSplitCedar.id}-storm-cedar`,
+      nodeId: stormSplitCedar.id,
+      itemId: stormCedar.id,
+      minQty: 2,
+      maxQty: 7,
+      weight: 100,
+    },
+  });
+
+  const resinousFirGiants = await prisma.gatheringNode.upsert({
+    where: { key: "resinous-fir-giants" },
+    update: {},
+    create: {
+      key: "resinous-fir-giants",
+      name: "Resinous Fir Giants",
+      description: "Giant firs with abundant resin.",
+      jobId: loggerJob.id,
+      dangerTier: 3,
+      tier: 3,
+      requiredJobLevel: 60,
+      gatherTimeSeconds: 240,
+      xpReward: 120,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${resinousFirGiants.id}-fir-resinwood` },
+    update: {},
+    create: {
+      id: `${resinousFirGiants.id}-fir-resinwood`,
+      nodeId: resinousFirGiants.id,
+      itemId: firResinwood.id,
+      minQty: 3,
+      maxQty: 7,
+      weight: 100,
+    },
+  });
+
+  // Logger nodes - Tier 4 (levels 61-80)
+  const ancientIronwood = await prisma.gatheringNode.upsert({
+    where: { key: "ancient-ironwood" },
+    update: {},
+    create: {
+      key: "ancient-ironwood",
+      name: "Ancient Ironwood",
+      description: "Ancient ironwood trees of legendary hardness.",
+      jobId: loggerJob.id,
+      dangerTier: 3,
+      tier: 4,
+      requiredJobLevel: 65,
+      gatherTimeSeconds: 300,
+      xpReward: 150,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${ancientIronwood.id}-ironwood-timber` },
+    update: {},
+    create: {
+      id: `${ancientIronwood.id}-ironwood-timber`,
+      nodeId: ancientIronwood.id,
+      itemId: ironwoodTimber.id,
+      minQty: 1,
+      maxQty: 2,
+      weight: 100,
+    },
+  });
+
+  const elderRedwoodColossus = await prisma.gatheringNode.upsert({
+    where: { key: "elder-redwood-colossus" },
+    update: {},
+    create: {
+      key: "elder-redwood-colossus",
+      name: "Elder Redwood Colossus",
+      description: "A colossal elder redwood tree.",
+      jobId: loggerJob.id,
+      dangerTier: 4,
+      tier: 4,
+      requiredJobLevel: 70,
+      gatherTimeSeconds: 360,
+      xpReward: 175,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${elderRedwoodColossus.id}-elder-redwood-timber` },
+    update: {},
+    create: {
+      id: `${elderRedwoodColossus.id}-elder-redwood-timber`,
+      nodeId: elderRedwoodColossus.id,
+      itemId: elderRedwoodTimber.id,
+      minQty: 1,
+      maxQty: 3,
+      weight: 100,
+    },
+  });
+
+  const ghostbarkGrove = await prisma.gatheringNode.upsert({
+    where: { key: "ghostbark-grove" },
+    update: {},
+    create: {
+      key: "ghostbark-grove",
+      name: "Ghostbark Grove",
+      description: "A grove of ethereal ghostbark trees.",
+      jobId: loggerJob.id,
+      dangerTier: 4,
+      tier: 4,
+      requiredJobLevel: 75,
+      gatherTimeSeconds: 420,
+      xpReward: 200,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${ghostbarkGrove.id}-ghostbark` },
+    update: {},
+    create: {
+      id: `${ghostbarkGrove.id}-ghostbark`,
+      nodeId: ghostbarkGrove.id,
+      itemId: ghostbark.id,
+      minQty: 1,
+      maxQty: 3,
+      weight: 100,
+    },
+  });
+
+  const thornwoodBrambletree = await prisma.gatheringNode.upsert({
+    where: { key: "thornwood-brambletree" },
+    update: {},
+    create: {
+      key: "thornwood-brambletree",
+      name: "Thornwood Brambletree",
+      description: "A massive brambletree with thornwood core.",
+      jobId: loggerJob.id,
+      dangerTier: 4,
+      tier: 4,
+      requiredJobLevel: 78,
+      gatherTimeSeconds: 480,
+      xpReward: 220,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${thornwoodBrambletree.id}-thornwood` },
+    update: {},
+    create: {
+      id: `${thornwoodBrambletree.id}-thornwood`,
+      nodeId: thornwoodBrambletree.id,
+      itemId: thornwood.id,
+      minQty: 1,
+      maxQty: 4,
+      weight: 100,
+    },
+  });
+
+  const tempestPineHighlands = await prisma.gatheringNode.upsert({
+    where: { key: "tempest-pine-highlands" },
+    update: {},
+    create: {
+      key: "tempest-pine-highlands",
+      name: "Tempest-Pine Highlands",
+      description: "Highlands swept by tempests, home to rare pines.",
+      jobId: loggerJob.id,
+      dangerTier: 4,
+      tier: 4,
+      requiredJobLevel: 80,
+      gatherTimeSeconds: 540,
+      xpReward: 240,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${tempestPineHighlands.id}-tempest-pine` },
+    update: {},
+    create: {
+      id: `${tempestPineHighlands.id}-tempest-pine`,
+      nodeId: tempestPineHighlands.id,
+      itemId: tempestPine.id,
+      minQty: 2,
+      maxQty: 4,
+      weight: 100,
+    },
+  });
+
+  // Logger nodes - Tier 5 (levels 81-100)
+  const moonElderSequoia = await prisma.gatheringNode.upsert({
+    where: { key: "moon-elder-sequoia" },
+    update: {},
+    create: {
+      key: "moon-elder-sequoia",
+      name: "Moon-Elder Sequoia",
+      description: "A sequoia touched by moonlight.",
+      jobId: loggerJob.id,
+      dangerTier: 4,
+      tier: 5,
+      requiredJobLevel: 85,
+      gatherTimeSeconds: 900,
+      xpReward: 360,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${moonElderSequoia.id}-moon-sequoia-timber` },
+    update: {},
+    create: {
+      id: `${moonElderSequoia.id}-moon-sequoia-timber`,
+      nodeId: moonElderSequoia.id,
+      itemId: moonSequoiaTimber.id,
+      minQty: 1,
+      maxQty: 1,
+      weight: 100,
+    },
+  });
+
+  const sunkenMangroveTitan = await prisma.gatheringNode.upsert({
+    where: { key: "sunken-mangrove-titan" },
+    update: {},
+    create: {
+      key: "sunken-mangrove-titan",
+      name: "Sunken Mangrove Titan",
+      description: "A titanic mangrove tree sunken in swampland.",
+      jobId: loggerJob.id,
+      dangerTier: 4,
+      tier: 5,
+      requiredJobLevel: 88,
+      gatherTimeSeconds: 1050,
+      xpReward: 420,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${sunkenMangroveTitan.id}-mangrove-corewood` },
+    update: {},
+    create: {
+      id: `${sunkenMangroveTitan.id}-mangrove-corewood`,
+      nodeId: sunkenMangroveTitan.id,
+      itemId: mangroveCorewood.id,
+      minQty: 1,
+      maxQty: 2,
+      weight: 100,
+    },
+  });
+
+  const crystalheartYew = await prisma.gatheringNode.upsert({
+    where: { key: "crystalheart-yew" },
+    update: {},
+    create: {
+      key: "crystalheart-yew",
+      name: "Crystalheart Yew",
+      description: "A yew tree with a crystalline heart.",
+      jobId: loggerJob.id,
+      dangerTier: 5,
+      tier: 5,
+      requiredJobLevel: 90,
+      gatherTimeSeconds: 1200,
+      xpReward: 480,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${crystalheartYew.id}-crystal-yew-wood` },
+    update: {},
+    create: {
+      id: `${crystalheartYew.id}-crystal-yew-wood`,
+      nodeId: crystalheartYew.id,
+      itemId: crystalYewWood.id,
+      minQty: 1,
+      maxQty: 2,
+      weight: 100,
+    },
+  });
+
+  const worldAshBranchspire = await prisma.gatheringNode.upsert({
+    where: { key: "world-ash-branchspire" },
+    update: {},
+    create: {
+      key: "world-ash-branchspire",
+      name: "World-Ash Branchspire",
+      description: "A branchspire of the legendary World-Ash.",
+      jobId: loggerJob.id,
+      dangerTier: 5,
+      tier: 5,
+      requiredJobLevel: 95,
+      gatherTimeSeconds: 1350,
+      xpReward: 540,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${worldAshBranchspire.id}-world-ash-timber` },
+    update: {},
+    create: {
+      id: `${worldAshBranchspire.id}-world-ash-timber`,
+      nodeId: worldAshBranchspire.id,
+      itemId: worldAshTimber.id,
+      minQty: 1,
+      maxQty: 2,
+      weight: 100,
+    },
+  });
+
+  const mythicRootwoodMonolith = await prisma.gatheringNode.upsert({
+    where: { key: "mythic-rootwood-monolith" },
+    update: {},
+    create: {
+      key: "mythic-rootwood-monolith",
+      name: "Mythic Rootwood Monolith",
+      description: "The legendary Mythic Rootwood Monolith.",
+      jobId: loggerJob.id,
+      dangerTier: 5,
+      tier: 5,
+      requiredJobLevel: 100,
+      gatherTimeSeconds: 1500,
+      xpReward: 600,
+    },
+  });
+
+  await prisma.nodeYield.upsert({
+    where: { id: `${mythicRootwoodMonolith.id}-mythic-rootwood` },
+    update: {},
+    create: {
+      id: `${mythicRootwoodMonolith.id}-mythic-rootwood`,
+      nodeId: mythicRootwoodMonolith.id,
+      itemId: mythicRootwood.id,
       minQty: 1,
       maxQty: 2,
       weight: 100,

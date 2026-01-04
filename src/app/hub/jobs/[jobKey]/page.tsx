@@ -43,6 +43,11 @@ export default function JobDetailPage({ params }: Props) {
     }
   );
 
+  const { data: gatheringNodes } = api.gathering.listNodes.useQuery(
+    { jobId: job?.id },
+    { enabled: !!job?.id }
+  );
+
   const utils = api.useUtils();
   const startActionMutation = api.skillTraining.startAction.useMutation({
     onSuccess: () => {
@@ -126,6 +131,81 @@ export default function JobDetailPage({ params }: Props) {
                   label="XP to Next Level"
                 />
               )}
+            </div>
+          </div>
+        )}
+
+        {/* Gathering Nodes Section */}
+        {gatheringNodes && gatheringNodes.length > 0 && (
+          <div className="mt-6">
+            <h2 className="mb-4 text-lg font-semibold text-slate-100">
+              Gathering Nodes
+            </h2>
+            <div className="space-y-3">
+              {gatheringNodes.map((node) => {
+                const isLocked = progression ? progression.level < node.requiredJobLevel : true;
+                const timeMinutes = Math.floor(node.gatherTimeSeconds / 60);
+                const timeSeconds = node.gatherTimeSeconds % 60;
+                const timeDisplay = timeMinutes > 0 
+                  ? `${timeMinutes}m ${timeSeconds}s`
+                  : `${timeSeconds}s`;
+
+                return (
+                  <div
+                    key={node.id}
+                    className={`rounded-xl border p-4 ${
+                      isLocked
+                        ? "border-slate-700/50 bg-slate-900/20 opacity-60"
+                        : "border-slate-800 bg-slate-950/60"
+                    }`}
+                  >
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <h3 className="font-semibold text-slate-100">{node.name}</h3>
+                          {isLocked && (
+                            <span className="rounded bg-slate-700/50 px-2 py-0.5 text-xs text-slate-400">
+                              Requires Level {node.requiredJobLevel}
+                            </span>
+                          )}
+                          <span className="rounded bg-purple-500/20 px-2 py-0.5 text-xs text-purple-400">
+                            Tier {node.tier}
+                          </span>
+                          {node.dangerTier > 0 && (
+                            <span className="rounded bg-red-500/20 px-2 py-0.5 text-xs text-red-400">
+                              Danger {node.dangerTier}
+                            </span>
+                          )}
+                        </div>
+                        {node.description && (
+                          <p className="mt-1 text-sm text-slate-400">{node.description}</p>
+                        )}
+                        <div className="mt-2 text-xs text-slate-400">
+                          <span>Req Level: {node.requiredJobLevel}</span>
+                          <span className="mx-2">|</span>
+                          <span>Time: {timeDisplay}</span>
+                          <span className="mx-2">|</span>
+                          <span className="text-green-400">XP: {node.xpReward}</span>
+                        </div>
+                        {node.yields && node.yields.length > 0 && (
+                          <div className="mt-2">
+                            <span className="text-xs text-slate-400">Yields: </span>
+                            {node.yields.map((yield_, idx) => (
+                              <span key={yield_.id} className="text-xs text-green-400">
+                                {idx > 0 && ", "}
+                                {yield_.minQty === yield_.maxQty
+                                  ? `${yield_.minQty}x`
+                                  : `${yield_.minQty}-${yield_.maxQty}x`}{" "}
+                                {yield_.item.name}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
