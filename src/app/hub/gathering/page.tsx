@@ -19,18 +19,15 @@ export default function GatheringPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-5xl p-4 md:p-8">
-          <h1 className="text-2xl font-bold text-cyan-400">Gathering</h1>
-          <p className="mt-2 text-slate-400">Loading...</p>
-        </div>
+      <div>
+        <h1 className="text-2xl font-bold text-cyan-400">Gathering</h1>
+        <p className="mt-2 text-slate-400">Loading...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-5xl p-4 md:p-8">
+    <div>
         <h1 className="text-2xl font-bold text-cyan-400">Gathering Nodes</h1>
         <p className="mt-2 text-slate-400">
           Collect resources from gathering nodes
@@ -75,8 +72,6 @@ export default function GatheringPage() {
             <p className="text-slate-400">No gathering nodes found</p>
           )}
         </div>
-
-      </div>
     </div>
   );
 }

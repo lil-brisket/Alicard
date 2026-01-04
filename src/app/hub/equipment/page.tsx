@@ -54,11 +54,9 @@ export default function EquipmentPage() {
 
   if (loadoutLoading) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-7xl p-4 md:p-8">
-          <h1 className="text-2xl font-bold text-cyan-400">Equipment</h1>
-          <p className="mt-2 text-slate-400">Loading...</p>
-        </div>
+      <div>
+        <h1 className="text-2xl font-bold text-cyan-400">Equipment</h1>
+        <p className="mt-2 text-slate-400">Loading...</p>
       </div>
     );
   }
@@ -105,8 +103,7 @@ export default function EquipmentPage() {
   ) ?? [];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-7xl p-4 md:p-8">
+    <div>
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-cyan-400">Equipment</h1>
           <p className="mt-2 text-slate-400">Manage your equipped items</p>
@@ -337,8 +334,6 @@ export default function EquipmentPage() {
             )}
           </div>
         </div>
-
-      </div>
     </div>
   );
 }

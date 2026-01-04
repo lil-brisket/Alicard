@@ -27,26 +27,22 @@ export default function JobsPage() {
 
   if (jobsLoading || myJobsLoading) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-5xl p-4 md:p-8">
-          <h1 className="text-2xl font-bold text-cyan-400">Jobs & Professions</h1>
-          <p className="mt-2 text-slate-400">Loading...</p>
-        </div>
+      <div>
+        <h1 className="text-2xl font-bold text-cyan-400">Jobs & Professions</h1>
+        <p className="mt-2 text-slate-400">Loading...</p>
       </div>
     );
   }
 
   if (jobsError || myJobsError) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-5xl p-4 md:p-8">
-          <h1 className="text-2xl font-bold text-cyan-400">Jobs & Professions</h1>
-          <div className="mt-4 rounded bg-red-500/20 border border-red-500/50 p-4">
-            <p className="text-red-400 font-semibold">Error loading jobs</p>
-            <p className="text-red-300 text-sm mt-2">
-              {jobsError?.message ?? myJobsError?.message ?? "Unknown error"}
-            </p>
-          </div>
+      <div>
+        <h1 className="text-2xl font-bold text-cyan-400">Jobs & Professions</h1>
+        <div className="mt-4 rounded bg-red-500/20 border border-red-500/50 p-4">
+          <p className="text-red-400 font-semibold">Error loading jobs</p>
+          <p className="text-red-300 text-sm mt-2">
+            {jobsError?.message ?? myJobsError?.message ?? "Unknown error"}
+          </p>
         </div>
       </div>
     );
@@ -59,8 +55,7 @@ export default function JobsPage() {
   const gatherJobs = jobs?.filter((job) => job.category === "GATHER") ?? [];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-5xl p-4 md:p-8">
+    <div>
         <h1 className="text-2xl font-bold text-cyan-400">Jobs & Professions</h1>
         <p className="mt-2 text-slate-400">
           Manage your crafting and gathering professions
@@ -165,8 +160,6 @@ export default function JobsPage() {
             <p className="text-slate-400">No jobs available yet.</p>
           </div>
         )}
-
-      </div>
     </div>
   );
 }

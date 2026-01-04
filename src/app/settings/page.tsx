@@ -117,11 +117,9 @@ export default function SettingsPage() {
 
   if (status === "loading" || isLoading) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-5xl p-4 md:p-8">
-          <div className="flex items-center justify-center py-12">
-            <div className="text-slate-400">Loading settings...</div>
-          </div>
+      <div>
+        <div className="flex items-center justify-center py-12">
+          <div className="text-slate-400">Loading settings...</div>
         </div>
       </div>
     );
@@ -129,12 +127,10 @@ export default function SettingsPage() {
 
   if (!settings) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-5xl p-4 md:p-8">
-          <div className="rounded-xl border border-red-500/20 bg-red-950/30 p-8 text-center">
-            <h2 className="text-xl font-semibold text-red-400">Settings Not Found</h2>
-            <p className="mt-2 text-slate-400">Unable to load your settings.</p>
-          </div>
+      <div>
+        <div className="rounded-xl border border-red-500/20 bg-red-950/30 p-8 text-center">
+          <h2 className="text-xl font-semibold text-red-400">Settings Not Found</h2>
+          <p className="mt-2 text-slate-400">Unable to load your settings.</p>
         </div>
       </div>
     );
@@ -150,8 +146,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-5xl p-4 md:p-8">
+    <div>
         <h1 className="text-2xl font-bold text-cyan-400 mb-2">Settings</h1>
         <p className="text-slate-400 mb-6">Manage your account and profile settings</p>
 
@@ -507,7 +502,6 @@ export default function SettingsPage() {
             )}
           </div>
         </div>
-      </div>
     </div>
   );
 }

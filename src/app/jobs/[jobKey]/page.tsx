@@ -39,28 +39,25 @@ export default function JobDetailPage({ params }: Props) {
 
   if (!job) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-5xl p-4 md:p-8">
-          <div className="mb-6 flex items-center justify-between">
-            <Link
-              href="/jobs"
-              className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-slate-200 transition-colors"
-            >
-              <span>←</span>
-              <span>Back to Jobs</span>
-            </Link>
-          </div>
-          <div className="mt-4 rounded bg-red-500/20 border border-red-500/50 p-4">
-            <p className="text-red-400 font-semibold">Job not found</p>
-          </div>
+      <div>
+        <div className="mb-6 flex items-center justify-between">
+          <Link
+            href="/jobs"
+            className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-slate-200 transition-colors"
+          >
+            <span>←</span>
+            <span>Back to Jobs</span>
+          </Link>
+        </div>
+        <div className="mt-4 rounded bg-red-500/20 border border-red-500/50 p-4">
+          <p className="text-red-400 font-semibold">Job not found</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-5xl p-4 md:p-8">
+    <div>
         <div className="mb-6 flex items-center justify-between">
           <Link
             href="/jobs"
@@ -200,7 +197,6 @@ export default function JobDetailPage({ params }: Props) {
             <p className="text-slate-400">No recipes or gathering nodes available for this job.</p>
           </div>
         )}
-      </div>
     </div>
   );
 }

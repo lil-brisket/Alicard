@@ -34,11 +34,9 @@ export default function SkillsPage() {
 
   if (loadoutLoading || learnedLoading) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-7xl p-4 md:p-8">
-          <h1 className="text-2xl font-bold text-cyan-400">Skills</h1>
-          <p className="mt-2 text-slate-400">Loading...</p>
-        </div>
+      <div>
+        <h1 className="text-2xl font-bold text-cyan-400">Skills</h1>
+        <p className="mt-2 text-slate-400">Loading...</p>
       </div>
     );
   }
@@ -46,8 +44,7 @@ export default function SkillsPage() {
   const slots = loadout?.slots ?? [];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-7xl p-4 md:p-8">
+    <div>
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-cyan-400">Skills</h1>
           <p className="mt-2 text-slate-400">Manage your skill loadout</p>
@@ -178,8 +175,6 @@ export default function SkillsPage() {
             </div>
           )}
         </div>
-
-      </div>
     </div>
   );
 }

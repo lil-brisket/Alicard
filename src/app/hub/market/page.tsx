@@ -30,8 +30,7 @@ export default function MarketPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-5xl p-4 md:p-8">
+    <div>
         <h1 className="text-2xl font-bold text-cyan-400">Marketplace</h1>
         <p className="mt-2 text-slate-400">
           Buy and sell items with other players
@@ -129,8 +128,6 @@ export default function MarketPage() {
             </div>
           )}
         </div>
-
-      </div>
     </div>
   );
 }

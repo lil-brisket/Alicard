@@ -7,7 +7,6 @@ import { DesktopSidebar } from "./AppSidebar";
 import { DesktopPlayerPanel } from "./PlayerPanel";
 import { MobileSidebar } from "./MobileSidebar";
 import { MobilePlayerPanel } from "./MobilePlayerPanel";
-import { Button } from "~/components/ui/button";
 import { Menu, X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const STORAGE_KEYS = {
@@ -62,7 +61,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <div className="min-h-dvh w-full overflow-x-hidden bg-gradient-to-b from-black via-black to-slate-950">
 
       {/* Mobile Header with menu buttons */}
-      <header className="sticky top-0 z-40 flex h-14 items-center justify-between gap-2 border-b border-slate-800 bg-black/80 backdrop-blur px-3 md:hidden w-full">
+      <header className="sticky top-0 z-50 flex h-14 items-center justify-between gap-2 border-b border-slate-800 bg-black/80 backdrop-blur px-3 md:hidden w-full">
         <div className="flex items-center gap-2 min-w-0">
           <MobileSidebar />
           {!isChatPage && (
@@ -73,30 +72,32 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </header>
 
       {/* Desktop Header with toggle buttons */}
-      <header className="sticky top-0 z-40 hidden h-14 items-center justify-between gap-3 border-b border-slate-800 bg-black/80 backdrop-blur px-4 md:flex">
+      <header className="sticky top-0 z-50 hidden h-14 items-center justify-between gap-3 border-b border-slate-800 bg-black/80 backdrop-blur px-4 md:flex">
         <div className="flex items-center gap-3">
-          <Button
-            variant="outline"
-            size="icon"
+          <button
+            type="button"
             onClick={() => setSidebarOpen(!sidebarOpen)}
             aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
-            className="h-9 w-9 border-slate-700 bg-slate-900 text-slate-100 hover:bg-slate-800"
+            className="relative z-50 flex h-9 w-9 items-center justify-center rounded-md border border-slate-700 bg-slate-900 text-slate-100 transition-colors hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-black"
           >
             {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
+          </button>
           {!isChatPage && (
             <div className="font-semibold text-slate-100">Alicard</div>
           )}
         </div>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={() => setPlayerPanelOpen(!playerPanelOpen)}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setPlayerPanelOpen((prev) => !prev);
+          }}
           aria-label={playerPanelOpen ? "Close player panel" : "Open player panel"}
-          className="h-9 w-9 border-slate-700 bg-slate-900 text-slate-100 hover:bg-slate-800"
+          className="relative z-50 flex h-9 w-9 items-center justify-center rounded-md border border-slate-700 bg-slate-900 text-slate-100 transition-colors hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-black cursor-pointer"
         >
           {playerPanelOpen ? <ChevronRight className="h-5 w-5" /> : <ChevronLeft className="h-5 w-5" />}
-        </Button>
+        </button>
       </header>
 
       <div className={`flex w-full max-w-full ${isChatPage ? 'h-[calc(100vh-3.5rem)] md:h-[calc(100vh-3.5rem)]' : 'min-h-screen'}`}>

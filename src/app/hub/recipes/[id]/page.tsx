@@ -23,38 +23,34 @@ export default function RecipeDetailPage({ params }: Props) {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-5xl p-4 md:p-8">
-          <div className="mb-6 flex items-center justify-between">
-            <Link
-              href="/hub/recipes"
-              className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-slate-200 transition-colors"
-            >
-              <span>←</span>
-              <span>Back to Recipes</span>
-            </Link>
-          </div>
-          <p className="text-slate-400">Loading...</p>
+      <div>
+        <div className="mb-6 flex items-center justify-between">
+          <Link
+            href="/hub/recipes"
+            className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-slate-200 transition-colors"
+          >
+            <span>←</span>
+            <span>Back to Recipes</span>
+          </Link>
         </div>
+        <p className="text-slate-400">Loading...</p>
       </div>
     );
   }
 
   if (!recipe) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-5xl p-4 md:p-8">
-          <div className="mb-6 flex items-center justify-between">
-            <Link
-              href="/hub/recipes"
-              className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-slate-200 transition-colors"
-            >
-              <span>←</span>
-              <span>Back to Recipes</span>
-            </Link>
-          </div>
-          <p className="text-slate-400">Recipe not found</p>
+      <div>
+        <div className="mb-6 flex items-center justify-between">
+          <Link
+            href="/hub/recipes"
+            className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-slate-200 transition-colors"
+          >
+            <span>←</span>
+            <span>Back to Recipes</span>
+          </Link>
         </div>
+        <p className="text-slate-400">Recipe not found</p>
       </div>
     );
   }
@@ -69,8 +65,7 @@ export default function RecipeDetailPage({ params }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-5xl p-4 md:p-8">
+    <div>
         <div className="mb-6 flex items-center justify-between">
           <Link
             href="/hub/recipes"
@@ -180,8 +175,6 @@ export default function RecipeDetailPage({ params }: Props) {
               <p className="mt-1 text-sm">{craftMutation.error.message}</p>
             </div>
           )}
-        </div>
-      </div>
     </div>
   );
 }

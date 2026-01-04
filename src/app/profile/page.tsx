@@ -22,17 +22,15 @@ export default async function ProfilePage() {
 
   if (!profile) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-5xl p-4 md:p-8">
-          <div className="mb-4 flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-cyan-400">My Profile</h1>
-          </div>
-          <div className="rounded-xl border border-red-500/20 bg-red-950/30 p-8 text-center">
-            <h2 className="text-xl font-semibold text-red-400">Profile Not Found</h2>
-            <p className="mt-2 text-slate-400">
-              Unable to load your profile. Please try again later.
-            </p>
-          </div>
+      <div>
+        <div className="mb-4 flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-cyan-400">My Profile</h1>
+        </div>
+        <div className="rounded-xl border border-red-500/20 bg-red-950/30 p-8 text-center">
+          <h2 className="text-xl font-semibold text-red-400">Profile Not Found</h2>
+          <p className="mt-2 text-slate-400">
+            Unable to load your profile. Please try again later.
+          </p>
         </div>
       </div>
     );
@@ -89,13 +87,12 @@ export default async function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto flex min-h-screen max-w-5xl flex-col gap-4 p-4 md:p-8">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-cyan-400">My Profile</h1>
-        </div>
+    <div>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold text-cyan-400">My Profile</h1>
+      </div>
 
-        <main className="mt-4 grid flex-1 grid-cols-1 gap-4 md:mt-6 md:grid-cols-12">
+      <main className="mt-4 grid flex-1 grid-cols-1 gap-4 md:mt-6 md:grid-cols-12">
           {/* Left column: md:col-span-5 */}
           <section className="space-y-4 md:col-span-5">
             <ProfileHeaderCard
@@ -169,8 +166,7 @@ export default async function ProfilePage() {
               commendationsStrategic={profile.social?.commendationsStrategic ?? 0}
             />
           </section>
-        </main>
-      </div>
+      </main>
     </div>
   );
 }

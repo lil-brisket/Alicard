@@ -172,8 +172,7 @@ export default function BankPage() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-5xl p-4 md:p-8">
+    <div>
         <div className="mb-6 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-cyan-400">Bank</h1>
@@ -411,7 +410,6 @@ export default function BankPage() {
             </div>
           )}
         </div>
-      </div>
     </div>
   );
 }

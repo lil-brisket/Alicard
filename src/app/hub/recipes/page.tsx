@@ -19,18 +19,15 @@ export default function RecipesPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-5xl p-4 md:p-8">
-          <h1 className="text-2xl font-bold text-cyan-400">Recipes</h1>
-          <p className="mt-2 text-slate-400">Loading...</p>
-        </div>
+      <div>
+        <h1 className="text-2xl font-bold text-cyan-400">Recipes</h1>
+        <p className="mt-2 text-slate-400">Loading...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-5xl p-4 md:p-8">
+    <div>
         <h1 className="text-2xl font-bold text-cyan-400">Recipes</h1>
         <p className="mt-2 text-slate-400">
           Browse available crafting recipes
@@ -73,8 +70,6 @@ export default function RecipesPage() {
             <p className="text-slate-400">No recipes found</p>
           )}
         </div>
-
-      </div>
     </div>
   );
 }

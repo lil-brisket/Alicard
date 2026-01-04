@@ -54,18 +54,15 @@ export default function CraftingPage() {
 
   if (recipesLoading) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-5xl p-4 md:p-8">
-          <h1 className="text-2xl font-bold text-cyan-400">Crafting</h1>
-          <p className="mt-2 text-slate-400">Loading recipes...</p>
-        </div>
+      <div>
+        <h1 className="text-2xl font-bold text-cyan-400">Crafting</h1>
+        <p className="mt-2 text-slate-400">Loading recipes...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-5xl p-4 md:p-8">
+    <div>
         <h1 className="text-2xl font-bold text-cyan-400">Crafting</h1>
         <p className="mt-2 text-slate-400">
           Create items using recipes organized by profession
@@ -224,8 +221,6 @@ export default function CraftingPage() {
             )
           )}
         </div>
-
-      </div>
     </div>
   );
 }

@@ -112,18 +112,15 @@ function TrainingPageContent() {
 
   if (skillsLoading || actionLoading) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-7xl p-4 md:p-8">
-          <h1 className="text-2xl font-bold text-cyan-400">Skill Training</h1>
-          <p className="mt-2 text-slate-400">Loading...</p>
-        </div>
+      <div>
+        <h1 className="text-2xl font-bold text-cyan-400">Skill Training</h1>
+        <p className="mt-2 text-slate-400">Loading...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-7xl p-4 md:p-8">
+    <div>
         <div className="mb-6">
           <div className="flex items-center justify-between">
             <div>
@@ -433,7 +430,6 @@ function TrainingPageContent() {
             </Link>
           )}
         </div>
-      </div>
     </div>
   );
 }
@@ -441,11 +437,9 @@ function TrainingPageContent() {
 export default function TrainingPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-7xl p-4 md:p-8">
-          <h1 className="text-2xl font-bold text-cyan-400">Skill Training</h1>
-          <p className="mt-2 text-slate-400">Loading...</p>
-        </div>
+      <div>
+        <h1 className="text-2xl font-bold text-cyan-400">Skill Training</h1>
+        <p className="mt-2 text-slate-400">Loading...</p>
       </div>
     }>
       <TrainingPageContent />

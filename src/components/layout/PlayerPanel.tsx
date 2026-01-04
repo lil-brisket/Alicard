@@ -378,16 +378,18 @@ export function PlayerPanelContent() {
 }
 
 export function DesktopPlayerPanel({ isOpen = true, isChatPage = false }: { isOpen?: boolean; isChatPage?: boolean }) {
-  if (!isOpen) {
-    return null;
-  }
-
   return (
-    <aside className={`hidden w-72 shrink-0 border-l border-slate-800/30 bg-slate-950/40 ${isChatPage ? 'md:block' : 'lg:block'}`}>
-      {/* sticky so it stays visible while scrolling */}
-      <div className="sticky top-0 h-screen">
-        <PlayerPanelContent />
-      </div>
+    <aside
+      className={`hidden shrink-0 border-l border-slate-800/30 bg-slate-950/40 transition-all duration-300 md:block ${
+        isOpen ? "w-72" : "w-0 border-l-0"
+      }`}
+      style={{ height: isChatPage ? "100vh" : "calc(100vh - 3.5rem)" }}
+    >
+      {isOpen && (
+        <div className="sticky top-0 h-screen w-72">
+          <PlayerPanelContent />
+        </div>
+      )}
     </aside>
   );
 }

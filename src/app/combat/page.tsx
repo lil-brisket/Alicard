@@ -49,10 +49,8 @@ export default function CombatPage() {
 
   if (battleLoading || monstersLoading) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-5xl p-4 md:p-8">
-          <p className="text-slate-400">Loading...</p>
-        </div>
+      <div>
+        <p className="text-slate-400">Loading...</p>
       </div>
     );
   }
@@ -63,8 +61,7 @@ export default function CombatPage() {
     const monster = activeBattle.monster;
 
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-5xl p-4 md:p-8">
+      <div>
           <h1 className="text-2xl font-bold text-cyan-400">Combat</h1>
 
           {error && (
@@ -194,15 +191,12 @@ export default function CombatPage() {
               </div>
             )}
           </div>
-        </div>
-      </div>
     );
   }
 
   // Show monster selection if no active battle
   return (
-      <div className="min-h-screen bg-slate-950 text-slate-100">
-        <div className="mx-auto max-w-5xl p-4 md:p-8">
+    <div>
           <h1 className="text-2xl font-bold text-cyan-400">Combat</h1>
           <p className="mt-2 text-slate-400">
             Select a monster to start a battle
@@ -269,8 +263,6 @@ export default function CombatPage() {
             </div>
           )}
         </div>
-
-      </div>
     </div>
   );
 }

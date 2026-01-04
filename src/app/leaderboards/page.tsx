@@ -53,8 +53,7 @@ export default function LeaderboardsPage() {
         : jobsData;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto max-w-6xl p-4 md:p-8">
+    <div>
         <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 className="text-2xl font-bold text-cyan-400">Leaderboards</h1>
@@ -271,7 +270,6 @@ export default function LeaderboardsPage() {
             Showing top {currentData.length} players
           </div>
         )}
-      </div>
     </div>
   );
 }
