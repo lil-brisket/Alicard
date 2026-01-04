@@ -218,6 +218,16 @@ export const JobCategory = {
 export type JobCategory = (typeof JobCategory)[keyof typeof JobCategory]
 
 
+export const CraftingStation = {
+  SMELTER: 'SMELTER',
+  ANVIL: 'ANVIL',
+  FORGE: 'FORGE',
+  TEMPERING_RACK: 'TEMPERING_RACK'
+} as const
+
+export type CraftingStation = (typeof CraftingStation)[keyof typeof CraftingStation]
+
+
 export const AchievementRarity = {
   COMMON: 'COMMON',
   UNCOMMON: 'UNCOMMON',

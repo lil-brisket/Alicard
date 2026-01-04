@@ -7646,8 +7646,14 @@ export const RecipeScalarFieldEnum = {
   updatedAt: 'updatedAt',
   jobId: 'jobId',
   difficulty: 'difficulty',
+  requiredJobLevel: 'requiredJobLevel',
   outputItemId: 'outputItemId',
-  outputQty: 'outputQty'
+  outputQty: 'outputQty',
+  station: 'station',
+  craftTimeSeconds: 'craftTimeSeconds',
+  xp: 'xp',
+  isActive: 'isActive',
+  allowNonGatherableInputs: 'allowNonGatherableInputs'
 } as const
 
 export type RecipeScalarFieldEnum = (typeof RecipeScalarFieldEnum)[keyof typeof RecipeScalarFieldEnum]
@@ -8817,6 +8823,20 @@ export type EnumJobCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
  * Reference to a field of type 'JobCategory[]'
  */
 export type ListEnumJobCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JobCategory[]'>
+    
+
+
+/**
+ * Reference to a field of type 'CraftingStation'
+ */
+export type EnumCraftingStationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CraftingStation'>
+    
+
+
+/**
+ * Reference to a field of type 'CraftingStation[]'
+ */
+export type ListEnumCraftingStationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CraftingStation[]'>
     
 
 

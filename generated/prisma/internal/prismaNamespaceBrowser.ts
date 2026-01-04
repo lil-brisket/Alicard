@@ -761,8 +761,14 @@ export const RecipeScalarFieldEnum = {
   updatedAt: 'updatedAt',
   jobId: 'jobId',
   difficulty: 'difficulty',
+  requiredJobLevel: 'requiredJobLevel',
   outputItemId: 'outputItemId',
-  outputQty: 'outputQty'
+  outputQty: 'outputQty',
+  station: 'station',
+  craftTimeSeconds: 'craftTimeSeconds',
+  xp: 'xp',
+  isActive: 'isActive',
+  allowNonGatherableInputs: 'allowNonGatherableInputs'
 } as const
 
 export type RecipeScalarFieldEnum = (typeof RecipeScalarFieldEnum)[keyof typeof RecipeScalarFieldEnum]

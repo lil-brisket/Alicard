@@ -647,6 +647,23 @@ export type EnumJobCategoryWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumJobCategoryFilter<$PrismaModel>
 }
 
+export type EnumCraftingStationNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.CraftingStation | Prisma.EnumCraftingStationFieldRefInput<$PrismaModel> | null
+  in?: $Enums.CraftingStation[] | Prisma.ListEnumCraftingStationFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.CraftingStation[] | Prisma.ListEnumCraftingStationFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumCraftingStationNullableFilter<$PrismaModel> | $Enums.CraftingStation | null
+}
+
+export type EnumCraftingStationNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CraftingStation | Prisma.EnumCraftingStationFieldRefInput<$PrismaModel> | null
+  in?: $Enums.CraftingStation[] | Prisma.ListEnumCraftingStationFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.CraftingStation[] | Prisma.ListEnumCraftingStationFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumCraftingStationNullableWithAggregatesFilter<$PrismaModel> | $Enums.CraftingStation | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCraftingStationNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCraftingStationNullableFilter<$PrismaModel>
+}
+
 export type EnumAchievementRarityFilter<$PrismaModel = never> = {
   equals?: $Enums.AchievementRarity | Prisma.EnumAchievementRarityFieldRefInput<$PrismaModel>
   in?: $Enums.AchievementRarity[] | Prisma.ListEnumAchievementRarityFieldRefInput<$PrismaModel>
@@ -1463,6 +1480,23 @@ export type NestedEnumJobCategoryWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumJobCategoryFilter<$PrismaModel>
   _max?: Prisma.NestedEnumJobCategoryFilter<$PrismaModel>
+}
+
+export type NestedEnumCraftingStationNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.CraftingStation | Prisma.EnumCraftingStationFieldRefInput<$PrismaModel> | null
+  in?: $Enums.CraftingStation[] | Prisma.ListEnumCraftingStationFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.CraftingStation[] | Prisma.ListEnumCraftingStationFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumCraftingStationNullableFilter<$PrismaModel> | $Enums.CraftingStation | null
+}
+
+export type NestedEnumCraftingStationNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CraftingStation | Prisma.EnumCraftingStationFieldRefInput<$PrismaModel> | null
+  in?: $Enums.CraftingStation[] | Prisma.ListEnumCraftingStationFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.CraftingStation[] | Prisma.ListEnumCraftingStationFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumCraftingStationNullableWithAggregatesFilter<$PrismaModel> | $Enums.CraftingStation | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCraftingStationNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCraftingStationNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumAchievementRarityFilter<$PrismaModel = never> = {

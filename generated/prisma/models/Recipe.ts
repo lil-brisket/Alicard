@@ -29,13 +29,19 @@ export type AggregateRecipe = {
 export type RecipeAvgAggregateOutputType = {
   version: number | null
   difficulty: number | null
+  requiredJobLevel: number | null
   outputQty: number | null
+  craftTimeSeconds: number | null
+  xp: number | null
 }
 
 export type RecipeSumAggregateOutputType = {
   version: number | null
   difficulty: number | null
+  requiredJobLevel: number | null
   outputQty: number | null
+  craftTimeSeconds: number | null
+  xp: number | null
 }
 
 export type RecipeMinAggregateOutputType = {
@@ -49,8 +55,14 @@ export type RecipeMinAggregateOutputType = {
   updatedAt: Date | null
   jobId: string | null
   difficulty: number | null
+  requiredJobLevel: number | null
   outputItemId: string | null
   outputQty: number | null
+  station: $Enums.CraftingStation | null
+  craftTimeSeconds: number | null
+  xp: number | null
+  isActive: boolean | null
+  allowNonGatherableInputs: boolean | null
 }
 
 export type RecipeMaxAggregateOutputType = {
@@ -64,8 +76,14 @@ export type RecipeMaxAggregateOutputType = {
   updatedAt: Date | null
   jobId: string | null
   difficulty: number | null
+  requiredJobLevel: number | null
   outputItemId: string | null
   outputQty: number | null
+  station: $Enums.CraftingStation | null
+  craftTimeSeconds: number | null
+  xp: number | null
+  isActive: boolean | null
+  allowNonGatherableInputs: boolean | null
 }
 
 export type RecipeCountAggregateOutputType = {
@@ -80,8 +98,14 @@ export type RecipeCountAggregateOutputType = {
   updatedAt: number
   jobId: number
   difficulty: number
+  requiredJobLevel: number
   outputItemId: number
   outputQty: number
+  station: number
+  craftTimeSeconds: number
+  xp: number
+  isActive: number
+  allowNonGatherableInputs: number
   _all: number
 }
 
@@ -89,13 +113,19 @@ export type RecipeCountAggregateOutputType = {
 export type RecipeAvgAggregateInputType = {
   version?: true
   difficulty?: true
+  requiredJobLevel?: true
   outputQty?: true
+  craftTimeSeconds?: true
+  xp?: true
 }
 
 export type RecipeSumAggregateInputType = {
   version?: true
   difficulty?: true
+  requiredJobLevel?: true
   outputQty?: true
+  craftTimeSeconds?: true
+  xp?: true
 }
 
 export type RecipeMinAggregateInputType = {
@@ -109,8 +139,14 @@ export type RecipeMinAggregateInputType = {
   updatedAt?: true
   jobId?: true
   difficulty?: true
+  requiredJobLevel?: true
   outputItemId?: true
   outputQty?: true
+  station?: true
+  craftTimeSeconds?: true
+  xp?: true
+  isActive?: true
+  allowNonGatherableInputs?: true
 }
 
 export type RecipeMaxAggregateInputType = {
@@ -124,8 +160,14 @@ export type RecipeMaxAggregateInputType = {
   updatedAt?: true
   jobId?: true
   difficulty?: true
+  requiredJobLevel?: true
   outputItemId?: true
   outputQty?: true
+  station?: true
+  craftTimeSeconds?: true
+  xp?: true
+  isActive?: true
+  allowNonGatherableInputs?: true
 }
 
 export type RecipeCountAggregateInputType = {
@@ -140,8 +182,14 @@ export type RecipeCountAggregateInputType = {
   updatedAt?: true
   jobId?: true
   difficulty?: true
+  requiredJobLevel?: true
   outputItemId?: true
   outputQty?: true
+  station?: true
+  craftTimeSeconds?: true
+  xp?: true
+  isActive?: true
+  allowNonGatherableInputs?: true
   _all?: true
 }
 
@@ -243,8 +291,14 @@ export type RecipeGroupByOutputType = {
   updatedAt: Date
   jobId: string
   difficulty: number
+  requiredJobLevel: number
   outputItemId: string
   outputQty: number
+  station: $Enums.CraftingStation | null
+  craftTimeSeconds: number
+  xp: number
+  isActive: boolean
+  allowNonGatherableInputs: boolean
   _count: RecipeCountAggregateOutputType | null
   _avg: RecipeAvgAggregateOutputType | null
   _sum: RecipeSumAggregateOutputType | null
@@ -282,8 +336,14 @@ export type RecipeWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Recipe"> | Date | string
   jobId?: Prisma.StringFilter<"Recipe"> | string
   difficulty?: Prisma.IntFilter<"Recipe"> | number
+  requiredJobLevel?: Prisma.IntFilter<"Recipe"> | number
   outputItemId?: Prisma.StringFilter<"Recipe"> | string
   outputQty?: Prisma.IntFilter<"Recipe"> | number
+  station?: Prisma.EnumCraftingStationNullableFilter<"Recipe"> | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntFilter<"Recipe"> | number
+  xp?: Prisma.IntFilter<"Recipe"> | number
+  isActive?: Prisma.BoolFilter<"Recipe"> | boolean
+  allowNonGatherableInputs?: Prisma.BoolFilter<"Recipe"> | boolean
   job?: Prisma.XOR<Prisma.JobScalarRelationFilter, Prisma.JobWhereInput>
   outputItem?: Prisma.XOR<Prisma.ItemScalarRelationFilter, Prisma.ItemWhereInput>
   inputs?: Prisma.RecipeInputListRelationFilter
@@ -302,8 +362,14 @@ export type RecipeOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
+  requiredJobLevel?: Prisma.SortOrder
   outputItemId?: Prisma.SortOrder
   outputQty?: Prisma.SortOrder
+  station?: Prisma.SortOrderInput | Prisma.SortOrder
+  craftTimeSeconds?: Prisma.SortOrder
+  xp?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  allowNonGatherableInputs?: Prisma.SortOrder
   job?: Prisma.JobOrderByWithRelationInput
   outputItem?: Prisma.ItemOrderByWithRelationInput
   inputs?: Prisma.RecipeInputOrderByRelationAggregateInput
@@ -325,8 +391,14 @@ export type RecipeWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Recipe"> | Date | string
   jobId?: Prisma.StringFilter<"Recipe"> | string
   difficulty?: Prisma.IntFilter<"Recipe"> | number
+  requiredJobLevel?: Prisma.IntFilter<"Recipe"> | number
   outputItemId?: Prisma.StringFilter<"Recipe"> | string
   outputQty?: Prisma.IntFilter<"Recipe"> | number
+  station?: Prisma.EnumCraftingStationNullableFilter<"Recipe"> | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntFilter<"Recipe"> | number
+  xp?: Prisma.IntFilter<"Recipe"> | number
+  isActive?: Prisma.BoolFilter<"Recipe"> | boolean
+  allowNonGatherableInputs?: Prisma.BoolFilter<"Recipe"> | boolean
   job?: Prisma.XOR<Prisma.JobScalarRelationFilter, Prisma.JobWhereInput>
   outputItem?: Prisma.XOR<Prisma.ItemScalarRelationFilter, Prisma.ItemWhereInput>
   inputs?: Prisma.RecipeInputListRelationFilter
@@ -345,8 +417,14 @@ export type RecipeOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
+  requiredJobLevel?: Prisma.SortOrder
   outputItemId?: Prisma.SortOrder
   outputQty?: Prisma.SortOrder
+  station?: Prisma.SortOrderInput | Prisma.SortOrder
+  craftTimeSeconds?: Prisma.SortOrder
+  xp?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  allowNonGatherableInputs?: Prisma.SortOrder
   _count?: Prisma.RecipeCountOrderByAggregateInput
   _avg?: Prisma.RecipeAvgOrderByAggregateInput
   _max?: Prisma.RecipeMaxOrderByAggregateInput
@@ -369,8 +447,14 @@ export type RecipeScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Recipe"> | Date | string
   jobId?: Prisma.StringWithAggregatesFilter<"Recipe"> | string
   difficulty?: Prisma.IntWithAggregatesFilter<"Recipe"> | number
+  requiredJobLevel?: Prisma.IntWithAggregatesFilter<"Recipe"> | number
   outputItemId?: Prisma.StringWithAggregatesFilter<"Recipe"> | string
   outputQty?: Prisma.IntWithAggregatesFilter<"Recipe"> | number
+  station?: Prisma.EnumCraftingStationNullableWithAggregatesFilter<"Recipe"> | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntWithAggregatesFilter<"Recipe"> | number
+  xp?: Prisma.IntWithAggregatesFilter<"Recipe"> | number
+  isActive?: Prisma.BoolWithAggregatesFilter<"Recipe"> | boolean
+  allowNonGatherableInputs?: Prisma.BoolWithAggregatesFilter<"Recipe"> | boolean
 }
 
 export type RecipeCreateInput = {
@@ -384,7 +468,13 @@ export type RecipeCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   difficulty?: number
+  requiredJobLevel?: number
   outputQty?: number
+  station?: $Enums.CraftingStation | null
+  craftTimeSeconds?: number
+  xp?: number
+  isActive?: boolean
+  allowNonGatherableInputs?: boolean
   job: Prisma.JobCreateNestedOneWithoutRecipesInput
   outputItem: Prisma.ItemCreateNestedOneWithoutRecipeOutputsInput
   inputs?: Prisma.RecipeInputCreateNestedManyWithoutRecipeInput
@@ -403,8 +493,14 @@ export type RecipeUncheckedCreateInput = {
   updatedAt?: Date | string
   jobId: string
   difficulty?: number
+  requiredJobLevel?: number
   outputItemId: string
   outputQty?: number
+  station?: $Enums.CraftingStation | null
+  craftTimeSeconds?: number
+  xp?: number
+  isActive?: boolean
+  allowNonGatherableInputs?: boolean
   inputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutRecipeInput
   craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutRecipeInput
 }
@@ -420,7 +516,13 @@ export type RecipeUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   difficulty?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
   outputQty?: Prisma.IntFieldUpdateOperationsInput | number
+  station?: Prisma.NullableEnumCraftingStationFieldUpdateOperationsInput | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowNonGatherableInputs?: Prisma.BoolFieldUpdateOperationsInput | boolean
   job?: Prisma.JobUpdateOneRequiredWithoutRecipesNestedInput
   outputItem?: Prisma.ItemUpdateOneRequiredWithoutRecipeOutputsNestedInput
   inputs?: Prisma.RecipeInputUpdateManyWithoutRecipeNestedInput
@@ -439,8 +541,14 @@ export type RecipeUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   difficulty?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
   outputItemId?: Prisma.StringFieldUpdateOperationsInput | string
   outputQty?: Prisma.IntFieldUpdateOperationsInput | number
+  station?: Prisma.NullableEnumCraftingStationFieldUpdateOperationsInput | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowNonGatherableInputs?: Prisma.BoolFieldUpdateOperationsInput | boolean
   inputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutRecipeNestedInput
   craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutRecipeNestedInput
 }
@@ -457,8 +565,14 @@ export type RecipeCreateManyInput = {
   updatedAt?: Date | string
   jobId: string
   difficulty?: number
+  requiredJobLevel?: number
   outputItemId: string
   outputQty?: number
+  station?: $Enums.CraftingStation | null
+  craftTimeSeconds?: number
+  xp?: number
+  isActive?: boolean
+  allowNonGatherableInputs?: boolean
 }
 
 export type RecipeUpdateManyMutationInput = {
@@ -472,7 +586,13 @@ export type RecipeUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   difficulty?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
   outputQty?: Prisma.IntFieldUpdateOperationsInput | number
+  station?: Prisma.NullableEnumCraftingStationFieldUpdateOperationsInput | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowNonGatherableInputs?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type RecipeUncheckedUpdateManyInput = {
@@ -487,8 +607,14 @@ export type RecipeUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   difficulty?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
   outputItemId?: Prisma.StringFieldUpdateOperationsInput | string
   outputQty?: Prisma.IntFieldUpdateOperationsInput | number
+  station?: Prisma.NullableEnumCraftingStationFieldUpdateOperationsInput | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowNonGatherableInputs?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type RecipeListRelationFilter = {
@@ -513,14 +639,23 @@ export type RecipeCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
+  requiredJobLevel?: Prisma.SortOrder
   outputItemId?: Prisma.SortOrder
   outputQty?: Prisma.SortOrder
+  station?: Prisma.SortOrder
+  craftTimeSeconds?: Prisma.SortOrder
+  xp?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  allowNonGatherableInputs?: Prisma.SortOrder
 }
 
 export type RecipeAvgOrderByAggregateInput = {
   version?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
+  requiredJobLevel?: Prisma.SortOrder
   outputQty?: Prisma.SortOrder
+  craftTimeSeconds?: Prisma.SortOrder
+  xp?: Prisma.SortOrder
 }
 
 export type RecipeMaxOrderByAggregateInput = {
@@ -534,8 +669,14 @@ export type RecipeMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
+  requiredJobLevel?: Prisma.SortOrder
   outputItemId?: Prisma.SortOrder
   outputQty?: Prisma.SortOrder
+  station?: Prisma.SortOrder
+  craftTimeSeconds?: Prisma.SortOrder
+  xp?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  allowNonGatherableInputs?: Prisma.SortOrder
 }
 
 export type RecipeMinOrderByAggregateInput = {
@@ -549,14 +690,23 @@ export type RecipeMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
+  requiredJobLevel?: Prisma.SortOrder
   outputItemId?: Prisma.SortOrder
   outputQty?: Prisma.SortOrder
+  station?: Prisma.SortOrder
+  craftTimeSeconds?: Prisma.SortOrder
+  xp?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  allowNonGatherableInputs?: Prisma.SortOrder
 }
 
 export type RecipeSumOrderByAggregateInput = {
   version?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
+  requiredJobLevel?: Prisma.SortOrder
   outputQty?: Prisma.SortOrder
+  craftTimeSeconds?: Prisma.SortOrder
+  xp?: Prisma.SortOrder
 }
 
 export type RecipeScalarRelationFilter = {
@@ -648,6 +798,10 @@ export type RecipeUncheckedUpdateManyWithoutJobNestedInput = {
   deleteMany?: Prisma.RecipeScalarWhereInput | Prisma.RecipeScalarWhereInput[]
 }
 
+export type NullableEnumCraftingStationFieldUpdateOperationsInput = {
+  set?: $Enums.CraftingStation | null
+}
+
 export type RecipeCreateNestedOneWithoutInputsInput = {
   create?: Prisma.XOR<Prisma.RecipeCreateWithoutInputsInput, Prisma.RecipeUncheckedCreateWithoutInputsInput>
   connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutInputsInput
@@ -687,7 +841,13 @@ export type RecipeCreateWithoutOutputItemInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   difficulty?: number
+  requiredJobLevel?: number
   outputQty?: number
+  station?: $Enums.CraftingStation | null
+  craftTimeSeconds?: number
+  xp?: number
+  isActive?: boolean
+  allowNonGatherableInputs?: boolean
   job: Prisma.JobCreateNestedOneWithoutRecipesInput
   inputs?: Prisma.RecipeInputCreateNestedManyWithoutRecipeInput
   craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutRecipeInput
@@ -705,7 +865,13 @@ export type RecipeUncheckedCreateWithoutOutputItemInput = {
   updatedAt?: Date | string
   jobId: string
   difficulty?: number
+  requiredJobLevel?: number
   outputQty?: number
+  station?: $Enums.CraftingStation | null
+  craftTimeSeconds?: number
+  xp?: number
+  isActive?: boolean
+  allowNonGatherableInputs?: boolean
   inputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutRecipeInput
   craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutRecipeInput
 }
@@ -751,8 +917,14 @@ export type RecipeScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Recipe"> | Date | string
   jobId?: Prisma.StringFilter<"Recipe"> | string
   difficulty?: Prisma.IntFilter<"Recipe"> | number
+  requiredJobLevel?: Prisma.IntFilter<"Recipe"> | number
   outputItemId?: Prisma.StringFilter<"Recipe"> | string
   outputQty?: Prisma.IntFilter<"Recipe"> | number
+  station?: Prisma.EnumCraftingStationNullableFilter<"Recipe"> | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntFilter<"Recipe"> | number
+  xp?: Prisma.IntFilter<"Recipe"> | number
+  isActive?: Prisma.BoolFilter<"Recipe"> | boolean
+  allowNonGatherableInputs?: Prisma.BoolFilter<"Recipe"> | boolean
 }
 
 export type RecipeCreateWithoutJobInput = {
@@ -766,7 +938,13 @@ export type RecipeCreateWithoutJobInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   difficulty?: number
+  requiredJobLevel?: number
   outputQty?: number
+  station?: $Enums.CraftingStation | null
+  craftTimeSeconds?: number
+  xp?: number
+  isActive?: boolean
+  allowNonGatherableInputs?: boolean
   outputItem: Prisma.ItemCreateNestedOneWithoutRecipeOutputsInput
   inputs?: Prisma.RecipeInputCreateNestedManyWithoutRecipeInput
   craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutRecipeInput
@@ -783,8 +961,14 @@ export type RecipeUncheckedCreateWithoutJobInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   difficulty?: number
+  requiredJobLevel?: number
   outputItemId: string
   outputQty?: number
+  station?: $Enums.CraftingStation | null
+  craftTimeSeconds?: number
+  xp?: number
+  isActive?: boolean
+  allowNonGatherableInputs?: boolean
   inputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutRecipeInput
   craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutRecipeInput
 }
@@ -826,7 +1010,13 @@ export type RecipeCreateWithoutInputsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   difficulty?: number
+  requiredJobLevel?: number
   outputQty?: number
+  station?: $Enums.CraftingStation | null
+  craftTimeSeconds?: number
+  xp?: number
+  isActive?: boolean
+  allowNonGatherableInputs?: boolean
   job: Prisma.JobCreateNestedOneWithoutRecipesInput
   outputItem: Prisma.ItemCreateNestedOneWithoutRecipeOutputsInput
   craftAttempts?: Prisma.CraftAttemptCreateNestedManyWithoutRecipeInput
@@ -844,8 +1034,14 @@ export type RecipeUncheckedCreateWithoutInputsInput = {
   updatedAt?: Date | string
   jobId: string
   difficulty?: number
+  requiredJobLevel?: number
   outputItemId: string
   outputQty?: number
+  station?: $Enums.CraftingStation | null
+  craftTimeSeconds?: number
+  xp?: number
+  isActive?: boolean
+  allowNonGatherableInputs?: boolean
   craftAttempts?: Prisma.CraftAttemptUncheckedCreateNestedManyWithoutRecipeInput
 }
 
@@ -876,7 +1072,13 @@ export type RecipeUpdateWithoutInputsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   difficulty?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
   outputQty?: Prisma.IntFieldUpdateOperationsInput | number
+  station?: Prisma.NullableEnumCraftingStationFieldUpdateOperationsInput | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowNonGatherableInputs?: Prisma.BoolFieldUpdateOperationsInput | boolean
   job?: Prisma.JobUpdateOneRequiredWithoutRecipesNestedInput
   outputItem?: Prisma.ItemUpdateOneRequiredWithoutRecipeOutputsNestedInput
   craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutRecipeNestedInput
@@ -894,8 +1096,14 @@ export type RecipeUncheckedUpdateWithoutInputsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   difficulty?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
   outputItemId?: Prisma.StringFieldUpdateOperationsInput | string
   outputQty?: Prisma.IntFieldUpdateOperationsInput | number
+  station?: Prisma.NullableEnumCraftingStationFieldUpdateOperationsInput | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowNonGatherableInputs?: Prisma.BoolFieldUpdateOperationsInput | boolean
   craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutRecipeNestedInput
 }
 
@@ -910,7 +1118,13 @@ export type RecipeCreateWithoutCraftAttemptsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   difficulty?: number
+  requiredJobLevel?: number
   outputQty?: number
+  station?: $Enums.CraftingStation | null
+  craftTimeSeconds?: number
+  xp?: number
+  isActive?: boolean
+  allowNonGatherableInputs?: boolean
   job: Prisma.JobCreateNestedOneWithoutRecipesInput
   outputItem: Prisma.ItemCreateNestedOneWithoutRecipeOutputsInput
   inputs?: Prisma.RecipeInputCreateNestedManyWithoutRecipeInput
@@ -928,8 +1142,14 @@ export type RecipeUncheckedCreateWithoutCraftAttemptsInput = {
   updatedAt?: Date | string
   jobId: string
   difficulty?: number
+  requiredJobLevel?: number
   outputItemId: string
   outputQty?: number
+  station?: $Enums.CraftingStation | null
+  craftTimeSeconds?: number
+  xp?: number
+  isActive?: boolean
+  allowNonGatherableInputs?: boolean
   inputs?: Prisma.RecipeInputUncheckedCreateNestedManyWithoutRecipeInput
 }
 
@@ -960,7 +1180,13 @@ export type RecipeUpdateWithoutCraftAttemptsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   difficulty?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
   outputQty?: Prisma.IntFieldUpdateOperationsInput | number
+  station?: Prisma.NullableEnumCraftingStationFieldUpdateOperationsInput | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowNonGatherableInputs?: Prisma.BoolFieldUpdateOperationsInput | boolean
   job?: Prisma.JobUpdateOneRequiredWithoutRecipesNestedInput
   outputItem?: Prisma.ItemUpdateOneRequiredWithoutRecipeOutputsNestedInput
   inputs?: Prisma.RecipeInputUpdateManyWithoutRecipeNestedInput
@@ -978,8 +1204,14 @@ export type RecipeUncheckedUpdateWithoutCraftAttemptsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   difficulty?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
   outputItemId?: Prisma.StringFieldUpdateOperationsInput | string
   outputQty?: Prisma.IntFieldUpdateOperationsInput | number
+  station?: Prisma.NullableEnumCraftingStationFieldUpdateOperationsInput | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowNonGatherableInputs?: Prisma.BoolFieldUpdateOperationsInput | boolean
   inputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutRecipeNestedInput
 }
 
@@ -995,7 +1227,13 @@ export type RecipeCreateManyOutputItemInput = {
   updatedAt?: Date | string
   jobId: string
   difficulty?: number
+  requiredJobLevel?: number
   outputQty?: number
+  station?: $Enums.CraftingStation | null
+  craftTimeSeconds?: number
+  xp?: number
+  isActive?: boolean
+  allowNonGatherableInputs?: boolean
 }
 
 export type RecipeUpdateWithoutOutputItemInput = {
@@ -1009,7 +1247,13 @@ export type RecipeUpdateWithoutOutputItemInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   difficulty?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
   outputQty?: Prisma.IntFieldUpdateOperationsInput | number
+  station?: Prisma.NullableEnumCraftingStationFieldUpdateOperationsInput | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowNonGatherableInputs?: Prisma.BoolFieldUpdateOperationsInput | boolean
   job?: Prisma.JobUpdateOneRequiredWithoutRecipesNestedInput
   inputs?: Prisma.RecipeInputUpdateManyWithoutRecipeNestedInput
   craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutRecipeNestedInput
@@ -1027,7 +1271,13 @@ export type RecipeUncheckedUpdateWithoutOutputItemInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   difficulty?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
   outputQty?: Prisma.IntFieldUpdateOperationsInput | number
+  station?: Prisma.NullableEnumCraftingStationFieldUpdateOperationsInput | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowNonGatherableInputs?: Prisma.BoolFieldUpdateOperationsInput | boolean
   inputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutRecipeNestedInput
   craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutRecipeNestedInput
 }
@@ -1044,7 +1294,13 @@ export type RecipeUncheckedUpdateManyWithoutOutputItemInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   difficulty?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
   outputQty?: Prisma.IntFieldUpdateOperationsInput | number
+  station?: Prisma.NullableEnumCraftingStationFieldUpdateOperationsInput | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowNonGatherableInputs?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type RecipeCreateManyJobInput = {
@@ -1058,8 +1314,14 @@ export type RecipeCreateManyJobInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   difficulty?: number
+  requiredJobLevel?: number
   outputItemId: string
   outputQty?: number
+  station?: $Enums.CraftingStation | null
+  craftTimeSeconds?: number
+  xp?: number
+  isActive?: boolean
+  allowNonGatherableInputs?: boolean
 }
 
 export type RecipeUpdateWithoutJobInput = {
@@ -1073,7 +1335,13 @@ export type RecipeUpdateWithoutJobInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   difficulty?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
   outputQty?: Prisma.IntFieldUpdateOperationsInput | number
+  station?: Prisma.NullableEnumCraftingStationFieldUpdateOperationsInput | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowNonGatherableInputs?: Prisma.BoolFieldUpdateOperationsInput | boolean
   outputItem?: Prisma.ItemUpdateOneRequiredWithoutRecipeOutputsNestedInput
   inputs?: Prisma.RecipeInputUpdateManyWithoutRecipeNestedInput
   craftAttempts?: Prisma.CraftAttemptUpdateManyWithoutRecipeNestedInput
@@ -1090,8 +1358,14 @@ export type RecipeUncheckedUpdateWithoutJobInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   difficulty?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
   outputItemId?: Prisma.StringFieldUpdateOperationsInput | string
   outputQty?: Prisma.IntFieldUpdateOperationsInput | number
+  station?: Prisma.NullableEnumCraftingStationFieldUpdateOperationsInput | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowNonGatherableInputs?: Prisma.BoolFieldUpdateOperationsInput | boolean
   inputs?: Prisma.RecipeInputUncheckedUpdateManyWithoutRecipeNestedInput
   craftAttempts?: Prisma.CraftAttemptUncheckedUpdateManyWithoutRecipeNestedInput
 }
@@ -1107,8 +1381,14 @@ export type RecipeUncheckedUpdateManyWithoutJobInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   difficulty?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
   outputItemId?: Prisma.StringFieldUpdateOperationsInput | string
   outputQty?: Prisma.IntFieldUpdateOperationsInput | number
+  station?: Prisma.NullableEnumCraftingStationFieldUpdateOperationsInput | $Enums.CraftingStation | null
+  craftTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowNonGatherableInputs?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -1163,8 +1443,14 @@ export type RecipeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   updatedAt?: boolean
   jobId?: boolean
   difficulty?: boolean
+  requiredJobLevel?: boolean
   outputItemId?: boolean
   outputQty?: boolean
+  station?: boolean
+  craftTimeSeconds?: boolean
+  xp?: boolean
+  isActive?: boolean
+  allowNonGatherableInputs?: boolean
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
   outputItem?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
   inputs?: boolean | Prisma.Recipe$inputsArgs<ExtArgs>
@@ -1184,8 +1470,14 @@ export type RecipeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   updatedAt?: boolean
   jobId?: boolean
   difficulty?: boolean
+  requiredJobLevel?: boolean
   outputItemId?: boolean
   outputQty?: boolean
+  station?: boolean
+  craftTimeSeconds?: boolean
+  xp?: boolean
+  isActive?: boolean
+  allowNonGatherableInputs?: boolean
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
   outputItem?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["recipe"]>
@@ -1202,8 +1494,14 @@ export type RecipeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   updatedAt?: boolean
   jobId?: boolean
   difficulty?: boolean
+  requiredJobLevel?: boolean
   outputItemId?: boolean
   outputQty?: boolean
+  station?: boolean
+  craftTimeSeconds?: boolean
+  xp?: boolean
+  isActive?: boolean
+  allowNonGatherableInputs?: boolean
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
   outputItem?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["recipe"]>
@@ -1220,11 +1518,17 @@ export type RecipeSelectScalar = {
   updatedAt?: boolean
   jobId?: boolean
   difficulty?: boolean
+  requiredJobLevel?: boolean
   outputItemId?: boolean
   outputQty?: boolean
+  station?: boolean
+  craftTimeSeconds?: boolean
+  xp?: boolean
+  isActive?: boolean
+  allowNonGatherableInputs?: boolean
 }
 
-export type RecipeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "jobId" | "difficulty" | "outputItemId" | "outputQty", ExtArgs["result"]["recipe"]>
+export type RecipeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "jobId" | "difficulty" | "requiredJobLevel" | "outputItemId" | "outputQty" | "station" | "craftTimeSeconds" | "xp" | "isActive" | "allowNonGatherableInputs", ExtArgs["result"]["recipe"]>
 export type RecipeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
   outputItem?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
@@ -1261,8 +1565,14 @@ export type $RecipePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     updatedAt: Date
     jobId: string
     difficulty: number
+    requiredJobLevel: number
     outputItemId: string
     outputQty: number
+    station: $Enums.CraftingStation | null
+    craftTimeSeconds: number
+    xp: number
+    isActive: boolean
+    allowNonGatherableInputs: boolean
   }, ExtArgs["result"]["recipe"]>
   composites: {}
 }
@@ -1701,8 +2011,14 @@ export interface RecipeFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"Recipe", 'DateTime'>
   readonly jobId: Prisma.FieldRef<"Recipe", 'String'>
   readonly difficulty: Prisma.FieldRef<"Recipe", 'Int'>
+  readonly requiredJobLevel: Prisma.FieldRef<"Recipe", 'Int'>
   readonly outputItemId: Prisma.FieldRef<"Recipe", 'String'>
   readonly outputQty: Prisma.FieldRef<"Recipe", 'Int'>
+  readonly station: Prisma.FieldRef<"Recipe", 'CraftingStation'>
+  readonly craftTimeSeconds: Prisma.FieldRef<"Recipe", 'Int'>
+  readonly xp: Prisma.FieldRef<"Recipe", 'Int'>
+  readonly isActive: Prisma.FieldRef<"Recipe", 'Boolean'>
+  readonly allowNonGatherableInputs: Prisma.FieldRef<"Recipe", 'Boolean'>
 }
     
 
