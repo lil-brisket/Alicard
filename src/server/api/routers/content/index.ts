@@ -7,6 +7,7 @@ import { contentSkillsRouter } from "./skills";
 import { contentPlayerAssignmentRouter } from "./player-assignment";
 import { contentGatheringNodesRouter } from "./gathering-nodes";
 import { contentGatheringNodeYieldsRouter } from "./gathering-node-yields";
+import { contentRecipesRouter } from "./recipes";
 import { getContentPermissions } from "~/server/lib/admin-auth";
 
 export const contentRouter = createTRPCRouter({
@@ -18,6 +19,7 @@ export const contentRouter = createTRPCRouter({
   playerAssignment: contentPlayerAssignmentRouter,
   gatheringNodes: contentGatheringNodesRouter,
   gatheringNodeYields: contentGatheringNodeYieldsRouter,
+  recipes: contentRecipesRouter,
   
   // Get current user's content permissions
   permissions: createTRPCRouter({
