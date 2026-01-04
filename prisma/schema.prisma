@@ -968,28 +968,35 @@ model CraftAttempt {
 }
 
 model GatheringNode {
-  id             String          @id @default(cuid())
-  key            String          @unique
+  id                String          @id @default(cuid())
+  key               String          @unique
   // Global taxonomy fields
-  name           String
-  description    String?
-  tags           Json? // Array of strings: ["ore", "tier1", "safe"]
-  status         ContentStatus   @default(DRAFT)
-  version        Int             @default(1)
-  createdBy      String?
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
+  name              String
+  description       String?
+  tags              Json? // Array of strings: ["ore", "tier1", "safe"]
+  status            ContentStatus   @default(DRAFT)
+  version           Int             @default(1)
+  createdBy         String?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
   // Node-specific fields
-  jobId          String
-  dangerTier     Int             @default(1)
-  job            Job             @relation(fields: [jobId], references: [id], onDelete: Cascade)
-  yields         NodeYield[]
-  gatherAttempts GatherAttempt[]
+  jobId             String
+  dangerTier        Int             @default(1)
+  tier              Int             @default(1)
+  requiredJobLevel  Int             @default(1)
+  gatherTimeSeconds Int             @default(30)
+  xpReward          Int             @default(10)
+  cooldownSeconds   Int?
+  job               Job             @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  yields            NodeYield[]
+  gatherAttempts    GatherAttempt[]
 
   @@index([jobId])
   @@index([key])
   @@index([status])
   @@index([createdBy])
+  @@index([tier])
+  @@index([requiredJobLevel])
 }
 
 model NodeYield {

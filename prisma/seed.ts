@@ -783,31 +783,494 @@ async function main() {
     },
   });
 
-  // Fishing spots
-  const fishingSpot = await prisma.gatheringNode.upsert({
-    where: { key: "fishing-spot-1" },
+  // Fishing items for Fisher nodes
+  console.log("Creating fishing items...");
+  
+  const minnow = await prisma.item.upsert({
+    where: { id: "minnow" },
     update: {},
     create: {
-      key: "fishing-spot-1",
-      name: "Fishing Spot",
-      description: "A quiet spot by the water.",
-      jobId: fisherJob.id,
-      dangerTier: 1,
+      id: "minnow",
+      key: "minnow",
+      name: "Minnow",
+      description: "A tiny freshwater fish.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 3,
+      stackable: true,
+      maxStack: 99,
     },
   });
 
-  await prisma.nodeYield.upsert({
-    where: { id: `${fishingSpot.id}-fish` },
+  const perch = await prisma.item.upsert({
+    where: { id: "perch" },
     update: {},
     create: {
-      id: `${fishingSpot.id}-fish`,
-      nodeId: fishingSpot.id,
-      itemId: fish.id,
-      minQty: 1,
-      maxQty: 2,
-      weight: 100,
+      id: "perch",
+      key: "perch",
+      name: "Perch",
+      description: "A common river fish.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 5,
+      stackable: true,
+      maxStack: 99,
     },
   });
+
+  const carp = await prisma.item.upsert({
+    where: { id: "carp" },
+    update: {},
+    create: {
+      id: "carp",
+      key: "carp",
+      name: "Carp",
+      description: "A hardy pond fish.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 6,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const sardine = await prisma.item.upsert({
+    where: { id: "sardine" },
+    update: {},
+    create: {
+      id: "sardine",
+      key: "sardine",
+      name: "Sardine",
+      description: "A small coastal fish.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 7,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const tidepoolShellfish = await prisma.item.upsert({
+    where: { id: "tidepool-shellfish" },
+    update: {},
+    create: {
+      id: "tidepool-shellfish",
+      key: "tidepool-shellfish",
+      name: "Tidepool Shellfish",
+      description: "Shellfish from rocky tidepools.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 8,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const catfish = await prisma.item.upsert({
+    where: { id: "catfish" },
+    update: {},
+    create: {
+      id: "catfish",
+      key: "catfish",
+      name: "Catfish",
+      description: "A deep river bottom-feeder.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 12,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const mackerel = await prisma.item.upsert({
+    where: { id: "mackerel" },
+    update: {},
+    create: {
+      id: "mackerel",
+      key: "mackerel",
+      name: "Mackerel",
+      description: "A fast-swimming bay fish.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 15,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const kelpShellfish = await prisma.item.upsert({
+    where: { id: "kelp-shellfish" },
+    update: {},
+    create: {
+      id: "kelp-shellfish",
+      key: "kelp-shellfish",
+      name: "Kelp Shellfish",
+      description: "Shellfish harvested from kelp beds.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 18,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const tuna = await prisma.item.upsert({
+    where: { id: "tuna" },
+    update: {},
+    create: {
+      id: "tuna",
+      key: "tuna",
+      name: "Tuna",
+      description: "A large open-water fish.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 20,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const eel = await prisma.item.upsert({
+    where: { id: "eel" },
+    update: {},
+    create: {
+      id: "eel",
+      key: "eel",
+      name: "Eel",
+      description: "A slippery nocturnal fish.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 22,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const snapper = await prisma.item.upsert({
+    where: { id: "snapper" },
+    update: {},
+    create: {
+      id: "snapper",
+      key: "snapper",
+      name: "Snapper",
+      description: "A colorful reef fish.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 35,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const salmon = await prisma.item.upsert({
+    where: { id: "salmon" },
+    update: {},
+    create: {
+      id: "salmon",
+      key: "salmon",
+      name: "Salmon",
+      description: "A prized coldwater fish.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 45,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const crustacean = await prisma.item.upsert({
+    where: { id: "crustacean" },
+    update: {},
+    create: {
+      id: "crustacean",
+      key: "crustacean",
+      name: "Deep Crustacean",
+      description: "A deep-sea crustacean.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 50,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const swordfish = await prisma.item.upsert({
+    where: { id: "swordfish" },
+    update: {},
+    create: {
+      id: "swordfish",
+      key: "swordfish",
+      name: "Swordfish",
+      description: "A powerful storm-chasing fish.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 55,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const blackfinTuna = await prisma.item.upsert({
+    where: { id: "blackfin-tuna" },
+    update: {},
+    create: {
+      id: "blackfin-tuna",
+      key: "blackfin-tuna",
+      name: "Blackfin Tuna",
+      description: "An aggressive deep-water tuna.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 60,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const abyssalCod = await prisma.item.upsert({
+    where: { id: "abyssal-cod" },
+    update: {},
+    create: {
+      id: "abyssal-cod",
+      key: "abyssal-cod",
+      name: "Abyssal Cod",
+      description: "A cod from the deep abyss.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 80,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const marlin = await prisma.item.upsert({
+    where: { id: "marlin" },
+    update: {},
+    create: {
+      id: "marlin",
+      key: "marlin",
+      name: "Marlin",
+      description: "A legendary billfish from whirlpools.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 100,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const trenchKelp = await prisma.item.upsert({
+    where: { id: "trench-kelp" },
+    update: {},
+    create: {
+      id: "trench-kelp",
+      key: "trench-kelp",
+      name: "Kraken-Kelp",
+      description: "Rare kelp from deep trenches.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 120,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const tempestFish = await prisma.item.upsert({
+    where: { id: "tempest-fish" },
+    update: {},
+    create: {
+      id: "tempest-fish",
+      key: "tempest-fish",
+      name: "Tempest Fish",
+      description: "A fish caught in storm currents.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 140,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const anglerfish = await prisma.item.upsert({
+    where: { id: "anglerfish" },
+    update: {},
+    create: {
+      id: "anglerfish",
+      key: "anglerfish",
+      name: "Midnight Angler",
+      description: "A deep-sea anglerfish from the rift.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 200,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const relicScale = await prisma.item.upsert({
+    where: { id: "relic-scale" },
+    update: {},
+    create: {
+      id: "relic-scale",
+      key: "relic-scale",
+      name: "Relic Scale",
+      description: "A scale from a sunken relic shoal.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 250,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const glassSturgeon = await prisma.item.upsert({
+    where: { id: "glass-sturgeon" },
+    update: {},
+    create: {
+      id: "glass-sturgeon",
+      key: "glass-sturgeon",
+      name: "Glass-Sea Sturgeon",
+      description: "A translucent sturgeon from glassy waters.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 300,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const leviathanMeat = await prisma.item.upsert({
+    where: { id: "leviathan-meat" },
+    update: {},
+    create: {
+      id: "leviathan-meat",
+      key: "leviathan-meat",
+      name: "Leviathan Meat",
+      description: "Meat from the spine of a leviathan.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 400,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const mythicRoe = await prisma.item.upsert({
+    where: { id: "mythic-roe" },
+    update: {},
+    create: {
+      id: "mythic-roe",
+      key: "mythic-roe",
+      name: "Mythic Roe",
+      description: "Roe from the mythical maw whirlpool.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 500,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  // Fisher nodes - 25 nodes total with tier progression
+  console.log("Creating Fisher nodes...");
+
+  // TIER 1 (1–20)
+  const fisherNodes = [
+    // Tier 1
+    { key: "shallow-minnow-shoal", name: "Shallow Minnow Shoal", reqLevel: 1, time: 25, xp: 12, danger: 0, tier: 1, itemId: minnow.id, minQty: 1, maxQty: 3 },
+    { key: "river-perch-run", name: "River Perch Run", reqLevel: 5, time: 30, xp: 15, danger: 0, tier: 1, itemId: perch.id, minQty: 1, maxQty: 3 },
+    { key: "pond-carp-cluster", name: "Pond Carp Cluster", reqLevel: 10, time: 35, xp: 18, danger: 0, tier: 1, itemId: carp.id, minQty: 1, maxQty: 4 },
+    { key: "coastal-sardine-school", name: "Coastal Sardine School", reqLevel: 15, time: 40, xp: 22, danger: 1, tier: 1, itemId: sardine.id, minQty: 2, maxQty: 4 },
+    { key: "rocky-tidepool-harvest", name: "Rocky Tidepool Harvest", reqLevel: 20, time: 45, xp: 25, danger: 1, tier: 1, itemId: tidepoolShellfish.id, minQty: 2, maxQty: 4 },
+    // Tier 2
+    { key: "deep-river-catfish", name: "Deep River Catfish", reqLevel: 25, time: 75, xp: 35, danger: 1, tier: 2, itemId: catfish.id, minQty: 1, maxQty: 4 },
+    { key: "bay-mackerel-sweep", name: "Bay Mackerel Sweep", reqLevel: 30, time: 90, xp: 42, danger: 1, tier: 2, itemId: mackerel.id, minQty: 2, maxQty: 5 },
+    { key: "kelpbed-shellfish-bed", name: "Kelpbed Shellfish Bed", reqLevel: 35, time: 105, xp: 50, danger: 2, tier: 2, itemId: kelpShellfish.id, minQty: 1, maxQty: 5 },
+    { key: "open-water-tuna-trail", name: "Open-Water Tuna Trail", reqLevel: 38, time: 115, xp: 55, danger: 2, tier: 2, itemId: tuna.id, minQty: 2, maxQty: 5 },
+    { key: "night-eel-drift", name: "Night Eel Drift", reqLevel: 40, time: 120, xp: 60, danger: 2, tier: 2, itemId: eel.id, minQty: 1, maxQty: 5 },
+    // Tier 3
+    { key: "reef-snapper-grounds", name: "Reef Snapper Grounds", reqLevel: 45, time: 150, xp: 80, danger: 2, tier: 3, itemId: snapper.id, minQty: 1, maxQty: 6 },
+    { key: "coldwater-salmon-route", name: "Coldwater Salmon Route", reqLevel: 50, time: 180, xp: 95, danger: 3, tier: 3, itemId: salmon.id, minQty: 2, maxQty: 7 },
+    { key: "deep-crustacean-pots", name: "Deep Crustacean Pots", reqLevel: 55, time: 210, xp: 110, danger: 3, tier: 3, itemId: crustacean.id, minQty: 1, maxQty: 7 },
+    { key: "storm-shoal-swordfish", name: "Storm Shoal Swordfish", reqLevel: 58, time: 225, xp: 115, danger: 3, tier: 3, itemId: swordfish.id, minQty: 2, maxQty: 7 },
+    { key: "blackfin-tuna-surge", name: "Blackfin Tuna Surge", reqLevel: 60, time: 240, xp: 120, danger: 3, tier: 3, itemId: blackfinTuna.id, minQty: 1, maxQty: 7 },
+    // Tier 4
+    { key: "abyssal-cod-drop", name: "Abyssal Cod Drop", reqLevel: 65, time: 300, xp: 150, danger: 3, tier: 4, itemId: abyssalCod.id, minQty: 1, maxQty: 3 },
+    { key: "reef-leviathan-bycatch", name: "Reef Leviathan Bycatch", reqLevel: 70, time: 360, xp: 175, danger: 4, tier: 4, itemId: marlin.id, minQty: 1, maxQty: 4 },
+    { key: "whirlpool-marlin-chase", name: "Whirlpool Marlin Chase", reqLevel: 75, time: 420, xp: 200, danger: 4, tier: 4, itemId: marlin.id, minQty: 1, maxQty: 4 },
+    { key: "kraken-kelp-trench", name: "Kraken-Kelp Trench", reqLevel: 78, time: 480, xp: 220, danger: 4, tier: 4, itemId: trenchKelp.id, minQty: 2, maxQty: 4 },
+    { key: "tempest-current-harvest", name: "Tempest Current Harvest", reqLevel: 80, time: 540, xp: 240, danger: 4, tier: 4, itemId: tempestFish.id, minQty: 1, maxQty: 4 },
+    // Tier 5
+    { key: "midnight-angler-rift", name: "Midnight Angler Rift", reqLevel: 85, time: 900, xp: 360, danger: 4, tier: 5, itemId: anglerfish.id, minQty: 1, maxQty: 2 },
+    { key: "sunken-relic-shoal", name: "Sunken Relic Shoal", reqLevel: 88, time: 1050, xp: 420, danger: 4, tier: 5, itemId: relicScale.id, minQty: 1, maxQty: 2 },
+    { key: "glass-sea-sturgeon", name: "Glass-Sea Sturgeon", reqLevel: 90, time: 1200, xp: 480, danger: 5, tier: 5, itemId: glassSturgeon.id, minQty: 1, maxQty: 1 },
+    { key: "leviathan-spinewater", name: "Leviathan Spinewater", reqLevel: 95, time: 1350, xp: 540, danger: 5, tier: 5, itemId: leviathanMeat.id, minQty: 1, maxQty: 1 },
+    { key: "mythic-maw-whirlpool", name: "Mythic Maw Whirlpool", reqLevel: 100, time: 1500, xp: 600, danger: 5, tier: 5, itemId: mythicRoe.id, minQty: 1, maxQty: 2 },
+  ];
+
+  for (const nodeData of fisherNodes) {
+    const node = await prisma.gatheringNode.upsert({
+      where: { key: nodeData.key },
+      update: {
+        tier: nodeData.tier,
+        requiredJobLevel: nodeData.reqLevel,
+        gatherTimeSeconds: nodeData.time,
+        xpReward: nodeData.xp,
+        dangerTier: nodeData.danger,
+      },
+      create: {
+        key: nodeData.key,
+        name: nodeData.name,
+        description: `A fishing spot for ${nodeData.name.toLowerCase()}.`,
+        jobId: fisherJob.id,
+        dangerTier: nodeData.danger,
+        tier: nodeData.tier,
+        requiredJobLevel: nodeData.reqLevel,
+        gatherTimeSeconds: nodeData.time,
+        xpReward: nodeData.xp,
+        status: "ACTIVE",
+      },
+    });
+
+    await prisma.nodeYield.upsert({
+      where: { id: `${node.id}-${nodeData.itemId}` },
+      update: {
+        minQty: nodeData.minQty,
+        maxQty: nodeData.maxQty,
+      },
+      create: {
+        id: `${node.id}-${nodeData.itemId}`,
+        nodeId: node.id,
+        itemId: nodeData.itemId,
+        minQty: nodeData.minQty,
+        maxQty: nodeData.maxQty,
+        weight: 100,
+      },
+    });
+  }
 
   // Herbalist nodes
   const herbPatch = await prisma.gatheringNode.upsert({

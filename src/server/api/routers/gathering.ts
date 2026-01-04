@@ -90,7 +90,11 @@ export const gatheringRouter = createTRPCRouter({
             },
           },
         },
-        orderBy: { dangerTier: "asc" },
+        orderBy: [
+          { tier: "asc" },
+          { requiredJobLevel: "asc" },
+          { dangerTier: "asc" },
+        ],
       });
     }),
 
@@ -167,12 +171,20 @@ export const gatheringRouter = createTRPCRouter({
         });
       }
 
+      // Validate required job level
+      if (userJob.level < node.requiredJobLevel) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: `This node requires job level ${node.requiredJobLevel}. Your current level is ${userJob.level}.`,
+        });
+      }
+
       // Calculate success chance
       const successChance = calculateGatherSuccessChance(userJob.level, node.dangerTier);
       const success = Math.random() < successChance;
 
-      // Calculate XP
-      const xpGained = getGatherXp(success, node.dangerTier);
+      // Use XP from node if available, otherwise calculate from danger tier
+      const xpGained = node.xpReward ?? getGatherXp(success, node.dangerTier);
 
       // Select yields on success
       const gatheredItems = success

@@ -163,23 +163,34 @@ export default function JobDetailPage({ params }: Props) {
               Gathering Nodes
             </h2>
             <div className="space-y-3">
-              {nodes.map((node) => (
-                <div
-                  key={node.id}
-                  className="rounded-xl border border-slate-800 bg-slate-950/60 p-4"
-                >
-                  <h3 className="font-semibold text-slate-100">{node.name}</h3>
-                  <p className="mt-1 text-sm text-slate-400">
-                    Danger: {"⚠".repeat(node.dangerTier)} | Yields:{" "}
-                    {node.yields
-                      .map(
-                        (y) =>
-                          `${y.minQty}-${y.maxQty}x ${y.item.name}`
-                      )
-                      .join(", ")}
-                  </p>
-                </div>
-              ))}
+              {nodes.map((node) => {
+                const minutes = Math.floor((node.gatherTimeSeconds ?? 0) / 60);
+                const seconds = (node.gatherTimeSeconds ?? 0) % 60;
+                const timeDisplay = minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`;
+                
+                return (
+                  <div
+                    key={node.id}
+                    className="rounded-xl border border-slate-800 bg-slate-950/60 p-4"
+                  >
+                    <h3 className="font-semibold text-slate-100">{node.name}</h3>
+                    <p className="mt-1 text-sm text-slate-400">
+                      Danger: {"⚠".repeat(node.dangerTier)} | Yields:{" "}
+                      {node.yields
+                        .map(
+                          (y) =>
+                            `${y.minQty}-${y.maxQty}x ${y.item.name}`
+                        )
+                        .join(", ")}
+                    </p>
+                    <p className="mt-1 text-xs text-slate-500">
+                      Req Level: {node.requiredJobLevel ?? 1} | Time: {timeDisplay} | XP: {node.xpReward ?? 10}
+                      {node.tier && ` | Tier: ${node.tier}`}
+                      {node.cooldownSeconds && ` | Cooldown: ${node.cooldownSeconds}s`}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
