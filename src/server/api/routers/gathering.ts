@@ -183,8 +183,8 @@ export const gatheringRouter = createTRPCRouter({
       const successChance = calculateGatherSuccessChance(userJob.level, node.dangerTier);
       const success = Math.random() < successChance;
 
-      // Use XP from node if available, otherwise calculate from danger tier
-      const xpGained = node.xpReward ?? getGatherXp(success, node.dangerTier);
+      // Use XP from node (nodes should always have xpReward set)
+      const xpGained = node.xpReward;
 
       // Select yields on success
       const gatheredItems = success

@@ -292,6 +292,436 @@ async function main() {
     },
   });
 
+  // Herbalist items - Tier 1
+  const meadowleaf = await prisma.item.upsert({
+    where: { id: "meadowleaf" },
+    update: {},
+    create: {
+      id: "meadowleaf",
+      key: "meadowleaf",
+      name: "Meadowleaf",
+      description: "A common herb found in peaceful meadows.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 5,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const wildmint = await prisma.item.upsert({
+    where: { id: "wildmint" },
+    update: {},
+    create: {
+      id: "wildmint",
+      key: "wildmint",
+      name: "Wildmint",
+      description: "Fresh wild mint with a refreshing aroma.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 6,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const bitterroot = await prisma.item.upsert({
+    where: { id: "bitterroot" },
+    update: {},
+    create: {
+      id: "bitterroot",
+      key: "bitterroot",
+      name: "Bitterroot",
+      description: "A bitter root used in alchemy.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 7,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const sunblossom = await prisma.item.upsert({
+    where: { id: "sunblossom" },
+    update: {},
+    create: {
+      id: "sunblossom",
+      key: "sunblossom",
+      name: "Sunblossom",
+      description: "A bright flower that thrives in sunlight.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 8,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const creekReed = await prisma.item.upsert({
+    where: { id: "creek-reed" },
+    update: {},
+    create: {
+      id: "creek-reed",
+      key: "creek-reed",
+      name: "Creek Reed",
+      description: "Reeds harvested from creek banks.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 6,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  // Herbalist items - Tier 2
+  const duskleaf = await prisma.item.upsert({
+    where: { id: "duskleaf" },
+    update: {},
+    create: {
+      id: "duskleaf",
+      key: "duskleaf",
+      name: "Duskleaf",
+      description: "Leaves that glow faintly in the twilight.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 15,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const thornshadeVine = await prisma.item.upsert({
+    where: { id: "thornshade-vine" },
+    update: {},
+    create: {
+      id: "thornshade-vine",
+      key: "thornshade-vine",
+      name: "Thornshade Vine",
+      description: "A thorny vine with dark leaves.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 18,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const mooncap = await prisma.item.upsert({
+    where: { id: "mooncap" },
+    update: {},
+    create: {
+      id: "mooncap",
+      key: "mooncap",
+      name: "Mooncap",
+      description: "A luminescent mushroom that glows like moonlight.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 20,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const frostbud = await prisma.item.upsert({
+    where: { id: "frostbud" },
+    update: {},
+    create: {
+      id: "frostbud",
+      key: "frostbud",
+      name: "Frostbud",
+      description: "A delicate bud that stays frozen even in warmth.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 22,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const nightshade = await prisma.item.upsert({
+    where: { id: "nightshade" },
+    update: {},
+    create: {
+      id: "nightshade",
+      key: "nightshade",
+      name: "Nightshade",
+      description: "A toxic plant that blooms only at night.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 25,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  // Herbalist items - Tier 3
+  const emberbloom = await prisma.item.upsert({
+    where: { id: "emberbloom" },
+    update: {},
+    create: {
+      id: "emberbloom",
+      key: "emberbloom",
+      name: "Emberbloom",
+      description: "A flower that radiates gentle heat like embers.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 50,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const silverthorn = await prisma.item.upsert({
+    where: { id: "silverthorn" },
+    update: {},
+    create: {
+      id: "silverthorn",
+      key: "silverthorn",
+      name: "Silverthorn",
+      description: "Thorns with a silver metallic sheen.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 55,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const deepwoodMycelium = await prisma.item.upsert({
+    where: { id: "deepwood-mycelium" },
+    update: {},
+    create: {
+      id: "deepwood-mycelium",
+      key: "deepwood-mycelium",
+      name: "Deepwood Mycelium",
+      description: "Fungal network from the deepest woods.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 60,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const stormpetal = await prisma.item.upsert({
+    where: { id: "stormpetal" },
+    update: {},
+    create: {
+      id: "stormpetal",
+      key: "stormpetal",
+      name: "Stormpetal",
+      description: "Petal that crackles with electrical energy.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 65,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const bloodmoss = await prisma.item.upsert({
+    where: { id: "bloodmoss" },
+    update: {},
+    create: {
+      id: "bloodmoss",
+      key: "bloodmoss",
+      name: "Bloodmoss",
+      description: "Moss with a deep crimson hue that pulses with life.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 70,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  // Herbalist items - Tier 4
+  const wraithorchid = await prisma.item.upsert({
+    where: { id: "wraithorchid" },
+    update: {},
+    create: {
+      id: "wraithorchid",
+      key: "wraithorchid",
+      name: "Wraithorchid",
+      description: "An ethereal orchid that seems to phase between worlds.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 150,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const ancientGinseng = await prisma.item.upsert({
+    where: { id: "ancient-ginseng" },
+    update: {},
+    create: {
+      id: "ancient-ginseng",
+      key: "ancient-ginseng",
+      name: "Ancient Ginseng",
+      description: "An ancient root with centuries of accumulated energy.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 175,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const spiritvine = await prisma.item.upsert({
+    where: { id: "spiritvine" },
+    update: {},
+    create: {
+      id: "spiritvine",
+      key: "spiritvine",
+      name: "Spiritvine",
+      description: "A vine that resonates with spiritual energy.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 200,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const venomflower = await prisma.item.upsert({
+    where: { id: "venomflower" },
+    update: {},
+    create: {
+      id: "venomflower",
+      key: "venomflower",
+      name: "Venomflower",
+      description: "A beautiful but deadly flower that drips with venom.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 220,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const tempestbloom = await prisma.item.upsert({
+    where: { id: "tempestbloom" },
+    update: {},
+    create: {
+      id: "tempestbloom",
+      key: "tempestbloom",
+      name: "Tempestbloom",
+      description: "A flower that channels the power of storms.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 240,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  // Herbalist items - Tier 5
+  const starlotus = await prisma.item.upsert({
+    where: { id: "starlotus" },
+    update: {},
+    create: {
+      id: "starlotus",
+      key: "starlotus",
+      name: "Starlotus",
+      description: "A lotus that glimmers with starlight.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 500,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const umbralTruffle = await prisma.item.upsert({
+    where: { id: "umbral-truffle" },
+    update: {},
+    create: {
+      id: "umbral-truffle",
+      key: "umbral-truffle",
+      name: "Umbral Truffle",
+      description: "A truffle that exists in the shadow between realms.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 600,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const celestialSaffron = await prisma.item.upsert({
+    where: { id: "celestial-saffron" },
+    update: {},
+    create: {
+      id: "celestial-saffron",
+      key: "celestial-saffron",
+      name: "Celestial Saffron",
+      description: "Saffron threads that shimmer with celestial energy.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 700,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const phoenixfern = await prisma.item.upsert({
+    where: { id: "phoenixfern" },
+    update: {},
+    create: {
+      id: "phoenixfern",
+      key: "phoenixfern",
+      name: "Phoenixfern",
+      description: "A fern that regenerates like a phoenix from its own ashes.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 800,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const worldroot = await prisma.item.upsert({
+    where: { id: "worldroot" },
+    update: {},
+    create: {
+      id: "worldroot",
+      key: "worldroot",
+      name: "Worldroot",
+      description: "The legendary root that connects all worlds.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 1000,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
   const fish = await prisma.item.upsert({
     where: { id: "fish" },
     update: {},
@@ -1272,28 +1702,707 @@ async function main() {
     });
   }
 
-  // Herbalist nodes
-  const herbPatch = await prisma.gatheringNode.upsert({
-    where: { key: "herb-patch-1" },
+  // Herbalist nodes - Tier 1 (levels 1-20)
+  const meadowleafPatch = await prisma.gatheringNode.upsert({
+    where: { key: "meadowleaf-patch" },
     update: {},
     create: {
-      key: "herb-patch-1",
-      name: "Herb Patch",
-      description: "A patch of wild herbs.",
+      key: "meadowleaf-patch",
+      name: "Meadowleaf Patch",
+      description: "A peaceful meadow filled with common herbs.",
       jobId: herbalistJob.id,
-      dangerTier: 1,
+      tier: 1,
+      requiredJobLevel: 1,
+      gatherTimeSeconds: 25,
+      xpReward: 12,
+      dangerTier: 0,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${meadowleafPatch.id}-meadowleaf` },
+    update: {},
+    create: {
+      id: `${meadowleafPatch.id}-meadowleaf`,
+      nodeId: meadowleafPatch.id,
+      itemId: meadowleaf.id,
+      minQty: 1,
+      maxQty: 2,
+      weight: 100,
     },
   });
 
-  await prisma.nodeYield.upsert({
-    where: { id: `${herbPatch.id}-herb` },
+  const wildmintCluster = await prisma.gatheringNode.upsert({
+    where: { key: "wildmint-cluster" },
     update: {},
     create: {
-      id: `${herbPatch.id}-herb`,
-      nodeId: herbPatch.id,
-      itemId: herb.id,
+      key: "wildmint-cluster",
+      name: "Wildmint Cluster",
+      description: "A cluster of wild mint growing near water.",
+      jobId: herbalistJob.id,
+      tier: 1,
+      requiredJobLevel: 5,
+      gatherTimeSeconds: 30,
+      xpReward: 15,
+      dangerTier: 0,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${wildmintCluster.id}-wildmint` },
+    update: {},
+    create: {
+      id: `${wildmintCluster.id}-wildmint`,
+      nodeId: wildmintCluster.id,
+      itemId: wildmint.id,
+      minQty: 2,
+      maxQty: 4,
+      weight: 100,
+    },
+  });
+
+  const bitterrootSprouts = await prisma.gatheringNode.upsert({
+    where: { key: "bitterroot-sprouts" },
+    update: {},
+    create: {
+      key: "bitterroot-sprouts",
+      name: "Bitterroot Sprouts",
+      description: "Fresh bitterroot sprouts emerging from the ground.",
+      jobId: herbalistJob.id,
+      tier: 1,
+      requiredJobLevel: 10,
+      gatherTimeSeconds: 35,
+      xpReward: 18,
+      dangerTier: 0,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${bitterrootSprouts.id}-bitterroot` },
+    update: {},
+    create: {
+      id: `${bitterrootSprouts.id}-bitterroot`,
+      nodeId: bitterrootSprouts.id,
+      itemId: bitterroot.id,
       minQty: 1,
       maxQty: 3,
+      weight: 100,
+    },
+  });
+
+  const sunblossomField = await prisma.gatheringNode.upsert({
+    where: { key: "sunblossom-field" },
+    update: {},
+    create: {
+      key: "sunblossom-field",
+      name: "Sunblossom Field",
+      description: "A field of sunblossoms basking in the sunlight.",
+      jobId: herbalistJob.id,
+      tier: 1,
+      requiredJobLevel: 15,
+      gatherTimeSeconds: 40,
+      xpReward: 22,
+      dangerTier: 1,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${sunblossomField.id}-sunblossom` },
+    update: {},
+    create: {
+      id: `${sunblossomField.id}-sunblossom`,
+      nodeId: sunblossomField.id,
+      itemId: sunblossom.id,
+      minQty: 1,
+      maxQty: 2,
+      weight: 100,
+    },
+  });
+
+  const creeksideReedbed = await prisma.gatheringNode.upsert({
+    where: { key: "creekside-reedbed" },
+    update: {},
+    create: {
+      key: "creekside-reedbed",
+      name: "Creekside Reedbed",
+      description: "Reeds growing along a peaceful creek.",
+      jobId: herbalistJob.id,
+      tier: 1,
+      requiredJobLevel: 20,
+      gatherTimeSeconds: 45,
+      xpReward: 25,
+      dangerTier: 1,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${creeksideReedbed.id}-creek-reed` },
+    update: {},
+    create: {
+      id: `${creeksideReedbed.id}-creek-reed`,
+      nodeId: creeksideReedbed.id,
+      itemId: creekReed.id,
+      minQty: 2,
+      maxQty: 4,
+      weight: 100,
+    },
+  });
+
+  // Herbalist nodes - Tier 2 (levels 21-40)
+  const duskleafThicket = await prisma.gatheringNode.upsert({
+    where: { key: "duskleaf-thicket" },
+    update: {},
+    create: {
+      key: "duskleaf-thicket",
+      name: "Duskleaf Thicket",
+      description: "A dense thicket of duskleaf plants.",
+      jobId: herbalistJob.id,
+      tier: 2,
+      requiredJobLevel: 25,
+      gatherTimeSeconds: 75,
+      xpReward: 35,
+      dangerTier: 1,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${duskleafThicket.id}-duskleaf` },
+    update: {},
+    create: {
+      id: `${duskleafThicket.id}-duskleaf`,
+      nodeId: duskleafThicket.id,
+      itemId: duskleaf.id,
+      minQty: 1,
+      maxQty: 3,
+      weight: 100,
+    },
+  });
+
+  const thornshadeBramble = await prisma.gatheringNode.upsert({
+    where: { key: "thornshade-bramble" },
+    update: {},
+    create: {
+      key: "thornshade-bramble",
+      name: "Thornshade Bramble",
+      description: "A dangerous bramble of thornshade vines.",
+      jobId: herbalistJob.id,
+      tier: 2,
+      requiredJobLevel: 30,
+      gatherTimeSeconds: 90,
+      xpReward: 42,
+      dangerTier: 1,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${thornshadeBramble.id}-thornshade-vine` },
+    update: {},
+    create: {
+      id: `${thornshadeBramble.id}-thornshade-vine`,
+      nodeId: thornshadeBramble.id,
+      itemId: thornshadeVine.id,
+      minQty: 2,
+      maxQty: 5,
+      weight: 100,
+    },
+  });
+
+  const mooncapMushroomRing = await prisma.gatheringNode.upsert({
+    where: { key: "mooncap-mushroom-ring" },
+    update: {},
+    create: {
+      key: "mooncap-mushroom-ring",
+      name: "Mooncap Mushroom Ring",
+      description: "A ring of luminescent mooncap mushrooms.",
+      jobId: herbalistJob.id,
+      tier: 2,
+      requiredJobLevel: 35,
+      gatherTimeSeconds: 105,
+      xpReward: 50,
+      dangerTier: 2,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${mooncapMushroomRing.id}-mooncap` },
+    update: {},
+    create: {
+      id: `${mooncapMushroomRing.id}-mooncap`,
+      nodeId: mooncapMushroomRing.id,
+      itemId: mooncap.id,
+      minQty: 1,
+      maxQty: 4,
+      weight: 100,
+    },
+  });
+
+  const frostbudRidge = await prisma.gatheringNode.upsert({
+    where: { key: "frostbud-ridge" },
+    update: {},
+    create: {
+      key: "frostbud-ridge",
+      name: "Frostbud Ridge",
+      description: "A high ridge where frostbuds grow in the cold winds.",
+      jobId: herbalistJob.id,
+      tier: 2,
+      requiredJobLevel: 38,
+      gatherTimeSeconds: 115,
+      xpReward: 55,
+      dangerTier: 2,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${frostbudRidge.id}-frostbud` },
+    update: {},
+    create: {
+      id: `${frostbudRidge.id}-frostbud`,
+      nodeId: frostbudRidge.id,
+      itemId: frostbud.id,
+      minQty: 1,
+      maxQty: 3,
+      weight: 100,
+    },
+  });
+
+  const nightshadeHollow = await prisma.gatheringNode.upsert({
+    where: { key: "nightshade-hollow" },
+    update: {},
+    create: {
+      key: "nightshade-hollow",
+      name: "Nightshade Hollow",
+      description: "A dark hollow where nightshade blooms at dusk.",
+      jobId: herbalistJob.id,
+      tier: 2,
+      requiredJobLevel: 40,
+      gatherTimeSeconds: 120,
+      xpReward: 60,
+      dangerTier: 2,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${nightshadeHollow.id}-nightshade` },
+    update: {},
+    create: {
+      id: `${nightshadeHollow.id}-nightshade`,
+      nodeId: nightshadeHollow.id,
+      itemId: nightshade.id,
+      minQty: 2,
+      maxQty: 5,
+      weight: 100,
+    },
+  });
+
+  // Herbalist nodes - Tier 3 (levels 41-60)
+  const emberbloomGrove = await prisma.gatheringNode.upsert({
+    where: { key: "emberbloom-grove" },
+    update: {},
+    create: {
+      key: "emberbloom-grove",
+      name: "Emberbloom Grove",
+      description: "A grove of emberblooms radiating warmth.",
+      jobId: herbalistJob.id,
+      tier: 3,
+      requiredJobLevel: 45,
+      gatherTimeSeconds: 150,
+      xpReward: 80,
+      dangerTier: 2,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${emberbloomGrove.id}-emberbloom` },
+    update: {},
+    create: {
+      id: `${emberbloomGrove.id}-emberbloom`,
+      nodeId: emberbloomGrove.id,
+      itemId: emberbloom.id,
+      minQty: 1,
+      maxQty: 4,
+      weight: 100,
+    },
+  });
+
+  const silverthornGlade = await prisma.gatheringNode.upsert({
+    where: { key: "silverthorn-glade" },
+    update: {},
+    create: {
+      key: "silverthorn-glade",
+      name: "Silverthorn Glade",
+      description: "A glade filled with silverthorn bushes.",
+      jobId: herbalistJob.id,
+      tier: 3,
+      requiredJobLevel: 50,
+      gatherTimeSeconds: 180,
+      xpReward: 95,
+      dangerTier: 3,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${silverthornGlade.id}-silverthorn` },
+    update: {},
+    create: {
+      id: `${silverthornGlade.id}-silverthorn`,
+      nodeId: silverthornGlade.id,
+      itemId: silverthorn.id,
+      minQty: 2,
+      maxQty: 5,
+      weight: 100,
+    },
+  });
+
+  const deepwoodMyceliumBed = await prisma.gatheringNode.upsert({
+    where: { key: "deepwood-mycelium-bed" },
+    update: {},
+    create: {
+      key: "deepwood-mycelium-bed",
+      name: "Deepwood Mycelium Bed",
+      description: "A bed of mycelium in the deepest parts of the forest.",
+      jobId: herbalistJob.id,
+      tier: 3,
+      requiredJobLevel: 55,
+      gatherTimeSeconds: 210,
+      xpReward: 110,
+      dangerTier: 3,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${deepwoodMyceliumBed.id}-deepwood-mycelium` },
+    update: {},
+    create: {
+      id: `${deepwoodMyceliumBed.id}-deepwood-mycelium`,
+      nodeId: deepwoodMyceliumBed.id,
+      itemId: deepwoodMycelium.id,
+      minQty: 1,
+      maxQty: 3,
+      weight: 100,
+    },
+  });
+
+  const stormpetalSlope = await prisma.gatheringNode.upsert({
+    where: { key: "stormpetal-slope" },
+    update: {},
+    create: {
+      key: "stormpetal-slope",
+      name: "Stormpetal Slope",
+      description: "A slope where stormpetals grow during thunderstorms.",
+      jobId: herbalistJob.id,
+      tier: 3,
+      requiredJobLevel: 58,
+      gatherTimeSeconds: 225,
+      xpReward: 115,
+      dangerTier: 3,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${stormpetalSlope.id}-stormpetal` },
+    update: {},
+    create: {
+      id: `${stormpetalSlope.id}-stormpetal`,
+      nodeId: stormpetalSlope.id,
+      itemId: stormpetal.id,
+      minQty: 2,
+      maxQty: 6,
+      weight: 100,
+    },
+  });
+
+  const bloodmossMarsh = await prisma.gatheringNode.upsert({
+    where: { key: "bloodmoss-marsh" },
+    update: {},
+    create: {
+      key: "bloodmoss-marsh",
+      name: "Bloodmoss Marsh",
+      description: "A marsh where bloodmoss grows in crimson patches.",
+      jobId: herbalistJob.id,
+      tier: 3,
+      requiredJobLevel: 60,
+      gatherTimeSeconds: 240,
+      xpReward: 120,
+      dangerTier: 3,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${bloodmossMarsh.id}-bloodmoss` },
+    update: {},
+    create: {
+      id: `${bloodmossMarsh.id}-bloodmoss`,
+      nodeId: bloodmossMarsh.id,
+      itemId: bloodmoss.id,
+      minQty: 3,
+      maxQty: 7,
+      weight: 100,
+    },
+  });
+
+  // Herbalist nodes - Tier 4 (levels 61-80)
+  const wraithorchidClearing = await prisma.gatheringNode.upsert({
+    where: { key: "wraithorchid-clearing" },
+    update: {},
+    create: {
+      key: "wraithorchid-clearing",
+      name: "Wraithorchid Clearing",
+      description: "A clearing where ethereal wraithorchids phase in and out of existence.",
+      jobId: herbalistJob.id,
+      tier: 4,
+      requiredJobLevel: 65,
+      gatherTimeSeconds: 300,
+      xpReward: 150,
+      dangerTier: 3,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${wraithorchidClearing.id}-wraithorchid` },
+    update: {},
+    create: {
+      id: `${wraithorchidClearing.id}-wraithorchid`,
+      nodeId: wraithorchidClearing.id,
+      itemId: wraithorchid.id,
+      minQty: 1,
+      maxQty: 2,
+      weight: 100,
+    },
+  });
+
+  const ancientGinsengVein = await prisma.gatheringNode.upsert({
+    where: { key: "ancient-ginseng-vein" },
+    update: {},
+    create: {
+      key: "ancient-ginseng-vein",
+      name: "Ancient Ginseng Vein",
+      description: "A vein of ancient ginseng roots deep underground.",
+      jobId: herbalistJob.id,
+      tier: 4,
+      requiredJobLevel: 70,
+      gatherTimeSeconds: 360,
+      xpReward: 175,
+      dangerTier: 4,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${ancientGinsengVein.id}-ancient-ginseng` },
+    update: {},
+    create: {
+      id: `${ancientGinsengVein.id}-ancient-ginseng`,
+      nodeId: ancientGinsengVein.id,
+      itemId: ancientGinseng.id,
+      minQty: 1,
+      maxQty: 3,
+      weight: 100,
+    },
+  });
+
+  const spiritvineCanopy = await prisma.gatheringNode.upsert({
+    where: { key: "spiritvine-canopy" },
+    update: {},
+    create: {
+      key: "spiritvine-canopy",
+      name: "Spiritvine Canopy",
+      description: "A canopy of spiritvines high in the ancient trees.",
+      jobId: herbalistJob.id,
+      tier: 4,
+      requiredJobLevel: 75,
+      gatherTimeSeconds: 420,
+      xpReward: 200,
+      dangerTier: 4,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${spiritvineCanopy.id}-spiritvine` },
+    update: {},
+    create: {
+      id: `${spiritvineCanopy.id}-spiritvine`,
+      nodeId: spiritvineCanopy.id,
+      itemId: spiritvine.id,
+      minQty: 2,
+      maxQty: 4,
+      weight: 100,
+    },
+  });
+
+  const venomflowerRavine = await prisma.gatheringNode.upsert({
+    where: { key: "venomflower-ravine" },
+    update: {},
+    create: {
+      key: "venomflower-ravine",
+      name: "Venomflower Ravine",
+      description: "A dangerous ravine filled with venomous flowers.",
+      jobId: herbalistJob.id,
+      tier: 4,
+      requiredJobLevel: 78,
+      gatherTimeSeconds: 480,
+      xpReward: 220,
+      dangerTier: 4,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${venomflowerRavine.id}-venomflower` },
+    update: {},
+    create: {
+      id: `${venomflowerRavine.id}-venomflower`,
+      nodeId: venomflowerRavine.id,
+      itemId: venomflower.id,
+      minQty: 1,
+      maxQty: 2,
+      weight: 100,
+    },
+  });
+
+  const tempestbloomHighlands = await prisma.gatheringNode.upsert({
+    where: { key: "tempestbloom-highlands" },
+    update: {},
+    create: {
+      key: "tempestbloom-highlands",
+      name: "Tempestbloom Highlands",
+      description: "Highlands where tempestblooms channel the power of storms.",
+      jobId: herbalistJob.id,
+      tier: 4,
+      requiredJobLevel: 80,
+      gatherTimeSeconds: 540,
+      xpReward: 240,
+      dangerTier: 4,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${tempestbloomHighlands.id}-tempestbloom` },
+    update: {},
+    create: {
+      id: `${tempestbloomHighlands.id}-tempestbloom`,
+      nodeId: tempestbloomHighlands.id,
+      itemId: tempestbloom.id,
+      minQty: 2,
+      maxQty: 4,
+      weight: 100,
+    },
+  });
+
+  // Herbalist nodes - Tier 5 (levels 81-100)
+  const starlotusSpring = await prisma.gatheringNode.upsert({
+    where: { key: "starlotus-spring" },
+    update: {},
+    create: {
+      key: "starlotus-spring",
+      name: "Starlotus Spring",
+      description: "A sacred spring where starlotus blossoms glow with starlight.",
+      jobId: herbalistJob.id,
+      tier: 5,
+      requiredJobLevel: 85,
+      gatherTimeSeconds: 900,
+      xpReward: 360,
+      dangerTier: 4,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${starlotusSpring.id}-starlotus` },
+    update: {},
+    create: {
+      id: `${starlotusSpring.id}-starlotus`,
+      nodeId: starlotusSpring.id,
+      itemId: starlotus.id,
+      minQty: 1,
+      maxQty: 1,
+      weight: 100,
+    },
+  });
+
+  const umbralTruffleBurrow = await prisma.gatheringNode.upsert({
+    where: { key: "umbral-truffle-burrow" },
+    update: {},
+    create: {
+      key: "umbral-truffle-burrow",
+      name: "Umbral Truffle Burrow",
+      description: "A burrow where umbral truffles exist between shadows.",
+      jobId: herbalistJob.id,
+      tier: 5,
+      requiredJobLevel: 88,
+      gatherTimeSeconds: 1050,
+      xpReward: 420,
+      dangerTier: 4,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${umbralTruffleBurrow.id}-umbral-truffle` },
+    update: {},
+    create: {
+      id: `${umbralTruffleBurrow.id}-umbral-truffle`,
+      nodeId: umbralTruffleBurrow.id,
+      itemId: umbralTruffle.id,
+      minQty: 1,
+      maxQty: 2,
+      weight: 100,
+    },
+  });
+
+  const celestialSaffronTerrace = await prisma.gatheringNode.upsert({
+    where: { key: "celestial-saffron-terrace" },
+    update: {},
+    create: {
+      key: "celestial-saffron-terrace",
+      name: "Celestial Saffron Terrace",
+      description: "Terraced fields where celestial saffron shimmers with divine energy.",
+      jobId: herbalistJob.id,
+      tier: 5,
+      requiredJobLevel: 90,
+      gatherTimeSeconds: 1200,
+      xpReward: 480,
+      dangerTier: 5,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${celestialSaffronTerrace.id}-celestial-saffron` },
+    update: {},
+    create: {
+      id: `${celestialSaffronTerrace.id}-celestial-saffron`,
+      nodeId: celestialSaffronTerrace.id,
+      itemId: celestialSaffron.id,
+      minQty: 1,
+      maxQty: 1,
+      weight: 100,
+    },
+  });
+
+  const phoenixfernCrater = await prisma.gatheringNode.upsert({
+    where: { key: "phoenixfern-crater" },
+    update: {},
+    create: {
+      key: "phoenixfern-crater",
+      name: "Phoenixfern Crater",
+      description: "A volcanic crater where phoenixfern regenerates from ashes.",
+      jobId: herbalistJob.id,
+      tier: 5,
+      requiredJobLevel: 95,
+      gatherTimeSeconds: 1350,
+      xpReward: 540,
+      dangerTier: 5,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${phoenixfernCrater.id}-phoenixfern` },
+    update: {},
+    create: {
+      id: `${phoenixfernCrater.id}-phoenixfern`,
+      nodeId: phoenixfernCrater.id,
+      itemId: phoenixfern.id,
+      minQty: 1,
+      maxQty: 2,
+      weight: 100,
+    },
+  });
+
+  const worldrootHeartgrove = await prisma.gatheringNode.upsert({
+    where: { key: "worldroot-heartgrove" },
+    update: {},
+    create: {
+      key: "worldroot-heartgrove",
+      name: "Worldroot Heartgrove",
+      description: "The legendary grove where the worldroot connects all realms.",
+      jobId: herbalistJob.id,
+      tier: 5,
+      requiredJobLevel: 100,
+      gatherTimeSeconds: 1500,
+      xpReward: 600,
+      dangerTier: 5,
+    },
+  });
+  await prisma.nodeYield.upsert({
+    where: { id: `${worldrootHeartgrove.id}-worldroot` },
+    update: {},
+    create: {
+      id: `${worldrootHeartgrove.id}-worldroot`,
+      nodeId: worldrootHeartgrove.id,
+      itemId: worldroot.id,
+      minQty: 1,
+      maxQty: 1,
       weight: 100,
     },
   });
