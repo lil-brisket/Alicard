@@ -55,6 +55,7 @@ export const gatheringRouter = createTRPCRouter({
         jobId: z.string().optional(),
         dangerTierMax: z.number().int().min(1).max(10).optional(),
         search: z.string().optional(),
+        playerLevel: z.number().int().min(1).optional(), // Filter by player's job level
       }).optional()
     )
     .query(async ({ input }) => {
@@ -63,11 +64,17 @@ export const gatheringRouter = createTRPCRouter({
         dangerTier?: { lte: number };
         name?: { contains: string; mode?: "insensitive" };
         isActive?: boolean;
-        status?: string;
+        requiredJobLevel?: { lte: number };
       } = {
-        isActive: true, // Only return active nodes
-        status: "ACTIVE", // Also filter by status for safety
+        isActive: true, // Only return active nodes (runtime filter)
+        // Note: We don't filter by status here because status is for content management
+        // Runtime should only care about isActive flag
       };
+      
+      // Filter by player level if provided
+      if (input?.playerLevel !== undefined) {
+        where.requiredJobLevel = { lte: input.playerLevel };
+      }
       
       if (input?.jobKey) {
         const job = await db.job.findUnique({ where: { key: input.jobKey } });

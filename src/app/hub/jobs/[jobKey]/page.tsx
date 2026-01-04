@@ -44,8 +44,11 @@ export default function JobDetailPage({ params }: Props) {
   );
 
   const { data: gatheringNodes } = api.gathering.listNodes.useQuery(
-    { jobId: job?.id },
-    { enabled: !!job?.id }
+    { 
+      jobId: job?.id,
+      playerLevel: progression?.level,
+    },
+    { enabled: !!job?.id && !!progression }
   );
 
   const utils = api.useUtils();

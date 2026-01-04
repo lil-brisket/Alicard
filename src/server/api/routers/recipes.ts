@@ -39,6 +39,7 @@ export const recipesRouter = createTRPCRouter({
         jobId: z.string().optional(),
         difficultyMax: z.number().int().min(1).max(10).optional(),
         search: z.string().optional(),
+        playerLevel: z.number().int().min(1).optional(), // Filter by player's job level
       }).optional()
     )
     .query(async ({ input }) => {
@@ -46,6 +47,7 @@ export const recipesRouter = createTRPCRouter({
         jobId?: string;
         difficulty?: { lte: number };
         name?: { contains: string; mode?: "insensitive" };
+        requiredJobLevel?: { lte: number };
       } = {};
       
       if (input?.jobKey) {
@@ -63,6 +65,11 @@ export const recipesRouter = createTRPCRouter({
       
       if (input?.search) {
         where.name = { contains: input.search, mode: "insensitive" };
+      }
+      
+      // Filter by player level if provided
+      if (input?.playerLevel !== undefined) {
+        where.requiredJobLevel = { lte: input.playerLevel };
       }
       
       return await db.recipe.findMany({

@@ -934,6 +934,7 @@ model Recipe {
   // Recipe-specific fields
   jobId         String
   difficulty    Int            @default(1)
+  requiredJobLevel Int         @default(1)
   outputItemId  String
   outputQty     Int            @default(1)
   job           Job            @relation(fields: [jobId], references: [id], onDelete: Cascade)
@@ -945,6 +946,7 @@ model Recipe {
   @@index([outputItemId])
   @@index([status])
   @@index([createdBy])
+  @@index([requiredJobLevel])
 }
 
 model RecipeInput {
