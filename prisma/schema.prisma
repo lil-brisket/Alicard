@@ -885,6 +885,13 @@ enum JobCategory {
   GATHER
 }
 
+enum CraftingStation {
+  SMELTER
+  ANVIL
+  FORGE
+  TEMPERING_RACK
+}
+
 model Job {
   id             String          @id @default(cuid())
   key            String          @unique
@@ -937,6 +944,13 @@ model Recipe {
   requiredJobLevel Int         @default(1)
   outputItemId  String
   outputQty     Int            @default(1)
+  // Station and crafting details
+  station       CraftingStation?
+  craftTimeSeconds Int          @default(0)
+  xp            Int            @default(0)
+  isActive      Boolean        @default(true)
+  // Validation override
+  allowNonGatherableInputs Boolean @default(false)
   job           Job            @relation(fields: [jobId], references: [id], onDelete: Cascade)
   outputItem    Item           @relation("RecipeOutput", fields: [outputItemId], references: [id])
   inputs        RecipeInput[]
@@ -947,6 +961,8 @@ model Recipe {
   @@index([status])
   @@index([createdBy])
   @@index([requiredJobLevel])
+  @@index([station])
+  @@index([isActive])
 }
 
 model RecipeInput {
