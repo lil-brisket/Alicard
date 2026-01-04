@@ -8,6 +8,332 @@ import { UserDetailForm } from "./_components/user-detail-form";
 
 type Tab = "details" | "action-log";
 
+function PlayerDataEditor({
+  player,
+  userId,
+}: {
+  player: {
+    id: string;
+    level: number;
+    experience: number;
+    userJobs: Array<{
+      id: string;
+      level: number;
+      xp: number;
+      job: {
+        id: string;
+        key: string;
+        name: string;
+      };
+    }>;
+  };
+  userId: string;
+}) {
+  const utils = api.useUtils();
+  const [editingLevel, setEditingLevel] = useState(false);
+  const [editingExp, setEditingExp] = useState(false);
+  const [editingJobs, setEditingJobs] = useState<Record<string, boolean>>({});
+  const [level, setLevel] = useState(player.level);
+  const [experience, setExperience] = useState(player.experience);
+  const [jobLevels, setJobLevels] = useState<Record<string, number>>(
+    Object.fromEntries(player.userJobs.map((job) => [job.id, job.level]))
+  );
+  const [jobXp, setJobXp] = useState<Record<string, number>>(
+    Object.fromEntries(player.userJobs.map((job) => [job.id, job.xp]))
+  );
+  const [levelReason, setLevelReason] = useState("");
+  const [expReason, setExpReason] = useState("");
+  const [jobReasons, setJobReasons] = useState<Record<string, string>>({});
+
+  const updateLevel = api.admin.users.updatePlayerLevel.useMutation({
+    onSuccess: () => {
+      toast.success("Player level updated");
+      void utils.admin.users.getUserById.invalidate({ id: userId });
+      setEditingLevel(false);
+      setLevelReason("");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const updateExperience = api.admin.users.updatePlayerExperience.useMutation({
+    onSuccess: () => {
+      toast.success("Player experience updated");
+      void utils.admin.users.getUserById.invalidate({ id: userId });
+      setEditingExp(false);
+      setExpReason("");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const updateJobLevel = api.admin.users.updateJobLevel.useMutation({
+    onSuccess: () => {
+      toast.success("Job level updated");
+      void utils.admin.users.getUserById.invalidate({ id: userId });
+      setEditingJobs({});
+      setJobReasons({});
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  return (
+    <div className="mt-4 space-y-4 border-t border-slate-800 pt-4">
+      <h4 className="text-sm font-semibold text-cyan-400">Player Stats</h4>
+      
+      {/* Level Editor */}
+      <div className="rounded border border-slate-800 bg-slate-800/30 p-3">
+        <div className="flex items-center justify-between">
+          <div>
+            <span className="text-sm text-slate-400">Level:</span>{" "}
+            <span className="text-sm font-medium text-slate-200">
+              {player.level}
+            </span>
+          </div>
+          {editingLevel ? (
+            <div className="flex-1 space-y-2 pl-4">
+              <input
+                type="number"
+                value={level}
+                onChange={(e) => setLevel(Number(e.target.value))}
+                className="w-full rounded-lg border border-slate-700 bg-slate-800 px-2 py-1 text-sm text-slate-100"
+                min="1"
+              />
+              <input
+                type="text"
+                placeholder="Reason for change..."
+                value={levelReason}
+                onChange={(e) => setLevelReason(e.target.value)}
+                className="w-full rounded-lg border border-slate-700 bg-slate-800 px-2 py-1 text-sm text-slate-100"
+              />
+              <div className="flex gap-2">
+                <button
+                  onClick={() => {
+                    updateLevel.mutate({
+                      playerId: player.id,
+                      level,
+                      reason: levelReason,
+                    });
+                  }}
+                  disabled={updateLevel.isPending || !levelReason}
+                  className="rounded bg-cyan-600 px-3 py-1 text-xs text-white transition hover:bg-cyan-700 disabled:opacity-50"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => {
+                    setEditingLevel(false);
+                    setLevel(player.level);
+                    setLevelReason("");
+                  }}
+                  className="rounded bg-slate-600 px-3 py-1 text-xs text-white transition hover:bg-slate-700"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            <button
+              onClick={() => setEditingLevel(true)}
+              className="rounded bg-cyan-600 px-3 py-1 text-xs text-white transition hover:bg-cyan-700"
+            >
+              Edit Level
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Experience Editor */}
+      <div className="rounded border border-slate-800 bg-slate-800/30 p-3">
+        <div className="flex items-center justify-between">
+          <div>
+            <span className="text-sm text-slate-400">Experience:</span>{" "}
+            <span className="text-sm font-medium text-slate-200">
+              {player.experience.toLocaleString()}
+            </span>
+          </div>
+          {editingExp ? (
+            <div className="flex-1 space-y-2 pl-4">
+              <input
+                type="number"
+                value={experience}
+                onChange={(e) => setExperience(Number(e.target.value))}
+                className="w-full rounded-lg border border-slate-700 bg-slate-800 px-2 py-1 text-sm text-slate-100"
+                min="0"
+              />
+              <input
+                type="text"
+                placeholder="Reason for change..."
+                value={expReason}
+                onChange={(e) => setExpReason(e.target.value)}
+                className="w-full rounded-lg border border-slate-700 bg-slate-800 px-2 py-1 text-sm text-slate-100"
+              />
+              <div className="flex gap-2">
+                <button
+                  onClick={() => {
+                    updateExperience.mutate({
+                      playerId: player.id,
+                      experience,
+                      reason: expReason,
+                    });
+                  }}
+                  disabled={updateExperience.isPending || !expReason}
+                  className="rounded bg-cyan-600 px-3 py-1 text-xs text-white transition hover:bg-cyan-700 disabled:opacity-50"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => {
+                    setEditingExp(false);
+                    setExperience(player.experience);
+                    setExpReason("");
+                  }}
+                  className="rounded bg-slate-600 px-3 py-1 text-xs text-white transition hover:bg-slate-700"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            <button
+              onClick={() => setEditingExp(true)}
+              className="rounded bg-cyan-600 px-3 py-1 text-xs text-white transition hover:bg-cyan-700"
+            >
+              Edit Experience
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Job Levels Editor */}
+      {player.userJobs.length > 0 && (
+        <div className="rounded border border-slate-800 bg-slate-800/30 p-3">
+          <h5 className="mb-2 text-sm font-semibold text-cyan-400">Job Levels</h5>
+          <div className="space-y-2">
+            {player.userJobs.map((userJob) => (
+              <div key={userJob.id} className="rounded border border-slate-700 bg-slate-900/50 p-2">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="text-sm font-medium text-slate-200">
+                      {userJob.job.name}
+                    </span>
+                    <div className="text-xs text-slate-400">
+                      Level {userJob.level} | XP: {userJob.xp.toLocaleString()}
+                    </div>
+                  </div>
+                  {editingJobs[userJob.id] ? (
+                    <div className="flex-1 space-y-2 pl-4">
+                      <div className="flex gap-2">
+                        <div className="flex-1">
+                          <label className="text-xs text-slate-400">Level</label>
+                          <input
+                            type="number"
+                            value={jobLevels[userJob.id] ?? userJob.level}
+                            onChange={(e) =>
+                              setJobLevels({
+                                ...jobLevels,
+                                [userJob.id]: Number(e.target.value),
+                              })
+                            }
+                            className="w-full rounded-lg border border-slate-700 bg-slate-800 px-2 py-1 text-sm text-slate-100"
+                            min="1"
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <label className="text-xs text-slate-400">XP</label>
+                          <input
+                            type="number"
+                            value={jobXp[userJob.id] ?? userJob.xp}
+                            onChange={(e) =>
+                              setJobXp({
+                                ...jobXp,
+                                [userJob.id]: Number(e.target.value),
+                              })
+                            }
+                            className="w-full rounded-lg border border-slate-700 bg-slate-800 px-2 py-1 text-sm text-slate-100"
+                            min="0"
+                          />
+                        </div>
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="Reason for change..."
+                        value={jobReasons[userJob.id] ?? ""}
+                        onChange={(e) =>
+                          setJobReasons({
+                            ...jobReasons,
+                            [userJob.id]: e.target.value,
+                          })
+                        }
+                        className="w-full rounded-lg border border-slate-700 bg-slate-800 px-2 py-1 text-sm text-slate-100"
+                      />
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => {
+                            updateJobLevel.mutate({
+                              userJobId: userJob.id,
+                              level: jobLevels[userJob.id] ?? userJob.level,
+                              xp: jobXp[userJob.id] ?? userJob.xp,
+                              reason: jobReasons[userJob.id] ?? "",
+                            });
+                          }}
+                          disabled={updateJobLevel.isPending || !jobReasons[userJob.id]}
+                          className="rounded bg-cyan-600 px-3 py-1 text-xs text-white transition hover:bg-cyan-700 disabled:opacity-50"
+                        >
+                          Save
+                        </button>
+                        <button
+                          onClick={() => {
+                            setEditingJobs({
+                              ...editingJobs,
+                              [userJob.id]: false,
+                            });
+                            setJobLevels({
+                              ...jobLevels,
+                              [userJob.id]: userJob.level,
+                            });
+                            setJobXp({
+                              ...jobXp,
+                              [userJob.id]: userJob.xp,
+                            });
+                            setJobReasons({
+                              ...jobReasons,
+                              [userJob.id]: "",
+                            });
+                          }}
+                          className="rounded bg-slate-600 px-3 py-1 text-xs text-white transition hover:bg-slate-700"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        setEditingJobs({
+                          ...editingJobs,
+                          [userJob.id]: true,
+                        });
+                      }}
+                      className="rounded bg-cyan-600 px-3 py-1 text-xs text-white transition hover:bg-cyan-700"
+                    >
+                      Edit
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function CharacterCard({ 
   character, 
   userId 
@@ -227,6 +553,9 @@ export default function AdminUserDetailPage({
                   </div>
                 )}
               </div>
+              {user.player && (
+                <PlayerDataEditor player={user.player} userId={user.id} />
+              )}
             </div>
 
             <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">

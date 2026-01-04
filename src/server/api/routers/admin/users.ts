@@ -129,7 +129,19 @@ export const adminUsersRouter = createTRPCRouter({
               id: true,
               characterName: true,
               level: true,
+              experience: true,
               gold: true,
+              userJobs: {
+                include: {
+                  job: {
+                    select: {
+                      id: true,
+                      key: true,
+                      name: true,
+                    },
+                  },
+                },
+              },
             },
           },
           roles: {
@@ -777,5 +789,157 @@ export const adminUsersRouter = createTRPCRouter({
       });
 
       return { success: true };
+    }),
+
+  // Update player level (ADMIN only)
+  updatePlayerLevel: adminProcedure
+    .input(
+      z.object({
+        playerId: z.string(),
+        level: z.number().int().min(1),
+        reason: z.string().min(1, "Reason is required"),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const player = await ctx.db.player.findUnique({
+        where: { id: input.playerId },
+      });
+
+      if (!player) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Player not found",
+        });
+      }
+
+      const oldLevel = player.level;
+      const updatedPlayer = await ctx.db.player.update({
+        where: { id: input.playerId },
+        data: {
+          level: input.level,
+        },
+      });
+
+      // Log admin action
+      await ctx.db.adminActionLog.create({
+        data: {
+          actorId: ctx.session.user.id,
+          targetUserId: player.userId,
+          action: "UPDATE_PLAYER_LEVEL",
+          reason: input.reason,
+          metadata: {
+            oldLevel,
+            newLevel: input.level,
+            change: input.level - oldLevel,
+          },
+        },
+      });
+
+      return updatedPlayer;
+    }),
+
+  // Update player experience (ADMIN only)
+  updatePlayerExperience: adminProcedure
+    .input(
+      z.object({
+        playerId: z.string(),
+        experience: z.number().int().min(0),
+        reason: z.string().min(1, "Reason is required"),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const player = await ctx.db.player.findUnique({
+        where: { id: input.playerId },
+      });
+
+      if (!player) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Player not found",
+        });
+      }
+
+      const oldExperience = player.experience;
+      const updatedPlayer = await ctx.db.player.update({
+        where: { id: input.playerId },
+        data: {
+          experience: input.experience,
+        },
+      });
+
+      // Log admin action
+      await ctx.db.adminActionLog.create({
+        data: {
+          actorId: ctx.session.user.id,
+          targetUserId: player.userId,
+          action: "UPDATE_PLAYER_EXPERIENCE",
+          reason: input.reason,
+          metadata: {
+            oldExperience,
+            newExperience: input.experience,
+            change: input.experience - oldExperience,
+          },
+        },
+      });
+
+      return updatedPlayer;
+    }),
+
+  // Update job level (ADMIN only)
+  updateJobLevel: adminProcedure
+    .input(
+      z.object({
+        userJobId: z.string(),
+        level: z.number().int().min(1),
+        xp: z.number().int().min(0).optional(),
+        reason: z.string().min(1, "Reason is required"),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userJob = await ctx.db.userJob.findUnique({
+        where: { id: input.userJobId },
+        include: { job: true },
+      });
+
+      if (!userJob) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Job not found",
+        });
+      }
+
+      const oldLevel = userJob.level;
+      const oldXp = userJob.xp;
+      const updatedJob = await ctx.db.userJob.update({
+        where: { id: input.userJobId },
+        data: {
+          level: input.level,
+          ...(input.xp !== undefined && { xp: input.xp }),
+        },
+      });
+
+      // Log admin action
+      await ctx.db.adminActionLog.create({
+        data: {
+          actorId: ctx.session.user.id,
+          targetUserId: userJob.playerId,
+          action: "UPDATE_JOB_LEVEL",
+          reason: input.reason,
+          metadata: {
+            jobId: userJob.jobId,
+            jobName: userJob.job.name,
+            oldLevel,
+            newLevel: input.level,
+            levelChange: input.level - oldLevel,
+            ...(input.xp !== undefined && {
+              oldXp,
+              newXp: input.xp,
+              xpChange: input.xp - oldXp,
+            }),
+          },
+        },
+      });
+
+      return updatedJob;
     }),
 });
