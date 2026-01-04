@@ -1881,16 +1881,173 @@ async function main() {
   // Create recipes
   console.log("Creating recipes...");
 
-  // Blacksmith: Iron Ore -> Iron Bar
+  // Create bar items if they don't exist
+  const copperBar = await prisma.item.upsert({
+    where: { id: "copper-bar" },
+    update: {},
+    create: {
+      id: "copper-bar",
+      key: "copper-bar",
+      name: "Copper Bar",
+      description: "A refined copper bar ready for forging.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 15,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const bronzeBar = await prisma.item.upsert({
+    where: { id: "bronze-bar" },
+    update: {},
+    create: {
+      id: "bronze-bar",
+      key: "bronze-bar",
+      name: "Bronze Bar",
+      description: "A refined bronze bar ready for forging.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 20,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const steelLongsword = await prisma.item.upsert({
+    where: { id: "steel-longsword" },
+    update: {},
+    create: {
+      id: "steel-longsword",
+      key: "steel-longsword",
+      name: "Steel Longsword",
+      description: "A well-crafted steel longsword.",
+      itemType: "WEAPON",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 150,
+      stackable: false,
+      maxStack: 1,
+      equipmentSlot: "MAINHAND",
+      strengthBonus: 5,
+      defenseBonus: 2,
+    },
+  });
+
+  // Blacksmith: Copper Ore -> Copper Bar (SMELTER)
+  const copperBarRecipe = await prisma.recipe.upsert({
+    where: { id: "copper-bar-recipe" },
+    update: {
+      station: "SMELTER",
+      craftTimeSeconds: 30,
+      xp: 15,
+      isActive: true,
+      requiredJobLevel: 1,
+    },
+    create: {
+      id: "copper-bar-recipe",
+      jobId: blacksmithJob.id,
+      name: "Copper Bar",
+      description: "Smelt copper ore into a refined copper bar.",
+      difficulty: 1,
+      requiredJobLevel: 1,
+      station: "SMELTER",
+      craftTimeSeconds: 30,
+      xp: 15,
+      isActive: true,
+      allowNonGatherableInputs: false,
+      status: "ACTIVE",
+      outputItemId: copperBar.id,
+      outputQty: 1,
+    },
+  });
+
+  await prisma.recipeInput.upsert({
+    where: { id: `${copperBarRecipe.id}-copper-ore` },
+    update: {},
+    create: {
+      id: `${copperBarRecipe.id}-copper-ore`,
+      recipeId: copperBarRecipe.id,
+      itemId: copperOre.id,
+      qty: 2,
+    },
+  });
+
+  // Blacksmith: Copper + Tin -> Bronze Bar (SMELTER)
+  const bronzeBarRecipe = await prisma.recipe.upsert({
+    where: { id: "bronze-bar-recipe" },
+    update: {
+      station: "SMELTER",
+      craftTimeSeconds: 45,
+      xp: 25,
+      isActive: true,
+      requiredJobLevel: 5,
+    },
+    create: {
+      id: "bronze-bar-recipe",
+      jobId: blacksmithJob.id,
+      name: "Bronze Bar",
+      description: "Smelt copper and tin ore into a bronze bar.",
+      difficulty: 2,
+      requiredJobLevel: 5,
+      station: "SMELTER",
+      craftTimeSeconds: 45,
+      xp: 25,
+      isActive: true,
+      allowNonGatherableInputs: false,
+      status: "ACTIVE",
+      outputItemId: bronzeBar.id,
+      outputQty: 1,
+    },
+  });
+
+  await prisma.recipeInput.upsert({
+    where: { id: `${bronzeBarRecipe.id}-copper-ore` },
+    update: {},
+    create: {
+      id: `${bronzeBarRecipe.id}-copper-ore`,
+      recipeId: bronzeBarRecipe.id,
+      itemId: copperOre.id,
+      qty: 2,
+    },
+  });
+
+  await prisma.recipeInput.upsert({
+    where: { id: `${bronzeBarRecipe.id}-tin-ore` },
+    update: {},
+    create: {
+      id: `${bronzeBarRecipe.id}-tin-ore`,
+      recipeId: bronzeBarRecipe.id,
+      itemId: tinOre.id,
+      qty: 1,
+    },
+  });
+
+  // Blacksmith: Iron Ore -> Iron Bar (SMELTER) - Updated with new fields
   const ironBarRecipe = await prisma.recipe.upsert({
     where: { id: "iron-bar-recipe" },
-    update: {},
+    update: {
+      station: "SMELTER",
+      craftTimeSeconds: 60,
+      xp: 30,
+      isActive: true,
+      requiredJobLevel: 10,
+    },
     create: {
       id: "iron-bar-recipe",
       jobId: blacksmithJob.id,
       name: "Iron Bar",
       description: "Smelt iron ore into a refined iron bar.",
       difficulty: 2,
+      requiredJobLevel: 10,
+      station: "SMELTER",
+      craftTimeSeconds: 60,
+      xp: 30,
+      isActive: true,
+      allowNonGatherableInputs: false,
+      status: "ACTIVE",
       outputItemId: ironBar.id,
       outputQty: 1,
     },
@@ -1903,6 +2060,56 @@ async function main() {
       id: `${ironBarRecipe.id}-iron-ore`,
       recipeId: ironBarRecipe.id,
       itemId: ironOre.id,
+      qty: 2,
+    },
+  });
+
+  // Blacksmith: Iron Bar + Coal -> Steel Longsword (ANVIL)
+  const steelLongswordRecipe = await prisma.recipe.upsert({
+    where: { id: "steel-longsword-recipe" },
+    update: {
+      station: "ANVIL",
+      craftTimeSeconds: 120,
+      xp: 50,
+      isActive: true,
+      requiredJobLevel: 15,
+    },
+    create: {
+      id: "steel-longsword-recipe",
+      jobId: blacksmithJob.id,
+      name: "Steel Longsword",
+      description: "Forge a steel longsword from iron bars and coal.",
+      difficulty: 4,
+      requiredJobLevel: 15,
+      station: "ANVIL",
+      craftTimeSeconds: 120,
+      xp: 50,
+      isActive: true,
+      allowNonGatherableInputs: true, // Allows iron bar (from recipe) and coal
+      status: "ACTIVE",
+      outputItemId: steelLongsword.id,
+      outputQty: 1,
+    },
+  });
+
+  await prisma.recipeInput.upsert({
+    where: { id: `${steelLongswordRecipe.id}-iron-bar` },
+    update: {},
+    create: {
+      id: `${steelLongswordRecipe.id}-iron-bar`,
+      recipeId: steelLongswordRecipe.id,
+      itemId: ironBar.id,
+      qty: 3,
+    },
+  });
+
+  await prisma.recipeInput.upsert({
+    where: { id: `${steelLongswordRecipe.id}-coal` },
+    update: {},
+    create: {
+      id: `${steelLongswordRecipe.id}-coal`,
+      recipeId: steelLongswordRecipe.id,
+      itemId: coal.id,
       qty: 2,
     },
   });
