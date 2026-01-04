@@ -94,7 +94,11 @@ export const ItemType = {
   MATERIAL: 'MATERIAL',
   QUEST_ITEM: 'QUEST_ITEM',
   TOOL: 'TOOL',
-  EQUIPMENT: 'EQUIPMENT'
+  EQUIPMENT: 'EQUIPMENT',
+  QUEST: 'QUEST',
+  CURRENCY: 'CURRENCY',
+  KEY: 'KEY',
+  MISC: 'MISC'
 } as const
 
 export type ItemType = (typeof ItemType)[keyof typeof ItemType]
@@ -120,7 +124,9 @@ export const EquipmentSlot = {
   RING: 'RING',
   NECKLACE: 'NECKLACE',
   BELT: 'BELT',
-  CLOAK: 'CLOAK'
+  CLOAK: 'CLOAK',
+  OFFHAND: 'OFFHAND',
+  MAINHAND: 'MAINHAND'
 } as const
 
 export type EquipmentSlot = (typeof EquipmentSlot)[keyof typeof EquipmentSlot]

@@ -40,16 +40,20 @@ export default function ItemDetailPage({
   const { data: references } = api.content.items.getReferences.useQuery({ id });
   const utils = api.useUtils();
 
-  const [affectsExisting, setAffectsExisting] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
   const [form, setForm] = useState<FormState>({
     name: "",
     description: "",
     status: "DRAFT",
-    itemType: "",
+    itemType: "MATERIAL",
     equipmentSlot: "",
     rarity: "COMMON",
     value: 0,
+    stackable: false,
+    maxStack: 999,
+    isTradeable: true,
+    isActive: true,
+    tags: [],
     stats: {},
   });
   
@@ -59,11 +63,24 @@ export default function ItemDetailPage({
         name: item.name,
         description: item.description ?? "",
         status: (item as any).status ?? "DRAFT",
-        itemType: (item as any).itemType ?? "",
-        equipmentSlot: (item as any).equipmentSlot ?? "",
-        rarity: item.rarity,
+        itemType: item.itemType ?? "MATERIAL",
+        equipmentSlot: item.equipmentSlot ?? "",
+        rarity: item.itemRarity,
         value: item.value,
-        stats: (item.statsJSON as ItemStats) ?? {},
+        stackable: item.stackable ?? false,
+        maxStack: item.maxStack ?? 999,
+        isTradeable: (item as any).isTradeable ?? true,
+        isActive: (item as any).isActive ?? true,
+        tags: (item as any).tags ?? [],
+        stats: {
+          vitality: item.vitalityBonus,
+          strength: item.strengthBonus,
+          speed: item.speedBonus,
+          dexterity: item.dexterityBonus,
+          hp: item.hpBonus,
+          sp: item.spBonus,
+          defense: item.defenseBonus,
+        },
       });
       setHasChanges(false);
     }
@@ -86,20 +103,26 @@ export default function ItemDetailPage({
   });
 
   const handleSave = () => {
-    const cleanedStats = Object.fromEntries(
-      Object.entries(form.stats).filter(([, v]) => v !== undefined && v !== 0)
-    );
     updateItem.mutate({
       id,
       name: form.name,
       description: form.description || null,
-      status: form.status,
-      itemType: (form.itemType || undefined) as any,
-      equipmentSlot: (form.equipmentSlot || undefined) as any,
+      itemType: form.itemType as any,
+      equipmentSlot: form.itemType === "EQUIPMENT" ? (form.equipmentSlot as any) : null,
       rarity: form.rarity as any,
       value: form.value,
-      statsJSON: Object.keys(cleanedStats).length > 0 ? cleanedStats : undefined,
-      affectsExisting,
+      stackable: form.stackable,
+      maxStack: form.maxStack,
+      isTradeable: form.isTradeable,
+      isActive: form.isActive,
+      tags: form.tags,
+      vitalityBonus: form.stats.vitality ?? 0,
+      strengthBonus: form.stats.strength ?? 0,
+      speedBonus: form.stats.speed ?? 0,
+      dexterityBonus: form.stats.dexterity ?? 0,
+      hpBonus: form.stats.hp ?? 0,
+      spBonus: form.stats.sp ?? 0,
+      defenseBonus: form.stats.defense ?? 0,
     });
   };
   
@@ -239,48 +262,64 @@ export default function ItemDetailPage({
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-300">
-                Item Type
+                Item Type <span className="text-red-400">*</span>
               </label>
               <select
                 value={form.itemType}
-                onChange={(e) => updateField("itemType", e.target.value)}
+                onChange={(e) => {
+                  const newType = e.target.value;
+                  updateField("itemType", newType);
+                  // If not EQUIPMENT, clear equipmentSlot
+                  if (newType !== "EQUIPMENT") {
+                    updateField("equipmentSlot", "");
+                  }
+                }}
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
+                required
               >
-                <option value="">None</option>
-                <option value="WEAPON">WEAPON</option>
-                <option value="ARMOR">ARMOR</option>
-                <option value="ACCESSORY">ACCESSORY</option>
-                <option value="CONSUMABLE">CONSUMABLE</option>
                 <option value="MATERIAL">MATERIAL</option>
-                <option value="QUEST_ITEM">QUEST_ITEM</option>
-                <option value="TOOL">TOOL</option>
                 <option value="EQUIPMENT">EQUIPMENT</option>
+                <option value="CONSUMABLE">CONSUMABLE</option>
+                <option value="QUEST">QUEST</option>
+                <option value="CURRENCY">CURRENCY</option>
+                <option value="KEY">KEY</option>
+                <option value="MISC">MISC</option>
+                <option value="WEAPON">WEAPON (legacy)</option>
+                <option value="ARMOR">ARMOR (legacy)</option>
+                <option value="ACCESSORY">ACCESSORY (legacy)</option>
+                <option value="QUEST_ITEM">QUEST_ITEM (legacy)</option>
+                <option value="TOOL">TOOL (legacy)</option>
               </select>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-slate-300">
-                Equipment Slot
-              </label>
-              <select
-                value={form.equipmentSlot}
-                onChange={(e) => updateField("equipmentSlot", e.target.value)}
-                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
-              >
-                <option value="">None</option>
-                <option value="HEAD">HEAD</option>
-                <option value="ARMS">ARMS</option>
-                <option value="BODY">BODY</option>
-                <option value="LEGS">LEGS</option>
-                <option value="FEET">FEET</option>
-                <option value="RING">RING</option>
-                <option value="NECKLACE">NECKLACE</option>
-                <option value="BELT">BELT</option>
-                <option value="CLOAK">CLOAK</option>
-              </select>
-              <p className="mt-1 text-xs text-slate-400">
-                Required for equippable items (weapons, armor, accessories)
-              </p>
-            </div>
+            {form.itemType === "EQUIPMENT" && (
+              <div>
+                <label className="block text-sm font-medium text-slate-300">
+                  Equipment Slot <span className="text-red-400">*</span>
+                </label>
+                <select
+                  value={form.equipmentSlot}
+                  onChange={(e) => updateField("equipmentSlot", e.target.value)}
+                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
+                  required
+                >
+                  <option value="">Select slot...</option>
+                  <option value="HEAD">HEAD</option>
+                  <option value="ARMS">ARMS</option>
+                  <option value="BODY">BODY</option>
+                  <option value="LEGS">LEGS</option>
+                  <option value="FEET">FEET</option>
+                  <option value="RING">RING</option>
+                  <option value="NECKLACE">NECKLACE</option>
+                  <option value="BELT">BELT</option>
+                  <option value="CLOAK">CLOAK</option>
+                  <option value="OFFHAND">OFFHAND</option>
+                  <option value="MAINHAND">MAINHAND</option>
+                </select>
+                <p className="mt-1 text-xs text-slate-400">
+                  Required for equipment items
+                </p>
+              </div>
+            )}
             <div>
               <label className="block text-sm font-medium text-slate-300">
                 Rarity
@@ -323,6 +362,67 @@ export default function ItemDetailPage({
                 onChange={(e) => updateField("value", parseInt(e.target.value) || 0)}
                 className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
               />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-300">
+                Stack Size (Max Stack)
+              </label>
+              <input
+                type="number"
+                value={form.maxStack}
+                onChange={(e) => updateField("maxStack", parseInt(e.target.value) || 1)}
+                min={1}
+                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
+              />
+              <div className="mt-2 flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={form.stackable}
+                  onChange={(e) => updateField("stackable", e.target.checked)}
+                  className="rounded border-slate-700"
+                />
+                <span className="text-sm text-slate-300">Stackable</span>
+              </div>
+            </div>
+            <div>
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={form.isTradeable}
+                  onChange={(e) => updateField("isTradeable", e.target.checked)}
+                  className="rounded border-slate-700"
+                />
+                <span className="text-sm text-slate-300">Tradeable</span>
+              </label>
+            </div>
+            <div>
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={form.isActive}
+                  onChange={(e) => updateField("isActive", e.target.checked)}
+                  className="rounded border-slate-700"
+                />
+                <span className="text-sm text-slate-300">Active</span>
+              </label>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-300">
+                Tags (comma-separated)
+              </label>
+              <input
+                type="text"
+                value={form.tags.join(", ")}
+                onChange={(e) => {
+                  const tags = e.target.value.split(",").map(t => t.trim()).filter(t => t.length > 0);
+                  updateField("tags", tags);
+                }}
+                placeholder="tag1, tag2, tag3"
+                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
+              />
+              <p className="mt-1 text-xs text-slate-400">
+                Separate tags with commas
+              </p>
             </div>
 
             {/* Item Stats Section */}

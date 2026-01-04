@@ -29,11 +29,21 @@ export type AggregateGatheringNode = {
 export type GatheringNodeAvgAggregateOutputType = {
   version: number | null
   dangerTier: number | null
+  tier: number | null
+  requiredJobLevel: number | null
+  gatherTimeSeconds: number | null
+  xpReward: number | null
+  cooldownSeconds: number | null
 }
 
 export type GatheringNodeSumAggregateOutputType = {
   version: number | null
   dangerTier: number | null
+  tier: number | null
+  requiredJobLevel: number | null
+  gatherTimeSeconds: number | null
+  xpReward: number | null
+  cooldownSeconds: number | null
 }
 
 export type GatheringNodeMinAggregateOutputType = {
@@ -48,6 +58,12 @@ export type GatheringNodeMinAggregateOutputType = {
   updatedAt: Date | null
   jobId: string | null
   dangerTier: number | null
+  tier: number | null
+  requiredJobLevel: number | null
+  gatherTimeSeconds: number | null
+  xpReward: number | null
+  cooldownSeconds: number | null
+  isActive: boolean | null
 }
 
 export type GatheringNodeMaxAggregateOutputType = {
@@ -62,6 +78,12 @@ export type GatheringNodeMaxAggregateOutputType = {
   updatedAt: Date | null
   jobId: string | null
   dangerTier: number | null
+  tier: number | null
+  requiredJobLevel: number | null
+  gatherTimeSeconds: number | null
+  xpReward: number | null
+  cooldownSeconds: number | null
+  isActive: boolean | null
 }
 
 export type GatheringNodeCountAggregateOutputType = {
@@ -77,6 +99,12 @@ export type GatheringNodeCountAggregateOutputType = {
   updatedAt: number
   jobId: number
   dangerTier: number
+  tier: number
+  requiredJobLevel: number
+  gatherTimeSeconds: number
+  xpReward: number
+  cooldownSeconds: number
+  isActive: number
   _all: number
 }
 
@@ -84,11 +112,21 @@ export type GatheringNodeCountAggregateOutputType = {
 export type GatheringNodeAvgAggregateInputType = {
   version?: true
   dangerTier?: true
+  tier?: true
+  requiredJobLevel?: true
+  gatherTimeSeconds?: true
+  xpReward?: true
+  cooldownSeconds?: true
 }
 
 export type GatheringNodeSumAggregateInputType = {
   version?: true
   dangerTier?: true
+  tier?: true
+  requiredJobLevel?: true
+  gatherTimeSeconds?: true
+  xpReward?: true
+  cooldownSeconds?: true
 }
 
 export type GatheringNodeMinAggregateInputType = {
@@ -103,6 +141,12 @@ export type GatheringNodeMinAggregateInputType = {
   updatedAt?: true
   jobId?: true
   dangerTier?: true
+  tier?: true
+  requiredJobLevel?: true
+  gatherTimeSeconds?: true
+  xpReward?: true
+  cooldownSeconds?: true
+  isActive?: true
 }
 
 export type GatheringNodeMaxAggregateInputType = {
@@ -117,6 +161,12 @@ export type GatheringNodeMaxAggregateInputType = {
   updatedAt?: true
   jobId?: true
   dangerTier?: true
+  tier?: true
+  requiredJobLevel?: true
+  gatherTimeSeconds?: true
+  xpReward?: true
+  cooldownSeconds?: true
+  isActive?: true
 }
 
 export type GatheringNodeCountAggregateInputType = {
@@ -132,6 +182,12 @@ export type GatheringNodeCountAggregateInputType = {
   updatedAt?: true
   jobId?: true
   dangerTier?: true
+  tier?: true
+  requiredJobLevel?: true
+  gatherTimeSeconds?: true
+  xpReward?: true
+  cooldownSeconds?: true
+  isActive?: true
   _all?: true
 }
 
@@ -234,6 +290,12 @@ export type GatheringNodeGroupByOutputType = {
   updatedAt: Date
   jobId: string
   dangerTier: number
+  tier: number
+  requiredJobLevel: number
+  gatherTimeSeconds: number
+  xpReward: number
+  cooldownSeconds: number | null
+  isActive: boolean
   _count: GatheringNodeCountAggregateOutputType | null
   _avg: GatheringNodeAvgAggregateOutputType | null
   _sum: GatheringNodeSumAggregateOutputType | null
@@ -272,6 +334,12 @@ export type GatheringNodeWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"GatheringNode"> | Date | string
   jobId?: Prisma.StringFilter<"GatheringNode"> | string
   dangerTier?: Prisma.IntFilter<"GatheringNode"> | number
+  tier?: Prisma.IntFilter<"GatheringNode"> | number
+  requiredJobLevel?: Prisma.IntFilter<"GatheringNode"> | number
+  gatherTimeSeconds?: Prisma.IntFilter<"GatheringNode"> | number
+  xpReward?: Prisma.IntFilter<"GatheringNode"> | number
+  cooldownSeconds?: Prisma.IntNullableFilter<"GatheringNode"> | number | null
+  isActive?: Prisma.BoolFilter<"GatheringNode"> | boolean
   job?: Prisma.XOR<Prisma.JobScalarRelationFilter, Prisma.JobWhereInput>
   yields?: Prisma.NodeYieldListRelationFilter
   gatherAttempts?: Prisma.GatherAttemptListRelationFilter
@@ -290,6 +358,12 @@ export type GatheringNodeOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   dangerTier?: Prisma.SortOrder
+  tier?: Prisma.SortOrder
+  requiredJobLevel?: Prisma.SortOrder
+  gatherTimeSeconds?: Prisma.SortOrder
+  xpReward?: Prisma.SortOrder
+  cooldownSeconds?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   job?: Prisma.JobOrderByWithRelationInput
   yields?: Prisma.NodeYieldOrderByRelationAggregateInput
   gatherAttempts?: Prisma.GatherAttemptOrderByRelationAggregateInput
@@ -311,6 +385,12 @@ export type GatheringNodeWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"GatheringNode"> | Date | string
   jobId?: Prisma.StringFilter<"GatheringNode"> | string
   dangerTier?: Prisma.IntFilter<"GatheringNode"> | number
+  tier?: Prisma.IntFilter<"GatheringNode"> | number
+  requiredJobLevel?: Prisma.IntFilter<"GatheringNode"> | number
+  gatherTimeSeconds?: Prisma.IntFilter<"GatheringNode"> | number
+  xpReward?: Prisma.IntFilter<"GatheringNode"> | number
+  cooldownSeconds?: Prisma.IntNullableFilter<"GatheringNode"> | number | null
+  isActive?: Prisma.BoolFilter<"GatheringNode"> | boolean
   job?: Prisma.XOR<Prisma.JobScalarRelationFilter, Prisma.JobWhereInput>
   yields?: Prisma.NodeYieldListRelationFilter
   gatherAttempts?: Prisma.GatherAttemptListRelationFilter
@@ -329,6 +409,12 @@ export type GatheringNodeOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   dangerTier?: Prisma.SortOrder
+  tier?: Prisma.SortOrder
+  requiredJobLevel?: Prisma.SortOrder
+  gatherTimeSeconds?: Prisma.SortOrder
+  xpReward?: Prisma.SortOrder
+  cooldownSeconds?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   _count?: Prisma.GatheringNodeCountOrderByAggregateInput
   _avg?: Prisma.GatheringNodeAvgOrderByAggregateInput
   _max?: Prisma.GatheringNodeMaxOrderByAggregateInput
@@ -352,6 +438,12 @@ export type GatheringNodeScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"GatheringNode"> | Date | string
   jobId?: Prisma.StringWithAggregatesFilter<"GatheringNode"> | string
   dangerTier?: Prisma.IntWithAggregatesFilter<"GatheringNode"> | number
+  tier?: Prisma.IntWithAggregatesFilter<"GatheringNode"> | number
+  requiredJobLevel?: Prisma.IntWithAggregatesFilter<"GatheringNode"> | number
+  gatherTimeSeconds?: Prisma.IntWithAggregatesFilter<"GatheringNode"> | number
+  xpReward?: Prisma.IntWithAggregatesFilter<"GatheringNode"> | number
+  cooldownSeconds?: Prisma.IntNullableWithAggregatesFilter<"GatheringNode"> | number | null
+  isActive?: Prisma.BoolWithAggregatesFilter<"GatheringNode"> | boolean
 }
 
 export type GatheringNodeCreateInput = {
@@ -366,6 +458,12 @@ export type GatheringNodeCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dangerTier?: number
+  tier?: number
+  requiredJobLevel?: number
+  gatherTimeSeconds?: number
+  xpReward?: number
+  cooldownSeconds?: number | null
+  isActive?: boolean
   job: Prisma.JobCreateNestedOneWithoutNodesInput
   yields?: Prisma.NodeYieldCreateNestedManyWithoutNodeInput
   gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutNodeInput
@@ -384,6 +482,12 @@ export type GatheringNodeUncheckedCreateInput = {
   updatedAt?: Date | string
   jobId: string
   dangerTier?: number
+  tier?: number
+  requiredJobLevel?: number
+  gatherTimeSeconds?: number
+  xpReward?: number
+  cooldownSeconds?: number | null
+  isActive?: boolean
   yields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutNodeInput
   gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutNodeInput
 }
@@ -400,6 +504,12 @@ export type GatheringNodeUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  gatherTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xpReward?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   job?: Prisma.JobUpdateOneRequiredWithoutNodesNestedInput
   yields?: Prisma.NodeYieldUpdateManyWithoutNodeNestedInput
   gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutNodeNestedInput
@@ -418,6 +528,12 @@ export type GatheringNodeUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  gatherTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xpReward?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   yields?: Prisma.NodeYieldUncheckedUpdateManyWithoutNodeNestedInput
   gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutNodeNestedInput
 }
@@ -435,6 +551,12 @@ export type GatheringNodeCreateManyInput = {
   updatedAt?: Date | string
   jobId: string
   dangerTier?: number
+  tier?: number
+  requiredJobLevel?: number
+  gatherTimeSeconds?: number
+  xpReward?: number
+  cooldownSeconds?: number | null
+  isActive?: boolean
 }
 
 export type GatheringNodeUpdateManyMutationInput = {
@@ -449,6 +571,12 @@ export type GatheringNodeUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  gatherTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xpReward?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type GatheringNodeUncheckedUpdateManyInput = {
@@ -464,6 +592,12 @@ export type GatheringNodeUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  gatherTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xpReward?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type GatheringNodeListRelationFilter = {
@@ -489,11 +623,22 @@ export type GatheringNodeCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   dangerTier?: Prisma.SortOrder
+  tier?: Prisma.SortOrder
+  requiredJobLevel?: Prisma.SortOrder
+  gatherTimeSeconds?: Prisma.SortOrder
+  xpReward?: Prisma.SortOrder
+  cooldownSeconds?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
 }
 
 export type GatheringNodeAvgOrderByAggregateInput = {
   version?: Prisma.SortOrder
   dangerTier?: Prisma.SortOrder
+  tier?: Prisma.SortOrder
+  requiredJobLevel?: Prisma.SortOrder
+  gatherTimeSeconds?: Prisma.SortOrder
+  xpReward?: Prisma.SortOrder
+  cooldownSeconds?: Prisma.SortOrder
 }
 
 export type GatheringNodeMaxOrderByAggregateInput = {
@@ -508,6 +653,12 @@ export type GatheringNodeMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   dangerTier?: Prisma.SortOrder
+  tier?: Prisma.SortOrder
+  requiredJobLevel?: Prisma.SortOrder
+  gatherTimeSeconds?: Prisma.SortOrder
+  xpReward?: Prisma.SortOrder
+  cooldownSeconds?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
 }
 
 export type GatheringNodeMinOrderByAggregateInput = {
@@ -522,11 +673,22 @@ export type GatheringNodeMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   dangerTier?: Prisma.SortOrder
+  tier?: Prisma.SortOrder
+  requiredJobLevel?: Prisma.SortOrder
+  gatherTimeSeconds?: Prisma.SortOrder
+  xpReward?: Prisma.SortOrder
+  cooldownSeconds?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
 }
 
 export type GatheringNodeSumOrderByAggregateInput = {
   version?: Prisma.SortOrder
   dangerTier?: Prisma.SortOrder
+  tier?: Prisma.SortOrder
+  requiredJobLevel?: Prisma.SortOrder
+  gatherTimeSeconds?: Prisma.SortOrder
+  xpReward?: Prisma.SortOrder
+  cooldownSeconds?: Prisma.SortOrder
 }
 
 export type GatheringNodeScalarRelationFilter = {
@@ -616,6 +778,12 @@ export type GatheringNodeCreateWithoutJobInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dangerTier?: number
+  tier?: number
+  requiredJobLevel?: number
+  gatherTimeSeconds?: number
+  xpReward?: number
+  cooldownSeconds?: number | null
+  isActive?: boolean
   yields?: Prisma.NodeYieldCreateNestedManyWithoutNodeInput
   gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutNodeInput
 }
@@ -632,6 +800,12 @@ export type GatheringNodeUncheckedCreateWithoutJobInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dangerTier?: number
+  tier?: number
+  requiredJobLevel?: number
+  gatherTimeSeconds?: number
+  xpReward?: number
+  cooldownSeconds?: number | null
+  isActive?: boolean
   yields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutNodeInput
   gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutNodeInput
 }
@@ -678,6 +852,12 @@ export type GatheringNodeScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"GatheringNode"> | Date | string
   jobId?: Prisma.StringFilter<"GatheringNode"> | string
   dangerTier?: Prisma.IntFilter<"GatheringNode"> | number
+  tier?: Prisma.IntFilter<"GatheringNode"> | number
+  requiredJobLevel?: Prisma.IntFilter<"GatheringNode"> | number
+  gatherTimeSeconds?: Prisma.IntFilter<"GatheringNode"> | number
+  xpReward?: Prisma.IntFilter<"GatheringNode"> | number
+  cooldownSeconds?: Prisma.IntNullableFilter<"GatheringNode"> | number | null
+  isActive?: Prisma.BoolFilter<"GatheringNode"> | boolean
 }
 
 export type GatheringNodeCreateWithoutYieldsInput = {
@@ -692,6 +872,12 @@ export type GatheringNodeCreateWithoutYieldsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dangerTier?: number
+  tier?: number
+  requiredJobLevel?: number
+  gatherTimeSeconds?: number
+  xpReward?: number
+  cooldownSeconds?: number | null
+  isActive?: boolean
   job: Prisma.JobCreateNestedOneWithoutNodesInput
   gatherAttempts?: Prisma.GatherAttemptCreateNestedManyWithoutNodeInput
 }
@@ -709,6 +895,12 @@ export type GatheringNodeUncheckedCreateWithoutYieldsInput = {
   updatedAt?: Date | string
   jobId: string
   dangerTier?: number
+  tier?: number
+  requiredJobLevel?: number
+  gatherTimeSeconds?: number
+  xpReward?: number
+  cooldownSeconds?: number | null
+  isActive?: boolean
   gatherAttempts?: Prisma.GatherAttemptUncheckedCreateNestedManyWithoutNodeInput
 }
 
@@ -740,6 +932,12 @@ export type GatheringNodeUpdateWithoutYieldsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  gatherTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xpReward?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   job?: Prisma.JobUpdateOneRequiredWithoutNodesNestedInput
   gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutNodeNestedInput
 }
@@ -757,6 +955,12 @@ export type GatheringNodeUncheckedUpdateWithoutYieldsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  gatherTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xpReward?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutNodeNestedInput
 }
 
@@ -772,6 +976,12 @@ export type GatheringNodeCreateWithoutGatherAttemptsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dangerTier?: number
+  tier?: number
+  requiredJobLevel?: number
+  gatherTimeSeconds?: number
+  xpReward?: number
+  cooldownSeconds?: number | null
+  isActive?: boolean
   job: Prisma.JobCreateNestedOneWithoutNodesInput
   yields?: Prisma.NodeYieldCreateNestedManyWithoutNodeInput
 }
@@ -789,6 +999,12 @@ export type GatheringNodeUncheckedCreateWithoutGatherAttemptsInput = {
   updatedAt?: Date | string
   jobId: string
   dangerTier?: number
+  tier?: number
+  requiredJobLevel?: number
+  gatherTimeSeconds?: number
+  xpReward?: number
+  cooldownSeconds?: number | null
+  isActive?: boolean
   yields?: Prisma.NodeYieldUncheckedCreateNestedManyWithoutNodeInput
 }
 
@@ -820,6 +1036,12 @@ export type GatheringNodeUpdateWithoutGatherAttemptsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  gatherTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xpReward?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   job?: Prisma.JobUpdateOneRequiredWithoutNodesNestedInput
   yields?: Prisma.NodeYieldUpdateManyWithoutNodeNestedInput
 }
@@ -837,6 +1059,12 @@ export type GatheringNodeUncheckedUpdateWithoutGatherAttemptsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  gatherTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xpReward?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   yields?: Prisma.NodeYieldUncheckedUpdateManyWithoutNodeNestedInput
 }
 
@@ -852,6 +1080,12 @@ export type GatheringNodeCreateManyJobInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dangerTier?: number
+  tier?: number
+  requiredJobLevel?: number
+  gatherTimeSeconds?: number
+  xpReward?: number
+  cooldownSeconds?: number | null
+  isActive?: boolean
 }
 
 export type GatheringNodeUpdateWithoutJobInput = {
@@ -866,6 +1100,12 @@ export type GatheringNodeUpdateWithoutJobInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  gatherTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xpReward?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   yields?: Prisma.NodeYieldUpdateManyWithoutNodeNestedInput
   gatherAttempts?: Prisma.GatherAttemptUpdateManyWithoutNodeNestedInput
 }
@@ -882,6 +1122,12 @@ export type GatheringNodeUncheckedUpdateWithoutJobInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  gatherTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xpReward?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   yields?: Prisma.NodeYieldUncheckedUpdateManyWithoutNodeNestedInput
   gatherAttempts?: Prisma.GatherAttemptUncheckedUpdateManyWithoutNodeNestedInput
 }
@@ -898,6 +1144,12 @@ export type GatheringNodeUncheckedUpdateManyWithoutJobInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dangerTier?: Prisma.IntFieldUpdateOperationsInput | number
+  tier?: Prisma.IntFieldUpdateOperationsInput | number
+  requiredJobLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  gatherTimeSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  xpReward?: Prisma.IntFieldUpdateOperationsInput | number
+  cooldownSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -953,6 +1205,12 @@ export type GatheringNodeSelect<ExtArgs extends runtime.Types.Extensions.Interna
   updatedAt?: boolean
   jobId?: boolean
   dangerTier?: boolean
+  tier?: boolean
+  requiredJobLevel?: boolean
+  gatherTimeSeconds?: boolean
+  xpReward?: boolean
+  cooldownSeconds?: boolean
+  isActive?: boolean
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
   yields?: boolean | Prisma.GatheringNode$yieldsArgs<ExtArgs>
   gatherAttempts?: boolean | Prisma.GatheringNode$gatherAttemptsArgs<ExtArgs>
@@ -972,6 +1230,12 @@ export type GatheringNodeSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   updatedAt?: boolean
   jobId?: boolean
   dangerTier?: boolean
+  tier?: boolean
+  requiredJobLevel?: boolean
+  gatherTimeSeconds?: boolean
+  xpReward?: boolean
+  cooldownSeconds?: boolean
+  isActive?: boolean
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["gatheringNode"]>
 
@@ -988,6 +1252,12 @@ export type GatheringNodeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   updatedAt?: boolean
   jobId?: boolean
   dangerTier?: boolean
+  tier?: boolean
+  requiredJobLevel?: boolean
+  gatherTimeSeconds?: boolean
+  xpReward?: boolean
+  cooldownSeconds?: boolean
+  isActive?: boolean
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["gatheringNode"]>
 
@@ -1004,9 +1274,15 @@ export type GatheringNodeSelectScalar = {
   updatedAt?: boolean
   jobId?: boolean
   dangerTier?: boolean
+  tier?: boolean
+  requiredJobLevel?: boolean
+  gatherTimeSeconds?: boolean
+  xpReward?: boolean
+  cooldownSeconds?: boolean
+  isActive?: boolean
 }
 
-export type GatheringNodeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "jobId" | "dangerTier", ExtArgs["result"]["gatheringNode"]>
+export type GatheringNodeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "description" | "tags" | "status" | "version" | "createdBy" | "createdAt" | "updatedAt" | "jobId" | "dangerTier" | "tier" | "requiredJobLevel" | "gatherTimeSeconds" | "xpReward" | "cooldownSeconds" | "isActive", ExtArgs["result"]["gatheringNode"]>
 export type GatheringNodeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
   yields?: boolean | Prisma.GatheringNode$yieldsArgs<ExtArgs>
@@ -1040,6 +1316,12 @@ export type $GatheringNodePayload<ExtArgs extends runtime.Types.Extensions.Inter
     updatedAt: Date
     jobId: string
     dangerTier: number
+    tier: number
+    requiredJobLevel: number
+    gatherTimeSeconds: number
+    xpReward: number
+    cooldownSeconds: number | null
+    isActive: boolean
   }, ExtArgs["result"]["gatheringNode"]>
   composites: {}
 }
@@ -1478,6 +1760,12 @@ export interface GatheringNodeFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"GatheringNode", 'DateTime'>
   readonly jobId: Prisma.FieldRef<"GatheringNode", 'String'>
   readonly dangerTier: Prisma.FieldRef<"GatheringNode", 'Int'>
+  readonly tier: Prisma.FieldRef<"GatheringNode", 'Int'>
+  readonly requiredJobLevel: Prisma.FieldRef<"GatheringNode", 'Int'>
+  readonly gatherTimeSeconds: Prisma.FieldRef<"GatheringNode", 'Int'>
+  readonly xpReward: Prisma.FieldRef<"GatheringNode", 'Int'>
+  readonly cooldownSeconds: Prisma.FieldRef<"GatheringNode", 'Int'>
+  readonly isActive: Prisma.FieldRef<"GatheringNode", 'Boolean'>
 }
     
 

@@ -359,7 +359,7 @@ export function MapViewport() {
   return (
     <div className="w-full">
       {/* Coordinates */}
-      <div className="mx-auto mb-2 w-full max-w-[520px] text-center">
+      <div className="mx-auto mb-2 w-full max-w-[520px] md:max-w-[400px] text-center">
         <div className="inline-block rounded-lg border border-white/10 bg-white/5 px-4 py-2">
           <span className="text-sm font-semibold text-slate-300">
             Position: <span className="text-cyan-400">{playerPos.x}, {playerPos.y}</span>
@@ -368,7 +368,7 @@ export function MapViewport() {
       </div>
 
       {/* Map frame */}
-      <div className="mx-auto w-full max-w-[520px] rounded-2xl border border-white/10 bg-white/5 p-2 shadow-xl sm:p-3">
+      <div className="mx-auto w-full max-w-[520px] md:max-w-[400px] rounded-2xl border border-white/10 bg-white/5 p-2 shadow-xl sm:p-3">
         <div className="aspect-square w-full overflow-hidden rounded-xl">
           <div className="grid h-full w-full select-none grid-cols-7 gap-0.5 sm:gap-1">
             {vp.tiles.map((t) => (
@@ -395,7 +395,7 @@ export function MapViewport() {
       </div>
 
       {/* Movement controls */}
-      <div className="mx-auto mt-4 w-full max-w-[520px] rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4">
+      <div className="mx-auto mt-4 w-full max-w-[520px] md:max-w-[400px] rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4">
         <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
           {/* Top row */}
           <div

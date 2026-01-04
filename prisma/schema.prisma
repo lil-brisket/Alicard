@@ -308,12 +308,12 @@ model Item {
   key                String?             @unique
   name               String
   description        String?
-  itemType           ItemType
+  itemType           ItemType            @default(MATERIAL)
   itemRarity         ItemRarity
   tier               Int                 @default(1)
   value              Int
   stackable          Boolean             @default(false)
-  maxStack           Int                 @default(1)
+  maxStack           Int                 @default(999)
   equipmentSlot      EquipmentSlot?
   vitalityBonus      Int                 @default(0)
   strengthBonus      Int                 @default(0)
@@ -322,6 +322,9 @@ model Item {
   hpBonus            Int                 @default(0)
   spBonus            Int                 @default(0)
   defenseBonus       Int                 @default(0)
+  isTradeable        Boolean             @default(true)
+  isActive           Boolean             @default(true)
+  tags               String[]            @default([])
   createdAt          DateTime            @default(now())
   bankVaultItems     BankVaultItem[]
   equippedAsHead     Equipment[]         @relation("Head")
@@ -350,6 +353,7 @@ model Item {
   @@index([itemType])
   @@index([itemRarity])
   @@index([tier])
+  @@index([isActive])
 }
 
 model InventoryItem {
@@ -791,6 +795,10 @@ enum ItemType {
   QUEST_ITEM
   TOOL
   EQUIPMENT
+  QUEST
+  CURRENCY
+  KEY
+  MISC
 }
 
 enum ItemRarity {
@@ -811,6 +819,8 @@ enum EquipmentSlot {
   NECKLACE
   BELT
   CLOAK
+  OFFHAND
+  MAINHAND
 }
 
 enum PrimaryOccupation {
@@ -986,7 +996,8 @@ model GatheringNode {
   requiredJobLevel  Int             @default(1)
   gatherTimeSeconds Int             @default(30)
   xpReward          Int             @default(10)
-  cooldownSeconds   Int?
+  cooldownSeconds  Int?
+  isActive           Boolean         @default(true)
   job               Job             @relation(fields: [jobId], references: [id], onDelete: Cascade)
   yields            NodeYield[]
   gatherAttempts    GatherAttempt[]
@@ -997,6 +1008,7 @@ model GatheringNode {
   @@index([createdBy])
   @@index([tier])
   @@index([requiredJobLevel])
+  @@index([isActive])
 }
 
 model NodeYield {
@@ -1005,7 +1017,8 @@ model NodeYield {
   itemId    String
   minQty    Int           @default(1)
   maxQty    Int           @default(1)
-  weight    Int           @default(100)
+  chance    Float?        // nullable for now; if null treat as 1.0
+  weight    Int           @default(100) // legacy field, kept for backwards compatibility
   createdAt DateTime      @default(now())
   node      GatheringNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
   item      Item          @relation("NodeYield", fields: [itemId], references: [id])

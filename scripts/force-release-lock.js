@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /**
- * Force release Prisma advisory lock
- * This script attempts to release the specific Prisma migration lock
+ * Force release Prisma advisory locks by terminating all connections holding them
  */
 
 import 'dotenv/config';
@@ -11,6 +10,7 @@ const DATABASE_URL = process.env.DATABASE_URL;
 
 if (!DATABASE_URL) {
   console.error('Error: DATABASE_URL not found in environment');
+  console.error('Please set DATABASE_URL in your .env file');
   process.exit(1);
 }
 
@@ -18,86 +18,75 @@ const pool = new Pool({
   connectionString: DATABASE_URL,
 });
 
-// Prisma migration lock ID
-const LOCK_ID = 72707369;
-
-async function forceReleaseLock() {
+async function forceReleaseLocks() {
   try {
-    console.log('Attempting to force release Prisma migration lock...');
-    console.log(`Lock ID: ${LOCK_ID}\n`);
+    console.log('🔍 Finding processes holding Prisma migration lock (ID: 72707369)...');
     
-    // Get all sessions and their locks
-    const locksResult = await pool.query(`
+    // Find all processes holding the advisory lock
+    const lockResult = await pool.query(`
       SELECT 
-        pid,
-        locktype,
-        objid,
-        mode,
-        granted
-      FROM pg_locks
-      WHERE locktype = 'advisory'
-        AND objid = ${LOCK_ID};
+        l.pid,
+        a.usename,
+        a.application_name,
+        a.state,
+        a.query_start
+      FROM pg_locks l
+      LEFT JOIN pg_stat_activity a ON l.pid = a.pid
+      WHERE l.locktype = 'advisory' 
+      AND l.objid = 72707369
+      ORDER BY l.granted DESC;
     `);
     
-    if (locksResult.rows.length > 0) {
-      console.log('Found advisory locks:');
-      console.table(locksResult.rows);
-      
-      // Try to terminate each process holding the lock
-      for (const lock of locksResult.rows) {
-        if (lock.pid) {
-          try {
-            console.log(`\nAttempting to terminate PID ${lock.pid}...`);
-            await pool.query(`SELECT pg_terminate_backend(${lock.pid})`);
-            console.log(`✓ Terminated PID ${lock.pid}`);
-          } catch (err) {
-            console.log(`⚠ Error terminating PID ${lock.pid}: ${err.message}`);
-          }
+    if (lockResult.rows.length === 0) {
+      console.log('✅ No processes holding the lock!');
+      await pool.query('SELECT pg_advisory_unlock_all()');
+      console.log('✅ Released all advisory locks');
+      return;
+    }
+    
+    console.log(`\n⚠️  Found ${lockResult.rows.length} process(es) holding the lock:`);
+    console.table(lockResult.rows.map(row => ({
+      pid: row.pid,
+      user: row.usename,
+      app: row.application_name || 'N/A',
+      state: row.state,
+      started: row.query_start ? new Date(row.query_start).toLocaleString() : 'N/A',
+    })));
+    
+    console.log('\n🔧 Terminating all connections holding the lock...');
+    
+    // Terminate all processes holding the lock
+    for (const row of lockResult.rows) {
+      if (row.pid) {
+        try {
+          await pool.query(`SELECT pg_terminate_backend(${row.pid})`);
+          console.log(`  ✓ Terminated PID ${row.pid}`);
+        } catch (err) {
+          console.log(`  ⚠ Could not terminate PID ${row.pid}: ${err.message}`);
         }
       }
-      
-      // Wait a moment
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Try to release the lock directly (this only works if we hold it)
-      try {
-        const releaseResult = await pool.query(`SELECT pg_advisory_unlock(${LOCK_ID})`);
-        if (releaseResult.rows[0]?.pg_advisory_unlock) {
-          console.log(`\n✓ Successfully released lock ${LOCK_ID}`);
-        } else {
-          console.log(`\n⚠ Could not release lock ${LOCK_ID} (we don't hold it)`);
-        }
-      } catch (err) {
-        console.log(`\n⚠ Could not release lock directly: ${err.message}`);
-      }
+    }
+    
+    // Wait a moment for connections to close
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Release all advisory locks
+    await pool.query('SELECT pg_advisory_unlock_all()');
+    console.log('\n✅ Released all advisory locks');
+    
+    // Verify no locks remain
+    const verifyResult = await pool.query(`
+      SELECT COUNT(*) as count
+      FROM pg_locks 
+      WHERE locktype = 'advisory' 
+      AND objid = 72707369;
+    `);
+    
+    if (parseInt(verifyResult.rows[0].count) === 0) {
+      console.log('✅ Lock successfully released! You can now run migrations.');
     } else {
-      console.log('No advisory locks found for this ID');
+      console.log('⚠️  Some locks may still remain. Try waiting a few seconds and running the migration again.');
     }
-    
-    // Check for any remaining Prisma connections
-    const connectionsResult = await pool.query(`
-      SELECT pid, usename, application_name, state, query
-      FROM pg_stat_activity
-      WHERE pid IN (
-        SELECT pid FROM pg_locks WHERE locktype = 'advisory' AND objid = ${LOCK_ID}
-      );
-    `);
-    
-    if (connectionsResult.rows.length > 0) {
-      console.log('\n⚠ Remaining connections holding locks:');
-      console.table(connectionsResult.rows.map(row => ({
-        pid: row.pid,
-        user: row.usename,
-        app: row.application_name || 'N/A',
-        state: row.state,
-      })));
-    }
-    
-    console.log('\n✅ Lock release attempt complete.');
-    console.log('💡 If the lock persists, try:');
-    console.log('   1. Wait 10-15 seconds and try the migration again');
-    console.log('   2. Restart your PostgreSQL server');
-    console.log('   3. Check for any running Prisma Studio or other Prisma processes');
     
   } catch (error) {
     console.error('❌ Error:', error.message);
@@ -107,4 +96,4 @@ async function forceReleaseLock() {
   }
 }
 
-forceReleaseLock();
+forceReleaseLocks();

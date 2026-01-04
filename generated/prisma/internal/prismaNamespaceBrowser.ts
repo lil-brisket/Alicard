@@ -405,6 +405,9 @@ export const ItemScalarFieldEnum = {
   hpBonus: 'hpBonus',
   spBonus: 'spBonus',
   defenseBonus: 'defenseBonus',
+  isTradeable: 'isTradeable',
+  isActive: 'isActive',
+  tags: 'tags',
   createdAt: 'createdAt'
 } as const
 
@@ -800,7 +803,13 @@ export const GatheringNodeScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   jobId: 'jobId',
-  dangerTier: 'dangerTier'
+  dangerTier: 'dangerTier',
+  tier: 'tier',
+  requiredJobLevel: 'requiredJobLevel',
+  gatherTimeSeconds: 'gatherTimeSeconds',
+  xpReward: 'xpReward',
+  cooldownSeconds: 'cooldownSeconds',
+  isActive: 'isActive'
 } as const
 
 export type GatheringNodeScalarFieldEnum = (typeof GatheringNodeScalarFieldEnum)[keyof typeof GatheringNodeScalarFieldEnum]
@@ -812,6 +821,7 @@ export const NodeYieldScalarFieldEnum = {
   itemId: 'itemId',
   minQty: 'minQty',
   maxQty: 'maxQty',
+  chance: 'chance',
   weight: 'weight',
   createdAt: 'createdAt'
 } as const

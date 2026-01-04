@@ -71,6 +71,8 @@ export type ItemMinAggregateOutputType = {
   hpBonus: number | null
   spBonus: number | null
   defenseBonus: number | null
+  isTradeable: boolean | null
+  isActive: boolean | null
   createdAt: Date | null
 }
 
@@ -93,6 +95,8 @@ export type ItemMaxAggregateOutputType = {
   hpBonus: number | null
   spBonus: number | null
   defenseBonus: number | null
+  isTradeable: boolean | null
+  isActive: boolean | null
   createdAt: Date | null
 }
 
@@ -115,6 +119,9 @@ export type ItemCountAggregateOutputType = {
   hpBonus: number
   spBonus: number
   defenseBonus: number
+  isTradeable: number
+  isActive: number
+  tags: number
   createdAt: number
   _all: number
 }
@@ -165,6 +172,8 @@ export type ItemMinAggregateInputType = {
   hpBonus?: true
   spBonus?: true
   defenseBonus?: true
+  isTradeable?: true
+  isActive?: true
   createdAt?: true
 }
 
@@ -187,6 +196,8 @@ export type ItemMaxAggregateInputType = {
   hpBonus?: true
   spBonus?: true
   defenseBonus?: true
+  isTradeable?: true
+  isActive?: true
   createdAt?: true
 }
 
@@ -209,6 +220,9 @@ export type ItemCountAggregateInputType = {
   hpBonus?: true
   spBonus?: true
   defenseBonus?: true
+  isTradeable?: true
+  isActive?: true
+  tags?: true
   createdAt?: true
   _all?: true
 }
@@ -318,6 +332,9 @@ export type ItemGroupByOutputType = {
   hpBonus: number
   spBonus: number
   defenseBonus: number
+  isTradeable: boolean
+  isActive: boolean
+  tags: string[]
   createdAt: Date
   _count: ItemCountAggregateOutputType | null
   _avg: ItemAvgAggregateOutputType | null
@@ -363,6 +380,9 @@ export type ItemWhereInput = {
   hpBonus?: Prisma.IntFilter<"Item"> | number
   spBonus?: Prisma.IntFilter<"Item"> | number
   defenseBonus?: Prisma.IntFilter<"Item"> | number
+  isTradeable?: Prisma.BoolFilter<"Item"> | boolean
+  isActive?: Prisma.BoolFilter<"Item"> | boolean
+  tags?: Prisma.StringNullableListFilter<"Item">
   createdAt?: Prisma.DateTimeFilter<"Item"> | Date | string
   bankVaultItems?: Prisma.BankVaultItemListRelationFilter
   equippedAsHead?: Prisma.EquipmentListRelationFilter
@@ -408,6 +428,9 @@ export type ItemOrderByWithRelationInput = {
   hpBonus?: Prisma.SortOrder
   spBonus?: Prisma.SortOrder
   defenseBonus?: Prisma.SortOrder
+  isTradeable?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  tags?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   bankVaultItems?: Prisma.BankVaultItemOrderByRelationAggregateInput
   equippedAsHead?: Prisma.EquipmentOrderByRelationAggregateInput
@@ -456,6 +479,9 @@ export type ItemWhereUniqueInput = Prisma.AtLeast<{
   hpBonus?: Prisma.IntFilter<"Item"> | number
   spBonus?: Prisma.IntFilter<"Item"> | number
   defenseBonus?: Prisma.IntFilter<"Item"> | number
+  isTradeable?: Prisma.BoolFilter<"Item"> | boolean
+  isActive?: Prisma.BoolFilter<"Item"> | boolean
+  tags?: Prisma.StringNullableListFilter<"Item">
   createdAt?: Prisma.DateTimeFilter<"Item"> | Date | string
   bankVaultItems?: Prisma.BankVaultItemListRelationFilter
   equippedAsHead?: Prisma.EquipmentListRelationFilter
@@ -501,6 +527,9 @@ export type ItemOrderByWithAggregationInput = {
   hpBonus?: Prisma.SortOrder
   spBonus?: Prisma.SortOrder
   defenseBonus?: Prisma.SortOrder
+  isTradeable?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  tags?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ItemCountOrderByAggregateInput
   _avg?: Prisma.ItemAvgOrderByAggregateInput
@@ -531,6 +560,9 @@ export type ItemScalarWhereWithAggregatesInput = {
   hpBonus?: Prisma.IntWithAggregatesFilter<"Item"> | number
   spBonus?: Prisma.IntWithAggregatesFilter<"Item"> | number
   defenseBonus?: Prisma.IntWithAggregatesFilter<"Item"> | number
+  isTradeable?: Prisma.BoolWithAggregatesFilter<"Item"> | boolean
+  isActive?: Prisma.BoolWithAggregatesFilter<"Item"> | boolean
+  tags?: Prisma.StringNullableListFilter<"Item">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Item"> | Date | string
 }
 
@@ -539,7 +571,7 @@ export type ItemCreateInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -553,6 +585,9 @@ export type ItemCreateInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -584,7 +619,7 @@ export type ItemUncheckedCreateInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -598,6 +633,9 @@ export type ItemUncheckedCreateInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -643,6 +681,9 @@ export type ItemUpdateInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -688,6 +729,9 @@ export type ItemUncheckedUpdateInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -719,7 +763,7 @@ export type ItemCreateManyInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -733,6 +777,9 @@ export type ItemCreateManyInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
 }
 
@@ -755,6 +802,9 @@ export type ItemUpdateManyMutationInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -777,12 +827,23 @@ export type ItemUncheckedUpdateManyInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ItemScalarRelationFilter = {
   is?: Prisma.ItemWhereInput
   isNot?: Prisma.ItemWhereInput
+}
+
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
 }
 
 export type ItemCountOrderByAggregateInput = {
@@ -804,6 +865,9 @@ export type ItemCountOrderByAggregateInput = {
   hpBonus?: Prisma.SortOrder
   spBonus?: Prisma.SortOrder
   defenseBonus?: Prisma.SortOrder
+  isTradeable?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  tags?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -839,6 +903,8 @@ export type ItemMaxOrderByAggregateInput = {
   hpBonus?: Prisma.SortOrder
   spBonus?: Prisma.SortOrder
   defenseBonus?: Prisma.SortOrder
+  isTradeable?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -861,6 +927,8 @@ export type ItemMinOrderByAggregateInput = {
   hpBonus?: Prisma.SortOrder
   spBonus?: Prisma.SortOrder
   defenseBonus?: Prisma.SortOrder
+  isTradeable?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -896,6 +964,10 @@ export type ItemUpdateOneRequiredWithoutShopItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutShopItemsInput, Prisma.ItemUpdateWithoutShopItemsInput>, Prisma.ItemUncheckedUpdateWithoutShopItemsInput>
 }
 
+export type ItemCreatetagsInput = {
+  set: string[]
+}
+
 export type EnumItemTypeFieldUpdateOperationsInput = {
   set?: $Enums.ItemType
 }
@@ -906,6 +978,11 @@ export type EnumItemRarityFieldUpdateOperationsInput = {
 
 export type NullableEnumEquipmentSlotFieldUpdateOperationsInput = {
   set?: $Enums.EquipmentSlot | null
+}
+
+export type ItemUpdatetagsInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type ItemCreateNestedOneWithoutInventoryItemsInput = {
@@ -1245,7 +1322,7 @@ export type ItemCreateWithoutShopItemsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -1259,6 +1336,9 @@ export type ItemCreateWithoutShopItemsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -1289,7 +1369,7 @@ export type ItemUncheckedCreateWithoutShopItemsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -1303,6 +1383,9 @@ export type ItemUncheckedCreateWithoutShopItemsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -1363,6 +1446,9 @@ export type ItemUpdateWithoutShopItemsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -1407,6 +1493,9 @@ export type ItemUncheckedUpdateWithoutShopItemsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -1437,7 +1526,7 @@ export type ItemCreateWithoutInventoryItemsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -1451,6 +1540,9 @@ export type ItemCreateWithoutInventoryItemsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -1481,7 +1573,7 @@ export type ItemUncheckedCreateWithoutInventoryItemsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -1495,6 +1587,9 @@ export type ItemUncheckedCreateWithoutInventoryItemsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -1555,6 +1650,9 @@ export type ItemUpdateWithoutInventoryItemsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -1599,6 +1697,9 @@ export type ItemUncheckedUpdateWithoutInventoryItemsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -1629,7 +1730,7 @@ export type ItemCreateWithoutEquippedAsHeadInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -1643,6 +1744,9 @@ export type ItemCreateWithoutEquippedAsHeadInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsLeftArm?: Prisma.EquipmentCreateNestedManyWithoutLeftArmInput
@@ -1673,7 +1777,7 @@ export type ItemUncheckedCreateWithoutEquippedAsHeadInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -1687,6 +1791,9 @@ export type ItemUncheckedCreateWithoutEquippedAsHeadInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsLeftArm?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLeftArmInput
@@ -1722,7 +1829,7 @@ export type ItemCreateWithoutEquippedAsLeftArmInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -1736,6 +1843,9 @@ export type ItemCreateWithoutEquippedAsLeftArmInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -1766,7 +1876,7 @@ export type ItemUncheckedCreateWithoutEquippedAsLeftArmInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -1780,6 +1890,9 @@ export type ItemUncheckedCreateWithoutEquippedAsLeftArmInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -1815,7 +1928,7 @@ export type ItemCreateWithoutEquippedAsRightArmInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -1829,6 +1942,9 @@ export type ItemCreateWithoutEquippedAsRightArmInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -1859,7 +1975,7 @@ export type ItemUncheckedCreateWithoutEquippedAsRightArmInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -1873,6 +1989,9 @@ export type ItemUncheckedCreateWithoutEquippedAsRightArmInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -1908,7 +2027,7 @@ export type ItemCreateWithoutEquippedAsBodyInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -1922,6 +2041,9 @@ export type ItemCreateWithoutEquippedAsBodyInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -1952,7 +2074,7 @@ export type ItemUncheckedCreateWithoutEquippedAsBodyInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -1966,6 +2088,9 @@ export type ItemUncheckedCreateWithoutEquippedAsBodyInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -2001,7 +2126,7 @@ export type ItemCreateWithoutEquippedAsLegsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -2015,6 +2140,9 @@ export type ItemCreateWithoutEquippedAsLegsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -2045,7 +2173,7 @@ export type ItemUncheckedCreateWithoutEquippedAsLegsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -2059,6 +2187,9 @@ export type ItemUncheckedCreateWithoutEquippedAsLegsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -2094,7 +2225,7 @@ export type ItemCreateWithoutEquippedAsFeetInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -2108,6 +2239,9 @@ export type ItemCreateWithoutEquippedAsFeetInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -2138,7 +2272,7 @@ export type ItemUncheckedCreateWithoutEquippedAsFeetInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -2152,6 +2286,9 @@ export type ItemUncheckedCreateWithoutEquippedAsFeetInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -2187,7 +2324,7 @@ export type ItemCreateWithoutEquippedAsRing1Input = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -2201,6 +2338,9 @@ export type ItemCreateWithoutEquippedAsRing1Input = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -2231,7 +2371,7 @@ export type ItemUncheckedCreateWithoutEquippedAsRing1Input = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -2245,6 +2385,9 @@ export type ItemUncheckedCreateWithoutEquippedAsRing1Input = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -2280,7 +2423,7 @@ export type ItemCreateWithoutEquippedAsRing2Input = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -2294,6 +2437,9 @@ export type ItemCreateWithoutEquippedAsRing2Input = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -2324,7 +2470,7 @@ export type ItemUncheckedCreateWithoutEquippedAsRing2Input = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -2338,6 +2484,9 @@ export type ItemUncheckedCreateWithoutEquippedAsRing2Input = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -2373,7 +2522,7 @@ export type ItemCreateWithoutEquippedAsRing3Input = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -2387,6 +2536,9 @@ export type ItemCreateWithoutEquippedAsRing3Input = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -2417,7 +2569,7 @@ export type ItemUncheckedCreateWithoutEquippedAsRing3Input = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -2431,6 +2583,9 @@ export type ItemUncheckedCreateWithoutEquippedAsRing3Input = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -2466,7 +2621,7 @@ export type ItemCreateWithoutEquippedAsNecklaceInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -2480,6 +2635,9 @@ export type ItemCreateWithoutEquippedAsNecklaceInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -2510,7 +2668,7 @@ export type ItemUncheckedCreateWithoutEquippedAsNecklaceInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -2524,6 +2682,9 @@ export type ItemUncheckedCreateWithoutEquippedAsNecklaceInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -2559,7 +2720,7 @@ export type ItemCreateWithoutEquippedAsBeltInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -2573,6 +2734,9 @@ export type ItemCreateWithoutEquippedAsBeltInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -2603,7 +2767,7 @@ export type ItemUncheckedCreateWithoutEquippedAsBeltInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -2617,6 +2781,9 @@ export type ItemUncheckedCreateWithoutEquippedAsBeltInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -2652,7 +2819,7 @@ export type ItemCreateWithoutEquippedAsCloakInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -2666,6 +2833,9 @@ export type ItemCreateWithoutEquippedAsCloakInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -2696,7 +2866,7 @@ export type ItemUncheckedCreateWithoutEquippedAsCloakInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -2710,6 +2880,9 @@ export type ItemUncheckedCreateWithoutEquippedAsCloakInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -2770,6 +2943,9 @@ export type ItemUpdateWithoutEquippedAsHeadInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsLeftArm?: Prisma.EquipmentUpdateManyWithoutLeftArmNestedInput
@@ -2814,6 +2990,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsHeadInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsLeftArm?: Prisma.EquipmentUncheckedUpdateManyWithoutLeftArmNestedInput
@@ -2869,6 +3048,9 @@ export type ItemUpdateWithoutEquippedAsLeftArmInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -2913,6 +3095,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsLeftArmInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -2968,6 +3153,9 @@ export type ItemUpdateWithoutEquippedAsRightArmInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3012,6 +3200,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsRightArmInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3067,6 +3258,9 @@ export type ItemUpdateWithoutEquippedAsBodyInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3111,6 +3305,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsBodyInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3166,6 +3363,9 @@ export type ItemUpdateWithoutEquippedAsLegsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3210,6 +3410,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsLegsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3265,6 +3468,9 @@ export type ItemUpdateWithoutEquippedAsFeetInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3309,6 +3515,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsFeetInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3364,6 +3573,9 @@ export type ItemUpdateWithoutEquippedAsRing1Input = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3408,6 +3620,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsRing1Input = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3463,6 +3678,9 @@ export type ItemUpdateWithoutEquippedAsRing2Input = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3507,6 +3725,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsRing2Input = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3562,6 +3783,9 @@ export type ItemUpdateWithoutEquippedAsRing3Input = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3606,6 +3830,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsRing3Input = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3661,6 +3888,9 @@ export type ItemUpdateWithoutEquippedAsNecklaceInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3705,6 +3935,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsNecklaceInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3760,6 +3993,9 @@ export type ItemUpdateWithoutEquippedAsBeltInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3804,6 +4040,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsBeltInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3859,6 +4098,9 @@ export type ItemUpdateWithoutEquippedAsCloakInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -3903,6 +4145,9 @@ export type ItemUncheckedUpdateWithoutEquippedAsCloakInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -3933,7 +4178,7 @@ export type ItemCreateWithoutBankVaultItemsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -3947,6 +4192,9 @@ export type ItemCreateWithoutBankVaultItemsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
   equippedAsLeftArm?: Prisma.EquipmentCreateNestedManyWithoutLeftArmInput
@@ -3977,7 +4225,7 @@ export type ItemUncheckedCreateWithoutBankVaultItemsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -3991,6 +4239,9 @@ export type ItemUncheckedCreateWithoutBankVaultItemsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
   equippedAsLeftArm?: Prisma.EquipmentUncheckedCreateNestedManyWithoutLeftArmInput
@@ -4051,6 +4302,9 @@ export type ItemUpdateWithoutBankVaultItemsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
   equippedAsLeftArm?: Prisma.EquipmentUpdateManyWithoutLeftArmNestedInput
@@ -4095,6 +4349,9 @@ export type ItemUncheckedUpdateWithoutBankVaultItemsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
   equippedAsLeftArm?: Prisma.EquipmentUncheckedUpdateManyWithoutLeftArmNestedInput
@@ -4125,7 +4382,7 @@ export type ItemCreateWithoutMarketListingsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -4139,6 +4396,9 @@ export type ItemCreateWithoutMarketListingsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -4169,7 +4429,7 @@ export type ItemUncheckedCreateWithoutMarketListingsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -4183,6 +4443,9 @@ export type ItemUncheckedCreateWithoutMarketListingsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -4243,6 +4506,9 @@ export type ItemUpdateWithoutMarketListingsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -4287,6 +4553,9 @@ export type ItemUncheckedUpdateWithoutMarketListingsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -4317,7 +4586,7 @@ export type ItemCreateWithoutMarketTransactionsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -4331,6 +4600,9 @@ export type ItemCreateWithoutMarketTransactionsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -4361,7 +4633,7 @@ export type ItemUncheckedCreateWithoutMarketTransactionsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -4375,6 +4647,9 @@ export type ItemUncheckedCreateWithoutMarketTransactionsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -4435,6 +4710,9 @@ export type ItemUpdateWithoutMarketTransactionsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -4479,6 +4757,9 @@ export type ItemUncheckedUpdateWithoutMarketTransactionsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -4509,7 +4790,7 @@ export type ItemCreateWithoutRecipeOutputsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -4523,6 +4804,9 @@ export type ItemCreateWithoutRecipeOutputsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -4553,7 +4837,7 @@ export type ItemUncheckedCreateWithoutRecipeOutputsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -4567,6 +4851,9 @@ export type ItemUncheckedCreateWithoutRecipeOutputsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -4627,6 +4914,9 @@ export type ItemUpdateWithoutRecipeOutputsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -4671,6 +4961,9 @@ export type ItemUncheckedUpdateWithoutRecipeOutputsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -4701,7 +4994,7 @@ export type ItemCreateWithoutRecipeInputsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -4715,6 +5008,9 @@ export type ItemCreateWithoutRecipeInputsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -4745,7 +5041,7 @@ export type ItemUncheckedCreateWithoutRecipeInputsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -4759,6 +5055,9 @@ export type ItemUncheckedCreateWithoutRecipeInputsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -4819,6 +5118,9 @@ export type ItemUpdateWithoutRecipeInputsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -4863,6 +5165,9 @@ export type ItemUncheckedUpdateWithoutRecipeInputsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -4893,7 +5198,7 @@ export type ItemCreateWithoutNodeYieldsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -4907,6 +5212,9 @@ export type ItemCreateWithoutNodeYieldsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -4937,7 +5245,7 @@ export type ItemUncheckedCreateWithoutNodeYieldsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -4951,6 +5259,9 @@ export type ItemUncheckedCreateWithoutNodeYieldsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -5011,6 +5322,9 @@ export type ItemUpdateWithoutNodeYieldsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -5055,6 +5369,9 @@ export type ItemUncheckedUpdateWithoutNodeYieldsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -5085,7 +5402,7 @@ export type ItemCreateWithoutSkillActionInputsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -5099,6 +5416,9 @@ export type ItemCreateWithoutSkillActionInputsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -5129,7 +5449,7 @@ export type ItemUncheckedCreateWithoutSkillActionInputsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -5143,6 +5463,9 @@ export type ItemUncheckedCreateWithoutSkillActionInputsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -5203,6 +5526,9 @@ export type ItemUpdateWithoutSkillActionInputsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -5247,6 +5573,9 @@ export type ItemUncheckedUpdateWithoutSkillActionInputsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -5277,7 +5606,7 @@ export type ItemCreateWithoutSkillActionOutputsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -5291,6 +5620,9 @@ export type ItemCreateWithoutSkillActionOutputsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -5321,7 +5653,7 @@ export type ItemUncheckedCreateWithoutSkillActionOutputsInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -5335,6 +5667,9 @@ export type ItemUncheckedCreateWithoutSkillActionOutputsInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -5395,6 +5730,9 @@ export type ItemUpdateWithoutSkillActionOutputsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -5439,6 +5777,9 @@ export type ItemUncheckedUpdateWithoutSkillActionOutputsInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -5469,7 +5810,7 @@ export type ItemCreateWithoutDropTableEntriesInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -5483,6 +5824,9 @@ export type ItemCreateWithoutDropTableEntriesInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentCreateNestedManyWithoutHeadInput
@@ -5513,7 +5857,7 @@ export type ItemUncheckedCreateWithoutDropTableEntriesInput = {
   key?: string | null
   name: string
   description?: string | null
-  itemType: $Enums.ItemType
+  itemType?: $Enums.ItemType
   itemRarity: $Enums.ItemRarity
   tier?: number
   value: number
@@ -5527,6 +5871,9 @@ export type ItemUncheckedCreateWithoutDropTableEntriesInput = {
   hpBonus?: number
   spBonus?: number
   defenseBonus?: number
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: Prisma.ItemCreatetagsInput | string[]
   createdAt?: Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedCreateNestedManyWithoutItemInput
   equippedAsHead?: Prisma.EquipmentUncheckedCreateNestedManyWithoutHeadInput
@@ -5587,6 +5934,9 @@ export type ItemUpdateWithoutDropTableEntriesInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUpdateManyWithoutHeadNestedInput
@@ -5631,6 +5981,9 @@ export type ItemUncheckedUpdateWithoutDropTableEntriesInput = {
   hpBonus?: Prisma.IntFieldUpdateOperationsInput | number
   spBonus?: Prisma.IntFieldUpdateOperationsInput | number
   defenseBonus?: Prisma.IntFieldUpdateOperationsInput | number
+  isTradeable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tags?: Prisma.ItemUpdatetagsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankVaultItems?: Prisma.BankVaultItemUncheckedUpdateManyWithoutItemNestedInput
   equippedAsHead?: Prisma.EquipmentUncheckedUpdateManyWithoutHeadNestedInput
@@ -5904,6 +6257,9 @@ export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   hpBonus?: boolean
   spBonus?: boolean
   defenseBonus?: boolean
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: boolean
   createdAt?: boolean
   bankVaultItems?: boolean | Prisma.Item$bankVaultItemsArgs<ExtArgs>
   equippedAsHead?: boolean | Prisma.Item$equippedAsHeadArgs<ExtArgs>
@@ -5950,6 +6306,9 @@ export type ItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   hpBonus?: boolean
   spBonus?: boolean
   defenseBonus?: boolean
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["item"]>
 
@@ -5972,6 +6331,9 @@ export type ItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   hpBonus?: boolean
   spBonus?: boolean
   defenseBonus?: boolean
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["item"]>
 
@@ -5994,10 +6356,13 @@ export type ItemSelectScalar = {
   hpBonus?: boolean
   spBonus?: boolean
   defenseBonus?: boolean
+  isTradeable?: boolean
+  isActive?: boolean
+  tags?: boolean
   createdAt?: boolean
 }
 
-export type ItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "description" | "itemType" | "itemRarity" | "tier" | "value" | "stackable" | "maxStack" | "equipmentSlot" | "vitalityBonus" | "strengthBonus" | "speedBonus" | "dexterityBonus" | "hpBonus" | "spBonus" | "defenseBonus" | "createdAt", ExtArgs["result"]["item"]>
+export type ItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "name" | "description" | "itemType" | "itemRarity" | "tier" | "value" | "stackable" | "maxStack" | "equipmentSlot" | "vitalityBonus" | "strengthBonus" | "speedBonus" | "dexterityBonus" | "hpBonus" | "spBonus" | "defenseBonus" | "isTradeable" | "isActive" | "tags" | "createdAt", ExtArgs["result"]["item"]>
 export type ItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   bankVaultItems?: boolean | Prisma.Item$bankVaultItemsArgs<ExtArgs>
   equippedAsHead?: boolean | Prisma.Item$equippedAsHeadArgs<ExtArgs>
@@ -6073,6 +6438,9 @@ export type $ItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     hpBonus: number
     spBonus: number
     defenseBonus: number
+    isTradeable: boolean
+    isActive: boolean
+    tags: string[]
     createdAt: Date
   }, ExtArgs["result"]["item"]>
   composites: {}
@@ -6538,6 +6906,9 @@ export interface ItemFieldRefs {
   readonly hpBonus: Prisma.FieldRef<"Item", 'Int'>
   readonly spBonus: Prisma.FieldRef<"Item", 'Int'>
   readonly defenseBonus: Prisma.FieldRef<"Item", 'Int'>
+  readonly isTradeable: Prisma.FieldRef<"Item", 'Boolean'>
+  readonly isActive: Prisma.FieldRef<"Item", 'Boolean'>
+  readonly tags: Prisma.FieldRef<"Item", 'String[]'>
   readonly createdAt: Prisma.FieldRef<"Item", 'DateTime'>
 }
     

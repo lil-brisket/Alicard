@@ -23,6 +23,10 @@ const itemTypeSchema = z.enum([
   "QUEST_ITEM",
   "TOOL",
   "EQUIPMENT",
+  "QUEST",
+  "CURRENCY",
+  "KEY",
+  "MISC",
 ]);
 
 const equipmentSlotSchema = z.enum([
@@ -35,6 +39,8 @@ const equipmentSlotSchema = z.enum([
   "NECKLACE",
   "BELT",
   "CLOAK",
+  "OFFHAND",
+  "MAINHAND",
 ]);
 
 const contentStatusSchema = z.enum(["DRAFT", "ACTIVE", "DISABLED"]);
@@ -50,40 +56,37 @@ const itemStatsSchema = z.object({
 }).optional();
 
 export const contentItemsRouter = createTRPCRouter({
-  // List all item templates with filtering
+  // List all items with filtering
   list: contentProcedure
     .input(
       z.object({
-        includeArchived: z.boolean().default(false),
-        status: contentStatusSchema.optional(),
+        type: itemTypeSchema.optional(),
+        query: z.string().optional(),
+        isActive: z.boolean().optional(),
         tags: z.array(z.string()).optional(),
-        search: z.string().optional(),
         limit: z.number().min(1).max(100).default(50),
       })
     )
     .query(async ({ ctx, input }) => {
       const where: any = {};
       
-      if (!input.includeArchived) {
-        where.isArchived = false;
+      if (input.type) {
+        where.itemType = input.type;
       }
       
-      if (input.status) {
-        where.status = input.status;
+      if (input.isActive !== undefined) {
+        where.isActive = input.isActive;
       }
       
-      // Note: Tag filtering with JSON in Prisma is limited
-      // For now, we'll filter in memory after fetching
-      // TODO: Consider using a separate Tag model for better filtering
-      
-      if (input.search) {
+      if (input.query) {
         where.OR = [
-          { name: { contains: input.search, mode: "insensitive" } },
-          { description: { contains: input.search, mode: "insensitive" } },
+          { name: { contains: input.query, mode: "insensitive" } },
+          { description: { contains: input.query, mode: "insensitive" } },
+          { key: { contains: input.query, mode: "insensitive" } },
         ];
       }
 
-      let items = await ctx.db.itemTemplate.findMany({
+      let items = await ctx.db.item.findMany({
         where,
         take: input.limit * 2, // Fetch more to account for tag filtering
         orderBy: {
@@ -91,10 +94,10 @@ export const contentItemsRouter = createTRPCRouter({
         },
       });
 
-      // Filter by tags in memory (Prisma JSON filtering is limited)
+      // Filter by tags in memory (Prisma array filtering)
       if (input.tags && input.tags.length > 0) {
         items = items.filter((item) => {
-          const itemTags = (item.tags as string[] | null) ?? [];
+          const itemTags = item.tags ?? [];
           return input.tags!.some((tag) => itemTags.includes(tag));
         });
       }
@@ -103,25 +106,25 @@ export const contentItemsRouter = createTRPCRouter({
       return items.slice(0, input.limit);
     }),
 
-  // Get item template by ID
+  // Get item by ID
   get: contentProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
-      const item = await ctx.db.itemTemplate.findUnique({
+      const item = await ctx.db.item.findUnique({
         where: { id: input.id },
       });
 
       if (!item) {
         throw new TRPCError({
           code: "NOT_FOUND",
-          message: "Item template not found",
+          message: "Item not found",
         });
       }
 
       return item;
     }),
 
-  // Create new item template (requires content.create permission)
+  // Create new item (requires content.create permission)
   create: contentProcedure
     .use(async ({ ctx, next }) => {
       await requireContentPermission(ctx.session.user.id, "content.create");
@@ -130,77 +133,79 @@ export const contentItemsRouter = createTRPCRouter({
     .input(
       z.object({
         name: z.string().min(1, "Name is required"),
+        key: z.string().optional(),
         description: z.string().optional(),
         tags: z.array(z.string()).optional(),
-        status: contentStatusSchema.default("DRAFT"),
-        itemType: itemTypeSchema.optional(),
-        equipmentSlot: equipmentSlotSchema.optional(),
-        rarity: itemRaritySchema,
+        itemType: itemTypeSchema.default("MATERIAL"),
+        equipmentSlot: equipmentSlotSchema.optional().nullable(),
+        rarity: itemRaritySchema.default("COMMON"),
         stackable: z.boolean().default(false),
-        maxStack: z.number().min(1).default(1),
+        maxStack: z.number().min(1).default(999),
         value: z.number().min(0).default(0),
-        damage: z.number().min(0).default(0),
-        statsJSON: itemStatsSchema,
-        icon: z.string().optional(),
-        cloneFromId: z.string().optional(), // For inheritance/cloning
+        isTradeable: z.boolean().default(true),
+        isActive: z.boolean().default(true),
+        vitalityBonus: z.number().default(0),
+        strengthBonus: z.number().default(0),
+        speedBonus: z.number().default(0),
+        dexterityBonus: z.number().default(0),
+        hpBonus: z.number().default(0),
+        spBonus: z.number().default(0),
+        defenseBonus: z.number().default(0),
+        tier: z.number().int().min(1).default(1),
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const { cloneFromId, ...data } = input;
-      
-      let baseData: any = {
-        ...data,
-        tags: input.tags ? input.tags : [],
-        version: 1,
-        createdBy: ctx.session.user.id,
-      };
-      
-      // If cloning, copy data from source
-      if (cloneFromId) {
-        const source = await ctx.db.itemTemplate.findUnique({
-          where: { id: cloneFromId },
+      // Validation: if type === EQUIPMENT then equipSlot must be set
+      if (input.itemType === "EQUIPMENT" && !input.equipmentSlot) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Equipment items must have an equipment slot specified",
         });
-        
-        if (!source) {
-          throw new TRPCError({
-            code: "NOT_FOUND",
-            message: "Source item template not found",
-          });
-        }
-        
-        baseData = {
-          ...baseData,
-          itemType: source.itemType,
-          equipmentSlot: source.equipmentSlot,
-          rarity: source.rarity,
-          stackable: source.stackable,
-          maxStack: source.maxStack,
-          value: source.value,
-          damage: source.damage,
-          statsJSON: source.statsJSON,
-          icon: source.icon,
-          // Don't copy name, description, tags, status - those should be new
-        };
+      }
+      
+      // Validation: if type !== EQUIPMENT then equipSlot must be null
+      if (input.itemType !== "EQUIPMENT" && input.equipmentSlot !== null) {
+        input.equipmentSlot = null;
       }
 
       try {
-        const item = await ctx.db.itemTemplate.create({
-          data: baseData,
+        const item = await ctx.db.item.create({
+          data: {
+            name: input.name,
+            key: input.key,
+            description: input.description,
+            tags: input.tags ?? [],
+            itemType: input.itemType,
+            equipmentSlot: input.equipmentSlot,
+            itemRarity: input.rarity,
+            stackable: input.stackable,
+            maxStack: input.maxStack,
+            value: input.value,
+            isTradeable: input.isTradeable,
+            isActive: input.isActive,
+            vitalityBonus: input.vitalityBonus,
+            strengthBonus: input.strengthBonus,
+            speedBonus: input.speedBonus,
+            dexterityBonus: input.dexterityBonus,
+            hpBonus: input.hpBonus,
+            spBonus: input.spBonus,
+            defenseBonus: input.defenseBonus,
+            tier: input.tier,
+          },
         });
 
         return item;
       } catch (error: any) {
-        console.error("Error creating item template:", error);
-        console.error("Data being sent:", JSON.stringify(baseData, null, 2));
+        console.error("Error creating item:", error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
-          message: error?.message || "Failed to create item template",
+          message: error?.message || "Failed to create item",
           cause: error,
         });
       }
     }),
 
-  // Update item template (requires content.edit permission)
+  // Update item (requires content.edit permission)
   update: contentProcedure
     .use(async ({ ctx, next }) => {
       await requireContentPermission(ctx.session.user.id, "content.edit");
@@ -210,50 +215,60 @@ export const contentItemsRouter = createTRPCRouter({
       z.object({
         id: z.string(),
         name: z.string().min(1).optional(),
+        key: z.string().optional().nullable(),
         description: z.string().optional().nullable(),
         tags: z.array(z.string()).optional(),
-        status: contentStatusSchema.optional(),
-        itemType: itemTypeSchema.optional().nullable(),
+        itemType: itemTypeSchema.optional(),
         equipmentSlot: equipmentSlotSchema.optional().nullable(),
         rarity: itemRaritySchema.optional(),
         stackable: z.boolean().optional(),
         maxStack: z.number().min(1).optional(),
         value: z.number().min(0).optional(),
-        damage: z.number().min(0).optional(),
-        statsJSON: itemStatsSchema.nullable(),
-        icon: z.string().optional().nullable(),
-        affectsExisting: z.boolean().default(false), // Versioning: if false, only affects new items
+        isTradeable: z.boolean().optional(),
+        isActive: z.boolean().optional(),
+        vitalityBonus: z.number().optional(),
+        strengthBonus: z.number().optional(),
+        speedBonus: z.number().optional(),
+        dexterityBonus: z.number().optional(),
+        hpBonus: z.number().optional(),
+        spBonus: z.number().optional(),
+        defenseBonus: z.number().optional(),
+        tier: z.number().int().min(1).optional(),
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const { id, affectsExisting, ...updateData } = input;
+      const { id, ...updateData } = input;
 
-      const item = await ctx.db.itemTemplate.findUnique({
+      const item = await ctx.db.item.findUnique({
         where: { id },
       });
 
       if (!item) {
         throw new TRPCError({
           code: "NOT_FOUND",
-          message: "Item template not found",
+          message: "Item not found",
         });
       }
 
-      // If not affecting existing items, increment version
-      const versionIncrement = affectsExisting ? 0 : 1;
+      // Validation: if type === EQUIPMENT then equipSlot must be set
+      const newItemType = updateData.itemType ?? item.itemType;
+      const newEquipSlot = updateData.equipmentSlot !== undefined ? updateData.equipmentSlot : item.equipmentSlot;
       
-      // Handle statsJSON null properly for Prisma
-      const dataToUpdate = {
-        ...updateData,
-        version: item.version + versionIncrement,
-      };
-      if (updateData.statsJSON === null) {
-        (dataToUpdate as any).statsJSON = { set: null };
+      if (newItemType === "EQUIPMENT" && !newEquipSlot) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Equipment items must have an equipment slot specified",
+        });
       }
       
-      const updatedItem = await ctx.db.itemTemplate.update({
+      // Validation: if type !== EQUIPMENT then equipSlot must be null
+      if (newItemType !== "EQUIPMENT" && newEquipSlot !== null) {
+        updateData.equipmentSlot = null;
+      }
+      
+      const updatedItem = await ctx.db.item.update({
         where: { id },
-        data: dataToUpdate as any,
+        data: updateData,
       });
 
       return updatedItem;

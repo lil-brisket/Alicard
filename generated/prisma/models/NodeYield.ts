@@ -29,12 +29,14 @@ export type AggregateNodeYield = {
 export type NodeYieldAvgAggregateOutputType = {
   minQty: number | null
   maxQty: number | null
+  chance: number | null
   weight: number | null
 }
 
 export type NodeYieldSumAggregateOutputType = {
   minQty: number | null
   maxQty: number | null
+  chance: number | null
   weight: number | null
 }
 
@@ -44,6 +46,7 @@ export type NodeYieldMinAggregateOutputType = {
   itemId: string | null
   minQty: number | null
   maxQty: number | null
+  chance: number | null
   weight: number | null
   createdAt: Date | null
 }
@@ -54,6 +57,7 @@ export type NodeYieldMaxAggregateOutputType = {
   itemId: string | null
   minQty: number | null
   maxQty: number | null
+  chance: number | null
   weight: number | null
   createdAt: Date | null
 }
@@ -64,6 +68,7 @@ export type NodeYieldCountAggregateOutputType = {
   itemId: number
   minQty: number
   maxQty: number
+  chance: number
   weight: number
   createdAt: number
   _all: number
@@ -73,12 +78,14 @@ export type NodeYieldCountAggregateOutputType = {
 export type NodeYieldAvgAggregateInputType = {
   minQty?: true
   maxQty?: true
+  chance?: true
   weight?: true
 }
 
 export type NodeYieldSumAggregateInputType = {
   minQty?: true
   maxQty?: true
+  chance?: true
   weight?: true
 }
 
@@ -88,6 +95,7 @@ export type NodeYieldMinAggregateInputType = {
   itemId?: true
   minQty?: true
   maxQty?: true
+  chance?: true
   weight?: true
   createdAt?: true
 }
@@ -98,6 +106,7 @@ export type NodeYieldMaxAggregateInputType = {
   itemId?: true
   minQty?: true
   maxQty?: true
+  chance?: true
   weight?: true
   createdAt?: true
 }
@@ -108,6 +117,7 @@ export type NodeYieldCountAggregateInputType = {
   itemId?: true
   minQty?: true
   maxQty?: true
+  chance?: true
   weight?: true
   createdAt?: true
   _all?: true
@@ -205,6 +215,7 @@ export type NodeYieldGroupByOutputType = {
   itemId: string
   minQty: number
   maxQty: number
+  chance: number | null
   weight: number
   createdAt: Date
   _count: NodeYieldCountAggregateOutputType | null
@@ -238,6 +249,7 @@ export type NodeYieldWhereInput = {
   itemId?: Prisma.StringFilter<"NodeYield"> | string
   minQty?: Prisma.IntFilter<"NodeYield"> | number
   maxQty?: Prisma.IntFilter<"NodeYield"> | number
+  chance?: Prisma.FloatNullableFilter<"NodeYield"> | number | null
   weight?: Prisma.IntFilter<"NodeYield"> | number
   createdAt?: Prisma.DateTimeFilter<"NodeYield"> | Date | string
   node?: Prisma.XOR<Prisma.GatheringNodeScalarRelationFilter, Prisma.GatheringNodeWhereInput>
@@ -250,6 +262,7 @@ export type NodeYieldOrderByWithRelationInput = {
   itemId?: Prisma.SortOrder
   minQty?: Prisma.SortOrder
   maxQty?: Prisma.SortOrder
+  chance?: Prisma.SortOrderInput | Prisma.SortOrder
   weight?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   node?: Prisma.GatheringNodeOrderByWithRelationInput
@@ -265,6 +278,7 @@ export type NodeYieldWhereUniqueInput = Prisma.AtLeast<{
   itemId?: Prisma.StringFilter<"NodeYield"> | string
   minQty?: Prisma.IntFilter<"NodeYield"> | number
   maxQty?: Prisma.IntFilter<"NodeYield"> | number
+  chance?: Prisma.FloatNullableFilter<"NodeYield"> | number | null
   weight?: Prisma.IntFilter<"NodeYield"> | number
   createdAt?: Prisma.DateTimeFilter<"NodeYield"> | Date | string
   node?: Prisma.XOR<Prisma.GatheringNodeScalarRelationFilter, Prisma.GatheringNodeWhereInput>
@@ -277,6 +291,7 @@ export type NodeYieldOrderByWithAggregationInput = {
   itemId?: Prisma.SortOrder
   minQty?: Prisma.SortOrder
   maxQty?: Prisma.SortOrder
+  chance?: Prisma.SortOrderInput | Prisma.SortOrder
   weight?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.NodeYieldCountOrderByAggregateInput
@@ -295,6 +310,7 @@ export type NodeYieldScalarWhereWithAggregatesInput = {
   itemId?: Prisma.StringWithAggregatesFilter<"NodeYield"> | string
   minQty?: Prisma.IntWithAggregatesFilter<"NodeYield"> | number
   maxQty?: Prisma.IntWithAggregatesFilter<"NodeYield"> | number
+  chance?: Prisma.FloatNullableWithAggregatesFilter<"NodeYield"> | number | null
   weight?: Prisma.IntWithAggregatesFilter<"NodeYield"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"NodeYield"> | Date | string
 }
@@ -303,6 +319,7 @@ export type NodeYieldCreateInput = {
   id?: string
   minQty?: number
   maxQty?: number
+  chance?: number | null
   weight?: number
   createdAt?: Date | string
   node: Prisma.GatheringNodeCreateNestedOneWithoutYieldsInput
@@ -315,6 +332,7 @@ export type NodeYieldUncheckedCreateInput = {
   itemId: string
   minQty?: number
   maxQty?: number
+  chance?: number | null
   weight?: number
   createdAt?: Date | string
 }
@@ -323,6 +341,7 @@ export type NodeYieldUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   minQty?: Prisma.IntFieldUpdateOperationsInput | number
   maxQty?: Prisma.IntFieldUpdateOperationsInput | number
+  chance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   node?: Prisma.GatheringNodeUpdateOneRequiredWithoutYieldsNestedInput
@@ -335,6 +354,7 @@ export type NodeYieldUncheckedUpdateInput = {
   itemId?: Prisma.StringFieldUpdateOperationsInput | string
   minQty?: Prisma.IntFieldUpdateOperationsInput | number
   maxQty?: Prisma.IntFieldUpdateOperationsInput | number
+  chance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -345,6 +365,7 @@ export type NodeYieldCreateManyInput = {
   itemId: string
   minQty?: number
   maxQty?: number
+  chance?: number | null
   weight?: number
   createdAt?: Date | string
 }
@@ -353,6 +374,7 @@ export type NodeYieldUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   minQty?: Prisma.IntFieldUpdateOperationsInput | number
   maxQty?: Prisma.IntFieldUpdateOperationsInput | number
+  chance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -363,6 +385,7 @@ export type NodeYieldUncheckedUpdateManyInput = {
   itemId?: Prisma.StringFieldUpdateOperationsInput | string
   minQty?: Prisma.IntFieldUpdateOperationsInput | number
   maxQty?: Prisma.IntFieldUpdateOperationsInput | number
+  chance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -383,6 +406,7 @@ export type NodeYieldCountOrderByAggregateInput = {
   itemId?: Prisma.SortOrder
   minQty?: Prisma.SortOrder
   maxQty?: Prisma.SortOrder
+  chance?: Prisma.SortOrder
   weight?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -390,6 +414,7 @@ export type NodeYieldCountOrderByAggregateInput = {
 export type NodeYieldAvgOrderByAggregateInput = {
   minQty?: Prisma.SortOrder
   maxQty?: Prisma.SortOrder
+  chance?: Prisma.SortOrder
   weight?: Prisma.SortOrder
 }
 
@@ -399,6 +424,7 @@ export type NodeYieldMaxOrderByAggregateInput = {
   itemId?: Prisma.SortOrder
   minQty?: Prisma.SortOrder
   maxQty?: Prisma.SortOrder
+  chance?: Prisma.SortOrder
   weight?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -409,6 +435,7 @@ export type NodeYieldMinOrderByAggregateInput = {
   itemId?: Prisma.SortOrder
   minQty?: Prisma.SortOrder
   maxQty?: Prisma.SortOrder
+  chance?: Prisma.SortOrder
   weight?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -416,6 +443,7 @@ export type NodeYieldMinOrderByAggregateInput = {
 export type NodeYieldSumOrderByAggregateInput = {
   minQty?: Prisma.SortOrder
   maxQty?: Prisma.SortOrder
+  chance?: Prisma.SortOrder
   weight?: Prisma.SortOrder
 }
 
@@ -507,6 +535,7 @@ export type NodeYieldCreateWithoutItemInput = {
   id?: string
   minQty?: number
   maxQty?: number
+  chance?: number | null
   weight?: number
   createdAt?: Date | string
   node: Prisma.GatheringNodeCreateNestedOneWithoutYieldsInput
@@ -517,6 +546,7 @@ export type NodeYieldUncheckedCreateWithoutItemInput = {
   nodeId: string
   minQty?: number
   maxQty?: number
+  chance?: number | null
   weight?: number
   createdAt?: Date | string
 }
@@ -556,6 +586,7 @@ export type NodeYieldScalarWhereInput = {
   itemId?: Prisma.StringFilter<"NodeYield"> | string
   minQty?: Prisma.IntFilter<"NodeYield"> | number
   maxQty?: Prisma.IntFilter<"NodeYield"> | number
+  chance?: Prisma.FloatNullableFilter<"NodeYield"> | number | null
   weight?: Prisma.IntFilter<"NodeYield"> | number
   createdAt?: Prisma.DateTimeFilter<"NodeYield"> | Date | string
 }
@@ -564,6 +595,7 @@ export type NodeYieldCreateWithoutNodeInput = {
   id?: string
   minQty?: number
   maxQty?: number
+  chance?: number | null
   weight?: number
   createdAt?: Date | string
   item: Prisma.ItemCreateNestedOneWithoutNodeYieldsInput
@@ -574,6 +606,7 @@ export type NodeYieldUncheckedCreateWithoutNodeInput = {
   itemId: string
   minQty?: number
   maxQty?: number
+  chance?: number | null
   weight?: number
   createdAt?: Date | string
 }
@@ -609,6 +642,7 @@ export type NodeYieldCreateManyItemInput = {
   nodeId: string
   minQty?: number
   maxQty?: number
+  chance?: number | null
   weight?: number
   createdAt?: Date | string
 }
@@ -617,6 +651,7 @@ export type NodeYieldUpdateWithoutItemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   minQty?: Prisma.IntFieldUpdateOperationsInput | number
   maxQty?: Prisma.IntFieldUpdateOperationsInput | number
+  chance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   node?: Prisma.GatheringNodeUpdateOneRequiredWithoutYieldsNestedInput
@@ -627,6 +662,7 @@ export type NodeYieldUncheckedUpdateWithoutItemInput = {
   nodeId?: Prisma.StringFieldUpdateOperationsInput | string
   minQty?: Prisma.IntFieldUpdateOperationsInput | number
   maxQty?: Prisma.IntFieldUpdateOperationsInput | number
+  chance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -636,6 +672,7 @@ export type NodeYieldUncheckedUpdateManyWithoutItemInput = {
   nodeId?: Prisma.StringFieldUpdateOperationsInput | string
   minQty?: Prisma.IntFieldUpdateOperationsInput | number
   maxQty?: Prisma.IntFieldUpdateOperationsInput | number
+  chance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -645,6 +682,7 @@ export type NodeYieldCreateManyNodeInput = {
   itemId: string
   minQty?: number
   maxQty?: number
+  chance?: number | null
   weight?: number
   createdAt?: Date | string
 }
@@ -653,6 +691,7 @@ export type NodeYieldUpdateWithoutNodeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   minQty?: Prisma.IntFieldUpdateOperationsInput | number
   maxQty?: Prisma.IntFieldUpdateOperationsInput | number
+  chance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   item?: Prisma.ItemUpdateOneRequiredWithoutNodeYieldsNestedInput
@@ -663,6 +702,7 @@ export type NodeYieldUncheckedUpdateWithoutNodeInput = {
   itemId?: Prisma.StringFieldUpdateOperationsInput | string
   minQty?: Prisma.IntFieldUpdateOperationsInput | number
   maxQty?: Prisma.IntFieldUpdateOperationsInput | number
+  chance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -672,6 +712,7 @@ export type NodeYieldUncheckedUpdateManyWithoutNodeInput = {
   itemId?: Prisma.StringFieldUpdateOperationsInput | string
   minQty?: Prisma.IntFieldUpdateOperationsInput | number
   maxQty?: Prisma.IntFieldUpdateOperationsInput | number
+  chance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -684,6 +725,7 @@ export type NodeYieldSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   itemId?: boolean
   minQty?: boolean
   maxQty?: boolean
+  chance?: boolean
   weight?: boolean
   createdAt?: boolean
   node?: boolean | Prisma.GatheringNodeDefaultArgs<ExtArgs>
@@ -696,6 +738,7 @@ export type NodeYieldSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   itemId?: boolean
   minQty?: boolean
   maxQty?: boolean
+  chance?: boolean
   weight?: boolean
   createdAt?: boolean
   node?: boolean | Prisma.GatheringNodeDefaultArgs<ExtArgs>
@@ -708,6 +751,7 @@ export type NodeYieldSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   itemId?: boolean
   minQty?: boolean
   maxQty?: boolean
+  chance?: boolean
   weight?: boolean
   createdAt?: boolean
   node?: boolean | Prisma.GatheringNodeDefaultArgs<ExtArgs>
@@ -720,11 +764,12 @@ export type NodeYieldSelectScalar = {
   itemId?: boolean
   minQty?: boolean
   maxQty?: boolean
+  chance?: boolean
   weight?: boolean
   createdAt?: boolean
 }
 
-export type NodeYieldOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nodeId" | "itemId" | "minQty" | "maxQty" | "weight" | "createdAt", ExtArgs["result"]["nodeYield"]>
+export type NodeYieldOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nodeId" | "itemId" | "minQty" | "maxQty" | "chance" | "weight" | "createdAt", ExtArgs["result"]["nodeYield"]>
 export type NodeYieldInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   node?: boolean | Prisma.GatheringNodeDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
@@ -750,6 +795,7 @@ export type $NodeYieldPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     itemId: string
     minQty: number
     maxQty: number
+    chance: number | null
     weight: number
     createdAt: Date
   }, ExtArgs["result"]["nodeYield"]>
@@ -1182,6 +1228,7 @@ export interface NodeYieldFieldRefs {
   readonly itemId: Prisma.FieldRef<"NodeYield", 'String'>
   readonly minQty: Prisma.FieldRef<"NodeYield", 'Int'>
   readonly maxQty: Prisma.FieldRef<"NodeYield", 'Int'>
+  readonly chance: Prisma.FieldRef<"NodeYield", 'Float'>
   readonly weight: Prisma.FieldRef<"NodeYield", 'Int'>
   readonly createdAt: Prisma.FieldRef<"NodeYield", 'DateTime'>
 }

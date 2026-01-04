@@ -47,6 +47,7 @@ function selectNodeYields(yields: Array<{ itemId: string; minQty: number; maxQty
 
 export const gatheringRouter = createTRPCRouter({
   // List all gathering nodes (optional filter by job)
+  // Only returns active nodes with yields including item.name and item.type
   listNodes: publicProcedure
     .input(
       z.object({
@@ -61,7 +62,12 @@ export const gatheringRouter = createTRPCRouter({
         jobId?: string;
         dangerTier?: { lte: number };
         name?: { contains: string; mode?: "insensitive" };
-      } = {};
+        isActive?: boolean;
+        status?: string;
+      } = {
+        isActive: true, // Only return active nodes
+        status: "ACTIVE", // Also filter by status for safety
+      };
       
       if (input?.jobKey) {
         const job = await db.job.findUnique({ where: { key: input.jobKey } });
@@ -86,7 +92,14 @@ export const gatheringRouter = createTRPCRouter({
           job: true,
           yields: {
             include: {
-              item: true,
+              item: {
+                select: {
+                  id: true,
+                  name: true,
+                  itemType: true,
+                  description: true,
+                },
+              },
             },
           },
         },
