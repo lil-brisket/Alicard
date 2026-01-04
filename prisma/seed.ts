@@ -244,6 +244,402 @@ async function main() {
     },
   });
 
+  // Mining items - Tier 1
+  const stone = await prisma.item.upsert({
+    where: { id: "stone" },
+    update: {},
+    create: {
+      id: "stone",
+      key: "stone",
+      name: "Stone",
+      description: "Common stone used for basic construction.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 1,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const tinOre = await prisma.item.upsert({
+    where: { id: "tin-ore" },
+    update: {},
+    create: {
+      id: "tin-ore",
+      key: "tin-ore",
+      name: "Tin Ore",
+      description: "A chunk of raw tin ore.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 6,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const coal = await prisma.item.upsert({
+    where: { id: "coal" },
+    update: {},
+    create: {
+      id: "coal",
+      key: "coal",
+      name: "Coal",
+      description: "A chunk of coal used for smelting.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 8,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  // Mining items - Tier 2
+  const silverOre = await prisma.item.upsert({
+    where: { id: "silver-ore" },
+    update: {},
+    create: {
+      id: "silver-ore",
+      key: "silver-ore",
+      name: "Silver Ore",
+      description: "A chunk of raw silver ore.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 25,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const goldOre = await prisma.item.upsert({
+    where: { id: "gold-ore" },
+    update: {},
+    create: {
+      id: "gold-ore",
+      key: "gold-ore",
+      name: "Gold Ore",
+      description: "A chunk of raw gold ore.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 35,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const quartz = await prisma.item.upsert({
+    where: { id: "quartz" },
+    update: {},
+    create: {
+      id: "quartz",
+      key: "quartz",
+      name: "Quartz",
+      description: "A crystal of quartz.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 30,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const platinumOre = await prisma.item.upsert({
+    where: { id: "platinum-ore" },
+    update: {},
+    create: {
+      id: "platinum-ore",
+      key: "platinum-ore",
+      name: "Platinum Ore",
+      description: "A chunk of raw platinum ore.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 40,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const sulfur = await prisma.item.upsert({
+    where: { id: "sulfur" },
+    update: {},
+    create: {
+      id: "sulfur",
+      key: "sulfur",
+      name: "Sulfur",
+      description: "Crystalline sulfur used in alchemy.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 32,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  // Mining items - Tier 3
+  const denseIronOre = await prisma.item.upsert({
+    where: { id: "dense-iron-ore" },
+    update: {},
+    create: {
+      id: "dense-iron-ore",
+      key: "dense-iron-ore",
+      name: "Dense Iron Ore",
+      description: "A high-quality chunk of dense iron ore.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 60,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const deepSilverOre = await prisma.item.upsert({
+    where: { id: "deep-silver-ore" },
+    update: {},
+    create: {
+      id: "deep-silver-ore",
+      key: "deep-silver-ore",
+      name: "Deep Silver Ore",
+      description: "Silver ore from deep underground veins.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 75,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const geodeCrystal = await prisma.item.upsert({
+    where: { id: "geode-crystal" },
+    update: {},
+    create: {
+      id: "geode-crystal",
+      key: "geode-crystal",
+      name: "Geode Crystal",
+      description: "A crystalline formation from a geode.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 85,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const obsidian = await prisma.item.upsert({
+    where: { id: "obsidian" },
+    update: {},
+    create: {
+      id: "obsidian",
+      key: "obsidian",
+      name: "Obsidian",
+      description: "Volcanic glass with a sharp edge.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 90,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const blackstoneOre = await prisma.item.upsert({
+    where: { id: "blackstone-ore" },
+    update: {},
+    create: {
+      id: "blackstone-ore",
+      key: "blackstone-ore",
+      name: "Blackstone Ore",
+      description: "A dark, dense ore with mysterious properties.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 95,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  // Mining items - Tier 4
+  const mithrilOre = await prisma.item.upsert({
+    where: { id: "mithril-ore" },
+    update: {},
+    create: {
+      id: "mithril-ore",
+      key: "mithril-ore",
+      name: "Mithril Ore",
+      description: "A rare, lightweight ore with magical properties.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 150,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const adamantiteOre = await prisma.item.upsert({
+    where: { id: "adamantite-ore" },
+    update: {},
+    create: {
+      id: "adamantite-ore",
+      key: "adamantite-ore",
+      name: "Adamantite Ore",
+      description: "An extremely hard and durable ore.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 180,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const runestone = await prisma.item.upsert({
+    where: { id: "runestone" },
+    update: {},
+    create: {
+      id: "runestone",
+      key: "runestone",
+      name: "Runestone",
+      description: "A stone inscribed with ancient runes.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 200,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const bloodIronOre = await prisma.item.upsert({
+    where: { id: "blood-iron-ore" },
+    update: {},
+    create: {
+      id: "blood-iron-ore",
+      key: "blood-iron-ore",
+      name: "Blood-Iron Ore",
+      description: "Iron ore with a deep crimson hue.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 220,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const tempestCrystal = await prisma.item.upsert({
+    where: { id: "tempest-crystal" },
+    update: {},
+    create: {
+      id: "tempest-crystal",
+      key: "tempest-crystal",
+      name: "Tempest Crystal",
+      description: "A crystal that crackles with elemental energy.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 240,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  // Mining items - Tier 5
+  const voidQuartz = await prisma.item.upsert({
+    where: { id: "void-quartz" },
+    update: {},
+    create: {
+      id: "void-quartz",
+      key: "void-quartz",
+      name: "Void Quartz",
+      description: "A quartz crystal that seems to absorb light.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 400,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const starMetal = await prisma.item.upsert({
+    where: { id: "star-metal" },
+    update: {},
+    create: {
+      id: "star-metal",
+      key: "star-metal",
+      name: "Star-Metal",
+      description: "Metal that fell from the stars.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 500,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const celestialMithril = await prisma.item.upsert({
+    where: { id: "celestial-mithril" },
+    update: {},
+    create: {
+      id: "celestial-mithril",
+      key: "celestial-mithril",
+      name: "Celestial Mithril",
+      description: "Mithril blessed by celestial forces.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 600,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const abyssalAdamantite = await prisma.item.upsert({
+    where: { id: "abyssal-adamantite" },
+    update: {},
+    create: {
+      id: "abyssal-adamantite",
+      key: "abyssal-adamantite",
+      name: "Abyssal Adamantite",
+      description: "Adamantite forged in the depths of the abyss.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 700,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const worldcoreOre = await prisma.item.upsert({
+    where: { id: "worldcore-ore" },
+    update: {},
+    create: {
+      id: "worldcore-ore",
+      key: "worldcore-ore",
+      name: "Worldcore Ore",
+      description: "Ore from the very heart of the world.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 1000,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
   const cloth = await prisma.item.upsert({
     where: { id: "cloth" },
     update: {},
@@ -1592,56 +1988,80 @@ async function main() {
   // Create gathering nodes
   console.log("Creating gathering nodes...");
 
-  // Mining nodes
-  const ironMine = await prisma.gatheringNode.upsert({
-    where: { key: "iron-mine-1" },
-    update: {},
-    create: {
-      key: "iron-mine-1",
-      name: "Iron Mine",
-      description: "A rich vein of iron ore.",
-      jobId: minerJob.id,
-      dangerTier: 2,
-    },
-  });
+  // Mining nodes - Tier 1 (Levels 1-20)
+  const minerNodes = [
+    // TIER 1
+    { key: "loose-stone-outcrop", name: "Loose Stone Outcrop", req: 1, time: 25, xp: 12, danger: 0, tier: 1, item: stone, minQty: 1, maxQty: 2 },
+    { key: "copper-vein", name: "Copper Vein", req: 5, time: 30, xp: 15, danger: 0, tier: 1, item: copperOre, minQty: 1, maxQty: 3 },
+    { key: "tin-seam", name: "Tin Seam", req: 10, time: 35, xp: 18, danger: 0, tier: 1, item: tinOre, minQty: 1, maxQty: 4 },
+    { key: "iron-deposit", name: "Iron Deposit", req: 15, time: 40, xp: 22, danger: 1, tier: 1, item: ironOre, minQty: 1, maxQty: 4 },
+    { key: "coal-pocket", name: "Coal Pocket", req: 20, time: 45, xp: 25, danger: 1, tier: 1, item: coal, minQty: 2, maxQty: 4 },
+    // TIER 2
+    { key: "silver-thread-vein", name: "Silver Thread Vein", req: 25, time: 75, xp: 35, danger: 1, tier: 2, item: silverOre, minQty: 1, maxQty: 4 },
+    { key: "gold-flake-seam", name: "Gold Flake Seam", req: 30, time: 90, xp: 42, danger: 1, tier: 2, item: goldOre, minQty: 1, maxQty: 5 },
+    { key: "quartz-cluster", name: "Quartz Cluster", req: 35, time: 105, xp: 50, danger: 2, tier: 2, item: quartz, minQty: 2, maxQty: 5 },
+    { key: "platinum-speck-vein", name: "Platinum Speck Vein", req: 38, time: 115, xp: 55, danger: 2, tier: 2, item: platinumOre, minQty: 1, maxQty: 4 },
+    { key: "sulfur-shelf", name: "Sulfur Shelf", req: 40, time: 120, xp: 60, danger: 2, tier: 2, item: sulfur, minQty: 2, maxQty: 5 },
+    // TIER 3
+    { key: "dense-iron-lode", name: "Dense Iron Lode", req: 45, time: 150, xp: 80, danger: 2, tier: 3, item: denseIronOre, minQty: 1, maxQty: 5 },
+    { key: "deep-silver-lode", name: "Deep Silver Lode", req: 50, time: 180, xp: 95, danger: 3, tier: 3, item: deepSilverOre, minQty: 2, maxQty: 6 },
+    { key: "crystal-geode", name: "Crystal Geode", req: 55, time: 210, xp: 110, danger: 3, tier: 3, item: geodeCrystal, minQty: 2, maxQty: 7 },
+    { key: "volcanic-obsidian-seam", name: "Volcanic Obsidian Seam", req: 58, time: 225, xp: 115, danger: 3, tier: 3, item: obsidian, minQty: 1, maxQty: 6 },
+    { key: "blackstone-ore-vein", name: "Blackstone Ore Vein", req: 60, time: 240, xp: 120, danger: 3, tier: 3, item: blackstoneOre, minQty: 3, maxQty: 7 },
+    // TIER 4
+    { key: "mithril-vein", name: "Mithril Vein", req: 65, time: 300, xp: 150, danger: 3, tier: 4, item: mithrilOre, minQty: 1, maxQty: 3 },
+    { key: "adamantite-seam", name: "Adamantite Seam", req: 70, time: 360, xp: 175, danger: 4, tier: 4, item: adamantiteOre, minQty: 1, maxQty: 3 },
+    { key: "runestone-cluster", name: "Runestone Cluster", req: 75, time: 420, xp: 200, danger: 4, tier: 4, item: runestone, minQty: 2, maxQty: 4 },
+    { key: "blood-iron-lode", name: "Blood-Iron Lode", req: 78, time: 480, xp: 220, danger: 4, tier: 4, item: bloodIronOre, minQty: 1, maxQty: 3 },
+    { key: "tempest-crystal-shelf", name: "Tempest Crystal Shelf", req: 80, time: 540, xp: 240, danger: 4, tier: 4, item: tempestCrystal, minQty: 2, maxQty: 4 },
+    // TIER 5
+    { key: "void-quartz-rift", name: "Void Quartz Rift", req: 85, time: 900, xp: 360, danger: 4, tier: 5, item: voidQuartz, minQty: 1, maxQty: 2 },
+    { key: "star-metal-fragment-bed", name: "Star-Metal Fragment Bed", req: 88, time: 1050, xp: 420, danger: 4, tier: 5, item: starMetal, minQty: 1, maxQty: 2 },
+    { key: "celestial-mithril-lode", name: "Celestial Mithril Lode", req: 90, time: 1200, xp: 480, danger: 5, tier: 5, item: celestialMithril, minQty: 1, maxQty: 2 },
+    { key: "abyssal-adamantite-heart", name: "Abyssal Adamantite Heart", req: 95, time: 1350, xp: 540, danger: 5, tier: 5, item: abyssalAdamantite, minQty: 1, maxQty: 1 },
+    { key: "worldcore-ore-monolith", name: "Worldcore Ore Monolith", req: 100, time: 1500, xp: 600, danger: 5, tier: 5, item: worldcoreOre, minQty: 1, maxQty: 2 },
+  ];
 
-  await prisma.nodeYield.upsert({
-    where: { id: `${ironMine.id}-iron-ore` },
-    update: {},
-    create: {
-      id: `${ironMine.id}-iron-ore`,
-      nodeId: ironMine.id,
-      itemId: ironOre.id,
-      minQty: 1,
-      maxQty: 2,
-      weight: 100,
-    },
-  });
+  for (const nodeData of minerNodes) {
+    const node = await prisma.gatheringNode.upsert({
+      where: { key: nodeData.key },
+      update: {
+        name: nodeData.name,
+        tier: nodeData.tier,
+        requiredJobLevel: nodeData.req,
+        gatherTimeSeconds: nodeData.time,
+        xpReward: nodeData.xp,
+        dangerTier: nodeData.danger,
+      },
+      create: {
+        key: nodeData.key,
+        name: nodeData.name,
+        description: `A mining node requiring level ${nodeData.req}.`,
+        jobId: minerJob.id,
+        tier: nodeData.tier,
+        requiredJobLevel: nodeData.req,
+        gatherTimeSeconds: nodeData.time,
+        xpReward: nodeData.xp,
+        dangerTier: nodeData.danger,
+      },
+    });
 
-  const copperMine = await prisma.gatheringNode.upsert({
-    where: { key: "copper-mine-1" },
-    update: {},
-    create: {
-      key: "copper-mine-1",
-      name: "Copper Mine",
-      description: "A vein of copper ore.",
-      jobId: minerJob.id,
-      dangerTier: 1,
-    },
-  });
-
-  await prisma.nodeYield.upsert({
-    where: { id: `${copperMine.id}-copper-ore` },
-    update: {},
-    create: {
-      id: `${copperMine.id}-copper-ore`,
-      nodeId: copperMine.id,
-      itemId: copperOre.id,
-      minQty: 1,
-      maxQty: 3,
-      weight: 100,
-    },
-  });
+    await prisma.nodeYield.upsert({
+      where: { id: `${node.id}-${nodeData.item.id}` },
+      update: {
+        minQty: nodeData.minQty,
+        maxQty: nodeData.maxQty,
+      },
+      create: {
+        id: `${node.id}-${nodeData.item.id}`,
+        nodeId: node.id,
+        itemId: nodeData.item.id,
+        minQty: nodeData.minQty,
+        maxQty: nodeData.maxQty,
+        weight: 100,
+      },
+    });
+  }
 
   // Fishing items for Fisher nodes
   console.log("Creating fishing items...");

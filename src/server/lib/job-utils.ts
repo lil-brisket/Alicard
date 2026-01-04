@@ -5,7 +5,7 @@ export function getXpForLevel(level: number): number {
 }
 
 // Calculate level from total XP
-export function getLevelFromXp(totalXp: number, maxLevel: number = 10): number {
+export function getLevelFromXp(totalXp: number, maxLevel: number = 100): number {
   let level = 1;
   let xpForCurrentLevel = 0;
   
@@ -56,14 +56,14 @@ export function getMaxXpForLevel(maxLevel: number): number {
  * @param currentLevel - Current job level
  * @param currentXp - Current total XP
  * @param xpDelta - XP to add (must be >= 0)
- * @param maxLevel - Maximum level cap (default 10)
+ * @param maxLevel - Maximum level cap (default 100)
  * @returns Object with newLevel, newXp, leveledUp flag, and progress info
  */
 export function addXp(
   currentLevel: number,
   currentXp: number,
   xpDelta: number,
-  maxLevel: number = 10
+  maxLevel: number = 100
 ): {
   newLevel: number;
   newXp: number;

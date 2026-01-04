@@ -190,7 +190,7 @@ export const jobsRouter = createTRPCRouter({
       });
 
       return updatedUserJobs.map((uj) => {
-        const levelResult = addXp(uj.level, uj.xp, 0, 10);
+        const levelResult = addXp(uj.level, uj.xp, 0, 100);
         return {
           ...uj,
           totalXp: uj.xp,
@@ -204,7 +204,7 @@ export const jobsRouter = createTRPCRouter({
 
     // Return existing jobs if no new ones were created
     return userJobs.map((uj) => {
-      const levelResult = addXp(uj.level, uj.xp, 0, 10);
+      const levelResult = addXp(uj.level, uj.xp, 0, 100);
       return {
         ...uj,
         totalXp: uj.xp,
@@ -384,7 +384,7 @@ export const jobsRouter = createTRPCRouter({
       }
 
       // Update XP using shared addXp function for consistent leveling
-      const levelResult = addXp(userJob.level, userJob.xp, input.xp, 10);
+      const levelResult = addXp(userJob.level, userJob.xp, input.xp, 100);
 
       const updated = await db.userJob.update({
         where: { id: userJob.id },
@@ -496,7 +496,7 @@ export const jobsRouter = createTRPCRouter({
 
       const level = getLevelFromXp(userJob.xp);
       const progress = getXpProgress(level, userJob.xp);
-      const levelResult = addXp(level, userJob.xp, 0, 10);
+      const levelResult = addXp(level, userJob.xp, 0, 100);
 
       return {
         ...userJob,
@@ -505,7 +505,7 @@ export const jobsRouter = createTRPCRouter({
         xpInLevel: levelResult.xpInLevel,
         xpToNext: levelResult.xpToNext,
         progressPct: levelResult.progressPct,
-        isMaxLevel: levelResult.newLevel >= 10,
+        isMaxLevel: levelResult.newLevel >= 100,
       };
     }),
 });

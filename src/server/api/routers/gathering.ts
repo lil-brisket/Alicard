@@ -216,7 +216,7 @@ export const gatheringRouter = createTRPCRouter({
         });
 
         // Update job XP (use the shared addXp function for consistent leveling)
-        const levelResult = addXp(userJob.level, userJob.xp, xpGained, 10);
+        const levelResult = addXp(userJob.level, userJob.xp, xpGained, 100);
 
         await tx.userJob.update({
           where: { id: userJob.id },

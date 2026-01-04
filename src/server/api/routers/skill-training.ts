@@ -504,7 +504,7 @@ export const skillTrainingRouter = createTRPCRouter({
           });
 
           if (userJob) {
-            const jobXpResult = addXp(userJob.level, userJob.xp, xpGained, 10);
+            const jobXpResult = addXp(userJob.level, userJob.xp, xpGained, 100);
             await ctx.db.userJob.update({
               where: { id: userJob.id },
               data: {
@@ -785,7 +785,7 @@ export const skillTrainingRouter = createTRPCRouter({
         });
 
         if (userJob) {
-          const jobXpResult = addXp(userJob.level, userJob.xp, xpGained, 10);
+          const jobXpResult = addXp(userJob.level, userJob.xp, xpGained, 100);
           jobLeveledUp = jobXpResult.leveledUp;
           await ctx.db.userJob.update({
             where: { id: userJob.id },
