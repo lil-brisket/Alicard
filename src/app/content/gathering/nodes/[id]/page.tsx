@@ -58,6 +58,9 @@ export default function GatheringNodeDetailPage({
   });
   const [itemTypeFilter, setItemTypeFilter] = useState<string>("MATERIAL");
   const [itemSearch, setItemSearch] = useState("");
+  const [editingYieldId, setEditingYieldId] = useState<string | null>(null);
+  const [editItemSearch, setEditItemSearch] = useState("");
+  const [editItemTypeFilter, setEditItemTypeFilter] = useState<string>("MATERIAL");
 
   useEffect(() => {
     if (node) {
@@ -96,6 +99,15 @@ export default function GatheringNodeDetailPage({
     query: itemSearch || undefined,
     isActive: true,
     limit: 50,
+  });
+
+  const { data: editItems } = api.content.items.list.useQuery({
+    type: editItemTypeFilter as any,
+    query: editItemSearch || undefined,
+    isActive: true,
+    limit: 50,
+  }, {
+    enabled: editingYieldId !== null,
   });
 
   const createNode = api.content.gatheringNodes.create.useMutation({
@@ -208,6 +220,18 @@ export default function GatheringNodeDetailPage({
   };
 
   const handleUpdateYield = (yieldId: string, updates: Partial<YieldForm>) => {
+    // Validate minQty <= maxQty if both are being updated
+    const currentYield = yieldForms.find(y => y.id === yieldId);
+    if (currentYield) {
+      const newMinQty = updates.minQty ?? currentYield.minQty;
+      const newMaxQty = updates.maxQty ?? currentYield.maxQty;
+      
+      if (newMinQty > newMaxQty) {
+        toast.error("Min quantity must be less than or equal to max quantity");
+        return;
+      }
+    }
+    
     updateYield.mutate({
       id: yieldId,
       ...updates,
@@ -430,77 +454,162 @@ export default function GatheringNodeDetailPage({
                 <div className="space-y-2">
                   {yieldForms.map((yieldForm) => {
                     const item = yields?.find((y) => y.id === yieldForm.id)?.item;
+                    const isEditing = editingYieldId === yieldForm.id;
+                    
                     return (
                       <div
                         key={yieldForm.id}
                         className="rounded-lg border border-slate-700 bg-slate-800/50 p-3"
                       >
                         <div className="mb-2 flex items-center justify-between">
-                          <div>
-                            <p className="font-medium text-slate-200">
-                              {item?.name ?? "Unknown Item"}
-                            </p>
-                            <p className="text-xs text-slate-400">
-                              {item?.itemType}
-                            </p>
+                          <div className="flex-1">
+                            {isEditing ? (
+                              <div className="space-y-2">
+                                <div>
+                                  <label className="block text-xs text-slate-400 mb-1">Item Type Filter</label>
+                                  <select
+                                    value={editItemTypeFilter}
+                                    onChange={(e) => setEditItemTypeFilter(e.target.value)}
+                                    className="w-full rounded border border-slate-700 bg-slate-900 px-2 py-1 text-xs text-slate-100"
+                                  >
+                                    <option value="MATERIAL">MATERIAL</option>
+                                    <option value="EQUIPMENT">EQUIPMENT</option>
+                                    <option value="CONSUMABLE">CONSUMABLE</option>
+                                    <option value="QUEST">QUEST</option>
+                                    <option value="CURRENCY">CURRENCY</option>
+                                    <option value="KEY">KEY</option>
+                                    <option value="MISC">MISC</option>
+                                  </select>
+                                </div>
+                                <div>
+                                  <label className="block text-xs text-slate-400 mb-1">Search Items</label>
+                                  <input
+                                    type="text"
+                                    value={editItemSearch}
+                                    onChange={(e) => setEditItemSearch(e.target.value)}
+                                    placeholder="Search items..."
+                                    className="w-full rounded border border-slate-700 bg-slate-900 px-2 py-1 text-xs text-slate-100"
+                                  />
+                                </div>
+                                <div>
+                                  <label className="block text-xs text-slate-400 mb-1">Select Item</label>
+                                  <select
+                                    value={yieldForm.itemId}
+                                    onChange={(e) => {
+                                      if (yieldForm.id) {
+                                        handleUpdateYield(yieldForm.id, { itemId: e.target.value });
+                                        setEditingYieldId(null);
+                                        setEditItemSearch("");
+                                      }
+                                    }}
+                                    className="w-full rounded border border-slate-700 bg-slate-900 px-2 py-1 text-xs text-slate-100"
+                                  >
+                                    <option value={yieldForm.itemId}>
+                                      {item?.name ?? "Current: Unknown"}
+                                    </option>
+                                    {editItems?.filter(i => i.id !== yieldForm.itemId).map((editItem) => (
+                                      <option key={editItem.id} value={editItem.id}>
+                                        {editItem.name} ({editItem.itemType})
+                                      </option>
+                                    ))}
+                                  </select>
+                                </div>
+                                <div className="flex gap-2">
+                                  <button
+                                    onClick={() => {
+                                      setEditingYieldId(null);
+                                      setEditItemSearch("");
+                                    }}
+                                    className="flex-1 rounded bg-slate-700 px-2 py-1 text-xs text-slate-300 hover:bg-slate-600"
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
+                              </div>
+                            ) : (
+                              <div>
+                                <p className="font-medium text-slate-200">
+                                  {item?.name ?? "Unknown Item"}
+                                </p>
+                                <p className="text-xs text-slate-400">
+                                  {item?.itemType}
+                                </p>
+                                <button
+                                  onClick={() => {
+                                    if (yieldForm.id) {
+                                      setEditingYieldId(yieldForm.id);
+                                      setEditItemTypeFilter("MATERIAL");
+                                      setEditItemSearch("");
+                                    }
+                                  }}
+                                  className="mt-1 text-xs text-cyan-400 hover:text-cyan-300"
+                                >
+                                  Change Item
+                                </button>
+                              </div>
+                            )}
                           </div>
-                          <button
-                            onClick={() => yieldForm.id && handleRemoveYield(yieldForm.id)}
-                            className="text-xs text-red-400 hover:text-red-300"
-                          >
-                            Remove
-                          </button>
+                          {!isEditing && (
+                            <button
+                              onClick={() => yieldForm.id && handleRemoveYield(yieldForm.id)}
+                              className="ml-2 text-xs text-red-400 hover:text-red-300"
+                            >
+                              Remove
+                            </button>
+                          )}
                         </div>
-                        <div className="grid grid-cols-3 gap-2">
-                          <div>
-                            <label className="block text-xs text-slate-400">Min</label>
-                            <input
-                              type="number"
-                              value={yieldForm.minQty}
-                              onChange={(e) => {
-                                const newMin = parseInt(e.target.value) || 1;
-                                if (yieldForm.id) {
-                                  handleUpdateYield(yieldForm.id, { minQty: newMin });
-                                }
-                              }}
-                              min={1}
-                              className="mt-1 w-full rounded border border-slate-700 bg-slate-900 px-2 py-1 text-sm text-slate-100"
-                            />
+                        {!isEditing && (
+                          <div className="grid grid-cols-3 gap-2">
+                            <div>
+                              <label className="block text-xs text-slate-400">Min</label>
+                              <input
+                                type="number"
+                                value={yieldForm.minQty}
+                                onChange={(e) => {
+                                  const newMin = parseInt(e.target.value) || 1;
+                                  if (yieldForm.id) {
+                                    handleUpdateYield(yieldForm.id, { minQty: newMin });
+                                  }
+                                }}
+                                min={1}
+                                className="mt-1 w-full rounded border border-slate-700 bg-slate-900 px-2 py-1 text-sm text-slate-100"
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-xs text-slate-400">Max</label>
+                              <input
+                                type="number"
+                                value={yieldForm.maxQty}
+                                onChange={(e) => {
+                                  const newMax = parseInt(e.target.value) || 1;
+                                  if (yieldForm.id) {
+                                    handleUpdateYield(yieldForm.id, { maxQty: newMax });
+                                  }
+                                }}
+                                min={yieldForm.minQty}
+                                className="mt-1 w-full rounded border border-slate-700 bg-slate-900 px-2 py-1 text-sm text-slate-100"
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-xs text-slate-400">Chance</label>
+                              <input
+                                type="number"
+                                step="0.01"
+                                value={yieldForm.chance ?? ""}
+                                onChange={(e) => {
+                                  const newChance = e.target.value === "" ? null : parseFloat(e.target.value);
+                                  if (yieldForm.id) {
+                                    handleUpdateYield(yieldForm.id, { chance: newChance });
+                                  }
+                                }}
+                                min={0}
+                                max={1}
+                                placeholder="1.0"
+                                className="mt-1 w-full rounded border border-slate-700 bg-slate-900 px-2 py-1 text-sm text-slate-100"
+                              />
+                            </div>
                           </div>
-                          <div>
-                            <label className="block text-xs text-slate-400">Max</label>
-                            <input
-                              type="number"
-                              value={yieldForm.maxQty}
-                              onChange={(e) => {
-                                const newMax = parseInt(e.target.value) || 1;
-                                if (yieldForm.id) {
-                                  handleUpdateYield(yieldForm.id, { maxQty: newMax });
-                                }
-                              }}
-                              min={yieldForm.minQty}
-                              className="mt-1 w-full rounded border border-slate-700 bg-slate-900 px-2 py-1 text-sm text-slate-100"
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-xs text-slate-400">Chance</label>
-                            <input
-                              type="number"
-                              step="0.01"
-                              value={yieldForm.chance ?? ""}
-                              onChange={(e) => {
-                                const newChance = e.target.value === "" ? null : parseFloat(e.target.value);
-                                if (yieldForm.id) {
-                                  handleUpdateYield(yieldForm.id, { chance: newChance });
-                                }
-                              }}
-                              min={0}
-                              max={1}
-                              placeholder="1.0"
-                              className="mt-1 w-full rounded border border-slate-700 bg-slate-900 px-2 py-1 text-sm text-slate-100"
-                            />
-                          </div>
-                        </div>
+                        )}
                       </div>
                     );
                   })}

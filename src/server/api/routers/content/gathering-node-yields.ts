@@ -134,6 +134,7 @@ export const contentGatheringNodeYieldsRouter = createTRPCRouter({
     .input(
       z.object({
         id: z.string(),
+        itemId: z.string().optional(),
         minQty: z.number().int().min(1).optional(),
         maxQty: z.number().int().min(1).optional(),
         chance: z.number().min(0).max(1).optional().nullable(),
@@ -154,6 +155,25 @@ export const contentGatheringNodeYieldsRouter = createTRPCRouter({
           code: "NOT_FOUND",
           message: "Node yield not found",
         });
+      }
+
+      // Verify item exists if itemId is being updated
+      if (updateData.itemId) {
+        const item = await ctx.db.item.findUnique({
+          where: { id: updateData.itemId },
+        });
+
+        if (!item) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "Item not found",
+          });
+        }
+
+        // Warn if item is inactive (but allow it for backwards compatibility)
+        if (!item.isActive) {
+          console.warn(`Updating yield to inactive item ${item.name}`);
+        }
       }
 
       // Validate minQty <= maxQty if both are provided
