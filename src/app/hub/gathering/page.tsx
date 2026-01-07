@@ -27,7 +27,7 @@ export default function GatheringPage() {
   }
 
   return (
-    <div>
+    <div className="pb-[calc(4rem+env(safe-area-inset-bottom)+1rem)] md:pb-24">
         <h1 className="text-2xl font-bold text-cyan-400">Gathering Nodes</h1>
         <p className="mt-2 text-slate-400">
           Collect resources from gathering nodes
