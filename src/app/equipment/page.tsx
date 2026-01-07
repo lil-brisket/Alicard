@@ -40,8 +40,8 @@ const rarityColors: Record<string, { border: string; text: string; dot: string }
 // Position coordinates for body slots (percentage-based for true rig)
 const slotPositions: Record<EquipmentSlot, { top: string; left?: string; right?: string }> = {
   HEAD: { top: "8%", left: "50%" },
-  LEFT_ARM: { top: "38%", left: "15%" }, // Positioned on the left side at arm level
-  RIGHT_ARM: { top: "38%", right: "15%" }, // Positioned on the right side at arm level
+  LEFT_ARM: { top: "38%", right: "15%" }, // Positioned on the character's left (viewer's right)
+  RIGHT_ARM: { top: "38%", left: "15%" }, // Positioned on the character's right (viewer's left)
   BODY: { top: "35%", left: "50%" },
   LEGS: { top: "59%", left: "50%" },
   FEET: { top: "82%", left: "50%" },

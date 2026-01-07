@@ -13,7 +13,7 @@ export default function NewItemPage() {
     tags: [] as string[],
     status: "DRAFT" as "DRAFT" | "ACTIVE" | "DISABLED",
     itemType: "" as "" | "WEAPON" | "ARMOR" | "ACCESSORY" | "CONSUMABLE" | "MATERIAL" | "QUEST_ITEM" | "TOOL" | "EQUIPMENT",
-    equipmentSlot: "" as "" | "HEAD" | "ARMS" | "BODY" | "LEGS" | "FEET" | "RING" | "NECKLACE" | "BELT" | "CLOAK",
+    equipmentSlot: "" as "" | "HEAD" | "ARMS" | "BODY" | "LEGS" | "FEET" | "RING" | "NECKLACE" | "BELT" | "CLOAK" | "OFFHAND" | "MAINHAND",
     rarity: "COMMON" as const,
     stackable: false,
     maxStack: 1,
@@ -176,6 +176,8 @@ export default function NewItemPage() {
             <option value="NECKLACE">NECKLACE</option>
             <option value="BELT">BELT</option>
             <option value="CLOAK">CLOAK</option>
+            <option value="OFFHAND">OFFHAND</option>
+            <option value="MAINHAND">MAINHAND</option>
           </select>
           <p className="mt-1 text-xs text-slate-400">
             Required for equippable items (weapons, armor, accessories)

@@ -40,7 +40,7 @@ const slotToFieldMap = {
 // This provides backward compatibility for items created without equipmentSlot
 type ItemWithType = {
   itemType: "WEAPON" | "ARMOR" | "ACCESSORY" | "CONSUMABLE" | "MATERIAL" | "QUEST_ITEM" | "TOOL" | "EQUIPMENT";
-  equipmentSlot: "HEAD" | "ARMS" | "BODY" | "LEGS" | "FEET" | "RING" | "NECKLACE" | "BELT" | "CLOAK" | null;
+  equipmentSlot: "HEAD" | "ARMS" | "BODY" | "LEGS" | "FEET" | "RING" | "NECKLACE" | "BELT" | "CLOAK" | "OFFHAND" | "MAINHAND" | null;
 };
 
 const getEffectiveEquipmentSlot = (item: ItemWithType): string | null => {
@@ -52,7 +52,7 @@ const getEffectiveEquipmentSlot = (item: ItemWithType): string | null => {
   // Infer from itemType for backward compatibility
   switch (item.itemType) {
     case "WEAPON":
-      return "ARMS";
+      return "MAINHAND";
     case "ARMOR":
       // ARMOR could be BODY, HEAD, LEGS, or FEET - default to BODY
       return "BODY";
@@ -224,10 +224,10 @@ export const equipmentRouter = createTRPCRouter({
             return effectiveSlot === "RING";
           });
         } else if (input.slot === "LEFT_ARM" || input.slot === "RIGHT_ARM") {
-          // Both arm slots accept items with equipmentSlot: "ARMS"
+          // Both arm slots accept items with equipmentSlot: "ARMS" or "MAINHAND"
           equippable = equippable.filter((invItem) => {
             const effectiveSlot = getEffectiveEquipmentSlot(invItem.item);
-            return effectiveSlot === "ARMS";
+            return effectiveSlot === "ARMS" || effectiveSlot === "MAINHAND";
           });
         } else {
           equippable = equippable.filter((invItem) => {
@@ -322,8 +322,8 @@ export const equipmentRouter = createTRPCRouter({
           });
         }
       } else if (input.toSlot === "LEFT_ARM" || input.toSlot === "RIGHT_ARM") {
-        // Both arm slots accept items with equipmentSlot: "ARMS"
-        if (effectiveSlot !== "ARMS") {
+        // Both arm slots accept items with equipmentSlot: "ARMS" or "MAINHAND"
+        if (effectiveSlot !== "ARMS" && effectiveSlot !== "MAINHAND") {
           throw new TRPCError({
             code: "BAD_REQUEST",
             message: "Item slot does not match",
