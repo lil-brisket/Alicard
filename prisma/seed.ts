@@ -2114,6 +2114,2822 @@ async function main() {
     },
   });
 
+  // ==========================================
+  // FULL BLACKSMITH RECIPE PACK (Levels 1-100)
+  // ==========================================
+  console.log("Creating full Blacksmith recipe pack...");
+
+  // Create all missing bar items first
+  const tinBar = await prisma.item.upsert({
+    where: { id: "tin-bar" },
+    update: {},
+    create: {
+      id: "tin-bar",
+      key: "tin-bar",
+      name: "Tin Bar",
+      description: "A refined tin bar ready for forging.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 1,
+      value: 12,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const steelBar = await prisma.item.upsert({
+    where: { id: "steel-bar" },
+    update: {},
+    create: {
+      id: "steel-bar",
+      key: "steel-bar",
+      name: "Steel Bar",
+      description: "A refined steel bar ready for forging.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 45,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const silverBar = await prisma.item.upsert({
+    where: { id: "silver-bar" },
+    update: {},
+    create: {
+      id: "silver-bar",
+      key: "silver-bar",
+      name: "Silver Bar",
+      description: "A refined silver bar ready for forging.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 70,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const goldBar = await prisma.item.upsert({
+    where: { id: "gold-bar" },
+    update: {},
+    create: {
+      id: "gold-bar",
+      key: "gold-bar",
+      name: "Gold Bar",
+      description: "A refined gold bar ready for forging.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 95,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const mithrilBar = await prisma.item.upsert({
+    where: { id: "mithril-bar" },
+    update: {},
+    create: {
+      id: "mithril-bar",
+      key: "mithril-bar",
+      name: "Mithril Bar",
+      description: "A refined mithril bar ready for forging.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 380,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  // Create component items
+  const rivets = await prisma.item.upsert({
+    where: { id: "rivets" },
+    update: {},
+    create: {
+      id: "rivets",
+      key: "rivets",
+      name: "Iron Rivets",
+      description: "Small iron rivets used for armor construction.",
+      itemType: "MATERIAL",
+      itemRarity: "COMMON",
+      tier: 2,
+      value: 5,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const plate = await prisma.item.upsert({
+    where: { id: "plate" },
+    update: {},
+    create: {
+      id: "plate",
+      key: "plate",
+      name: "Steel Plate",
+      description: "A reinforced steel plate for armor crafting.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 25,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const reinforcedPlate = await prisma.item.upsert({
+    where: { id: "reinforced-plate" },
+    update: {},
+    create: {
+      id: "reinforced-plate",
+      key: "reinforced-plate",
+      name: "Reinforced Plate",
+      description: "A heavily reinforced plate for advanced armor.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 4,
+      value: 120,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const gemSettingRuby = await prisma.item.upsert({
+    where: { id: "gem-setting-ruby" },
+    update: {},
+    create: {
+      id: "gem-setting-ruby",
+      key: "gem-setting-ruby",
+      name: "Ruby Gem Setting",
+      description: "A silver setting designed to hold quartz crystals.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 55,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const gemSettingSapphire = await prisma.item.upsert({
+    where: { id: "gem-setting-sapphire" },
+    update: {},
+    create: {
+      id: "gem-setting-sapphire",
+      key: "gem-setting-sapphire",
+      name: "Sapphire Gem Setting",
+      description: "A silver setting designed to hold geode crystals.",
+      itemType: "MATERIAL",
+      itemRarity: "RARE",
+      tier: 3,
+      value: 65,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const gemSettingEmerald = await prisma.item.upsert({
+    where: { id: "gem-setting-emerald" },
+    update: {},
+    create: {
+      id: "gem-setting-emerald",
+      key: "gem-setting-emerald",
+      name: "Emerald Gem Setting",
+      description: "A silver setting designed to hold tempest crystals.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 140,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const gildedHilt = await prisma.item.upsert({
+    where: { id: "gilded-hilt" },
+    update: {},
+    create: {
+      id: "gilded-hilt",
+      key: "gilded-hilt",
+      name: "Gilded Hilt",
+      description: "An ornate hilt crafted with gold accents.",
+      itemType: "MATERIAL",
+      itemRarity: "UNCOMMON",
+      tier: 2,
+      value: 40,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const mithrilEdge = await prisma.item.upsert({
+    where: { id: "mithril-edge" },
+    update: {},
+    create: {
+      id: "mithril-edge",
+      key: "mithril-edge",
+      name: "Mithril Edge",
+      description: "A razor-sharp blade edge forged from mithril.",
+      itemType: "MATERIAL",
+      itemRarity: "EPIC",
+      tier: 4,
+      value: 200,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const legendaryCore = await prisma.item.upsert({
+    where: { id: "legendary-core" },
+    update: {},
+    create: {
+      id: "legendary-core",
+      key: "legendary-core",
+      name: "Legendary Core",
+      description: "A powerful core forged from celestial materials.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 800,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  const runedPlate = await prisma.item.upsert({
+    where: { id: "runed-plate" },
+    update: {},
+    create: {
+      id: "runed-plate",
+      key: "runed-plate",
+      name: "Runed Plate",
+      description: "A plate inscribed with ancient runes.",
+      itemType: "MATERIAL",
+      itemRarity: "LEGENDARY",
+      tier: 5,
+      value: 1000,
+      stackable: true,
+      maxStack: 99,
+    },
+  });
+
+  // Helper function to create recipes idempotently
+  const createRecipe = async (
+    recipeId: string,
+    name: string,
+    description: string,
+    jobId: string,
+    difficulty: number,
+    requiredJobLevel: number,
+    station: "SMELTER" | "ANVIL",
+    craftTimeSeconds: number,
+    xp: number,
+    outputItemId: string,
+    outputQty: number,
+    inputs: Array<{ itemId: string; qty: number }>,
+    allowNonGatherableInputs: boolean = false
+  ) => {
+    const recipe = await prisma.recipe.upsert({
+      where: { id: recipeId },
+      update: {
+        station,
+        craftTimeSeconds,
+        xp,
+        requiredJobLevel,
+        isActive: true,
+      },
+      create: {
+        id: recipeId,
+        jobId,
+        name,
+        description,
+        difficulty,
+        requiredJobLevel,
+        station,
+        craftTimeSeconds,
+        xp,
+        isActive: true,
+        allowNonGatherableInputs,
+        status: "ACTIVE",
+        outputItemId,
+        outputQty,
+      },
+    });
+
+    for (const input of inputs) {
+      await prisma.recipeInput.upsert({
+        where: { id: `${recipeId}-${input.itemId}` },
+        update: { qty: input.qty },
+        create: {
+          id: `${recipeId}-${input.itemId}`,
+          recipeId: recipe.id,
+          itemId: input.itemId,
+          qty: input.qty,
+        },
+      });
+    }
+  };
+
+  // Helper function to create gear items
+  const createGearItem = async (
+    itemId: string,
+    key: string,
+    name: string,
+    description: string,
+    itemType: "WEAPON" | "ARMOR" | "TOOL",
+    itemRarity: "COMMON" | "UNCOMMON" | "RARE" | "EPIC" | "LEGENDARY",
+    tier: number,
+    value: number,
+    equipmentSlot: "MAINHAND" | "OFFHAND" | "HEAD" | "ARMS" | "BODY" | "LEGS" | "FEET" | "RING" | "NECKLACE" | "BELT" | "CLOAK",
+    stats?: {
+      strengthBonus?: number;
+      vitalityBonus?: number;
+      speedBonus?: number;
+      dexterityBonus?: number;
+      hpBonus?: number;
+      spBonus?: number;
+      defenseBonus?: number;
+    }
+  ) => {
+    return await prisma.item.upsert({
+      where: { id: itemId },
+      update: {},
+      create: {
+        id: itemId,
+        key,
+        name,
+        description,
+        itemType,
+        itemRarity,
+        tier,
+        value,
+        stackable: false,
+        maxStack: 1,
+        equipmentSlot,
+        ...(stats || {}),
+      },
+    });
+  };
+
+  // Create all gear items (weapons, armor, tools)
+  // Tier 1 Weapons (Levels 1-20)
+  const bronzeDagger = await createGearItem(
+    "bronze-dagger",
+    "bronze-dagger",
+    "Bronze Dagger",
+    "A lightweight bronze dagger.",
+    "WEAPON",
+    "COMMON",
+    1,
+    30,
+    "MAINHAND",
+    { strengthBonus: 2 }
+  );
+
+  const bronzeShortsword = await createGearItem(
+    "bronze-shortsword",
+    "bronze-shortsword",
+    "Bronze Shortsword",
+    "A simple bronze shortsword.",
+    "WEAPON",
+    "COMMON",
+    1,
+    45,
+    "MAINHAND",
+    { strengthBonus: 3 }
+  );
+
+  const ironDagger = await createGearItem(
+    "iron-dagger",
+    "iron-dagger",
+    "Iron Dagger",
+    "A sturdy iron dagger.",
+    "WEAPON",
+    "COMMON",
+    1,
+    50,
+    "MAINHAND",
+    { strengthBonus: 3, dexterityBonus: 1 }
+  );
+
+  const ironShortsword = await createGearItem(
+    "iron-shortsword",
+    "iron-shortsword",
+    "Iron Shortsword",
+    "A well-balanced iron shortsword.",
+    "WEAPON",
+    "UNCOMMON",
+    2,
+    80,
+    "MAINHAND",
+    { strengthBonus: 4, dexterityBonus: 1 }
+  );
+
+  const bronzeMace = await createGearItem(
+    "bronze-mace",
+    "bronze-mace",
+    "Bronze Mace",
+    "A heavy bronze mace.",
+    "WEAPON",
+    "COMMON",
+    1,
+    55,
+    "MAINHAND",
+    { strengthBonus: 4 }
+  );
+
+  const ironMace = await createGearItem(
+    "iron-mace",
+    "iron-mace",
+    "Iron Mace",
+    "A heavy iron mace for crushing.",
+    "WEAPON",
+    "UNCOMMON",
+    2,
+    90, "MAINHAND", { strengthBonus: 5 }
+  );
+
+  // Tier 2 Weapons (Levels 21-40)
+  const steelDagger = await createGearItem(
+    "steel-dagger",
+    "steel-dagger",
+    "Steel Dagger",
+    "A sharp steel dagger.",
+    "WEAPON",
+    "UNCOMMON",
+    2,
+    110, "MAINHAND", { strengthBonus: 4, dexterityBonus: 2 }
+  );
+
+  const steelShortsword = await createGearItem(
+    "steel-shortsword",
+    "steel-shortsword",
+    "Steel Shortsword",
+    "A refined steel shortsword.",
+    "WEAPON",
+    "UNCOMMON",
+    2,
+    140, "MAINHAND", { strengthBonus: 6, dexterityBonus: 1 }
+  );
+
+  const steelMace = await createGearItem(
+    "steel-mace",
+    "steel-mace",
+    "Steel Mace",
+    "A powerful steel mace.",
+    "WEAPON",
+    "UNCOMMON",
+    2,
+    150, "MAINHAND", { strengthBonus: 7 }
+  );
+
+  const ironWarhammer = await createGearItem(
+    "iron-warhammer",
+    "iron-warhammer",
+    "Iron Warhammer",
+    "A massive iron warhammer.",
+    "WEAPON",
+    "UNCOMMON",
+    2,
+    160, "MAINHAND", { strengthBonus: 8 }
+  );
+
+  const steelWarhammer = await createGearItem(
+    "steel-warhammer",
+    "steel-warhammer",
+    "Steel Warhammer",
+    "A devastating steel warhammer.",
+    "WEAPON",
+    "RARE",
+    2,
+    200, "MAINHAND", { strengthBonus: 10 }
+  );
+
+  const steelGreatsword = await createGearItem(
+    "steel-greatsword",
+    "steel-greatsword",
+    "Steel Greatsword",
+    "A massive steel greatsword.",
+    "WEAPON",
+    "RARE",
+    2,
+    220, "MAINHAND", { strengthBonus: 11 }
+  );
+
+  const ironSpear = await createGearItem(
+    "iron-spear",
+    "iron-spear",
+    "Iron Spear",
+    "A long iron spear.",
+    "WEAPON",
+    "UNCOMMON",
+    2,
+    130, "MAINHAND", { strengthBonus: 5, speedBonus: 1 }
+  );
+
+  const steelSpear = await createGearItem(
+    "steel-spear",
+    "steel-spear",
+    "Steel Spear",
+    "A precise steel spear.",
+    "WEAPON",
+    "UNCOMMON",
+    2,
+    170, "MAINHAND", { strengthBonus: 7, speedBonus: 2 }
+  );
+
+  // Tier 3 Weapons (Levels 41-60)
+  const gildedBlade = await createGearItem(
+    "gilded-blade",
+    "gilded-blade",
+    "Gilded Blade",
+    "An elegant blade with gold accents.",
+    "WEAPON",
+    "RARE",
+    3,
+    280, "MAINHAND", { strengthBonus: 9, dexterityBonus: 2 }
+  );
+
+  const silverShortsword = await createGearItem(
+    "silver-shortsword",
+    "silver-shortsword",
+    "Silver Shortsword",
+    "A finely crafted silver shortsword.",
+    "WEAPON",
+    "RARE",
+    3,
+    300, "MAINHAND", { strengthBonus: 10, dexterityBonus: 3 }
+  );
+
+  const socketedSwordRuby = await createGearItem(
+    "socketed-sword-ruby",
+    "socketed-sword-ruby",
+    "Socketed Sword (Ruby)",
+    "A sword with a quartz crystal socket.",
+    "WEAPON",
+    "RARE",
+    3,
+    320, "MAINHAND", { strengthBonus: 11, vitalityBonus: 2 }
+  );
+
+  const socketedSwordSapphire = await createGearItem(
+    "socketed-sword-sapphire",
+    "socketed-sword-sapphire",
+    "Socketed Sword (Sapphire)",
+    "A sword with a geode crystal socket.",
+    "WEAPON",
+    "RARE",
+    3,
+    350, "MAINHAND", { strengthBonus: 12, dexterityBonus: 2 }
+  );
+
+  // Tier 4 Weapons (Levels 61-80)
+  const mithrilDagger = await createGearItem(
+    "mithril-dagger",
+    "mithril-dagger",
+    "Mithril Dagger",
+    "A razor-sharp mithril dagger.",
+    "WEAPON",
+    "EPIC",
+    4,
+    450, "MAINHAND", { strengthBonus: 13, dexterityBonus: 5, speedBonus: 2 }
+  );
+
+  const mithrilLongsword = await createGearItem(
+    "mithril-longsword",
+    "mithril-longsword",
+    "Mithril Longsword",
+    "An exquisite mithril longsword.",
+    "WEAPON",
+    "EPIC",
+    4,
+    520, "MAINHAND", { strengthBonus: 16, dexterityBonus: 3, speedBonus: 2 }
+  );
+
+  const mithrilGreatsword = await createGearItem(
+    "mithril-greatsword",
+    "mithril-greatsword",
+    "Mithril Greatsword",
+    "A legendary mithril greatsword.",
+    "WEAPON",
+    "EPIC",
+    4,
+    580, "MAINHAND", { strengthBonus: 18, vitalityBonus: 3 }
+  );
+
+  // Tier 5 Weapons (Levels 81-100)
+  const runedGreatsword = await createGearItem(
+    "runed-greatsword",
+    "runed-greatsword",
+    "Runed Greatsword",
+    "A greatsword inscribed with ancient runes.",
+    "WEAPON",
+    "LEGENDARY",
+    5,
+    1200, "MAINHAND", { strengthBonus: 25, vitalityBonus: 5, dexterityBonus: 3 }
+  );
+
+  // Additional Weapons for expanded recipe set
+  const bronzeLongsword = await createGearItem(
+    "bronze-longsword",
+    "bronze-longsword",
+    "Bronze Longsword",
+    "A basic bronze longsword.",
+    "WEAPON",
+    "COMMON",
+    1,
+    50,
+    "MAINHAND",
+    { strengthBonus: 3 }
+  );
+
+  const ironLongsword = await createGearItem(
+    "iron-longsword",
+    "iron-longsword",
+    "Iron Longsword",
+    "A reliable iron longsword.",
+    "WEAPON",
+    "UNCOMMON",
+    2,
+    100,
+    "MAINHAND",
+    { strengthBonus: 5 }
+  );
+
+  const silverDagger = await createGearItem(
+    "silver-dagger",
+    "silver-dagger",
+    "Silver Dagger",
+    "An elegant silver dagger.",
+    "WEAPON",
+    "RARE",
+    3,
+    180,
+    "MAINHAND",
+    { strengthBonus: 7, dexterityBonus: 2 }
+  );
+
+  const gildedMace = await createGearItem(
+    "gilded-mace",
+    "gilded-mace",
+    "Gilded Mace",
+    "An ornate mace with gold accents.",
+    "WEAPON",
+    "RARE",
+    3,
+    220,
+    "MAINHAND",
+    { strengthBonus: 8, defenseBonus: 2 }
+  );
+
+  const silverSpear = await createGearItem(
+    "silver-spear",
+    "silver-spear",
+    "Silver Spear",
+    "An elegant silver spear.",
+    "WEAPON",
+    "RARE",
+    3,
+    200,
+    "MAINHAND",
+    { strengthBonus: 6, speedBonus: 3 }
+  );
+
+  const socketedSwordEmerald = await createGearItem(
+    "socketed-sword-emerald",
+    "socketed-sword-emerald",
+    "Socketed Sword (Emerald)",
+    "A sword with a tempest crystal socket.",
+    "WEAPON",
+    "EPIC",
+    3,
+    280,
+    "MAINHAND",
+    { strengthBonus: 9, speedBonus: 2 }
+  );
+
+  const mithrilShortsword = await createGearItem(
+    "mithril-shortsword",
+    "mithril-shortsword",
+    "Mithril Shortsword",
+    "A precise mithril shortsword.",
+    "WEAPON",
+    "EPIC",
+    4,
+    350,
+    "MAINHAND",
+    { strengthBonus: 12, speedBonus: 4 }
+  );
+
+  const mithrilMace = await createGearItem(
+    "mithril-mace",
+    "mithril-mace",
+    "Mithril Mace",
+    "A legendary mithril mace.",
+    "WEAPON",
+    "EPIC",
+    4,
+    380,
+    "MAINHAND",
+    { strengthBonus: 14, defenseBonus: 3 }
+  );
+
+  const mithrilWarhammer = await createGearItem(
+    "mithril-warhammer",
+    "mithril-warhammer",
+    "Mithril Warhammer",
+    "A devastating mithril warhammer.",
+    "WEAPON",
+    "EPIC",
+    4,
+    420,
+    "MAINHAND",
+    { strengthBonus: 16, defenseBonus: 4 }
+  );
+
+  const mithrilSpear = await createGearItem(
+    "mithril-spear",
+    "mithril-spear",
+    "Mithril Spear",
+    "A legendary mithril spear.",
+    "WEAPON",
+    "EPIC",
+    4,
+    400,
+    "MAINHAND",
+    { strengthBonus: 13, speedBonus: 5 }
+  );
+
+  const legendaryBlade = await createGearItem(
+    "legendary-blade",
+    "legendary-blade",
+    "Legendary Blade",
+    "A blade forged from celestial materials.",
+    "WEAPON",
+    "LEGENDARY",
+    5,
+    800,
+    "MAINHAND",
+    { strengthBonus: 20, speedBonus: 6 }
+  );
+
+  const runedLongsword = await createGearItem(
+    "runed-longsword",
+    "runed-longsword",
+    "Runed Longsword",
+    "A longsword inscribed with ancient runes.",
+    "WEAPON",
+    "LEGENDARY",
+    5,
+    850,
+    "MAINHAND",
+    { strengthBonus: 22, defenseBonus: 5 }
+  );
+
+  const celestialGreatsword = await createGearItem(
+    "celestial-greatsword",
+    "celestial-greatsword",
+    "Celestial Greatsword",
+    "A greatsword forged from celestial mithril.",
+    "WEAPON",
+    "LEGENDARY",
+    5,
+    900,
+    "MAINHAND",
+    { strengthBonus: 25, defenseBonus: 6 }
+  );
+
+  // Tier 1 Armor (Levels 1-20)
+  const bronzeHelm = await createGearItem(
+    "bronze-helm",
+    "bronze-helm",
+    "Bronze Helm",
+    "A basic bronze helmet.",
+    "ARMOR",
+    "COMMON",
+    1,
+    40,
+    "HEAD",
+    { vitalityBonus: 2, defenseBonus: 1 }
+  );
+
+  const bronzeChestplate = await createGearItem(
+    "bronze-chestplate",
+    "bronze-chestplate",
+    "Bronze Chestplate",
+    "A simple bronze chestplate.",
+    "ARMOR",
+    "COMMON",
+    1,
+    60,
+    "BODY",
+    { vitalityBonus: 3, defenseBonus: 2 }
+  );
+
+  const bronzeLegs = await createGearItem(
+    "bronze-legs",
+    "bronze-legs",
+    "Bronze Legguards",
+    "Basic bronze leg protection.",
+    "ARMOR",
+    "COMMON",
+    1,
+    50,
+    "LEGS",
+    { vitalityBonus: 2, defenseBonus: 1 }
+  );
+
+  const bronzeBoots = await createGearItem(
+    "bronze-boots",
+    "bronze-boots",
+    "Bronze Boots",
+    "Sturdy bronze boots.",
+    "ARMOR",
+    "COMMON",
+    1,
+    35,
+    "FEET",
+    { vitalityBonus: 1, speedBonus: 1, defenseBonus: 1 }
+  );
+
+  const bronzeGloves = await createGearItem(
+    "bronze-gloves",
+    "bronze-gloves",
+    "Bronze Gauntlets",
+    "Heavy bronze gauntlets.",
+    "ARMOR",
+    "COMMON",
+    1,
+    30,
+    "ARMS",
+    { strengthBonus: 1, dexterityBonus: 1 }
+  );
+
+  const bronzeShield = await createGearItem(
+    "bronze-shield",
+    "bronze-shield",
+    "Bronze Shield",
+    "A round bronze shield.",
+    "ARMOR",
+    "COMMON",
+    1,
+    55,
+    "OFFHAND",
+    { vitalityBonus: 2, defenseBonus: 3 }
+  );
+
+  const ironHelm = await createGearItem(
+    "iron-helm",
+    "iron-helm",
+    "Iron Helm",
+    "A sturdy iron helmet.",
+    "ARMOR",
+    "COMMON",
+    1,
+    80,
+    "HEAD",
+    { vitalityBonus: 3, defenseBonus: 2 }
+  );
+
+  const ironChestplate = await createGearItem(
+    "iron-chestplate",
+    "iron-chestplate",
+    "Iron Chestplate",
+    "A well-crafted iron chestplate.",
+    "ARMOR",
+    "UNCOMMON",
+    2,
+    120,
+    "BODY",
+    { vitalityBonus: 5, defenseBonus: 4 }
+  );
+
+  const ironLegs = await createGearItem(
+    "iron-legs",
+    "iron-legs",
+    "Iron Legguards",
+    "Protective iron leg armor.",
+    "ARMOR",
+    "UNCOMMON",
+    2,
+    100,
+    "LEGS",
+    { vitalityBonus: 4, defenseBonus: 3 }
+  );
+
+  const ironBoots = await createGearItem(
+    "iron-boots",
+    "iron-boots",
+    "Iron Boots",
+    "Reinforced iron boots.",
+    "ARMOR",
+    "UNCOMMON",
+    2,
+    70,
+    "FEET",
+    { vitalityBonus: 2, speedBonus: 1, defenseBonus: 2 }
+  );
+
+
+  // Tier 2 Armor (Levels 21-40)
+  const steelHelm = await createGearItem(
+    "steel-helm",
+    "steel-helm",
+    "Steel Helm",
+    "A reinforced steel helmet.",
+    "ARMOR",
+    "UNCOMMON",
+    2,
+    150,
+    "HEAD",
+    { vitalityBonus: 4, defenseBonus: 3 }
+  );
+
+  const steelChestplate = await createGearItem(
+    "steel-chestplate",
+    "steel-chestplate",
+    "Steel Chestplate",
+    "A masterfully crafted steel chestplate.",
+    "ARMOR",
+    "UNCOMMON",
+    2,
+    220,
+    "BODY",
+    { vitalityBonus: 7, defenseBonus: 6 }
+  );
+
+  const steelLegs = await createGearItem(
+    "steel-legs",
+    "steel-legs",
+    "Steel Legguards",
+    "Excellent steel leg protection.",
+    "ARMOR",
+    "UNCOMMON",
+    2,
+    180,
+    "LEGS",
+    { vitalityBonus: 6, defenseBonus: 5 }
+  );
+
+  const steelBoots = await createGearItem(
+    "steel-boots",
+    "steel-boots",
+    "Steel Boots",
+    "Durable steel boots.",
+    "ARMOR",
+    "UNCOMMON",
+    2,
+    130,
+    "FEET",
+    { vitalityBonus: 3, speedBonus: 2, defenseBonus: 3 }
+  );
+
+  const steelGloves = await createGearItem(
+    "steel-gloves",
+    "steel-gloves",
+    "Steel Gauntlets",
+    "Precise steel gauntlets.",
+    "ARMOR",
+    "UNCOMMON",
+    2,
+    120,
+    "ARMS",
+    { strengthBonus: 2, dexterityBonus: 2 }
+  );
+
+  const steelShield = await createGearItem(
+    "steel-shield",
+    "steel-shield",
+    "Steel Shield",
+    "A formidable steel shield.",
+    "ARMOR",
+    "RARE",
+    2,
+    200,
+    "OFFHAND",
+    { vitalityBonus: 5, defenseBonus: 8 }
+  );
+
+  // Tier 3 Armor (Levels 41-60)
+  const gildedHelm = await createGearItem(
+    "gilded-helm",
+    "gilded-helm",
+    "Gilded Helm",
+    "An ornate helm with gold accents.",
+    "ARMOR",
+    "RARE",
+    3,
+    280,
+    "HEAD",
+    { vitalityBonus: 5, defenseBonus: 4, dexterityBonus: 1 }
+  );
+
+  const silverChestplate = await createGearItem(
+    "silver-chestplate",
+    "silver-chestplate",
+    "Silver Chestplate",
+    "A beautifully crafted silver chestplate.",
+    "ARMOR",
+    "RARE",
+    3,
+    400,
+    "BODY",
+    { vitalityBonus: 9, defenseBonus: 7, dexterityBonus: 2 }
+  );
+
+  // Tier 4 Armor (Levels 61-80)
+  const mithrilHelm = await createGearItem(
+    "mithril-helm",
+    "mithril-helm",
+    "Mithril Helm",
+    "An elegant mithril helmet.",
+    "ARMOR",
+    "EPIC",
+    4,
+    550,
+    "HEAD",
+    { vitalityBonus: 7, defenseBonus: 6, speedBonus: 2 }
+  );
+
+  const mithrilChestplate = await createGearItem(
+    "mithril-chestplate",
+    "mithril-chestplate",
+    "Mithril Chestplate",
+    "An exquisite mithril chestplate.",
+    "ARMOR",
+    "EPIC",
+    4,
+    750,
+    "BODY",
+    { vitalityBonus: 12, defenseBonus: 10, speedBonus: 3 }
+  );
+
+  const mithrilLegs = await createGearItem(
+    "mithril-legs",
+    "mithril-legs",
+    "Mithril Legguards",
+    "Lightweight mithril leg armor.",
+    "ARMOR",
+    "EPIC",
+    4,
+    650,
+    "LEGS",
+    { vitalityBonus: 10, defenseBonus: 8, speedBonus: 2 }
+  );
+
+  const mithrilBoots = await createGearItem(
+    "mithril-boots",
+    "mithril-boots",
+    "Mithril Boots",
+    "Graceful mithril boots.",
+    "ARMOR",
+    "EPIC",
+    4,
+    500,
+    "FEET",
+    { vitalityBonus: 5, speedBonus: 5, defenseBonus: 5 }
+  );
+
+  const mithrilShield = await createGearItem(
+    "mithril-shield",
+    "mithril-shield",
+    "Mithril Shield",
+    "A legendary mithril shield.",
+    "ARMOR",
+    "EPIC",
+    4,
+    700,
+    "OFFHAND",
+    { vitalityBonus: 8, defenseBonus: 12, speedBonus: 2 }
+  );
+
+  // Tier 5 Armor (Levels 81-100)
+  const runedArmor = await createGearItem(
+    "runed-armor",
+    "runed-armor",
+    "Runed Armor",
+    "Armor inscribed with powerful runes.",
+    "ARMOR",
+    "LEGENDARY",
+    5,
+    1500,
+    "BODY",
+    { vitalityBonus: 18, defenseBonus: 15, strengthBonus: 5, dexterityBonus: 3 }
+  );
+
+  // Additional Armor for expanded recipe set
+  const ironGloves = await createGearItem(
+    "iron-gloves",
+    "iron-gloves",
+    "Iron Gauntlets",
+    "Protective iron gauntlets.",
+    "ARMOR",
+    "UNCOMMON",
+    2,
+    60,
+    "ARMS",
+    { strengthBonus: 2, defenseBonus: 3 }
+  );
+
+  const silverHelm = await createGearItem(
+    "silver-helm",
+    "silver-helm",
+    "Silver Helm",
+    "An elegant silver helmet.",
+    "ARMOR",
+    "RARE",
+    3,
+    180,
+    "HEAD",
+    { vitalityBonus: 4, defenseBonus: 5 }
+  );
+
+  const silverLegs = await createGearItem(
+    "silver-legs",
+    "silver-legs",
+    "Silver Legguards",
+    "Elegant silver leg armor.",
+    "ARMOR",
+    "RARE",
+    3,
+    220,
+    "LEGS",
+    { vitalityBonus: 5, defenseBonus: 6 }
+  );
+
+  const silverBoots = await createGearItem(
+    "silver-boots",
+    "silver-boots",
+    "Silver Boots",
+    "Elegant silver boots.",
+    "ARMOR",
+    "RARE",
+    3,
+    160,
+    "FEET",
+    { vitalityBonus: 3, speedBonus: 2, defenseBonus: 4 }
+  );
+
+  const gildedChestplate = await createGearItem(
+    "gilded-chestplate",
+    "gilded-chestplate",
+    "Gilded Chestplate",
+    "An ornate chestplate with gold accents.",
+    "ARMOR",
+    "RARE",
+    3,
+    250,
+    "BODY",
+    { vitalityBonus: 8, defenseBonus: 8 }
+  );
+
+  const mithrilGloves = await createGearItem(
+    "mithril-gloves",
+    "mithril-gloves",
+    "Mithril Gauntlets",
+    "Legendary mithril gauntlets.",
+    "ARMOR",
+    "EPIC",
+    4,
+    320,
+    "ARMS",
+    { strengthBonus: 5, dexterityBonus: 4, defenseBonus: 8 }
+  );
+
+  const legendaryHelm = await createGearItem(
+    "legendary-helm",
+    "legendary-helm",
+    "Legendary Helm",
+    "A helm forged from celestial materials.",
+    "ARMOR",
+    "LEGENDARY",
+    5,
+    700,
+    "HEAD",
+    { vitalityBonus: 12, defenseBonus: 12 }
+  );
+
+  const runedChestplate = await createGearItem(
+    "runed-chestplate",
+    "runed-chestplate",
+    "Runed Chestplate",
+    "A chestplate inscribed with powerful runes.",
+    "ARMOR",
+    "LEGENDARY",
+    5,
+    850,
+    "BODY",
+    { vitalityBonus: 15, defenseBonus: 15 }
+  );
+
+  const celestialLegs = await createGearItem(
+    "celestial-legs",
+    "celestial-legs",
+    "Celestial Legguards",
+    "Leg armor forged from celestial mithril.",
+    "ARMOR",
+    "LEGENDARY",
+    5,
+    900,
+    "LEGS",
+    { vitalityBonus: 14, speedBonus: 4, defenseBonus: 14 }
+  );
+
+  const legendaryBoots = await createGearItem(
+    "legendary-boots",
+    "legendary-boots",
+    "Legendary Boots",
+    "Boots forged from celestial materials.",
+    "ARMOR",
+    "LEGENDARY",
+    5,
+    750,
+    "FEET",
+    { vitalityBonus: 10, speedBonus: 6, defenseBonus: 10 }
+  );
+
+  const runedShield = await createGearItem(
+    "runed-shield",
+    "runed-shield",
+    "Runed Shield",
+    "A shield inscribed with powerful runes.",
+    "ARMOR",
+    "LEGENDARY",
+    5,
+    950,
+    "OFFHAND",
+    { vitalityBonus: 12, defenseBonus: 18 }
+  );
+
+  // Tools (Miner synergy)
+  const bronzePickaxe = await createGearItem(
+    "bronze-pickaxe",
+    "bronze-pickaxe",
+    "Bronze Pickaxe",
+    "A basic bronze pickaxe for mining.",
+    "TOOL",
+    "COMMON",
+    1,
+    50,
+    "MAINHAND",
+    { strengthBonus: 2 }
+  );
+
+  const ironPickaxe = await createGearItem(
+    "iron-pickaxe",
+    "iron-pickaxe",
+    "Iron Pickaxe",
+    "A sturdy iron pickaxe for mining.",
+    "TOOL",
+    "UNCOMMON",
+    2,
+    100,
+    "MAINHAND",
+    { strengthBonus: 4 }
+  );
+
+  const steelPickaxe = await createGearItem(
+    "steel-pickaxe",
+    "steel-pickaxe",
+    "Steel Pickaxe",
+    "An efficient steel pickaxe for mining.",
+    "TOOL",
+    "UNCOMMON",
+    2,
+    180,
+    "MAINHAND",
+    { strengthBonus: 6 }
+  );
+
+  const mithrilPickaxe = await createGearItem(
+    "mithril-pickaxe",
+    "mithril-pickaxe",
+    "Mithril Pickaxe",
+    "A legendary mithril pickaxe for mining.",
+    "TOOL",
+    "EPIC",
+    4,
+    600,
+    "MAINHAND",
+    { strengthBonus: 10, speedBonus: 3 }
+  );
+
+  // ==========================================
+  // SMELTER RECIPES (Bars)
+  // ==========================================
+  
+  // Tier 1 Bars (Levels 1-20)
+  await createRecipe(
+    "tin-bar-recipe",
+    "Tin Bar",
+    "Smelt tin ore into a refined tin bar.",
+    blacksmithJob.id,
+    1,
+    3,
+    "SMELTER",
+    35,
+    18,
+    tinBar.id,
+    1,
+    [{ itemId: tinOre.id, qty: 3 }, { itemId: coal.id, qty: 1 }],
+    false
+  );
+
+  await createRecipe(
+    "steel-bar-recipe",
+    "Steel Bar",
+    "Smelt iron ore and coal into a steel bar.",
+    blacksmithJob.id,
+    3,
+    20,
+    "SMELTER",
+    75,
+    40,
+    steelBar.id,
+    1,
+    [{ itemId: ironOre.id, qty: 3 }, { itemId: coal.id, qty: 3 }],
+    false
+  );
+
+  // Tier 2 Bars (Levels 21-40)
+  await createRecipe(
+    "silver-bar-recipe",
+    "Silver Bar",
+    "Smelt silver ore into a refined silver bar.",
+    blacksmithJob.id,
+    2,
+    25,
+    "SMELTER",
+    90,
+    45,
+    silverBar.id,
+    1,
+    [{ itemId: silverOre.id, qty: 3 }, { itemId: coal.id, qty: 2 }],
+    false
+  );
+
+  await createRecipe(
+    "gold-bar-recipe",
+    "Gold Bar",
+    "Smelt gold ore into a refined gold bar.",
+    blacksmithJob.id,
+    2,
+    30,
+    "SMELTER",
+    105,
+    50,
+    goldBar.id,
+    1,
+    [{ itemId: goldOre.id, qty: 3 }, { itemId: coal.id, qty: 2 }],
+    false
+  );
+
+  // Tier 4 Bars (Levels 61-80)
+  await createRecipe(
+    "mithril-bar-recipe",
+    "Mithril Bar",
+    "Smelt mithril ore into a refined mithril bar.",
+    blacksmithJob.id,
+    4,
+    65,
+    "SMELTER",
+    360,
+    180,
+    mithrilBar.id,
+    1,
+    [{ itemId: mithrilOre.id, qty: 4 }, { itemId: coal.id, qty: 3 }],
+    false
+  );
+
+  // ==========================================
+  // ANVIL RECIPES - Components
+  // ==========================================
+
+  // Tier 2 Components (Levels 21-40)
+  await createRecipe(
+    "rivets-recipe",
+    "Iron Rivets",
+    "Craft iron rivets from iron bars.",
+    blacksmithJob.id,
+    2,
+    22,
+    "ANVIL",
+    45,
+    35,
+    rivets.id,
+    6,
+    [{ itemId: ironBar.id, qty: 1 }, { itemId: coal.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "plate-recipe",
+    "Steel Plate",
+    "Forge a reinforced steel plate.",
+    blacksmithJob.id,
+    3,
+    32,
+    "ANVIL",
+    60,
+    50,
+    plate.id,
+    1,
+    [{ itemId: steelBar.id, qty: 2 }, { itemId: stone.id, qty: 2 }],
+    true
+  );
+
+  // Tier 3 Components (Levels 41-60)
+  await createRecipe(
+    "gem-setting-ruby-recipe",
+    "Ruby Gem Setting",
+    "Create a silver setting for quartz crystals.",
+    blacksmithJob.id,
+    3,
+    48,
+    "ANVIL",
+    75,
+    60,
+    gemSettingRuby.id,
+    1,
+    [{ itemId: silverBar.id, qty: 1 }, { itemId: quartz.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "gem-setting-sapphire-recipe",
+    "Sapphire Gem Setting",
+    "Create a silver setting for geode crystals.",
+    blacksmithJob.id,
+    3,
+    53,
+    "ANVIL",
+    80,
+    65,
+    gemSettingSapphire.id,
+    1,
+    [{ itemId: silverBar.id, qty: 1 }, { itemId: geodeCrystal.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "gilded-hilt-recipe",
+    "Gilded Hilt",
+    "Craft an ornate hilt with gold accents.",
+    blacksmithJob.id,
+    3,
+    46,
+    "ANVIL",
+    70,
+    55,
+    gildedHilt.id,
+    1,
+    [{ itemId: steelBar.id, qty: 2 }, { itemId: goldBar.id, qty: 1 }, { itemId: coal.id, qty: 1 }],
+    true
+  );
+
+  // Tier 4 Components (Levels 61-80)
+  await createRecipe(
+    "reinforced-plate-recipe",
+    "Reinforced Plate",
+    "Forge a heavily reinforced plate.",
+    blacksmithJob.id,
+    4,
+    68,
+    "ANVIL",
+    120,
+    95,
+    reinforcedPlate.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 2 }, { itemId: steelBar.id, qty: 2 }, { itemId: stone.id, qty: 4 }],
+    true
+  );
+
+  await createRecipe(
+    "mithril-edge-recipe",
+    "Mithril Edge",
+    "Forge a razor-sharp mithril blade edge.",
+    blacksmithJob.id,
+    4,
+    72,
+    "ANVIL",
+    135,
+    110,
+    mithrilEdge.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 3 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "gem-setting-emerald-recipe",
+    "Emerald Gem Setting",
+    "Create a silver setting for tempest crystals.",
+    blacksmithJob.id,
+    4,
+    70,
+    "ANVIL",
+    150,
+    120,
+    gemSettingEmerald.id,
+    1,
+    [{ itemId: silverBar.id, qty: 2 }, { itemId: tempestCrystal.id, qty: 1 }],
+    true
+  );
+
+  // Tier 5 Components (Levels 81-100)
+  await createRecipe(
+    "legendary-core-recipe",
+    "Legendary Core",
+    "Forge a powerful core from celestial materials.",
+    blacksmithJob.id,
+    5,
+    85,
+    "ANVIL",
+    240,
+    200,
+    legendaryCore.id,
+    1,
+    [{ itemId: celestialMithril.id, qty: 2 }, { itemId: starMetal.id, qty: 1 }, { itemId: coal.id, qty: 4 }],
+    true
+  );
+
+  await createRecipe(
+    "runed-plate-recipe",
+    "Runed Plate",
+    "Inscribe a plate with ancient runes.",
+    blacksmithJob.id,
+    5,
+    90,
+    "ANVIL",
+    300,
+    250,
+    runedPlate.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 4 }, { itemId: runestone.id, qty: 2 }, { itemId: coal.id, qty: 3 }],
+    true
+  );
+
+  // ==========================================
+  // ANVIL RECIPES - Weapons (Tier 1: Levels 1-20)
+  // ==========================================
+
+  await createRecipe(
+    "bronze-dagger-recipe",
+    "Bronze Dagger",
+    "Forge a lightweight bronze dagger.",
+    blacksmithJob.id,
+    1,
+    3,
+    "ANVIL",
+    40,
+    25,
+    bronzeDagger.id,
+    1,
+    [{ itemId: bronzeBar.id, qty: 2 }, { itemId: coal.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "bronze-shortsword-recipe",
+    "Bronze Shortsword",
+    "Forge a simple bronze shortsword.",
+    blacksmithJob.id,
+    2,
+    5,
+    "ANVIL",
+    50,
+    30,
+    bronzeShortsword.id,
+    1,
+    [{ itemId: bronzeBar.id, qty: 3 }, { itemId: coal.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "bronze-mace-recipe",
+    "Bronze Mace",
+    "Forge a heavy bronze mace.",
+    blacksmithJob.id,
+    2,
+    7,
+    "ANVIL",
+    55,
+    32,
+    bronzeMace.id,
+    1,
+    [{ itemId: bronzeBar.id, qty: 4 }, { itemId: stone.id, qty: 1 }, { itemId: coal.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "iron-dagger-recipe",
+    "Iron Dagger",
+    "Forge a sturdy iron dagger.",
+    blacksmithJob.id,
+    2,
+    12,
+    "ANVIL",
+    60,
+    35,
+    ironDagger.id,
+    1,
+    [{ itemId: ironBar.id, qty: 2 }, { itemId: coal.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "iron-shortsword-recipe",
+    "Iron Shortsword",
+    "Forge a well-balanced iron shortsword.",
+    blacksmithJob.id,
+    3,
+    18,
+    "ANVIL",
+    75,
+    45,
+    ironShortsword.id,
+    1,
+    [{ itemId: ironBar.id, qty: 4 }, { itemId: coal.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "iron-mace-recipe",
+    "Iron Mace",
+    "Forge a heavy iron mace.",
+    blacksmithJob.id,
+    3,
+    16,
+    "ANVIL",
+    70,
+    42,
+    ironMace.id,
+    1,
+    [{ itemId: ironBar.id, qty: 5 }, { itemId: stone.id, qty: 2 }, { itemId: coal.id, qty: 1 }],
+    true
+  );
+
+  // ==========================================
+  // ANVIL RECIPES - Weapons (Tier 2: Levels 21-40)
+  // ==========================================
+
+  await createRecipe(
+    "steel-dagger-recipe",
+    "Steel Dagger",
+    "Forge a sharp steel dagger.",
+    blacksmithJob.id,
+    3,
+    24,
+    "ANVIL",
+    85,
+    50,
+    steelDagger.id,
+    1,
+    [{ itemId: steelBar.id, qty: 2 }, { itemId: coal.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "steel-shortsword-recipe",
+    "Steel Shortsword",
+    "Forge a refined steel shortsword.",
+    blacksmithJob.id,
+    3,
+    28,
+    "ANVIL",
+    95,
+    58,
+    steelShortsword.id,
+    1,
+    [{ itemId: steelBar.id, qty: 3 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "steel-mace-recipe",
+    "Steel Mace",
+    "Forge a powerful steel mace.",
+    blacksmithJob.id,
+    3,
+    32,
+    "ANVIL",
+    105,
+    65,
+    steelMace.id,
+    1,
+    [{ itemId: steelBar.id, qty: 4 }, { itemId: stone.id, qty: 2 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "iron-warhammer-recipe",
+    "Iron Warhammer",
+    "Forge a massive iron warhammer.",
+    blacksmithJob.id,
+    4,
+    34,
+    "ANVIL",
+    115,
+    70,
+    ironWarhammer.id,
+    1,
+    [{ itemId: ironBar.id, qty: 6 }, { itemId: stone.id, qty: 3 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "steel-warhammer-recipe",
+    "Steel Warhammer",
+    "Forge a devastating steel warhammer.",
+    blacksmithJob.id,
+    4,
+    38,
+    "ANVIL",
+    130,
+    80,
+    steelWarhammer.id,
+    1,
+    [{ itemId: steelBar.id, qty: 5 }, { itemId: stone.id, qty: 4 }, { itemId: coal.id, qty: 3 }],
+    true
+  );
+
+  await createRecipe(
+    "steel-greatsword-recipe",
+    "Steel Greatsword",
+    "Forge a massive steel greatsword.",
+    blacksmithJob.id,
+    4,
+    36,
+    "ANVIL",
+    125,
+    75,
+    steelGreatsword.id,
+    1,
+    [{ itemId: steelBar.id, qty: 6 }, { itemId: coal.id, qty: 3 }],
+    true
+  );
+
+  await createRecipe(
+    "iron-spear-recipe",
+    "Iron Spear",
+    "Forge a long iron spear.",
+    blacksmithJob.id,
+    3,
+    26,
+    "ANVIL",
+    90,
+    55,
+    ironSpear.id,
+    1,
+    [{ itemId: ironBar.id, qty: 3 }, { itemId: stone.id, qty: 2 }, { itemId: coal.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "steel-spear-recipe",
+    "Steel Spear",
+    "Forge a precise steel spear.",
+    blacksmithJob.id,
+    3,
+    30,
+    "ANVIL",
+    100,
+    62,
+    steelSpear.id,
+    1,
+    [{ itemId: steelBar.id, qty: 4 }, { itemId: stone.id, qty: 3 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  // ==========================================
+  // ANVIL RECIPES - Weapons (Tier 3: Levels 41-60)
+  // ==========================================
+
+  await createRecipe(
+    "gilded-blade-recipe",
+    "Gilded Blade",
+    "Forge an elegant blade with gold accents.",
+    blacksmithJob.id,
+    4,
+    48,
+    "ANVIL",
+    140,
+    90,
+    gildedBlade.id,
+    1,
+    [{ itemId: steelBar.id, qty: 4 }, { itemId: goldBar.id, qty: 1 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "silver-shortsword-recipe",
+    "Silver Shortsword",
+    "Forge a finely crafted silver shortsword.",
+    blacksmithJob.id,
+    4,
+    50,
+    "ANVIL",
+    150,
+    95,
+    silverShortsword.id,
+    1,
+    [{ itemId: silverBar.id, qty: 5 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "socketed-sword-ruby-recipe",
+    "Socketed Sword (Ruby)",
+    "Forge a sword with a quartz crystal socket.",
+    blacksmithJob.id,
+    4,
+    55,
+    "ANVIL",
+    160,
+    105,
+    socketedSwordRuby.id,
+    1,
+    [{ itemId: steelBar.id, qty: 4 }, { itemId: gemSettingRuby.id, qty: 1 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "socketed-sword-sapphire-recipe",
+    "Socketed Sword (Sapphire)",
+    "Forge a sword with a geode crystal socket.",
+    blacksmithJob.id,
+    4,
+    58,
+    "ANVIL",
+    170,
+    115,
+    socketedSwordSapphire.id,
+    1,
+    [{ itemId: steelBar.id, qty: 5 }, { itemId: gemSettingSapphire.id, qty: 1 }, { itemId: coal.id, qty: 3 }],
+    true
+  );
+
+  // ==========================================
+  // ANVIL RECIPES - Weapons (Tier 4: Levels 61-80)
+  // ==========================================
+
+  await createRecipe(
+    "mithril-dagger-recipe",
+    "Mithril Dagger",
+    "Forge a razor-sharp mithril dagger.",
+    blacksmithJob.id,
+    5,
+    66,
+    "ANVIL",
+    180,
+    130,
+    mithrilDagger.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 3 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "mithril-longsword-recipe",
+    "Mithril Longsword",
+    "Forge an exquisite mithril longsword.",
+    blacksmithJob.id,
+    5,
+    70,
+    "ANVIL",
+    200,
+    150,
+    mithrilLongsword.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 6 }, { itemId: coal.id, qty: 4 }],
+    true
+  );
+
+  await createRecipe(
+    "mithril-greatsword-recipe",
+    "Mithril Greatsword",
+    "Forge a legendary mithril greatsword.",
+    blacksmithJob.id,
+    5,
+    74,
+    "ANVIL",
+    220,
+    170,
+    mithrilGreatsword.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 8 }, { itemId: coal.id, qty: 5 }],
+    true
+  );
+
+  // ==========================================
+  // ANVIL RECIPES - Weapons (Tier 5: Levels 81-100)
+  // ==========================================
+
+  await createRecipe(
+    "runed-greatsword-recipe",
+    "Runed Greatsword",
+    "Forge a greatsword inscribed with ancient runes.",
+    blacksmithJob.id,
+    5,
+    92,
+    "ANVIL",
+    280,
+    220,
+    runedGreatsword.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 10 }, { itemId: goldBar.id, qty: 2 }, { itemId: quartz.id, qty: 1 }, { itemId: geodeCrystal.id, qty: 1 }, { itemId: coal.id, qty: 6 }],
+    true
+  );
+
+  // ==========================================
+  // ANVIL RECIPES - Armor (Tier 1: Levels 1-20)
+  // ==========================================
+
+  await createRecipe(
+    "bronze-helm-recipe",
+    "Bronze Helm",
+    "Forge a basic bronze helmet.",
+    blacksmithJob.id,
+    1,
+    6,
+    "ANVIL",
+    50,
+    28,
+    bronzeHelm.id,
+    1,
+    [{ itemId: bronzeBar.id, qty: 3 }, { itemId: stone.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "bronze-chestplate-recipe",
+    "Bronze Chestplate",
+    "Forge a simple bronze chestplate.",
+    blacksmithJob.id,
+    2,
+    8,
+    "ANVIL",
+    70,
+    40,
+    bronzeChestplate.id,
+    1,
+    [{ itemId: bronzeBar.id, qty: 5 }, { itemId: stone.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "bronze-legs-recipe",
+    "Bronze Legguards",
+    "Forge basic bronze leg protection.",
+    blacksmithJob.id,
+    2,
+    7,
+    "ANVIL",
+    60,
+    35,
+    bronzeLegs.id,
+    1,
+    [{ itemId: bronzeBar.id, qty: 4 }, { itemId: stone.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "bronze-boots-recipe",
+    "Bronze Boots",
+    "Forge sturdy bronze boots.",
+    blacksmithJob.id,
+    1,
+    9,
+    "ANVIL",
+    45,
+    25,
+    bronzeBoots.id,
+    1,
+    [{ itemId: bronzeBar.id, qty: 2 }, { itemId: stone.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "bronze-gloves-recipe",
+    "Bronze Gauntlets",
+    "Forge heavy bronze gauntlets.",
+    blacksmithJob.id,
+    1,
+    10,
+    "ANVIL",
+    40,
+    22,
+    bronzeGloves.id,
+    1,
+    [{ itemId: bronzeBar.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "bronze-shield-recipe",
+    "Bronze Shield",
+    "Forge a round bronze shield.",
+    blacksmithJob.id,
+    2,
+    11,
+    "ANVIL",
+    65,
+    38,
+    bronzeShield.id,
+    1,
+    [{ itemId: bronzeBar.id, qty: 4 }, { itemId: stone.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "iron-helm-recipe",
+    "Iron Helm",
+    "Forge a sturdy iron helmet.",
+    blacksmithJob.id,
+    2,
+    13,
+    "ANVIL",
+    75,
+    42,
+    ironHelm.id,
+    1,
+    [{ itemId: ironBar.id, qty: 3 }, { itemId: stone.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "iron-chestplate-recipe",
+    "Iron Chestplate",
+    "Forge a well-crafted iron chestplate.",
+    blacksmithJob.id,
+    3,
+    17,
+    "ANVIL",
+    100,
+    58,
+    ironChestplate.id,
+    1,
+    [{ itemId: ironBar.id, qty: 6 }, { itemId: rivets.id, qty: 4 }, { itemId: stone.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "iron-legs-recipe",
+    "Iron Legguards",
+    "Forge protective iron leg armor.",
+    blacksmithJob.id,
+    3,
+    15,
+    "ANVIL",
+    90,
+    52,
+    ironLegs.id,
+    1,
+    [{ itemId: ironBar.id, qty: 5 }, { itemId: stone.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "iron-boots-recipe",
+    "Iron Boots",
+    "Forge reinforced iron boots.",
+    blacksmithJob.id,
+    2,
+    14,
+    "ANVIL",
+    70,
+    40,
+    ironBoots.id,
+    1,
+    [{ itemId: ironBar.id, qty: 3 }, { itemId: stone.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "iron-shield-recipe",
+    "Iron Shield",
+    "Forge a heavy iron shield.",
+    blacksmithJob.id,
+    3,
+    19,
+    "ANVIL",
+    110,
+    65,
+    ironShield.id,
+    1,
+    [{ itemId: ironBar.id, qty: 5 }, { itemId: stone.id, qty: 3 }],
+    true
+  );
+
+  // ==========================================
+  // ANVIL RECIPES - Armor (Tier 2: Levels 21-40)
+  // ==========================================
+
+  await createRecipe(
+    "steel-helm-recipe",
+    "Steel Helm",
+    "Forge a reinforced steel helmet.",
+    blacksmithJob.id,
+    3,
+    23,
+    "ANVIL",
+    105,
+    62,
+    steelHelm.id,
+    1,
+    [{ itemId: steelBar.id, qty: 3 }, { itemId: stone.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "steel-chestplate-recipe",
+    "Steel Chestplate",
+    "Forge a masterfully crafted steel chestplate.",
+    blacksmithJob.id,
+    4,
+    27,
+    "ANVIL",
+    140,
+    85,
+    steelChestplate.id,
+    1,
+    [{ itemId: steelBar.id, qty: 7 }, { itemId: rivets.id, qty: 6 }, { itemId: stone.id, qty: 3 }],
+    true
+  );
+
+  await createRecipe(
+    "steel-legs-recipe",
+    "Steel Legguards",
+    "Forge excellent steel leg protection.",
+    blacksmithJob.id,
+    3,
+    25,
+    "ANVIL",
+    120,
+    72,
+    steelLegs.id,
+    1,
+    [{ itemId: steelBar.id, qty: 6 }, { itemId: stone.id, qty: 3 }],
+    true
+  );
+
+  await createRecipe(
+    "steel-boots-recipe",
+    "Steel Boots",
+    "Forge durable steel boots.",
+    blacksmithJob.id,
+    3,
+    24,
+    "ANVIL",
+    100,
+    60,
+    steelBoots.id,
+    1,
+    [{ itemId: steelBar.id, qty: 4 }, { itemId: stone.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "steel-gloves-recipe",
+    "Steel Gauntlets",
+    "Forge precise steel gauntlets.",
+    blacksmithJob.id,
+    3,
+    26,
+    "ANVIL",
+    95,
+    58,
+    steelGloves.id,
+    1,
+    [{ itemId: steelBar.id, qty: 3 }, { itemId: coal.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "steel-shield-recipe",
+    "Steel Shield",
+    "Forge a formidable steel shield.",
+    blacksmithJob.id,
+    4,
+    29,
+    "ANVIL",
+    150,
+    90,
+    steelShield.id,
+    1,
+    [{ itemId: steelBar.id, qty: 5 }, { itemId: plate.id, qty: 1 }, { itemId: stone.id, qty: 3 }],
+    true
+  );
+
+  // ==========================================
+  // ANVIL RECIPES - Armor (Tier 3: Levels 41-60)
+  // ==========================================
+
+  await createRecipe(
+    "gilded-helm-recipe",
+    "Gilded Helm",
+    "Forge an ornate helm with gold accents.",
+    blacksmithJob.id,
+    4,
+    52,
+    "ANVIL",
+    165,
+    100,
+    gildedHelm.id,
+    1,
+    [{ itemId: steelBar.id, qty: 3 }, { itemId: goldBar.id, qty: 1 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "silver-chestplate-recipe",
+    "Silver Chestplate",
+    "Forge a beautifully crafted silver chestplate.",
+    blacksmithJob.id,
+    4,
+    54,
+    "ANVIL",
+    180,
+    110,
+    silverChestplate.id,
+    1,
+    [{ itemId: silverBar.id, qty: 8 }, { itemId: plate.id, qty: 2 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  // ==========================================
+  // ANVIL RECIPES - Armor (Tier 4: Levels 61-80)
+  // ==========================================
+
+  await createRecipe(
+    "mithril-helm-recipe",
+    "Mithril Helm",
+    "Forge an elegant mithril helmet.",
+    blacksmithJob.id,
+    5,
+    67,
+    "ANVIL",
+    190,
+    140,
+    mithrilHelm.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 4 }, { itemId: stone.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "mithril-chestplate-recipe",
+    "Mithril Chestplate",
+    "Forge an exquisite mithril chestplate.",
+    blacksmithJob.id,
+    5,
+    75,
+    "ANVIL",
+    240,
+    180,
+    mithrilChestplate.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 10 }, { itemId: reinforcedPlate.id, qty: 1 }, { itemId: stone.id, qty: 4 }],
+    true
+  );
+
+  await createRecipe(
+    "mithril-legs-recipe",
+    "Mithril Legguards",
+    "Forge lightweight mithril leg armor.",
+    blacksmithJob.id,
+    5,
+    73,
+    "ANVIL",
+    220,
+    165,
+    mithrilLegs.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 8 }, { itemId: stone.id, qty: 3 }],
+    true
+  );
+
+  await createRecipe(
+    "mithril-boots-recipe",
+    "Mithril Boots",
+    "Forge graceful mithril boots.",
+    blacksmithJob.id,
+    5,
+    71,
+    "ANVIL",
+    200,
+    150,
+    mithrilBoots.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 5 }, { itemId: stone.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "mithril-shield-recipe",
+    "Mithril Shield",
+    "Forge a legendary mithril shield.",
+    blacksmithJob.id,
+    5,
+    77,
+    "ANVIL",
+    260,
+    195,
+    mithrilShield.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 8 }, { itemId: reinforcedPlate.id, qty: 1 }, { itemId: stone.id, qty: 4 }],
+    true
+  );
+
+  // ==========================================
+  // ANVIL RECIPES - Armor (Tier 5: Levels 81-100)
+  // ==========================================
+
+  await createRecipe(
+    "runed-armor-recipe",
+    "Runed Armor",
+    "Forge armor inscribed with powerful runes.",
+    blacksmithJob.id,
+    5,
+    96,
+    "ANVIL",
+    300,
+    240,
+    runedArmor.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 14 }, { itemId: reinforcedPlate.id, qty: 2 }, { itemId: tempestCrystal.id, qty: 2 }, { itemId: coal.id, qty: 8 }],
+    true
+  );
+
+  // ==========================================
+  // ANVIL RECIPES - Tools (Miner synergy)
+  // ==========================================
+
+  await createRecipe(
+    "bronze-pickaxe-recipe",
+    "Bronze Pickaxe",
+    "Forge a basic bronze pickaxe for mining.",
+    blacksmithJob.id,
+    2,
+    8,
+    "ANVIL",
+    60,
+    35,
+    bronzePickaxe.id,
+    1,
+    [{ itemId: bronzeBar.id, qty: 3 }, { itemId: stone.id, qty: 3 }, { itemId: coal.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "iron-pickaxe-recipe",
+    "Iron Pickaxe",
+    "Forge a sturdy iron pickaxe for mining.",
+    blacksmithJob.id,
+    3,
+    26,
+    "ANVIL",
+    95,
+    58,
+    ironPickaxe.id,
+    1,
+    [{ itemId: ironBar.id, qty: 4 }, { itemId: stone.id, qty: 4 }, { itemId: coal.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "steel-pickaxe-recipe",
+    "Steel Pickaxe",
+    "Forge an efficient steel pickaxe for mining.",
+    blacksmithJob.id,
+    3,
+    38,
+    "ANVIL",
+    125,
+    75,
+    steelPickaxe.id,
+    1,
+    [{ itemId: steelBar.id, qty: 4 }, { itemId: stone.id, qty: 5 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "mithril-pickaxe-recipe",
+    "Mithril Pickaxe",
+    "Forge a legendary mithril pickaxe for mining.",
+    blacksmithJob.id,
+    5,
+    78,
+    "ANVIL",
+    250,
+    190,
+    mithrilPickaxe.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 5 }, { itemId: stone.id, qty: 6 }, { itemId: coal.id, qty: 3 }],
+    true
+  );
+
+  // ==========================================
+  // ADDITIONAL RECIPES TO REACH 80-110 TARGET
+  // ==========================================
+
+  // Tier 1-2 Additional Weapons
+  await createRecipe(
+    "bronze-longsword-recipe",
+    "Bronze Longsword",
+    "Forge a basic bronze longsword.",
+    blacksmithJob.id,
+    2,
+    9,
+    "ANVIL",
+    60,
+    35,
+    bronzeLongsword.id,
+    1,
+    [{ itemId: bronzeBar.id, qty: 4 }, { itemId: coal.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "iron-longsword-recipe",
+    "Iron Longsword",
+    "Forge a reliable iron longsword.",
+    blacksmithJob.id,
+    3,
+    20,
+    "ANVIL",
+    85,
+    50,
+    ironLongsword.id,
+    1,
+    [{ itemId: ironBar.id, qty: 5 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+
+  // Tier 3 Additional Weapons
+  await createRecipe(
+    "silver-dagger-recipe",
+    "Silver Dagger",
+    "Forge an elegant silver dagger.",
+    blacksmithJob.id,
+    4,
+    44,
+    "ANVIL",
+    130,
+    82,
+    silverDagger.id,
+    1,
+    [{ itemId: silverBar.id, qty: 3 }, { itemId: coal.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "gilded-mace-recipe",
+    "Gilded Mace",
+    "Forge an ornate mace with gold accents.",
+    blacksmithJob.id,
+    4,
+    49,
+    "ANVIL",
+    145,
+    92,
+    gildedMace.id,
+    1,
+    [{ itemId: steelBar.id, qty: 5 }, { itemId: goldBar.id, qty: 1 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "silver-spear-recipe",
+    "Silver Spear",
+    "Forge an elegant silver spear.",
+    blacksmithJob.id,
+    4,
+    51,
+    "ANVIL",
+    155,
+    98,
+    silverSpear.id,
+    1,
+    [{ itemId: silverBar.id, qty: 4 }, { itemId: stone.id, qty: 3 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "socketed-sword-emerald-recipe",
+    "Socketed Sword (Emerald)",
+    "Forge a sword with a tempest crystal socket.",
+    blacksmithJob.id,
+    4,
+    60,
+    "ANVIL",
+    180,
+    120,
+    socketedSwordEmerald.id,
+    1,
+    [{ itemId: steelBar.id, qty: 6 }, { itemId: gemSettingEmerald.id, qty: 1 }, { itemId: coal.id, qty: 3 }],
+    true
+  );
+
+  // Tier 4 Additional Weapons
+  await createRecipe(
+    "mithril-shortsword-recipe",
+    "Mithril Shortsword",
+    "Forge a precise mithril shortsword.",
+    blacksmithJob.id,
+    5,
+    64,
+    "ANVIL",
+    175,
+    125,
+    mithrilShortsword.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 5 }, { itemId: coal.id, qty: 3 }],
+    true
+  );
+
+  await createRecipe(
+    "mithril-mace-recipe",
+    "Mithril Mace",
+    "Forge a legendary mithril mace.",
+    blacksmithJob.id,
+    5,
+    68,
+    "ANVIL",
+    190,
+    140,
+    mithrilMace.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 7 }, { itemId: stone.id, qty: 2 }, { itemId: coal.id, qty: 4 }],
+    true
+  );
+
+  await createRecipe(
+    "mithril-warhammer-recipe",
+    "Mithril Warhammer",
+    "Forge a devastating mithril warhammer.",
+    blacksmithJob.id,
+    5,
+    72,
+    "ANVIL",
+    210,
+    160,
+    mithrilWarhammer.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 9 }, { itemId: stone.id, qty: 4 }, { itemId: coal.id, qty: 5 }],
+    true
+  );
+
+  await createRecipe(
+    "mithril-spear-recipe",
+    "Mithril Spear",
+    "Forge a legendary mithril spear.",
+    blacksmithJob.id,
+    5,
+    76,
+    "ANVIL",
+    230,
+    175,
+    mithrilSpear.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 7 }, { itemId: stone.id, qty: 5 }, { itemId: coal.id, qty: 4 }],
+    true
+  );
+
+  // Tier 5 Additional Weapons
+  await createRecipe(
+    "legendary-blade-recipe",
+    "Legendary Blade",
+    "Forge a blade forged from celestial materials.",
+    blacksmithJob.id,
+    5,
+    84,
+    "ANVIL",
+    260,
+    210,
+    legendaryBlade.id,
+    1,
+    [{ itemId: legendaryCore.id, qty: 1 }, { itemId: mithrilBar.id, qty: 8 }, { itemId: coal.id, qty: 5 }],
+    true
+  );
+
+  await createRecipe(
+    "runed-longsword-recipe",
+    "Runed Longsword",
+    "Forge a longsword inscribed with ancient runes.",
+    blacksmithJob.id,
+    5,
+    88,
+    "ANVIL",
+    290,
+    230,
+    runedLongsword.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 12 }, { itemId: runedPlate.id, qty: 1 }, { itemId: coal.id, qty: 7 }],
+    true
+  );
+
+  await createRecipe(
+    "celestial-greatsword-recipe",
+    "Celestial Greatsword",
+    "Forge a greatsword from celestial mithril.",
+    blacksmithJob.id,
+    5,
+    94,
+    "ANVIL",
+    320,
+    260,
+    celestialGreatsword.id,
+    1,
+    [{ itemId: celestialMithril.id, qty: 3 }, { itemId: mithrilBar.id, qty: 10 }, { itemId: coal.id, qty: 8 }],
+    true
+  );
+
+  // Tier 2-3 Additional Armor
+  await createRecipe(
+    "iron-gloves-recipe",
+    "Iron Gauntlets",
+    "Forge protective iron gauntlets.",
+    blacksmithJob.id,
+    2,
+    16,
+    "ANVIL",
+    85,
+    48,
+    ironGloves.id,
+    1,
+    [{ itemId: ironBar.id, qty: 4 }, { itemId: coal.id, qty: 1 }],
+    true
+  );
+
+  await createRecipe(
+    "silver-helm-recipe",
+    "Silver Helm",
+    "Forge an elegant silver helmet.",
+    blacksmithJob.id,
+    4,
+    46,
+    "ANVIL",
+    140,
+    88,
+    silverHelm.id,
+    1,
+    [{ itemId: silverBar.id, qty: 4 }, { itemId: stone.id, qty: 2 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "silver-legs-recipe",
+    "Silver Legguards",
+    "Forge elegant silver leg armor.",
+    blacksmithJob.id,
+    4,
+    56,
+    "ANVIL",
+    175,
+    108,
+    silverLegs.id,
+    1,
+    [{ itemId: silverBar.id, qty: 7 }, { itemId: stone.id, qty: 3 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "silver-boots-recipe",
+    "Silver Boots",
+    "Forge elegant silver boots.",
+    blacksmithJob.id,
+    4,
+    48,
+    "ANVIL",
+    135,
+    85,
+    silverBoots.id,
+    1,
+    [{ itemId: silverBar.id, qty: 3 }, { itemId: stone.id, qty: 2 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  await createRecipe(
+    "gilded-chestplate-recipe",
+    "Gilded Chestplate",
+    "Forge an ornate chestplate with gold accents.",
+    blacksmithJob.id,
+    4,
+    50,
+    "ANVIL",
+    160,
+    100,
+    gildedChestplate.id,
+    1,
+    [{ itemId: steelBar.id, qty: 6 }, { itemId: goldBar.id, qty: 2 }, { itemId: plate.id, qty: 1 }, { itemId: coal.id, qty: 2 }],
+    true
+  );
+
+  // Tier 4 Additional Armor
+  await createRecipe(
+    "mithril-gloves-recipe",
+    "Mithril Gauntlets",
+    "Forge legendary mithril gauntlets.",
+    blacksmithJob.id,
+    5,
+    69,
+    "ANVIL",
+    205,
+    152,
+    mithrilGloves.id,
+    1,
+    [{ itemId: mithrilBar.id, qty: 6 }, { itemId: coal.id, qty: 3 }],
+    true
+  );
+
+  // Tier 5 Additional Armor
+  await createRecipe(
+    "legendary-helm-recipe",
+    "Legendary Helm",
+    "Forge a helm from celestial materials.",
+    blacksmithJob.id,
+    5,
+    82,
+    "ANVIL",
+    250,
+    205,
+    legendaryHelm.id,
+    1,
+    [{ itemId: legendaryCore.id, qty: 1 }, { itemId: mithrilBar.id, qty: 5 }, { itemId: stone.id, qty: 3 }, { itemId: coal.id, qty: 4 }],
+    true
+  );
+
+  await createRecipe(
+    "runed-chestplate-recipe",
+    "Runed Chestplate",
+    "Forge a chestplate inscribed with powerful runes.",
+    blacksmithJob.id,
+    5,
+    93,
+    "ANVIL",
+    310,
+    250,
+    runedChestplate.id,
+    1,
+    [{ itemId: runedPlate.id, qty: 2 }, { itemId: mithrilBar.id, qty: 12 }, { itemId: reinforcedPlate.id, qty: 1 }, { itemId: coal.id, qty: 7 }],
+    true
+  );
+
+  await createRecipe(
+    "celestial-legs-recipe",
+    "Celestial Legguards",
+    "Forge leg armor from celestial mithril.",
+    blacksmithJob.id,
+    5,
+    97,
+    "ANVIL",
+    340,
+    275,
+    celestialLegs.id,
+    1,
+    [{ itemId: celestialMithril.id, qty: 2 }, { itemId: mithrilBar.id, qty: 10 }, { itemId: stone.id, qty: 5 }, { itemId: coal.id, qty: 8 }],
+    true
+  );
+
+  await createRecipe(
+    "legendary-boots-recipe",
+    "Legendary Boots",
+    "Forge boots from celestial materials.",
+    blacksmithJob.id,
+    5,
+    86,
+    "ANVIL",
+    270,
+    220,
+    legendaryBoots.id,
+    1,
+    [{ itemId: legendaryCore.id, qty: 1 }, { itemId: mithrilBar.id, qty: 6 }, { itemId: stone.id, qty: 3 }, { itemId: coal.id, qty: 5 }],
+    true
+  );
+
+  await createRecipe(
+    "runed-shield-recipe",
+    "Runed Shield",
+    "Forge a shield inscribed with powerful runes.",
+    blacksmithJob.id,
+    5,
+    98,
+    "ANVIL",
+    350,
+    285,
+    runedShield.id,
+    1,
+    [{ itemId: runedPlate.id, qty: 2 }, { itemId: mithrilBar.id, qty: 14 }, { itemId: reinforcedPlate.id, qty: 2 }, { itemId: coal.id, qty: 9 }],
+    true
+  );
+
+  console.log("✅ Created full Blacksmith recipe pack (100+ recipes)");
+
   // Tailor: Cloth -> Cloth Shirt
   const clothShirtRecipe = await prisma.recipe.upsert({
     where: { id: "cloth-shirt-recipe" },
