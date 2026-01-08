@@ -6,6 +6,7 @@ import {
   adminProcedure,
 } from "~/server/api/trpc";
 import { logAuditEvent, getIpAddress, getUserAgent } from "~/server/lib/audit";
+import { getMaxXpForLevel } from "~/server/lib/job-utils";
 
 export const adminUsersRouter = createTRPCRouter({
   // List users with pagination
@@ -910,13 +911,26 @@ export const adminUsersRouter = createTRPCRouter({
 
       const oldLevel = userJob.level;
       const oldXp = userJob.xp;
+      
+      // Calculate minimum XP required for the target level
+      // getMaxXpForLevel(level) returns the total XP needed to reach that level
+      // (sum of XP for levels 1 to level-1)
+      // Always calculate XP from level to ensure consistency with getMyJobs query
+      // which recalculates the level from XP
+      const xpForLevel = getMaxXpForLevel(input.level);
+      
+      // Always calculate XP from the target level to ensure getMyJobs shows correct level
+      const newXp = xpForLevel;
+      
       const updatedJob = await ctx.db.userJob.update({
         where: { id: input.userJobId },
         data: {
           level: input.level,
-          ...(input.xp !== undefined && { xp: input.xp }),
+          xp: newXp,
         },
       });
+
+      console.log(`[UPDATE_JOB_LEVEL] Updated userJob ${input.userJobId}: level ${oldLevel} -> ${input.level}, xp ${oldXp} -> ${newXp}`);
 
       // Log admin action
       await ctx.db.adminActionLog.create({
@@ -931,11 +945,9 @@ export const adminUsersRouter = createTRPCRouter({
             oldLevel,
             newLevel: input.level,
             levelChange: input.level - oldLevel,
-            ...(input.xp !== undefined && {
-              oldXp,
-              newXp: input.xp,
-              xpChange: input.xp - oldXp,
-            }),
+            oldXp,
+            newXp,
+            xpChange: newXp - oldXp,
           },
         },
       });

@@ -323,4 +323,138 @@ export const gatheringRouter = createTRPCRouter({
         take: input?.limit ?? 50,
       });
     }),
+
+  // Get all gatherable items for a specific job
+  getGatherableItemsByJob: publicProcedure
+    .input(
+      z.object({
+        jobKey: z.string(),
+        playerLevel: z.number().int().min(1).optional(),
+      })
+    )
+    .query(async ({ input }) => {
+      // Find the job by key
+      const job = await db.job.findUnique({
+        where: { key: input.jobKey },
+      });
+
+      if (!job) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: `Job with key "${input.jobKey}" not found`,
+        });
+      }
+
+      // Build where clause for nodes
+      const nodeWhere: {
+        jobId: string;
+        isActive: boolean;
+        requiredJobLevel?: { lte: number };
+      } = {
+        jobId: job.id,
+        isActive: true,
+      };
+
+      // Filter by player level if provided
+      if (input.playerLevel !== undefined) {
+        nodeWhere.requiredJobLevel = { lte: input.playerLevel };
+      }
+
+      // Get all nodes for this job with their yields
+      const nodes = await db.gatheringNode.findMany({
+        where: nodeWhere,
+        include: {
+          yields: {
+            include: {
+              item: {
+                select: {
+                  id: true,
+                  name: true,
+                  itemType: true,
+                  description: true,
+                  itemRarity: true,
+                  tier: true,
+                  value: true,
+                },
+              },
+            },
+          },
+        },
+        orderBy: [
+          { tier: "asc" },
+          { requiredJobLevel: "asc" },
+        ],
+      });
+
+      // Aggregate items from all yields
+      // Items can appear in multiple nodes, so we'll combine them
+      const itemMap = new Map<
+        string,
+        {
+          item: {
+            id: string;
+            name: string;
+            itemType: string;
+            description: string | null;
+            itemRarity: string;
+            tier: number;
+            value: number;
+          };
+          nodes: Array<{
+            nodeId: string;
+            nodeName: string;
+            nodeTier: number;
+            requiredJobLevel: number;
+            dangerTier: number;
+            minQty: number;
+            maxQty: number;
+            weight: number;
+          }>;
+          minQty: number; // Overall minimum across all nodes
+          maxQty: number; // Overall maximum across all nodes
+        }
+      >();
+
+      for (const node of nodes) {
+        for (const yield_ of node.yields) {
+          const itemId = yield_.itemId;
+          const existing = itemMap.get(itemId);
+
+          const nodeInfo = {
+            nodeId: node.id,
+            nodeName: node.name,
+            nodeTier: node.tier,
+            requiredJobLevel: node.requiredJobLevel,
+            dangerTier: node.dangerTier,
+            minQty: yield_.minQty,
+            maxQty: yield_.maxQty,
+            weight: yield_.weight,
+          };
+
+          if (existing) {
+            // Item already exists, add this node to the list
+            existing.nodes.push(nodeInfo);
+            existing.minQty = Math.min(existing.minQty, yield_.minQty);
+            existing.maxQty = Math.max(existing.maxQty, yield_.maxQty);
+          } else {
+            // First occurrence of this item
+            itemMap.set(itemId, {
+              item: yield_.item,
+              nodes: [nodeInfo],
+              minQty: yield_.minQty,
+              maxQty: yield_.maxQty,
+            });
+          }
+        }
+      }
+
+      // Convert map to array and sort
+      return Array.from(itemMap.values()).sort((a, b) => {
+        // Sort by tier first, then by name
+        if (a.item.tier !== b.item.tier) {
+          return a.item.tier - b.item.tier;
+        }
+        return a.item.name.localeCompare(b.item.name);
+      });
+    }),
 });

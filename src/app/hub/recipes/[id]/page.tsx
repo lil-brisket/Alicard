@@ -175,6 +175,7 @@ export default function RecipeDetailPage({ params }: Props) {
               <p className="mt-1 text-sm">{craftMutation.error.message}</p>
             </div>
           )}
+        </div>
     </div>
   );
 }

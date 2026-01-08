@@ -70,14 +70,18 @@ function PlayerDataEditor({
   });
 
   const updateJobLevel = api.admin.users.updateJobLevel.useMutation({
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success("Job level updated");
-      void utils.admin.users.getUserById.invalidate({ id: userId });
       setEditingJobs({});
       setJobReasons({});
+      await utils.admin.users.getUserById.invalidate({ id: userId });
+      // Also invalidate jobs queries that the hub/professions pages use
+      await utils.jobs.getMyJobs.invalidate();
+      await utils.jobs.getJobProgression.invalidate();
     },
     onError: (error) => {
-      toast.error(error.message);
+      console.error("Update job level error:", error);
+      toast.error(error.message || "Failed to update job level");
     },
   });
 
