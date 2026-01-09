@@ -54,21 +54,43 @@ export async function getRecipeOutputItemIdsForJob(
 }
 
 /**
+ * Get gatherable item IDs for a job by its key (e.g., "miner")
+ */
+export async function getGatherableItemIdsForJobByKey(
+  jobKey: string
+): Promise<Set<string>> {
+  const job = await db.job.findUnique({
+    where: { key: jobKey },
+  });
+
+  if (!job) {
+    return new Set();
+  }
+
+  return getGatherableItemIdsForJob(job.id);
+}
+
+/**
  * Validate recipe inputs against allowed sources
  * Returns list of invalid item IDs if any
  */
 export async function validateRecipeInputs(
   jobId: string,
   inputItemIds: string[],
-  allowNonGatherable: boolean
+  allowNonGatherable: boolean,
+  sourceGatherJobKey?: string | null
 ): Promise<{ valid: boolean; invalidItemIds: string[] }> {
   if (allowNonGatherable) {
     return { valid: true, invalidItemIds: [] };
   }
 
-  // Get allowed items: gatherable items + recipe outputs
+  // Get allowed items: gatherable items (from source job if specified, otherwise from recipe job) + recipe outputs
+  const gatherJobId = sourceGatherJobKey
+    ? (await db.job.findUnique({ where: { key: sourceGatherJobKey } }))?.id ?? jobId
+    : jobId;
+
   const [gatherableItems, recipeOutputs] = await Promise.all([
-    getGatherableItemIdsForJob(jobId),
+    getGatherableItemIdsForJob(gatherJobId),
     getRecipeOutputItemIdsForJob(jobId),
   ]);
 
