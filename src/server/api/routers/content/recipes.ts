@@ -38,6 +38,8 @@ export const contentRecipesRouter = createTRPCRouter({
         query: z.string().optional(),
         isActive: z.boolean().optional(),
         status: contentStatusSchema.optional(),
+        levelMin: z.number().int().min(1).max(100).optional(),
+        levelMax: z.number().int().min(1).max(100).optional(),
         limit: z.number().min(1).max(100).default(50),
       }).optional()
     )
@@ -60,10 +62,56 @@ export const contentRecipesRouter = createTRPCRouter({
         where.status = input.status;
       }
 
+      if (input?.levelMin !== undefined || input?.levelMax !== undefined) {
+        where.requiredJobLevel = {};
+        if (input?.levelMin !== undefined) {
+          where.requiredJobLevel.gte = input.levelMin;
+        }
+        if (input?.levelMax !== undefined) {
+          where.requiredJobLevel.lte = input.levelMax;
+        }
+      }
+
       if (input?.query) {
+        // Search in recipe name, output item name, and input item names
+        const searchTerm = input.query.toLowerCase();
+        
+        // First, find items matching the search term
+        const matchingItems = await ctx.db.item.findMany({
+          where: {
+            OR: [
+              { name: { contains: searchTerm, mode: "insensitive" } },
+              { key: { contains: searchTerm, mode: "insensitive" } },
+            ],
+          },
+          select: { id: true },
+        });
+
+        const matchingItemIds = matchingItems.map((i) => i.id);
+
+        // Find recipes that match by name, or have matching output/item inputs
+        const recipesWithMatchingItems = await ctx.db.recipe.findMany({
+          where: {
+            OR: [
+              { outputItemId: { in: matchingItemIds } },
+              {
+                inputs: {
+                  some: {
+                    itemId: { in: matchingItemIds },
+                  },
+                },
+              },
+            ],
+          },
+          select: { id: true },
+        });
+
+        const matchingRecipeIds = recipesWithMatchingItems.map((r) => r.id);
+
         where.OR = [
           { name: { contains: input.query, mode: "insensitive" } },
           { description: { contains: input.query, mode: "insensitive" } },
+          { id: { in: matchingRecipeIds } },
         ];
       }
 
@@ -94,6 +142,7 @@ export const contentRecipesRouter = createTRPCRouter({
           },
         },
         orderBy: [
+          { updatedAt: "desc" },
           { requiredJobLevel: "asc" },
           { name: "asc" },
         ],
@@ -167,6 +216,7 @@ export const contentRecipesRouter = createTRPCRouter({
         inputs: z.array(recipeInputSchema).min(1, "At least one input is required"),
         isActive: z.boolean().default(true),
         allowNonGatherableInputs: z.boolean().default(false),
+        sourceGatherJobKey: z.string().optional().nullable(),
         status: contentStatusSchema.default("DRAFT"),
       })
     )
@@ -176,7 +226,8 @@ export const contentRecipesRouter = createTRPCRouter({
       const validation = await validateRecipeInputs(
         input.jobId,
         inputItemIds,
-        input.allowNonGatherableInputs
+        input.allowNonGatherableInputs,
+        input.sourceGatherJobKey
       );
 
       if (!validation.valid) {
@@ -251,6 +302,7 @@ export const contentRecipesRouter = createTRPCRouter({
               outputQty: input.outputQty,
               isActive: input.isActive,
               allowNonGatherableInputs: input.allowNonGatherableInputs,
+              sourceGatherJobKey: input.sourceGatherJobKey ?? null,
               createdBy: ctx.session.user.id,
             },
           });
@@ -313,6 +365,7 @@ export const contentRecipesRouter = createTRPCRouter({
         inputs: z.array(recipeInputSchema).optional(),
         isActive: z.boolean().optional(),
         allowNonGatherableInputs: z.boolean().optional(),
+        sourceGatherJobKey: z.string().optional().nullable(),
         status: contentStatusSchema.optional(),
       })
     )
@@ -336,12 +389,17 @@ export const contentRecipesRouter = createTRPCRouter({
         const allowNonGatherable =
           updateData.allowNonGatherableInputs ??
           existingRecipe.allowNonGatherableInputs;
+        const sourceGatherJobKey =
+          updateData.sourceGatherJobKey !== undefined
+            ? updateData.sourceGatherJobKey
+            : existingRecipe.sourceGatherJobKey;
 
         const inputItemIds = inputs.map((i) => i.itemId);
         const validation = await validateRecipeInputs(
           jobId,
           inputItemIds,
-          allowNonGatherable
+          allowNonGatherable,
+          sourceGatherJobKey
         );
 
         if (!validation.valid) {
@@ -475,6 +533,7 @@ export const contentRecipesRouter = createTRPCRouter({
             outputQty: source.outputQty,
             isActive: false, // Start as inactive
             allowNonGatherableInputs: source.allowNonGatherableInputs,
+            sourceGatherJobKey: source.sourceGatherJobKey,
           },
         });
 
@@ -502,6 +561,287 @@ export const contentRecipesRouter = createTRPCRouter({
       });
 
       return cloned!;
+    }),
+
+  // Bulk update recipes
+  bulkUpdate: contentProcedure
+    .use(async ({ ctx, next }) => {
+      await requireContentPermission(ctx.session.user.id, "content.edit");
+      return next({ ctx });
+    })
+    .input(
+      z.object({
+        recipeIds: z.array(z.string()).min(1),
+        patch: z.object({
+          isActive: z.boolean().optional(),
+          station: craftingStationSchema.optional(),
+          requiredJobLevel: z.number().int().min(1).max(100).optional(),
+          xp: z.number().int().min(0).optional(),
+          craftTimeSeconds: z.number().int().min(0).optional(),
+          // Level offset (adds to existing level)
+          levelOffset: z.number().int().optional(),
+          // XP adjust (percentage multiplier or set value)
+          xpAdjustPercent: z.number().optional(),
+          xpSetValue: z.number().int().min(0).optional(),
+          // Time adjust (percentage multiplier or set value)
+          timeAdjustPercent: z.number().optional(),
+          timeSetValue: z.number().int().min(0).optional(),
+        }),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const recipes = await ctx.db.recipe.findMany({
+        where: { id: { in: input.recipeIds } },
+      });
+
+      if (recipes.length !== input.recipeIds.length) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "One or more recipes not found",
+        });
+      }
+
+      const updates = await Promise.all(
+        recipes.map(async (recipe) => {
+          const updateData: any = {};
+
+          if (input.patch.isActive !== undefined) {
+            updateData.isActive = input.patch.isActive;
+          }
+
+          if (input.patch.station !== undefined) {
+            updateData.station = input.patch.station;
+          }
+
+          if (input.patch.requiredJobLevel !== undefined) {
+            updateData.requiredJobLevel = input.patch.requiredJobLevel;
+          } else if (input.patch.levelOffset !== undefined) {
+            updateData.requiredJobLevel = Math.max(
+              1,
+              Math.min(100, recipe.requiredJobLevel + input.patch.levelOffset)
+            );
+          }
+
+          if (input.patch.xpSetValue !== undefined) {
+            updateData.xp = input.patch.xpSetValue;
+          } else if (input.patch.xpAdjustPercent !== undefined) {
+            updateData.xp = Math.max(0, Math.floor(recipe.xp * (1 + input.patch.xpAdjustPercent / 100)));
+          } else if (input.patch.xp !== undefined) {
+            updateData.xp = input.patch.xp;
+          }
+
+          if (input.patch.timeSetValue !== undefined) {
+            updateData.craftTimeSeconds = input.patch.timeSetValue;
+          } else if (input.patch.timeAdjustPercent !== undefined) {
+            updateData.craftTimeSeconds = Math.max(
+              0,
+              Math.floor(recipe.craftTimeSeconds * (1 + input.patch.timeAdjustPercent / 100))
+            );
+          } else if (input.patch.craftTimeSeconds !== undefined) {
+            updateData.craftTimeSeconds = input.patch.craftTimeSeconds;
+          }
+
+          return ctx.db.recipe.update({
+            where: { id: recipe.id },
+            data: updateData,
+          });
+        })
+      );
+
+      return { count: updates.length };
+    }),
+
+  // Bulk import recipes (JSON)
+  bulkImport: contentProcedure
+    .use(async ({ ctx, next }) => {
+      await requireContentPermission(ctx.session.user.id, "content.create");
+      return next({ ctx });
+    })
+    .input(
+      z.object({
+        jobId: z.string().min(1),
+        recipes: z.array(
+          z.object({
+            name: z.string().min(1),
+            description: z.string().optional(),
+            tags: z.array(z.string()).optional(),
+            station: craftingStationSchema,
+            requiredJobLevel: z.number().int().min(1).max(100).default(1),
+            difficulty: z.number().int().min(1).max(10).default(1),
+            craftTimeSeconds: z.number().int().min(0).default(0),
+            xp: z.number().int().min(0).default(0),
+            outputItemId: z.string().min(1),
+            outputQty: z.number().int().min(1).max(9999).default(1),
+            inputs: z.array(recipeInputSchema).min(1),
+            isActive: z.boolean().default(true),
+            allowNonGatherableInputs: z.boolean().default(false),
+            sourceGatherJobKey: z.string().optional().nullable(),
+            status: contentStatusSchema.default("DRAFT"),
+          })
+        ),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const errors: Array<{ index: number; message: string }> = [];
+      const created: string[] = [];
+
+      // Verify job exists
+      const job = await ctx.db.job.findUnique({
+        where: { id: input.jobId },
+      });
+
+      if (!job) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Job not found",
+        });
+      }
+
+      for (let i = 0; i < input.recipes.length; i++) {
+        const recipeData = input.recipes[i];
+
+        try {
+          // Validate inputs
+          const inputItemIds = recipeData.inputs.map((inp) => inp.itemId);
+          const validation = await validateRecipeInputs(
+            input.jobId,
+            inputItemIds,
+            recipeData.allowNonGatherableInputs,
+            recipeData.sourceGatherJobKey
+          );
+
+          if (!validation.valid) {
+            const invalidItems = await ctx.db.item.findMany({
+              where: { id: { in: validation.invalidItemIds } },
+              select: { name: true },
+            });
+
+            errors.push({
+              index: i,
+              message: `Invalid input items: ${invalidItems.map((i) => i.name).join(", ")}`,
+            });
+            continue;
+          }
+
+          // Verify output item exists
+          const outputItem = await ctx.db.item.findUnique({
+            where: { id: recipeData.outputItemId },
+          });
+
+          if (!outputItem) {
+            errors.push({
+              index: i,
+              message: `Output item not found: ${recipeData.outputItemId}`,
+            });
+            continue;
+          }
+
+          // Verify all input items exist
+          const inputItems = await ctx.db.item.findMany({
+            where: { id: { in: inputItemIds } },
+          });
+
+          if (inputItems.length !== inputItemIds.length) {
+            errors.push({
+              index: i,
+              message: "One or more input items not found",
+            });
+            continue;
+          }
+
+          // Create recipe
+          const recipe = await ctx.db.$transaction(async (tx) => {
+            const created = await tx.recipe.create({
+              data: {
+                name: recipeData.name,
+                description: recipeData.description,
+                tags: recipeData.tags ?? [],
+                status: recipeData.status,
+                jobId: input.jobId,
+                station: recipeData.station,
+                requiredJobLevel: recipeData.requiredJobLevel,
+                difficulty: recipeData.difficulty,
+                craftTimeSeconds: recipeData.craftTimeSeconds,
+                xp: recipeData.xp,
+                outputItemId: recipeData.outputItemId,
+                outputQty: recipeData.outputQty,
+                isActive: recipeData.isActive,
+                allowNonGatherableInputs: recipeData.allowNonGatherableInputs,
+                sourceGatherJobKey: recipeData.sourceGatherJobKey ?? null,
+                createdBy: ctx.session.user.id,
+              },
+            });
+
+            await tx.recipeInput.createMany({
+              data: recipeData.inputs.map((inp) => ({
+                recipeId: created.id,
+                itemId: inp.itemId,
+                qty: inp.qty,
+              })),
+            });
+
+            return created.id;
+          });
+
+          created.push(recipe);
+        } catch (error: any) {
+          errors.push({
+            index: i,
+            message: error?.message || "Failed to create recipe",
+          });
+        }
+      }
+
+      return {
+        created: created.length,
+        errors: errors.length > 0 ? errors : undefined,
+      };
+    }),
+
+  // Get recipes for export (JSON)
+  exportRecipes: contentProcedure
+    .input(
+      z.object({
+        recipeIds: z.array(z.string()).optional(),
+        jobId: z.string().optional(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const where: any = {};
+
+      if (input.recipeIds && input.recipeIds.length > 0) {
+        where.id = { in: input.recipeIds };
+      } else if (input.jobId) {
+        where.jobId = input.jobId;
+      }
+
+      const recipes = await ctx.db.recipe.findMany({
+        where,
+        include: {
+          inputs: true,
+        },
+      });
+
+      return recipes.map((r) => ({
+        name: r.name,
+        description: r.description,
+        tags: (r.tags as string[] | null) ?? [],
+        station: r.station,
+        requiredJobLevel: r.requiredJobLevel,
+        difficulty: r.difficulty,
+        craftTimeSeconds: r.craftTimeSeconds,
+        xp: r.xp,
+        outputItemId: r.outputItemId,
+        outputQty: r.outputQty,
+        inputs: r.inputs.map((inp) => ({
+          itemId: inp.itemId,
+          qty: inp.qty,
+        })),
+        isActive: r.isActive,
+        allowNonGatherableInputs: r.allowNonGatherableInputs,
+        sourceGatherJobKey: r.sourceGatherJobKey,
+        status: r.status,
+      }));
     }),
 });
 

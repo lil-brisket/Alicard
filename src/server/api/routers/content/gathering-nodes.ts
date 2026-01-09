@@ -5,6 +5,7 @@ import {
   contentProcedure,
 } from "~/server/api/trpc";
 import { requireContentPermission } from "~/server/lib/admin-auth";
+import { getGatherableItemIdsForJob } from "~/server/lib/recipe-validation";
 
 export const contentGatheringNodesRouter = createTRPCRouter({
   // List gathering nodes with filtering
@@ -300,6 +301,31 @@ export const contentGatheringNodesRouter = createTRPCRouter({
       });
 
       return updatedNode;
+    }),
+
+  // Get gatherable items for a job
+  getGatherableItems: contentProcedure
+    .input(z.object({ jobId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const itemIds = await getGatherableItemIdsForJob(input.jobId);
+      
+      if (itemIds.size === 0) {
+        return [];
+      }
+
+      const items = await ctx.db.item.findMany({
+        where: {
+          id: { in: Array.from(itemIds) },
+        },
+        select: {
+          id: true,
+          name: true,
+          itemType: true,
+        },
+        orderBy: { name: "asc" },
+      });
+
+      return items;
     }),
 });
 

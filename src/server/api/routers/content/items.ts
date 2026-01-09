@@ -653,4 +653,98 @@ export const contentItemsRouter = createTRPCRouter({
 
       return { synced: true, message: "Item synced successfully" };
     }),
+
+  // Search items by name (for item picker)
+  search: contentProcedure
+    .input(
+      z.object({
+        query: z.string().min(1),
+        limit: z.number().min(1).max(100).default(20),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const items = await ctx.db.item.findMany({
+        where: {
+          OR: [
+            { name: { contains: input.query, mode: "insensitive" } },
+            { key: { contains: input.query, mode: "insensitive" } },
+          ],
+        },
+        select: {
+          id: true,
+          name: true,
+          key: true,
+          itemType: true,
+          description: true,
+        },
+        take: input.limit,
+        orderBy: { name: "asc" },
+      });
+
+      return items.map((item) => ({
+        id: item.id,
+        name: item.name,
+        key: item.key,
+        sourceType: item.itemType,
+        description: item.description,
+      }));
+    }),
+
+  // Get item usage (recipes that use this item)
+  getUsage: contentProcedure
+    .input(z.object({ itemId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const [recipesAsInput, recipesAsOutput] = await Promise.all([
+        ctx.db.recipe.findMany({
+          where: {
+            inputs: {
+              some: {
+                itemId: input.itemId,
+              },
+            },
+          },
+          select: {
+            id: true,
+            name: true,
+            job: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        }),
+        ctx.db.recipe.findMany({
+          where: {
+            outputItemId: input.itemId,
+          },
+          select: {
+            id: true,
+            name: true,
+            job: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        }),
+      ]);
+
+      return {
+        usedInRecipesCount: recipesAsInput.length + recipesAsOutput.length,
+        usedInRecipes: [
+          ...recipesAsInput.map((r) => ({
+            id: r.id,
+            name: r.name,
+            jobName: r.job.name,
+            role: "input" as const,
+          })),
+          ...recipesAsOutput.map((r) => ({
+            id: r.id,
+            name: r.name,
+            jobName: r.job.name,
+            role: "output" as const,
+          })),
+        ],
+      };
+    }),
 });
