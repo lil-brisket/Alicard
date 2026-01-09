@@ -951,6 +951,7 @@ model Recipe {
   isActive      Boolean        @default(true)
   // Validation override
   allowNonGatherableInputs Boolean @default(false)
+  sourceGatherJobKey String? // e.g., "miner" for blacksmith recipes that use miner items
   job           Job            @relation(fields: [jobId], references: [id], onDelete: Cascade)
   outputItem    Item           @relation("RecipeOutput", fields: [outputItemId], references: [id])
   inputs        RecipeInput[]
