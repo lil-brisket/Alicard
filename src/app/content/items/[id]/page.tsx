@@ -612,7 +612,12 @@ export default function ItemDetailPage({
                           key={recipe.id}
                           className="flex items-center justify-between rounded bg-slate-800/50 px-2 py-1"
                         >
-                          <span className="text-slate-300">{recipe.name}</span>
+                          <Link
+                            href={`/content/recipes/${recipe.id}`}
+                            className="text-slate-300 hover:text-cyan-400"
+                          >
+                            {recipe.name}
+                          </Link>
                           <span
                             className={`text-xs ${
                               recipe.status === "ACTIVE"
@@ -641,7 +646,12 @@ export default function ItemDetailPage({
                           key={recipe.id}
                           className="flex items-center justify-between rounded bg-slate-800/50 px-2 py-1"
                         >
-                          <span className="text-slate-300">{recipe.name}</span>
+                          <Link
+                            href={`/content/recipes/${recipe.id}`}
+                            className="text-slate-300 hover:text-cyan-400"
+                          >
+                            {recipe.name}
+                          </Link>
                           <span
                             className={`text-xs ${
                               recipe.status === "ACTIVE"
