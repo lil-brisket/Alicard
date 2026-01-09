@@ -3,12 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import { api } from "~/trpc/react";
+import { toast } from "react-hot-toast";
 
 export default function ContentRecipesPage() {
   const [jobId, setJobId] = useState<string | undefined>();
   const [station, setStation] = useState<string | undefined>();
   const [isActive, setIsActive] = useState<boolean | undefined>(true);
   const [search, setSearch] = useState("");
+  const [levelMin, setLevelMin] = useState<number | undefined>();
+  const [levelMax, setLevelMax] = useState<number | undefined>();
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [showBulkActions, setShowBulkActions] = useState(false);
 
   const { data: jobs } = api.jobs.listJobs.useQuery();
   const { data: recipes, isLoading } = api.content.recipes.list.useQuery({
@@ -16,8 +21,97 @@ export default function ContentRecipesPage() {
     station: station as "SMELTER" | "ANVIL" | "FORGE" | "TEMPERING_RACK" | undefined,
     isActive,
     query: search || undefined,
+    levelMin,
+    levelMax,
     limit: 100,
   });
+
+  const utils = api.useUtils();
+
+  const bulkUpdate = api.content.recipes.bulkUpdate.useMutation({
+    onSuccess: () => {
+      toast.success("Bulk update completed");
+      setSelectedIds(new Set());
+      setShowBulkActions(false);
+      void utils.content.recipes.list.invalidate();
+    },
+    onError: (error) => {
+      toast.error(error.message || "Bulk update failed");
+    },
+  });
+
+  const toggleSelect = (id: string) => {
+    const newSelected = new Set(selectedIds);
+    if (newSelected.has(id)) {
+      newSelected.delete(id);
+    } else {
+      newSelected.add(id);
+    }
+    setSelectedIds(newSelected);
+    setShowBulkActions(newSelected.size > 0);
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedIds.size === recipes?.length) {
+      setSelectedIds(new Set());
+      setShowBulkActions(false);
+    } else {
+      setSelectedIds(new Set(recipes?.map((r) => r.id) ?? []));
+      setShowBulkActions(true);
+    }
+  };
+
+  const handleBulkActivate = () => {
+    if (selectedIds.size === 0) return;
+    bulkUpdate.mutate({
+      recipeIds: Array.from(selectedIds),
+      patch: { isActive: true },
+    });
+  };
+
+  const handleBulkDeactivate = () => {
+    if (selectedIds.size === 0) return;
+    bulkUpdate.mutate({
+      recipeIds: Array.from(selectedIds),
+      patch: { isActive: false },
+    });
+  };
+
+  const handleBulkLevelOffset = (offset: number) => {
+    if (selectedIds.size === 0) return;
+    bulkUpdate.mutate({
+      recipeIds: Array.from(selectedIds),
+      patch: { levelOffset: offset },
+    });
+  };
+
+  const handleBulkXPAdjust = (percent: number) => {
+    if (selectedIds.size === 0) return;
+    bulkUpdate.mutate({
+      recipeIds: Array.from(selectedIds),
+      patch: { xpAdjustPercent: percent },
+    });
+  };
+
+  const handleBulkTimeAdjust = (percent: number) => {
+    if (selectedIds.size === 0) return;
+    bulkUpdate.mutate({
+      recipeIds: Array.from(selectedIds),
+      patch: { timeAdjustPercent: percent },
+    });
+  };
+
+  const handleExport = () => {
+    if (selectedIds.size === 0) {
+      toast.error("Please select recipes to export");
+      return;
+    }
+
+    // This would call the export endpoint and download JSON
+    // For now, just show a message
+    toast.success(`Exporting ${selectedIds.size} recipes...`);
+    // TODO: Implement actual export download
+  };
 
   const stations = ["SMELTER", "ANVIL", "FORGE", "TEMPERING_RACK"] as const;
 
@@ -40,7 +134,7 @@ export default function ContentRecipesPage() {
 
       {/* Filters */}
       <div className="mb-4 space-y-3 rounded-lg border border-slate-800 bg-slate-900/50 p-4">
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-4">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-6">
           <div>
             <label className="block text-xs font-medium text-slate-400 mb-1">
               Job
@@ -97,6 +191,40 @@ export default function ContentRecipesPage() {
 
           <div>
             <label className="block text-xs font-medium text-slate-400 mb-1">
+              Level Min
+            </label>
+            <input
+              type="number"
+              min={1}
+              max={100}
+              value={levelMin || ""}
+              onChange={(e) =>
+                setLevelMin(e.target.value ? parseInt(e.target.value) : undefined)
+              }
+              placeholder="Min"
+              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-100"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-medium text-slate-400 mb-1">
+              Level Max
+            </label>
+            <input
+              type="number"
+              min={1}
+              max={100}
+              value={levelMax || ""}
+              onChange={(e) =>
+                setLevelMax(e.target.value ? parseInt(e.target.value) : undefined)
+              }
+              placeholder="Max"
+              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-100"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-medium text-slate-400 mb-1">
               Search
             </label>
             <input
@@ -110,6 +238,89 @@ export default function ContentRecipesPage() {
         </div>
       </div>
 
+      {/* Bulk Actions Bar */}
+      {showBulkActions && selectedIds.size > 0 && (
+        <div className="mb-4 flex flex-wrap items-center gap-2 rounded-lg border border-cyan-500/50 bg-cyan-500/10 p-4">
+          <span className="text-sm font-medium text-cyan-400">
+            {selectedIds.size} selected
+          </span>
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={handleBulkActivate}
+              disabled={bulkUpdate.isPending}
+              className="rounded-lg bg-green-600 px-3 py-1 text-xs font-medium text-white transition hover:bg-green-700 disabled:opacity-50"
+            >
+              Activate
+            </button>
+            <button
+              onClick={handleBulkDeactivate}
+              disabled={bulkUpdate.isPending}
+              className="rounded-lg bg-red-600 px-3 py-1 text-xs font-medium text-white transition hover:bg-red-700 disabled:opacity-50"
+            >
+              Deactivate
+            </button>
+            <button
+              onClick={() => handleBulkLevelOffset(1)}
+              disabled={bulkUpdate.isPending}
+              className="rounded-lg bg-slate-700 px-3 py-1 text-xs font-medium text-slate-300 transition hover:bg-slate-600 disabled:opacity-50"
+            >
+              Level +1
+            </button>
+            <button
+              onClick={() => handleBulkLevelOffset(-1)}
+              disabled={bulkUpdate.isPending}
+              className="rounded-lg bg-slate-700 px-3 py-1 text-xs font-medium text-slate-300 transition hover:bg-slate-600 disabled:opacity-50"
+            >
+              Level -1
+            </button>
+            <button
+              onClick={() => handleBulkXPAdjust(10)}
+              disabled={bulkUpdate.isPending}
+              className="rounded-lg bg-slate-700 px-3 py-1 text-xs font-medium text-slate-300 transition hover:bg-slate-600 disabled:opacity-50"
+            >
+              XP +10%
+            </button>
+            <button
+              onClick={() => handleBulkXPAdjust(-10)}
+              disabled={bulkUpdate.isPending}
+              className="rounded-lg bg-slate-700 px-3 py-1 text-xs font-medium text-slate-300 transition hover:bg-slate-600 disabled:opacity-50"
+            >
+              XP -10%
+            </button>
+            <button
+              onClick={() => handleBulkTimeAdjust(10)}
+              disabled={bulkUpdate.isPending}
+              className="rounded-lg bg-slate-700 px-3 py-1 text-xs font-medium text-slate-300 transition hover:bg-slate-600 disabled:opacity-50"
+            >
+              Time +10%
+            </button>
+            <button
+              onClick={() => handleBulkTimeAdjust(-10)}
+              disabled={bulkUpdate.isPending}
+              className="rounded-lg bg-slate-700 px-3 py-1 text-xs font-medium text-slate-300 transition hover:bg-slate-600 disabled:opacity-50"
+            >
+              Time -10%
+            </button>
+            <button
+              onClick={handleExport}
+              disabled={bulkUpdate.isPending}
+              className="rounded-lg bg-blue-600 px-3 py-1 text-xs font-medium text-white transition hover:bg-blue-700 disabled:opacity-50"
+            >
+              Export JSON
+            </button>
+            <button
+              onClick={() => {
+                setSelectedIds(new Set());
+                setShowBulkActions(false);
+              }}
+              className="rounded-lg bg-slate-700 px-3 py-1 text-xs font-medium text-slate-300 transition hover:bg-slate-600"
+            >
+              Clear
+            </button>
+          </div>
+        </div>
+      )}
+
       {isLoading ? (
         <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-8 text-center">
           <p className="text-slate-400">Loading recipes...</p>
@@ -119,6 +330,14 @@ export default function ContentRecipesPage() {
           <table className="w-full">
             <thead className="bg-slate-800/50">
               <tr>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.size === recipes.length && recipes.length > 0}
+                    onChange={toggleSelectAll}
+                    className="rounded border-slate-700"
+                  />
+                </th>
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
                   Name
                 </th>
@@ -132,10 +351,10 @@ export default function ContentRecipesPage() {
                   Station
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
-                  Inputs
+                  Output
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
-                  Output
+                  Inputs
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
                   XP
@@ -144,7 +363,10 @@ export default function ContentRecipesPage() {
                   Time
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
-                  Status
+                  Active
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
+                  Updated
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium uppercase text-slate-400">
                   Actions
@@ -153,7 +375,20 @@ export default function ContentRecipesPage() {
             </thead>
             <tbody className="divide-y divide-slate-800">
               {recipes.map((recipe) => (
-                <tr key={recipe.id} className="hover:bg-slate-800/30">
+                <tr
+                  key={recipe.id}
+                  className={`hover:bg-slate-800/30 ${
+                    selectedIds.has(recipe.id) ? "bg-cyan-500/10" : ""
+                  }`}
+                >
+                  <td className="px-4 py-3">
+                    <input
+                      type="checkbox"
+                      checked={selectedIds.has(recipe.id)}
+                      onChange={() => toggleSelect(recipe.id)}
+                      className="rounded border-slate-700"
+                    />
+                  </td>
                   <td className="px-4 py-3 font-medium">{recipe.name}</td>
                   <td className="px-4 py-3 text-sm text-slate-400">
                     {recipe.job.name}
@@ -171,10 +406,10 @@ export default function ContentRecipesPage() {
                     )}
                   </td>
                   <td className="px-4 py-3 text-sm text-slate-400">
-                    {recipe.inputs.length} item{recipe.inputs.length !== 1 ? "s" : ""}
+                    {recipe.outputQty}x {recipe.outputItem.name}
                   </td>
                   <td className="px-4 py-3 text-sm text-slate-400">
-                    {recipe.outputQty}x {recipe.outputItem.name}
+                    {recipe.inputs.length} item{recipe.inputs.length !== 1 ? "s" : ""}
                   </td>
                   <td className="px-4 py-3 text-sm text-slate-400">
                     {recipe.xp ?? 0}
@@ -193,13 +428,20 @@ export default function ContentRecipesPage() {
                       </span>
                     )}
                   </td>
+                  <td className="px-4 py-3 text-xs text-slate-500">
+                    {recipe.updatedAt
+                      ? new Date(recipe.updatedAt).toLocaleDateString()
+                      : "—"}
+                  </td>
                   <td className="px-4 py-3">
-                    <Link
-                      href={`/content/recipes/${recipe.id}`}
-                      className="text-sm text-cyan-400 hover:text-cyan-300"
-                    >
-                      Edit
-                    </Link>
+                    <div className="flex gap-2">
+                      <Link
+                        href={`/content/recipes/${recipe.id}`}
+                        className="text-sm text-cyan-400 hover:text-cyan-300"
+                      >
+                        Edit
+                      </Link>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -220,4 +462,3 @@ export default function ContentRecipesPage() {
     </div>
   );
 }
-

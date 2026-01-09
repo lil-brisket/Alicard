@@ -39,6 +39,7 @@ export default function RecipeDetailPage({
     inputs: [] as RecipeInput[],
     isActive: true,
     allowNonGatherableInputs: false,
+    sourceGatherJobKey: "",
     status: "DRAFT" as "DRAFT" | "ACTIVE" | "DISABLED",
   });
 
@@ -64,6 +65,7 @@ export default function RecipeDetailPage({
         })),
         isActive: recipe.isActive,
         allowNonGatherableInputs: recipe.allowNonGatherableInputs,
+        sourceGatherJobKey: recipe.sourceGatherJobKey ?? "",
         status: (recipe.status as typeof formData.status) ?? "DRAFT",
       });
       setHasChanges(false);
@@ -197,6 +199,7 @@ export default function RecipeDetailPage({
       inputs: formData.inputs,
       isActive: formData.isActive,
       allowNonGatherableInputs: formData.allowNonGatherableInputs,
+      sourceGatherJobKey: formData.sourceGatherJobKey || null,
       status: formData.status,
     });
   };
@@ -420,6 +423,23 @@ export default function RecipeDetailPage({
                 other recipes
               </p>
             )}
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-slate-300 mb-1">
+              Source Gather Job Key (Advanced)
+            </label>
+            <input
+              type="text"
+              value={formData.sourceGatherJobKey}
+              onChange={(e) => updateField("sourceGatherJobKey", e.target.value)}
+              placeholder="e.g., miner (for blacksmith recipes)"
+              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100"
+            />
+            <p className="text-xs text-slate-400">
+              If set, recipe inputs will be validated against items gatherable by this job instead of the recipe's job.
+              Leave empty to use the recipe's job.
+            </p>
           </div>
         </div>
 
