@@ -349,6 +349,7 @@ model Item {
   skillActionInputs  SkillActionInput[]  @relation("SkillActionInput")
   skillActionOutputs SkillActionOutput[] @relation("SkillActionOutput")
   dropTableEntries   DropTableEntry[]
+  itemEffects        ItemEffect[]        @relation("ItemEffect")
 
   @@index([itemType])
   @@index([itemRarity])
@@ -928,34 +929,39 @@ model UserJob {
 }
 
 model Recipe {
-  id            String         @id @default(cuid())
+  id                       String             @id @default(cuid())
   // Global taxonomy fields
-  name          String
-  description   String?
-  tags          Json? // Array of strings: ["weapon", "tier1", "starter"]
-  status        ContentStatus  @default(DRAFT)
-  version       Int            @default(1)
-  createdBy     String?
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  name                     String
+  description              String?
+  tags                     Json? // Array of strings: ["weapon", "tier1", "starter"]
+  status                   ContentStatus      @default(DRAFT)
+  version                  Int                @default(1)
+  createdBy                String?
+  createdAt                DateTime           @default(now())
+  updatedAt                DateTime           @updatedAt
   // Recipe-specific fields
-  jobId         String
-  difficulty    Int            @default(1)
-  requiredJobLevel Int         @default(1)
-  outputItemId  String
-  outputQty     Int            @default(1)
+  jobId                    String
+  difficulty               Int                @default(1)
+  requiredJobLevel         Int                @default(1)
+  outputItemId             String
+  outputQty                Int                @default(1)
   // Station and crafting details
-  station       CraftingStation?
-  craftTimeSeconds Int          @default(0)
-  xp            Int            @default(0)
-  isActive      Boolean        @default(true)
+  station                  CraftingStation? // Legacy enum (for backward compatibility with blacksmith)
+  stationDefinitionId      String? // Data-driven station reference (for alchemy and future)
+  category                 String? // Recipe category (e.g., "POTION", "BREW", "OIL", "POWDER", "SALVE", "ELIXIR", "BOMB", "UTILITY")
+  craftTimeSeconds         Int                @default(0)
+  xp                       Int                @default(0)
+  successRate              Float? // Nullable: null means use calculated rate, 0-1 means override
+  isDiscoverable           Boolean            @default(false)
+  isActive                 Boolean            @default(true)
   // Validation override
-  allowNonGatherableInputs Boolean @default(false)
-  sourceGatherJobKey String? // e.g., "miner" for blacksmith recipes that use miner items
-  job           Job            @relation(fields: [jobId], references: [id], onDelete: Cascade)
-  outputItem    Item           @relation("RecipeOutput", fields: [outputItemId], references: [id])
-  inputs        RecipeInput[]
-  craftAttempts CraftAttempt[]
+  allowNonGatherableInputs Boolean            @default(false)
+  sourceGatherJobKey       String? // e.g., "miner" for blacksmith recipes that use miner items
+  job                      Job                @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  outputItem               Item               @relation("RecipeOutput", fields: [outputItemId], references: [id])
+  stationDefinition        StationDefinition? @relation(fields: [stationDefinitionId], references: [id], onDelete: SetNull)
+  inputs                   RecipeInput[]
+  craftAttempts            CraftAttempt[]
 
   @@index([jobId])
   @@index([outputItemId])
@@ -963,6 +969,8 @@ model Recipe {
   @@index([createdBy])
   @@index([requiredJobLevel])
   @@index([station])
+  @@index([stationDefinitionId])
+  @@index([category])
   @@index([isActive])
 }
 
@@ -996,6 +1004,81 @@ model CraftAttempt {
   @@index([createdAt])
 }
 
+// Data-driven crafting station definitions (editable via Content Panel)
+model StationDefinition {
+  id          String        @id @default(cuid())
+  key         String        @unique
+  // Global taxonomy fields
+  name        String
+  description String?
+  tags        Json? // Array of strings: ["alchemy", "basic", "advanced"]
+  status      ContentStatus @default(DRAFT)
+  version     Int           @default(1)
+  createdBy   String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  // Station-specific fields
+  stationType String // e.g., "ALCHEMY", "BLACKSMITH" - profession this station belongs to
+  unlockLevel Int           @default(1) // Required job level to unlock
+  isEnabled   Boolean       @default(true)
+  metadata    Json? // Additional station properties (speed modifier, bonus XP, etc.)
+  recipes     Recipe[] // Recipes that use this station
+
+  @@index([key])
+  @@index([status])
+  @@index([stationType])
+  @@index([unlockLevel])
+  @@index([isEnabled])
+  @@index([createdBy])
+}
+
+// Data-driven effect definitions for consumables (potions, oils, bombs, etc.)
+model EffectDefinition {
+  id              String        @id @default(cuid())
+  key             String        @unique
+  // Global taxonomy fields
+  name            String
+  description     String?
+  tags            Json? // Array of strings: ["healing", "combat", "utility"]
+  status          ContentStatus @default(DRAFT)
+  version         Int           @default(1)
+  createdBy       String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  // Effect-specific fields
+  type            String // "HEAL_INSTANT" | "HEAL_REGEN" | "STAMINA_RESTORE" | "BUFF_STAT" | "RESISTANCE" | "DAMAGE_OVER_TIME" | "UTILITY"
+  magnitude       Float         @default(0) // Effect strength (healing amount, damage, stat bonus, etc.)
+  durationSeconds Int? // Nullable: null means instant, >0 means duration-based
+  tickSeconds     Int? // For DOT/HOT effects: interval between ticks
+  stackingRule    String        @default("NONE") // "NONE" | "REFRESH" | "STACK" | "REPLACE_WEAKER"
+  pvpScalar       Float? // PvP modifier (e.g., 0.5 = 50% effectiveness in PvP)
+  cooldownSeconds Int? // Cooldown before effect can be applied again
+  metadata        Json? // Additional effect data (stat type for BUFF_STAT, resistance type, etc.)
+  itemEffects     ItemEffect[] // Items that have this effect
+
+  @@index([key])
+  @@index([status])
+  @@index([type])
+  @@index([createdBy])
+}
+
+// Join table: Item <-> EffectDefinition (many-to-many)
+// Items can have multiple effects, effects can be on multiple items
+model ItemEffect {
+  id        String           @id @default(cuid())
+  itemId    String
+  effectId  String
+  ordering  Int              @default(0) // Execution order if item has multiple effects
+  createdAt DateTime         @default(now())
+  item      Item             @relation("ItemEffect", fields: [itemId], references: [id], onDelete: Cascade)
+  effect    EffectDefinition @relation(fields: [effectId], references: [id], onDelete: Cascade)
+
+  @@unique([itemId, effectId, ordering])
+  @@index([itemId])
+  @@index([effectId])
+  @@index([ordering])
+}
+
 model GatheringNode {
   id                String          @id @default(cuid())
   key               String          @unique
@@ -1015,8 +1098,8 @@ model GatheringNode {
   requiredJobLevel  Int             @default(1)
   gatherTimeSeconds Int             @default(30)
   xpReward          Int             @default(10)
-  cooldownSeconds  Int?
-  isActive           Boolean         @default(true)
+  cooldownSeconds   Int?
+  isActive          Boolean         @default(true)
   job               Job             @relation(fields: [jobId], references: [id], onDelete: Cascade)
   yields            NodeYield[]
   gatherAttempts    GatherAttempt[]
@@ -1036,7 +1119,7 @@ model NodeYield {
   itemId    String
   minQty    Int           @default(1)
   maxQty    Int           @default(1)
-  chance    Float?        // nullable for now; if null treat as 1.0
+  chance    Float? // nullable for now; if null treat as 1.0
   weight    Int           @default(100) // legacy field, kept for backwards compatibility
   createdAt DateTime      @default(now())
   node      GatheringNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)

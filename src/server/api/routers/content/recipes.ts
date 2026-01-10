@@ -16,7 +16,7 @@ const craftingStationSchema = z.enum([
   "TEMPERING_RACK",
 ]);
 
-const contentStatusSchema = z.enum(["DRAFT", "ACTIVE", "DISABLED"]);
+const contentStatusSchema = z.enum(["DRAFT", "ACTIVE", "DISABLED", "PUBLISHED", "ARCHIVED"]);
 
 const recipeInputSchema = z.object({
   itemId: z.string().min(1),
@@ -35,6 +35,8 @@ export const contentRecipesRouter = createTRPCRouter({
       z.object({
         jobId: z.string().optional(),
         station: craftingStationSchema.optional(),
+        stationDefinitionId: z.string().optional(),
+        category: z.string().optional(),
         query: z.string().optional(),
         isActive: z.boolean().optional(),
         status: contentStatusSchema.optional(),
@@ -52,6 +54,14 @@ export const contentRecipesRouter = createTRPCRouter({
 
       if (input?.station) {
         where.station = input.station;
+      }
+
+      if (input?.stationDefinitionId) {
+        where.stationDefinitionId = input.stationDefinitionId;
+      }
+
+      if (input?.category) {
+        where.category = input.category;
       }
 
       if (input?.isActive !== undefined) {
@@ -126,6 +136,13 @@ export const contentRecipesRouter = createTRPCRouter({
               itemType: true,
             },
           },
+          stationDefinition: {
+            select: {
+              id: true,
+              key: true,
+              name: true,
+            },
+          },
           inputs: {
             include: {
               item: {
@@ -163,6 +180,14 @@ export const contentRecipesRouter = createTRPCRouter({
               id: true,
               name: true,
               itemType: true,
+              description: true,
+            },
+          },
+          stationDefinition: {
+            select: {
+              id: true,
+              key: true,
+              name: true,
               description: true,
             },
           },
@@ -206,11 +231,15 @@ export const contentRecipesRouter = createTRPCRouter({
         description: z.string().optional(),
         tags: z.array(z.string()).optional(),
         jobId: z.string().min(1, "Job ID is required"),
-        station: craftingStationSchema,
+        station: craftingStationSchema.optional(), // Legacy enum (for backward compatibility)
+        stationDefinitionId: z.string().optional(), // Data-driven station (for alchemy)
+        category: z.string().optional(), // Recipe category (POTION, BREW, OIL, etc.)
         requiredJobLevel: z.number().int().min(1).max(100).default(1),
         difficulty: z.number().int().min(1).max(10).default(1),
         craftTimeSeconds: z.number().int().min(0).default(0),
         xp: z.number().int().min(0).default(0),
+        successRate: z.number().min(0).max(1).nullable().optional(), // Null = use calculated, 0-1 = override
+        isDiscoverable: z.boolean().default(false),
         outputItemId: z.string().min(1, "Output item is required"),
         outputQty: z.number().int().min(1).max(9999).default(1),
         inputs: z.array(recipeInputSchema).min(1, "At least one input is required"),
@@ -283,6 +312,42 @@ export const contentRecipesRouter = createTRPCRouter({
         });
       }
 
+      // Verify stationDefinition exists if provided
+      if (input.stationDefinitionId) {
+        const station = await ctx.db.stationDefinition.findUnique({
+          where: { id: input.stationDefinitionId },
+        });
+
+        if (!station) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "Station definition not found",
+          });
+        }
+
+        if (!station.isEnabled || station.status !== "ACTIVE") {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: "Station is not enabled or active",
+          });
+        }
+      }
+
+      // Require either station (enum) or stationDefinitionId (not both)
+      if (!input.station && !input.stationDefinitionId) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Either station (enum) or stationDefinitionId must be provided",
+        });
+      }
+
+      if (input.station && input.stationDefinitionId) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Cannot specify both station (enum) and stationDefinitionId. Use one or the other.",
+        });
+      }
+
       try {
         // Create recipe with inputs in a transaction
         const recipe = await ctx.db.$transaction(async (tx) => {
@@ -293,11 +358,15 @@ export const contentRecipesRouter = createTRPCRouter({
               tags: input.tags ?? [],
               status: input.status,
               jobId: input.jobId,
-              station: input.station,
+              station: input.station ?? null,
+              stationDefinitionId: input.stationDefinitionId ?? null,
+              category: input.category ?? null,
               requiredJobLevel: input.requiredJobLevel,
               difficulty: input.difficulty,
               craftTimeSeconds: input.craftTimeSeconds,
               xp: input.xp,
+              successRate: input.successRate ?? null,
+              isDiscoverable: input.isDiscoverable,
               outputItemId: input.outputItemId,
               outputQty: input.outputQty,
               isActive: input.isActive,
@@ -322,6 +391,7 @@ export const contentRecipesRouter = createTRPCRouter({
             include: {
               job: true,
               outputItem: true,
+              stationDefinition: true,
               inputs: {
                 include: {
                   item: true,
@@ -355,11 +425,15 @@ export const contentRecipesRouter = createTRPCRouter({
         description: z.string().optional().nullable(),
         tags: z.array(z.string()).optional(),
         jobId: z.string().optional(),
-        station: craftingStationSchema.optional(),
+        station: craftingStationSchema.optional().nullable(),
+        stationDefinitionId: z.string().optional().nullable(),
+        category: z.string().optional().nullable(),
         requiredJobLevel: z.number().int().min(1).max(100).optional(),
         difficulty: z.number().int().min(1).max(10).optional(),
         craftTimeSeconds: z.number().int().min(0).optional(),
         xp: z.number().int().min(0).optional(),
+        successRate: z.number().min(0).max(1).nullable().optional(),
+        isDiscoverable: z.boolean().optional(),
         outputItemId: z.string().optional(),
         outputQty: z.number().int().min(1).max(9999).optional(),
         inputs: z.array(recipeInputSchema).optional(),
@@ -417,6 +491,38 @@ export const contentRecipesRouter = createTRPCRouter({
         }
       }
 
+      // Validate stationDefinition if being updated
+      if (input.stationDefinitionId !== undefined && input.stationDefinitionId !== null) {
+        const station = await ctx.db.stationDefinition.findUnique({
+          where: { id: input.stationDefinitionId },
+        });
+
+        if (!station) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "Station definition not found",
+          });
+        }
+
+        if (!station.isEnabled || station.status !== "ACTIVE") {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: "Station is not enabled or active",
+          });
+        }
+      }
+
+      // Validate: cannot have both station enum and stationDefinitionId
+      const finalStation = input.station !== undefined ? input.station : existingRecipe.station;
+      const finalStationDefId = input.stationDefinitionId !== undefined ? input.stationDefinitionId : existingRecipe.stationDefinitionId;
+
+      if (finalStation && finalStationDefId) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Cannot specify both station (enum) and stationDefinitionId. Use one or the other.",
+        });
+      }
+
       // Update recipe and inputs in transaction
       const updated = await ctx.db.$transaction(async (tx) => {
         // Update recipe
@@ -448,6 +554,7 @@ export const contentRecipesRouter = createTRPCRouter({
           include: {
             job: true,
             outputItem: true,
+            stationDefinition: true,
             inputs: {
               include: {
                 item: true,
@@ -525,10 +632,14 @@ export const contentRecipesRouter = createTRPCRouter({
             createdBy: ctx.session.user.id,
             jobId: source.jobId,
             station: source.station,
+            stationDefinitionId: source.stationDefinitionId,
+            category: source.category,
             requiredJobLevel: source.requiredJobLevel,
             difficulty: source.difficulty,
             craftTimeSeconds: source.craftTimeSeconds,
             xp: source.xp,
+            successRate: source.successRate,
+            isDiscoverable: source.isDiscoverable,
             outputItemId: source.outputItemId,
             outputQty: source.outputQty,
             isActive: false, // Start as inactive
@@ -551,6 +662,7 @@ export const contentRecipesRouter = createTRPCRouter({
           include: {
             job: true,
             outputItem: true,
+            stationDefinition: true,
             inputs: {
               include: {
                 item: true,
@@ -665,11 +777,15 @@ export const contentRecipesRouter = createTRPCRouter({
             name: z.string().min(1),
             description: z.string().optional(),
             tags: z.array(z.string()).optional(),
-            station: craftingStationSchema,
+            station: craftingStationSchema.optional(),
+            stationDefinitionId: z.string().optional(),
+            category: z.string().optional(),
             requiredJobLevel: z.number().int().min(1).max(100).default(1),
             difficulty: z.number().int().min(1).max(10).default(1),
             craftTimeSeconds: z.number().int().min(0).default(0),
             xp: z.number().int().min(0).default(0),
+            successRate: z.number().min(0).max(1).nullable().optional(),
+            isDiscoverable: z.boolean().default(false),
             outputItemId: z.string().min(1),
             outputQty: z.number().int().min(1).max(9999).default(1),
             inputs: z.array(recipeInputSchema).min(1),
@@ -749,6 +865,46 @@ export const contentRecipesRouter = createTRPCRouter({
             continue;
           }
 
+          // Validate station if provided
+          if (recipeData.stationDefinitionId) {
+            const station = await ctx.db.stationDefinition.findUnique({
+              where: { id: recipeData.stationDefinitionId },
+            });
+
+            if (!station) {
+              errors.push({
+                index: i,
+                message: `Station definition not found: ${recipeData.stationDefinitionId}`,
+              });
+              continue;
+            }
+
+            if (!station.isEnabled || station.status !== "ACTIVE") {
+              errors.push({
+                index: i,
+                message: `Station is not enabled or active: ${station.name}`,
+              });
+              continue;
+            }
+          }
+
+          // Require either station or stationDefinitionId (not both)
+          if (!recipeData.station && !recipeData.stationDefinitionId) {
+            errors.push({
+              index: i,
+              message: "Either station (enum) or stationDefinitionId must be provided",
+            });
+            continue;
+          }
+
+          if (recipeData.station && recipeData.stationDefinitionId) {
+            errors.push({
+              index: i,
+              message: "Cannot specify both station (enum) and stationDefinitionId",
+            });
+            continue;
+          }
+
           // Create recipe
           const recipe = await ctx.db.$transaction(async (tx) => {
             const created = await tx.recipe.create({
@@ -758,11 +914,15 @@ export const contentRecipesRouter = createTRPCRouter({
                 tags: recipeData.tags ?? [],
                 status: recipeData.status,
                 jobId: input.jobId,
-                station: recipeData.station,
+                station: recipeData.station ?? null,
+                stationDefinitionId: recipeData.stationDefinitionId ?? null,
+                category: recipeData.category ?? null,
                 requiredJobLevel: recipeData.requiredJobLevel,
                 difficulty: recipeData.difficulty,
                 craftTimeSeconds: recipeData.craftTimeSeconds,
                 xp: recipeData.xp,
+                successRate: recipeData.successRate ?? null,
+                isDiscoverable: recipeData.isDiscoverable,
                 outputItemId: recipeData.outputItemId,
                 outputQty: recipeData.outputQty,
                 isActive: recipeData.isActive,
@@ -827,10 +987,14 @@ export const contentRecipesRouter = createTRPCRouter({
         description: r.description,
         tags: (r.tags as string[] | null) ?? [],
         station: r.station,
+        stationDefinitionId: r.stationDefinitionId,
+        category: r.category,
         requiredJobLevel: r.requiredJobLevel,
         difficulty: r.difficulty,
         craftTimeSeconds: r.craftTimeSeconds,
         xp: r.xp,
+        successRate: r.successRate,
+        isDiscoverable: r.isDiscoverable,
         outputItemId: r.outputItemId,
         outputQty: r.outputQty,
         inputs: r.inputs.map((inp) => ({

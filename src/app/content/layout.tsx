@@ -57,6 +57,12 @@ export default async function ContentLayout({
             Recipes
           </Link>
           <Link
+            href="/content/alchemy"
+            className="border-b-2 border-transparent px-4 py-2 text-sm font-medium text-slate-400 transition hover:border-cyan-500 hover:text-cyan-400"
+          >
+            Alchemy
+          </Link>
+          <Link
             href="/content/monsters"
             className="border-b-2 border-transparent px-4 py-2 text-sm font-medium text-slate-400 transition hover:border-cyan-500 hover:text-cyan-400"
           >

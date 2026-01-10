@@ -16,7 +16,18 @@ import { checkRateLimit } from "~/server/lib/rate-limit";
 
 // Calculate crafting success chance
 // Success chance = clamp(0.2, 0.95, 0.55 + (jobLevel - difficulty)*0.07)
-function calculateSuccessChance(jobLevel: number, difficulty: number): number {
+// If recipe.successRate is provided (not null), use that instead of calculating
+function calculateSuccessChance(
+  jobLevel: number,
+  difficulty: number,
+  recipeSuccessRate: number | null | undefined
+): number {
+  // Use recipe's successRate if provided (data-driven override)
+  if (recipeSuccessRate !== null && recipeSuccessRate !== undefined) {
+    return Math.max(0.0, Math.min(1.0, recipeSuccessRate));
+  }
+
+  // Otherwise calculate based on level and difficulty
   const base = 0.55 + (jobLevel - difficulty) * 0.07;
   return Math.max(0.2, Math.min(0.95, base));
 }
@@ -147,12 +158,13 @@ export const recipesRouter = createTRPCRouter({
         });
       }
 
-      // Get recipe with inputs
+      // Get recipe with inputs and station definition
       const recipe = await db.recipe.findUnique({
         where: { id: input.recipeId },
         include: {
           job: true,
           outputItem: true,
+          stationDefinition: true,
           inputs: {
             include: {
               item: true,
@@ -165,6 +177,13 @@ export const recipesRouter = createTRPCRouter({
         throw new TRPCError({
           code: "NOT_FOUND",
           message: "Recipe not found",
+        });
+      }
+
+      if (!recipe.isActive || recipe.status !== "ACTIVE") {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Recipe is not active",
         });
       }
 
@@ -196,12 +215,39 @@ export const recipesRouter = createTRPCRouter({
         });
       }
 
-      // Calculate success chance
-      const successChance = calculateSuccessChance(userJob.level, recipe.difficulty);
+      // Check required job level
+      if (userJob.level < recipe.requiredJobLevel) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: `This recipe requires level ${recipe.requiredJobLevel} ${recipe.job.name}. You are level ${userJob.level}.`,
+        });
+      }
+
+      // Check station unlock if using stationDefinition
+      if (recipe.stationDefinitionId && recipe.stationDefinition) {
+        const station = recipe.stationDefinition;
+        
+        if (!station.isEnabled || station.status !== "ACTIVE") {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: `Station "${station.name}" is not available`,
+          });
+        }
+
+        if (userJob.level < station.unlockLevel) {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: `Station "${station.name}" requires level ${station.unlockLevel}. You are level ${userJob.level}.`,
+          });
+        }
+      }
+
+      // Calculate success chance (use recipe.successRate if provided, otherwise calculate)
+      const successChance = calculateSuccessChance(userJob.level, recipe.difficulty, recipe.successRate);
       const success = Math.random() < successChance;
 
-      // Calculate XP
-      const xpGained = getCraftXp(success, recipe.difficulty);
+      // Calculate XP (use recipe.xp if provided, otherwise calculate from difficulty)
+      const xpGained = recipe.xp > 0 ? recipe.xp : getCraftXp(success, recipe.difficulty);
 
       // Use transaction to ensure atomicity
       const result = await db.$transaction(async (tx) => {

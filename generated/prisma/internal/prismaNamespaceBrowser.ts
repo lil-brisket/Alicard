@@ -92,6 +92,9 @@ export const ModelName = {
   Recipe: 'Recipe',
   RecipeInput: 'RecipeInput',
   CraftAttempt: 'CraftAttempt',
+  StationDefinition: 'StationDefinition',
+  EffectDefinition: 'EffectDefinition',
+  ItemEffect: 'ItemEffect',
   GatheringNode: 'GatheringNode',
   NodeYield: 'NodeYield',
   GatherAttempt: 'GatherAttempt',
@@ -765,10 +768,15 @@ export const RecipeScalarFieldEnum = {
   outputItemId: 'outputItemId',
   outputQty: 'outputQty',
   station: 'station',
+  stationDefinitionId: 'stationDefinitionId',
+  category: 'category',
   craftTimeSeconds: 'craftTimeSeconds',
   xp: 'xp',
+  successRate: 'successRate',
+  isDiscoverable: 'isDiscoverable',
   isActive: 'isActive',
-  allowNonGatherableInputs: 'allowNonGatherableInputs'
+  allowNonGatherableInputs: 'allowNonGatherableInputs',
+  sourceGatherJobKey: 'sourceGatherJobKey'
 } as const
 
 export type RecipeScalarFieldEnum = (typeof RecipeScalarFieldEnum)[keyof typeof RecipeScalarFieldEnum]
@@ -795,6 +803,61 @@ export const CraftAttemptScalarFieldEnum = {
 } as const
 
 export type CraftAttemptScalarFieldEnum = (typeof CraftAttemptScalarFieldEnum)[keyof typeof CraftAttemptScalarFieldEnum]
+
+
+export const StationDefinitionScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  description: 'description',
+  tags: 'tags',
+  status: 'status',
+  version: 'version',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  stationType: 'stationType',
+  unlockLevel: 'unlockLevel',
+  isEnabled: 'isEnabled',
+  metadata: 'metadata'
+} as const
+
+export type StationDefinitionScalarFieldEnum = (typeof StationDefinitionScalarFieldEnum)[keyof typeof StationDefinitionScalarFieldEnum]
+
+
+export const EffectDefinitionScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  description: 'description',
+  tags: 'tags',
+  status: 'status',
+  version: 'version',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  type: 'type',
+  magnitude: 'magnitude',
+  durationSeconds: 'durationSeconds',
+  tickSeconds: 'tickSeconds',
+  stackingRule: 'stackingRule',
+  pvpScalar: 'pvpScalar',
+  cooldownSeconds: 'cooldownSeconds',
+  metadata: 'metadata'
+} as const
+
+export type EffectDefinitionScalarFieldEnum = (typeof EffectDefinitionScalarFieldEnum)[keyof typeof EffectDefinitionScalarFieldEnum]
+
+
+export const ItemEffectScalarFieldEnum = {
+  id: 'id',
+  itemId: 'itemId',
+  effectId: 'effectId',
+  ordering: 'ordering',
+  createdAt: 'createdAt'
+} as const
+
+export type ItemEffectScalarFieldEnum = (typeof ItemEffectScalarFieldEnum)[keyof typeof ItemEffectScalarFieldEnum]
 
 
 export const GatheringNodeScalarFieldEnum = {

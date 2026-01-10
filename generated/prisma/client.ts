@@ -245,6 +245,21 @@ export type RecipeInput = Prisma.RecipeInputModel
  */
 export type CraftAttempt = Prisma.CraftAttemptModel
 /**
+ * Model StationDefinition
+ * 
+ */
+export type StationDefinition = Prisma.StationDefinitionModel
+/**
+ * Model EffectDefinition
+ * 
+ */
+export type EffectDefinition = Prisma.EffectDefinitionModel
+/**
+ * Model ItemEffect
+ * 
+ */
+export type ItemEffect = Prisma.ItemEffectModel
+/**
  * Model GatheringNode
  * 
  */
